@@ -1,0 +1,901 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC2E476C1995767900BCACAF /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E476B1995767900BCACAF /* PreferencesController.swift */; };
+		DC2E47B219957F5D00BCACAF /* 41Z.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E476E19957F5D00BCACAF /* 41Z.MOD */; };
+		DC2E47B319957F5D00BCACAF /* ADV-APP.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E476F19957F5D00BCACAF /* ADV-APP.MOD */; };
+		DC2E47B419957F5D00BCACAF /* ADVANTAGE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477019957F5D00BCACAF /* ADVANTAGE.MOD */; };
+		DC2E47B519957F5D00BCACAF /* AECROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477119957F5D00BCACAF /* AECROM.MOD */; };
+		DC2E47B619957F5D00BCACAF /* AUTOSTART.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477219957F5D00BCACAF /* AUTOSTART.MOD */; };
+		DC2E47B719957F5D00BCACAF /* AVIATION.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477319957F5D00BCACAF /* AVIATION.MOD */; };
+		DC2E47B819957F5D00BCACAF /* BLDROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477419957F5D00BCACAF /* BLDROM.MOD */; };
+		DC2E47B919957F5D00BCACAF /* CARD-RDR.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477519957F5D00BCACAF /* CARD-RDR.MOD */; };
+		DC2E47BA19957F5D00BCACAF /* CCD.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477619957F5D00BCACAF /* CCD.MOD */; };
+		DC2E47BB19957F5D00BCACAF /* CIRCUIT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477719957F5D00BCACAF /* CIRCUIT.MOD */; };
+		DC2E47BC19957F5D00BCACAF /* CLINICAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477819957F5D00BCACAF /* CLINICAL.MOD */; };
+		DC2E47BD19957F5D00BCACAF /* DATA-ACQ.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477919957F5D00BCACAF /* DATA-ACQ.MOD */; };
+		DC2E47BE19957F5D00BCACAF /* DAVID.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477A19957F5D00BCACAF /* DAVID.MOD */; };
+		DC2E47BF19957F5D00BCACAF /* DIAGNOSTIC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477B19957F5D00BCACAF /* DIAGNOSTIC.MOD */; };
+		DC2E47C019957F5D00BCACAF /* ES-41.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477C19957F5D00BCACAF /* ES-41.MOD */; };
+		DC2E47C119957F5D00BCACAF /* ES-MLDL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477D19957F5D00BCACAF /* ES-MLDL.MOD */; };
+		DC2E47C219957F5D00BCACAF /* EXT-FUNS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477E19957F5D00BCACAF /* EXT-FUNS.MOD */; };
+		DC2E47C319957F5D00BCACAF /* EXT-IO.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477F19957F5D00BCACAF /* EXT-IO.MOD */; };
+		DC2E47C419957F5D00BCACAF /* EXT-MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478019957F5D00BCACAF /* EXT-MEM.MOD */; };
+		DC2E47C519957F5D00BCACAF /* FINANCE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478119957F5D00BCACAF /* FINANCE.MOD */; };
+		DC2E47C619957F5D00BCACAF /* FORTH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478219957F5D00BCACAF /* FORTH.MOD */; };
+		DC2E47C719957F5D00BCACAF /* GAMES.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478319957F5D00BCACAF /* GAMES.MOD */; };
+		DC2E47C819957F5D00BCACAF /* HEP-2MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478419957F5D00BCACAF /* HEP-2MEM.MOD */; };
+		DC2E47C919957F5D00BCACAF /* HEP-MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478519957F5D00BCACAF /* HEP-MEM.MOD */; };
+		DC2E47CA19957F5D00BCACAF /* HEPAX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478619957F5D00BCACAF /* HEPAX.MOD */; };
+		DC2E47CB19957F5D00BCACAF /* HOME-MGT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478719957F5D00BCACAF /* HOME-MGT.MOD */; };
+		DC2E47CC19957F5D00BCACAF /* HPIL-DEV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478819957F5D00BCACAF /* HPIL-DEV.MOD */; };
+		DC2E47CD19957F5D00BCACAF /* HPIL-DIAG.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478919957F5D00BCACAF /* HPIL-DIAG.MOD */; };
+		DC2E47CE19957F5D00BCACAF /* HPIL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478A19957F5D00BCACAF /* HPIL.MOD */; };
+		DC2E47CF19957F5D00BCACAF /* IR-PRINT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478B19957F5D00BCACAF /* IR-PRINT.MOD */; };
+		DC2E47D019957F5D00BCACAF /* LAITRAM-XQ2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478C19957F5D00BCACAF /* LAITRAM-XQ2.MOD */; };
+		DC2E47D119957F5D00BCACAF /* LANDNAV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478D19957F5D00BCACAF /* LANDNAV.MOD */; };
+		DC2E47D219957F5D00BCACAF /* MACHINE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478E19957F5D00BCACAF /* MACHINE.MOD */; };
+		DC2E47D319957F5D00BCACAF /* MATH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478F19957F5D00BCACAF /* MATH.MOD */; };
+		DC2E47D419957F5D00BCACAF /* MATHSTAT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479019957F5D00BCACAF /* MATHSTAT.MOD */; };
+		DC2E47D519957F5D00BCACAF /* MC-EPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479119957F5D00BCACAF /* MC-EPROM.MOD */; };
+		DC2E47D619957F5D00BCACAF /* MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479219957F5D00BCACAF /* MEM.MOD */; };
+		DC2E47D719957F5D00BCACAF /* MLROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479319957F5D00BCACAF /* MLROM.MOD */; };
+		DC2E47D819957F5D00BCACAF /* NAVIGATION.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479419957F5D00BCACAF /* NAVIGATION.MOD */; };
+		DC2E47D919957F5D00BCACAF /* NFCROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479519957F5D00BCACAF /* NFCROM.MOD */; };
+		DC2E47DA19957F5D00BCACAF /* NUT-C.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479619957F5D00BCACAF /* NUT-C.MOD */; };
+		DC2E47DB19957F5D00BCACAF /* NUT-CV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479719957F5D00BCACAF /* NUT-CV.MOD */; };
+		DC2E47DC19957F5D00BCACAF /* NUT-CX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479819957F5D00BCACAF /* NUT-CX.MOD */; };
+		DC2E47DD19957F5D00BCACAF /* PETROLEUM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479919957F5D00BCACAF /* PETROLEUM.MOD */; };
+		DC2E47DE19957F5D00BCACAF /* PLOTTER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479A19957F5D00BCACAF /* PLOTTER.MOD */; };
+		DC2E47DF19957F5D00BCACAF /* PPC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479B19957F5D00BCACAF /* PPC.MOD */; };
+		DC2E47E019957F5D00BCACAF /* PRINTER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479C19957F5D00BCACAF /* PRINTER.MOD */; };
+		DC2E47E119957F5D00BCACAF /* PROTOCODER2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479D19957F5D00BCACAF /* PROTOCODER2.MOD */; };
+		DC2E47E219957F5D00BCACAF /* PROTOPARIO.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479E19957F5D00BCACAF /* PROTOPARIO.MOD */; };
+		DC2E47E319957F5D00BCACAF /* QUADMEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479F19957F5D00BCACAF /* QUADMEM.MOD */; };
+		DC2E47E419957F5D00BCACAF /* RAM4K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A019957F5D00BCACAF /* RAM4K.MOD */; };
+		DC2E47E519957F5D00BCACAF /* RAM8K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A119957F5D00BCACAF /* RAM8K.MOD */; };
+		DC2E47E619957F5D00BCACAF /* RAM16K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A219957F5D00BCACAF /* RAM16K.MOD */; };
+		DC2E47E719957F5D00BCACAF /* RAM32K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A319957F5D00BCACAF /* RAM32K.MOD */; };
+		DC2E47E819957F5D00BCACAF /* REAL-ESTATE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A419957F5D00BCACAF /* REAL-ESTATE.MOD */; };
+		DC2E47E919957F5D00BCACAF /* SANDBOX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A519957F5D00BCACAF /* SANDBOX.MOD */; };
+		DC2E47EA19957F5D00BCACAF /* SANDMATH-III.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A619957F5D00BCACAF /* SANDMATH-III.MOD */; };
+		DC2E47EB19957F5D00BCACAF /* SECURITIES.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A719957F5D00BCACAF /* SECURITIES.MOD */; };
+		DC2E47EC19957F5D00BCACAF /* SERVICE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A819957F5D00BCACAF /* SERVICE.MOD */; };
+		DC2E47ED19957F5D00BCACAF /* STANDARD.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A919957F5D00BCACAF /* STANDARD.MOD */; };
+		DC2E47EE19957F5D00BCACAF /* STAT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AA19957F5D00BCACAF /* STAT.MOD */; };
+		DC2E47EF19957F5D00BCACAF /* STRESS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AB19957F5D00BCACAF /* STRESS.MOD */; };
+		DC2E47F019957F5D00BCACAF /* STRUCTURAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AC19957F5D00BCACAF /* STRUCTURAL.MOD */; };
+		DC2E47F119957F5D00BCACAF /* SURVEY.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AD19957F5D00BCACAF /* SURVEY.MOD */; };
+		DC2E47F219957F5D00BCACAF /* THERMAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AE19957F5D00BCACAF /* THERMAL.MOD */; };
+		DC2E47F319957F5D00BCACAF /* TIME.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AF19957F5D00BCACAF /* TIME.MOD */; };
+		DC2E47F419957F5D00BCACAF /* WAND.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47B019957F5D00BCACAF /* WAND.MOD */; };
+		DC2E47F519957F5D00BCACAF /* WWRAMBOXII.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47B119957F5D00BCACAF /* WWRAMBOXII.MOD */; };
+		DC45285319897DA600C40B6C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285219897DA600C40B6C /* main.swift */; };
+		DC45285519897DA600C40B6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285419897DA600C40B6C /* ViewController.swift */; };
+		DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285619897DA600C40B6C /* AppDelegate.swift */; };
+		DC45285919897DA600C40B6C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC45285819897DA600C40B6C /* Images.xcassets */; };
+		DC45285C19897DA600C40B6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC45285A19897DA600C40B6C /* Main.storyboard */; };
+		DC45286819897DA600C40B6C /* my41Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45286719897DA600C40B6C /* my41Tests.swift */; };
+		DC46ED8E19B3A09B0091E143 /* display.lookup in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8C19B3A09B0091E143 /* display.lookup */; };
+		DC46ED8F19B3A09B0091E143 /* hpchar.geom in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8D19B3A09B0091E143 /* hpchar.geom */; };
+		DC56269D198B75E80040453F /* XNUT2.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC56268F198B75E80040453F /* XNUT2.ROM */; };
+		DC56269E198B75E80040453F /* XNUT1.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562690198B75E80040453F /* XNUT1.ROM */; };
+		DC56269F198B75E80040453F /* XNUT0.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562691198B75E80040453F /* XNUT0.ROM */; };
+		DC5626A0198B75E80040453F /* TIMER.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562692198B75E80040453F /* TIMER.ROM */; };
+		DC5626A1198B75E80040453F /* PRINTER.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562693198B75E80040453F /* PRINTER.ROM */; };
+		DC5626A2198B75E80040453F /* NUT2.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562694198B75E80040453F /* NUT2.ROM */; };
+		DC5626A3198B75E80040453F /* NUT1.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562695198B75E80040453F /* NUT1.ROM */; };
+		DC5626A4198B75E80040453F /* NUT0.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562696198B75E80040453F /* NUT0.ROM */; };
+		DC5626A5198B75E80040453F /* CXFUNS1.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562697198B75E80040453F /* CXFUNS1.ROM */; };
+		DC5626A6198B75E80040453F /* CXFUNS0.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562698198B75E80040453F /* CXFUNS0.ROM */; };
+		DC5626A7198B75E80040453F /* ADV2.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562699198B75E80040453F /* ADV2.ROM */; };
+		DC5626A8198B75E80040453F /* ADV1.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC56269A198B75E80040453F /* ADV1.ROM */; };
+		DC5626A9198B75E80040453F /* ADV0.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC56269B198B75E80040453F /* ADV0.ROM */; };
+		DC5626AA198B75E80040453F /* CrdRdr-1E.rom in Resources */ = {isa = PBXBuildFile; fileRef = DC56269C198B75E80040453F /* CrdRdr-1E.rom */; };
+		DC5626B1198B89FC0040453F /* RamChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5626B0198B89FC0040453F /* RamChip.swift */; };
+		DC6DB98B19BA5C1800E26ADD /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */; };
+		DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98D19BB6A5200E26ADD /* Button.swift */; };
+		DC75043919B2652200180161 /* hpfont.hpfont in Resources */ = {isa = PBXBuildFile; fileRef = DC75043819B2652200180161 /* hpfont.hpfont */; };
+		DC7B7E0F19AF99AB00C70269 /* CalculatorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */; };
+		DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E1019AFA4EE00C70269 /* Timer.swift */; };
+		DCAD885C199D360B0027C925 /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885B199D360B0027C925 /* CPU.swift */; };
+		DCAD885E199D36150027C925 /* DataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885D199D36150027C925 /* DataOperations.swift */; };
+		DCAD8860199D37CB0027C925 /* MOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885F199D37CB0027C925 /* MOD.swift */; };
+		DCAD8862199D37E70027C925 /* RomChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8861199D37E70027C925 /* RomChip.swift */; };
+		DCAD8864199D380C0027C925 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8863199D380C0027C925 /* Bus.swift */; };
+		DCAD8866199D38540027C925 /* SoundOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8865199D38540027C925 /* SoundOutput.swift */; };
+		DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD48908198AF42B00F3B898 /* CalculatorController.swift */; };
+		DCF52A21199C971A006BF825 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF52A20199C971A006BF825 /* Extensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DC45286219897DA600C40B6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC45284519897DA500C40B6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC45284C19897DA500C40B6C;
+			remoteInfo = my41;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DC2E476B1995767900BCACAF /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesController.swift; path = Classes/PreferencesController.swift; sourceTree = "<group>"; };
+		DC2E476E19957F5D00BCACAF /* 41Z.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = 41Z.MOD; path = MOD/41Z.MOD; sourceTree = "<group>"; };
+		DC2E476F19957F5D00BCACAF /* ADV-APP.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ADV-APP.MOD"; path = "MOD/ADV-APP.MOD"; sourceTree = "<group>"; };
+		DC2E477019957F5D00BCACAF /* ADVANTAGE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADVANTAGE.MOD; path = MOD/ADVANTAGE.MOD; sourceTree = "<group>"; };
+		DC2E477119957F5D00BCACAF /* AECROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AECROM.MOD; path = MOD/AECROM.MOD; sourceTree = "<group>"; };
+		DC2E477219957F5D00BCACAF /* AUTOSTART.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AUTOSTART.MOD; path = MOD/AUTOSTART.MOD; sourceTree = "<group>"; };
+		DC2E477319957F5D00BCACAF /* AVIATION.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AVIATION.MOD; path = MOD/AVIATION.MOD; sourceTree = "<group>"; };
+		DC2E477419957F5D00BCACAF /* BLDROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = BLDROM.MOD; path = MOD/BLDROM.MOD; sourceTree = "<group>"; };
+		DC2E477519957F5D00BCACAF /* CARD-RDR.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CARD-RDR.MOD"; path = "MOD/CARD-RDR.MOD"; sourceTree = "<group>"; };
+		DC2E477619957F5D00BCACAF /* CCD.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CCD.MOD; path = MOD/CCD.MOD; sourceTree = "<group>"; };
+		DC2E477719957F5D00BCACAF /* CIRCUIT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CIRCUIT.MOD; path = MOD/CIRCUIT.MOD; sourceTree = "<group>"; };
+		DC2E477819957F5D00BCACAF /* CLINICAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CLINICAL.MOD; path = MOD/CLINICAL.MOD; sourceTree = "<group>"; };
+		DC2E477919957F5D00BCACAF /* DATA-ACQ.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DATA-ACQ.MOD"; path = "MOD/DATA-ACQ.MOD"; sourceTree = "<group>"; };
+		DC2E477A19957F5D00BCACAF /* DAVID.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DAVID.MOD; path = MOD/DAVID.MOD; sourceTree = "<group>"; };
+		DC2E477B19957F5D00BCACAF /* DIAGNOSTIC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DIAGNOSTIC.MOD; path = MOD/DIAGNOSTIC.MOD; sourceTree = "<group>"; };
+		DC2E477C19957F5D00BCACAF /* ES-41.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ES-41.MOD"; path = "MOD/ES-41.MOD"; sourceTree = "<group>"; };
+		DC2E477D19957F5D00BCACAF /* ES-MLDL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ES-MLDL.MOD"; path = "MOD/ES-MLDL.MOD"; sourceTree = "<group>"; };
+		DC2E477E19957F5D00BCACAF /* EXT-FUNS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-FUNS.MOD"; path = "MOD/EXT-FUNS.MOD"; sourceTree = "<group>"; };
+		DC2E477F19957F5D00BCACAF /* EXT-IO.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-IO.MOD"; path = "MOD/EXT-IO.MOD"; sourceTree = "<group>"; };
+		DC2E478019957F5D00BCACAF /* EXT-MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-MEM.MOD"; path = "MOD/EXT-MEM.MOD"; sourceTree = "<group>"; };
+		DC2E478119957F5D00BCACAF /* FINANCE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = FINANCE.MOD; path = MOD/FINANCE.MOD; sourceTree = "<group>"; };
+		DC2E478219957F5D00BCACAF /* FORTH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = FORTH.MOD; path = MOD/FORTH.MOD; sourceTree = "<group>"; };
+		DC2E478319957F5D00BCACAF /* GAMES.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = GAMES.MOD; path = MOD/GAMES.MOD; sourceTree = "<group>"; };
+		DC2E478419957F5D00BCACAF /* HEP-2MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HEP-2MEM.MOD"; path = "MOD/HEP-2MEM.MOD"; sourceTree = "<group>"; };
+		DC2E478519957F5D00BCACAF /* HEP-MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HEP-MEM.MOD"; path = "MOD/HEP-MEM.MOD"; sourceTree = "<group>"; };
+		DC2E478619957F5D00BCACAF /* HEPAX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HEPAX.MOD; path = MOD/HEPAX.MOD; sourceTree = "<group>"; };
+		DC2E478719957F5D00BCACAF /* HOME-MGT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HOME-MGT.MOD"; path = "MOD/HOME-MGT.MOD"; sourceTree = "<group>"; };
+		DC2E478819957F5D00BCACAF /* HPIL-DEV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HPIL-DEV.MOD"; path = "MOD/HPIL-DEV.MOD"; sourceTree = "<group>"; };
+		DC2E478919957F5D00BCACAF /* HPIL-DIAG.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HPIL-DIAG.MOD"; path = "MOD/HPIL-DIAG.MOD"; sourceTree = "<group>"; };
+		DC2E478A19957F5D00BCACAF /* HPIL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HPIL.MOD; path = MOD/HPIL.MOD; sourceTree = "<group>"; };
+		DC2E478B19957F5D00BCACAF /* IR-PRINT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "IR-PRINT.MOD"; path = "MOD/IR-PRINT.MOD"; sourceTree = "<group>"; };
+		DC2E478C19957F5D00BCACAF /* LAITRAM-XQ2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "LAITRAM-XQ2.MOD"; path = "MOD/LAITRAM-XQ2.MOD"; sourceTree = "<group>"; };
+		DC2E478D19957F5D00BCACAF /* LANDNAV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = LANDNAV.MOD; path = MOD/LANDNAV.MOD; sourceTree = "<group>"; };
+		DC2E478E19957F5D00BCACAF /* MACHINE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MACHINE.MOD; path = MOD/MACHINE.MOD; sourceTree = "<group>"; };
+		DC2E478F19957F5D00BCACAF /* MATH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MATH.MOD; path = MOD/MATH.MOD; sourceTree = "<group>"; };
+		DC2E479019957F5D00BCACAF /* MATHSTAT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MATHSTAT.MOD; path = MOD/MATHSTAT.MOD; sourceTree = "<group>"; };
+		DC2E479119957F5D00BCACAF /* MC-EPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MC-EPROM.MOD"; path = "MOD/MC-EPROM.MOD"; sourceTree = "<group>"; };
+		DC2E479219957F5D00BCACAF /* MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MEM.MOD; path = MOD/MEM.MOD; sourceTree = "<group>"; };
+		DC2E479319957F5D00BCACAF /* MLROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MLROM.MOD; path = MOD/MLROM.MOD; sourceTree = "<group>"; };
+		DC2E479419957F5D00BCACAF /* NAVIGATION.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NAVIGATION.MOD; path = MOD/NAVIGATION.MOD; sourceTree = "<group>"; };
+		DC2E479519957F5D00BCACAF /* NFCROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NFCROM.MOD; path = MOD/NFCROM.MOD; sourceTree = "<group>"; };
+		DC2E479619957F5D00BCACAF /* NUT-C.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-C.MOD"; path = "MOD/NUT-C.MOD"; sourceTree = "<group>"; };
+		DC2E479719957F5D00BCACAF /* NUT-CV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CV.MOD"; path = "MOD/NUT-CV.MOD"; sourceTree = "<group>"; };
+		DC2E479819957F5D00BCACAF /* NUT-CX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CX.MOD"; path = "MOD/NUT-CX.MOD"; sourceTree = "<group>"; };
+		DC2E479919957F5D00BCACAF /* PETROLEUM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PETROLEUM.MOD; path = MOD/PETROLEUM.MOD; sourceTree = "<group>"; };
+		DC2E479A19957F5D00BCACAF /* PLOTTER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PLOTTER.MOD; path = MOD/PLOTTER.MOD; sourceTree = "<group>"; };
+		DC2E479B19957F5D00BCACAF /* PPC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PPC.MOD; path = MOD/PPC.MOD; sourceTree = "<group>"; };
+		DC2E479C19957F5D00BCACAF /* PRINTER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PRINTER.MOD; path = MOD/PRINTER.MOD; sourceTree = "<group>"; };
+		DC2E479D19957F5D00BCACAF /* PROTOCODER2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROTOCODER2.MOD; path = MOD/PROTOCODER2.MOD; sourceTree = "<group>"; };
+		DC2E479E19957F5D00BCACAF /* PROTOPARIO.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROTOPARIO.MOD; path = MOD/PROTOPARIO.MOD; sourceTree = "<group>"; };
+		DC2E479F19957F5D00BCACAF /* QUADMEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = QUADMEM.MOD; path = MOD/QUADMEM.MOD; sourceTree = "<group>"; };
+		DC2E47A019957F5D00BCACAF /* RAM4K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM4K.MOD; path = MOD/RAM4K.MOD; sourceTree = "<group>"; };
+		DC2E47A119957F5D00BCACAF /* RAM8K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM8K.MOD; path = MOD/RAM8K.MOD; sourceTree = "<group>"; };
+		DC2E47A219957F5D00BCACAF /* RAM16K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM16K.MOD; path = MOD/RAM16K.MOD; sourceTree = "<group>"; };
+		DC2E47A319957F5D00BCACAF /* RAM32K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM32K.MOD; path = MOD/RAM32K.MOD; sourceTree = "<group>"; };
+		DC2E47A419957F5D00BCACAF /* REAL-ESTATE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "REAL-ESTATE.MOD"; path = "MOD/REAL-ESTATE.MOD"; sourceTree = "<group>"; };
+		DC2E47A519957F5D00BCACAF /* SANDBOX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SANDBOX.MOD; path = MOD/SANDBOX.MOD; sourceTree = "<group>"; };
+		DC2E47A619957F5D00BCACAF /* SANDMATH-III.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SANDMATH-III.MOD"; path = "MOD/SANDMATH-III.MOD"; sourceTree = "<group>"; };
+		DC2E47A719957F5D00BCACAF /* SECURITIES.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SECURITIES.MOD; path = MOD/SECURITIES.MOD; sourceTree = "<group>"; };
+		DC2E47A819957F5D00BCACAF /* SERVICE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SERVICE.MOD; path = MOD/SERVICE.MOD; sourceTree = "<group>"; };
+		DC2E47A919957F5D00BCACAF /* STANDARD.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STANDARD.MOD; path = MOD/STANDARD.MOD; sourceTree = "<group>"; };
+		DC2E47AA19957F5D00BCACAF /* STAT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STAT.MOD; path = MOD/STAT.MOD; sourceTree = "<group>"; };
+		DC2E47AB19957F5D00BCACAF /* STRESS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STRESS.MOD; path = MOD/STRESS.MOD; sourceTree = "<group>"; };
+		DC2E47AC19957F5D00BCACAF /* STRUCTURAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STRUCTURAL.MOD; path = MOD/STRUCTURAL.MOD; sourceTree = "<group>"; };
+		DC2E47AD19957F5D00BCACAF /* SURVEY.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SURVEY.MOD; path = MOD/SURVEY.MOD; sourceTree = "<group>"; };
+		DC2E47AE19957F5D00BCACAF /* THERMAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = THERMAL.MOD; path = MOD/THERMAL.MOD; sourceTree = "<group>"; };
+		DC2E47AF19957F5D00BCACAF /* TIME.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TIME.MOD; path = MOD/TIME.MOD; sourceTree = "<group>"; };
+		DC2E47B019957F5D00BCACAF /* WAND.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WAND.MOD; path = MOD/WAND.MOD; sourceTree = "<group>"; };
+		DC2E47B119957F5D00BCACAF /* WWRAMBOXII.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WWRAMBOXII.MOD; path = MOD/WWRAMBOXII.MOD; sourceTree = "<group>"; };
+		DC45284D19897DA600C40B6C /* my41.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my41.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC45285119897DA600C40B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC45285219897DA600C40B6C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DC45285419897DA600C40B6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DC45285619897DA600C40B6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DC45285819897DA600C40B6C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DC45285B19897DA600C40B6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DC45286119897DA600C40B6C /* my41Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = my41Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC45286619897DA600C40B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC45286719897DA600C40B6C /* my41Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my41Tests.swift; sourceTree = "<group>"; };
+		DC46ED8C19B3A09B0091E143 /* display.lookup */ = {isa = PBXFileReference; lastKnownFileType = file; path = display.lookup; sourceTree = "<group>"; };
+		DC46ED8D19B3A09B0091E143 /* hpchar.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = hpchar.geom; sourceTree = "<group>"; };
+		DC56268F198B75E80040453F /* XNUT2.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT2.ROM; path = ROMs/XNUT2.ROM; sourceTree = "<group>"; };
+		DC562690198B75E80040453F /* XNUT1.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT1.ROM; path = ROMs/XNUT1.ROM; sourceTree = "<group>"; };
+		DC562691198B75E80040453F /* XNUT0.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT0.ROM; path = ROMs/XNUT0.ROM; sourceTree = "<group>"; };
+		DC562692198B75E80040453F /* TIMER.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = TIMER.ROM; path = ROMs/TIMER.ROM; sourceTree = "<group>"; };
+		DC562693198B75E80040453F /* PRINTER.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = PRINTER.ROM; path = ROMs/PRINTER.ROM; sourceTree = "<group>"; };
+		DC562694198B75E80040453F /* NUT2.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = NUT2.ROM; path = ROMs/NUT2.ROM; sourceTree = "<group>"; };
+		DC562695198B75E80040453F /* NUT1.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = NUT1.ROM; path = ROMs/NUT1.ROM; sourceTree = "<group>"; };
+		DC562696198B75E80040453F /* NUT0.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = NUT0.ROM; path = ROMs/NUT0.ROM; sourceTree = "<group>"; };
+		DC562697198B75E80040453F /* CXFUNS1.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = CXFUNS1.ROM; path = ROMs/CXFUNS1.ROM; sourceTree = "<group>"; };
+		DC562698198B75E80040453F /* CXFUNS0.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = CXFUNS0.ROM; path = ROMs/CXFUNS0.ROM; sourceTree = "<group>"; };
+		DC562699198B75E80040453F /* ADV2.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADV2.ROM; path = ROMs/ADV2.ROM; sourceTree = "<group>"; };
+		DC56269A198B75E80040453F /* ADV1.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADV1.ROM; path = ROMs/ADV1.ROM; sourceTree = "<group>"; };
+		DC56269B198B75E80040453F /* ADV0.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADV0.ROM; path = ROMs/ADV0.ROM; sourceTree = "<group>"; };
+		DC56269C198B75E80040453F /* CrdRdr-1E.rom */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CrdRdr-1E.rom"; path = "ROMs/CrdRdr-1E.rom"; sourceTree = "<group>"; };
+		DC5626B0198B89FC0040453F /* RamChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RamChip.swift; path = Classes/RamChip.swift; sourceTree = "<group>"; };
+		DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Classes/Keyboard.swift; sourceTree = "<group>"; };
+		DC6DB98D19BB6A5200E26ADD /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = Classes/Button.swift; sourceTree = "<group>"; };
+		DC75043819B2652200180161 /* hpfont.hpfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = hpfont.hpfont; sourceTree = "<group>"; };
+		DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatorWindow.swift; path = Classes/CalculatorWindow.swift; sourceTree = "<group>"; };
+		DC7B7E1019AFA4EE00C70269 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Classes/Timer.swift; sourceTree = "<group>"; };
+		DCAD885B199D360B0027C925 /* CPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU.swift; path = Classes/CPU.swift; sourceTree = "<group>"; };
+		DCAD885D199D36150027C925 /* DataOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataOperations.swift; path = Classes/DataOperations.swift; sourceTree = "<group>"; };
+		DCAD885F199D37CB0027C925 /* MOD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MOD.swift; path = Classes/MOD.swift; sourceTree = "<group>"; };
+		DCAD8861199D37E70027C925 /* RomChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RomChip.swift; path = Classes/RomChip.swift; sourceTree = "<group>"; };
+		DCAD8863199D380C0027C925 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bus.swift; path = Classes/Bus.swift; sourceTree = "<group>"; };
+		DCAD8865199D38540027C925 /* SoundOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundOutput.swift; path = Classes/SoundOutput.swift; sourceTree = "<group>"; };
+		DCD48908198AF42B00F3B898 /* CalculatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatorController.swift; path = Classes/CalculatorController.swift; sourceTree = "<group>"; };
+		DCF52A20199C971A006BF825 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Classes/Extensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC45284A19897DA500C40B6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC45285E19897DA600C40B6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC0B8E6B1999461C0092BDD3 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Sound;
+			sourceTree = "<group>";
+		};
+		DC2E476A1995766000BCACAF /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				DC2E476B1995767900BCACAF /* PreferencesController.swift */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		DC2E476D19957F4C00BCACAF /* MODs */ = {
+			isa = PBXGroup;
+			children = (
+				DC2E476E19957F5D00BCACAF /* 41Z.MOD */,
+				DC2E476F19957F5D00BCACAF /* ADV-APP.MOD */,
+				DC2E477019957F5D00BCACAF /* ADVANTAGE.MOD */,
+				DC2E477119957F5D00BCACAF /* AECROM.MOD */,
+				DC2E477219957F5D00BCACAF /* AUTOSTART.MOD */,
+				DC2E477319957F5D00BCACAF /* AVIATION.MOD */,
+				DC2E477419957F5D00BCACAF /* BLDROM.MOD */,
+				DC2E477519957F5D00BCACAF /* CARD-RDR.MOD */,
+				DC2E477619957F5D00BCACAF /* CCD.MOD */,
+				DC2E477719957F5D00BCACAF /* CIRCUIT.MOD */,
+				DC2E477819957F5D00BCACAF /* CLINICAL.MOD */,
+				DC2E477919957F5D00BCACAF /* DATA-ACQ.MOD */,
+				DC2E477A19957F5D00BCACAF /* DAVID.MOD */,
+				DC2E477B19957F5D00BCACAF /* DIAGNOSTIC.MOD */,
+				DC2E477C19957F5D00BCACAF /* ES-41.MOD */,
+				DC2E477D19957F5D00BCACAF /* ES-MLDL.MOD */,
+				DC2E477E19957F5D00BCACAF /* EXT-FUNS.MOD */,
+				DC2E477F19957F5D00BCACAF /* EXT-IO.MOD */,
+				DC2E478019957F5D00BCACAF /* EXT-MEM.MOD */,
+				DC2E478119957F5D00BCACAF /* FINANCE.MOD */,
+				DC2E478219957F5D00BCACAF /* FORTH.MOD */,
+				DC2E478319957F5D00BCACAF /* GAMES.MOD */,
+				DC2E478419957F5D00BCACAF /* HEP-2MEM.MOD */,
+				DC2E478519957F5D00BCACAF /* HEP-MEM.MOD */,
+				DC2E478619957F5D00BCACAF /* HEPAX.MOD */,
+				DC2E478719957F5D00BCACAF /* HOME-MGT.MOD */,
+				DC2E478819957F5D00BCACAF /* HPIL-DEV.MOD */,
+				DC2E478919957F5D00BCACAF /* HPIL-DIAG.MOD */,
+				DC2E478A19957F5D00BCACAF /* HPIL.MOD */,
+				DC2E478B19957F5D00BCACAF /* IR-PRINT.MOD */,
+				DC2E478C19957F5D00BCACAF /* LAITRAM-XQ2.MOD */,
+				DC2E478D19957F5D00BCACAF /* LANDNAV.MOD */,
+				DC2E478E19957F5D00BCACAF /* MACHINE.MOD */,
+				DC2E478F19957F5D00BCACAF /* MATH.MOD */,
+				DC2E479019957F5D00BCACAF /* MATHSTAT.MOD */,
+				DC2E479119957F5D00BCACAF /* MC-EPROM.MOD */,
+				DC2E479219957F5D00BCACAF /* MEM.MOD */,
+				DC2E479319957F5D00BCACAF /* MLROM.MOD */,
+				DC2E479419957F5D00BCACAF /* NAVIGATION.MOD */,
+				DC2E479519957F5D00BCACAF /* NFCROM.MOD */,
+				DC2E479619957F5D00BCACAF /* NUT-C.MOD */,
+				DC2E479719957F5D00BCACAF /* NUT-CV.MOD */,
+				DC2E479819957F5D00BCACAF /* NUT-CX.MOD */,
+				DC2E479919957F5D00BCACAF /* PETROLEUM.MOD */,
+				DC2E479A19957F5D00BCACAF /* PLOTTER.MOD */,
+				DC2E479B19957F5D00BCACAF /* PPC.MOD */,
+				DC2E479C19957F5D00BCACAF /* PRINTER.MOD */,
+				DC2E479D19957F5D00BCACAF /* PROTOCODER2.MOD */,
+				DC2E479E19957F5D00BCACAF /* PROTOPARIO.MOD */,
+				DC2E479F19957F5D00BCACAF /* QUADMEM.MOD */,
+				DC2E47A019957F5D00BCACAF /* RAM4K.MOD */,
+				DC2E47A119957F5D00BCACAF /* RAM8K.MOD */,
+				DC2E47A219957F5D00BCACAF /* RAM16K.MOD */,
+				DC2E47A319957F5D00BCACAF /* RAM32K.MOD */,
+				DC2E47A419957F5D00BCACAF /* REAL-ESTATE.MOD */,
+				DC2E47A519957F5D00BCACAF /* SANDBOX.MOD */,
+				DC2E47A619957F5D00BCACAF /* SANDMATH-III.MOD */,
+				DC2E47A719957F5D00BCACAF /* SECURITIES.MOD */,
+				DC2E47A819957F5D00BCACAF /* SERVICE.MOD */,
+				DC2E47A919957F5D00BCACAF /* STANDARD.MOD */,
+				DC2E47AA19957F5D00BCACAF /* STAT.MOD */,
+				DC2E47AB19957F5D00BCACAF /* STRESS.MOD */,
+				DC2E47AC19957F5D00BCACAF /* STRUCTURAL.MOD */,
+				DC2E47AD19957F5D00BCACAF /* SURVEY.MOD */,
+				DC2E47AE19957F5D00BCACAF /* THERMAL.MOD */,
+				DC2E47AF19957F5D00BCACAF /* TIME.MOD */,
+				DC2E47B019957F5D00BCACAF /* WAND.MOD */,
+				DC2E47B119957F5D00BCACAF /* WWRAMBOXII.MOD */,
+			);
+			name = MODs;
+			sourceTree = "<group>";
+		};
+		DC45284419897DA500C40B6C = {
+			isa = PBXGroup;
+			children = (
+				DC45284F19897DA600C40B6C /* my41 */,
+				DC45286419897DA600C40B6C /* my41Tests */,
+				DC45284E19897DA600C40B6C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC45284E19897DA600C40B6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC45284D19897DA600C40B6C /* my41.app */,
+				DC45286119897DA600C40B6C /* my41Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC45284F19897DA600C40B6C /* my41 */ = {
+			isa = PBXGroup;
+			children = (
+				DC2E476D19957F4C00BCACAF /* MODs */,
+				DC56268E198B75770040453F /* ROMs */,
+				DCD48906198AF40600F3B898 /* Classes */,
+				DC45285419897DA600C40B6C /* ViewController.swift */,
+				DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */,
+				DC45285619897DA600C40B6C /* AppDelegate.swift */,
+				DC45285819897DA600C40B6C /* Images.xcassets */,
+				DC45285A19897DA600C40B6C /* Main.storyboard */,
+				DC45285019897DA600C40B6C /* Supporting Files */,
+				DCF52A20199C971A006BF825 /* Extensions.swift */,
+			);
+			path = my41;
+			sourceTree = "<group>";
+		};
+		DC45285019897DA600C40B6C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC46ED8C19B3A09B0091E143 /* display.lookup */,
+				DC46ED8D19B3A09B0091E143 /* hpchar.geom */,
+				DC75043819B2652200180161 /* hpfont.hpfont */,
+				DC45285119897DA600C40B6C /* Info.plist */,
+				DC45285219897DA600C40B6C /* main.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC45286419897DA600C40B6C /* my41Tests */ = {
+			isa = PBXGroup;
+			children = (
+				DC45286719897DA600C40B6C /* my41Tests.swift */,
+				DC45286519897DA600C40B6C /* Supporting Files */,
+			);
+			path = my41Tests;
+			sourceTree = "<group>";
+		};
+		DC45286519897DA600C40B6C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC45286619897DA600C40B6C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC56268E198B75770040453F /* ROMs */ = {
+			isa = PBXGroup;
+			children = (
+				DC56268F198B75E80040453F /* XNUT2.ROM */,
+				DC562690198B75E80040453F /* XNUT1.ROM */,
+				DC562691198B75E80040453F /* XNUT0.ROM */,
+				DC562692198B75E80040453F /* TIMER.ROM */,
+				DC562693198B75E80040453F /* PRINTER.ROM */,
+				DC562694198B75E80040453F /* NUT2.ROM */,
+				DC562695198B75E80040453F /* NUT1.ROM */,
+				DC562696198B75E80040453F /* NUT0.ROM */,
+				DC562697198B75E80040453F /* CXFUNS1.ROM */,
+				DC562698198B75E80040453F /* CXFUNS0.ROM */,
+				DC562699198B75E80040453F /* ADV2.ROM */,
+				DC56269A198B75E80040453F /* ADV1.ROM */,
+				DC56269B198B75E80040453F /* ADV0.ROM */,
+				DC56269C198B75E80040453F /* CrdRdr-1E.rom */,
+			);
+			name = ROMs;
+			sourceTree = "<group>";
+		};
+		DC5626AB198B78540040453F /* CPU and Memory */ = {
+			isa = PBXGroup;
+			children = (
+				DCAD8865199D38540027C925 /* SoundOutput.swift */,
+				DCAD8863199D380C0027C925 /* Bus.swift */,
+				DCAD8861199D37E70027C925 /* RomChip.swift */,
+				DCAD885F199D37CB0027C925 /* MOD.swift */,
+				DCAD885D199D36150027C925 /* DataOperations.swift */,
+				DCAD885B199D360B0027C925 /* CPU.swift */,
+				DC5626B0198B89FC0040453F /* RamChip.swift */,
+			);
+			name = "CPU and Memory";
+			sourceTree = "<group>";
+		};
+		DC6DB98C19BB6A1700E26ADD /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */,
+				DC6DB98D19BB6A5200E26ADD /* Button.swift */,
+			);
+			name = Keyboard;
+			sourceTree = "<group>";
+		};
+		DC78A1D81992C49400258BD5 /* Display */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Display;
+			sourceTree = "<group>";
+		};
+		DC7B7E1219AFAFA600C70269 /* Peripherals */ = {
+			isa = PBXGroup;
+			children = (
+				DC7B7E1019AFA4EE00C70269 /* Timer.swift */,
+			);
+			name = Peripherals;
+			sourceTree = "<group>";
+		};
+		DCD48906198AF40600F3B898 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DC6DB98C19BB6A1700E26ADD /* Keyboard */,
+				DC7B7E1219AFAFA600C70269 /* Peripherals */,
+				DC0B8E6B1999461C0092BDD3 /* Sound */,
+				DC2E476A1995766000BCACAF /* Preferences */,
+				DC78A1D81992C49400258BD5 /* Display */,
+				DC5626AB198B78540040453F /* CPU and Memory */,
+				DCD48907198AF41000F3B898 /* Main Body */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		DCD48907198AF41000F3B898 /* Main Body */ = {
+			isa = PBXGroup;
+			children = (
+				DCD48908198AF42B00F3B898 /* CalculatorController.swift */,
+			);
+			name = "Main Body";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC45284C19897DA500C40B6C /* my41 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC45286B19897DA600C40B6C /* Build configuration list for PBXNativeTarget "my41" */;
+			buildPhases = (
+				DC45284919897DA500C40B6C /* Sources */,
+				DC45284A19897DA500C40B6C /* Frameworks */,
+				DC45284B19897DA500C40B6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = my41;
+			productName = my41;
+			productReference = DC45284D19897DA600C40B6C /* my41.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DC45286019897DA600C40B6C /* my41Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC45286E19897DA600C40B6C /* Build configuration list for PBXNativeTarget "my41Tests" */;
+			buildPhases = (
+				DC45285D19897DA600C40B6C /* Sources */,
+				DC45285E19897DA600C40B6C /* Frameworks */,
+				DC45285F19897DA600C40B6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC45286319897DA600C40B6C /* PBXTargetDependency */,
+			);
+			name = my41Tests;
+			productName = my41Tests;
+			productReference = DC45286119897DA600C40B6C /* my41Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC45284519897DA500C40B6C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = iPera;
+				TargetAttributes = {
+					DC45284C19897DA500C40B6C = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					DC45286019897DA600C40B6C = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = DC45284C19897DA500C40B6C;
+					};
+				};
+			};
+			buildConfigurationList = DC45284819897DA500C40B6C /* Build configuration list for PBXProject "my41" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DC45284419897DA500C40B6C;
+			productRefGroup = DC45284E19897DA600C40B6C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC45284C19897DA500C40B6C /* my41 */,
+				DC45286019897DA600C40B6C /* my41Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DC45284B19897DA500C40B6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC2E47EF19957F5D00BCACAF /* STRESS.MOD in Resources */,
+				DC2E47DC19957F5D00BCACAF /* NUT-CX.MOD in Resources */,
+				DC2E47C619957F5D00BCACAF /* FORTH.MOD in Resources */,
+				DC2E47BC19957F5D00BCACAF /* CLINICAL.MOD in Resources */,
+				DC2E47E319957F5D00BCACAF /* QUADMEM.MOD in Resources */,
+				DC2E47D019957F5D00BCACAF /* LAITRAM-XQ2.MOD in Resources */,
+				DC2E47F119957F5D00BCACAF /* SURVEY.MOD in Resources */,
+				DC2E47E419957F5D00BCACAF /* RAM4K.MOD in Resources */,
+				DC2E47DB19957F5D00BCACAF /* NUT-CV.MOD in Resources */,
+				DC2E47B319957F5D00BCACAF /* ADV-APP.MOD in Resources */,
+				DC2E47CE19957F5D00BCACAF /* HPIL.MOD in Resources */,
+				DC5626A1198B75E80040453F /* PRINTER.ROM in Resources */,
+				DC2E47C719957F5D00BCACAF /* GAMES.MOD in Resources */,
+				DC5626A9198B75E80040453F /* ADV0.ROM in Resources */,
+				DC2E47B519957F5D00BCACAF /* AECROM.MOD in Resources */,
+				DC2E47B819957F5D00BCACAF /* BLDROM.MOD in Resources */,
+				DC2E47C319957F5D00BCACAF /* EXT-IO.MOD in Resources */,
+				DC2E47ED19957F5D00BCACAF /* STANDARD.MOD in Resources */,
+				DC2E47BD19957F5D00BCACAF /* DATA-ACQ.MOD in Resources */,
+				DC2E47C119957F5D00BCACAF /* ES-MLDL.MOD in Resources */,
+				DC5626A4198B75E80040453F /* NUT0.ROM in Resources */,
+				DC2E47F519957F5D00BCACAF /* WWRAMBOXII.MOD in Resources */,
+				DC2E47E119957F5D00BCACAF /* PROTOCODER2.MOD in Resources */,
+				DC2E47E019957F5D00BCACAF /* PRINTER.MOD in Resources */,
+				DC2E47D519957F5D00BCACAF /* MC-EPROM.MOD in Resources */,
+				DC45285919897DA600C40B6C /* Images.xcassets in Resources */,
+				DC2E47D719957F5D00BCACAF /* MLROM.MOD in Resources */,
+				DC2E47E219957F5D00BCACAF /* PROTOPARIO.MOD in Resources */,
+				DC46ED8E19B3A09B0091E143 /* display.lookup in Resources */,
+				DC2E47D619957F5D00BCACAF /* MEM.MOD in Resources */,
+				DC56269F198B75E80040453F /* XNUT0.ROM in Resources */,
+				DC2E47B719957F5D00BCACAF /* AVIATION.MOD in Resources */,
+				DC56269E198B75E80040453F /* XNUT1.ROM in Resources */,
+				DC56269D198B75E80040453F /* XNUT2.ROM in Resources */,
+				DC46ED8F19B3A09B0091E143 /* hpchar.geom in Resources */,
+				DC5626A6198B75E80040453F /* CXFUNS0.ROM in Resources */,
+				DC2E47CA19957F5D00BCACAF /* HEPAX.MOD in Resources */,
+				DC5626A2198B75E80040453F /* NUT2.ROM in Resources */,
+				DC2E47C819957F5D00BCACAF /* HEP-2MEM.MOD in Resources */,
+				DC2E47BA19957F5D00BCACAF /* CCD.MOD in Resources */,
+				DC2E47E719957F5D00BCACAF /* RAM32K.MOD in Resources */,
+				DC2E47E519957F5D00BCACAF /* RAM8K.MOD in Resources */,
+				DC2E47F019957F5D00BCACAF /* STRUCTURAL.MOD in Resources */,
+				DC2E47DE19957F5D00BCACAF /* PLOTTER.MOD in Resources */,
+				DC2E47BB19957F5D00BCACAF /* CIRCUIT.MOD in Resources */,
+				DC75043919B2652200180161 /* hpfont.hpfont in Resources */,
+				DC2E47BF19957F5D00BCACAF /* DIAGNOSTIC.MOD in Resources */,
+				DC5626A8198B75E80040453F /* ADV1.ROM in Resources */,
+				DC2E47D219957F5D00BCACAF /* MACHINE.MOD in Resources */,
+				DC5626A5198B75E80040453F /* CXFUNS1.ROM in Resources */,
+				DC2E47CB19957F5D00BCACAF /* HOME-MGT.MOD in Resources */,
+				DC2E47C219957F5D00BCACAF /* EXT-FUNS.MOD in Resources */,
+				DC2E47C919957F5D00BCACAF /* HEP-MEM.MOD in Resources */,
+				DC5626A0198B75E80040453F /* TIMER.ROM in Resources */,
+				DC2E47D819957F5D00BCACAF /* NAVIGATION.MOD in Resources */,
+				DC2E47DF19957F5D00BCACAF /* PPC.MOD in Resources */,
+				DC2E47D419957F5D00BCACAF /* MATHSTAT.MOD in Resources */,
+				DC2E47E819957F5D00BCACAF /* REAL-ESTATE.MOD in Resources */,
+				DC2E47DD19957F5D00BCACAF /* PETROLEUM.MOD in Resources */,
+				DC2E47EA19957F5D00BCACAF /* SANDMATH-III.MOD in Resources */,
+				DC5626A3198B75E80040453F /* NUT1.ROM in Resources */,
+				DC2E47C519957F5D00BCACAF /* FINANCE.MOD in Resources */,
+				DC2E47B919957F5D00BCACAF /* CARD-RDR.MOD in Resources */,
+				DC2E47C419957F5D00BCACAF /* EXT-MEM.MOD in Resources */,
+				DC2E47CF19957F5D00BCACAF /* IR-PRINT.MOD in Resources */,
+				DC2E47B219957F5D00BCACAF /* 41Z.MOD in Resources */,
+				DC2E47DA19957F5D00BCACAF /* NUT-C.MOD in Resources */,
+				DC2E47F219957F5D00BCACAF /* THERMAL.MOD in Resources */,
+				DC2E47CC19957F5D00BCACAF /* HPIL-DEV.MOD in Resources */,
+				DC2E47F419957F5D00BCACAF /* WAND.MOD in Resources */,
+				DC2E47C019957F5D00BCACAF /* ES-41.MOD in Resources */,
+				DC2E47EC19957F5D00BCACAF /* SERVICE.MOD in Resources */,
+				DC5626AA198B75E80040453F /* CrdRdr-1E.rom in Resources */,
+				DC2E47E619957F5D00BCACAF /* RAM16K.MOD in Resources */,
+				DC2E47BE19957F5D00BCACAF /* DAVID.MOD in Resources */,
+				DC2E47B619957F5D00BCACAF /* AUTOSTART.MOD in Resources */,
+				DC2E47E919957F5D00BCACAF /* SANDBOX.MOD in Resources */,
+				DC2E47EE19957F5D00BCACAF /* STAT.MOD in Resources */,
+				DC2E47F319957F5D00BCACAF /* TIME.MOD in Resources */,
+				DC45285C19897DA600C40B6C /* Main.storyboard in Resources */,
+				DC5626A7198B75E80040453F /* ADV2.ROM in Resources */,
+				DC2E47D119957F5D00BCACAF /* LANDNAV.MOD in Resources */,
+				DC2E47CD19957F5D00BCACAF /* HPIL-DIAG.MOD in Resources */,
+				DC2E47D919957F5D00BCACAF /* NFCROM.MOD in Resources */,
+				DC2E47D319957F5D00BCACAF /* MATH.MOD in Resources */,
+				DC2E47EB19957F5D00BCACAF /* SECURITIES.MOD in Resources */,
+				DC2E47B419957F5D00BCACAF /* ADVANTAGE.MOD in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC45285F19897DA600C40B6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC45284919897DA500C40B6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCAD8860199D37CB0027C925 /* MOD.swift in Sources */,
+				DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */,
+				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
+				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
+				DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */,
+				DC2E476C1995767900BCACAF /* PreferencesController.swift in Sources */,
+				DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */,
+				DCAD885E199D36150027C925 /* DataOperations.swift in Sources */,
+				DCAD8864199D380C0027C925 /* Bus.swift in Sources */,
+				DC7B7E0F19AF99AB00C70269 /* CalculatorWindow.swift in Sources */,
+				DC5626B1198B89FC0040453F /* RamChip.swift in Sources */,
+				DCAD8866199D38540027C925 /* SoundOutput.swift in Sources */,
+				DCAD885C199D360B0027C925 /* CPU.swift in Sources */,
+				DC6DB98B19BA5C1800E26ADD /* Keyboard.swift in Sources */,
+				DCF52A21199C971A006BF825 /* Extensions.swift in Sources */,
+				DC45285519897DA600C40B6C /* ViewController.swift in Sources */,
+				DC45285319897DA600C40B6C /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC45285D19897DA600C40B6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC45286819897DA600C40B6C /* my41Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DC45286319897DA600C40B6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC45284C19897DA500C40B6C /* my41 */;
+			targetProxy = DC45286219897DA600C40B6C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DC45285A19897DA600C40B6C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC45285B19897DA600C40B6C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DC45286919897DA600C40B6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DC45286A19897DA600C40B6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DC45286C19897DA600C40B6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = my41/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DC45286D19897DA600C40B6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = my41/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+			};
+			name = Release;
+		};
+		DC45286F19897DA600C40B6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/my41.app/Contents/MacOS/my41";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = my41Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		DC45287019897DA600C40B6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/my41.app/Contents/MacOS/my41";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = my41Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC45284819897DA500C40B6C /* Build configuration list for PBXProject "my41" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC45286919897DA600C40B6C /* Debug */,
+				DC45286A19897DA600C40B6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC45286B19897DA600C40B6C /* Build configuration list for PBXNativeTarget "my41" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC45286C19897DA600C40B6C /* Debug */,
+				DC45286D19897DA600C40B6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC45286E19897DA600C40B6C /* Build configuration list for PBXNativeTarget "my41Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC45286F19897DA600C40B6C /* Debug */,
+				DC45287019897DA600C40B6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC45284519897DA500C40B6C /* Project object */;
+}

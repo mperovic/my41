@@ -1,0 +1,7 @@
+Page,Bank     File Name         Description
+n             CrdRdr-1E.rom     Card Reader ROM 1E
+*Where n can be 8,A,C or E
+
+ROM Image(s) Copyright Hewlett Packard
+
+Hewlett-Packard Company makes no warranty as to the accuracy or completeness of the foregoing information and hereby disclaims any responsibility therefore.
