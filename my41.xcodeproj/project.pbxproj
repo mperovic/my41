@@ -101,6 +101,7 @@
 		DC5626B1198B89FC0040453F /* RamChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5626B0198B89FC0040453F /* RamChip.swift */; };
 		DC6DB98B19BA5C1800E26ADD /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */; };
 		DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98D19BB6A5200E26ADD /* Button.swift */; };
+		DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC74922619CF1E600012B5C0 /* Debuger.swift */; };
 		DC75043919B2652200180161 /* hpfont.hpfont in Resources */ = {isa = PBXBuildFile; fileRef = DC75043819B2652200180161 /* hpfont.hpfont */; };
 		DC7B7E0F19AF99AB00C70269 /* CalculatorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */; };
 		DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E1019AFA4EE00C70269 /* Timer.swift */; };
@@ -223,6 +224,7 @@
 		DC5626B0198B89FC0040453F /* RamChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RamChip.swift; path = Classes/RamChip.swift; sourceTree = "<group>"; };
 		DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Classes/Keyboard.swift; sourceTree = "<group>"; };
 		DC6DB98D19BB6A5200E26ADD /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = Classes/Button.swift; sourceTree = "<group>"; };
+		DC74922619CF1E600012B5C0 /* Debuger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Debuger.swift; path = Classes/Debuger.swift; sourceTree = "<group>"; };
 		DC75043819B2652200180161 /* hpfont.hpfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = hpfont.hpfont; sourceTree = "<group>"; };
 		DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatorWindow.swift; path = Classes/CalculatorWindow.swift; sourceTree = "<group>"; };
 		DC7B7E1019AFA4EE00C70269 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Classes/Timer.swift; sourceTree = "<group>"; };
@@ -452,6 +454,14 @@
 			name = Keyboard;
 			sourceTree = "<group>";
 		};
+		DC74922519CF1E480012B5C0 /* Debuger */ = {
+			isa = PBXGroup;
+			children = (
+				DC74922619CF1E600012B5C0 /* Debuger.swift */,
+			);
+			name = Debuger;
+			sourceTree = "<group>";
+		};
 		DC78A1D81992C49400258BD5 /* Display */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +480,7 @@
 		DCD48906198AF40600F3B898 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DC74922519CF1E480012B5C0 /* Debuger */,
 				DC6DB98C19BB6A1700E26ADD /* Keyboard */,
 				DC7B7E1219AFAFA600C70269 /* Peripherals */,
 				DC0B8E6B1999461C0092BDD3 /* Sound */,
@@ -677,6 +688,7 @@
 				DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
 				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
+				DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */,
 				DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */,
 				DC2E476C1995767900BCACAF /* PreferencesController.swift in Sources */,
 				DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */,

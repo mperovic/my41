@@ -51,24 +51,26 @@ class CalculatorWindow : NSWindow {
 	}
 	
 	override func mouseDragged(theEvent: NSEvent!) {
-		let screenVisibleFrame = NSScreen.mainScreen().visibleFrame
-		let windowFrame = self.frame
-		var newOrigin = windowFrame.origin
-		
-		// Get the mouse location in window coordinates.
-		let currentLocation = theEvent.locationInWindow
-		
-		// Update the origin with the difference between the new mouse location and the old mouse location.
-		newOrigin.x += (currentLocation.x - initialLocation!.x)
-		newOrigin.y += (currentLocation.y - initialLocation!.y)
-		
-		// Don't let window get dragged up under the menu bar
-		if ((newOrigin.y + windowFrame.size.height) > (screenVisibleFrame.origin.y + screenVisibleFrame.size.height)) {
-			newOrigin.y = screenVisibleFrame.origin.y + (screenVisibleFrame.size.height - windowFrame.size.height);
+		if let iLocation = initialLocation {
+			let screenVisibleFrame = NSScreen.mainScreen().visibleFrame
+			let windowFrame = self.frame
+			var newOrigin = windowFrame.origin
+			
+			// Get the mouse location in window coordinates.
+			let currentLocation = theEvent.locationInWindow
+			
+			// Update the origin with the difference between the new mouse location and the old mouse location.
+			newOrigin.x += (currentLocation.x - iLocation.x)
+			newOrigin.y += (currentLocation.y - iLocation.y)
+			
+			// Don't let window get dragged up under the menu bar
+			if ((newOrigin.y + windowFrame.size.height) > (screenVisibleFrame.origin.y + screenVisibleFrame.size.height)) {
+				newOrigin.y = screenVisibleFrame.origin.y + (screenVisibleFrame.size.height - windowFrame.size.height);
+			}
+			
+			// Move the window to the new location
+			self.setFrameOrigin(newOrigin)
 		}
-		
-		// Move the window to the new location
-		self.setFrameOrigin(newOrigin)
 	}
 	
 }
@@ -108,6 +110,8 @@ class Display : NSView, Peripheral {
 	var annunciatorBottomMargin: CGFloat = 2.0
 	var annunciatorPositions: [NSPoint] = [NSPoint](count: 12, repeatedValue: CGPointMake(0.0, 0.0))
 	var foregroundColor: NSColor?
+	
+	var calculatorController: CalculatorController = CalculatorController.sharedInstance
 	
 	let punctSegmentTable: [DisplaySegmentMap] = [
 		0x00000, // no punctuation
@@ -150,6 +154,7 @@ class Display : NSView, Peripheral {
 	}
 	
 	override func awakeFromNib() {
+		calculatorController.display = self
 		foregroundColor = NSColorList(name: "HP41").colorWithKey("displayForegroundColor")
 		displayFont = loadFont("hpfont")
 		segmentPaths = loadSegmentPaths("hpchar")
@@ -176,7 +181,7 @@ class Display : NSView, Peripheral {
 		// 0x50..0x5f: some greek characters + "hangman"
 		// 0x60..0x7f: a-z lowercase characters
 		let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
-		let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)
+		let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)!
 		CTULookup = String(mString)
 		CTULookupLength = countElements(CTULookup!)
 	}
@@ -341,126 +346,87 @@ class Display : NSView, Peripheral {
 		bus = aBus
 	}
 	
-	func readFromRegister(register: Bits4, into: Digits14) -> Digits14 {
+	func readFromRegister(register: Bits4, inout into data: Digits14) {
 		// Implement READ f or READ DATA instruction with display as selected peripheral.
-		var data: Digits14 = into
-		let regs: DisplayRegisters = registers
 		switch register {
 		case 0x0:	//FLLDA
-			fetch(regs, withDirection: .Left, andSize: .Long, withRegister: .RA, andData: data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RA, andData: &data)
 		case 0x1:	// FLLDB
-			fetch(regs, withDirection: .Left, andSize: .Long, withRegister: .RB, andData: data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RB, andData: &data)
 		case 0x2:	// FLLDC
-			fetch(regs, withDirection: .Left, andSize: .Long, withRegister: .RC, andData: data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RC, andData: &data)
 		case 0x3:	// FLLDAB
-			fetch(regs, withDirection: .Left, andSize: .Long, withRegister: .RAB, andData: data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RAB, andData: &data)
 		case 0x4:	// FLLABC
-			fetch(regs, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &data)
 		case 0x5:	// READDEN
-			bitsToDigits(bits: Int(registers.E), source: data, start: 0, count: 4)
-			return data		// doesn't change display
+			bitsToDigits(bits: Int(registers.E), destination: &data, start: 0, count: 4)
+			return					// doesn't change display
 		case 0x6:	// FLSDC
-			fetch(regs, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: data)
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &data)
 		case 0x7:	// FRSDA
-			fetch(regs, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &data)
 		case 0x8:	// FRSDB
-			fetch(regs, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &data)
 		case 0x9:	// FRSDC
-			fetch(regs, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &data)
 		case 0xA:	// FLSDA
-			fetch(regs, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: data) // Original: .RB
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &data) // Original: .RB
 		case 0xB:	// FLSDB
-			fetch(regs, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: data)
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &data)
 		case 0xC:	// FRSDAB
-			fetch(regs, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &data)
 		case 0xD:	// FLSDAB
-			fetch(regs, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: data)
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &data)
 		case 0xE:	// FRSABC
-			fetch(regs, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &data)
 		case 0xF:	// FLSABC
-			fetch(regs, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: data)
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
 		default:
 			bus!.abortInstruction("Unimplemented display operation")
 		}
 		scheduleUpdate()
-		
-		return data
 	}
 	
-	func writeToRegister(register: Bits4, var from data: Digits14) -> (data: Digits14, registers: DisplayRegisters?) {
+	func writeToRegister(register: Bits4, inout from data: Digits14) {
 		// Implement WRITE f instruction with display as selected peripheral.
-		var regs: DisplayRegisters = registers
 		switch register {
 		case 0x0:	// SRLDA
-			let result = shift(regs, withDirection: .Right, andSize: .Long, withRegister: .RA, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RA, andData: &data)
 		case 0x1:	// SRLDB
-			let result = shift(regs, withDirection: .Right, andSize: .Long, withRegister: .RB, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RB, andData: &data)
 		case 0x2:	// SRLDC
-			let result = shift(regs, withDirection: .Right, andSize: .Long, withRegister: .RC, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RC, andData: &data)
 		case 0x3:	// SRLDAB
-			let result = shift(regs, withDirection: .Right, andSize: .Long, withRegister: .RAB, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RAB, andData: &data)
 		case 0x4:	// SRLABC
-			let result = shift(regs, withDirection: .Right, andSize: .Long, withRegister: .RABC, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RABC, andData: &data)
 		case 0x5:	// SLLDAB
-			let result = shift(regs, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &data)
 		case 0x6:	// SLLABC
-			let result = shift(regs, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &data)
 		case 0x7:	// SRSDA
-			let result = shift(regs, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &data)
 		case 0x8:	// SRSDB
-			let result = shift(regs, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &data)
 		case 0x9:	// SRSDC
-			let result = shift(regs, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &data)
 		case 0xA:	// SLSDA
-			let result = shift(regs, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &data)
 		case 0xB:	// SLSDB
-			let result = shift(regs, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &data)
 		case 0xC:	// SRSDAB
-			let result = shift(regs, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &data)
 		case 0xD:	// SLSDAB
-			let result = shift(regs, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &data)
 		case 0xE:	// SRSABC
-			let result = shift(regs, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &data)
 		case 0xF:	// SLSABC
-			let result = shift(regs, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: data)
-			data = result.newData
-			registers = result.newDisplayRegisters
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
 		default:
 			bus!.abortInstruction("Unimplemented display operation")
 		}
 		scheduleUpdate()
-		
-		return (data, registers)
 	}
 	
 	func writeDataFrom(data: Digits14) {
@@ -471,110 +437,90 @@ class Display : NSView, Peripheral {
 	
 	
 	//MARK: -
-	func fetch(var registers: DisplayRegisters, withDirection direction:DisplayShiftDirection, andSize size:DisplayTransitionSize, withRegister regset:DisplayRegisterSet, var andData data: Digits14) -> (newData: Digits14, newDisplayRegisters: DisplayRegisters) {
+	func fetch(inout registers: DisplayRegisters, withDirection direction:DisplayShiftDirection, andSize size:DisplayTransitionSize, withRegister regset:DisplayRegisterSet, inout andData data: Digits14) {
 		// Fetch digits from the specified registers, rotating them in the specified direction,
 		// and assemble them into the specified destination. For size == LONG, fetches a total
 		// of 12 digits into the destination; for size == SHORT, fetches one digit from
 		// each specified register.
 		var cp = 0
 		while cp < 12 {
-			if (regset.toRaw() & DisplayRegisterSet.RA.toRaw()) != 0 {
-				let result = fetchDigit(direction, from: registers.A)
-				data[cp++] = result.to
-				registers.A = result.register
+			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
+				fetchDigit(direction, from: &registers.A, to: &data[cp++])
 			}
-			if (regset.toRaw() & DisplayRegisterSet.RB.toRaw()) != 0 {
-				let result = fetchDigit(direction, from: registers.B)
-				data[cp++] = result.to
-				registers.B = result.register
+			if (regset.rawValue & DisplayRegisterSet.RB.rawValue) != 0 {
+				fetchDigit(direction, from: &registers.B, to: &data[cp++])
 			}
-			if (regset.toRaw() & DisplayRegisterSet.RC.toRaw()) != 0 {
-				let result = fetchDigit(direction, from: registers.C)
-				data[cp+1] = result.to
-				registers.C = result.register
+			if (regset.rawValue & DisplayRegisterSet.RC.rawValue) != 0 {
+				fetchDigit(direction, from: &registers.C, to: &data[cp++])
 			}
 			if size == .Short {
 				break
 			}
 		}
-		
-		return (data, registers)
 	}
 	
-	func fetchDigit(direction: DisplayShiftDirection, var from register: Digits12) -> (to: Digit, register: Digits12) {
+	func fetchDigit(direction: DisplayShiftDirection, inout from register: Digits12, inout to dst: Digit) -> Digits12 {
 		// Fetch a digit from the appropriate end of the given register into the specified destination,
 		// and rotate the register in the specified direction.
-		var result: Digit
 		switch direction {
 		case .Left:
-			result = register[11]
-			register = rotateRegisterLeft(register)
+			dst = register[11]
+			rotateRegisterLeft(&register)
 		case .Right:
-			result = register[0]
-			register = rotateRegisterRight(register)
+			dst = register[0]
+			rotateRegisterRight(&register)
 		}
 		
-		return (result, register)
+		return register
 	}
 	
-	func rotateRegisterLeft(register: Digits12) -> Digits12 {
+	func rotateRegisterLeft(inout register: Digits12) {
 		let temp = register[11]
-		var newRegister = register
-//		for var idx = 11; idx >= 1; idx-- {
-		for idx in reverse(11...1) {
-			newRegister[idx] = newRegister[idx + 1]
+		for idx in reverse(1...11) {
+			register[idx] = register[idx - 1]
 		}
-		newRegister[11] = temp
-		
-		return newRegister
+		register[0] = temp
 	}
 	
-	func rotateRegisterRight(register: Digits12) -> Digits12 {
-		var newRegister = register
+	func rotateRegisterRight(inout register: Digits12) {
 		let temp = register[0]
-		for var idx = 0; idx <= 10; idx++ {
-			newRegister[idx] = newRegister[idx+1]
+		for idx in 0...10 {
+			register[idx] = register[idx + 1]
 		}
-		newRegister[11] = temp
-		
-		return newRegister
+		register[11] = temp
 	}
 	
-	func shift(var registers: DisplayRegisters, withDirection direction:DisplayShiftDirection, andSize size:DisplayTransitionSize, withRegister regset:DisplayRegisterSet, var andData data: Digits14) -> (newData: Digits14, newDisplayRegisters: DisplayRegisters) {
+	func shift(inout registers: DisplayRegisters, withDirection direction:DisplayShiftDirection, andSize size:DisplayTransitionSize, withRegister regset:DisplayRegisterSet, inout andData data: Digits14) {
 		// Distribute digits from the given source and rotate them into the specified registers.
 		// For size == LONG, shifts a total of 12 digits from the source; for size == SHORT,
 		// shifts one digit into each specified register.
 		var cp = 0
 		while cp < 12 {
-			if (regset.toRaw() & DisplayRegisterSet.RA.toRaw()) != 0 {
-				registers.A = shiftDigit(direction, from: registers.A, withFilter: data[cp++])
+			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
+				shiftDigit(direction, from: &registers.A, withFilter: data[cp++])
 			}
-			if (regset.toRaw() & DisplayRegisterSet.RB.toRaw()) != 0 {
-				registers.B = shiftDigit(direction, from: registers.B, withFilter: data[cp++])
+			if (regset.rawValue & DisplayRegisterSet.RB.rawValue) != 0 {
+				shiftDigit(direction, from: &registers.B, withFilter: data[cp++])
 			}
-			if (regset.toRaw() & DisplayRegisterSet.RC.toRaw()) != 0 {
-				registers.C = shiftDigit(direction, from: registers.C, withFilter: data[cp++])
+			if (regset.rawValue & DisplayRegisterSet.RC.rawValue) != 0 {
+				shiftDigit(direction, from: &registers.C, withFilter: data[cp++])
 			}
 			if size == .Short {
 				break
 			}
 		}
-		
-		return (data, registers)
 	}
 	
-	func shiftDigit(direction: DisplayShiftDirection, var from register: Digits12, withFilter src: Digit) -> Digits12 {
+	func shiftDigit(direction: DisplayShiftDirection, inout from register: Digits12, withFilter src: Digit) {
 		// Rotate the given digit into the specified register in the specified direction.
 		switch direction {
 		case .Left:
-			register = rotateRegisterLeft(register)
+			rotateRegisterLeft(&register)
 			register[0] = src
 		case .Right:
-			register = rotateRegisterRight(register)
+			rotateRegisterRight(&register)
 			register[11] = src
 		}
-		
-		return register
 	}
 	
 	func segmentsForCell(i: Int) -> DisplaySegmentMap {
@@ -604,12 +550,12 @@ class Display : NSView, Peripheral {
 	func loadFont(resourceName: String) -> DisplayFont {
 		var font: DisplayFont = DisplayFont(count:128, repeatedValue: 0)
 		let filename = NSBundle.mainBundle().pathForResource(resourceName, ofType: "hpfont")
-		var data = NSData.dataWithContentsOfFile(filename!, options: .DataReadingMappedIfSafe, error: nil)
+		var data = NSData(contentsOfFile: filename!, options: .DataReadingMappedIfSafe, error: nil)
 		var range = NSRange(location: 0, length: 4)
 		for idx in 0..<127 {
 			var tmp: UInt32 = 0
 			var tmp2: UInt32 = 0
-			data.getBytes(&tmp, range: range)
+			data?.getBytes(&tmp, range: range)
 			range.location += 4
 			tmp2 = UInt32(bigEndian: tmp)
 			
@@ -622,8 +568,8 @@ class Display : NSView, Peripheral {
 	func loadSegmentPaths(file: String) -> DisplaySegmentPaths {
 		var paths: DisplaySegmentPaths = DisplaySegmentPaths()
 		let path = NSBundle.mainBundle().pathForResource(file, ofType: "geom")
-		var data = NSData.dataWithContentsOfFile(path!, options: .DataReadingMappedIfSafe, error: nil)
-		var unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+		var data = NSData(contentsOfFile: path!, options: .DataReadingMappedIfSafe, error: nil)
+		var unarchiver = NSKeyedUnarchiver(forReadingWithData: data!)
 		let dict = unarchiver.decodeObjectForKey("bezierPaths") as NSDictionary
 		unarchiver.finishDecoding()
 		for idx in 0..<numDisplaySegments {
@@ -633,5 +579,14 @@ class Display : NSView, Peripheral {
 		}
 		
 		return paths
+	}
+	
+	func digits12ToString(register: Digits12) -> String {
+		var result = String()
+		for idx in reverse(0...11) {
+			result += NSString(format:"%1X", register[idx])
+		}
+		
+		return result
 	}
 }

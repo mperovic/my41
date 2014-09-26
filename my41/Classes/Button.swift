@@ -9,12 +9,42 @@
 import Foundation
 import Cocoa
 
+class Key: NSButton {
+	@IBOutlet weak var keygroup: KeyGroup!
+	var keyCode: NSNumber?
+	var pressed: Bool = false
+	
+	override func acceptsFirstMouse(theEvent: NSEvent) -> Bool {
+		return true
+	}
+	
+	override func mouseDown(theEvent: NSEvent!) {
+		if theEvent.modifierFlags & .ControlKeyMask == nil {
+			pressed = true
+			notifyKeyGroup()
+		}
+		highlight(true)
+	}
+	
+	override func mouseUp(theEvent: NSEvent!) {
+		if theEvent.modifierFlags & .ControlKeyMask == nil {
+			pressed = false
+			notifyKeyGroup()
+		}
+		highlight(false)
+	}
+	
+	func notifyKeyGroup() {
+		keygroup.key(self, pressed: pressed)
+	}
+}
+
 class ButtonCell: NSButtonCell {
 	var lowerText: String?
 	var upperText: NSMutableAttributedString?
 	var shiftButton: String?
 	var switchButton: String?
-
+	
 	required init(coder: NSCoder) {
 		super.init(coder: coder)
 	}

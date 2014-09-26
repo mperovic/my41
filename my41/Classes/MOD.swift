@@ -219,7 +219,7 @@ class MOD {
 		// Read the file
 		let fileManager = NSFileManager.defaultManager()
 		if fileManager.fileExistsAtPath(filename) {
-			data = NSData.dataWithContentsOfFile(filename, options: .DataReadingMappedIfSafe, error: nil)
+			data = NSData(contentsOfFile: filename, options: .DataReadingMappedIfSafe, error: nil)
 			shortName = filename.lastPathComponent.lowercaseString
 		} else {
 			data = nil
@@ -329,5 +329,5 @@ class MOD {
 }
 
 func convertCCharToString(cstring: [CChar]) -> String {
-	return NSString(bytes: cstring, length: Int(cstring.count), encoding: NSASCIIStringEncoding)
+	return NSString(bytes: cstring, length: Int(cstring.count), encoding: NSASCIIStringEncoding)!
 }

@@ -136,6 +136,7 @@ class SoundOutput {
 			incBufferPtr(&p)
 		}
 		
+		println("Room for \(Int(numFreeBuffers * Int(SAMPLES_PER_BUFFER))) samples")
 		return Int(numFreeBuffers * Int(SAMPLES_PER_BUFFER))
 	}
 	

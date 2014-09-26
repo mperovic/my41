@@ -73,7 +73,7 @@ struct CPURegisters {
 		println("stack=\(stack)")
 		println("R=\(R)")
 		println("Carry=\(carry)")
-		println("Mode=\(mode.toRaw())")
+		println("Mode=\(mode.rawValue)")
 		println("ramAddress=\(ramAddress)")
 		println("Peripheral=\(peripheral)")
 		println("Keydown=\(keyDown)")
@@ -81,9 +81,9 @@ struct CPURegisters {
 }
 
 enum PowerMode: Bits2 {
-	case deepSleep = 0
-	case lightSleep = 1
-	case powerOn = 2
+	case DeepSleep = 0
+	case LightSleep = 1
+	case PowerOn = 2
 }
 
 enum ArithMode: Bit {
@@ -119,35 +119,34 @@ class CPU {
 	var runFlag = false
 	var simulationTime: NSTimeInterval?
 	var reg: CPURegisters = CPURegisters()
-	var keyReleaseDelay: Int = 0
-	var powerMode: PowerMode = .deepSleep
+	var keyReleaseDelay = 0
+	var powerMode: PowerMode = .DeepSleep
 	var soundOutput = SoundOutput()
-	var cycleLimit: Int = 0
-	var currentTyte: Int = 0
+	var cycleLimit = 0
+	var currentTyte = 0
 	var breakpointIsSet = false
 	var breakpointAddr: Bits16 = 0
 	var savedPC: Bits16 = 0
 	var nextCarry: Bit = 0
-	var lastTyte: Int = 0
-	var powerOffFlag: Bool = false
+	var lastTyte = 0
+	var powerOffFlag = false
+	var debugViewController: DebugViewController?
 	
-	let onKeyCode = 0x18
+	let onKeyCode: Bits8 = 0x18
 	
-	struct Static {
-		static var token : dispatch_once_t = 0
-		static var instance : CPU?
+	let keyColTable: [Int] = [0x10, 0x30, 0x70, 0x80, 0xC0]
+	
+	class var sharedInstance :CPU {
+		struct Singleton {
+			static let instance = CPU()
+		}
+		
+		return Singleton.instance
 	}
-	
-	class var instance: CPU {
-	dispatch_once(&Static.token) {  Static.instance = CPU() }
-		return Static.instance!
-	}
-	
+		
 	init() {
-		assert(Static.instance == nil, "Singleton already initialized!")
 	}
 
-	
 	func clearRegisters() {
 		reg.A = emptyDigit14
 		reg.B = emptyDigit14
@@ -174,21 +173,25 @@ class CPU {
 	
 	func setPowerMode(mode: PowerMode) {
 		if powerMode != mode {
-			if mode == .powerOn && powerMode == .deepSleep {
+			if mode == .PowerOn && powerMode == .DeepSleep {
 				reg.carry = 1
 			}
-			if mode == .powerOn && powerMode == .lightSleep {
+			if mode == .PowerOn && powerMode == .LightSleep {
 				reg.carry = 0
 			}
 			
 			powerMode = mode
-			if mode != .powerOn {
+			if mode != .PowerOn {
 				//TODO: IMPLEMENT
 				soundOutput.flushAndSuspendSoundOutput()
 			}
-			//TODO: IMPLEMENT
-//			[debugController updateDisplays];
+			debugViewController?.updateDisplay()
 		}
+	}
+	
+	func step() {
+		executeNextInstruction()
+		debugViewController?.updateDisplay()
 	}
 	
 	func reset() {
@@ -197,10 +200,29 @@ class CPU {
 		// deep sleep, otherwise the display doesn't get turned on. But it does
 		// a dummy test & reset of the keyboard before testing for this, so we
 		// have to arrange for it to appear held down for at least 2 kbd tests.
-		reg.KY = Bits8(onKeyCode)
+		reg.KY = onKeyCode
 		keyReleaseDelay = 1
-		setPowerMode(.deepSleep)
-		setPowerMode(.powerOn)
+		setPowerMode(.DeepSleep)
+		setPowerMode(.PowerOn)
+	}
+	
+	func keyWithCode(code: Int, pressed: Bool) {
+		if pressed {
+			let row = code >> 4
+			let col = code & 0x0f
+			reg.KY = Bits8(row | keyColTable[col])
+			reg.keyDown = 1
+			
+			if reg.KY == onKeyCode && powerMode != .DeepSleep {
+				powerOffFlag = true				// will enter deep sleep on next power off
+			}
+			if powerMode == .LightSleep || reg.KY == onKeyCode {
+				setPowerMode(.PowerOn)
+			}
+		} else {
+			reg.keyDown = 0
+		}
+		debugViewController?.updateDisplay()
 	}
 	
 	func abortInstruction(message: String) {
@@ -211,7 +233,7 @@ class CPU {
 	}
 	
 	func running() -> Bool {
-		return (powerMode == .powerOn) && runFlag
+		return (powerMode == .PowerOn) && runFlag
 	}
 	
 	func setRunning(state: Bool) {
@@ -219,7 +241,7 @@ class CPU {
 			runFlag = state
 			//TODO: IMPLEMENT
 //			[debugController updateButtons];
-//			[debugController updateDisplays];
+			debugViewController?.updateDisplay()
 		}
 		simulationTime = NSDate.timeIntervalSinceReferenceDate()
 	}
@@ -227,7 +249,7 @@ class CPU {
 	func timeSlice(timer: NSTimer) {
 		var currentTime = NSDate.timeIntervalSinceReferenceDate()
 		if running() {
-			let sTime: NSTimeInterval = simulationTime!
+			let sTime = simulationTime!
 			if sTime != 0 {
 				if currentTime - sTime > maxSimulationTimeLag {
 					simulationTime = currentTime - maxSimulationTimeLag
@@ -236,8 +258,7 @@ class CPU {
 				while self.running() && cycleLimit > 2 && simulationTime < currentTime {
 					executeNextInstruction()
 				}
-				//TODO: IMPLEMENT
-//				[debugController updateDisplays]
+				debugViewController?.updateDisplay()
 			}
 		} else {
 			simulationTime = currentTime
@@ -267,7 +288,9 @@ class CPU {
 		--cycleLimit
 		simulationTime? += simulatedInstructionTime
 		soundOutput.soundOutputForWordTime(Int(reg.T))
-		println("bus.readRomLocation \(reg.PC)")
+		if DEBUG != 0 {
+			println("bus.readRomLocation \(reg.PC)")
+		}
 		let romLocation = bus!.readRomLocation(Int(reg.PC++))
 		
 		return (romLocation.success, romLocation.data)
@@ -306,7 +329,7 @@ class CPU {
 		}
 	}
 	
-	var lineNo: Int = 0
+	var lineNo = 0
 	
 	func executeNextInstruction() {
 		if DEBUG != 0 {
@@ -319,7 +342,10 @@ class CPU {
 		lastTyte = currentTyte
 		let fetchResult = fetch()
 		currentTyte = fetchResult.data
-		if currentTyte != 0 {
+		if DEBUG != 0 {
+			println("currentTyte: \(currentTyte)")
+		}
+		if fetchResult.success {
 			switch currentTyte & 0x03 {
 			case 0:		 // miscellaneous
 				executeClass0(currentTyte)
@@ -352,7 +378,9 @@ class CPU {
 	func executeClass0(instr: Int) {
 		let param = (instr & 0x03C0) >> 6
 		let opcode = ((instr & 0x003C) >> 2) & 0xf
-		println("executeClass0: \(opcode) - param: \(param)")
+		if DEBUG != 0 {
+			println("executeClass0: opcode: \(opcode) - param: \(param)")
+		}
 		switch opcode {
 		case 0x0:
 			executeClass0_Line0(param)
@@ -391,7 +419,6 @@ class CPU {
 			unimplementedInstruction(param)
 		}
 	}
-
 	
 	func executeClass0_Line0(param: Int) {
 		switch param {
@@ -1035,7 +1062,7 @@ class CPU {
 			M=C										0101_0110_00							1
 			=========================================================================================
 			*/
-			reg.M = copyDigits(reg.C, sourceStartAt: 0, destination: reg.M, destinationStartAt: 0, count: 14)
+			copyDigits(reg.C, sourceStartAt: 0, destination: &reg.M, destinationStartAt: 0, count: 14)
 			
 		case 0x6:
 			/*
@@ -1056,7 +1083,7 @@ class CPU {
 			C=M										0110_0110_00							1
 			=========================================================================================
 			*/
-			reg.C = copyDigits(reg.M, sourceStartAt: 0, destination: reg.C, destinationStartAt: 0, count: 14)
+			copyDigits(reg.M, sourceStartAt: 0, destination: &reg.C, destinationStartAt: 0, count: 14)
 			
 		case 0x7:
 			/*
@@ -1080,11 +1107,11 @@ class CPU {
 			CMEX									0111_0110_00							1
 			=========================================================================================
 			*/
-			var C: Digits14 = reg.C
-			var M: Digits14 = reg.M
-			exchangeDigits(X: &C, Y: &M, startPos: 0, count: 14)
-			reg.C = C
-			reg.M = M
+			var x = reg.C
+			var y = reg.M
+			exchangeDigits(X: &x, Y: &y, startPos: 0, count: 14)
+			reg.C = x
+			reg.M = y
 			
 		case 0x8:
 			unimplementedInstruction(param)
@@ -1368,11 +1395,11 @@ class CPU {
 			*/
 			if powerOffFlag {
 				//printf("POWOFF: going into deep sleep and resetting powerOffFlag\n");
-				setPowerMode(.deepSleep)
+				setPowerMode(.DeepSleep)
 				powerOffFlag = false
 			} else {
 				//printf("POWOFF: going into light sleep\n");
-				setPowerMode(.lightSleep)
+				setPowerMode(.LightSleep)
 			}
 			reg.PC = 0
 			enableBank(0)
@@ -1536,7 +1563,7 @@ class CPU {
 			C=KEYS									1000_1000_00							1
 			=========================================================================================
 			*/
-			reg.C = bitsToDigits(bits: Int(reg.KY), source: reg.C, start: 3, count: 2)
+			bitsToDigits(bits: Int(reg.KY), destination: &reg.C, start: 3, count: 2)
 			
 		case 0x9:
 			/*
@@ -1811,7 +1838,7 @@ class CPU {
 			default:
 				break;
 			}
-			bus!.writeToRegister(Bits4(param), ofPeripheral: reg.peripheral, from: reg.C)
+			bus!.writeToRegister(Bits4(param), ofPeripheral: reg.peripheral, from: &reg.C)
 		}
 	}
 	
@@ -1909,7 +1936,7 @@ class CPU {
 			N=C										0001_1100_00							1
 			=========================================================================================
 			*/
-			reg.N = copyDigits(reg.C, sourceStartAt: 0, destination: reg.N, destinationStartAt: 0, count: 14)
+			copyDigits(reg.C, sourceStartAt: 0, destination: &reg.N, destinationStartAt: 0, count: 14)
 			
 		case 0x2:
 			/*
@@ -1930,7 +1957,7 @@ class CPU {
 			C=N										0010_1100_00							1
 			=========================================================================================
 			*/
-			reg.C = copyDigits(reg.N, sourceStartAt: 0, destination: reg.C, destinationStartAt: 0, count: 14)
+			copyDigits(reg.N, sourceStartAt: 0, destination: &reg.C, destinationStartAt: 0, count: 14)
 			
 		case 0x3:
 			/*
@@ -1954,11 +1981,11 @@ class CPU {
 			CNEX									0011_1100_00							1
 			=========================================================================================
 			*/
-			var C: Digits14 = reg.C
-			var N: Digits14 = reg.N
-			exchangeDigits(X: &C, Y: &reg.N, startPos: 0, count: 14)
-			reg.C = C
-			reg.N = N
+			var x = reg.C
+			var y = reg.N
+			exchangeDigits(X: &x, Y: &y, startPos: 0, count: 14)
+			reg.C = x
+			reg.N = y
 			
 		case 0x4:
 			/*
@@ -1984,10 +2011,10 @@ class CPU {
 				  interpreting the contents of the isa_bus during the second machine cycle as an
 				  instruction.
 			*/
-			var word: Int
 			let fetchResult = fetch()
-			word = Int(fetchResult.data)
-			reg.C = bitsToDigits(bits: word, source: reg.C, start: 0, count: 3)
+//			var word = Int(fetchResult.data)
+			bitsToDigits(bits: Int(fetchResult.data), destination: &reg.C, start: 0, count: 3)
+//			reg.C = bitsToDigits(bits: word, source: reg.C, start: 0, count: 3)
 			
 		case 0x5:
 			/*
@@ -2044,8 +2071,7 @@ class CPU {
 			=========================================================================================
 			*/
 			var word = popReturnStack()
-			var digits: [Digit] = [reg.C[3]]
-			reg.C = bitsToDigits(bits: Int(word), source: reg.C, start: 3, count: 4)
+			bitsToDigits(bits: Int(word), destination: &reg.C, start: 3, count: 4)
 			
 		case 0x7:
 			// HEPAX Toggle write protection on HEPAX at page C[0]
@@ -2180,14 +2206,13 @@ class CPU {
 				  significant bits set to 0.
 			*/
 			var addr: UInt16 = 0
-//			var digits: [Digit] = [reg.C[3]]
 			var digits: [Digit] = [Digit]()
 			for idx in 3...13 {
 				digits.append(reg.C[idx])
 			}
 			addr = digitsToBits(digits: digits, nbits: 16)
 			let romLocation = bus!.readRomLocation(Int(addr))
-			reg.C = bitsToDigits(bits:romLocation.data, source: reg.C, start: 0, count: 3)
+			bitsToDigits(bits: romLocation.data, destination: &reg.C, start: 0, count: 3)
 			
 		case 0xD:
 			/*
@@ -2313,11 +2338,10 @@ class CPU {
 			data_bus.
 			*/
 			if (reg.peripheral == 0 || (reg.ramAddress <= 0x000F) || (reg.ramAddress >= 0x0020)) {
-				let ramAddress = bus!.readRamAddress(reg.ramAddress, data: reg.C)
-				reg.C = ramAddress.data
+				bus!.readRamAddress(reg.ramAddress, into: &reg.C)
 			} else {
 				//printf("Peripheral Read: %02X %x \n", reg.peripheral, param);
-				reg.C = bus!.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral)
+				bus!.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
 			}
 		default:
 			/*
@@ -2352,11 +2376,10 @@ class CPU {
 			*/
 			if (reg.peripheral == 0 || (reg.ramAddress <= 0x000F) || (reg.ramAddress >= 0x0020)) {
 				reg.ramAddress = Bits12(reg.ramAddress & 0x03F0) | Bits12(param)
-				let ramAddress = bus!.readRamAddress(reg.ramAddress, data: reg.C)
-				reg.C = ramAddress.data
+				bus!.readRamAddress(reg.ramAddress, into: &reg.C)
 			} else {
 				//printf("Peripheral Read: %02X %x \n", reg.peripheral, param);
-				reg.C = bus!.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral)
+				bus!.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
 			}
 		}
 	}
@@ -2476,7 +2499,7 @@ class CPU {
 			Special MMU Enable		|                                            |  F |                   |
 									-----------------------------------------------------------------------
 			*/
-			unimplementedInstruction(param)
+			break
 		
 		default:
 			/*
@@ -2500,9 +2523,9 @@ class CPU {
 			=========================================================================================
 			*/
 			var temp = emptyDigit14
-			temp = copyDigits(reg.C, sourceStartAt: 0, destination: temp, destinationStartAt: 0, count: param)
-			reg.C = copyDigits(reg.C, sourceStartAt: param, destination: reg.C, destinationStartAt: 0, count: 14-param)
-			reg.C = copyDigits(temp, sourceStartAt: 0, destination: reg.C, destinationStartAt: 14-param, count: param)
+			copyDigits(reg.C, sourceStartAt: 0, destination: &temp, destinationStartAt: 0, count: param)
+			copyDigits(reg.C, sourceStartAt: param, destination: &reg.C, destinationStartAt: 0, count: 14-param)
+			copyDigits(temp, sourceStartAt: 0, destination: &reg.C, destinationStartAt: 14-param, count: param)
 		}
 	}
 	
@@ -2528,7 +2551,9 @@ class CPU {
 		let fetchResult = fetch()
 		let word = Int(fetchResult.data)
 		var addr = ((word & 0x3fc) << 6) | ((instr & 0x3fc) >> 2)
-		println("executeClass1: \(instr) - addr: \(addr) word: \(word & 0x3)")
+		if DEBUG != 0 {
+			println("executeClass1: \(instr) - addr: \(addr) word: \(word & 0x3)")
+		}
 		switch (word & 0x3) {
 		case 0:
 			/*
@@ -2680,14 +2705,16 @@ class CPU {
 	}
 	
 	func executeClass2(instr: Int) {
-		let opcode: Int = (instr & 0x3e0) >> 5
-		let field: Int = (instr & 0x1c) >> 2
-		var start: Int = 0
-		var cnt: Int = 0
+		let opcode = (instr & 0x3e0) >> 5
+		let field = (instr & 0x1c) >> 2
+		var start = 0
+		var cnt = 0
 		var carry: Bit = 0
 		var zero: Bit = 0
 		var scratch = emptyDigit14
-		println("executeClass2: \(opcode) - field: \(field)")
+		if DEBUG != 0 {
+			println("executeClass2: opcode: \(opcode) - field: \(field)")
+		}
 		switch field {
 		case 0x0: // @R
 			start = Int(regR())
@@ -2697,7 +2724,7 @@ class CPU {
 			cnt = 3
 		case 0x2: // R<
 			start = 0
-			cnt = Int(regR())
+			cnt = Int(regR()) + 1
 		case 0x3: // ALL
 			start = 0
 			cnt = 14
@@ -2804,11 +2831,11 @@ class CPU {
 			ABEX TEF								0001_1TEF_10							1
 			=========================================================================================
 			*/
-			var A: Digits14 = reg.A
-			var B: Digits14 = reg.B
-			exchangeDigits(X: &A, Y: &B, startPos: start, count: cnt)
-			reg.A = A
-			reg.B = B
+			var x = reg.A
+			var y = reg.B
+			exchangeDigits(X: &x, Y: &y, startPos: start, count: cnt)
+			reg.A = x
+			reg.B = y
 			
 		case 0x04:
 			/*
@@ -2829,7 +2856,7 @@ class CPU {
 			B=A TEF									0010_0TEF_10							1
 			=========================================================================================
 			*/
-			reg.B = copyDigits(reg.A, sourceStartAt: start, destination: reg.B, destinationStartAt: start, count: cnt)
+			copyDigits(reg.A, sourceStartAt: start, destination: &reg.B, destinationStartAt: start, count: cnt)
 
 		case 0x05:
 			/*
@@ -2853,11 +2880,11 @@ class CPU {
 			ACEX TEF								0010_1TEF_10							1
 			=========================================================================================
 			*/
-			var A: Digits14 = reg.A
-			var C: Digits14 = reg.C
-			exchangeDigits(X: &A, Y: &C, startPos: start, count: cnt)
-			reg.A = A
-			reg.C = C
+			var x = reg.A
+			var y = reg.C
+			exchangeDigits(X: &x, Y: &y, startPos: start, count: cnt)
+			reg.A = x
+			reg.C = y
 
 		case 0x06:
 			/*
@@ -2878,7 +2905,7 @@ class CPU {
 			C=B TEF									0011_0TEF_10							1
 			=========================================================================================
 			*/
-			reg.C = copyDigits(reg.B, sourceStartAt: start, destination: reg.C, destinationStartAt: start, count: cnt)
+			copyDigits(reg.B, sourceStartAt: start, destination: &reg.C, destinationStartAt: start, count: cnt)
 
 		case 0x07: // C<>B
 			/*
@@ -2902,11 +2929,11 @@ class CPU {
 			BCEX TEF								0011_1TEF_10							1
 			=========================================================================================
 			*/
-			var B: Digits14 = reg.B
-			var C: Digits14 = reg.C
-			exchangeDigits(X: &B, Y: &C, startPos: start, count: cnt)
-			reg.B = B
-			reg.C = C
+			var x = reg.B
+			var y = reg.C
+			exchangeDigits(X: &x, Y: &y, startPos: start, count: cnt)
+			reg.B = x
+			reg.C = y
 
 		case 0x08:
 			/*
@@ -2927,7 +2954,7 @@ class CPU {
 			A=C TEF									0100_0TEF_10							1
 			=========================================================================================
 			*/
-			reg.A = copyDigits(reg.C, sourceStartAt: start, destination: reg.A, destinationStartAt: start, count: cnt)
+			copyDigits(reg.C, sourceStartAt: start, destination: &reg.A, destinationStartAt: start, count: cnt)
 
 		case 0x09:
 			/*
@@ -2949,9 +2976,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 0
-			let newValues = addOrSubtractDigits(arithOp: .ADD, arithMode: reg.mode, firstNum: reg.A, secondNum: reg.B, destination: reg.A, from: start, count: cnt, carry: carry, zero: zero)
-			reg.A = newValues.value
-			nextCarry = newValues.newCarry
+			addOrSubtractDigits(
+				arithOp: .ADD,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: reg.B,
+				destination: &reg.A,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry
 
 		case 0x0A:
 			/*
@@ -2973,10 +3009,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 0
-			let newValues = addOrSubtractDigits(arithOp: .ADD, arithMode: reg.mode, firstNum: reg.A, secondNum: reg.C, destination: reg.A, from: start, count: cnt, carry: carry, zero: zero)
-			reg.A = newValues.value
-			nextCarry = newValues.newCarry
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .ADD,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: reg.C,
+				destination: &reg.A,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry;
 
 		case 0x0B:
 			/*
@@ -2998,11 +3042,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .ADD, arithMode: reg.mode, firstNum: reg.A, secondNum: zeroes, destination: reg.A, from: start, count: cnt, carry: carry, zero: zero)
-			reg.A = newValues.value
-			nextCarry = newValues.newCarry
-			zero = newValues.newZero
-			
+			addOrSubtractDigits(
+				arithOp: .ADD,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: zeroes,
+				destination: &reg.A,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry;
 		case 0x0C:
 			/*
 			A=A-B
@@ -3023,14 +3074,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.A, secondNum: reg.B, destination: reg.A, from: start, count: cnt, carry: carry, zero: zero)
-			reg.A = newValues.value
-			if newValues.newCarry == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: reg.B,
+				destination: &reg.A,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry == 0 ? 1 : 0
 
 		case 0x0D: // A=A-1
 			/*
@@ -3052,14 +3107,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 0
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.A, secondNum: zeroes, destination: reg.A, from: start, count: cnt, carry: carry, zero: zero)
-			reg.A = newValues.value
-			if newValues.newCarry == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: zeroes,
+				destination: &reg.A,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry == 0 ? 1 : 0
 
 		case 0x0E:
 			/*
@@ -3081,14 +3140,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.A, secondNum: reg.C, destination: reg.A, from: start, count: cnt, carry: carry, zero: zero)
-			reg.A = newValues.value
-			if newValues.newCarry == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: reg.C,
+				destination: &reg.A,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry == 0 ? 1 : 0
 
 		case 0x0F:
 			/*
@@ -3110,10 +3173,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 0
-			let newValues = addOrSubtractDigits(arithOp: .ADD, arithMode: reg.mode, firstNum: reg.C, secondNum: reg.C, destination: reg.C, from: start, count: cnt, carry: carry, zero: zero)
-			reg.C = newValues.value
-			nextCarry = newValues.newCarry
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .ADD,
+				arithMode: reg.mode,
+				firstNum: reg.C,
+				secondNum: reg.C,
+				destination: &reg.C,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry
 
 		case 0x10:
 			/*
@@ -3135,10 +3206,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 0
-			let newValues = addOrSubtractDigits(arithOp: .ADD, arithMode: reg.mode, firstNum: reg.C, secondNum: reg.A, destination: reg.C, from: start, count: cnt, carry: carry, zero: zero)
-			reg.C = newValues.value
-			nextCarry = newValues.newCarry
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .ADD,
+				arithMode: reg.mode,
+				firstNum: reg.C,
+				secondNum: reg.A,
+				destination: &reg.C,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry
 
 		case 0x11:
 			/*
@@ -3160,10 +3239,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .ADD, arithMode: reg.mode, firstNum: reg.C, secondNum: zeroes, destination: reg.C, from: start, count: cnt, carry: carry, zero: zero)
-			reg.C = newValues.value
-			nextCarry = newValues.newCarry
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .ADD,
+				arithMode: reg.mode,
+				firstNum: reg.C,
+				secondNum: zeroes,
+				destination: &reg.C,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry
 
 		case 0x12:
 			/*
@@ -3185,14 +3272,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.A, secondNum: reg.C, destination: reg.C, from: start, count: cnt, carry: carry, zero: zero)
-			reg.C = newValues.value
-			if newValues.newCarry == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: reg.C,
+				destination: &reg.C,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry == 0 ? 1 : 0
 
 		case 0x13:
 			/*
@@ -3214,14 +3305,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 0
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.C, secondNum: zeroes, destination: reg.C, from: start, count: cnt, carry: carry, zero: zero)
-			reg.C = newValues.value
-			if newValues.newCarry == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.C,
+				secondNum: zeroes,
+				destination: &reg.C,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry == 0 ? 1 : 0
 
 		case 0x14:
 			/*
@@ -3244,14 +3339,18 @@ class CPU {
 			Note: This is the arithmetic complement, or the value subtracted from zero.
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: zeroes, secondNum: reg.C, destination: reg.C, from: start, count: cnt, carry: carry, zero: zero)
-			reg.C = newValues.value
-			if newValues.newCarry == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: zeroes,
+				secondNum: reg.C,
+				destination: &reg.C,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry == 0 ? 1 : 0
 
 		case 0x15:
 			/*
@@ -3275,14 +3374,18 @@ class CPU {
 				  negative one.
 			*/
 			carry = 0
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: zeroes, secondNum: reg.C, destination: reg.C, from: start, count: cnt, carry: carry, zero: zero)
-			reg.C = newValues.value
-			if newValues.newCarry == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
-			zero = newValues.newZero
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: zeroes,
+				secondNum: reg.C,
+				destination: &reg.C,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry == 0 ? 1 : 0
 			
 		case 0x16:
 			/*
@@ -3305,14 +3408,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.B, secondNum: zeroes, destination: scratch, from: start, count: cnt, carry: carry, zero: zero)
-			scratch = newValues.value
-			zero = newValues.newZero
-			if newValues.newZero == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.B,
+				secondNum: zeroes,
+				destination: &scratch,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = zero == 0 ? 1 : 0
 
 		case 0x17:
 			/*
@@ -3335,14 +3442,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.C, secondNum: zeroes, destination: scratch, from: start, count: cnt, carry: carry, zero: zero)
-			scratch = newValues.value
-			zero = newValues.newZero
-			if newValues.newZero == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.C,
+				secondNum: zeroes,
+				destination: &scratch,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = zero == 0 ? 1 : 0
 
 		case 0x18:
 			/*
@@ -3365,14 +3476,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.A, secondNum: reg.C, destination: scratch, from: start, count: cnt, carry: carry, zero: zero)
-			scratch = newValues.value
-			zero = newValues.newZero
-			if newValues.newCarry == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: reg.C,
+				destination: &scratch,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry == 0 ? 1 : 0
 
 		case 0x19:
 			/*
@@ -3395,14 +3510,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.A, secondNum: reg.B, destination: scratch, from: start, count: cnt, carry: carry, zero: zero)
-			scratch = newValues.value
-			zero = newValues.newZero
-			if newValues.newCarry == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: reg.B,
+				destination: &scratch,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = carry == 0 ? 1 : 0
 
 		case 0x1A:
 			/*
@@ -3425,14 +3544,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.A, secondNum: zeroes, destination: scratch, from: start, count: cnt, carry: carry, zero: zero)
-			scratch = newValues.value
-			zero = newValues.newZero
-			if newValues.newZero == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: zeroes,
+				destination: &scratch,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = zero == 0 ? 1 : 0
 
 		case 0x1B:
 			/*
@@ -3455,14 +3578,18 @@ class CPU {
 			=========================================================================================
 			*/
 			carry = 1
-			let newValues = addOrSubtractDigits(arithOp: .SUB, arithMode: reg.mode, firstNum: reg.A, secondNum: reg.C, destination: scratch, from: start, count: cnt, carry: carry, zero: zero)
-			scratch = newValues.value
-			zero = newValues.newZero
-			if newValues.newZero == 0 {
-				nextCarry = 1
-			} else {
-				nextCarry = 0
-			}
+			addOrSubtractDigits(
+				arithOp: .SUB,
+				arithMode: reg.mode,
+				firstNum: reg.A,
+				secondNum: reg.C,
+				destination: &scratch,
+				from: start,
+				count: cnt,
+				carry: &carry,
+				zero: &zero
+			)
+			nextCarry = zero == 0 ? 1 : 0
 
 		case 0x1C:
 			/*
@@ -3556,18 +3683,29 @@ class CPU {
 			unimplementedInstruction(instr)
 		}
 	}
-
-	
 	
 	func executeClass3(instr: Int) {
 		println("executeClass3: \(instr)")
 		let v: Bit = Bit((instr >> 2) & 1)
-		var disp: Int = instr >> 3;
+		var disp = instr >> 3;
 		if disp >= 64 {
 			disp = disp - 128
 		}
 		if v == reg.carry {
 			reg.PC = (reg.PC - 1 + disp) & 0xffff;
 		}
+	}
+	
+	func digits14ToString(register: Digits14) -> String {
+		var result = String()
+		for idx in reverse(0...13) {
+			result += NSString(format:"%1X", register[idx])
+		}
+		
+		return result
+	}
+	
+	func bits4ToString(register: Bits4) -> String {
+		return NSString(format:"%1X", register)
 	}
 }

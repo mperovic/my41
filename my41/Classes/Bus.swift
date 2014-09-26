@@ -11,8 +11,8 @@ import Foundation
 
 protocol Peripheral {
 	func pluggedIntoBus(bus: Bus)
-	func readFromRegister(register: Bits4, into: Digits14) -> Digits14
-	func writeToRegister(register: Bits4, var from data: Digits14) -> (data: Digits14, registers: DisplayRegisters?)
+	func readFromRegister(register: Bits4, inout into: Digits14)
+	func writeToRegister(register: Bits4, inout from data: Digits14)
 	func writeDataFrom(data: Digits14)
 }
 
@@ -76,6 +76,7 @@ class Bus {
 	var ram: [Digits14]
 	var activeRomBank: [Bits4] = [Bits4](count: 0x10, repeatedValue: 0)
 	var peripherals: [Peripheral?] = [Peripheral?](count: 0x100, repeatedValue:nil)
+	var cpu: CPU
 	
 	var romChips = Array<Array<RomChip?>>()
 	
@@ -91,6 +92,8 @@ class Bus {
 
 	init () {
 		assert(Static.instance == nil, "Singleton already initialized!")
+		
+		cpu = CPU.sharedInstance
 
 		// 16 pages of 8 banks
 		for _ in 0..<0x10 {
@@ -112,14 +115,16 @@ class Bus {
 		ramValid[Int(address)] = true
 	}
 	
-	func readRamAddress(address: Bits12, var data: Digits14) -> (success:Bool, data: Digits14) {
+	func readRamAddress(address: Bits12, inout into data: Digits14) -> Bool {
 		// Read specified location of specified chip. If chip or location is
 		// nonexistent, set data to 0 and return false.
 		if ramValid[Int(address)] {
-			data = copyDigits(ram[Int(address)], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
-			return (true, data)
+			println("readRamAddress at \(address)=\(ram[Int(address)])")
+			copyDigits(ram[Int(address)], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			return true
 		} else {
-			return (false, emptyDigit14)
+			clearDigits(destination: &data)
+			return false
 		}
 	}
 	
@@ -151,7 +156,8 @@ class Bus {
 	func writeRamAddress(address: Bits12, from data: Digits14) -> Bool {
 		// Write to specified location of specified chip. If chip or location is nonexistent, do nothing and return false.
 		if ramValid[Int(address)] {
-			ram[Int(address)] = copyDigits(data, sourceStartAt: 0, destination: ram[Int(address)], destinationStartAt: 0, count: 14)
+			println("writeRamAddress at \(address)=\(ram[Int(address)])")
+			copyDigits(data, sourceStartAt: 0, destination: &ram[Int(address)], destinationStartAt: 0, count: 14)
 			return true
 		} else {
 			return false
@@ -181,9 +187,9 @@ class Bus {
 		activeRomBank[Int(slot)] = bank
 	}
 	
-	func writeToRegister(register: Bits4, ofPeripheral slot: Bits8, from data: Digits14) {
+	func writeToRegister(register: Bits4, ofPeripheral slot: Bits8, inout from data: Digits14) {
 		if let peripheral = peripherals[Int(slot)] {
-			peripheral.writeToRegister(register, from: data)
+			peripheral.writeToRegister(register, from: &data)
 		}
 	}
 	
@@ -192,13 +198,10 @@ class Bus {
 		peripheral.writeDataFrom(data)
 	}
 	
-	func readFromRegister(register reg: Bits4, ofPeripheral slot: Bits8) -> Digits14 {
-		var result: Digits14 = emptyDigit14
+	func readFromRegister(register reg: Bits4, ofPeripheral slot: Bits8, inout into data: Digits14) {
 		if let periph = peripherals[Int(slot)]? {
-			result = periph.readFromRegister(reg, into: result)
+			periph.readFromRegister(reg, into: &data)
 		}
-		
-		return result
 	}
 	
 	func installPeripheral(peripheral: Peripheral, inSlot slot: Bits8) {
@@ -207,7 +210,7 @@ class Bus {
 	}
 	
 	func abortInstruction(message: String) {
-		cpu!.abortInstruction(message)
+		cpu.abortInstruction(message)
 	}
 	
 	

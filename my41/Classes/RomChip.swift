@@ -44,12 +44,12 @@ class RomChip {
 	}
 	
 	func loadFromFile(path: String) {
-		let data = NSData.dataWithContentsOfFile(path, options: .DataReadingMappedIfSafe, error: nil)
+		let data = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)
 		var range = NSRange(location: 0, length: 2)
 		for idx in 0..<0x1000 {
 			var i16be: UInt16 = 0
 			var i16: UInt16 = 0
-			data.getBytes(&i16be, range: range)
+			data?.getBytes(&i16be, range: range)
 			range.location += 2
 			i16 = UInt16(bigEndian: i16be)
 			

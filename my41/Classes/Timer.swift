@@ -6,6 +6,29 @@
 //  Copyright (c) 2014 iPera. All rights reserved.
 //
 
+// TimerSeected ==1 if TIMER=A, ==0 if TIMER=B
+// Clock A is usually current time and B is usually stopwatch time (good until Dec 20, 2330)
+// Alarm A is usually time of next alarm or cleared. B usually has a constant of 09999999999000h which is checked for timer integrity
+// Scratch A is used to hold the last time when corrected.  B bit 5 is set for 24 hour, bit 6 is set for display of both time and date.
+// Interval A,B - 56 bits total but only 20 are used: [4-0] sss.hh where sss = seconds, hh = hundredths
+// Timer status - 13 bits
+//   Bit  Meaning
+//   0    ALMA  - Set on valid compare of Alarm A with Clock A
+//   1    DTZA  - Set on overflow of clock A (or decrement of 10's complement)
+//   2    ALMB  - Set on valid compare of Alarm B with Clock B
+//   3    DTZB  - Set on overflow of Clock B
+//   4    DTZIT - Set by terminal count state of Interval Timer (it has counted a whole interval)
+//   5    PUS   - Power Up Status - set when power first applied or falls below a certain minimum
+//   6    CKAEN - Enable Clock A incrementers
+//   7    CKBEN - Enable Clock B incrementers
+//   8    ALAEN - Enables comparator logic between Alarm A and Clock A - Set if Alarm A is enabled.  Since time alarms are usually enabled, this flag is usually set
+//   9    ALBEN - Enables comparator logic between Alarm B and Clock B - Set if Alarm B is enabled.  Always clear since stopwatch alarms are not possible.  Timer alarms occur as a result of bit 3 set.
+//  10    ITEN  - Enables Interval Timer incrementing and comparator logic (interval timer is running)
+//  11    TESTA - Enables Test A mode
+//  12    TESTB - Enables Test B mode
+//
+// This code does not do any accuracy factor corrections
+
 import Foundation
 import Cocoa
 
@@ -24,12 +47,12 @@ struct TimerRegisters {
 }
 
 class Timer : Peripheral {
-	
 	var timerSelected: TimerType = .TimerA
 	var clock: [UInt64] = [0, 0]
 	var alarm: [UInt] = [0, 0]
 	var intTimer: UInt64 = 0
 	var intTimerEnd: UInt64 = 0
+	var cpu: CPU
 	
 	var registers: TimerRegisters = TimerRegisters()
 	
@@ -46,6 +69,7 @@ class Timer : Peripheral {
 	init() {
 		assert(Static.instance == nil, "Singleton already initialized!")
 
+		cpu = CPU.sharedInstance
 		bus!.installPeripheral(self, inSlot: 0xFB)
 		
 		resetTimer()
@@ -80,10 +104,10 @@ class Timer : Peripheral {
 		registers.TMR_S = emptyDigit14
 		
 		// Clear internal simulation variable
-		clock[TimerType.TimerA.toRaw()] = 0
-		clock[TimerType.TimerB.toRaw()] = 0
-		alarm[TimerType.TimerA.toRaw()] = 0
-		alarm[TimerType.TimerB.toRaw()] = 0
+		clock[TimerType.TimerA.rawValue] = 0
+		clock[TimerType.TimerB.rawValue] = 0
+		alarm[TimerType.TimerA.rawValue] = 0
+		alarm[TimerType.TimerB.rawValue] = 0
 		intTimer = 0
 		intTimerEnd = 0
 		
@@ -124,7 +148,7 @@ class Timer : Peripheral {
 		dateComponents.year = 1900
 		let referenceDate: NSDate = NSCalendar.currentCalendar().dateFromComponents(dateComponents)!
 		let interval: NSTimeInterval = -1 * referenceDate.timeIntervalSinceNow + NSTimeInterval(daylightSavingTimeOffset)
-		clock[TimerType.TimerA.toRaw()] = UInt64(interval) * 1000
+		clock[TimerType.TimerA.rawValue] = UInt64(interval) * 1000
 	}
 	
 	func applicationWillBecomeActive(sender : AnyObject) {
@@ -140,20 +164,19 @@ class Timer : Peripheral {
 		bus = aBus
 	}
 	
-	func readFromRegister(register: Bits4, into: Digits14) -> Digits14 {
-		var data: Digits14 = into
+	func readFromRegister(register: Bits4, inout into data: Digits14) {
 		switch register {
 		case 0x0:		// RTIME
-			registers.CLK[timerSelected.toRaw()] = convertToReg14(clock[timerSelected.toRaw()])
-			data = copyDigits(registers.CLK[timerSelected.toRaw()], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
+			registers.CLK[timerSelected.rawValue] = convertToReg14(clock[timerSelected.rawValue])
+			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 		case 0x1:		// RTIMEST
-			registers.CLK[timerSelected.toRaw()] = convertToReg14(clock[timerSelected.toRaw()])
-			data = copyDigits(registers.CLK[timerSelected.toRaw()], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
+			registers.CLK[timerSelected.rawValue] = convertToReg14(clock[timerSelected.rawValue])
+			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 		case 0x2:		// RALM
-			data = copyDigits(registers.ALM[timerSelected.toRaw()], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
+			copyDigits(registers.ALM[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 		case 0x3:		// RSTS
-			if timerSelected.toRaw() != 0 {
-				data = copyDigits(registers.TMR_S, sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
+			if timerSelected.rawValue != 0 {
+				copyDigits(registers.TMR_S, sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 			} else {
 				data = emptyDigit14
 				for idx in 0..<4 {
@@ -161,7 +184,7 @@ class Timer : Peripheral {
 				}
 			}
 		case 0x4:		// RSCR
-			data = copyDigits(registers.SCR[timerSelected.toRaw()], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
+			copyDigits(registers.SCR[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 		case 0x5:		// RINT
 			data = emptyDigit14
 			for idx in 0..<5 {
@@ -170,28 +193,26 @@ class Timer : Peripheral {
 		default:
 			break
 		}
-		
-		return data
 	}
 	
 	func writeDataFrom(data: Digits14) {
 		//TODO: Implement this method
 	}
 	
-	func writeToRegister(register: Bits4, var from data: Digits14) -> (data: Digits14, registers: DisplayRegisters?) {
+	func writeToRegister(register: Bits4, inout from data: Digits14) {
 		// clearing flag 12,13 is in wrong place because SHIFT ON does not work.
-		cpu!.reg.FI &= 0xcfff			// clear flag 12, 13
+		cpu.reg.FI &= 0xcfff			// clear flag 12, 13
 		
 		switch register {
 		case 0x0:		// WTIME
-			data = copyDigits(registers.CLK[timerSelected.toRaw()], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
-			clock[timerSelected.toRaw()] = convertToUint64(registers.CLK[timerSelected.toRaw()])
+			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			clock[timerSelected.rawValue] = convertToUint64(registers.CLK[timerSelected.rawValue])
 		case 0x1:		// WTIME-
-			data = copyDigits(registers.CLK[timerSelected.toRaw()], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
-			clock[timerSelected.toRaw()] = convertToUint64(registers.CLK[timerSelected.toRaw()])
+			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			clock[timerSelected.rawValue] = convertToUint64(registers.CLK[timerSelected.rawValue])
 		case 0x2:		// WALM
-			data = copyDigits(registers.ALM[timerSelected.toRaw()], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
-			clock[timerSelected.toRaw()] = convertToUint64(registers.ALM[timerSelected.toRaw()])
+			copyDigits(registers.ALM[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			clock[timerSelected.rawValue] = convertToUint64(registers.ALM[timerSelected.rawValue])
 		case 0x3:		// WSTS
 			if timerSelected == .TimerA {
 				registers.TMR_S[0] &= data[0]
@@ -203,9 +224,9 @@ class Timer : Peripheral {
 				registers.ACC_F[0] = data[1];
 			}
 		case 0x4:		// WSCR
-			data = copyDigits(registers.SCR[timerSelected.toRaw()], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
+			copyDigits(registers.SCR[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 		case 0x5:		// WINTST - set and start interval time
-			data = copyDigits(registers.INT[0], sourceStartAt: 0, destination: data, destinationStartAt: 0, count: 14)
+			copyDigits(registers.INT[0], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 			intTimerEnd = convertToUint64(registers.INT[0])
 			intTimer = 0
 			registers.TMR_S[2] |= 0x04			// set bit 10- ITEN - Interval Timer Enable
@@ -254,7 +275,5 @@ class Timer : Peripheral {
 		default:
 			break
 		}
-		
-		return (data, nil)
 	}
 }

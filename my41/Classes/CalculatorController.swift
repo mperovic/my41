@@ -18,20 +18,31 @@ enum CalculatorType: Int {
 let timeSliceInterval	= 0.01
 let MAX_RAM_SIZE		= 0x400
 
-var cpu: CPU?
 var bus: Bus?
 var timer: Timer?
 
 class CalculatorController : NSObject {
-	@IBOutlet weak var display: Display!
+//	@IBOutlet weak var display: Display!
+//	@IBOutlet weak var keyboard: Keyboard!
 
 	var calculatorMod: MOD = MOD()
 	var portMod: [MOD?] = [nil, nil, nil, nil]
 	var calculatorType: CalculatorType?
 	var executionTimer: NSTimer?
+	var cpu: CPU
+	var display: Display?
+	var keyboard: Keyboard?
+	
+	class var sharedInstance :CalculatorController {
+		struct Singleton {
+			static let instance = CalculatorController()
+		}
+		
+		return Singleton.instance
+	}
 
 	override init() {
-		cpu = CPU()
+		cpu = CPU.sharedInstance
 		bus = Bus()
 		timer = Timer()
 		calculatorMod = MOD()
@@ -46,14 +57,14 @@ class CalculatorController : NSObject {
 	}
 	
 	func resetCalculator() {
-		cpu!.setRunning(false)
+		cpu.setRunning(false)
 		bus!.removeAllRomChips()
 		readCalculatorDescriptionFromDefaults()
 		installBuiltinRoms()
 		installBuiltinRam()
 		restoreMemory()
-		cpu!.reset()
-		cpu!.setRunning(true)
+		cpu.reset()
+		cpu.setRunning(true)
 		startExecutionTimer()
 	}
 	
@@ -75,7 +86,7 @@ class CalculatorController : NSObject {
 		default:
 			// Make sure I have a default for next time
 			calculatorType = .HP41CX
-			defaults.setInteger(CalculatorType.HP41CX.toRaw(), forKey: HPCalculatorType)
+			defaults.setInteger(CalculatorType.HP41CX.rawValue, forKey: HPCalculatorType)
 			filename = NSBundle.mainBundle().resourcePath! + "/" + "nut-cx.mod"
 		}
 		calculatorMod.readModFromFile(filename)
@@ -128,7 +139,7 @@ class CalculatorController : NSObject {
 	}
 	
 	func saveMemory() {
-		println("restoreMemory")
+		println("saveMemory")
 		let data = getMemoryContents()
 		NSUserDefaults.standardUserDefaults().setObject(data, forKey: "memory")
 	}
@@ -143,7 +154,7 @@ class CalculatorController : NSObject {
 	
 	func digits14FromArray(array: [Digit], position: Int) -> Digits14 {
 		var d14: Digits14 = emptyDigit14
-		for idx in 0..<14 {
+		for idx in 0...13 {
 			d14[idx] = array[position + idx]
 		}
 		
@@ -184,14 +195,14 @@ class CalculatorController : NSObject {
 	}
 	
 	func startExecutionTimer() {
-		cpu!.setPowerMode(.powerOn)
+		cpu.setPowerMode(.PowerOn)
 		executionTimer = NSTimer.scheduledTimerWithTimeInterval(timeSliceInterval, target: self, selector: Selector("timeSlice:"), userInfo: nil, repeats: true)
 	}
 	
 	func timeSlice(timer: NSTimer) {
-		cpu!.timeSlice(timer)
+		cpu.timeSlice(timer)
 		//TODO: IMPLEMENT
-		display.timeSlice(timer)
+		display?.timeSlice(timer)
 //		[timeModule timeSlice: timer];
 	}
 }

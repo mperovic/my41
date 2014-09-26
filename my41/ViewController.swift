@@ -16,76 +16,113 @@ class ViewController: NSViewController {
 	
 	@IBOutlet weak var displayBackgroundView: NSView!
 	@IBOutlet weak var keyboardContainerView: NSView!
+	
 	@IBOutlet weak var labelSigmaMinus: NSTextField!
-	@IBOutlet weak var buttonCellSigmaMinus: ButtonCell!
+	@IBOutlet weak var buttonCellSigmaPlus: ButtonCell!
+	@IBOutlet weak var buttonSigmaPlus: Key!
 	@IBOutlet weak var labelYX: NSTextField!
 	@IBOutlet weak var buttonCellOneX: ButtonCell!
+	@IBOutlet weak var buttonOneX: Key!
 	@IBOutlet weak var labelXSquare: NSTextField!
 	@IBOutlet weak var buttonCellSquareRoot: ButtonCell!
+	@IBOutlet weak var buttonSquareRoot: Key!
 	@IBOutlet weak var labelTenX: NSTextField!
 	@IBOutlet weak var buttonCellLog: ButtonCell!
+	@IBOutlet weak var buttonLog: Key!
 	@IBOutlet weak var labelEX: NSTextField!
 	@IBOutlet weak var buttonCellLn: ButtonCell!
+	@IBOutlet weak var buttonLn: Key!
 	@IBOutlet weak var labelCLSigma: NSTextField!
 	@IBOutlet weak var buttonCellXexY: ButtonCell!
+	@IBOutlet weak var buttonXexY: Key!
 	@IBOutlet weak var labelPercent: NSTextField!
 	@IBOutlet weak var buttonCellRArrrow: ButtonCell!
+	@IBOutlet weak var buttonRArrrow: Key!
 	@IBOutlet weak var labelSin: NSTextField!
 	@IBOutlet weak var buttonCellSin: ButtonCell!
+	@IBOutlet weak var buttonSin: Key!
 	@IBOutlet weak var labelCos: NSTextField!
 	@IBOutlet weak var buttonCellCos: ButtonCell!
+	@IBOutlet weak var buttonCos: Key!
 	@IBOutlet weak var labelTan: NSTextField!
 	@IBOutlet weak var buttonCellTan: ButtonCell!
+	@IBOutlet weak var buttonTan: Key!
 	@IBOutlet weak var buttonCellShift: ButtonCell!
+	@IBOutlet weak var buttonShift: Key!
 	@IBOutlet weak var labelASN: NSTextField!
 	@IBOutlet weak var buttonCellXEQ: ButtonCell!
+	@IBOutlet weak var buttonXEQ: Key!
 	@IBOutlet weak var labelLBL: NSTextField!
 	@IBOutlet weak var buttonCellSTO: ButtonCell!
+	@IBOutlet weak var buttonSTO: Key!
 	@IBOutlet weak var labelGTO: NSTextField!
 	@IBOutlet weak var buttonCellRCL: ButtonCell!
+	@IBOutlet weak var buttonRCL: Key!
 	@IBOutlet weak var labelBST: NSTextField!
 	@IBOutlet weak var buttonCellSST: ButtonCell!
+	@IBOutlet weak var buttonSST: Key!
 	@IBOutlet weak var labelCATALOG: NSTextField!
 	@IBOutlet weak var buttonCellENTER: ButtonCell!
+	@IBOutlet weak var buttonENTER: Key!
 	@IBOutlet weak var labelISG: NSTextField!
 	@IBOutlet weak var buttonCellCHS: ButtonCell!
+	@IBOutlet weak var buttonCHS: Key!
 	@IBOutlet weak var labelRTN: NSTextField!
 	@IBOutlet weak var buttonCellEEX: ButtonCell!
+	@IBOutlet weak var buttonEEX: Key!
 	@IBOutlet weak var labelCLXA: NSTextField!
 	@IBOutlet weak var buttonCellBack: ButtonCell!
+	@IBOutlet weak var buttonBack: Key!
+	
 	@IBOutlet weak var labelXEQY: NSTextField!
 	@IBOutlet weak var buttonCellMinus: ButtonCell!
+	@IBOutlet weak var buttonMinus: Key!
 	@IBOutlet weak var labelXLessThanY: NSTextField!
 	@IBOutlet weak var buttonCellPlus: ButtonCell!
+	@IBOutlet weak var buttonPlus: Key!
 	@IBOutlet weak var labelXGreaterThanY: NSTextField!
 	@IBOutlet weak var buttonCellMultiply: ButtonCell!
+	@IBOutlet weak var buttonMultiply: Key!
 	@IBOutlet weak var labelXEQ0: NSTextField!
 	@IBOutlet weak var buttonCellDivide: ButtonCell!
+	@IBOutlet weak var buttonDivide: Key!
 	
 	@IBOutlet weak var labelSF: NSTextField!
 	@IBOutlet weak var buttonCell7: ButtonCell!
+	@IBOutlet weak var button7: Key!
 	@IBOutlet weak var labelCF: NSTextField!
 	@IBOutlet weak var buttonCell8: ButtonCell!
+	@IBOutlet weak var button8: Key!
 	@IBOutlet weak var labelFS: NSTextField!
 	@IBOutlet weak var buttonCell9: ButtonCell!
+	@IBOutlet weak var button9: Key!
 	@IBOutlet weak var labelBEEP: NSTextField!
 	@IBOutlet weak var buttonCell4: ButtonCell!
+	@IBOutlet weak var button4: Key!
 	@IBOutlet weak var labelPR: NSTextField!
 	@IBOutlet weak var buttonCell5: ButtonCell!
+	@IBOutlet weak var button5: Key!
 	@IBOutlet weak var labelRP: NSTextField!
 	@IBOutlet weak var buttonCell6: ButtonCell!
+	@IBOutlet weak var button6: Key!
 	@IBOutlet weak var labelFIX: NSTextField!
 	@IBOutlet weak var buttonCell1: ButtonCell!
+	@IBOutlet weak var button1: Key!
 	@IBOutlet weak var labelSCI: NSTextField!
 	@IBOutlet weak var buttonCell2: ButtonCell!
+	@IBOutlet weak var button2: Key!
 	@IBOutlet weak var labelENG: NSTextField!
 	@IBOutlet weak var buttonCell3: ButtonCell!
+	@IBOutlet weak var button3: Key!
 	@IBOutlet weak var labelPI: NSTextField!
 	@IBOutlet weak var buttonCell0: ButtonCell!
+	@IBOutlet weak var button0: Key!
 	@IBOutlet weak var labelLASTX: NSTextField!
 	@IBOutlet weak var buttonCellPoint: ButtonCell!
+	@IBOutlet weak var buttonPoint: Key!
 	@IBOutlet weak var labelVIEW: NSTextField!
 	@IBOutlet weak var buttonCellRS: ButtonCell!
+	@IBOutlet weak var buttonRS: Key!
 	
 	override func viewWillAppear() {
 		self.view.layer = CALayer()
@@ -125,7 +162,7 @@ class ViewController: NSViewController {
 			NSBaselineOffsetAttributeName: 1
 		]
 		sigmaPlusString.addAttributes(sigmaPlusAttributes, range: NSMakeRange(1, 1))
-		buttonCellSigmaMinus.upperText = sigmaPlusString
+		buttonCellSigmaPlus.upperText = sigmaPlusString
 		
 		// Label yx
 		var yxString = mutableAttributedStringFromString("yx", color: nil)
