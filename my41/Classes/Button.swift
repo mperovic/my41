@@ -18,7 +18,7 @@ class Key: NSButton {
 		return true
 	}
 	
-	override func mouseDown(theEvent: NSEvent!) {
+	override func mouseDown(theEvent: NSEvent) {
 		if theEvent.modifierFlags & .ControlKeyMask == nil {
 			pressed = true
 			notifyKeyGroup()
@@ -26,7 +26,7 @@ class Key: NSButton {
 		highlight(true)
 	}
 	
-	override func mouseUp(theEvent: NSEvent!) {
+	override func mouseUp(theEvent: NSEvent) {
 		if theEvent.modifierFlags & .ControlKeyMask == nil {
 			pressed = false
 			notifyKeyGroup()
@@ -49,8 +49,8 @@ class ButtonCell: NSButtonCell {
 		super.init(coder: coder)
 	}
 	
-	override func drawBezelWithFrame(frame: NSRect, inView controlView: NSView!) {
-		let ctx = NSGraphicsContext.currentContext()
+	override func drawBezelWithFrame(frame: NSRect, inView controlView: NSView) {
+		let ctx = NSGraphicsContext.currentContext()!
 		
 		let roundedRadius: CGFloat = 3.0
 		
@@ -157,9 +157,9 @@ class ButtonCell: NSButtonCell {
 			
 			var font: NSFont
 			if countElements(lowerText!) > 1 {
-				font = NSFont(name: "Helvetica", size: 9.0)
+				font = NSFont(name: "Helvetica", size: 9.0)!
 			} else {
-				font = NSFont(name: "Helvetica", size: 11.0)
+				font = NSFont(name: "Helvetica", size: 11.0)!
 			}
 			let lowerTextFontAttributes: Dictionary = [
 				NSFontAttributeName: font,

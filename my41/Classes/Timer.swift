@@ -73,11 +73,6 @@ class Timer : Peripheral {
 		bus!.installPeripheral(self, inSlot: 0xFB)
 		
 		resetTimer()
-//		NSNotificationCenter.defaultCenter().addObserver(
-//			self,
-//			selector: Selector("applicationWillBecomeActive:"),
-//			name: NSApplicationWillBecomeActiveNotification,
-//			object: nil)
 
 		NSNotificationCenter.defaultCenter().addObserverForName(
 			NSApplicationWillBecomeActiveNotification,
@@ -113,31 +108,27 @@ class Timer : Peripheral {
 		
 		// Set to initial timer module value
 		registers.TMR_S[1] &= 0x04
-		registers.ALM[0] = convertToReg14(9999999999000)		 // anti-corruption constant
+		convertToReg14(9999999999000, dst: &registers.ALM[0])		 // anti-corruption constant
 		setToCurrentTime()
 	}
 	
 	// Converts UINT64 to Reg14 (BCD)
-	func convertToReg14(var src: UInt64) -> Digits14 {
-		var result = emptyDigit14
+	func convertToReg14(var src: UInt64, inout dst: Digits14) {
 		for idx in 0...13 {
-			result[idx] = (Digit)(src % 10)
+			dst[idx] = (Digit)(src % 10)
 			src /= 10
 		}
-		
-		return result
 	}
 	
 	// Converts Reg14 (BCD) to UINT64
-	func convertToUint64(reg: Digits14) -> UInt64 {
-		var result: UInt64 = 0
-//		for var idx = 13; idx >= 0; idx-- {
-		for idx in reverse(13...0) {
-			result *= 10
-			result += UInt64(reg[idx]) % 10
+	func convertToUint64(inout dest: UInt64, withRegister reg: Digits14) {
+		var temp: UInt64 = 0
+		for idx in reverse(0...13) {
+			temp *= 10
+			temp += UInt64(reg[idx]) % 10
 		}
 		
-		return result
+		dest = temp
 	}
 	
 	func setToCurrentTime() {
@@ -148,16 +139,8 @@ class Timer : Peripheral {
 		dateComponents.year = 1900
 		let referenceDate: NSDate = NSCalendar.currentCalendar().dateFromComponents(dateComponents)!
 		let interval: NSTimeInterval = -1 * referenceDate.timeIntervalSinceNow + NSTimeInterval(daylightSavingTimeOffset)
-		clock[TimerType.TimerA.rawValue] = UInt64(interval) * 1000
+		clock[TimerType.TimerA.rawValue] = UInt64(interval) * 100
 	}
-	
-	func applicationWillBecomeActive(sender : AnyObject) {
-		// This should help me detect when I'm being  activated.  I want to reset the clock
-		if (Int(registers.TMR_S[1]) & 0x04) != 0 {		// bit 6 - Clock A enabled
-			setToCurrentTime()
-		}
-	}
-	
 	
 	// MARK: Peripheral Delegate Methods
 	func pluggedIntoBus(aBus: Bus) {
@@ -167,10 +150,10 @@ class Timer : Peripheral {
 	func readFromRegister(register: Bits4, inout into data: Digits14) {
 		switch register {
 		case 0x0:		// RTIME
-			registers.CLK[timerSelected.rawValue] = convertToReg14(clock[timerSelected.rawValue])
+			convertToReg14(clock[timerSelected.rawValue], dst: &registers.CLK[timerSelected.rawValue])
 			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 		case 0x1:		// RTIMEST
-			registers.CLK[timerSelected.rawValue] = convertToReg14(clock[timerSelected.rawValue])
+			convertToReg14(clock[timerSelected.rawValue], dst: &registers.CLK[timerSelected.rawValue])
 			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 		case 0x2:		// RALM
 			copyDigits(registers.ALM[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
@@ -206,13 +189,13 @@ class Timer : Peripheral {
 		switch register {
 		case 0x0:		// WTIME
 			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
-			clock[timerSelected.rawValue] = convertToUint64(registers.CLK[timerSelected.rawValue])
+			convertToUint64(&clock[timerSelected.rawValue], withRegister:registers.CLK[timerSelected.rawValue])
 		case 0x1:		// WTIME-
 			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
-			clock[timerSelected.rawValue] = convertToUint64(registers.CLK[timerSelected.rawValue])
+			convertToUint64(&clock[timerSelected.rawValue], withRegister:registers.CLK[timerSelected.rawValue])
 		case 0x2:		// WALM
 			copyDigits(registers.ALM[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
-			clock[timerSelected.rawValue] = convertToUint64(registers.ALM[timerSelected.rawValue])
+			convertToUint64(&clock[timerSelected.rawValue], withRegister:registers.ALM[timerSelected.rawValue])
 		case 0x3:		// WSTS
 			if timerSelected == .TimerA {
 				registers.TMR_S[0] &= data[0]
@@ -227,7 +210,7 @@ class Timer : Peripheral {
 			copyDigits(registers.SCR[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 		case 0x5:		// WINTST - set and start interval time
 			copyDigits(registers.INT[0], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
-			intTimerEnd = convertToUint64(registers.INT[0])
+			convertToUint64(&intTimerEnd, withRegister:registers.INT[0])
 			intTimer = 0
 			registers.TMR_S[2] |= 0x04			// set bit 10- ITEN - Interval Timer Enable
 		case 0x7:		// STPINT - stop interval timer
@@ -275,5 +258,64 @@ class Timer : Peripheral {
 		default:
 			break
 		}
+	}
+	
+	func timeSlice(timer: NSTimer) {
+		var fAlert = 0
+		if (registers.TMR_S[1] & 0x04) != 0 {		// bit 6 - Clock A enabled
+			clock[TimerType.TimerA.rawValue] += 1
+			if clock[TimerType.TimerA.rawValue] > 99999999999999 || clock[TimerType.TimerA.rawValue]  == 0 {
+				clock[TimerType.TimerA.rawValue] = 0
+				registers.TMR_S[0] |= 0x02;			// set bit 1 - overflow in clock A
+				cpu.reg.FI |= 0x2000;				// set flag 13 - general service request flag
+				cpu.reg.FI |= 0x1000;				// set flag 12 - timer request
+				cpu.setPowerMode(.PowerOn)
+			}
+			if ((UInt64(registers.TMR_S[2]) & 0x01) != 0 && (clock[TimerType.TimerA.rawValue] == UInt64(alarm[TimerType.TimerA.rawValue]))) {
+				// if bit 8 set - enable ClockA & AlarmA comparator
+				registers.TMR_S[0] |= 0x01;			// set bit 0 - valid compare
+				cpu.reg.FI |= 0x2000;				// set flag 13 - general service request flag
+				cpu.reg.FI |= 0x1000;				// set flag 12 - timer request
+				cpu.setPowerMode(.PowerOn)
+				fAlert = 1;
+			}
+		}
+		if (registers.TMR_S[1] & 0x08) != 0 {		// bit 7 - Clock B enabled
+			clock[TimerType.TimerB.rawValue] += 1
+			if clock[TimerType.TimerB.rawValue] > 99999999999999 || clock[TimerType.TimerB.rawValue]  == 0 {
+				clock[TimerType.TimerB.rawValue] = 0
+				registers.TMR_S[0] |= 0x08			// set bit 3 - overflow in clock B
+				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
+				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
+				cpu.setPowerMode(.PowerOn)
+			}
+			if ((UInt64(registers.TMR_S[2]) & 0x02) != 0 && (clock[TimerType.TimerB.rawValue] == UInt64(alarm[TimerType.TimerB.rawValue]))) {
+				// if bit 9 set - enable ClockB & AlarmB comparator
+				registers.TMR_S[0] |= 0x04			// set bit 2 - valid compare
+				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
+				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
+				cpu.setPowerMode(.PowerOn)
+				fAlert = 1;
+			}
+		}
+		
+		// Interval Timer
+		if (registers.TMR_S[2] & 0x04) != 0 {
+			// bit 10 - interval timer enabled
+			intTimer += 1
+			if (intTimer == intTimerEnd) {
+				intTimer = 0						// reset interval timer to zero
+				registers.TMR_S[1] |= 0x01			// set bit 4 - DTZIT - Decrement Through Zero Interval timer
+				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
+				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
+				cpu.setPowerMode(.PowerOn)
+			}
+		}
+		
+		// alert for an alarm
+//		if fAlert != 0 {
+//			// I'll make the dock icon bounce
+//			NSApp.requestUserAttention(10)
+//		}
 	}
 }

@@ -54,6 +54,8 @@ struct CPURegisters {
 	var ramAddress: Bits12	= 0											// Selected ram address
 	var peripheral: Bits8	= 0											// Selected peripheral
 	var keyDown: Bit		= 0											// Set if a key is being held down
+	
+	var dis: Disassembly = Disassembly()
 
 	func description() {
 		println("A=\(A)")
@@ -184,6 +186,7 @@ class CPU {
 			if mode != .PowerOn {
 				//TODO: IMPLEMENT
 				soundOutput.flushAndSuspendSoundOutput()
+				self.lineNo = 0
 			}
 			debugViewController?.updateDisplay()
 		}
@@ -383,44 +386,60 @@ class CPU {
 		}
 		switch opcode {
 		case 0x0:
-			executeClass0_Line0(param)
+			executeClass0Line0(param)
+			
 		case 0x1:
-			executeClass0_Line1(fTable[param])
+			executeClass0Line1(fTable[param])
+			
 		case 0x2:
-			executeClass0_Line2(fTable[param])
+			executeClass0Line2(fTable[param])
+			
 		case 0x3:
-			executeClass0_Line3(fTable[param])
+			executeClass0Line3(fTable[param])
+			
 		case 0x4:
-			executeClass0_Line4(param)
+			executeClass0Line4(param)
+			
 		case 0x5:
-			executeClass0_Line5(fTable[param])
+			executeClass0Line5(fTable[param])
+			
 		case 0x6:
-			executeClass0_Line6(param)
+			executeClass0Line6(param)
+			
 		case 0x7:
-			executeClass0_Line7(fTable[param])
+			executeClass0Line7(fTable[param])
+			
 		case 0x8:
-			executeClass0_Line8(param)
+			executeClass0Line8(param)
+			
 		case 0x9:
 			// Printer control
-			executeClass0_Line9(param)
+			executeClass0Line9(param)
+			
 		case 0xA: // WRITE r
-			executeClass0_LineA(param)
+			executeClass0LineA(param)
+			
 		case 0xB:
-			executeClass0_LineB(fTable[param])
+			executeClass0LineB(fTable[param])
+			
 		case 0xC:
-			executeClass0_LineC(param)
+			executeClass0LineC(param)
+			
 		case 0xD:
-			executeClass0_LineD(param)
+			executeClass0LineD(param)
+			
 		case 0xE:
-			executeClass0_LineE(param)
+			executeClass0LineE(param)
+			
 		case 0xF:
-			executeClass0_LineF(fTable[param])
+			executeClass0LineF(fTable[param])
+			
 		default:
 			unimplementedInstruction(param)
 		}
 	}
 	
-	func executeClass0_Line0(param: Int) {
+	func executeClass0Line0(param: Int) {
 		switch param {
 		case 0x0:
 			/*
@@ -489,7 +508,7 @@ class CPU {
 				
 				let addr = (reg.C[5] << 8) | (reg.C[4] << 4) | reg.C[3]
 				let toSave = ((reg.C[2] & 0x03) << 8) | (reg.C[1] << 4) | reg.C[0]
-				rom.writeLocation(Int(addr), from: UInt16(toSave))
+				rom[Int(addr)] = UInt16(toSave)
 			}
 			
 		case 0x2, 0x3:
@@ -548,7 +567,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_Line1(param: Int) {
+	func executeClass0Line1(param: Int) {
 		switch param {
 		case 0xE:
 			unimplementedInstruction(param)
@@ -604,7 +623,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_Line2(param: Int) {
+	func executeClass0Line2(param: Int) {
 		switch param {
 		case 0xE:
 			unimplementedInstruction(param)
@@ -669,7 +688,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_Line3(param: Int) {
+	func executeClass0Line3(param: Int) {
 		switch (param) {
 		case 0xE:
 			unimplementedInstruction(param)
@@ -702,9 +721,9 @@ class CPU {
 		default:
 			/*
 			ST=1?
-			Set Status bit
+			Test Status Equal To One
 			=========================================================================================
-			CHKKB													operand: Digit Number
+			ST=1?													operand: Digit Number
 					
 			Operation: CY <= Status<digit>
 			=========================================================================================
@@ -736,7 +755,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_Line4(param: Int) {
+	func executeClass0Line4(param: Int) {
 		/*
 		LC
 		Load Constant
@@ -766,7 +785,7 @@ class CPU {
 		}
 	}
 
-	func executeClass0_Line5(param: Int) {
+	func executeClass0Line5(param: Int) {
 		var R: Bits4 = regR()
 		switch param {
 		case 0xE:
@@ -844,13 +863,13 @@ class CPU {
 		}
 	}
 
-	func executeClass0_Line6(param: Int) {
+	func executeClass0Line6(param: Int) {
 		var R: Bits4 = regR()
 		switch param {
 		case 0x1:
 			/*
 			G=C
-			Load Status Byte from Flag Out
+			Load G From C
 			=========================================================================================
 			G=C															operand: none
 			
@@ -1274,7 +1293,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_Line7(param: Int) {
+	func executeClass0Line7(param: Int) {
 		var R: Bits4 = regR()
 		switch (param) {
 		case 0xE:
@@ -1347,7 +1366,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_Line8(param: Int) {
+	func executeClass0Line8(param: Int) {
 		switch param {
 		case 0x0:
 			/*
@@ -1628,7 +1647,7 @@ class CPU {
 			Note: This instruction is a NOP for the processor, but is interpreted by the (off-chip)
 				  LCD display controller, which turns off the display.
 			*/
-//			[display displayOff];
+			NSNotificationCenter.defaultCenter().postNotificationName("displayOff", object: nil)
 			break
 			
 		case 0xC:
@@ -1652,7 +1671,7 @@ class CPU {
 			Note: This instruction is a NOP for the processor, but is interpreted by the (off-chip)
 			LCD display controller, which toggles the display.
 			*/
-//			[display displayToggle];
+			NSNotificationCenter.defaultCenter().postNotificationName("displayToggle", object: nil)
 			break
 			
 		case 0xD:
@@ -1743,7 +1762,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_Line9(param: Int) {
+	func executeClass0Line9(param: Int) {
 		/*
 		SELPF
 		Select Peripheral
@@ -1787,7 +1806,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_LineA(param: Int) {
+	func executeClass0LineA(param: Int) {
 		/*
 		REGN=C
 		Load Register from C
@@ -1842,7 +1861,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_LineB(param: Int) {
+	func executeClass0LineB(param: Int) {
 		switch param {
 		case 0xE, 0xF:
 			/*
@@ -1903,7 +1922,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_LineC(param: Int) {
+	func executeClass0LineC(param: Int) {
 		switch param {
 		case 0x0:
 			// Special HEPAX Module treatment
@@ -2012,9 +2031,7 @@ class CPU {
 				  instruction.
 			*/
 			let fetchResult = fetch()
-//			var word = Int(fetchResult.data)
 			bitsToDigits(bits: Int(fetchResult.data), destination: &reg.C, start: 0, count: 3)
-//			reg.C = bitsToDigits(bits: word, source: reg.C, start: 0, count: 3)
 			
 		case 0x5:
 			/*
@@ -2303,12 +2320,12 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_LineD(param: Int) {
+	func executeClass0LineD(param: Int) {
 		// Doing still nothing
 		unimplementedInstruction(param)
 	}
 	
-	func executeClass0_LineE(param: Int) {
+	func executeClass0LineE(param: Int) {
 		switch param {
 		case 0:
 			/*
@@ -2384,7 +2401,7 @@ class CPU {
 		}
 	}
 	
-	func executeClass0_LineF(param: Int) {
+	func executeClass0LineF(param: Int) {
 		switch (param) {
 		case 0x0, 0xE, 0xF:
 			unimplementedInstruction(param)
@@ -2539,7 +2556,7 @@ class CPU {
 			}
 			
 			// We do not jump to a NOP tyte
-			if rom.readLocation(addr & 0xfff) == 0 {
+			if rom[Int(addr & 0xfff)] == 0 {
 				return
 			}
 			
@@ -2659,7 +2676,7 @@ class CPU {
 													aaaa_aaaa_10
 			=========================================================================================
 			Note: The first word of the instruction contains bits 7-0 of the jump address, and the
-			second word of the instruction contains bits 15-8 of the jump address.
+				  second word of the instruction contains bits 15-8 of the jump address.
 			
 			The sync signal is suppressed during the fetch of the second word of the instruction to
 			prevent external devices from incorrectly interpreting the contents of the isa_bus during
@@ -3054,6 +3071,7 @@ class CPU {
 				zero: &zero
 			)
 			nextCarry = carry;
+			
 		case 0x0C:
 			/*
 			A=A-B
@@ -3686,13 +3704,13 @@ class CPU {
 	
 	func executeClass3(instr: Int) {
 		println("executeClass3: \(instr)")
-		let v: Bit = Bit((instr >> 2) & 1)
-		var disp = instr >> 3;
+		let v = ((instr >> 2) & 1)
+		var disp = instr >> 3
 		if disp >= 64 {
 			disp = disp - 128
 		}
-		if v == reg.carry {
-			reg.PC = (reg.PC - 1 + disp) & 0xffff;
+		if Bit(v) == reg.carry {
+			reg.PC = (reg.PC - 1 + disp) & 0xffff
 		}
 	}
 	

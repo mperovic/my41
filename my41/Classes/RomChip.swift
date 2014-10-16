@@ -57,15 +57,15 @@ class RomChip {
 		}
 	}
 	
-	func readLocation(addr: Int) -> UInt16 {
-		return words[addr]
-	}
-	func writeLocation(addr: Int, from data: UInt16) -> Bool {
-		if writable {
-			words[addr] = data
-			return true
-		} else {
-			return false
+	subscript(addr: Int) -> UInt16 {
+		get {
+			return words[addr]
+		}
+		
+		set {
+			if writable {
+				words[addr] = newValue
+			}
 		}
 	}
 }

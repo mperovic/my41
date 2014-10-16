@@ -19,7 +19,7 @@ let timeSliceInterval	= 0.01
 let MAX_RAM_SIZE		= 0x400
 
 var bus: Bus?
-var timer: Timer?
+var timerModule: Timer?
 
 class CalculatorController : NSObject {
 //	@IBOutlet weak var display: Display!
@@ -44,7 +44,7 @@ class CalculatorController : NSObject {
 	override init() {
 		cpu = CPU.sharedInstance
 		bus = Bus()
-		timer = Timer()
+		timerModule = Timer()
 		calculatorMod = MOD()
 		
 		super.init()
@@ -201,8 +201,7 @@ class CalculatorController : NSObject {
 	
 	func timeSlice(timer: NSTimer) {
 		cpu.timeSlice(timer)
-		//TODO: IMPLEMENT
 		display?.timeSlice(timer)
-//		[timeModule timeSlice: timer];
+		timerModule?.timeSlice(timer)
 	}
 }

@@ -48,7 +48,7 @@ class KeyGroup : NSView {
 	}
 	
 	func key(key: Key, pressed: Bool) {
-		let code: Int = key.keyCode!
+		let code: Int = key.keyCode! as Int
 		keyboard.keyWithCode(code, pressed: pressed)
 	}
 }

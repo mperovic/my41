@@ -112,6 +112,7 @@
 		DCAD8864199D380C0027C925 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8863199D380C0027C925 /* Bus.swift */; };
 		DCAD8866199D38540027C925 /* SoundOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8865199D38540027C925 /* SoundOutput.swift */; };
 		DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD48908198AF42B00F3B898 /* CalculatorController.swift */; };
+		DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */; };
 		DCF52A21199C971A006BF825 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF52A20199C971A006BF825 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -235,6 +236,7 @@
 		DCAD8863199D380C0027C925 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bus.swift; path = Classes/Bus.swift; sourceTree = "<group>"; };
 		DCAD8865199D38540027C925 /* SoundOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundOutput.swift; path = Classes/SoundOutput.swift; sourceTree = "<group>"; };
 		DCD48908198AF42B00F3B898 /* CalculatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatorController.swift; path = Classes/CalculatorController.swift; sourceTree = "<group>"; };
+		DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Disassembly.swift; path = Classes/Disassembly.swift; sourceTree = "<group>"; };
 		DCF52A20199C971A006BF825 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Classes/Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -458,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				DC74922619CF1E600012B5C0 /* Debuger.swift */,
+				DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */,
 			);
 			name = Debuger;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 			files = (
 				DCAD8860199D37CB0027C925 /* MOD.swift in Sources */,
 				DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */,
+				DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
 				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
 				DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */,
@@ -820,7 +824,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = my41/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -835,7 +839,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = my41/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};

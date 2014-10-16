@@ -54,7 +54,7 @@ class DebugViewController: NSViewController {
 }
 
 class SelectedView: NSView {
-	var text: String?
+	var text: NSString?
 	var selected: Bool?
 	
 	override func drawRect(dirtyRect: NSRect) {
@@ -62,6 +62,12 @@ class SelectedView: NSView {
 		let backColor = NSColor(calibratedRed: 1, green: 1, blue: 1, alpha: 0.95)
 		let textColor = NSColor(calibratedRed: 0.147, green: 0.222, blue: 0.162, alpha: 1)
 		
+		let font = NSFont(name: "Helvetica Bold", size: 14.0)
+		
+		let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
+		let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+		textStyle.alignment = NSTextAlignment.LeftTextAlignment
+
 		if selected! {
 			//// Rectangle Drawing
 			let rectangleCornerRadius: CGFloat = 5
@@ -85,24 +91,26 @@ class SelectedView: NSView {
 			rectanglePath.closePath()
 			backColor.setFill()
 			rectanglePath.fill()
-			
-			//// Text Drawing
-			let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
-			let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
-			textStyle.alignment = NSTextAlignment.LeftTextAlignment
-			
-			let textFontAttributes = [NSFontAttributeName: NSFont(name: "Helvetica Bold", size: 14), NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle]
-			
-			text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
+
+			if let actualFont = font {
+				let textFontAttributes: NSDictionary = [
+					NSFontAttributeName: actualFont,
+					NSForegroundColorAttributeName: textColor,
+					NSParagraphStyleAttributeName: textStyle
+				]
+				
+				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
+			}
 		} else {
-			//// Text Drawing
-			let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
-			let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
-			textStyle.alignment = NSTextAlignment.LeftTextAlignment
-			
-			let textFontAttributes = [NSFontAttributeName: NSFont(name: "Helvetica Bold", size: 14), NSForegroundColorAttributeName: backColor, NSParagraphStyleAttributeName: textStyle]
-			
-			text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
+			if let actualFont = font {
+				let textFontAttributes: NSDictionary = [
+					NSFontAttributeName: actualFont,
+					NSForegroundColorAttributeName: backColor,
+					NSParagraphStyleAttributeName: textStyle
+				]
+				
+				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
+			}
 		}
 	}
 }

@@ -131,7 +131,6 @@ func shiftDigitsRight(var X x: [Digit], start aStart: Int, count aCount: Int) ->
 func addOrSubtractDigits(arithOp op: ArithOp, arithMode mode: ArithMode, firstNum src1: [Digit], secondNum src2: [Digit], inout destination dst: [Digit], from start: Int, count cnt: Int, inout carry aCarry: Bit, inout zero aZero: Bit) {
 	var d: Digit = 0
 	var m: Digit = 0
-	var i = start
 	var c: Bit = aCarry
 	var z: Bit = 1
 	
@@ -142,11 +141,11 @@ func addOrSubtractDigits(arithOp op: ArithOp, arithMode mode: ArithMode, firstNu
 			m = 0xF
 		}
 	}
-	for _ in 0..<cnt {
+	for idx in start..<start+cnt {
 		if op == .ADD {
-			d = src1[i] + src2[i] + Digit(c)
+			d = src1[idx] + src2[idx] + Digit(c)
 		} else {
-			d = src1[i] + m - src2[i] + Digit(c)
+			d = src1[idx] + m - src2[idx] + Digit(c)
 		}
 		if mode == ArithMode.DEC_MODE && d > 9 {
 			d += 6
@@ -156,8 +155,7 @@ func addOrSubtractDigits(arithOp op: ArithOp, arithMode mode: ArithMode, firstNu
 		if d != 0 {
 			z = 0
 		}
-		dst[i] = d
-		++i
+		dst[idx] = d
 	}
 	
 	aCarry = c

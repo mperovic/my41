@@ -147,7 +147,8 @@ class Bus {
 		var rom: RomChip? = romChips[page][bank]
 		var data: Int
 		if let aRom = rom {
-			return (true, Int(aRom.readLocation(address & 0xfff)))
+			return (true, Int(aRom[Int(address & 0xfff)]))
+//			return (true, Int(aRom.readLocation(address & 0xfff)))
 		} else {
 			return (false, 0)
 		}
@@ -156,7 +157,6 @@ class Bus {
 	func writeRamAddress(address: Bits12, from data: Digits14) -> Bool {
 		// Write to specified location of specified chip. If chip or location is nonexistent, do nothing and return false.
 		if ramValid[Int(address)] {
-			println("writeRamAddress at \(address)=\(ram[Int(address)])")
 			copyDigits(data, sourceStartAt: 0, destination: &ram[Int(address)], destinationStartAt: 0, count: 14)
 			return true
 		} else {

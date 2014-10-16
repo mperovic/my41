@@ -21,7 +21,7 @@ class CalculatorWindow : NSWindow {
 		super.init(contentRect: contentRect, styleMask: aStyle, backing: bufferingType, defer: flag)
 	}
 	
-	required init(coder: NSCoder!) {
+	required init?(coder: NSCoder!) {
 //	    fatalError("init(coder:) has not been implemented")
 		super.init(coder: coder)
 	}
@@ -46,13 +46,13 @@ class CalculatorWindow : NSWindow {
 		}
 	}
 	
-	override func mouseDown(theEvent: NSEvent!) {
+	override func mouseDown(theEvent: NSEvent) {
 		initialLocation = theEvent.locationInWindow
 	}
 	
-	override func mouseDragged(theEvent: NSEvent!) {
+	override func mouseDragged(theEvent: NSEvent) {
 		if let iLocation = initialLocation {
-			let screenVisibleFrame = NSScreen.mainScreen().visibleFrame
+			let screenVisibleFrame = NSScreen.mainScreen()?.visibleFrame
 			let windowFrame = self.frame
 			var newOrigin = windowFrame.origin
 			
@@ -64,8 +64,8 @@ class CalculatorWindow : NSWindow {
 			newOrigin.y += (currentLocation.y - iLocation.y)
 			
 			// Don't let window get dragged up under the menu bar
-			if ((newOrigin.y + windowFrame.size.height) > (screenVisibleFrame.origin.y + screenVisibleFrame.size.height)) {
-				newOrigin.y = screenVisibleFrame.origin.y + (screenVisibleFrame.size.height - windowFrame.size.height);
+			if ((newOrigin.y + windowFrame.size.height) > (screenVisibleFrame!.origin.y + screenVisibleFrame!.size.height)) {
+				newOrigin.y = screenVisibleFrame!.origin.y + (screenVisibleFrame!.size.height - windowFrame.size.height);
 			}
 			
 			// Move the window to the new location
@@ -148,7 +148,7 @@ class Display : NSView, Peripheral {
 		super.init(frame: frameRect)
 	}
 
-	required init(coder: NSCoder) {
+	required init?(coder: NSCoder) {
 //	    fatalError("init(coder:) has not been implemented")
 		super.init(coder: coder)
 	}
@@ -253,7 +253,7 @@ class Display : NSView, Peripheral {
 		var idx: Int			// cell index (decreasing from left to right)
 
 //		for idx = numDisplayCells-1; idx >= 0; idx-- {
-		for idx in reverse(numDisplayCells-1...0) {
+		for idx in reverse(0...numDisplayCells-1) {
 			// assemble the actual hardware character index from the register bits:
 			// charCode = C0 B1 B0  A3 A2 A1 A0
 			let charCode = ((r.C[idx] & 0x1) << 6) | ((r.B[idx] & 0x3) << 4) | (r.A[idx] & 0xf);
@@ -492,8 +492,8 @@ class Display : NSView, Peripheral {
 	
 	func shift(inout registers: DisplayRegisters, withDirection direction:DisplayShiftDirection, andSize size:DisplayTransitionSize, withRegister regset:DisplayRegisterSet, inout andData data: Digits14) {
 		// Distribute digits from the given source and rotate them into the specified registers.
-		// For size == LONG, shifts a total of 12 digits from the source; for size == SHORT,
-		// shifts one digit into each specified register.
+		// For size == LONG, shifts a total of 12 digits from the source;
+		// for size == SHORT, shifts one digit into each specified register.
 		var cp = 0
 		while cp < 12 {
 			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
