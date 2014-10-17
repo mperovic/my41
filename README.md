@@ -7,3 +7,5 @@ Copyright 2014, Miroslav Perovic
 
 Distributed under terms of Revised BSD License
 
+
+NOTE: This app is still in heavy development
