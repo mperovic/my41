@@ -1,6 +1,6 @@
 //
 //  CalculatorWindow.swift
-//  i41CV
+//  my41
 //
 //  Created by Miroslav Perovic on 8/28/14.
 //  Copyright (c) 2014 iPera. All rights reserved.
@@ -252,7 +252,6 @@ class Display : NSView, Peripheral {
 		// loop through the display cells and translate their content:
 		var idx: Int			// cell index (decreasing from left to right)
 
-//		for idx = numDisplayCells-1; idx >= 0; idx-- {
 		for idx in reverse(0...numDisplayCells-1) {
 			// assemble the actual hardware character index from the register bits:
 			// charCode = C0 B1 B0  A3 A2 A1 A0

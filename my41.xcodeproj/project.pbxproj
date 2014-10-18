@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC2E476C1995767900BCACAF /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E476B1995767900BCACAF /* PreferencesController.swift */; };
 		DC2E47B219957F5D00BCACAF /* 41Z.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E476E19957F5D00BCACAF /* 41Z.MOD */; };
 		DC2E47B319957F5D00BCACAF /* ADV-APP.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E476F19957F5D00BCACAF /* ADV-APP.MOD */; };
 		DC2E47B419957F5D00BCACAF /* ADVANTAGE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477019957F5D00BCACAF /* ADVANTAGE.MOD */; };
@@ -99,6 +98,7 @@
 		DC5626A9198B75E80040453F /* ADV0.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC56269B198B75E80040453F /* ADV0.ROM */; };
 		DC5626AA198B75E80040453F /* CrdRdr-1E.rom in Resources */ = {isa = PBXBuildFile; fileRef = DC56269C198B75E80040453F /* CrdRdr-1E.rom */; };
 		DC5626B1198B89FC0040453F /* RamChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5626B0198B89FC0040453F /* RamChip.swift */; };
+		DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E4BDC19F17E7B00BF831B /* Preferences.swift */; };
 		DC6DB98B19BA5C1800E26ADD /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */; };
 		DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98D19BB6A5200E26ADD /* Button.swift */; };
 		DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC74922619CF1E600012B5C0 /* Debuger.swift */; };
@@ -127,7 +127,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DC2E476B1995767900BCACAF /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesController.swift; path = Classes/PreferencesController.swift; sourceTree = "<group>"; };
 		DC2E476E19957F5D00BCACAF /* 41Z.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = 41Z.MOD; path = MOD/41Z.MOD; sourceTree = "<group>"; };
 		DC2E476F19957F5D00BCACAF /* ADV-APP.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ADV-APP.MOD"; path = "MOD/ADV-APP.MOD"; sourceTree = "<group>"; };
 		DC2E477019957F5D00BCACAF /* ADVANTAGE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADVANTAGE.MOD; path = MOD/ADVANTAGE.MOD; sourceTree = "<group>"; };
@@ -223,6 +222,7 @@
 		DC56269B198B75E80040453F /* ADV0.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADV0.ROM; path = ROMs/ADV0.ROM; sourceTree = "<group>"; };
 		DC56269C198B75E80040453F /* CrdRdr-1E.rom */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CrdRdr-1E.rom"; path = "ROMs/CrdRdr-1E.rom"; sourceTree = "<group>"; };
 		DC5626B0198B89FC0040453F /* RamChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RamChip.swift; path = Classes/RamChip.swift; sourceTree = "<group>"; };
+		DC5E4BDC19F17E7B00BF831B /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Classes/Preferences.swift; sourceTree = "<group>"; };
 		DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Classes/Keyboard.swift; sourceTree = "<group>"; };
 		DC6DB98D19BB6A5200E26ADD /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = Classes/Button.swift; sourceTree = "<group>"; };
 		DC74922619CF1E600012B5C0 /* Debuger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Debuger.swift; path = Classes/Debuger.swift; sourceTree = "<group>"; };
@@ -268,7 +268,6 @@
 		DC2E476A1995766000BCACAF /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				DC2E476B1995767900BCACAF /* PreferencesController.swift */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -483,6 +482,7 @@
 		DCD48906198AF40600F3B898 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DC5E4BDC19F17E7B00BF831B /* Preferences.swift */,
 				DC74922519CF1E480012B5C0 /* Debuger */,
 				DC6DB98C19BB6A1700E26ADD /* Keyboard */,
 				DC7B7E1219AFAFA600C70269 /* Peripherals */,
@@ -689,12 +689,12 @@
 			files = (
 				DCAD8860199D37CB0027C925 /* MOD.swift in Sources */,
 				DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */,
+				DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */,
 				DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
 				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
 				DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */,
 				DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */,
-				DC2E476C1995767900BCACAF /* PreferencesController.swift in Sources */,
 				DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */,
 				DCAD885E199D36150027C925 /* DataOperations.swift in Sources */,
 				DCAD8864199D380C0027C925 /* Bus.swift in Sources */,
@@ -773,7 +773,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -810,7 +810,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -824,7 +824,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = my41/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -839,7 +839,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = my41/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};

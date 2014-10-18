@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 class DebugViewController: NSViewController {
-	var cpu: CPU = CPU.sharedInstance
+	var cpu = CPU.sharedInstance
 	var registersView: SelectedView?
 	var memoryView: SelectedView?
 	
@@ -239,28 +239,4 @@ class LabelView: NSView {
 		self.wantsLayer = true
 		self.layer = viewLayer
 	}
-}
-
-class DebugTableCellView: NSTableCellView {
-	
-}
-
-class DebugerTableViewController: NSObject, NSTableViewDataSource, NSTableViewDelegate {
-//	func numberOfRowsInTableView(tableView: NSTableView!) -> Int {
-//		return 2
-//	}
-//	
-//	func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject! {
-//		var cell = tableView.makeViewWithIdentifier("DebugItem", owner: self) as NSTableCellView
-//		switch row {
-//		case 0:
-//			cell.textField.stringValue = "Registers"
-//		case 1:
-//			cell.textField.stringValue = "Memory"
-//		default:
-//			cell.textField.stringValue = ""
-//		}
-//		
-//		return cell
-//	}
 }

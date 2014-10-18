@@ -1,6 +1,6 @@
 //
 //  CalculatorController.swift
-//  i41CV
+//  my41
 //
 //  Created by Miroslav Perovic on 8/1/14.
 //  Copyright (c) 2014 iPera. All rights reserved.
@@ -71,8 +71,18 @@ class CalculatorController : NSObject {
 	func readCalculatorDescriptionFromDefaults() {
 		println("readCalculatorDescriptionFromDefaults")
 		let defaults = NSUserDefaults.standardUserDefaults()
-		var filename: String
 		let cType = defaults.integerForKey(HPCalculatorType)
+		readROMModule(cType)
+		
+		// Now we fill each port
+		portMod[0]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!)
+		portMod[1]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!)
+		portMod[2]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!)
+		portMod[3]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!)
+	}
+	
+	func readROMModule(cType: Int) {
+		var filename: String
 		switch cType {
 		case 1:
 			calculatorType = .HP41C
@@ -86,16 +96,11 @@ class CalculatorController : NSObject {
 		default:
 			// Make sure I have a default for next time
 			calculatorType = .HP41CX
+			let defaults = NSUserDefaults.standardUserDefaults()
 			defaults.setInteger(CalculatorType.HP41CX.rawValue, forKey: HPCalculatorType)
 			filename = NSBundle.mainBundle().resourcePath! + "/" + "nut-cx.mod"
 		}
 		calculatorMod.readModFromFile(filename)
-		
-		// Now we fill each port
-		portMod[0]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!)
-		portMod[1]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!)
-		portMod[2]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!)
-		portMod[3]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!)
 	}
 	
 	func installBuiltinRoms() {

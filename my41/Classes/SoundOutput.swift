@@ -1,6 +1,6 @@
 //
 //  SoundOutput.swift
-//  i41CV
+//  my41
 //
 //  Created by Miroslav Perovic on 8/11/14.
 //  Copyright (c) 2014 iPera. All rights reserved.
