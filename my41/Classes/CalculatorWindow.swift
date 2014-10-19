@@ -72,7 +72,6 @@ class CalculatorWindow : NSWindow {
 			self.setFrameOrigin(newOrigin)
 		}
 	}
-	
 }
 
 typealias Digits12 = [Digit]

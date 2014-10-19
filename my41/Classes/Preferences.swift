@@ -50,13 +50,21 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 	@IBOutlet weak var expansionModule2: ExpansionView!
 	@IBOutlet weak var expansionModule3: ExpansionView!
 	@IBOutlet weak var expansionModule4: ExpansionView!
+	@IBOutlet weak var comments: NSTextField!
+	@IBOutlet weak var bottomView: NSView!
 	
 	override func viewDidLoad() {
-		self.title = nil
+		self.title = ""
+		comments.stringValue = ""
 		
 		self.menuView.layer = CALayer()
 		self.menuView.layer?.backgroundColor = NSColor(calibratedRed: 0.9843, green: 0.9804, blue: 0.9725, alpha: 1.0).CGColor
 		self.menuView.wantsLayer = true
+		
+		// Draw border on splitView
+		bottomView.layer = CALayer()
+		bottomView.layer?.borderWidth = 1.0
+		bottomView.wantsLayer = true
 		
 		calculatorView = SelectedPreferencesView(frame: CGRectMake(0, self.menuView.frame.size.height - 35, 184, 24))
 		calculatorView?.text = "Calculator"
@@ -136,6 +144,19 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 		displayHeader()
 	}
 	
+	func applyChanges() {
+		// First check calclulator type
+		let defaults = NSUserDefaults.standardUserDefaults()
+		let cType = defaults.integerForKey(HPCalculatorType)
+		if cType != calculatorType!.rawValue {
+			defaults.setInteger(calculatorType!.rawValue, forKey: HPCalculatorType)
+			calculatorController.resetCalculator()
+		}
+		
+		defaults.synchronize()
+	}
+	
+	
 	// MARK: Actions
 	@IBAction func selectCalculatorAction(sender: AnyObject) {
 		calculatorView?.selected = true
@@ -155,6 +176,16 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 		modsView!.setNeedsDisplayInRect(modsView!.bounds)
 	}
 	
+	@IBAction func doneAction(sender: AnyObject) {
+		applyChanges()
+		dismissViewController(self)
+	}
+	
+	@IBAction func cancelAction(sender: AnyObject) {
+		dismissViewController(self)
+	}
+	
+	
 	// MARK: NSComboBoxDelegate Methods
 	func comboBoxSelectionDidChange(notification: NSNotification) {
 		if notification.object as NSObject == calculatorSelector {
@@ -163,11 +194,22 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 			let cType = defaults.integerForKey(HPCalculatorType)
 
 			if selected != cType {
-				defaults.setInteger(selected, forKey: HPCalculatorType)
-				calculatorController.resetCalculator()
+				comments.stringValue = "Please be aware that changing the calculator type may result in some memory loss"
+				switch selected {
+				case 1:
+					calculatorType = .HP41C
+				case 2:
+					calculatorType = .HP41CV
+				case 3:
+					calculatorType = .HP41CX
+				default:
+					// Make sure I have a default for next time
+					calculatorType = .HP41CX
+				}
 			}
 		}
 	}
+	
 	
 	// MARK: NSTableViewDataSource Methods
 	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
@@ -195,6 +237,19 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 		selectedRow(row)
 		
 		return true
+	}
+	
+	func tableView(tableView: NSTableView, writeRowsWithIndexes rowIndexes: NSIndexSet, toPasteboard pboard: NSPasteboard) -> Bool {
+		if rowIndexes.count > 1 {
+			return false
+		} else {
+			let title = convertCCharToString(modDetailsView.modDetails!.title)
+			let row = rowIndexes.firstIndex
+			let filePath = modFiles![row] as String
+			pboard.setString(filePath, forType: NSPasteboardTypeString)
+
+			return true
+		}
 	}
 }
 
@@ -277,10 +332,19 @@ class ModDetailsView: NSView {
 	}
 }
 
-class ExpansionView: NSView {
+class ExpansionView: NSView, NSDraggingDestination {
 	var modDetails: ModuleFileHeader?
 	var category: String?
 	var hardware: String?
+	var filePath: String?
+	
+	override func awakeFromNib() {
+		let theArray = [
+			"NSStringPboardType"
+		]
+		
+		registerForDraggedTypes(theArray)
+	}
 	
 	override func drawRect(dirtyRect: NSRect) {
 		let backColor = NSColor(calibratedRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.95)
@@ -291,5 +355,53 @@ class ExpansionView: NSView {
 
 		backColor.setFill()
 		path.fill()
+		
+		if let fPath: NSString = filePath {
+			let font = NSFont.systemFontOfSize(12.0)
+			var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+			textStyle.alignment = .CenterTextAlignment
+			let attributes = [
+				NSFontAttributeName : font,
+				NSParagraphStyleAttributeName: textStyle
+			]
+			fPath.lastPathComponent.drawInRect(NSMakeRect(20.0, 85.0, 100.0, 17.0), withAttributes: attributes)
+		}
+	}
+	
+	override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
+		if NSDragOperation.Generic & sender.draggingSourceOperationMask() == NSDragOperation.Generic {
+			return NSDragOperation.Generic
+		} else {
+			return NSDragOperation.None
+		}
+	}
+	
+	override func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
+		if NSDragOperation.Generic & sender.draggingSourceOperationMask() == NSDragOperation.Generic {
+			return NSDragOperation.Generic
+		} else {
+			return NSDragOperation.None
+		}
+	}
+	
+	override func prepareForDragOperation(sender: NSDraggingInfo) -> Bool {
+		return true
+	}
+	
+	override func performDragOperation(sender: NSDraggingInfo) -> Bool {
+		let paste = sender.draggingPasteboard()
+		let theArray = [
+			"NSStringPboardType"
+		]
+		let desiredType = paste.availableTypeFromArray(theArray)
+		if let data = paste.dataForType(desiredType!) {
+			filePath = NSString(data: data, encoding: NSUTF8StringEncoding)
+		}
+		
+		return true
+	}
+	
+	override func concludeDragOperation(sender: NSDraggingInfo?) {
+		self.setNeedsDisplayInRect(self.bounds)
 	}
 }
