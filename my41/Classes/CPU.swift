@@ -2782,7 +2782,7 @@ class CPU {
 			A=0 TEF									0000_0TEF_10							1
 			=========================================================================================
 			*/
-			reg.A = fillDigits(reg.A, value: 0, start: start, count: cnt)
+			fillDigits(&reg.A, value: 0, start: start, count: cnt)
 			
 		case 0x01:
 			/*
@@ -2803,7 +2803,7 @@ class CPU {
 			B=0 TEF									0000_1TEF_10							1
 			=========================================================================================
 			*/
-			reg.B = fillDigits(reg.B, value: 0, start: start, count: cnt)
+			fillDigits(&reg.B, value: 0, start: start, count: cnt)
 			
 		case 0x02:
 			/*
@@ -2824,7 +2824,7 @@ class CPU {
 			C=0 TEF									0001_0TEF_10							1
 			=========================================================================================
 			*/
-			reg.C = fillDigits(reg.C, value: 0, start: start, count: cnt)
+			fillDigits(&reg.C, value: 0, start: start, count: cnt)
 
 		case 0x03:
 			/*

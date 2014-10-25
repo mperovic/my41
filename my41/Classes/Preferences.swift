@@ -57,6 +57,24 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 		self.title = ""
 		comments.stringValue = ""
 		
+		let defaults = NSUserDefaults.standardUserDefaults()
+		expansionModule1.port = 1
+		if (defaults.stringForKey(HPPort1) != nil) {
+			expansionModule1.filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!
+		}
+		expansionModule2.port = 2
+		if (defaults.stringForKey(HPPort2) != nil) {
+			expansionModule2.filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!
+		}
+		expansionModule3.port = 3
+		if (defaults.stringForKey(HPPort3) != nil) {
+			expansionModule3.filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!
+		}
+		expansionModule4.port = 4
+		if (defaults.stringForKey(HPPort4) != nil) {
+			expansionModule4.filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!
+		}
+		
 		self.menuView.layer = CALayer()
 		self.menuView.layer?.backgroundColor = NSColor(calibratedRed: 0.9843, green: 0.9804, blue: 0.9725, alpha: 1.0).CGColor
 		self.menuView.wantsLayer = true
@@ -76,7 +94,6 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 		modsView?.selected = false
 		self.menuView.addSubview(modsView!)
 		
-		let defaults = NSUserDefaults.standardUserDefaults()
 		let cType = defaults.integerForKey(HPCalculatorType)
 
 		switch cType {
@@ -146,14 +163,69 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 	
 	func applyChanges() {
 		// First check calclulator type
+		var needsRestart = false
+		
 		let defaults = NSUserDefaults.standardUserDefaults()
 		let cType = defaults.integerForKey(HPCalculatorType)
 		if cType != calculatorType!.rawValue {
 			defaults.setInteger(calculatorType!.rawValue, forKey: HPCalculatorType)
-			calculatorController.resetCalculator()
+			needsRestart = true
+		}
+		
+		if let fPath = expansionModule1.filePath {
+			let moduleName = fPath.lastPathComponent
+			if let dModuleName = defaults.stringForKey(HPPort1) {
+				if moduleName != dModuleName {
+					defaults.setObject(fPath.lastPathComponent, forKey: HPPort1)
+					needsRestart = true
+				}
+			} else {
+				defaults.setObject(fPath.lastPathComponent, forKey: HPPort1)
+				needsRestart = true
+			}
+		}
+		if let fPath = expansionModule2.filePath {
+			let moduleName = fPath.lastPathComponent
+			if let dModuleName = defaults.stringForKey(HPPort2) {
+				if moduleName != dModuleName {
+					defaults.setObject(fPath.lastPathComponent, forKey: HPPort2)
+					needsRestart = true
+				}
+			} else {
+				defaults.setObject(fPath.lastPathComponent, forKey: HPPort2)
+				needsRestart = true
+			}
+		}
+		if let fPath = expansionModule3.filePath {
+			let moduleName = fPath.lastPathComponent
+			if let dModuleName = defaults.stringForKey(HPPort3) {
+				if moduleName != dModuleName {
+					defaults.setObject(fPath.lastPathComponent, forKey: HPPort3)
+					needsRestart = true
+				}
+			} else {
+				defaults.setObject(fPath.lastPathComponent, forKey: HPPort3)
+				needsRestart = true
+			}
+		}
+		if let fPath = expansionModule4.filePath {
+			let moduleName = fPath.lastPathComponent
+			if let dModuleName = defaults.stringForKey(HPPort4) {
+				if moduleName != dModuleName {
+					defaults.setObject(fPath.lastPathComponent, forKey: HPPort4)
+					needsRestart = true
+				}
+			} else {
+				defaults.setObject(fPath.lastPathComponent, forKey: HPPort4)
+				needsRestart = true
+			}
 		}
 		
 		defaults.synchronize()
+		
+		if needsRestart {
+			calculatorController.resetCalculator()
+		}
 	}
 	
 	
@@ -337,6 +409,35 @@ class ExpansionView: NSView, NSDraggingDestination {
 	var category: String?
 	var hardware: String?
 	var filePath: String?
+	var port: Int = 0
+	
+	init(port: Int) {
+		let defaults = NSUserDefaults.standardUserDefaults()
+		switch port {
+		case 1:
+			filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!
+			
+		case 2:
+			filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!
+			
+		case 3:
+			filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!
+			
+		case 4:
+			filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!
+			
+		default:
+			break
+		}
+		
+		super.init()
+
+		self.port = port
+	}
+
+	required init?(coder: NSCoder) {
+		super.init(coder: coder)
+	}
 	
 	override func awakeFromNib() {
 		let theArray = [

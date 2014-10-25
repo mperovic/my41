@@ -75,10 +75,22 @@ class CalculatorController : NSObject {
 		readROMModule(cType)
 		
 		// Now we fill each port
-		portMod[0]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!)
-		portMod[1]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!)
-		portMod[2]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!)
-		portMod[3]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!)
+		if defaults.stringForKey(HPPort1) != nil {
+			portMod[0] = MOD()
+			portMod[0]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!)
+		}
+		if defaults.stringForKey(HPPort2) != nil {
+			portMod[1] = MOD()
+			portMod[1]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!)
+		}
+		if defaults.stringForKey(HPPort3) != nil {
+			portMod[2] = MOD()
+			portMod[2]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!)
+		}
+		if defaults.stringForKey(HPPort4) != nil {
+			portMod[3] = MOD()
+			portMod[3]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!)
+		}
 	}
 	
 	func readROMModule(cType: Int) {
@@ -121,7 +133,7 @@ class CalculatorController : NSObject {
 	func installBuiltinRam() {
 		println("installBuiltinRam")
 		var address: Bits12
-		for var idx = 0; idx < builtinRamTable.count; idx++ {
+		for idx in 0..<builtinRamTable.count {
 			var ramDesc = builtinRamTable[idx]
 			if let cType :CalculatorType = calculatorType? {
 				let condition1: Bool = ramDesc.inC && (cType == .HP41C)
@@ -135,7 +147,7 @@ class CalculatorController : NSObject {
 				let condition9: Bool = ramDesc.xMem && (calculatorMod.module().header.XMemModules == 1)
 				let conditionA: Bool = ramDesc.xFunction && (calculatorMod.module().header.XMemModules >= 2)
 				if condition1 || condition2 || condition3 || condition4 || condition5 || condition6 || condition7 || condition8 || condition9 || conditionA {
-					for address = ramDesc.firstAddress; address <= ramDesc.lastAddress; address++ {
+					for address in ramDesc.firstAddress...ramDesc.lastAddress {
 						bus!.installRamAtAddress(address)
 					}
 				}
@@ -146,24 +158,24 @@ class CalculatorController : NSObject {
 	func saveMemory() {
 		println("saveMemory")
 		let data = getMemoryContents()
-		NSUserDefaults.standardUserDefaults().setObject(data, forKey: "memory")
+		let defaults = NSUserDefaults.standardUserDefaults()
+		defaults.setObject(data, forKey: "memory")
+		defaults.synchronize()
 	}
 	
 	func restoreMemory() {
 		println("restoreMemory")
 		let data: NSData? = NSUserDefaults.standardUserDefaults().objectForKey("memory") as? NSData
-		if let aData: NSData = data {
+		if let aData = data {
 			self.setMemoryContents(aData)
 		}
 	}
 	
-	func digits14FromArray(array: [Digit], position: Int) -> Digits14 {
-		var d14: Digits14 = emptyDigit14
+	func digits14FromArray(array: [Digit], position: Int, inout to: Digits14) {
 		for idx in 0...13 {
-			d14[idx] = array[position + idx]
+			to[idx] = array[position + idx]
 		}
 		
-		return d14
 	}
 
 	func setMemoryContents(data: NSData) {
@@ -174,27 +186,32 @@ class CalculatorController : NSObject {
 		var memoryArray = [UInt8](count: count, repeatedValue: 0)
 
 		// copy bytes into array
-		data.getBytes(&memoryArray, length:count * sizeof(UInt8))
+		data.getBytes(&memoryArray, length:count)
 
-		var ptr: Int = 0
+		var ptr = 0
 		for addr in 0..<MAX_RAM_SIZE {
-			var d14: Digits14 = digits14FromArray(memoryArray, position: ptr)
-			bus!.writeRamAddress(Bits12(addr), from: d14)
+			var tmpReg = emptyDigit14
+			digits14FromArray(memoryArray, position: ptr, to: &tmpReg)
+			println(tmpReg)
+			bus!.writeRamAddress(Bits12(addr), from: tmpReg)
 			ptr += 14
 		}
 	}
 	
 	func getMemoryContents() -> NSData {
-		//TODO: Implement this method
 		var data: NSMutableData = NSMutableData()
-//		for addr in 0..<MAX_RAM_SIZE {
-//			let result = bus!.readRamAddress(Bits12(addr))
-//			if result.success {
-//				for idx in 0...13 {
-//					data.appendBytes(result.data, length: 14)
-//				}
-//			}
-//		}
+		let count = 14 * MAX_RAM_SIZE
+		var memoryArray = [UInt8](count: count, repeatedValue: 0)
+		var ptr = 0
+		for addr in 0..<MAX_RAM_SIZE {
+			var tmpReg = emptyDigit14
+			bus!.readRamAddress(Bits12(addr), into: &tmpReg)
+			for idx in 0...13 {
+				memoryArray[ptr+idx] = tmpReg[idx]
+			}
+			ptr += 14
+		}
+		data.appendBytes(memoryArray, length: count)
 		
 		return data
 	}

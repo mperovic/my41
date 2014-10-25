@@ -13,46 +13,66 @@ enum ArithOp {
 	case SUB
 }
 
-func copyDigits(src: Digits14, var sourceStartAt startS: Int, inout destination dst: Digits14, destinationStartAt startD: Int, count cnt: Int) {
+func copyDigits(
+	src: Digits14,
+	var #sourceStartAt: Int,
+	inout #destination: Digits14,
+	#destinationStartAt: Int,
+	count cnt: Int)
+{
 	for idx in 0..<cnt {
-		dst[startD+idx] = src[startS+idx]
+		destination[destinationStartAt+idx] = src[sourceStartAt+idx]
 	}
 }
 
-func fillDigits(var src: Digits14, value v: Digit, start startPos: Int, count cnt: Int) -> Digits14 {
-	for idx in startPos..<startPos+cnt  {
+func fillDigits(
+	inout src: Digits14,
+	value v: Digit,
+	#start: Int,
+	#count: Int)
+{
+	for idx in start..<start+count  {
 		src[idx] = v
 	}
-	
-	return src
 }
 
-func clearDigits(inout destination dst: [Digit]) {
+func clearDigits(inout #destination: [Digit])
+{
 	for idx in reverse(0...13) {
-		dst[idx] = Digit(0)
+		destination[idx] = Digit(0)
 	}
 }
 
-func digitsToBitsWrap(digits aDigits: Digits14, inout bits aBits: Bits8, start aStart: Digit, var count cnt: Int) {
+func digitsToBitsWrap(
+	#digits: Digits14,
+	inout #bits: Bits8,
+	#start: Digit,
+	var #count: Int)
+{
 	var result: Bits8 = 0
-	var i: Int = Int(aStart)
+	var i: Int = Int(start)
 	var j: Digit = 0
-	while cnt-- > 0 {
-		result |= Bits8(aDigits[i] << j)
+	while count-- > 0 {
+		result |= Bits8(digits[i] << j)
 		i++
 		if i > 13 {
 			i = 0
 		}
 		j += 4
 	}
-	aBits = result
+	bits = result
 }
 
-func bitsToDigitsWrap(var bits aBits: Bits8, inout digits aDigits: Digits14, start aStart: Digit, var count cnt: Int) {
-	var i: Int = Int(aStart)
-	while cnt-- > 0 {
-		aDigits[i] = Digit(aBits & 0xF)
-		aBits >>= 4
+func bitsToDigitsWrap(
+	var #bits: Bits8,
+	inout #digits: Digits14,
+	#start: Digit,
+	var #count: Int)
+{
+	var i: Int = Int(start)
+	while count-- > 0 {
+		digits[i] = Digit(bits & 0xF)
+		bits >>= 4
 		++i
 		if i > 13 {
 			i = 0
@@ -60,66 +80,96 @@ func bitsToDigitsWrap(var bits aBits: Bits8, inout digits aDigits: Digits14, sta
 	}
 }
 
-func exchangeDigits(inout X x: Digits14, inout Y y: Digits14, startPos start: Int, var count cnt: Int) {
+func exchangeDigits(
+	inout #X: Digits14,
+	inout #Y: Digits14,
+	startPos start: Int,
+	var #count: Int)
+{
 	var i = start
-	while cnt-- > 0 {
-		swap(&x[i], &y[i])
+	while count-- > 0 {
+		swap(&X[i], &Y[i])
 		++i
 	}
 }
 
-func digitsToBits(digits aDigits: [Digit], nbits aNBits: Int) -> UInt16 {
+func digitsToBits(
+	#digits: [Digit],
+	#nbits: Int) -> UInt16
+{
 	var result: UInt16 = 0
-	var ndigits = (aNBits + 3) >> 2
+	var ndigits = (nbits + 3) >> 2
 	var dp = ndigits
 	while ndigits-- > 0 {
-		result = UInt16(result << 4) | UInt16(aDigits[--dp])
+		result = UInt16(result << 4) | UInt16(digits[--dp])
 	}
-	var res = ((1 << aNBits) - 1)
+	var res = ((1 << nbits) - 1)
 	
 	return (result & UInt16(res))
 }
 
-func bitsToDigits(var bits aBits: Int, inout destination digits: Digits14, var start startPos: Int, var count cnt: Int) {
-	while cnt-- > 0 {
-		digits[startPos++] = Digit(aBits & 0xF)
-		aBits >>= 4
+func bitsToDigits(
+	var #bits: Int,
+	inout destination digits: Digits14,
+	var #start: Int,
+	var #count: Int)
+{
+	while count-- > 0 {
+		digits[start++] = Digit(bits & 0xF)
+		bits >>= 4
 	}
 }
 
-func orDigits(X x: [Digit], Y y: [Digit], start aStart: Int, count aCount: Int) -> [Digit] {
+func orDigits(
+	#X: [Digit],
+	#Y: [Digit],
+	#start: Int,
+	#count: Int) -> [Digit]
+{
 	var z: Digits14 = emptyDigit14
-	for i in aStart..<aCount {
-		z[i] = x[i] | y[i]
+	for i in start..<count {
+		z[i] = X[i] | Y[i]
 	}
 	return z
 }
 
-func andDigits(X x: [Digit], Y y: [Digit], start aStart: Int, count aCount: Int) -> [Digit] {
+func andDigits(
+	#X: [Digit],
+	#Y: [Digit],
+	#start: Int,
+	#count: Int) -> [Digit]
+{
 	var z: Digits14 = emptyDigit14
-	for i in aStart..<aCount {
-		z[i] = x[i] & y[i]
+	for i in start..<count {
+		z[i] = X[i] & Y[i]
 	}
 	return z
 }
 
-func shiftDigitsLeft(var X x: [Digit], start aStart: Int, count aCount: Int) -> [Digit] {
-	for var idx = aStart + aCount - 1; idx > aStart; idx-- {
-		x[idx] = x[idx-1]
+func shiftDigitsLeft(
+	var #X: [Digit],
+	#start: Int,
+	#count: Int) -> [Digit]
+{
+	for var idx = start + count - 1; idx > start; idx-- {
+		X[idx] = X[idx-1]
 	}
-	x[aStart] = 0
+	X[start] = 0
 	
-	return x
+	return X
 }
 
-func shiftDigitsRight(var X x: [Digit], start aStart: Int, count aCount: Int) -> [Digit] {
-//	for var idx = aStart + 1; idx < aStart + aCount; idx++ {
-	for idx in aStart+1..<aStart+aCount {
-		x[idx-1] = x[idx]
+func shiftDigitsRight(
+	var #X: [Digit],
+	#start: Int,
+	#count: Int) -> [Digit]
+{
+	for idx in start+1..<start+count {
+		X[idx-1] = X[idx]
 	}
-	x[aStart + aCount - 1] = 0
+	X[start + count - 1] = 0
 	
-	return x
+	return X
 }
 
 /*
@@ -128,10 +178,20 @@ func shiftDigitsRight(var X x: [Digit], start aStart: Int, count aCount: Int) ->
    carry and returning the final carry. Zero is an out parameter returning
    true if all digits of the result are zero.
 */
-func addOrSubtractDigits(arithOp op: ArithOp, arithMode mode: ArithMode, firstNum src1: [Digit], secondNum src2: [Digit], inout destination dst: [Digit], from start: Int, count cnt: Int, inout carry aCarry: Bit, inout zero aZero: Bit) {
+func addOrSubtractDigits(
+	arithOp op: ArithOp,
+	arithMode mode: ArithMode,
+	#firstNum: [Digit],
+	#secondNum: [Digit],
+	inout #destination: [Digit],
+	#from: Int,
+	#count: Int,
+	inout #carry: Bit,
+	inout #zero: Bit)
+{
 	var d: Digit = 0
 	var m: Digit = 0
-	var c: Bit = aCarry
+	var c: Bit = carry
 	var z: Bit = 1
 	
 	if op == .SUB {
@@ -141,11 +201,11 @@ func addOrSubtractDigits(arithOp op: ArithOp, arithMode mode: ArithMode, firstNu
 			m = 0xF
 		}
 	}
-	for idx in start..<start+cnt {
+	for idx in from..<from+count {
 		if op == .ADD {
-			d = src1[idx] + src2[idx] + Digit(c)
+			d = firstNum[idx] + secondNum[idx] + Digit(c)
 		} else {
-			d = src1[idx] + m - src2[idx] + Digit(c)
+			d = firstNum[idx] + m - secondNum[idx] + Digit(c)
 		}
 		if mode == ArithMode.DEC_MODE && d > 9 {
 			d += 6
@@ -155,9 +215,9 @@ func addOrSubtractDigits(arithOp op: ArithOp, arithMode mode: ArithMode, firstNu
 		if d != 0 {
 			z = 0
 		}
-		dst[idx] = d
+		destination[idx] = d
 	}
 	
-	aCarry = c
-	aZero = z
+	carry = c
+	zero = z
 }

@@ -107,10 +107,6 @@ class Bus {
 		romChips[Int(slot)][Int(bank)] = chip
 	}
 	
-	func a(address: Bits12) {
-		ramValid[Int(address)] = true
-	}
-	
 	func installRamAtAddress(address: Bits12) {
 		ramValid[Int(address)] = true
 	}
