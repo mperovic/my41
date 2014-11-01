@@ -18,22 +18,25 @@ enum CalculatorType: Int {
 let timeSliceInterval	= 0.01
 let MAX_RAM_SIZE		= 0x400
 
-var bus: Bus?
 var timerModule: Timer?
 
 class CalculatorController : NSObject {
 //	@IBOutlet weak var display: Display!
 //	@IBOutlet weak var keyboard: Keyboard!
 
-	var calculatorMod: MOD = MOD()
+	var calculatorMod = MOD()
 	var portMod: [MOD?] = [nil, nil, nil, nil]
 	var calculatorType: CalculatorType?
 	var executionTimer: NSTimer?
-	var cpu: CPU
+	var cpu = CPU.sharedInstance
 	var display: Display?
 	var keyboard: Keyboard?
+	var bus = Bus.sharedInstance
 	
-	class var sharedInstance :CalculatorController {
+	var memModules: byte = 0
+	var XMemModules: byte = 0
+	
+	class var sharedInstance: CalculatorController {
 		struct Singleton {
 			static let instance = CalculatorController()
 		}
@@ -42,8 +45,6 @@ class CalculatorController : NSObject {
 	}
 
 	override init() {
-		cpu = CPU.sharedInstance
-		bus = Bus()
 		timerModule = Timer()
 		calculatorMod = MOD()
 		
@@ -58,9 +59,10 @@ class CalculatorController : NSObject {
 	
 	func resetCalculator() {
 		cpu.setRunning(false)
-		bus!.removeAllRomChips()
+		bus.removeAllRomChips()
 		readCalculatorDescriptionFromDefaults()
 		installBuiltinRoms()
+		installExternalModules()
 		installBuiltinRam()
 		restoreMemory()
 		cpu.reset()
@@ -112,20 +114,25 @@ class CalculatorController : NSObject {
 			defaults.setInteger(CalculatorType.HP41CX.rawValue, forKey: HPCalculatorType)
 			filename = NSBundle.mainBundle().resourcePath! + "/" + "nut-cx.mod"
 		}
-		calculatorMod.readModFromFile(filename)
+		calculatorMod.calculatorController = self
+		
+		switch calculatorMod.readModFromFile(filename) {
+		case .Success:
+			break
+		case .Error(let error): error
+			abort()
+		}
 	}
 	
 	func installBuiltinRoms() {
 		println("installBuiltinRoms")
 		if calculatorMod.data? != nil {
 			// Install ROMs which came with the calculator module
-			println("reading module...")
-			var modFile: ModuleFile = calculatorMod.module()
-			for idx: UInt8 in 0..<modFile.header.numPages {
-				println("installing page \(idx)")
-				var page: ModuleFilePage = calculatorMod.moduleFile.pages[Int(idx)]
-				var romChip = RomChip(fromBIN: page.image)
-				bus!.installRomChip(romChip, inSlot: page.page, andBank: page.bank-1)
+			switch bus.installMod(calculatorMod) {
+			case .Success:
+				break
+			case .Error(let error): error
+				abort()
 			}
 		}
 	}
@@ -135,24 +142,65 @@ class CalculatorController : NSObject {
 		var address: Bits12
 		for idx in 0..<builtinRamTable.count {
 			var ramDesc = builtinRamTable[idx]
-			if let cType :CalculatorType = calculatorType? {
-				let condition1: Bool = ramDesc.inC && (cType == .HP41C)
-				let condition2: Bool = ramDesc.inCV && (cType == .HP41CV)
-				let condition3: Bool = ramDesc.inCX && (cType == .HP41CX)
-				let condition4: Bool = ramDesc.memModule1 && (calculatorMod.module().header.memModules >= 1)
-				let condition5: Bool = ramDesc.memModule2 && (calculatorMod.module().header.memModules >= 2)
-				let condition6: Bool = ramDesc.memModule3 && (calculatorMod.module().header.memModules >= 3)
-				let condition7: Bool = ramDesc.memModule4 && (calculatorMod.module().header.memModules >= 4)
-				let condition8: Bool = ramDesc.quad && (calculatorMod.module().header.memModules == 4)
-				let condition9: Bool = ramDesc.xMem && (calculatorMod.module().header.XMemModules == 1)
-				let conditionA: Bool = ramDesc.xFunction && (calculatorMod.module().header.XMemModules >= 2)
-				if condition1 || condition2 || condition3 || condition4 || condition5 || condition6 || condition7 || condition8 || condition9 || conditionA {
+			if let cType = calculatorType? {
+				if checkRam(ramDesc: ramDesc) {
 					for address in ramDesc.firstAddress...ramDesc.lastAddress {
-						bus!.installRamAtAddress(address)
+						bus.installRamAtAddress(address)
 					}
 				}
 			}
 		}
+	}
+	
+	func installExternalModules() {
+		println("installExternalModules")
+		for idx in 0...3 {
+			if portMod[idx]?.data != nil {
+				switch bus.installMod(portMod[idx]!) {
+				case .Success:
+					break
+				case .Error(let error): error
+					abort()
+				}
+			}
+		}
+	}
+	
+	func checkRam(#ramDesc: RamDesc) -> Bool {
+		if let cType = calculatorType? {
+			if ramDesc.inC && cType == .HP41C {
+				return true
+			}
+			if ramDesc.inCV && cType == .HP41CV {
+				return true
+			}
+			if ramDesc.inCX && cType == .HP41CX {
+				return true
+			}
+			if ramDesc.memModule1 && calculatorMod.moduleHeader.memModules >= 1 {
+				return true
+			}
+			if ramDesc.memModule2 && calculatorMod.moduleHeader.memModules >= 2 {
+				return true
+			}
+			if ramDesc.memModule3 && calculatorMod.moduleHeader.memModules >= 3 {
+				return true
+			}
+			if ramDesc.memModule4 && calculatorMod.moduleHeader.memModules >= 4 {
+				return true
+			}
+			if ramDesc.quad && calculatorMod.moduleHeader.memModules == 4 {
+				return true
+			}
+			if ramDesc.xMem && calculatorMod.moduleHeader.XMemModules == 1 {
+				return true
+			}
+			if ramDesc.xFunction && calculatorMod.moduleHeader.XMemModules >= 2 {
+				return true
+			}
+		}
+		
+		return false
 	}
 	
 	func saveMemory() {
@@ -192,8 +240,7 @@ class CalculatorController : NSObject {
 		for addr in 0..<MAX_RAM_SIZE {
 			var tmpReg = emptyDigit14
 			digits14FromArray(memoryArray, position: ptr, to: &tmpReg)
-			println(tmpReg)
-			bus!.writeRamAddress(Bits12(addr), from: tmpReg)
+			bus.writeRamAddress(Bits12(addr), from: tmpReg)
 			ptr += 14
 		}
 	}
@@ -205,7 +252,7 @@ class CalculatorController : NSObject {
 		var ptr = 0
 		for addr in 0..<MAX_RAM_SIZE {
 			var tmpReg = emptyDigit14
-			bus!.readRamAddress(Bits12(addr), into: &tmpReg)
+			bus.readRamAddress(Bits12(addr), into: &tmpReg)
 			for idx in 0...13 {
 				memoryArray[ptr+idx] = tmpReg[idx]
 			}
@@ -218,7 +265,13 @@ class CalculatorController : NSObject {
 	
 	func startExecutionTimer() {
 		cpu.setPowerMode(.PowerOn)
-		executionTimer = NSTimer.scheduledTimerWithTimeInterval(timeSliceInterval, target: self, selector: Selector("timeSlice:"), userInfo: nil, repeats: true)
+		executionTimer = NSTimer.scheduledTimerWithTimeInterval(
+			timeSliceInterval,
+			target: self,
+			selector: Selector("timeSlice:"),
+			userInfo: nil,
+			repeats: true
+		)
 	}
 	
 	func timeSlice(timer: NSTimer) {

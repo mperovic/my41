@@ -29,7 +29,7 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 	var modsView: SelectedPreferencesView?
 	var calculatorType: CalculatorType?
 	var modFiles: Array<AnyObject>?
-	var modFileHeaders: [String: ModuleFileHeader]?
+	var modFileHeaders: [String: ModuleHeader]?
 	
 	@IBOutlet weak var tableView: NSTableView!
 	@IBOutlet weak var menuView: NSView!
@@ -113,6 +113,7 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 		modFiles = modFilesInBundle()
 		if let mFiles = modFiles {
 			if mFiles.count > 0 {
+				tableView.reloadData()
 				tableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
 				selectedRow(0)
 			}
@@ -136,10 +137,10 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 	
 	func displayHeader() {
 		if let modDetails = modDetailsView.modDetails {
-			modTitle.stringValue = convertCCharToString(modDetails.title)
-			modAuthor.stringValue = convertCCharToString(modDetails.author)
-			modVersion.stringValue = convertCCharToString(modDetails.version)
-			modCopyright.stringValue = convertCCharToString(modDetails.copyright)
+			modTitle.stringValue = modDetails.title
+			modAuthor.stringValue = modDetails.author
+			modVersion.stringValue = modDetails.version
+			modCopyright.stringValue = modDetails.copyright
 			modCategory.stringValue = modDetailsView.category!
 			modHardware.stringValue = modDetailsView.hardware!
 		}
@@ -152,11 +153,10 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 		} else {
 			let mod = MOD()
 			mod.readModFromFile(filePath)
-			let modFile: ModuleFile = mod.module()
-			modDetailsView.modDetails = mod.moduleFile.header
+			modDetailsView.modDetails = mod.moduleHeader
 			modDetailsView.category = mod.categoryDescription()
 			modDetailsView.hardware = mod.hardwareDescription()
-			modFileHeaders?[filePath.lastPathComponent] = mod.moduleFile.header
+			modFileHeaders?[filePath.lastPathComponent] = mod.moduleHeader
 		}
 		displayHeader()
 	}
@@ -315,7 +315,7 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate, NSTableVi
 		if rowIndexes.count > 1 {
 			return false
 		} else {
-			let title = convertCCharToString(modDetailsView.modDetails!.title)
+			let title = modDetailsView.modDetails?.title
 			let row = rowIndexes.firstIndex
 			let filePath = modFiles![row] as String
 			pboard.setString(filePath, forType: NSPasteboardTypeString)
@@ -388,7 +388,7 @@ class SelectedPreferencesView: NSView {
 }
 
 class ModDetailsView: NSView {
-	var modDetails: ModuleFileHeader?
+	var modDetails: ModuleHeader?
 	var category: String?
 	var hardware: String?
 	
@@ -405,7 +405,7 @@ class ModDetailsView: NSView {
 }
 
 class ExpansionView: NSView, NSDraggingDestination {
-	var modDetails: ModuleFileHeader?
+	var modDetails: ModuleHeader?
 	var category: String?
 	var hardware: String?
 	var filePath: String?

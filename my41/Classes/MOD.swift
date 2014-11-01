@@ -12,47 +12,53 @@ import Foundation
 let MOD_FORMAT = "MOD1"
 
 /* Module type codes */
-let CATEGORY_UNDEF: byte			= 0		/* not categorized */
-let CATEGORY_OS: byte				= 1		/* base Operating System for C,CV,CX */
-let CATEGORY_APP_PAC: byte			= 2		/* HP Application PACs */
-let CATEGORY_HPIL_PERPH: byte		= 3		/* any HP-IL related modules and devices */
-let CATEGORY_STD_PERPH: byte		= 4		/* standard Peripherals: Wand, Printer, Card Reader, XFuns/Mem, Service, Time, IR Printer */
-let CATEGORY_CUSTOM_PERPH: byte		= 5		/* custom Peripherals: AECROM, CCD, HEPAX, PPC, ZENROM, etc */
-let CATEGORY_BETA: byte				= 6		/* BETA releases not fully debugged and finished */
-let CATEGORY_EXPERIMENTAL: byte		= 7		/* test programs not meant for normal usage */
-let CATEGORY_MAX: byte				= 7		/* maximum CATEGORY_ define value */
+enum Category: byte {
+	case Undef					= 0		/* not categorized */
+	case OS						= 1		/* base Operating System for C,CV,CX */
+	case HPApplicationPAC		= 2		/* HP Application PACs */
+	case HPILPeripheral			= 3		/* any HP-IL related modules and devices */
+	case StandardPeripheral		= 4		/* standard Peripherals: Wand, Printer, Card Reader, XFuns/Mem, Service, Time, IR Printer */
+	case CustomPeripheral		= 5		/* custom Peripherals: AECROM, CCD, HEPAX, PPC, ZENROM, etc */
+	case Beta					= 6		/* BETA releases not fully debugged and finished */
+	case Experimental			= 7		/* test programs not meant for normal usage */
+}
+let CATEGORY_MAX: byte			= 7		/* maximum CATEGORY_ define value */
 
 /* Hardware codes */
-let HARDWARE_NONE: byte			= 0		/* no additional hardware specified */
-let HARDWARE_PRINTER: byte		= 1		/* 82143A Printer */
-let HARDWARE_CARDREADER: byte	= 2		/* 82104A Card Reader */
-let HARDWARE_TIMER: byte		= 3		/* 82182A Time Module or HP-41CX built in timer */
-let HARDWARE_WAND: byte			= 4		/* 82153A Barcode Wand */
-let HARDWARE_HPIL: byte			= 5		/* 82160A HP-IL Module */
-let HARDWARE_INFRARED: byte		= 6		/* 82242A Infrared Printer Module */
-let HARDWARE_HEPAX: byte		= 7		/* HEPAX Module - has special hardware features (write protect, relocation) */
-let HARDWARE_WWRAMBOX: byte		= 8		/* W&W RAMBOX - has special hardware features (RAM block swap instructions) */
-let HARDWARE_MLDL2000: byte		= 9		/* MLDL2000 */
-let HARDWARE_CLONIX: byte		= 10	/* CLONIX-41 Module */
+enum Hardware: byte {
+	case None					= 0		/* no additional hardware specified */
+	case Printer				= 1		/* 82143A Printer */
+	case CardReader				= 2		/* 82104A Card Reader */
+	case Timer					= 3		/* 82182A Time Module or HP-41CX built in timer */
+	case WAND					= 4		/* 82153A Barcode Wand */
+	case HPIL					= 5		/* 82160A HP-IL Module */
+	case Infrared				= 6		/* 82242A Infrared Printer Module */
+	case HEPAX					= 7		/* HEPAX Module - has special hardware features (write protect, relocation) */
+	case WWRAMBox				= 8		/* W&W RAMBOX - has special hardware features (RAM block swap instructions) */
+	case MLDL2000				= 9		/* MLDL2000 */
+	case CLONIX					= 10	/* CLONIX-41 Module */
+}
 let HARDWARE_MAX: byte			= 10	/* maximum HARDWARE_ define value */
 
 /* relative position codes- do not mix these in a group except ODD/EVEN and UPPER/LOWER */
 /* ODD/EVEN, UPPER/LOWER can only place ROMS in 16K blocks */
-let POSITION_MIN			= 0x1f	/* minimum POSITION_ define value */
-let POSITION_ANY			= 0x1f	/* position in any port page (8-F) */
-let POSITION_LOWER			= 0x2f	/* position in lower port page relative to any upper image(s) (8-F) */
-let POSITION_UPPER			= 0x3f	/* position in upper port page */
-let POSITION_EVEN			= 0x4f	/* position in any even port page (8,A,C,E) */
-let POSITION_ODD			= 0x5f	/* position in any odd port page (9,B,D,F) */
-let POSITION_ORDERED		= 0x6f	/* position sequentially in MOD file order, one image per page regardless of bank */
-let POSITION_MAX			= 0x6f	/* maximum POSITION_ define value */
+enum Position: byte {
+	case POSITION_ANY			= 0x1f	/* position in any port page (8-F) */
+	case POSITION_LOWER			= 0x2f	/* position in lower port page relative to any upper image(s) (8-F) */
+	case POSITION_UPPER			= 0x3f	/* position in upper port page */
+	case POSITION_EVEN			= 0x4f	/* position in any even port page (8,A,C,E) */
+	case POSITION_ODD			= 0x5f	/* position in any odd port page (9,B,D,F) */
+	case POSITION_ORDERED		= 0x6f	/* position sequentially in MOD file order, one image per page regardless of bank */
+}
+let POSITION_MIN: byte			= 0x1f	/* minimum POSITION_ define value */
+let POSITION_MAX: byte			= 0x6f	/* maximum POSITION_ define value */
 
-let PAGE_SIZE				= 5188	// Size of ModulePageFile Struct
-let HEADER_SIZE				= 729	// Size of MOduleFileHeader Struct
+let PAGE_SIZE				= 5188		// Size of ModulePageFile Struct
+let HEADER_SIZE				= 729		// Size of ModuleFileHeader Struct
 
 struct ModuleFilePage {
 	var name: [CChar]			/* normally the name of the original .ROM file, if any */
-	var ID: [CChar]			/* ROM ID code, normally two letters and a number are ID and last letter is revision - if all zeros, will show up as @@@@ */
+	var ID: [CChar]				/* ROM ID code, normally two letters and a number are ID and last letter is revision - if all zeros, will show up as @@@@ */
 	var page: byte				/* the page that this image must be in (0-F, although 8-F is not normally used) or defines each page's position relative to other images in a page group, see codes below */
 	var pageGroup: byte			/* 0=not grouped, otherwise images with matching PageGroup values (1..8) are grouped according to POSITION code */
 	var bank: byte				/* the bank that this image must be in (1-4) */
@@ -87,8 +93,8 @@ struct ModuleFileHeader {
 	var copyright: [CChar]			/* copyright notice, if any */
 	var license: [CChar]			/* license terms, if any */
 	var comments: [CChar]			/* free form comments, if any */
-	var category: byte				/* module category, see codes below */
-	var hardware: byte				/* defines special hardware that module contains */
+	var category: Category			/* module category, see codes below */
+	var hardware: Hardware			/* defines special hardware that module contains */
 	var memModules: byte			/* defines number of main memory modules (0-4) */
 	var XMemModules: byte			/* defines number of extended memory modules (0=none, 1=Xfuns/XMem, 2,3=one or two additional XMem modules) */
 	var original: byte				/* allows validation of original contents: 1=images and data are original, 0=this file has been updated by a user application (data in RAM written back to MOD file, etc) */
@@ -105,8 +111,8 @@ struct ModuleFileHeader {
 		copyright = [CChar](count: 100, repeatedValue: 0)
 		license = [CChar](count: 200, repeatedValue: 0)
 		comments = [CChar](count: 255, repeatedValue: 0)
-		category = 0
-		hardware = 0
+		category = .Undef
+		hardware = .None
 		memModules = 0
 		XMemModules = 0
 		original = 0
@@ -116,22 +122,100 @@ struct ModuleFileHeader {
 	}
 }
 
-
-struct ModuleFile {
-	var header: ModuleFileHeader			// A file consists of a header
-	var pages: [ModuleFilePage]				// Followed by a bunch of pages
+// Module Memory Structures - see MOD file structures for field descriptions
+class ModuleHeader {
+	var fullFileName: String
+	var fileFormat: String
+	var title: String
+	var version: String
+	var partNumber: String
+	var author: String
+	var copyright: String
+	var license: String
+	var comments: String
+	var category: Category
+	var hardware: Hardware
+	var memModules: byte
+	var XMemModules: byte
+	var original: byte
+	var appAutoUpdate: byte
+	var numPages: byte
 	
-	init () {
-		header = ModuleFileHeader()
-		pages = [ModuleFilePage]()
-	}	
+	init() {
+		fullFileName = ""
+		fileFormat = ""
+		title = ""
+		version = ""
+		partNumber = ""
+		author = ""
+		copyright = ""
+		license = ""
+		comments = ""
+		category = .Undef
+		hardware = .None
+		memModules = 0
+		XMemModules = 0
+		original = 0
+		appAutoUpdate = 0
+		numPages = 0
+	}
 }
 
+class Box<T> {
+	var unbox: T
+	init (_ value: T) {
+		unbox = value
+	}
+}
+
+enum Result<T> {
+	case Success(Box<T>)
+	case Error(String)
+}
+
+class ModulePage {
+	var moduleHeader: ModuleHeader?		// pointer to module that this page is a part of, or NULL if none
+	var altPage: ModulePage?			// pointer to alternate page if any (HEPAX, W&W RAMBOX2 use)
+	var name: String
+	var ID: String
+	var page: byte						// file data - unchanged
+	var actualPage: byte				// running data- the actual location this page is loaded in
+	var pageGroup: byte					// file data - unchanged
+	var bank: byte
+	var bankGroup: byte					// file data - unchanged
+	var actualBankGroup: byte			// running data - BankGroup is unique to file only
+	var RAM: byte
+	var writeProtect: byte
+	var FAT: byte						// could be incorrectly set to false if a .ROM file loaded
+	var HEPAX: byte						// if a HEPAX page
+	var WWRAMBOX: byte					// if a W&W RAMBOX page
+	var image: [byte]
+	
+	init() {
+		name = ""
+		ID = ""
+		page = 0
+		actualPage = 0
+		pageGroup = 0
+		bank = 0
+		bankGroup = 0
+		actualBankGroup = 0
+		RAM = 0
+		writeProtect = 0
+		FAT = 0
+		HEPAX = 0
+		WWRAMBOX = 0
+		image = [byte](count: 4096, repeatedValue: 0)
+	}
+}
 
 class MOD {
 	var data: NSData?
 	var shortName: String
-	var moduleFile: ModuleFile = ModuleFile()
+	var fileSize = 0
+	var moduleHeader = ModuleHeader()
+	var modulePages = [ModulePage]()
+	var calculatorController: CalculatorController?
 
 	init () {
 		shortName = ""
@@ -140,7 +224,7 @@ class MOD {
 	
 	func is41C() -> Bool {
 		let sName: NSString = shortName
-		if module().header.category == CATEGORY_OS && sName.rangeOfString("nut-c.mod").location != NSNotFound {
+		if moduleHeader.category == .OS && sName.rangeOfString("nut-c.mod").location != NSNotFound {
 			return true
 		}
 		
@@ -149,7 +233,7 @@ class MOD {
 	
 	func is41CV() -> Bool {
 		let sName: NSString = shortName
-		if module().header.category == CATEGORY_OS && sName.rangeOfString("nut-cv.mod").location != NSNotFound {
+		if moduleHeader.category == .OS && sName.rangeOfString("nut-cv.mod").location != NSNotFound {
 			return true
 		}
 		
@@ -158,7 +242,7 @@ class MOD {
 	
 	func is41CX() -> Bool {
 		let sName: NSString = shortName
-		if module().header.category == CATEGORY_OS && sName.rangeOfString("nut-cx.mod").location != NSNotFound {
+		if moduleHeader.category == .OS && sName.rangeOfString("nut-cx.mod").location != NSNotFound {
 			return true
 		}
 		
@@ -166,39 +250,121 @@ class MOD {
 	}
 
 	
-	func module() -> ModuleFile {
-		populateModuleHeader(&moduleFile)
-		for var idx: UInt8 = 0; idx < moduleFile.header.numPages; idx++ {
-			populateModulePage(&moduleFile, pageNo: Int(idx))
+	// Check Page
+	func checkPage(page: ModulePage) -> Result<Bool> {
+		if page.page > 0x0f && page.page < POSITION_MIN {
+			return .Error("page is out of range values")
+		}
+		if page.page > POSITION_MAX && page.pageGroup > 8 {
+			return .Error("page is out of range values")
 		}
 		
-//		description()
+		// out of range values
+		if page.bank == 0 || page.bank > 4 {
+			return .Error("bank is out of range values")
+		}
+		if page.bankGroup > 8 {
+			return .Error("bankGroup is out of range values")
+		}
+		if page.RAM > 1 {
+			return .Error("ram is out of range values")
+		}
+		if page.writeProtect > 1 {
+			return .Error("writeProtect is out of range values")
+		}
+		if page.FAT > 1 {
+			return .Error("fat is out of range values")
+		}
 		
-		return moduleFile
+		// group pages cannot use non-grouped position codes
+		if page.pageGroup == 1 && page.page <= Position.POSITION_ANY.rawValue {
+			return .Error("group pages cannot use non-grouped position codes")
+		}
+		
+		// non-grouped pages cannot use grouped position codes
+		if page.pageGroup == 0 && page.page > Position.POSITION_ANY.rawValue {
+			return .Error("non-grouped pages cannot use grouped position codes")
+		}
+	
+		return .Success(Box(true))
 	}
 	
-	func populateModuleHeader(inout moduleFile: ModuleFile) {
-		data!.getBytes(&moduleFile.header.fileFormat, range: NSMakeRange(0, 5))
-		data!.getBytes(&moduleFile.header.title, range: NSMakeRange(5, 50))
-		data!.getBytes(&moduleFile.header.version, range: NSMakeRange(55, 10))
-		data!.getBytes(&moduleFile.header.partNumber, range: NSMakeRange(65, 20))
-		data!.getBytes(&moduleFile.header.author, range: NSMakeRange(85, 50))
-		data!.getBytes(&moduleFile.header.copyright, range: NSMakeRange(135, 100))
-		data!.getBytes(&moduleFile.header.license, range: NSMakeRange(235, 200))
-		data!.getBytes(&moduleFile.header.comments, range: NSMakeRange(435, 255))
-		data!.getBytes(&moduleFile.header.category, range: NSMakeRange(690, 1))
-		data!.getBytes(&moduleFile.header.hardware, range: NSMakeRange(691, 1))
-		data!.getBytes(&moduleFile.header.memModules, range: NSMakeRange(692, 1))
-		data!.getBytes(&moduleFile.header.XMemModules, range: NSMakeRange(693, 1))
-		data!.getBytes(&moduleFile.header.original, range: NSMakeRange(694, 1))
-		data!.getBytes(&moduleFile.header.appAutoUpdate, range: NSMakeRange(695, 1))
-		data!.getBytes(&moduleFile.header.numPages, range: NSMakeRange(696, 1))
-		data!.getBytes(&moduleFile.header.headerCustom, range: NSMakeRange(697, 32))
+	func populateModuleHeader() {
+		var header = ModuleFileHeader()
+		data!.getBytes(&header.fileFormat, range: NSMakeRange(0, 5))
+		data!.getBytes(&header.title, range: NSMakeRange(5, 50))
+		data!.getBytes(&header.version, range: NSMakeRange(55, 10))
+		data!.getBytes(&header.partNumber, range: NSMakeRange(65, 20))
+		data!.getBytes(&header.author, range: NSMakeRange(85, 50))
+		data!.getBytes(&header.copyright, range: NSMakeRange(135, 100))
+		data!.getBytes(&header.license, range: NSMakeRange(235, 200))
+		data!.getBytes(&header.comments, range: NSMakeRange(435, 255))
+		data!.getBytes(&header.category, range: NSMakeRange(690, 1))
+		data!.getBytes(&header.hardware, range: NSMakeRange(691, 1))
+		data!.getBytes(&header.memModules, range: NSMakeRange(692, 1))
+		data!.getBytes(&header.XMemModules, range: NSMakeRange(693, 1))
+		data!.getBytes(&header.original, range: NSMakeRange(694, 1))
+		data!.getBytes(&header.appAutoUpdate, range: NSMakeRange(695, 1))
+		data!.getBytes(&header.numPages, range: NSMakeRange(696, 1))
+		data!.getBytes(&header.headerCustom, range: NSMakeRange(697, 32))
+		
+		moduleHeader.fileFormat = convertCCharToString(header.fileFormat)
+		moduleHeader.title = convertCCharToString(header.title)
+		moduleHeader.version = convertCCharToString(header.version)
+		moduleHeader.partNumber = convertCCharToString(header.partNumber)
+		moduleHeader.author = convertCCharToString(header.author)
+		moduleHeader.comments = convertCCharToString(header.comments)
+		moduleHeader.category = header.category
+		moduleHeader.hardware = header.hardware
+		moduleHeader.memModules = header.memModules
+		moduleHeader.XMemModules = header.XMemModules
+		moduleHeader.original = header.original
+		moduleHeader.appAutoUpdate = header.appAutoUpdate
+		moduleHeader.numPages = header.numPages
 	}
 	
-	func populateModulePage(inout moduleFile: ModuleFile, pageNo: Int) {
+	func validateModuleHeader() -> Result<Bool> {
+		// check size
+		if fileSize != HEADER_SIZE + Int(moduleHeader.numPages) * PAGE_SIZE {
+			return .Error("wrong file size")
+		}
+		
+		if !moduleHeader.fileFormat.hasPrefix(MOD_FORMAT) {
+			return .Error("file does not have MOD extension")
+		}
+		
+		if let calcController = calculatorController {
+			if calcController.memModules + moduleHeader.memModules > 4 {
+				return .Error("too many mem modules")
+			}
+			
+			if calcController.XMemModules + moduleHeader.XMemModules > 3 {
+				return .Error("too many xmem modules")
+			}
+		}
+		
+		if moduleHeader.original > 1 {
+			return .Error("wrong original value")
+		}
+		
+		if moduleHeader.appAutoUpdate > 1 {
+			return .Error("wrong appAutoUpdate value")
+		}
+		
+		if moduleHeader.category.rawValue > CATEGORY_MAX {
+			return .Error("wrong category value")
+		}
+		
+		if moduleHeader.hardware.rawValue > HARDWARE_MAX {
+			return .Error("wrong hardware value")
+		}
+		
+		return .Success(Box(true))
+	}
+	
+	func populateModulePage(pageNo: Int) {
 		let startPosition: Int = HEADER_SIZE + (PAGE_SIZE * pageNo)
-		var page: ModuleFilePage = ModuleFilePage()
+		var page = ModuleFilePage()
 		
 		data!.getBytes(&page.name, range: NSMakeRange(startPosition, 20))
 		data!.getBytes(&page.ID, range: NSMakeRange(startPosition+20, 9))
@@ -212,18 +378,60 @@ class MOD {
 		data!.getBytes(&page.image, range: NSMakeRange(startPosition+36, 5120))
 		data!.getBytes(&page.pageCustom, range: NSMakeRange(startPosition+5156, 32))
 
-		moduleFile.pages.append(page)
+		var modulePage = ModulePage()
+		modulePage.moduleHeader = self.moduleHeader
+		modulePage.name = convertCCharToString(page.name)
+		modulePage.ID = convertCCharToString(page.ID)
+		modulePage.page = page.page
+		modulePage.pageGroup = page.pageGroup
+		modulePage.bank = page.bank
+		modulePage.bankGroup = page.bankGroup
+		modulePage.RAM = page.RAM
+		modulePage.writeProtect = page.writeProtect
+		modulePage.FAT = page.FAT
+		modulePage.image = page.image
+
+		modulePages.append(modulePage)
 	}
 	
-	func readModFromFile(filename: String) {
+	func readModFromFile(filename: String) -> Result<Bool> {
 		// Read the file
+		var error: NSError?
 		let fileManager = NSFileManager.defaultManager()
 		if fileManager.fileExistsAtPath(filename) {
+			let fileAttributes: NSDictionary = fileManager.attributesOfItemAtPath(filename, error: &error)!
+			if error != nil {
+				println(error!)
+				return .Error("problem with loading file")
+			}
+			
+			fileSize = fileAttributes[NSFileSize]! as Int
 			data = NSData(contentsOfFile: filename, options: .DataReadingMappedIfSafe, error: nil)
 			shortName = filename.lastPathComponent.lowercaseString
+			
+			moduleHeader.fullFileName = filename
+			
+			populateModuleHeader()
+			switch validateModuleHeader() {
+			case .Success:
+				break
+			case .Error(let error): error
+				return .Error(error)
+			}
+			
+			if let calcController = calculatorController {
+				calcController.memModules += moduleHeader.memModules
+				calcController.XMemModules += moduleHeader.memModules
+			}
+
+			for var idx: UInt8 = 0; idx < moduleHeader.numPages; idx++ {
+				populateModulePage(Int(idx))
+			}
 		} else {
 			data = nil
 		}
+		
+		return .Success(Box(true))
 	}
 	
 	func categoryDescription() -> String? {
@@ -231,22 +439,22 @@ class MOD {
 			return nil
 		}
 		
-		switch module().header.category {
-		case CATEGORY_UNDEF:
+		switch moduleHeader.category {
+		case .Undef:
 			return "Undefined"
-		case CATEGORY_OS:
+		case .OS:
 			return "Operating system"
-		case CATEGORY_APP_PAC:
+		case .HPApplicationPAC:
 			return "HP Application PACs"
-		case CATEGORY_HPIL_PERPH:
+		case .HPILPeripheral:
 			return "HP-IL related modules and devices"
-		case CATEGORY_STD_PERPH:
+		case .StandardPeripheral:
 			return "Standard Peripherals"
-		case CATEGORY_CUSTOM_PERPH:
+		case .CustomPeripheral:
 			return "Custom Peripherals"
-		case CATEGORY_BETA:
+		case .Beta:
 			return "BETA releases"
-		case CATEGORY_EXPERIMENTAL:
+		case .Experimental:
 			return "Test programs"
 		default:
 			return nil
@@ -258,32 +466,32 @@ class MOD {
 			return nil
 		}
 		
-		switch module().header.hardware {
-		case HARDWARE_NONE:
+		switch moduleHeader.hardware {
+		case .None:
 			return "no additional hardware specified"
-		case HARDWARE_PRINTER:
+		case .Printer:
 			return "82143A Printer"
-		case HARDWARE_CARDREADER:
+		case .CardReader:
 			return "82104A Card Reader"
-		case HARDWARE_TIMER:
+		case .Timer:
 			if is41CX() {
 				return "HP-41CX built in timer"
 			} else {
 				return "82182A Time Module"
 			}
-		case HARDWARE_WAND:
+		case .WAND:
 			return "82153A Barcode Wand"
-		case HARDWARE_HPIL:
+		case .HPIL:
 			return "82160A HP-IL Module"
-		case HARDWARE_INFRARED:
+		case .Infrared:
 			return "82242A Infrared Printer Module"
-		case HARDWARE_HEPAX:
+		case .HEPAX:
 			return "HEPAX Module"
-		case HARDWARE_WWRAMBOX:
+		case .WWRAMBox:
 			return "W&W RAMBOX"
-		case HARDWARE_MLDL2000:
+		case .MLDL2000:
 			return "MLDL2000"
-		case HARDWARE_CLONIX:
+		case .CLONIX:
 			return "CLONIX-41 Module"
 		default:
 			return nil
@@ -293,37 +501,42 @@ class MOD {
 	func description() {
 		headerDescription()
 		var idx: UInt8
-		for idx = 0; idx < moduleFile.header.numPages; idx++ {
+		for idx = 0; idx < moduleHeader.numPages; idx++ {
 			pageDescription(idx)
 		}
 	}
 	
 	func headerDescription() {
 		println(">>>>>     HEADER     <<<<<")
-		println("fileFormat: \(convertCCharToString(moduleFile.header.fileFormat))")
-		println("title: \(convertCCharToString(moduleFile.header.title))")
-		println("version: \(convertCCharToString(moduleFile.header.version))")
-		println("partNumber: \(convertCCharToString(moduleFile.header.partNumber))")
-		println("copyright: \(convertCCharToString(moduleFile.header.copyright))")
-		println("author: \(convertCCharToString(moduleFile.header.author))")
-		println("license: \(convertCCharToString(moduleFile.header.license))")
-		println("comments: \(convertCCharToString(moduleFile.header.comments))")
-		println("category: \(moduleFile.header.category)")
-		println("hardware: \(moduleFile.header.hardware)")
-		println("memModules: \(moduleFile.header.memModules)")
-		println("XMemModules: \(moduleFile.header.XMemModules)")
-		println("original: \(moduleFile.header.original)")
-		println("appAutoUpdate: \(moduleFile.header.appAutoUpdate)")
-		println("numPages: \(moduleFile.header.numPages)")
-		println("headerCustom: \(moduleFile.header.headerCustom)")
+		println("fileFormat: \(moduleHeader.fileFormat)")
+		println("title: \(moduleHeader.title)")
+		println("version: \(moduleHeader.version)")
+		println("partNumber: \(moduleHeader.partNumber)")
+		println("copyright: \(moduleHeader.copyright)")
+		println("author: \(moduleHeader.author)")
+		println("license: \(moduleHeader.license)")
+		println("comments: \(moduleHeader.comments)")
+		println("category: \(moduleHeader.category)")
+		println("hardware: \(moduleHeader.hardware)")
+		println("memModules: \(moduleHeader.memModules)")
+		println("XMemModules: \(moduleHeader.XMemModules)")
+		println("original: \(moduleHeader.original)")
+		println("appAutoUpdate: \(moduleHeader.appAutoUpdate)")
+		println("numPages: \(moduleHeader.numPages)")
 		println(">>>>>     END HEADER     <<<<<")
 	}
 	
 	func pageDescription(pageNo: UInt8) {
-		let page = moduleFile.pages[Int(pageNo)]
+		let page = modulePages[Int(pageNo)]
 		println(">>>>>     PAGE: \(pageNo)     <<<<<")
-		println("name: \(convertCCharToString(page.name))")
-		println("ID: \(convertCCharToString(page.ID))")
+		println("name: \(page.name)")
+		println("ID: \(page.ID)")
+		println("page: \(page.page)")
+		println("pageGroup: \(page.pageGroup)")
+		println("bank: \(page.bank)")
+		println("bankGroup: \(page.bankGroup)")
+		println("RAM: \(page.RAM)")
+		println("writeProtect: \(page.writeProtect)")
 		println(">>>>>     END PAGE     <<<<<")
 	}
 }

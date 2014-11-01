@@ -161,7 +161,7 @@ class Display : NSView, Peripheral {
 		annunciatorPositions = calculateAnnunciatorPositions(annunciatorFont!, inRect: self.bounds)
 		on = true
 		updateCountdown = 2
-		bus!.installPeripheral(self, inSlot: 0xFD)
+		Bus.sharedInstance.installPeripheral(self, inSlot: 0xFD)
 		
 		for idx in 0..<numDisplayCells {
 			registers.A[idx] = 0xA
@@ -340,9 +340,9 @@ class Display : NSView, Peripheral {
 	
 	//MARK: - Peripheral Protocol Method
 	
-	func pluggedIntoBus(aBus: Bus) {
-		bus = aBus
-	}
+//	func pluggedIntoBus(aBus: Bus) {
+//		bus = aBus
+//	}
 	
 	func readFromRegister(register: Bits4, inout into data: Digits14) {
 		// Implement READ f or READ DATA instruction with display as selected peripheral.
@@ -381,7 +381,7 @@ class Display : NSView, Peripheral {
 		case 0xF:	// FLSABC
 			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
 		default:
-			bus!.abortInstruction("Unimplemented display operation")
+			Bus.sharedInstance.abortInstruction("Unimplemented display operation")
 		}
 		scheduleUpdate()
 	}
@@ -422,7 +422,7 @@ class Display : NSView, Peripheral {
 		case 0xF:	// SLSABC
 			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
 		default:
-			bus!.abortInstruction("Unimplemented display operation")
+			Bus.sharedInstance.abortInstruction("Unimplemented display operation")
 		}
 		scheduleUpdate()
 	}

@@ -118,6 +118,16 @@ let fTable: [Int] = [
 var zeroes: Digits14 = emptyDigit14
 
 class CPU {
+	// Processor performance characteristics
+	// ProcCycles / ProcInterval=5.8 for a real machine: 578 cycles / 100 ms per interval
+	// 5780 inst/sec = 1E6 / 173 ms for a halfnut HP-41CX instruction (older models run at 158 ms)
+	// time in milliseconds between processor runs:
+	let DEFAULT_PROC_INTERVAL	=  50
+	let MAX_PROC_INTERVAL		= 100
+	let MIN_PROC_INTERVAL		=  10
+	// number of processor cycles to run each time:
+	let DEFAULT_PROC_CYCLES		= 578
+
 	var runFlag = false
 	var simulationTime: NSTimeInterval?
 	var reg: CPURegisters = CPURegisters()
@@ -294,20 +304,20 @@ class CPU {
 		if DEBUG != 0 {
 			println("bus.readRomLocation \(reg.PC)")
 		}
-		let romLocation = bus!.readRomLocation(Int(reg.PC++))
+		let romLocation = Bus.sharedInstance.readRomLocation(Int(reg.PC++))
 		
 		return (romLocation.success, romLocation.data)
 	}
 	
 	func enableBank(bankSet: Bits4) {
-		let currentBank = bus!.activeRomBankAtAddr(reg.PC)
+		let currentBank = Bus.sharedInstance.activeRomBankAtAddr(reg.PC)
 		for slot: Bits4 in 0..<0x10 {
-			let currentRom = bus!.romChipInSlot(slot)
-			let newRom = bus!.romChipInSlot(slot, bank: bankSet)
-			let slotBank = bus!.activeRomBankInSlot(slot)
+			let currentRom = Bus.sharedInstance.romChipInSlot(slot)
+			let newRom = Bus.sharedInstance.romChipInSlot(slot, bank: bankSet)
+			let slotBank = Bus.sharedInstance.activeRomBankInSlot(slot)
 			
 			if (currentRom == nil) && (newRom == nil) && (slotBank == currentBank) {
-				bus!.setActiveRomBankInSlot(slot, bank: bankSet)
+				Bus.sharedInstance.setActiveRomBankInSlot(slot, bank: bankSet)
 			}
 		}
 	}
@@ -501,7 +511,7 @@ class CPU {
 							-----------------------------------------------------------------------
 			*/
 			let slot = reg.C[6]
-			if let rom = bus!.romChipInSlot(Bits4(slot)) {
+			if let rom = Bus.sharedInstance.romChipInSlot(Bits4(slot)) {
 				if rom.writable == false {
 					break
 				}
@@ -1798,7 +1808,7 @@ class CPU {
 		switch param {
 		case 0xE, 0x9:
 			// Printer ROM is loaded?
-			if let printerRom = bus!.romChipInSlot(6) {
+			if let printerRom = Bus.sharedInstance.romChipInSlot(6) {
 				reg.peripheral = 1
 			}
 		default:
@@ -1836,7 +1846,7 @@ class CPU {
 		if reg.peripheral == 0 {
 			// RAM is currently selected peripheral
 			reg.ramAddress = (reg.ramAddress & 0x0FF0) | Bits12(param)
-			bus!.writeRamAddress(reg.ramAddress, from: reg.C)
+			Bus.sharedInstance.writeRamAddress(reg.ramAddress, from: reg.C)
 		} else {
 			switch (reg.peripheral) {
 			case 0x10:
@@ -1857,7 +1867,7 @@ class CPU {
 			default:
 				break;
 			}
-			bus!.writeToRegister(Bits4(param), ofPeripheral: reg.peripheral, from: &reg.C)
+			Bus.sharedInstance.writeToRegister(Bits4(param), ofPeripheral: reg.peripheral, from: &reg.C)
 		}
 	}
 	
@@ -2193,9 +2203,9 @@ class CPU {
 			RAM chip select.
 			*/
 			if reg.peripheral == 0 || reg.peripheral == 0xFB {
-				bus!.writeRamAddress(reg.ramAddress, from: reg.C)
+				Bus.sharedInstance.writeRamAddress(reg.ramAddress, from: reg.C)
 			} else {
-				bus!.writeDataToPeripheral(slot: reg.peripheral, from: reg.C)
+				Bus.sharedInstance.writeDataToPeripheral(slot: reg.peripheral, from: reg.C)
 			}
 			
 		case 0xC:
@@ -2228,7 +2238,7 @@ class CPU {
 				digits.append(reg.C[idx])
 			}
 			addr = digitsToBits(digits: digits, nbits: 16)
-			let romLocation = bus!.readRomLocation(Int(addr))
+			let romLocation = Bus.sharedInstance.readRomLocation(Int(addr))
 			bitsToDigits(bits: romLocation.data, destination: &reg.C, start: 0, count: 3)
 			
 		case 0xD:
@@ -2355,10 +2365,10 @@ class CPU {
 			data_bus.
 			*/
 			if (reg.peripheral == 0 || (reg.ramAddress <= 0x000F) || (reg.ramAddress >= 0x0020)) {
-				bus!.readRamAddress(reg.ramAddress, into: &reg.C)
+				Bus.sharedInstance.readRamAddress(reg.ramAddress, into: &reg.C)
 			} else {
 				//printf("Peripheral Read: %02X %x \n", reg.peripheral, param);
-				bus!.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
+				Bus.sharedInstance.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
 			}
 		default:
 			/*
@@ -2393,10 +2403,10 @@ class CPU {
 			*/
 			if (reg.peripheral == 0 || (reg.ramAddress <= 0x000F) || (reg.ramAddress >= 0x0020)) {
 				reg.ramAddress = Bits12(reg.ramAddress & 0x03F0) | Bits12(param)
-				bus!.readRamAddress(reg.ramAddress, into: &reg.C)
+				Bus.sharedInstance.readRamAddress(reg.ramAddress, into: &reg.C)
 			} else {
 				//printf("Peripheral Read: %02X %x \n", reg.peripheral, param);
-				bus!.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
+				Bus.sharedInstance.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
 			}
 		}
 	}
@@ -2550,7 +2560,7 @@ class CPU {
 	
 	func longJumpTo(addr: Int, withReturn push: Bool) {
 		let address: Bits4 = Bits4(addr >> 12)
-		if let rom = bus!.romChipInSlot(address) {
+		if let rom = Bus.sharedInstance.romChipInSlot(address) {
 			if push {
 				pushReturnStack(reg.PC)
 			}
@@ -3703,7 +3713,9 @@ class CPU {
 	}
 	
 	func executeClass3(instr: Int) {
-		println("executeClass3: \(instr)")
+		if DEBUG != 0 {
+			println("executeClass3: \(instr)")
+		}
 		let v = ((instr >> 2) & 1)
 		var disp = instr >> 3
 		if disp >= 64 {

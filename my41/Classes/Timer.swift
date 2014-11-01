@@ -70,7 +70,7 @@ class Timer : Peripheral {
 		assert(Static.instance == nil, "Singleton already initialized!")
 
 		cpu = CPU.sharedInstance
-		bus!.installPeripheral(self, inSlot: 0xFB)
+		Bus.sharedInstance.installPeripheral(self, inSlot: 0xFB)
 		
 		resetTimer()
 
@@ -143,9 +143,9 @@ class Timer : Peripheral {
 	}
 	
 	// MARK: Peripheral Delegate Methods
-	func pluggedIntoBus(aBus: Bus) {
-		bus = aBus
-	}
+//	func pluggedIntoBus(aBus: Bus) {
+//		bus = aBus
+//	}
 	
 	func readFromRegister(register: Bits4, inout into data: Digits14) {
 		switch register {
