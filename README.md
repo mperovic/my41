@@ -9,3 +9,6 @@ Distributed under terms of Revised BSD License
 
 
 NOTE: This app is still in heavy development
+
+![Screen shot]
+(https://github.com/mperovic/my41/blob/master/Picture%201.png)
