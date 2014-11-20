@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 
 let MOD_FORMAT = "MOD1"
@@ -173,7 +174,7 @@ enum Result<T> {
 	case Error(String)
 }
 
-class ModulePage {
+final class ModulePage {
 	var moduleHeader: ModuleHeader?		// pointer to module that this page is a part of, or NULL if none
 	var altPage: ModulePage?			// pointer to alternate page if any (HEPAX, W&W RAMBOX2 use)
 	var name: String
@@ -209,7 +210,7 @@ class ModulePage {
 	}
 }
 
-class MOD {
+final class MOD {
 	var data: NSData?
 	var shortName: String
 	var fileSize = 0
@@ -416,6 +417,10 @@ class MOD {
 			case .Success:
 				break
 			case .Error(let error): error
+				var alert:NSAlert = NSAlert()
+				alert.messageText = error
+				alert.runModal()
+
 				return .Error(error)
 			}
 			

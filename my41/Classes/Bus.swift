@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Cocoa
 
 protocol Peripheral {
 //	func pluggedIntoBus(bus: Bus)
@@ -180,7 +180,7 @@ var builtinRamTable: [RamDesc] = [
 ]
 
 
-class Bus {
+final class Bus {
 	// Section defining what type of memory we have
 	var memoryModule1: Bool?
 	var memoryModule2: Bool?
@@ -238,6 +238,10 @@ class Bus {
 					case .Success:
 						break
 					case .Error(let error): error
+						var alert:NSAlert = NSAlert()
+						alert.messageText = error
+						alert.runModal()
+					
 						return .Error(error)
 					}
 //					if mod.checkPage(modulePage) == false {
@@ -399,15 +403,18 @@ class Bus {
 					if hepPage != 0 && mod.moduleHeader.hardware == Hardware.HEPAX && modulePage.RAM == 1 {
 						// hepax was just loaded previously and this is the first RAM page after it
 						modulePage.page = hepPage
-						let romChip = RomChip(fromBIN: modulePage.image)
-//						let rom = romChipInSlot(Int(hep_page, bank: <#Bits4#>)
-//						romChips[Int(hep_page)][Int(mfPage.bank) - 1]->pAltPage=pNewPage;       // load this RAM into alternate page
+						let romChip = romChipInSlot(Bits4(hepPage), bank: Bits4(modulePage.bank - 1))
+						// load this RAM into alternate page
+						romChip?.altPage = modulePage
 					} else if wwPage != 0 && modulePage.WWRAMBOX != 0 && modulePage.RAM != 0 {
 						// W&W code was just loaded previously and this is the first RAM page after it
-//						pNewPage->ActualPage=ww_page;
-//						PageMatrix[ww_page][pMFP->Bank-1]->pAltPage=pNewPage;        // load this RAM into alternate page
+						modulePage.actualPage = wwPage
+						let romChip = romChipInSlot(Bits4(wwPage), bank: Bits4(modulePage.bank - 1))
+						// load this RAM into alternate page
+						romChip?.altPage = modulePage
 					} else if page > 0xf || romChips[Int(page)][Int(modulePage.bank) - 1] != nil {
 						// there is no free space or some load conflict exists
+						return .Error("No free space")
 					} else {
 						// otherwise load into primary page
 						let romChip = RomChip(fromBIN: modulePage.image)
@@ -428,15 +435,15 @@ class Bus {
 		ramValid[Int(address)] = true
 	}
 	
-	func readRamAddress(address: Bits12, inout into data: Digits14) -> Bool {
+	func readRamAddress(address: Bits12, inout into data: Digits14) -> Result<Bool> {
 		// Read specified location of specified chip. If chip or location is
 		// nonexistent, set data to 0 and return false.
 		if ramValid[Int(address)] {
 			copyDigits(ram[Int(address)], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
-			return true
+			return .Success(Box(true))
 		} else {
 			clearDigits(destination: &data)
-			return false
+			return .Error("invalid ram address")
 		}
 	}
 	
@@ -449,19 +456,18 @@ class Bus {
 		}
 	}
 	
-	func readRomLocation(addr: Int) -> (success: Bool, data: Int) {
+	func readRomLocation(addr: Int) -> Result<Int> {
 		// Read ROM location at the given address and return true.
-		// If there is no ROM at that address, sets data to 0 and returns false.
+		// If there is no ROM at that address, sets data to 0 and returns
 		var address = addr
 		address = address & 0xffff;
 		let page = Int(address >> 12)
 		let bank = Int(activeRomBank[address >> 12])
 		var rom: RomChip? = romChips[page][bank]
-		var data: Int
 		if let aRom = rom {
-			return (true, Int(aRom[Int(address & 0xfff)]))
+			return .Success(Box(Int(aRom[Int(address & 0xfff)])))
 		} else {
-			return (false, 0)
+			return .Error("invalid rom address")
 		}
 	}
 	

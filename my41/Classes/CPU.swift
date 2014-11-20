@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 typealias Digit = UInt8
 typealias Digits14 = [Digit]
@@ -117,7 +118,7 @@ let fTable: [Int] = [
 
 var zeroes: Digits14 = emptyDigit14
 
-class CPU {
+final class CPU {
 	// Processor performance characteristics
 	// ProcCycles / ProcInterval=5.8 for a real machine: 578 cycles / 100 ms per interval
 	// 5780 inst/sec = 1E6 / 173 ms for a halfnut HP-41CX instruction (older models run at 158 ms)
@@ -142,7 +143,8 @@ class CPU {
 	var nextCarry: Bit = 0
 	var lastTyte = 0
 	var powerOffFlag = false
-	var debugViewController: DebugViewController?
+	var debugViewController: DebugCPUViewController?
+	var bus = Bus.sharedInstance
 	
 	let onKeyCode: Bits8 = 0x18
 	
@@ -297,27 +299,30 @@ class CPU {
 		reg.stack[0] = word
 	}
 	
-	func fetch() -> (success: Bool, data: Int) {
+	func fetch() -> Result<Int> {
 		--cycleLimit
 		simulationTime? += simulatedInstructionTime
 		soundOutput.soundOutputForWordTime(Int(reg.T))
 		if DEBUG != 0 {
 			println("bus.readRomLocation \(reg.PC)")
 		}
-		let romLocation = Bus.sharedInstance.readRomLocation(Int(reg.PC++))
-		
-		return (romLocation.success, romLocation.data)
+		switch bus.readRomLocation(Int(reg.PC++)) {
+		case .Success(let result):
+			return .Success(result)
+		case .Error(let error):
+			return .Error(error)
+		}
 	}
 	
 	func enableBank(bankSet: Bits4) {
-		let currentBank = Bus.sharedInstance.activeRomBankAtAddr(reg.PC)
+		let currentBank = bus.activeRomBankAtAddr(reg.PC)
 		for slot: Bits4 in 0..<0x10 {
-			let currentRom = Bus.sharedInstance.romChipInSlot(slot)
-			let newRom = Bus.sharedInstance.romChipInSlot(slot, bank: bankSet)
-			let slotBank = Bus.sharedInstance.activeRomBankInSlot(slot)
+			let currentRom = bus.romChipInSlot(slot)
+			let newRom = bus.romChipInSlot(slot, bank: bankSet)
+			let slotBank = bus.activeRomBankInSlot(slot)
 			
 			if (currentRom == nil) && (newRom == nil) && (slotBank == currentBank) {
-				Bus.sharedInstance.setActiveRomBankInSlot(slot, bank: bankSet)
+				bus.setActiveRomBankInSlot(slot, bank: bankSet)
 			}
 		}
 	}
@@ -353,12 +358,12 @@ class CPU {
 		savedPC = reg.PC
 		nextCarry = 0
 		lastTyte = currentTyte
-		let fetchResult = fetch()
-		currentTyte = fetchResult.data
 		if DEBUG != 0 {
 			println("currentTyte: \(currentTyte)")
 		}
-		if fetchResult.success {
+		switch fetch() {
+		case .Success(let result):
+			currentTyte = result.unbox
 			switch currentTyte & 0x03 {
 			case 0:		 // miscellaneous
 				executeClass0(currentTyte)
@@ -371,7 +376,7 @@ class CPU {
 			default:	// Error
 				println("PROBLEM!")
 			}
-		} else {
+		case .Error(let error):
 			reg.PC = popReturnStack()
 		}
 		reg.carry = Bit(nextCarry)
@@ -511,7 +516,7 @@ class CPU {
 							-----------------------------------------------------------------------
 			*/
 			let slot = reg.C[6]
-			if let rom = Bus.sharedInstance.romChipInSlot(Bits4(slot)) {
+			if let rom = bus.romChipInSlot(Bits4(slot)) {
 				if rom.writable == false {
 					break
 				}
@@ -1808,7 +1813,7 @@ class CPU {
 		switch param {
 		case 0xE, 0x9:
 			// Printer ROM is loaded?
-			if let printerRom = Bus.sharedInstance.romChipInSlot(6) {
+			if let printerRom = bus.romChipInSlot(6) {
 				reg.peripheral = 1
 			}
 		default:
@@ -1846,7 +1851,7 @@ class CPU {
 		if reg.peripheral == 0 {
 			// RAM is currently selected peripheral
 			reg.ramAddress = (reg.ramAddress & 0x0FF0) | Bits12(param)
-			Bus.sharedInstance.writeRamAddress(reg.ramAddress, from: reg.C)
+			bus.writeRamAddress(reg.ramAddress, from: reg.C)
 		} else {
 			switch (reg.peripheral) {
 			case 0x10:
@@ -1867,7 +1872,7 @@ class CPU {
 			default:
 				break;
 			}
-			Bus.sharedInstance.writeToRegister(Bits4(param), ofPeripheral: reg.peripheral, from: &reg.C)
+			bus.writeToRegister(Bits4(param), ofPeripheral: reg.peripheral, from: &reg.C)
 		}
 	}
 	
@@ -2040,8 +2045,14 @@ class CPU {
 				  interpreting the contents of the isa_bus during the second machine cycle as an
 				  instruction.
 			*/
-			let fetchResult = fetch()
-			bitsToDigits(bits: Int(fetchResult.data), destination: &reg.C, start: 0, count: 3)
+			var value: Int
+			switch fetch() {
+			case .Success(let result):
+				value = result.unbox
+			case .Error(let error):
+				value = 0
+			}
+			bitsToDigits(bits: value, destination: &reg.C, start: 0, count: 3)
 			
 		case 0x5:
 			/*
@@ -2066,7 +2077,6 @@ class CPU {
 			=========================================================================================
 			*/
 			var word: UInt16 = 0
-//			var digits: [Digit] = [reg.C[3]]
 			var digits: [Digit] = [Digit]()
 			for idx in 3...13 {
 				digits.append(reg.C[idx])
@@ -2203,9 +2213,9 @@ class CPU {
 			RAM chip select.
 			*/
 			if reg.peripheral == 0 || reg.peripheral == 0xFB {
-				Bus.sharedInstance.writeRamAddress(reg.ramAddress, from: reg.C)
+				bus.writeRamAddress(reg.ramAddress, from: reg.C)
 			} else {
-				Bus.sharedInstance.writeDataToPeripheral(slot: reg.peripheral, from: reg.C)
+				bus.writeDataToPeripheral(slot: reg.peripheral, from: reg.C)
 			}
 			
 		case 0xC:
@@ -2238,8 +2248,12 @@ class CPU {
 				digits.append(reg.C[idx])
 			}
 			addr = digitsToBits(digits: digits, nbits: 16)
-			let romLocation = Bus.sharedInstance.readRomLocation(Int(addr))
-			bitsToDigits(bits: romLocation.data, destination: &reg.C, start: 0, count: 3)
+			switch bus.readRomLocation(Int(addr)) {
+			case .Success(let result):
+				bitsToDigits(bits: result.unbox, destination: &reg.C, start: 0, count: 3)
+			case .Error(let error):
+				bitsToDigits(bits: 0, destination: &reg.C, start: 0, count: 3)
+			}
 			
 		case 0xD:
 			/*
@@ -2365,10 +2379,16 @@ class CPU {
 			data_bus.
 			*/
 			if (reg.peripheral == 0 || (reg.ramAddress <= 0x000F) || (reg.ramAddress >= 0x0020)) {
-				Bus.sharedInstance.readRamAddress(reg.ramAddress, into: &reg.C)
+				switch bus.readRamAddress(reg.ramAddress, into: &reg.C) {
+				case .Success(let result):
+					break
+				case .Error (let error):
+					error
+					
+				}
 			} else {
 				//printf("Peripheral Read: %02X %x \n", reg.peripheral, param);
-				Bus.sharedInstance.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
+				bus.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
 			}
 		default:
 			/*
@@ -2403,10 +2423,15 @@ class CPU {
 			*/
 			if (reg.peripheral == 0 || (reg.ramAddress <= 0x000F) || (reg.ramAddress >= 0x0020)) {
 				reg.ramAddress = Bits12(reg.ramAddress & 0x03F0) | Bits12(param)
-				Bus.sharedInstance.readRamAddress(reg.ramAddress, into: &reg.C)
+				switch bus.readRamAddress(reg.ramAddress, into: &reg.C) {
+				case .Success(let result):
+					break
+				case .Error (let error):
+					error
+					
+				}
 			} else {
-				//printf("Peripheral Read: %02X %x \n", reg.peripheral, param);
-				Bus.sharedInstance.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
+				bus.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
 			}
 		}
 	}
@@ -2560,7 +2585,7 @@ class CPU {
 	
 	func longJumpTo(addr: Int, withReturn push: Bool) {
 		let address: Bits4 = Bits4(addr >> 12)
-		if let rom = Bus.sharedInstance.romChipInSlot(address) {
+		if let rom = bus.romChipInSlot(address) {
 			if push {
 				pushReturnStack(reg.PC)
 			}
@@ -2575,9 +2600,15 @@ class CPU {
 	}
 
 	func executeClass1(instr: Int) {
-		let fetchResult = fetch()
-		let word = Int(fetchResult.data)
-		var addr = ((word & 0x3fc) << 6) | ((instr & 0x3fc) >> 2)
+		var word: Int = 0
+		var addr: Int = 0
+		switch fetch() {
+		case .Success(let result):
+			word = result.unbox
+		case .Error(let error):
+			word = 0
+		}
+		addr = ((word & 0x3fc) << 6) | ((instr & 0x3fc) >> 2)
 		if DEBUG != 0 {
 			println("executeClass1: \(instr) - addr: \(addr) word: \(word & 0x3)")
 		}

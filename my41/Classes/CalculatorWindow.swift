@@ -21,7 +21,7 @@ class CalculatorWindow : NSWindow {
 		super.init(contentRect: contentRect, styleMask: aStyle, backing: bufferingType, defer: flag)
 	}
 	
-	required init?(coder: NSCoder!) {
+	required init?(coder: NSCoder) {
 //	    fatalError("init(coder:) has not been implemented")
 		super.init(coder: coder)
 	}

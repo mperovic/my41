@@ -9,9 +9,10 @@
 import Foundation
 import Cocoa
 
-class RomChip {
+final class RomChip {
 	var writable: Bool
 	var words: [word]
+	var altPage: ModulePage?
 	
 	 init(isWritable: Bool) {
 		words = [word](count: 0x1000, repeatedValue: 0x0)

@@ -58,6 +58,9 @@ class CalculatorController : NSObject {
 	}
 	
 	func resetCalculator() {
+		memModules = 0
+		XMemModules = 0
+
 		cpu.setRunning(false)
 		bus.removeAllRomChips()
 		readCalculatorDescriptionFromDefaults()
@@ -252,11 +255,16 @@ class CalculatorController : NSObject {
 		var ptr = 0
 		for addr in 0..<MAX_RAM_SIZE {
 			var tmpReg = emptyDigit14
-			bus.readRamAddress(Bits12(addr), into: &tmpReg)
-			for idx in 0...13 {
-				memoryArray[ptr+idx] = tmpReg[idx]
+			switch bus.readRamAddress(Bits12(addr), into: &tmpReg) {
+			case .Success(let result):
+					for idx in 0...13 {
+						memoryArray[ptr+idx] = tmpReg[idx]
+					}
+					ptr += 14
+			case .Error (let error):
+				error
+				
 			}
-			ptr += 14
 		}
 		data.appendBytes(memoryArray, length: count)
 		
