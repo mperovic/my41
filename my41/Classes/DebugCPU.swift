@@ -9,31 +9,6 @@
 import Foundation
 import Cocoa
 
-class DebugCPUAndMemoryViewController: NSViewController {
-	var debugCPUViewController: DebugCPUViewController?
-	
-	override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-		let segid = segue.identifier ?? "(none)"
-		println("\(__FUNCTION__) hit, segue ID = \(segid)")
-
-		if segid == "showCPUView" {
-			if debugCPUViewController == nil {
-				debugCPUViewController = segue.destinationController as? DebugCPUViewController
-			}
-		}
-	}
-
-	override func viewDidLoad() {
-		loadCPUViewController()
-	}
-	
-	func loadCPUViewController() {
-		self.performSegueWithIdentifier("showCPUView", sender: self)
-	}
-}
-
-
-//MARK: -
 
 class DebugCPUViewController: NSViewController {
 	@IBOutlet weak var cpuRegistersView: NSView!
@@ -70,6 +45,7 @@ class DebugCPUViewController: NSViewController {
 	
 	var cpu = CPU.sharedInstance
 	var calculatorController = CalculatorController.sharedInstance
+	var debugContainerViewController: DebugContainerViewController?
 	
 	override func viewDidLoad() {
 		self.cpuRegistersView.wantsLayer = true
@@ -84,16 +60,12 @@ class DebugCPUViewController: NSViewController {
 		self.displayRegistersView.layer?.borderColor = CGColorCreateGenericGray(0.75, 1.0)
 		self.displayRegistersView.layer?.cornerRadius = 6.0
 		
-		cpu.debugViewController = self
+		cpu.debugCPUViewController = self
 		
-		updateAll()
+		updateDisplay()
 	}
 	
 	func updateDisplay() {
-		updateAll()
-	}
-	
-	func updateAll() {
 		populateCPURegisters()
 		populateDisplayRegisters()
 	}
@@ -160,41 +132,4 @@ class DebugCPUViewController: NSViewController {
 	}
 	
 	
-}
-
-class DebugCPUView: NSView {
-	
-}
-
-class DebugSegue: NSStoryboardSegue {
-	override func perform() {
-		let source = self.sourceController as NSViewController
-		let destination = self.destinationController as NSViewController
-
-		if source.view.subviews.count > 0 {
-			let aView: AnyObject = source.view.subviews[0]
-			if aView.isKindOfClass(NSView) {
-				aView.removeFromSuperview()
-			}
-		}
-		
-		let dView = destination.view
-		source.view.addSubview(dView)
-		source.view.addConstraints(
-			NSLayoutConstraint.constraintsWithVisualFormat(
-				"H:|[dView]|",
-				options: nil,
-				metrics: nil,
-				views: ["dView": dView]
-			)
-		)
-		source.view.addConstraints(
-			NSLayoutConstraint.constraintsWithVisualFormat(
-				"V:|[dView]|",
-				options: nil,
-				metrics: nil,
-				views: ["dView": dView]
-			)
-		)
-	}
 }

@@ -84,7 +84,7 @@
 		DC46ED8E19B3A09B0091E143 /* display.lookup in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8C19B3A09B0091E143 /* display.lookup */; };
 		DC46ED8F19B3A09B0091E143 /* hpchar.geom in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8D19B3A09B0091E143 /* hpchar.geom */; };
 		DC4E040D1A1774F1008D6DD5 /* DebugerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */; };
-		DC4E040F1A17783E008D6DD5 /* DebugCPUAndMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040E1A17783E008D6DD5 /* DebugCPUAndMemory.swift */; };
+		DC4E040F1A17783E008D6DD5 /* DebugCPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */; };
 		DC56269D198B75E80040453F /* XNUT2.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC56268F198B75E80040453F /* XNUT2.ROM */; };
 		DC56269E198B75E80040453F /* XNUT1.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562690198B75E80040453F /* XNUT1.ROM */; };
 		DC56269F198B75E80040453F /* XNUT0.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562691198B75E80040453F /* XNUT0.ROM */; };
@@ -120,6 +120,7 @@
 		DCEEC96A1A18BE39000ECA76 /* PreferencesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEC9691A18BE39000ECA76 /* PreferencesCalculator.swift */; };
 		DCEEC96C1A18CD40000ECA76 /* PreferencesMods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEC96B1A18CD40000ECA76 /* PreferencesMods.swift */; };
 		DCF52A21199C971A006BF825 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF52A20199C971A006BF825 /* Extensions.swift */; };
+		DCFF74B01A1FE74A00C0DE9A /* DebugMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFF74AF1A1FE74A00C0DE9A /* DebugMemory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,7 +215,7 @@
 		DC46ED8C19B3A09B0091E143 /* display.lookup */ = {isa = PBXFileReference; lastKnownFileType = file; path = display.lookup; sourceTree = "<group>"; };
 		DC46ED8D19B3A09B0091E143 /* hpchar.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = hpchar.geom; sourceTree = "<group>"; };
 		DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugerMenu.swift; path = Classes/DebugerMenu.swift; sourceTree = "<group>"; };
-		DC4E040E1A17783E008D6DD5 /* DebugCPUAndMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugCPUAndMemory.swift; path = Classes/DebugCPUAndMemory.swift; sourceTree = "<group>"; };
+		DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugCPU.swift; path = Classes/DebugCPU.swift; sourceTree = "<group>"; };
 		DC56268F198B75E80040453F /* XNUT2.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT2.ROM; path = ROMs/XNUT2.ROM; sourceTree = "<group>"; };
 		DC562690198B75E80040453F /* XNUT1.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT1.ROM; path = ROMs/XNUT1.ROM; sourceTree = "<group>"; };
 		DC562691198B75E80040453F /* XNUT0.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT0.ROM; path = ROMs/XNUT0.ROM; sourceTree = "<group>"; };
@@ -250,6 +251,7 @@
 		DCEEC9691A18BE39000ECA76 /* PreferencesCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesCalculator.swift; path = Classes/PreferencesCalculator.swift; sourceTree = "<group>"; };
 		DCEEC96B1A18CD40000ECA76 /* PreferencesMods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesMods.swift; path = Classes/PreferencesMods.swift; sourceTree = "<group>"; };
 		DCF52A20199C971A006BF825 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Classes/Extensions.swift; sourceTree = "<group>"; };
+		DCFF74AF1A1FE74A00C0DE9A /* DebugMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugMemory.swift; path = Classes/DebugMemory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,7 +480,8 @@
 				DC74922619CF1E600012B5C0 /* Debuger.swift */,
 				DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */,
 				DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */,
-				DC4E040E1A17783E008D6DD5 /* DebugCPUAndMemory.swift */,
+				DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */,
+				DCFF74AF1A1FE74A00C0DE9A /* DebugMemory.swift */,
 			);
 			name = Debuger;
 			sourceTree = "<group>";
@@ -709,11 +712,12 @@
 				DCAD8860199D37CB0027C925 /* MOD.swift in Sources */,
 				DCEEC9681A18A270000ECA76 /* PreferencesMenu.swift in Sources */,
 				DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */,
-				DC4E040F1A17783E008D6DD5 /* DebugCPUAndMemory.swift in Sources */,
+				DC4E040F1A17783E008D6DD5 /* DebugCPU.swift in Sources */,
 				DCEEC96A1A18BE39000ECA76 /* PreferencesCalculator.swift in Sources */,
 				DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */,
 				DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
+				DCFF74B01A1FE74A00C0DE9A /* DebugMemory.swift in Sources */,
 				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
 				DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */,
 				DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */,

@@ -12,6 +12,7 @@ import Cocoa
 class DebugMenuViewController: NSViewController {
 	var registersView: SelectedDebugView?
 	var memoryView: SelectedDebugView?
+	var debugContainerViewController: DebugContainerViewController?
 	
 	@IBOutlet weak var menuView: NSView!
 	
@@ -36,6 +37,8 @@ class DebugMenuViewController: NSViewController {
 		memoryView!.selected = false
 		registersView!.setNeedsDisplayInRect(registersView!.bounds)
 		memoryView!.setNeedsDisplayInRect(memoryView!.bounds)
+		
+		debugContainerViewController?.loadCPUViewController()
 	}
 	
 	@IBAction func memoryAction(sender: AnyObject) {
@@ -43,11 +46,8 @@ class DebugMenuViewController: NSViewController {
 		memoryView!.selected = true
 		registersView!.setNeedsDisplayInRect(registersView!.bounds)
 		memoryView!.setNeedsDisplayInRect(memoryView!.bounds)
-	}
-	
-	override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-		let segid = segue.identifier ?? "(none)"
-		println("\(__FUNCTION__) hit, segue ID = \(segid)")
+		
+		debugContainerViewController?.loadMemoryViewController()
 	}
 }
 

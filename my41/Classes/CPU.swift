@@ -143,7 +143,8 @@ final class CPU {
 	var nextCarry: Bit = 0
 	var lastTyte = 0
 	var powerOffFlag = false
-	var debugViewController: DebugCPUViewController?
+	var debugCPUViewController: DebugCPUViewController?
+	var debugMemoryViewController: DebugMemoryViewController?
 	var bus = Bus.sharedInstance
 	
 	let onKeyCode: Bits8 = 0x18
@@ -200,13 +201,15 @@ final class CPU {
 				soundOutput.flushAndSuspendSoundOutput()
 				self.lineNo = 0
 			}
-			debugViewController?.updateDisplay()
+			debugCPUViewController?.updateDisplay()
+			debugMemoryViewController?.displaySelectedMemoryBank()
 		}
 	}
 	
 	func step() {
 		executeNextInstruction()
-		debugViewController?.updateDisplay()
+		debugCPUViewController?.updateDisplay()
+		debugMemoryViewController?.displaySelectedMemoryBank()
 	}
 	
 	func reset() {
@@ -237,7 +240,8 @@ final class CPU {
 		} else {
 			reg.keyDown = 0
 		}
-		debugViewController?.updateDisplay()
+		debugCPUViewController?.updateDisplay()
+		debugMemoryViewController?.displaySelectedMemoryBank()
 	}
 	
 	func abortInstruction(message: String) {
@@ -255,8 +259,8 @@ final class CPU {
 		if runFlag != state {
 			runFlag = state
 			//TODO: IMPLEMENT
-//			[debugController updateButtons];
-			debugViewController?.updateDisplay()
+			debugCPUViewController?.updateDisplay()
+			debugMemoryViewController?.displaySelectedMemoryBank()
 		}
 		simulationTime = NSDate.timeIntervalSinceReferenceDate()
 	}
@@ -273,7 +277,8 @@ final class CPU {
 				while self.running() && cycleLimit > 2 && simulationTime < currentTime {
 					executeNextInstruction()
 				}
-				debugViewController?.updateDisplay()
+				debugCPUViewController?.updateDisplay()
+				debugMemoryViewController?.displaySelectedMemoryBank()
 			}
 		} else {
 			simulationTime = currentTime

@@ -41,11 +41,10 @@ class PreferencesContainerViewController: NSViewController {
 	
 	override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
 		let segid = segue.identifier ?? "(none)"
-		println("\(__FUNCTION__) hit, segue ID = \(segid)")
 		
 		if segid == "showSelectCalculatorView" {
 			preferencesCalculatorViewController = segue.destinationController as? PreferencesCalculatorViewController
-			preferencesModsViewController?.preferencesContainerViewController = self
+			preferencesCalculatorViewController?.preferencesContainerViewController = self
 		}
 		if segid == "showModsView" {
 			preferencesModsViewController = segue.destinationController as? PreferencesModsViewController
