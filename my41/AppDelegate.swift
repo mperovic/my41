@@ -21,5 +21,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 
+	@IBAction func masterClear(sender: AnyObject) {
+		CalculatorController.sharedInstance.resetCalculator(false)
+	}
+	
 }
 

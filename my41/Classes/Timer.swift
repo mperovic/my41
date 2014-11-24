@@ -184,14 +184,28 @@ class Timer : Peripheral {
 	
 	func writeToRegister(register: Bits4, inout from data: Digits14) {
 		// clearing flag 12,13 is in wrong place because SHIFT ON does not work.
-		cpu.reg.FI &= 0xcfff			// clear flag 12, 13
+		cpu.reg.FI &= 0xcfff
 		
 		switch register {
 		case 0x0:		// WTIME
-			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
-			convertToUint64(&clock[timerSelected.rawValue], withRegister:registers.CLK[timerSelected.rawValue])
+			copyDigits(
+				registers.CLK[timerSelected.rawValue],
+				sourceStartAt: 0,
+				destination: &data,
+				destinationStartAt: 0,
+				count: 14
+			)
+			convertToUint64(&clock[timerSelected.rawValue],
+				withRegister:registers.CLK[timerSelected.rawValue]
+			)
 		case 0x1:		// WTIME-
-			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			copyDigits(
+				registers.CLK[timerSelected.rawValue],
+				sourceStartAt: 0,
+				destination: &data,
+				destinationStartAt: 0,
+				count: 14
+			)
 			convertToUint64(&clock[timerSelected.rawValue], withRegister:registers.CLK[timerSelected.rawValue])
 		case 0x2:		// WALM
 			copyDigits(registers.ALM[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)

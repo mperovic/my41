@@ -21,9 +21,6 @@ let MAX_RAM_SIZE		= 0x400
 var timerModule: Timer?
 
 class CalculatorController : NSObject {
-//	@IBOutlet weak var display: Display!
-//	@IBOutlet weak var keyboard: Keyboard!
-
 	var calculatorMod = MOD()
 	var portMod: [MOD?] = [nil, nil, nil, nil]
 	var calculatorType: CalculatorType?
@@ -50,14 +47,10 @@ class CalculatorController : NSObject {
 		
 		super.init()
 		
-		resetCalculator()
+		resetCalculator(true)
 	}
 	
-	override func awakeFromNib() {
-//		let x: Bool = self.calculatorWindow.excludedFromWindowsMenu
-	}
-	
-	func resetCalculator() {
+	func resetCalculator(restoringMemory: Bool) {
 		memModules = 0
 		XMemModules = 0
 
@@ -67,7 +60,9 @@ class CalculatorController : NSObject {
 		installBuiltinRoms()
 		installExternalModules()
 		installBuiltinRam()
-		restoreMemory()
+		if restoringMemory {
+			restoreMemory()
+		}
 		cpu.reset()
 		cpu.setRunning(true)
 		startExecutionTimer()
@@ -128,7 +123,6 @@ class CalculatorController : NSObject {
 	}
 	
 	func installBuiltinRoms() {
-		println("installBuiltinRoms")
 		if calculatorMod.data? != nil {
 			// Install ROMs which came with the calculator module
 			switch bus.installMod(calculatorMod) {
@@ -141,14 +135,15 @@ class CalculatorController : NSObject {
 	}
 	
 	func installBuiltinRam() {
-		println("installBuiltinRam")
 		var address: Bits12
+		let empty = emptyDigit14
 		for idx in 0..<builtinRamTable.count {
 			var ramDesc = builtinRamTable[idx]
 			if let cType = calculatorType? {
 				if checkRam(ramDesc: ramDesc) {
 					for address in ramDesc.firstAddress...ramDesc.lastAddress {
 						bus.installRamAtAddress(address)
+						bus.writeRamAddress(address, from: empty)
 					}
 				}
 			}
@@ -156,7 +151,6 @@ class CalculatorController : NSObject {
 	}
 	
 	func installExternalModules() {
-		println("installExternalModules")
 		for idx in 0...3 {
 			if portMod[idx]?.data != nil {
 				switch bus.installMod(portMod[idx]!) {
@@ -207,7 +201,6 @@ class CalculatorController : NSObject {
 	}
 	
 	func saveMemory() {
-		println("saveMemory")
 		let data = getMemoryContents()
 		let defaults = NSUserDefaults.standardUserDefaults()
 		defaults.setObject(data, forKey: "memory")
@@ -215,7 +208,6 @@ class CalculatorController : NSObject {
 	}
 	
 	func restoreMemory() {
-		println("restoreMemory")
 		let data: NSData? = NSUserDefaults.standardUserDefaults().objectForKey("memory") as? NSData
 		if let aData = data {
 			self.setMemoryContents(aData)

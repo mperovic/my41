@@ -321,7 +321,6 @@ class ExpansionView: NSView, NSDraggingDestination {
 			let mod = MOD()
 			mod.readModFromFile(fPath)
 			mod.moduleHeader.title.drawInRect(NSMakeRect(20.0, 40.0, 100.0, 58.0), withAttributes: attributes)
-			println(mod.moduleHeader.title)
 		}
 	}
 	

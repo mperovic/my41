@@ -7,74 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC2E47B219957F5D00BCACAF /* 41Z.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E476E19957F5D00BCACAF /* 41Z.MOD */; };
-		DC2E47B319957F5D00BCACAF /* ADV-APP.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E476F19957F5D00BCACAF /* ADV-APP.MOD */; };
-		DC2E47B419957F5D00BCACAF /* ADVANTAGE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477019957F5D00BCACAF /* ADVANTAGE.MOD */; };
-		DC2E47B519957F5D00BCACAF /* AECROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477119957F5D00BCACAF /* AECROM.MOD */; };
-		DC2E47B619957F5D00BCACAF /* AUTOSTART.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477219957F5D00BCACAF /* AUTOSTART.MOD */; };
-		DC2E47B719957F5D00BCACAF /* AVIATION.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477319957F5D00BCACAF /* AVIATION.MOD */; };
-		DC2E47B819957F5D00BCACAF /* BLDROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477419957F5D00BCACAF /* BLDROM.MOD */; };
-		DC2E47B919957F5D00BCACAF /* CARD-RDR.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477519957F5D00BCACAF /* CARD-RDR.MOD */; };
-		DC2E47BA19957F5D00BCACAF /* CCD.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477619957F5D00BCACAF /* CCD.MOD */; };
-		DC2E47BB19957F5D00BCACAF /* CIRCUIT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477719957F5D00BCACAF /* CIRCUIT.MOD */; };
-		DC2E47BC19957F5D00BCACAF /* CLINICAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477819957F5D00BCACAF /* CLINICAL.MOD */; };
-		DC2E47BD19957F5D00BCACAF /* DATA-ACQ.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477919957F5D00BCACAF /* DATA-ACQ.MOD */; };
-		DC2E47BE19957F5D00BCACAF /* DAVID.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477A19957F5D00BCACAF /* DAVID.MOD */; };
-		DC2E47BF19957F5D00BCACAF /* DIAGNOSTIC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477B19957F5D00BCACAF /* DIAGNOSTIC.MOD */; };
-		DC2E47C019957F5D00BCACAF /* ES-41.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477C19957F5D00BCACAF /* ES-41.MOD */; };
-		DC2E47C119957F5D00BCACAF /* ES-MLDL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477D19957F5D00BCACAF /* ES-MLDL.MOD */; };
-		DC2E47C219957F5D00BCACAF /* EXT-FUNS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477E19957F5D00BCACAF /* EXT-FUNS.MOD */; };
-		DC2E47C319957F5D00BCACAF /* EXT-IO.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E477F19957F5D00BCACAF /* EXT-IO.MOD */; };
-		DC2E47C419957F5D00BCACAF /* EXT-MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478019957F5D00BCACAF /* EXT-MEM.MOD */; };
-		DC2E47C519957F5D00BCACAF /* FINANCE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478119957F5D00BCACAF /* FINANCE.MOD */; };
-		DC2E47C619957F5D00BCACAF /* FORTH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478219957F5D00BCACAF /* FORTH.MOD */; };
-		DC2E47C719957F5D00BCACAF /* GAMES.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478319957F5D00BCACAF /* GAMES.MOD */; };
-		DC2E47C819957F5D00BCACAF /* HEP-2MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478419957F5D00BCACAF /* HEP-2MEM.MOD */; };
-		DC2E47C919957F5D00BCACAF /* HEP-MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478519957F5D00BCACAF /* HEP-MEM.MOD */; };
-		DC2E47CA19957F5D00BCACAF /* HEPAX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478619957F5D00BCACAF /* HEPAX.MOD */; };
-		DC2E47CB19957F5D00BCACAF /* HOME-MGT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478719957F5D00BCACAF /* HOME-MGT.MOD */; };
-		DC2E47CC19957F5D00BCACAF /* HPIL-DEV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478819957F5D00BCACAF /* HPIL-DEV.MOD */; };
-		DC2E47CD19957F5D00BCACAF /* HPIL-DIAG.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478919957F5D00BCACAF /* HPIL-DIAG.MOD */; };
-		DC2E47CE19957F5D00BCACAF /* HPIL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478A19957F5D00BCACAF /* HPIL.MOD */; };
-		DC2E47CF19957F5D00BCACAF /* IR-PRINT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478B19957F5D00BCACAF /* IR-PRINT.MOD */; };
-		DC2E47D019957F5D00BCACAF /* LAITRAM-XQ2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478C19957F5D00BCACAF /* LAITRAM-XQ2.MOD */; };
-		DC2E47D119957F5D00BCACAF /* LANDNAV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478D19957F5D00BCACAF /* LANDNAV.MOD */; };
-		DC2E47D219957F5D00BCACAF /* MACHINE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478E19957F5D00BCACAF /* MACHINE.MOD */; };
-		DC2E47D319957F5D00BCACAF /* MATH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E478F19957F5D00BCACAF /* MATH.MOD */; };
-		DC2E47D419957F5D00BCACAF /* MATHSTAT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479019957F5D00BCACAF /* MATHSTAT.MOD */; };
-		DC2E47D519957F5D00BCACAF /* MC-EPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479119957F5D00BCACAF /* MC-EPROM.MOD */; };
-		DC2E47D619957F5D00BCACAF /* MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479219957F5D00BCACAF /* MEM.MOD */; };
-		DC2E47D719957F5D00BCACAF /* MLROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479319957F5D00BCACAF /* MLROM.MOD */; };
-		DC2E47D819957F5D00BCACAF /* NAVIGATION.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479419957F5D00BCACAF /* NAVIGATION.MOD */; };
-		DC2E47D919957F5D00BCACAF /* NFCROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479519957F5D00BCACAF /* NFCROM.MOD */; };
-		DC2E47DA19957F5D00BCACAF /* NUT-C.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479619957F5D00BCACAF /* NUT-C.MOD */; };
-		DC2E47DB19957F5D00BCACAF /* NUT-CV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479719957F5D00BCACAF /* NUT-CV.MOD */; };
-		DC2E47DC19957F5D00BCACAF /* NUT-CX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479819957F5D00BCACAF /* NUT-CX.MOD */; };
-		DC2E47DD19957F5D00BCACAF /* PETROLEUM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479919957F5D00BCACAF /* PETROLEUM.MOD */; };
-		DC2E47DE19957F5D00BCACAF /* PLOTTER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479A19957F5D00BCACAF /* PLOTTER.MOD */; };
-		DC2E47DF19957F5D00BCACAF /* PPC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479B19957F5D00BCACAF /* PPC.MOD */; };
-		DC2E47E019957F5D00BCACAF /* PRINTER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479C19957F5D00BCACAF /* PRINTER.MOD */; };
-		DC2E47E119957F5D00BCACAF /* PROTOCODER2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479D19957F5D00BCACAF /* PROTOCODER2.MOD */; };
-		DC2E47E219957F5D00BCACAF /* PROTOPARIO.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479E19957F5D00BCACAF /* PROTOPARIO.MOD */; };
-		DC2E47E319957F5D00BCACAF /* QUADMEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E479F19957F5D00BCACAF /* QUADMEM.MOD */; };
-		DC2E47E419957F5D00BCACAF /* RAM4K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A019957F5D00BCACAF /* RAM4K.MOD */; };
-		DC2E47E519957F5D00BCACAF /* RAM8K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A119957F5D00BCACAF /* RAM8K.MOD */; };
-		DC2E47E619957F5D00BCACAF /* RAM16K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A219957F5D00BCACAF /* RAM16K.MOD */; };
-		DC2E47E719957F5D00BCACAF /* RAM32K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A319957F5D00BCACAF /* RAM32K.MOD */; };
-		DC2E47E819957F5D00BCACAF /* REAL-ESTATE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A419957F5D00BCACAF /* REAL-ESTATE.MOD */; };
-		DC2E47E919957F5D00BCACAF /* SANDBOX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A519957F5D00BCACAF /* SANDBOX.MOD */; };
-		DC2E47EA19957F5D00BCACAF /* SANDMATH-III.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A619957F5D00BCACAF /* SANDMATH-III.MOD */; };
-		DC2E47EB19957F5D00BCACAF /* SECURITIES.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A719957F5D00BCACAF /* SECURITIES.MOD */; };
-		DC2E47EC19957F5D00BCACAF /* SERVICE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A819957F5D00BCACAF /* SERVICE.MOD */; };
-		DC2E47ED19957F5D00BCACAF /* STANDARD.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47A919957F5D00BCACAF /* STANDARD.MOD */; };
-		DC2E47EE19957F5D00BCACAF /* STAT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AA19957F5D00BCACAF /* STAT.MOD */; };
-		DC2E47EF19957F5D00BCACAF /* STRESS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AB19957F5D00BCACAF /* STRESS.MOD */; };
-		DC2E47F019957F5D00BCACAF /* STRUCTURAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AC19957F5D00BCACAF /* STRUCTURAL.MOD */; };
-		DC2E47F119957F5D00BCACAF /* SURVEY.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AD19957F5D00BCACAF /* SURVEY.MOD */; };
-		DC2E47F219957F5D00BCACAF /* THERMAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AE19957F5D00BCACAF /* THERMAL.MOD */; };
-		DC2E47F319957F5D00BCACAF /* TIME.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47AF19957F5D00BCACAF /* TIME.MOD */; };
-		DC2E47F419957F5D00BCACAF /* WAND.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47B019957F5D00BCACAF /* WAND.MOD */; };
-		DC2E47F519957F5D00BCACAF /* WWRAMBOXII.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC2E47B119957F5D00BCACAF /* WWRAMBOXII.MOD */; };
 		DC45285319897DA600C40B6C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285219897DA600C40B6C /* main.swift */; };
 		DC45285519897DA600C40B6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285419897DA600C40B6C /* ViewController.swift */; };
 		DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285619897DA600C40B6C /* AppDelegate.swift */; };
@@ -85,6 +17,143 @@
 		DC46ED8F19B3A09B0091E143 /* hpchar.geom in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8D19B3A09B0091E143 /* hpchar.geom */; };
 		DC4E040D1A1774F1008D6DD5 /* DebugerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */; };
 		DC4E040F1A17783E008D6DD5 /* DebugCPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */; };
+		DC54542D1A234F61003DB27E /* 41Z.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A41A234F60003DB27E /* 41Z.MOD */; };
+		DC54542E1A234F61003DB27E /* 83TRINH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A51A234F60003DB27E /* 83TRINH.MOD */; };
+		DC54542F1A234F61003DB27E /* ADV-APP.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A61A234F60003DB27E /* ADV-APP.MOD */; };
+		DC5454301A234F61003DB27E /* ADVANTAGE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A71A234F60003DB27E /* ADVANTAGE.MOD */; };
+		DC5454311A234F61003DB27E /* AECROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A81A234F60003DB27E /* AECROM.MOD */; };
+		DC5454321A234F61003DB27E /* AFDC1.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A91A234F60003DB27E /* AFDC1.MOD */; };
+		DC5454331A234F61003DB27E /* AFDC2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AA1A234F60003DB27E /* AFDC2.MOD */; };
+		DC5454341A234F61003DB27E /* ALPHA.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AB1A234F60003DB27E /* ALPHA.MOD */; };
+		DC5454351A234F61003DB27E /* APAC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AC1A234F60003DB27E /* APAC.MOD */; };
+		DC5454361A234F61003DB27E /* ASSEMBLER3.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AD1A234F60003DB27E /* ASSEMBLER3.MOD */; };
+		DC5454371A234F61003DB27E /* ASSEMBLER4.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AE1A234F60003DB27E /* ASSEMBLER4.MOD */; };
+		DC5454381A234F61003DB27E /* ASTROLOGY.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AF1A234F60003DB27E /* ASTROLOGY.MOD */; };
+		DC5454391A234F61003DB27E /* AUTOFINANCE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B01A234F60003DB27E /* AUTOFINANCE.MOD */; };
+		DC54543A1A234F61003DB27E /* AUTOSTART.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B11A234F60003DB27E /* AUTOSTART.MOD */; };
+		DC54543B1A234F61003DB27E /* AVIATION.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B21A234F60003DB27E /* AVIATION.MOD */; };
+		DC54543C1A234F61003DB27E /* BCMW.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B31A234F60003DB27E /* BCMW.MOD */; };
+		DC54543D1A234F61003DB27E /* BEECHCRAFT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B41A234F60003DB27E /* BEECHCRAFT.MOD */; };
+		DC54543E1A234F61003DB27E /* BLDROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B51A234F60003DB27E /* BLDROM.MOD */; };
+		DC54543F1A234F61003DB27E /* BOEING-B52.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B61A234F60003DB27E /* BOEING-B52.MOD */; };
+		DC5454401A234F61003DB27E /* CARD-RDR.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B71A234F60003DB27E /* CARD-RDR.MOD */; };
+		DC5454411A234F61003DB27E /* CCD-MODIFIED.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B81A234F60003DB27E /* CCD-MODIFIED.MOD */; };
+		DC5454421A234F61003DB27E /* CCD-OSX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B91A234F60003DB27E /* CCD-OSX.MOD */; };
+		DC5454431A234F61003DB27E /* CCD.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BA1A234F60003DB27E /* CCD.MOD */; };
+		DC5454441A234F61003DB27E /* CHEMUSER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BB1A234F60003DB27E /* CHEMUSER.MOD */; };
+		DC5454451A234F61003DB27E /* CIRCUIT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BC1A234F60003DB27E /* CIRCUIT.MOD */; };
+		DC5454461A234F61003DB27E /* CLINICAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BD1A234F60003DB27E /* CLINICAL.MOD */; };
+		DC5454471A234F61003DB27E /* CMT-200.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BE1A234F60003DB27E /* CMT-200.MOD */; };
+		DC5454481A234F61003DB27E /* CMT-300.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BF1A234F60003DB27E /* CMT-300.MOD */; };
+		DC5454491A234F61003DB27E /* CVPAK.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C01A234F60003DB27E /* CVPAK.MOD */; };
+		DC54544A1A234F61003DB27E /* DATA-ACQ.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C11A234F60003DB27E /* DATA-ACQ.MOD */; };
+		DC54544B1A234F61003DB27E /* DAVID.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C21A234F60003DB27E /* DAVID.MOD */; };
+		DC54544C1A234F61003DB27E /* DIAGNOSTIC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C31A234F60003DB27E /* DIAGNOSTIC.MOD */; };
+		DC54544D1A234F61003DB27E /* DIAMOND.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C41A234F60003DB27E /* DIAMOND.MOD */; };
+		DC54544E1A234F61003DB27E /* DISASM4C.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C51A234F60003DB27E /* DISASM4C.MOD */; };
+		DC54544F1A234F61003DB27E /* DISASM4D.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C61A234F60003DB27E /* DISASM4D.MOD */; };
+		DC5454501A234F61003DB27E /* DYERKA.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C71A234F60003DB27E /* DYERKA.MOD */; };
+		DC5454511A234F61003DB27E /* ES-41.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C81A234F60003DB27E /* ES-41.MOD */; };
+		DC5454521A234F61003DB27E /* ES-MLDL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C91A234F60003DB27E /* ES-MLDL.MOD */; };
+		DC5454531A234F61003DB27E /* EXT-FUNS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CA1A234F60003DB27E /* EXT-FUNS.MOD */; };
+		DC5454541A234F61003DB27E /* EXT-IL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CB1A234F60003DB27E /* EXT-IL.MOD */; };
+		DC5454551A234F61003DB27E /* EXT-IO.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CC1A234F60003DB27E /* EXT-IO.MOD */; };
+		DC5454561A234F61003DB27E /* EXT-MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CD1A234F60003DB27E /* EXT-MEM.MOD */; };
+		DC5454571A234F61003DB27E /* FINANCE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CE1A234F60003DB27E /* FINANCE.MOD */; };
+		DC5454581A234F61003DB27E /* FORTH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CF1A234F60003DB27E /* FORTH.MOD */; };
+		DC5454591A234F61003DB27E /* GAMES.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D01A234F60003DB27E /* GAMES.MOD */; };
+		DC54545A1A234F61003DB27E /* GMAC2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D11A234F60003DB27E /* GMAC2.MOD */; };
+		DC54545B1A234F61003DB27E /* GMAC3.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D21A234F60003DB27E /* GMAC3.MOD */; };
+		DC54545C1A234F61003DB27E /* HEP-2MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D31A234F60003DB27E /* HEP-2MEM.MOD */; };
+		DC54545D1A234F61003DB27E /* HEP-MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D41A234F60003DB27E /* HEP-MEM.MOD */; };
+		DC54545E1A234F61003DB27E /* Hepax-1C.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D51A234F60003DB27E /* Hepax-1C.mod */; };
+		DC54545F1A234F61003DB27E /* HEPAX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D61A234F60003DB27E /* HEPAX.MOD */; };
+		DC5454601A234F61003DB27E /* HOME-MGT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D71A234F60003DB27E /* HOME-MGT.MOD */; };
+		DC5454611A234F61003DB27E /* HPIL-DEV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D81A234F60003DB27E /* HPIL-DEV.MOD */; };
+		DC5454621A234F61003DB27E /* HPIL-DIAG.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D91A234F60003DB27E /* HPIL-DIAG.MOD */; };
+		DC5454631A234F61003DB27E /* HPIL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DA1A234F60003DB27E /* HPIL.MOD */; };
+		DC5454641A234F61003DB27E /* HYDRACOMP.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DB1A234F60003DB27E /* HYDRACOMP.MOD */; };
+		DC5454651A234F61003DB27E /* ICEBOX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DC1A234F60003DB27E /* ICEBOX.MOD */; };
+		DC5454661A234F61003DB27E /* ICODE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DD1A234F60003DB27E /* ICODE.MOD */; };
+		DC5454671A234F61003DB27E /* IR-PRINT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DE1A234F60003DB27E /* IR-PRINT.MOD */; };
+		DC5454681A234F61003DB27E /* LAITRAM-XQ2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DF1A234F60003DB27E /* LAITRAM-XQ2.MOD */; };
+		DC5454691A234F61003DB27E /* LANDNAV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E01A234F60003DB27E /* LANDNAV.MOD */; };
+		DC54546A1A234F61003DB27E /* LBLAPP1A.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E11A234F60003DB27E /* LBLAPP1A.MOD */; };
+		DC54546B1A234F61003DB27E /* MACHINE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E21A234F60003DB27E /* MACHINE.MOD */; };
+		DC54546C1A234F61003DB27E /* MATH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E31A234F60003DB27E /* MATH.MOD */; };
+		DC54546D1A234F61003DB27E /* MATHSTAT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E41A234F60003DB27E /* MATHSTAT.MOD */; };
+		DC54546E1A234F61003DB27E /* MC-EPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E51A234F60003DB27E /* MC-EPROM.MOD */; };
+		DC54546F1A234F61003DB27E /* MCTEST.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E61A234F60003DB27E /* MCTEST.MOD */; };
+		DC5454701A234F61003DB27E /* MDP1.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E71A234F60003DB27E /* MDP1.MOD */; };
+		DC5454711A234F61003DB27E /* MDP2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E81A234F60003DB27E /* MDP2.MOD */; };
+		DC5454721A234F61003DB27E /* MELBOURNE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E91A234F60003DB27E /* MELBOURNE.MOD */; };
+		DC5454731A234F61003DB27E /* MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EA1A234F60003DB27E /* MEM.MOD */; };
+		DC5454741A234F61003DB27E /* MIL-ENG.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EB1A234F60003DB27E /* MIL-ENG.MOD */; };
+		DC5454751A234F61003DB27E /* MLDLOS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EC1A234F60003DB27E /* MLDLOS.MOD */; };
+		DC5454761A234F61003DB27E /* MLEPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453ED1A234F60003DB27E /* MLEPROM.MOD */; };
+		DC5454771A234F61003DB27E /* MLROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EE1A234F60003DB27E /* MLROM.MOD */; };
+		DC5454781A234F61003DB27E /* MMEPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EF1A234F60003DB27E /* MMEPROM.MOD */; };
+		DC5454791A234F61003DB27E /* MUECKE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F01A234F60003DB27E /* MUECKE.MOD */; };
+		DC54547A1A234F61003DB27E /* NAVCOM2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F11A234F60003DB27E /* NAVCOM2.MOD */; };
+		DC54547B1A234F61003DB27E /* NAVIGATION.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F21A234F60003DB27E /* NAVIGATION.MOD */; };
+		DC54547C1A234F61003DB27E /* NAVPAC2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F31A234F60003DB27E /* NAVPAC2.MOD */; };
+		DC54547D1A234F61003DB27E /* NFCROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F41A234F60003DB27E /* NFCROM.MOD */; };
+		DC54547E1A234F61003DB27E /* NUT-C.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F51A234F60003DB27E /* NUT-C.MOD */; };
+		DC54547F1A234F61003DB27E /* NUT-CV-GFF.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F61A234F60003DB27E /* NUT-CV-GFF.MOD */; };
+		DC5454801A234F61003DB27E /* NUT-CV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F71A234F60003DB27E /* NUT-CV.MOD */; };
+		DC5454811A234F61003DB27E /* NUT-CX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F81A234F60003DB27E /* NUT-CX.MOD */; };
+		DC5454821A234F61003DB27E /* PANAME.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F91A234F60003DB27E /* PANAME.MOD */; };
+		DC5454831A234F61003DB27E /* PCCOM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FA1A234F60003DB27E /* PCCOM.MOD */; };
+		DC5454841A234F61003DB27E /* PETROLEUM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FB1A234F60003DB27E /* PETROLEUM.MOD */; };
+		DC5454851A234F61003DB27E /* PLOTTER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FC1A234F60003DB27E /* PLOTTER.MOD */; };
+		DC5454861A234F61003DB27E /* PPC-MELB.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FD1A234F60003DB27E /* PPC-MELB.MOD */; };
+		DC5454871A234F61003DB27E /* PPC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FE1A234F60003DB27E /* PPC.MOD */; };
+		DC5454881A234F61003DB27E /* PRIDE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FF1A234F60003DB27E /* PRIDE.MOD */; };
+		DC5454891A234F61003DB27E /* PRINTER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454001A234F60003DB27E /* PRINTER.MOD */; };
+		DC54548A1A234F61003DB27E /* PRINTERSERVICE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454011A234F60003DB27E /* PRINTERSERVICE.MOD */; };
+		DC54548B1A234F61003DB27E /* PROFISET.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454021A234F60003DB27E /* PROFISET.MOD */; };
+		DC54548C1A234F61003DB27E /* PROTOCODER2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454031A234F60003DB27E /* PROTOCODER2.MOD */; };
+		DC54548D1A234F61003DB27E /* PROTOPARIO.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454041A234F60003DB27E /* PROTOPARIO.MOD */; };
+		DC54548E1A234F61003DB27E /* PS0F.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454051A234F60003DB27E /* PS0F.MOD */; };
+		DC54548F1A234F61003DB27E /* QUADMEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454061A234F60003DB27E /* QUADMEM.MOD */; };
+		DC5454901A234F61003DB27E /* RAM4K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454071A234F60003DB27E /* RAM4K.MOD */; };
+		DC5454911A234F61003DB27E /* RAM8K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454081A234F60003DB27E /* RAM8K.MOD */; };
+		DC5454921A234F61003DB27E /* RAM16K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454091A234F60003DB27E /* RAM16K.MOD */; };
+		DC5454931A234F61003DB27E /* RAM32K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540A1A234F60003DB27E /* RAM32K.MOD */; };
+		DC5454941A234F61003DB27E /* REAL-ESTATE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540B1A234F61003DB27E /* REAL-ESTATE.MOD */; };
+		DC5454951A234F61003DB27E /* ROAM-0.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540C1A234F61003DB27E /* ROAM-0.MOD */; };
+		DC5454961A234F61003DB27E /* ROAM-0A.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540D1A234F61003DB27E /* ROAM-0A.MOD */; };
+		DC5454971A234F61003DB27E /* ROMSV01.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540E1A234F61003DB27E /* ROMSV01.MOD */; };
+		DC5454981A234F61003DB27E /* SANDBOX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540F1A234F61003DB27E /* SANDBOX.MOD */; };
+		DC5454991A234F61003DB27E /* SANDMATH-III.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454101A234F61003DB27E /* SANDMATH-III.MOD */; };
+		DC54549A1A234F61003DB27E /* SANDMATH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454111A234F61003DB27E /* SANDMATH.MOD */; };
+		DC54549B1A234F61003DB27E /* SECURITIES.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454121A234F61003DB27E /* SECURITIES.MOD */; };
+		DC54549C1A234F61003DB27E /* SENDPGM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454131A234F61003DB27E /* SENDPGM.MOD */; };
+		DC54549D1A234F61003DB27E /* SERVICE-CV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454141A234F61003DB27E /* SERVICE-CV.MOD */; };
+		DC54549E1A234F61003DB27E /* SERVICE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454151A234F61003DB27E /* SERVICE.MOD */; };
+		DC54549F1A234F61003DB27E /* SGS-GAS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454161A234F61003DB27E /* SGS-GAS.MOD */; };
+		DC5454A01A234F61003DB27E /* SIM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454171A234F61003DB27E /* SIM.MOD */; };
+		DC5454A11A234F61003DB27E /* SIMPLEX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454181A234F61003DB27E /* SIMPLEX.MOD */; };
+		DC5454A21A234F61003DB27E /* SKWIDBC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454191A234F61003DB27E /* SKWIDBC.MOD */; };
+		DC5454A31A234F61003DB27E /* SPEED-MACHINE2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541A1A234F61003DB27E /* SPEED-MACHINE2.MOD */; };
+		DC5454A41A234F61003DB27E /* STANDARD.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541B1A234F61003DB27E /* STANDARD.MOD */; };
+		DC5454A51A234F61003DB27E /* STAT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541C1A234F61003DB27E /* STAT.MOD */; };
+		DC5454A61A234F61003DB27E /* STRESS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541D1A234F61003DB27E /* STRESS.MOD */; };
+		DC5454A71A234F61003DB27E /* STRUCTURAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541E1A234F61003DB27E /* STRUCTURAL.MOD */; };
+		DC5454A81A234F61003DB27E /* SUP-R-ROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541F1A234F61003DB27E /* SUP-R-ROM.MOD */; };
+		DC5454A91A234F61003DB27E /* SURVEY.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454201A234F61003DB27E /* SURVEY.MOD */; };
+		DC5454AA1A234F61003DB27E /* THERMAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454211A234F61003DB27E /* THERMAL.MOD */; };
+		DC5454AB1A234F61003DB27E /* TIME.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454221A234F61003DB27E /* TIME.MOD */; };
+		DC5454AC1A234F61003DB27E /* TOMSROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454231A234F61003DB27E /* TOMSROM.MOD */; };
+		DC5454AD1A234F61003DB27E /* TOMSROM1.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454241A234F61003DB27E /* TOMSROM1.MOD */; };
+		DC5454AE1A234F61003DB27E /* TOOLBOX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454251A234F61003DB27E /* TOOLBOX.MOD */; };
+		DC5454AF1A234F61003DB27E /* USPS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454261A234F61003DB27E /* USPS.MOD */; };
+		DC5454B01A234F61003DB27E /* WAND.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454271A234F61003DB27E /* WAND.MOD */; };
+		DC5454B11A234F61003DB27E /* WWRAMBOX2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454281A234F61003DB27E /* WWRAMBOX2.MOD */; };
+		DC5454B21A234F61003DB27E /* WWRAMBOXI.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454291A234F61003DB27E /* WWRAMBOXI.MOD */; };
+		DC5454B31A234F61003DB27E /* WWRAMBOXII.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54542A1A234F61003DB27E /* WWRAMBOXII.MOD */; };
+		DC5454B41A234F61003DB27E /* ZENROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54542B1A234F61003DB27E /* ZENROM.MOD */; };
+		DC5454B51A234F61003DB27E /* ZEPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54542C1A234F61003DB27E /* ZEPROM.MOD */; };
 		DC56269D198B75E80040453F /* XNUT2.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC56268F198B75E80040453F /* XNUT2.ROM */; };
 		DC56269E198B75E80040453F /* XNUT1.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562690198B75E80040453F /* XNUT1.ROM */; };
 		DC56269F198B75E80040453F /* XNUT0.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562691198B75E80040453F /* XNUT0.ROM */; };
@@ -134,74 +203,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DC2E476E19957F5D00BCACAF /* 41Z.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = 41Z.MOD; path = MOD/41Z.MOD; sourceTree = "<group>"; };
-		DC2E476F19957F5D00BCACAF /* ADV-APP.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ADV-APP.MOD"; path = "MOD/ADV-APP.MOD"; sourceTree = "<group>"; };
-		DC2E477019957F5D00BCACAF /* ADVANTAGE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADVANTAGE.MOD; path = MOD/ADVANTAGE.MOD; sourceTree = "<group>"; };
-		DC2E477119957F5D00BCACAF /* AECROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AECROM.MOD; path = MOD/AECROM.MOD; sourceTree = "<group>"; };
-		DC2E477219957F5D00BCACAF /* AUTOSTART.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AUTOSTART.MOD; path = MOD/AUTOSTART.MOD; sourceTree = "<group>"; };
-		DC2E477319957F5D00BCACAF /* AVIATION.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AVIATION.MOD; path = MOD/AVIATION.MOD; sourceTree = "<group>"; };
-		DC2E477419957F5D00BCACAF /* BLDROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = BLDROM.MOD; path = MOD/BLDROM.MOD; sourceTree = "<group>"; };
-		DC2E477519957F5D00BCACAF /* CARD-RDR.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CARD-RDR.MOD"; path = "MOD/CARD-RDR.MOD"; sourceTree = "<group>"; };
-		DC2E477619957F5D00BCACAF /* CCD.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CCD.MOD; path = MOD/CCD.MOD; sourceTree = "<group>"; };
-		DC2E477719957F5D00BCACAF /* CIRCUIT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CIRCUIT.MOD; path = MOD/CIRCUIT.MOD; sourceTree = "<group>"; };
-		DC2E477819957F5D00BCACAF /* CLINICAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CLINICAL.MOD; path = MOD/CLINICAL.MOD; sourceTree = "<group>"; };
-		DC2E477919957F5D00BCACAF /* DATA-ACQ.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DATA-ACQ.MOD"; path = "MOD/DATA-ACQ.MOD"; sourceTree = "<group>"; };
-		DC2E477A19957F5D00BCACAF /* DAVID.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DAVID.MOD; path = MOD/DAVID.MOD; sourceTree = "<group>"; };
-		DC2E477B19957F5D00BCACAF /* DIAGNOSTIC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DIAGNOSTIC.MOD; path = MOD/DIAGNOSTIC.MOD; sourceTree = "<group>"; };
-		DC2E477C19957F5D00BCACAF /* ES-41.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ES-41.MOD"; path = "MOD/ES-41.MOD"; sourceTree = "<group>"; };
-		DC2E477D19957F5D00BCACAF /* ES-MLDL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ES-MLDL.MOD"; path = "MOD/ES-MLDL.MOD"; sourceTree = "<group>"; };
-		DC2E477E19957F5D00BCACAF /* EXT-FUNS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-FUNS.MOD"; path = "MOD/EXT-FUNS.MOD"; sourceTree = "<group>"; };
-		DC2E477F19957F5D00BCACAF /* EXT-IO.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-IO.MOD"; path = "MOD/EXT-IO.MOD"; sourceTree = "<group>"; };
-		DC2E478019957F5D00BCACAF /* EXT-MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-MEM.MOD"; path = "MOD/EXT-MEM.MOD"; sourceTree = "<group>"; };
-		DC2E478119957F5D00BCACAF /* FINANCE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = FINANCE.MOD; path = MOD/FINANCE.MOD; sourceTree = "<group>"; };
-		DC2E478219957F5D00BCACAF /* FORTH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = FORTH.MOD; path = MOD/FORTH.MOD; sourceTree = "<group>"; };
-		DC2E478319957F5D00BCACAF /* GAMES.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = GAMES.MOD; path = MOD/GAMES.MOD; sourceTree = "<group>"; };
-		DC2E478419957F5D00BCACAF /* HEP-2MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HEP-2MEM.MOD"; path = "MOD/HEP-2MEM.MOD"; sourceTree = "<group>"; };
-		DC2E478519957F5D00BCACAF /* HEP-MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HEP-MEM.MOD"; path = "MOD/HEP-MEM.MOD"; sourceTree = "<group>"; };
-		DC2E478619957F5D00BCACAF /* HEPAX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HEPAX.MOD; path = MOD/HEPAX.MOD; sourceTree = "<group>"; };
-		DC2E478719957F5D00BCACAF /* HOME-MGT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HOME-MGT.MOD"; path = "MOD/HOME-MGT.MOD"; sourceTree = "<group>"; };
-		DC2E478819957F5D00BCACAF /* HPIL-DEV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HPIL-DEV.MOD"; path = "MOD/HPIL-DEV.MOD"; sourceTree = "<group>"; };
-		DC2E478919957F5D00BCACAF /* HPIL-DIAG.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HPIL-DIAG.MOD"; path = "MOD/HPIL-DIAG.MOD"; sourceTree = "<group>"; };
-		DC2E478A19957F5D00BCACAF /* HPIL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HPIL.MOD; path = MOD/HPIL.MOD; sourceTree = "<group>"; };
-		DC2E478B19957F5D00BCACAF /* IR-PRINT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "IR-PRINT.MOD"; path = "MOD/IR-PRINT.MOD"; sourceTree = "<group>"; };
-		DC2E478C19957F5D00BCACAF /* LAITRAM-XQ2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "LAITRAM-XQ2.MOD"; path = "MOD/LAITRAM-XQ2.MOD"; sourceTree = "<group>"; };
-		DC2E478D19957F5D00BCACAF /* LANDNAV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = LANDNAV.MOD; path = MOD/LANDNAV.MOD; sourceTree = "<group>"; };
-		DC2E478E19957F5D00BCACAF /* MACHINE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MACHINE.MOD; path = MOD/MACHINE.MOD; sourceTree = "<group>"; };
-		DC2E478F19957F5D00BCACAF /* MATH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MATH.MOD; path = MOD/MATH.MOD; sourceTree = "<group>"; };
-		DC2E479019957F5D00BCACAF /* MATHSTAT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MATHSTAT.MOD; path = MOD/MATHSTAT.MOD; sourceTree = "<group>"; };
-		DC2E479119957F5D00BCACAF /* MC-EPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MC-EPROM.MOD"; path = "MOD/MC-EPROM.MOD"; sourceTree = "<group>"; };
-		DC2E479219957F5D00BCACAF /* MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MEM.MOD; path = MOD/MEM.MOD; sourceTree = "<group>"; };
-		DC2E479319957F5D00BCACAF /* MLROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MLROM.MOD; path = MOD/MLROM.MOD; sourceTree = "<group>"; };
-		DC2E479419957F5D00BCACAF /* NAVIGATION.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NAVIGATION.MOD; path = MOD/NAVIGATION.MOD; sourceTree = "<group>"; };
-		DC2E479519957F5D00BCACAF /* NFCROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NFCROM.MOD; path = MOD/NFCROM.MOD; sourceTree = "<group>"; };
-		DC2E479619957F5D00BCACAF /* NUT-C.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-C.MOD"; path = "MOD/NUT-C.MOD"; sourceTree = "<group>"; };
-		DC2E479719957F5D00BCACAF /* NUT-CV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CV.MOD"; path = "MOD/NUT-CV.MOD"; sourceTree = "<group>"; };
-		DC2E479819957F5D00BCACAF /* NUT-CX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CX.MOD"; path = "MOD/NUT-CX.MOD"; sourceTree = "<group>"; };
-		DC2E479919957F5D00BCACAF /* PETROLEUM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PETROLEUM.MOD; path = MOD/PETROLEUM.MOD; sourceTree = "<group>"; };
-		DC2E479A19957F5D00BCACAF /* PLOTTER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PLOTTER.MOD; path = MOD/PLOTTER.MOD; sourceTree = "<group>"; };
-		DC2E479B19957F5D00BCACAF /* PPC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PPC.MOD; path = MOD/PPC.MOD; sourceTree = "<group>"; };
-		DC2E479C19957F5D00BCACAF /* PRINTER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PRINTER.MOD; path = MOD/PRINTER.MOD; sourceTree = "<group>"; };
-		DC2E479D19957F5D00BCACAF /* PROTOCODER2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROTOCODER2.MOD; path = MOD/PROTOCODER2.MOD; sourceTree = "<group>"; };
-		DC2E479E19957F5D00BCACAF /* PROTOPARIO.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROTOPARIO.MOD; path = MOD/PROTOPARIO.MOD; sourceTree = "<group>"; };
-		DC2E479F19957F5D00BCACAF /* QUADMEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = QUADMEM.MOD; path = MOD/QUADMEM.MOD; sourceTree = "<group>"; };
-		DC2E47A019957F5D00BCACAF /* RAM4K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM4K.MOD; path = MOD/RAM4K.MOD; sourceTree = "<group>"; };
-		DC2E47A119957F5D00BCACAF /* RAM8K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM8K.MOD; path = MOD/RAM8K.MOD; sourceTree = "<group>"; };
-		DC2E47A219957F5D00BCACAF /* RAM16K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM16K.MOD; path = MOD/RAM16K.MOD; sourceTree = "<group>"; };
-		DC2E47A319957F5D00BCACAF /* RAM32K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM32K.MOD; path = MOD/RAM32K.MOD; sourceTree = "<group>"; };
-		DC2E47A419957F5D00BCACAF /* REAL-ESTATE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "REAL-ESTATE.MOD"; path = "MOD/REAL-ESTATE.MOD"; sourceTree = "<group>"; };
-		DC2E47A519957F5D00BCACAF /* SANDBOX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SANDBOX.MOD; path = MOD/SANDBOX.MOD; sourceTree = "<group>"; };
-		DC2E47A619957F5D00BCACAF /* SANDMATH-III.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SANDMATH-III.MOD"; path = "MOD/SANDMATH-III.MOD"; sourceTree = "<group>"; };
-		DC2E47A719957F5D00BCACAF /* SECURITIES.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SECURITIES.MOD; path = MOD/SECURITIES.MOD; sourceTree = "<group>"; };
-		DC2E47A819957F5D00BCACAF /* SERVICE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SERVICE.MOD; path = MOD/SERVICE.MOD; sourceTree = "<group>"; };
-		DC2E47A919957F5D00BCACAF /* STANDARD.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STANDARD.MOD; path = MOD/STANDARD.MOD; sourceTree = "<group>"; };
-		DC2E47AA19957F5D00BCACAF /* STAT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STAT.MOD; path = MOD/STAT.MOD; sourceTree = "<group>"; };
-		DC2E47AB19957F5D00BCACAF /* STRESS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STRESS.MOD; path = MOD/STRESS.MOD; sourceTree = "<group>"; };
-		DC2E47AC19957F5D00BCACAF /* STRUCTURAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STRUCTURAL.MOD; path = MOD/STRUCTURAL.MOD; sourceTree = "<group>"; };
-		DC2E47AD19957F5D00BCACAF /* SURVEY.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SURVEY.MOD; path = MOD/SURVEY.MOD; sourceTree = "<group>"; };
-		DC2E47AE19957F5D00BCACAF /* THERMAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = THERMAL.MOD; path = MOD/THERMAL.MOD; sourceTree = "<group>"; };
-		DC2E47AF19957F5D00BCACAF /* TIME.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TIME.MOD; path = MOD/TIME.MOD; sourceTree = "<group>"; };
-		DC2E47B019957F5D00BCACAF /* WAND.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WAND.MOD; path = MOD/WAND.MOD; sourceTree = "<group>"; };
-		DC2E47B119957F5D00BCACAF /* WWRAMBOXII.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WWRAMBOXII.MOD; path = MOD/WWRAMBOXII.MOD; sourceTree = "<group>"; };
 		DC45284D19897DA600C40B6C /* my41.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my41.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC45285119897DA600C40B6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC45285219897DA600C40B6C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -216,6 +217,143 @@
 		DC46ED8D19B3A09B0091E143 /* hpchar.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = hpchar.geom; sourceTree = "<group>"; };
 		DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugerMenu.swift; path = Classes/DebugerMenu.swift; sourceTree = "<group>"; };
 		DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugCPU.swift; path = Classes/DebugCPU.swift; sourceTree = "<group>"; };
+		DC5453A41A234F60003DB27E /* 41Z.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = 41Z.MOD; path = MOD/41Z.MOD; sourceTree = "<group>"; };
+		DC5453A51A234F60003DB27E /* 83TRINH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = 83TRINH.MOD; path = MOD/83TRINH.MOD; sourceTree = "<group>"; };
+		DC5453A61A234F60003DB27E /* ADV-APP.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ADV-APP.MOD"; path = "MOD/ADV-APP.MOD"; sourceTree = "<group>"; };
+		DC5453A71A234F60003DB27E /* ADVANTAGE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADVANTAGE.MOD; path = MOD/ADVANTAGE.MOD; sourceTree = "<group>"; };
+		DC5453A81A234F60003DB27E /* AECROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AECROM.MOD; path = MOD/AECROM.MOD; sourceTree = "<group>"; };
+		DC5453A91A234F60003DB27E /* AFDC1.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AFDC1.MOD; path = MOD/AFDC1.MOD; sourceTree = "<group>"; };
+		DC5453AA1A234F60003DB27E /* AFDC2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AFDC2.MOD; path = MOD/AFDC2.MOD; sourceTree = "<group>"; };
+		DC5453AB1A234F60003DB27E /* ALPHA.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ALPHA.MOD; path = MOD/ALPHA.MOD; sourceTree = "<group>"; };
+		DC5453AC1A234F60003DB27E /* APAC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = APAC.MOD; path = MOD/APAC.MOD; sourceTree = "<group>"; };
+		DC5453AD1A234F60003DB27E /* ASSEMBLER3.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ASSEMBLER3.MOD; path = MOD/ASSEMBLER3.MOD; sourceTree = "<group>"; };
+		DC5453AE1A234F60003DB27E /* ASSEMBLER4.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ASSEMBLER4.MOD; path = MOD/ASSEMBLER4.MOD; sourceTree = "<group>"; };
+		DC5453AF1A234F60003DB27E /* ASTROLOGY.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ASTROLOGY.MOD; path = MOD/ASTROLOGY.MOD; sourceTree = "<group>"; };
+		DC5453B01A234F60003DB27E /* AUTOFINANCE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AUTOFINANCE.MOD; path = MOD/AUTOFINANCE.MOD; sourceTree = "<group>"; };
+		DC5453B11A234F60003DB27E /* AUTOSTART.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AUTOSTART.MOD; path = MOD/AUTOSTART.MOD; sourceTree = "<group>"; };
+		DC5453B21A234F60003DB27E /* AVIATION.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AVIATION.MOD; path = MOD/AVIATION.MOD; sourceTree = "<group>"; };
+		DC5453B31A234F60003DB27E /* BCMW.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = BCMW.MOD; path = MOD/BCMW.MOD; sourceTree = "<group>"; };
+		DC5453B41A234F60003DB27E /* BEECHCRAFT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = BEECHCRAFT.MOD; path = MOD/BEECHCRAFT.MOD; sourceTree = "<group>"; };
+		DC5453B51A234F60003DB27E /* BLDROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = BLDROM.MOD; path = MOD/BLDROM.MOD; sourceTree = "<group>"; };
+		DC5453B61A234F60003DB27E /* BOEING-B52.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BOEING-B52.MOD"; path = "MOD/BOEING-B52.MOD"; sourceTree = "<group>"; };
+		DC5453B71A234F60003DB27E /* CARD-RDR.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CARD-RDR.MOD"; path = "MOD/CARD-RDR.MOD"; sourceTree = "<group>"; };
+		DC5453B81A234F60003DB27E /* CCD-MODIFIED.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CCD-MODIFIED.MOD"; path = "MOD/CCD-MODIFIED.MOD"; sourceTree = "<group>"; };
+		DC5453B91A234F60003DB27E /* CCD-OSX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CCD-OSX.MOD"; path = "MOD/CCD-OSX.MOD"; sourceTree = "<group>"; };
+		DC5453BA1A234F60003DB27E /* CCD.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CCD.MOD; path = MOD/CCD.MOD; sourceTree = "<group>"; };
+		DC5453BB1A234F60003DB27E /* CHEMUSER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CHEMUSER.MOD; path = MOD/CHEMUSER.MOD; sourceTree = "<group>"; };
+		DC5453BC1A234F60003DB27E /* CIRCUIT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CIRCUIT.MOD; path = MOD/CIRCUIT.MOD; sourceTree = "<group>"; };
+		DC5453BD1A234F60003DB27E /* CLINICAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CLINICAL.MOD; path = MOD/CLINICAL.MOD; sourceTree = "<group>"; };
+		DC5453BE1A234F60003DB27E /* CMT-200.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CMT-200.MOD"; path = "MOD/CMT-200.MOD"; sourceTree = "<group>"; };
+		DC5453BF1A234F60003DB27E /* CMT-300.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CMT-300.MOD"; path = "MOD/CMT-300.MOD"; sourceTree = "<group>"; };
+		DC5453C01A234F60003DB27E /* CVPAK.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CVPAK.MOD; path = MOD/CVPAK.MOD; sourceTree = "<group>"; };
+		DC5453C11A234F60003DB27E /* DATA-ACQ.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DATA-ACQ.MOD"; path = "MOD/DATA-ACQ.MOD"; sourceTree = "<group>"; };
+		DC5453C21A234F60003DB27E /* DAVID.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DAVID.MOD; path = MOD/DAVID.MOD; sourceTree = "<group>"; };
+		DC5453C31A234F60003DB27E /* DIAGNOSTIC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DIAGNOSTIC.MOD; path = MOD/DIAGNOSTIC.MOD; sourceTree = "<group>"; };
+		DC5453C41A234F60003DB27E /* DIAMOND.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DIAMOND.MOD; path = MOD/DIAMOND.MOD; sourceTree = "<group>"; };
+		DC5453C51A234F60003DB27E /* DISASM4C.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DISASM4C.MOD; path = MOD/DISASM4C.MOD; sourceTree = "<group>"; };
+		DC5453C61A234F60003DB27E /* DISASM4D.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DISASM4D.MOD; path = MOD/DISASM4D.MOD; sourceTree = "<group>"; };
+		DC5453C71A234F60003DB27E /* DYERKA.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DYERKA.MOD; path = MOD/DYERKA.MOD; sourceTree = "<group>"; };
+		DC5453C81A234F60003DB27E /* ES-41.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ES-41.MOD"; path = "MOD/ES-41.MOD"; sourceTree = "<group>"; };
+		DC5453C91A234F60003DB27E /* ES-MLDL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ES-MLDL.MOD"; path = "MOD/ES-MLDL.MOD"; sourceTree = "<group>"; };
+		DC5453CA1A234F60003DB27E /* EXT-FUNS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-FUNS.MOD"; path = "MOD/EXT-FUNS.MOD"; sourceTree = "<group>"; };
+		DC5453CB1A234F60003DB27E /* EXT-IL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-IL.MOD"; path = "MOD/EXT-IL.MOD"; sourceTree = "<group>"; };
+		DC5453CC1A234F60003DB27E /* EXT-IO.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-IO.MOD"; path = "MOD/EXT-IO.MOD"; sourceTree = "<group>"; };
+		DC5453CD1A234F60003DB27E /* EXT-MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-MEM.MOD"; path = "MOD/EXT-MEM.MOD"; sourceTree = "<group>"; };
+		DC5453CE1A234F60003DB27E /* FINANCE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = FINANCE.MOD; path = MOD/FINANCE.MOD; sourceTree = "<group>"; };
+		DC5453CF1A234F60003DB27E /* FORTH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = FORTH.MOD; path = MOD/FORTH.MOD; sourceTree = "<group>"; };
+		DC5453D01A234F60003DB27E /* GAMES.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = GAMES.MOD; path = MOD/GAMES.MOD; sourceTree = "<group>"; };
+		DC5453D11A234F60003DB27E /* GMAC2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = GMAC2.MOD; path = MOD/GMAC2.MOD; sourceTree = "<group>"; };
+		DC5453D21A234F60003DB27E /* GMAC3.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = GMAC3.MOD; path = MOD/GMAC3.MOD; sourceTree = "<group>"; };
+		DC5453D31A234F60003DB27E /* HEP-2MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HEP-2MEM.MOD"; path = "MOD/HEP-2MEM.MOD"; sourceTree = "<group>"; };
+		DC5453D41A234F60003DB27E /* HEP-MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HEP-MEM.MOD"; path = "MOD/HEP-MEM.MOD"; sourceTree = "<group>"; };
+		DC5453D51A234F60003DB27E /* Hepax-1C.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Hepax-1C.mod"; path = "MOD/Hepax-1C.mod"; sourceTree = "<group>"; };
+		DC5453D61A234F60003DB27E /* HEPAX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HEPAX.MOD; path = MOD/HEPAX.MOD; sourceTree = "<group>"; };
+		DC5453D71A234F60003DB27E /* HOME-MGT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HOME-MGT.MOD"; path = "MOD/HOME-MGT.MOD"; sourceTree = "<group>"; };
+		DC5453D81A234F60003DB27E /* HPIL-DEV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HPIL-DEV.MOD"; path = "MOD/HPIL-DEV.MOD"; sourceTree = "<group>"; };
+		DC5453D91A234F60003DB27E /* HPIL-DIAG.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HPIL-DIAG.MOD"; path = "MOD/HPIL-DIAG.MOD"; sourceTree = "<group>"; };
+		DC5453DA1A234F60003DB27E /* HPIL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HPIL.MOD; path = MOD/HPIL.MOD; sourceTree = "<group>"; };
+		DC5453DB1A234F60003DB27E /* HYDRACOMP.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HYDRACOMP.MOD; path = MOD/HYDRACOMP.MOD; sourceTree = "<group>"; };
+		DC5453DC1A234F60003DB27E /* ICEBOX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICEBOX.MOD; path = MOD/ICEBOX.MOD; sourceTree = "<group>"; };
+		DC5453DD1A234F60003DB27E /* ICODE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICODE.MOD; path = MOD/ICODE.MOD; sourceTree = "<group>"; };
+		DC5453DE1A234F60003DB27E /* IR-PRINT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "IR-PRINT.MOD"; path = "MOD/IR-PRINT.MOD"; sourceTree = "<group>"; };
+		DC5453DF1A234F60003DB27E /* LAITRAM-XQ2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "LAITRAM-XQ2.MOD"; path = "MOD/LAITRAM-XQ2.MOD"; sourceTree = "<group>"; };
+		DC5453E01A234F60003DB27E /* LANDNAV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = LANDNAV.MOD; path = MOD/LANDNAV.MOD; sourceTree = "<group>"; };
+		DC5453E11A234F60003DB27E /* LBLAPP1A.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = LBLAPP1A.MOD; path = MOD/LBLAPP1A.MOD; sourceTree = "<group>"; };
+		DC5453E21A234F60003DB27E /* MACHINE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MACHINE.MOD; path = MOD/MACHINE.MOD; sourceTree = "<group>"; };
+		DC5453E31A234F60003DB27E /* MATH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MATH.MOD; path = MOD/MATH.MOD; sourceTree = "<group>"; };
+		DC5453E41A234F60003DB27E /* MATHSTAT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MATHSTAT.MOD; path = MOD/MATHSTAT.MOD; sourceTree = "<group>"; };
+		DC5453E51A234F60003DB27E /* MC-EPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MC-EPROM.MOD"; path = "MOD/MC-EPROM.MOD"; sourceTree = "<group>"; };
+		DC5453E61A234F60003DB27E /* MCTEST.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MCTEST.MOD; path = MOD/MCTEST.MOD; sourceTree = "<group>"; };
+		DC5453E71A234F60003DB27E /* MDP1.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MDP1.MOD; path = MOD/MDP1.MOD; sourceTree = "<group>"; };
+		DC5453E81A234F60003DB27E /* MDP2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MDP2.MOD; path = MOD/MDP2.MOD; sourceTree = "<group>"; };
+		DC5453E91A234F60003DB27E /* MELBOURNE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MELBOURNE.MOD; path = MOD/MELBOURNE.MOD; sourceTree = "<group>"; };
+		DC5453EA1A234F60003DB27E /* MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MEM.MOD; path = MOD/MEM.MOD; sourceTree = "<group>"; };
+		DC5453EB1A234F60003DB27E /* MIL-ENG.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MIL-ENG.MOD"; path = "MOD/MIL-ENG.MOD"; sourceTree = "<group>"; };
+		DC5453EC1A234F60003DB27E /* MLDLOS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MLDLOS.MOD; path = MOD/MLDLOS.MOD; sourceTree = "<group>"; };
+		DC5453ED1A234F60003DB27E /* MLEPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MLEPROM.MOD; path = MOD/MLEPROM.MOD; sourceTree = "<group>"; };
+		DC5453EE1A234F60003DB27E /* MLROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MLROM.MOD; path = MOD/MLROM.MOD; sourceTree = "<group>"; };
+		DC5453EF1A234F60003DB27E /* MMEPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MMEPROM.MOD; path = MOD/MMEPROM.MOD; sourceTree = "<group>"; };
+		DC5453F01A234F60003DB27E /* MUECKE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MUECKE.MOD; path = MOD/MUECKE.MOD; sourceTree = "<group>"; };
+		DC5453F11A234F60003DB27E /* NAVCOM2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NAVCOM2.MOD; path = MOD/NAVCOM2.MOD; sourceTree = "<group>"; };
+		DC5453F21A234F60003DB27E /* NAVIGATION.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NAVIGATION.MOD; path = MOD/NAVIGATION.MOD; sourceTree = "<group>"; };
+		DC5453F31A234F60003DB27E /* NAVPAC2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NAVPAC2.MOD; path = MOD/NAVPAC2.MOD; sourceTree = "<group>"; };
+		DC5453F41A234F60003DB27E /* NFCROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NFCROM.MOD; path = MOD/NFCROM.MOD; sourceTree = "<group>"; };
+		DC5453F51A234F60003DB27E /* NUT-C.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-C.MOD"; path = "MOD/NUT-C.MOD"; sourceTree = "<group>"; };
+		DC5453F61A234F60003DB27E /* NUT-CV-GFF.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CV-GFF.MOD"; path = "MOD/NUT-CV-GFF.MOD"; sourceTree = "<group>"; };
+		DC5453F71A234F60003DB27E /* NUT-CV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CV.MOD"; path = "MOD/NUT-CV.MOD"; sourceTree = "<group>"; };
+		DC5453F81A234F60003DB27E /* NUT-CX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CX.MOD"; path = "MOD/NUT-CX.MOD"; sourceTree = "<group>"; };
+		DC5453F91A234F60003DB27E /* PANAME.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PANAME.MOD; path = MOD/PANAME.MOD; sourceTree = "<group>"; };
+		DC5453FA1A234F60003DB27E /* PCCOM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PCCOM.MOD; path = MOD/PCCOM.MOD; sourceTree = "<group>"; };
+		DC5453FB1A234F60003DB27E /* PETROLEUM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PETROLEUM.MOD; path = MOD/PETROLEUM.MOD; sourceTree = "<group>"; };
+		DC5453FC1A234F60003DB27E /* PLOTTER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PLOTTER.MOD; path = MOD/PLOTTER.MOD; sourceTree = "<group>"; };
+		DC5453FD1A234F60003DB27E /* PPC-MELB.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PPC-MELB.MOD"; path = "MOD/PPC-MELB.MOD"; sourceTree = "<group>"; };
+		DC5453FE1A234F60003DB27E /* PPC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PPC.MOD; path = MOD/PPC.MOD; sourceTree = "<group>"; };
+		DC5453FF1A234F60003DB27E /* PRIDE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PRIDE.MOD; path = MOD/PRIDE.MOD; sourceTree = "<group>"; };
+		DC5454001A234F60003DB27E /* PRINTER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PRINTER.MOD; path = MOD/PRINTER.MOD; sourceTree = "<group>"; };
+		DC5454011A234F60003DB27E /* PRINTERSERVICE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PRINTERSERVICE.MOD; path = MOD/PRINTERSERVICE.MOD; sourceTree = "<group>"; };
+		DC5454021A234F60003DB27E /* PROFISET.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROFISET.MOD; path = MOD/PROFISET.MOD; sourceTree = "<group>"; };
+		DC5454031A234F60003DB27E /* PROTOCODER2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROTOCODER2.MOD; path = MOD/PROTOCODER2.MOD; sourceTree = "<group>"; };
+		DC5454041A234F60003DB27E /* PROTOPARIO.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROTOPARIO.MOD; path = MOD/PROTOPARIO.MOD; sourceTree = "<group>"; };
+		DC5454051A234F60003DB27E /* PS0F.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PS0F.MOD; path = MOD/PS0F.MOD; sourceTree = "<group>"; };
+		DC5454061A234F60003DB27E /* QUADMEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = QUADMEM.MOD; path = MOD/QUADMEM.MOD; sourceTree = "<group>"; };
+		DC5454071A234F60003DB27E /* RAM4K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM4K.MOD; path = MOD/RAM4K.MOD; sourceTree = "<group>"; };
+		DC5454081A234F60003DB27E /* RAM8K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM8K.MOD; path = MOD/RAM8K.MOD; sourceTree = "<group>"; };
+		DC5454091A234F60003DB27E /* RAM16K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM16K.MOD; path = MOD/RAM16K.MOD; sourceTree = "<group>"; };
+		DC54540A1A234F60003DB27E /* RAM32K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM32K.MOD; path = MOD/RAM32K.MOD; sourceTree = "<group>"; };
+		DC54540B1A234F61003DB27E /* REAL-ESTATE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "REAL-ESTATE.MOD"; path = "MOD/REAL-ESTATE.MOD"; sourceTree = "<group>"; };
+		DC54540C1A234F61003DB27E /* ROAM-0.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ROAM-0.MOD"; path = "MOD/ROAM-0.MOD"; sourceTree = "<group>"; };
+		DC54540D1A234F61003DB27E /* ROAM-0A.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ROAM-0A.MOD"; path = "MOD/ROAM-0A.MOD"; sourceTree = "<group>"; };
+		DC54540E1A234F61003DB27E /* ROMSV01.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ROMSV01.MOD; path = MOD/ROMSV01.MOD; sourceTree = "<group>"; };
+		DC54540F1A234F61003DB27E /* SANDBOX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SANDBOX.MOD; path = MOD/SANDBOX.MOD; sourceTree = "<group>"; };
+		DC5454101A234F61003DB27E /* SANDMATH-III.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SANDMATH-III.MOD"; path = "MOD/SANDMATH-III.MOD"; sourceTree = "<group>"; };
+		DC5454111A234F61003DB27E /* SANDMATH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SANDMATH.MOD; path = MOD/SANDMATH.MOD; sourceTree = "<group>"; };
+		DC5454121A234F61003DB27E /* SECURITIES.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SECURITIES.MOD; path = MOD/SECURITIES.MOD; sourceTree = "<group>"; };
+		DC5454131A234F61003DB27E /* SENDPGM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SENDPGM.MOD; path = MOD/SENDPGM.MOD; sourceTree = "<group>"; };
+		DC5454141A234F61003DB27E /* SERVICE-CV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SERVICE-CV.MOD"; path = "MOD/SERVICE-CV.MOD"; sourceTree = "<group>"; };
+		DC5454151A234F61003DB27E /* SERVICE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SERVICE.MOD; path = MOD/SERVICE.MOD; sourceTree = "<group>"; };
+		DC5454161A234F61003DB27E /* SGS-GAS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SGS-GAS.MOD"; path = "MOD/SGS-GAS.MOD"; sourceTree = "<group>"; };
+		DC5454171A234F61003DB27E /* SIM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SIM.MOD; path = MOD/SIM.MOD; sourceTree = "<group>"; };
+		DC5454181A234F61003DB27E /* SIMPLEX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SIMPLEX.MOD; path = MOD/SIMPLEX.MOD; sourceTree = "<group>"; };
+		DC5454191A234F61003DB27E /* SKWIDBC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SKWIDBC.MOD; path = MOD/SKWIDBC.MOD; sourceTree = "<group>"; };
+		DC54541A1A234F61003DB27E /* SPEED-MACHINE2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SPEED-MACHINE2.MOD"; path = "MOD/SPEED-MACHINE2.MOD"; sourceTree = "<group>"; };
+		DC54541B1A234F61003DB27E /* STANDARD.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STANDARD.MOD; path = MOD/STANDARD.MOD; sourceTree = "<group>"; };
+		DC54541C1A234F61003DB27E /* STAT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STAT.MOD; path = MOD/STAT.MOD; sourceTree = "<group>"; };
+		DC54541D1A234F61003DB27E /* STRESS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STRESS.MOD; path = MOD/STRESS.MOD; sourceTree = "<group>"; };
+		DC54541E1A234F61003DB27E /* STRUCTURAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STRUCTURAL.MOD; path = MOD/STRUCTURAL.MOD; sourceTree = "<group>"; };
+		DC54541F1A234F61003DB27E /* SUP-R-ROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUP-R-ROM.MOD"; path = "MOD/SUP-R-ROM.MOD"; sourceTree = "<group>"; };
+		DC5454201A234F61003DB27E /* SURVEY.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SURVEY.MOD; path = MOD/SURVEY.MOD; sourceTree = "<group>"; };
+		DC5454211A234F61003DB27E /* THERMAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = THERMAL.MOD; path = MOD/THERMAL.MOD; sourceTree = "<group>"; };
+		DC5454221A234F61003DB27E /* TIME.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TIME.MOD; path = MOD/TIME.MOD; sourceTree = "<group>"; };
+		DC5454231A234F61003DB27E /* TOMSROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TOMSROM.MOD; path = MOD/TOMSROM.MOD; sourceTree = "<group>"; };
+		DC5454241A234F61003DB27E /* TOMSROM1.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TOMSROM1.MOD; path = MOD/TOMSROM1.MOD; sourceTree = "<group>"; };
+		DC5454251A234F61003DB27E /* TOOLBOX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TOOLBOX.MOD; path = MOD/TOOLBOX.MOD; sourceTree = "<group>"; };
+		DC5454261A234F61003DB27E /* USPS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = USPS.MOD; path = MOD/USPS.MOD; sourceTree = "<group>"; };
+		DC5454271A234F61003DB27E /* WAND.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WAND.MOD; path = MOD/WAND.MOD; sourceTree = "<group>"; };
+		DC5454281A234F61003DB27E /* WWRAMBOX2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WWRAMBOX2.MOD; path = MOD/WWRAMBOX2.MOD; sourceTree = "<group>"; };
+		DC5454291A234F61003DB27E /* WWRAMBOXI.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WWRAMBOXI.MOD; path = MOD/WWRAMBOXI.MOD; sourceTree = "<group>"; };
+		DC54542A1A234F61003DB27E /* WWRAMBOXII.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WWRAMBOXII.MOD; path = MOD/WWRAMBOXII.MOD; sourceTree = "<group>"; };
+		DC54542B1A234F61003DB27E /* ZENROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ZENROM.MOD; path = MOD/ZENROM.MOD; sourceTree = "<group>"; };
+		DC54542C1A234F61003DB27E /* ZEPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ZEPROM.MOD; path = MOD/ZEPROM.MOD; sourceTree = "<group>"; };
 		DC56268F198B75E80040453F /* XNUT2.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT2.ROM; path = ROMs/XNUT2.ROM; sourceTree = "<group>"; };
 		DC562690198B75E80040453F /* XNUT1.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT1.ROM; path = ROMs/XNUT1.ROM; sourceTree = "<group>"; };
 		DC562691198B75E80040453F /* XNUT0.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT0.ROM; path = ROMs/XNUT0.ROM; sourceTree = "<group>"; };
@@ -293,74 +431,143 @@
 		DC2E476D19957F4C00BCACAF /* MODs */ = {
 			isa = PBXGroup;
 			children = (
-				DC2E476E19957F5D00BCACAF /* 41Z.MOD */,
-				DC2E476F19957F5D00BCACAF /* ADV-APP.MOD */,
-				DC2E477019957F5D00BCACAF /* ADVANTAGE.MOD */,
-				DC2E477119957F5D00BCACAF /* AECROM.MOD */,
-				DC2E477219957F5D00BCACAF /* AUTOSTART.MOD */,
-				DC2E477319957F5D00BCACAF /* AVIATION.MOD */,
-				DC2E477419957F5D00BCACAF /* BLDROM.MOD */,
-				DC2E477519957F5D00BCACAF /* CARD-RDR.MOD */,
-				DC2E477619957F5D00BCACAF /* CCD.MOD */,
-				DC2E477719957F5D00BCACAF /* CIRCUIT.MOD */,
-				DC2E477819957F5D00BCACAF /* CLINICAL.MOD */,
-				DC2E477919957F5D00BCACAF /* DATA-ACQ.MOD */,
-				DC2E477A19957F5D00BCACAF /* DAVID.MOD */,
-				DC2E477B19957F5D00BCACAF /* DIAGNOSTIC.MOD */,
-				DC2E477C19957F5D00BCACAF /* ES-41.MOD */,
-				DC2E477D19957F5D00BCACAF /* ES-MLDL.MOD */,
-				DC2E477E19957F5D00BCACAF /* EXT-FUNS.MOD */,
-				DC2E477F19957F5D00BCACAF /* EXT-IO.MOD */,
-				DC2E478019957F5D00BCACAF /* EXT-MEM.MOD */,
-				DC2E478119957F5D00BCACAF /* FINANCE.MOD */,
-				DC2E478219957F5D00BCACAF /* FORTH.MOD */,
-				DC2E478319957F5D00BCACAF /* GAMES.MOD */,
-				DC2E478419957F5D00BCACAF /* HEP-2MEM.MOD */,
-				DC2E478519957F5D00BCACAF /* HEP-MEM.MOD */,
-				DC2E478619957F5D00BCACAF /* HEPAX.MOD */,
-				DC2E478719957F5D00BCACAF /* HOME-MGT.MOD */,
-				DC2E478819957F5D00BCACAF /* HPIL-DEV.MOD */,
-				DC2E478919957F5D00BCACAF /* HPIL-DIAG.MOD */,
-				DC2E478A19957F5D00BCACAF /* HPIL.MOD */,
-				DC2E478B19957F5D00BCACAF /* IR-PRINT.MOD */,
-				DC2E478C19957F5D00BCACAF /* LAITRAM-XQ2.MOD */,
-				DC2E478D19957F5D00BCACAF /* LANDNAV.MOD */,
-				DC2E478E19957F5D00BCACAF /* MACHINE.MOD */,
-				DC2E478F19957F5D00BCACAF /* MATH.MOD */,
-				DC2E479019957F5D00BCACAF /* MATHSTAT.MOD */,
-				DC2E479119957F5D00BCACAF /* MC-EPROM.MOD */,
-				DC2E479219957F5D00BCACAF /* MEM.MOD */,
-				DC2E479319957F5D00BCACAF /* MLROM.MOD */,
-				DC2E479419957F5D00BCACAF /* NAVIGATION.MOD */,
-				DC2E479519957F5D00BCACAF /* NFCROM.MOD */,
-				DC2E479619957F5D00BCACAF /* NUT-C.MOD */,
-				DC2E479719957F5D00BCACAF /* NUT-CV.MOD */,
-				DC2E479819957F5D00BCACAF /* NUT-CX.MOD */,
-				DC2E479919957F5D00BCACAF /* PETROLEUM.MOD */,
-				DC2E479A19957F5D00BCACAF /* PLOTTER.MOD */,
-				DC2E479B19957F5D00BCACAF /* PPC.MOD */,
-				DC2E479C19957F5D00BCACAF /* PRINTER.MOD */,
-				DC2E479D19957F5D00BCACAF /* PROTOCODER2.MOD */,
-				DC2E479E19957F5D00BCACAF /* PROTOPARIO.MOD */,
-				DC2E479F19957F5D00BCACAF /* QUADMEM.MOD */,
-				DC2E47A019957F5D00BCACAF /* RAM4K.MOD */,
-				DC2E47A119957F5D00BCACAF /* RAM8K.MOD */,
-				DC2E47A219957F5D00BCACAF /* RAM16K.MOD */,
-				DC2E47A319957F5D00BCACAF /* RAM32K.MOD */,
-				DC2E47A419957F5D00BCACAF /* REAL-ESTATE.MOD */,
-				DC2E47A519957F5D00BCACAF /* SANDBOX.MOD */,
-				DC2E47A619957F5D00BCACAF /* SANDMATH-III.MOD */,
-				DC2E47A719957F5D00BCACAF /* SECURITIES.MOD */,
-				DC2E47A819957F5D00BCACAF /* SERVICE.MOD */,
-				DC2E47A919957F5D00BCACAF /* STANDARD.MOD */,
-				DC2E47AA19957F5D00BCACAF /* STAT.MOD */,
-				DC2E47AB19957F5D00BCACAF /* STRESS.MOD */,
-				DC2E47AC19957F5D00BCACAF /* STRUCTURAL.MOD */,
-				DC2E47AD19957F5D00BCACAF /* SURVEY.MOD */,
-				DC2E47AE19957F5D00BCACAF /* THERMAL.MOD */,
-				DC2E47AF19957F5D00BCACAF /* TIME.MOD */,
-				DC2E47B019957F5D00BCACAF /* WAND.MOD */,
-				DC2E47B119957F5D00BCACAF /* WWRAMBOXII.MOD */,
+				DC5453A41A234F60003DB27E /* 41Z.MOD */,
+				DC5453A51A234F60003DB27E /* 83TRINH.MOD */,
+				DC5453A61A234F60003DB27E /* ADV-APP.MOD */,
+				DC5453A71A234F60003DB27E /* ADVANTAGE.MOD */,
+				DC5453A81A234F60003DB27E /* AECROM.MOD */,
+				DC5453A91A234F60003DB27E /* AFDC1.MOD */,
+				DC5453AA1A234F60003DB27E /* AFDC2.MOD */,
+				DC5453AB1A234F60003DB27E /* ALPHA.MOD */,
+				DC5453AC1A234F60003DB27E /* APAC.MOD */,
+				DC5453AD1A234F60003DB27E /* ASSEMBLER3.MOD */,
+				DC5453AE1A234F60003DB27E /* ASSEMBLER4.MOD */,
+				DC5453AF1A234F60003DB27E /* ASTROLOGY.MOD */,
+				DC5453B01A234F60003DB27E /* AUTOFINANCE.MOD */,
+				DC5453B11A234F60003DB27E /* AUTOSTART.MOD */,
+				DC5453B21A234F60003DB27E /* AVIATION.MOD */,
+				DC5453B31A234F60003DB27E /* BCMW.MOD */,
+				DC5453B41A234F60003DB27E /* BEECHCRAFT.MOD */,
+				DC5453B51A234F60003DB27E /* BLDROM.MOD */,
+				DC5453B61A234F60003DB27E /* BOEING-B52.MOD */,
+				DC5453B71A234F60003DB27E /* CARD-RDR.MOD */,
+				DC5453B81A234F60003DB27E /* CCD-MODIFIED.MOD */,
+				DC5453B91A234F60003DB27E /* CCD-OSX.MOD */,
+				DC5453BA1A234F60003DB27E /* CCD.MOD */,
+				DC5453BB1A234F60003DB27E /* CHEMUSER.MOD */,
+				DC5453BC1A234F60003DB27E /* CIRCUIT.MOD */,
+				DC5453BD1A234F60003DB27E /* CLINICAL.MOD */,
+				DC5453BE1A234F60003DB27E /* CMT-200.MOD */,
+				DC5453BF1A234F60003DB27E /* CMT-300.MOD */,
+				DC5453C01A234F60003DB27E /* CVPAK.MOD */,
+				DC5453C11A234F60003DB27E /* DATA-ACQ.MOD */,
+				DC5453C21A234F60003DB27E /* DAVID.MOD */,
+				DC5453C31A234F60003DB27E /* DIAGNOSTIC.MOD */,
+				DC5453C41A234F60003DB27E /* DIAMOND.MOD */,
+				DC5453C51A234F60003DB27E /* DISASM4C.MOD */,
+				DC5453C61A234F60003DB27E /* DISASM4D.MOD */,
+				DC5453C71A234F60003DB27E /* DYERKA.MOD */,
+				DC5453C81A234F60003DB27E /* ES-41.MOD */,
+				DC5453C91A234F60003DB27E /* ES-MLDL.MOD */,
+				DC5453CA1A234F60003DB27E /* EXT-FUNS.MOD */,
+				DC5453CB1A234F60003DB27E /* EXT-IL.MOD */,
+				DC5453CC1A234F60003DB27E /* EXT-IO.MOD */,
+				DC5453CD1A234F60003DB27E /* EXT-MEM.MOD */,
+				DC5453CE1A234F60003DB27E /* FINANCE.MOD */,
+				DC5453CF1A234F60003DB27E /* FORTH.MOD */,
+				DC5453D01A234F60003DB27E /* GAMES.MOD */,
+				DC5453D11A234F60003DB27E /* GMAC2.MOD */,
+				DC5453D21A234F60003DB27E /* GMAC3.MOD */,
+				DC5453D31A234F60003DB27E /* HEP-2MEM.MOD */,
+				DC5453D41A234F60003DB27E /* HEP-MEM.MOD */,
+				DC5453D51A234F60003DB27E /* Hepax-1C.mod */,
+				DC5453D61A234F60003DB27E /* HEPAX.MOD */,
+				DC5453D71A234F60003DB27E /* HOME-MGT.MOD */,
+				DC5453D81A234F60003DB27E /* HPIL-DEV.MOD */,
+				DC5453D91A234F60003DB27E /* HPIL-DIAG.MOD */,
+				DC5453DA1A234F60003DB27E /* HPIL.MOD */,
+				DC5453DB1A234F60003DB27E /* HYDRACOMP.MOD */,
+				DC5453DC1A234F60003DB27E /* ICEBOX.MOD */,
+				DC5453DD1A234F60003DB27E /* ICODE.MOD */,
+				DC5453DE1A234F60003DB27E /* IR-PRINT.MOD */,
+				DC5453DF1A234F60003DB27E /* LAITRAM-XQ2.MOD */,
+				DC5453E01A234F60003DB27E /* LANDNAV.MOD */,
+				DC5453E11A234F60003DB27E /* LBLAPP1A.MOD */,
+				DC5453E21A234F60003DB27E /* MACHINE.MOD */,
+				DC5453E31A234F60003DB27E /* MATH.MOD */,
+				DC5453E41A234F60003DB27E /* MATHSTAT.MOD */,
+				DC5453E51A234F60003DB27E /* MC-EPROM.MOD */,
+				DC5453E61A234F60003DB27E /* MCTEST.MOD */,
+				DC5453E71A234F60003DB27E /* MDP1.MOD */,
+				DC5453E81A234F60003DB27E /* MDP2.MOD */,
+				DC5453E91A234F60003DB27E /* MELBOURNE.MOD */,
+				DC5453EA1A234F60003DB27E /* MEM.MOD */,
+				DC5453EB1A234F60003DB27E /* MIL-ENG.MOD */,
+				DC5453EC1A234F60003DB27E /* MLDLOS.MOD */,
+				DC5453ED1A234F60003DB27E /* MLEPROM.MOD */,
+				DC5453EE1A234F60003DB27E /* MLROM.MOD */,
+				DC5453EF1A234F60003DB27E /* MMEPROM.MOD */,
+				DC5453F01A234F60003DB27E /* MUECKE.MOD */,
+				DC5453F11A234F60003DB27E /* NAVCOM2.MOD */,
+				DC5453F21A234F60003DB27E /* NAVIGATION.MOD */,
+				DC5453F31A234F60003DB27E /* NAVPAC2.MOD */,
+				DC5453F41A234F60003DB27E /* NFCROM.MOD */,
+				DC5453F51A234F60003DB27E /* NUT-C.MOD */,
+				DC5453F61A234F60003DB27E /* NUT-CV-GFF.MOD */,
+				DC5453F71A234F60003DB27E /* NUT-CV.MOD */,
+				DC5453F81A234F60003DB27E /* NUT-CX.MOD */,
+				DC5453F91A234F60003DB27E /* PANAME.MOD */,
+				DC5453FA1A234F60003DB27E /* PCCOM.MOD */,
+				DC5453FB1A234F60003DB27E /* PETROLEUM.MOD */,
+				DC5453FC1A234F60003DB27E /* PLOTTER.MOD */,
+				DC5453FD1A234F60003DB27E /* PPC-MELB.MOD */,
+				DC5453FE1A234F60003DB27E /* PPC.MOD */,
+				DC5453FF1A234F60003DB27E /* PRIDE.MOD */,
+				DC5454001A234F60003DB27E /* PRINTER.MOD */,
+				DC5454011A234F60003DB27E /* PRINTERSERVICE.MOD */,
+				DC5454021A234F60003DB27E /* PROFISET.MOD */,
+				DC5454031A234F60003DB27E /* PROTOCODER2.MOD */,
+				DC5454041A234F60003DB27E /* PROTOPARIO.MOD */,
+				DC5454051A234F60003DB27E /* PS0F.MOD */,
+				DC5454061A234F60003DB27E /* QUADMEM.MOD */,
+				DC5454071A234F60003DB27E /* RAM4K.MOD */,
+				DC5454081A234F60003DB27E /* RAM8K.MOD */,
+				DC5454091A234F60003DB27E /* RAM16K.MOD */,
+				DC54540A1A234F60003DB27E /* RAM32K.MOD */,
+				DC54540B1A234F61003DB27E /* REAL-ESTATE.MOD */,
+				DC54540C1A234F61003DB27E /* ROAM-0.MOD */,
+				DC54540D1A234F61003DB27E /* ROAM-0A.MOD */,
+				DC54540E1A234F61003DB27E /* ROMSV01.MOD */,
+				DC54540F1A234F61003DB27E /* SANDBOX.MOD */,
+				DC5454101A234F61003DB27E /* SANDMATH-III.MOD */,
+				DC5454111A234F61003DB27E /* SANDMATH.MOD */,
+				DC5454121A234F61003DB27E /* SECURITIES.MOD */,
+				DC5454131A234F61003DB27E /* SENDPGM.MOD */,
+				DC5454141A234F61003DB27E /* SERVICE-CV.MOD */,
+				DC5454151A234F61003DB27E /* SERVICE.MOD */,
+				DC5454161A234F61003DB27E /* SGS-GAS.MOD */,
+				DC5454171A234F61003DB27E /* SIM.MOD */,
+				DC5454181A234F61003DB27E /* SIMPLEX.MOD */,
+				DC5454191A234F61003DB27E /* SKWIDBC.MOD */,
+				DC54541A1A234F61003DB27E /* SPEED-MACHINE2.MOD */,
+				DC54541B1A234F61003DB27E /* STANDARD.MOD */,
+				DC54541C1A234F61003DB27E /* STAT.MOD */,
+				DC54541D1A234F61003DB27E /* STRESS.MOD */,
+				DC54541E1A234F61003DB27E /* STRUCTURAL.MOD */,
+				DC54541F1A234F61003DB27E /* SUP-R-ROM.MOD */,
+				DC5454201A234F61003DB27E /* SURVEY.MOD */,
+				DC5454211A234F61003DB27E /* THERMAL.MOD */,
+				DC5454221A234F61003DB27E /* TIME.MOD */,
+				DC5454231A234F61003DB27E /* TOMSROM.MOD */,
+				DC5454241A234F61003DB27E /* TOMSROM1.MOD */,
+				DC5454251A234F61003DB27E /* TOOLBOX.MOD */,
+				DC5454261A234F61003DB27E /* USPS.MOD */,
+				DC5454271A234F61003DB27E /* WAND.MOD */,
+				DC5454281A234F61003DB27E /* WWRAMBOX2.MOD */,
+				DC5454291A234F61003DB27E /* WWRAMBOXI.MOD */,
+				DC54542A1A234F61003DB27E /* WWRAMBOXII.MOD */,
+				DC54542B1A234F61003DB27E /* ZENROM.MOD */,
+				DC54542C1A234F61003DB27E /* ZEPROM.MOD */,
 			);
 			name = MODs;
 			sourceTree = "<group>";
@@ -604,94 +811,163 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC2E47EF19957F5D00BCACAF /* STRESS.MOD in Resources */,
-				DC2E47DC19957F5D00BCACAF /* NUT-CX.MOD in Resources */,
-				DC2E47C619957F5D00BCACAF /* FORTH.MOD in Resources */,
-				DC2E47BC19957F5D00BCACAF /* CLINICAL.MOD in Resources */,
-				DC2E47E319957F5D00BCACAF /* QUADMEM.MOD in Resources */,
-				DC2E47D019957F5D00BCACAF /* LAITRAM-XQ2.MOD in Resources */,
-				DC2E47F119957F5D00BCACAF /* SURVEY.MOD in Resources */,
-				DC2E47E419957F5D00BCACAF /* RAM4K.MOD in Resources */,
-				DC2E47DB19957F5D00BCACAF /* NUT-CV.MOD in Resources */,
-				DC2E47B319957F5D00BCACAF /* ADV-APP.MOD in Resources */,
-				DC2E47CE19957F5D00BCACAF /* HPIL.MOD in Resources */,
+				DC5454941A234F61003DB27E /* REAL-ESTATE.MOD in Resources */,
+				DC5454711A234F61003DB27E /* MDP2.MOD in Resources */,
+				DC5454A21A234F61003DB27E /* SKWIDBC.MOD in Resources */,
+				DC54547F1A234F61003DB27E /* NUT-CV-GFF.MOD in Resources */,
+				DC5454501A234F61003DB27E /* DYERKA.MOD in Resources */,
+				DC54546B1A234F61003DB27E /* MACHINE.MOD in Resources */,
+				DC5454431A234F61003DB27E /* CCD.MOD in Resources */,
+				DC5454B51A234F61003DB27E /* ZEPROM.MOD in Resources */,
+				DC5454991A234F61003DB27E /* SANDMATH-III.MOD in Resources */,
+				DC54543A1A234F61003DB27E /* AUTOSTART.MOD in Resources */,
+				DC5454AF1A234F61003DB27E /* USPS.MOD in Resources */,
+				DC5454921A234F61003DB27E /* RAM16K.MOD in Resources */,
+				DC5454401A234F61003DB27E /* CARD-RDR.MOD in Resources */,
+				DC54543B1A234F61003DB27E /* AVIATION.MOD in Resources */,
+				DC54549C1A234F61003DB27E /* SENDPGM.MOD in Resources */,
+				DC54545E1A234F61003DB27E /* Hepax-1C.mod in Resources */,
 				DC5626A1198B75E80040453F /* PRINTER.ROM in Resources */,
-				DC2E47C719957F5D00BCACAF /* GAMES.MOD in Resources */,
+				DC5454B01A234F61003DB27E /* WAND.MOD in Resources */,
+				DC5454861A234F61003DB27E /* PPC-MELB.MOD in Resources */,
+				DC5454661A234F61003DB27E /* ICODE.MOD in Resources */,
+				DC5454461A234F61003DB27E /* CLINICAL.MOD in Resources */,
+				DC5454A71A234F61003DB27E /* STRUCTURAL.MOD in Resources */,
+				DC54548E1A234F61003DB27E /* PS0F.MOD in Resources */,
+				DC54543C1A234F61003DB27E /* BCMW.MOD in Resources */,
+				DC5454801A234F61003DB27E /* NUT-CV.MOD in Resources */,
+				DC5454671A234F61003DB27E /* IR-PRINT.MOD in Resources */,
+				DC5454A11A234F61003DB27E /* SIMPLEX.MOD in Resources */,
 				DC5626A9198B75E80040453F /* ADV0.ROM in Resources */,
-				DC2E47B519957F5D00BCACAF /* AECROM.MOD in Resources */,
-				DC2E47B819957F5D00BCACAF /* BLDROM.MOD in Resources */,
-				DC2E47C319957F5D00BCACAF /* EXT-IO.MOD in Resources */,
-				DC2E47ED19957F5D00BCACAF /* STANDARD.MOD in Resources */,
-				DC2E47BD19957F5D00BCACAF /* DATA-ACQ.MOD in Resources */,
-				DC2E47C119957F5D00BCACAF /* ES-MLDL.MOD in Resources */,
+				DC54544E1A234F61003DB27E /* DISASM4C.MOD in Resources */,
+				DC54546E1A234F61003DB27E /* MC-EPROM.MOD in Resources */,
+				DC5454B11A234F61003DB27E /* WWRAMBOX2.MOD in Resources */,
+				DC5454561A234F61003DB27E /* EXT-MEM.MOD in Resources */,
+				DC5454511A234F61003DB27E /* ES-41.MOD in Resources */,
+				DC5454741A234F61003DB27E /* MIL-ENG.MOD in Resources */,
+				DC5454681A234F61003DB27E /* LAITRAM-XQ2.MOD in Resources */,
+				DC5454551A234F61003DB27E /* EXT-IO.MOD in Resources */,
+				DC54547D1A234F61003DB27E /* NFCROM.MOD in Resources */,
 				DC5626A4198B75E80040453F /* NUT0.ROM in Resources */,
-				DC2E47F519957F5D00BCACAF /* WWRAMBOXII.MOD in Resources */,
-				DC2E47E119957F5D00BCACAF /* PROTOCODER2.MOD in Resources */,
-				DC2E47E019957F5D00BCACAF /* PRINTER.MOD in Resources */,
-				DC2E47D519957F5D00BCACAF /* MC-EPROM.MOD in Resources */,
+				DC5454A51A234F61003DB27E /* STAT.MOD in Resources */,
+				DC5454851A234F61003DB27E /* PLOTTER.MOD in Resources */,
+				DC5454881A234F61003DB27E /* PRIDE.MOD in Resources */,
+				DC5454781A234F61003DB27E /* MMEPROM.MOD in Resources */,
+				DC54549B1A234F61003DB27E /* SECURITIES.MOD in Resources */,
+				DC5454931A234F61003DB27E /* RAM32K.MOD in Resources */,
+				DC5454901A234F61003DB27E /* RAM4K.MOD in Resources */,
+				DC5454591A234F61003DB27E /* GAMES.MOD in Resources */,
+				DC5454A01A234F61003DB27E /* SIM.MOD in Resources */,
+				DC5454721A234F61003DB27E /* MELBOURNE.MOD in Resources */,
+				DC5454371A234F61003DB27E /* ASSEMBLER4.MOD in Resources */,
+				DC54544D1A234F61003DB27E /* DIAMOND.MOD in Resources */,
+				DC5454631A234F61003DB27E /* HPIL.MOD in Resources */,
+				DC5454761A234F61003DB27E /* MLEPROM.MOD in Resources */,
+				DC5454981A234F61003DB27E /* SANDBOX.MOD in Resources */,
+				DC5454AD1A234F61003DB27E /* TOMSROM1.MOD in Resources */,
+				DC5454391A234F61003DB27E /* AUTOFINANCE.MOD in Resources */,
 				DC45285919897DA600C40B6C /* Images.xcassets in Resources */,
-				DC2E47D719957F5D00BCACAF /* MLROM.MOD in Resources */,
-				DC2E47E219957F5D00BCACAF /* PROTOPARIO.MOD in Resources */,
 				DC46ED8E19B3A09B0091E143 /* display.lookup in Resources */,
-				DC2E47D619957F5D00BCACAF /* MEM.MOD in Resources */,
+				DC54546A1A234F61003DB27E /* LBLAPP1A.MOD in Resources */,
+				DC54545F1A234F61003DB27E /* HEPAX.MOD in Resources */,
+				DC5454521A234F61003DB27E /* ES-MLDL.MOD in Resources */,
 				DC56269F198B75E80040453F /* XNUT0.ROM in Resources */,
-				DC2E47B719957F5D00BCACAF /* AVIATION.MOD in Resources */,
+				DC5454301A234F61003DB27E /* ADVANTAGE.MOD in Resources */,
+				DC5454441A234F61003DB27E /* CHEMUSER.MOD in Resources */,
+				DC54548C1A234F61003DB27E /* PROTOCODER2.MOD in Resources */,
+				DC54549D1A234F61003DB27E /* SERVICE-CV.MOD in Resources */,
+				DC5454611A234F61003DB27E /* HPIL-DEV.MOD in Resources */,
+				DC54548A1A234F61003DB27E /* PRINTERSERVICE.MOD in Resources */,
+				DC54547A1A234F61003DB27E /* NAVCOM2.MOD in Resources */,
+				DC54546D1A234F61003DB27E /* MATHSTAT.MOD in Resources */,
+				DC54548F1A234F61003DB27E /* QUADMEM.MOD in Resources */,
+				DC5454331A234F61003DB27E /* AFDC2.MOD in Resources */,
+				DC54545B1A234F61003DB27E /* GMAC3.MOD in Resources */,
+				DC5454531A234F61003DB27E /* EXT-FUNS.MOD in Resources */,
+				DC54546C1A234F61003DB27E /* MATH.MOD in Resources */,
+				DC54543F1A234F61003DB27E /* BOEING-B52.MOD in Resources */,
+				DC5454581A234F61003DB27E /* FORTH.MOD in Resources */,
+				DC54547B1A234F61003DB27E /* NAVIGATION.MOD in Resources */,
+				DC5454961A234F61003DB27E /* ROAM-0A.MOD in Resources */,
+				DC54542F1A234F61003DB27E /* ADV-APP.MOD in Resources */,
+				DC54546F1A234F61003DB27E /* MCTEST.MOD in Resources */,
+				DC5454AB1A234F61003DB27E /* TIME.MOD in Resources */,
+				DC5454831A234F61003DB27E /* PCCOM.MOD in Resources */,
+				DC5454AA1A234F61003DB27E /* THERMAL.MOD in Resources */,
+				DC54545A1A234F61003DB27E /* GMAC2.MOD in Resources */,
+				DC5454451A234F61003DB27E /* CIRCUIT.MOD in Resources */,
+				DC5454791A234F61003DB27E /* MUECKE.MOD in Resources */,
+				DC5454361A234F61003DB27E /* ASSEMBLER3.MOD in Resources */,
+				DC5454B31A234F61003DB27E /* WWRAMBOXII.MOD in Resources */,
+				DC5454971A234F61003DB27E /* ROMSV01.MOD in Resources */,
+				DC54545C1A234F61003DB27E /* HEP-2MEM.MOD in Resources */,
+				DC54547E1A234F61003DB27E /* NUT-C.MOD in Resources */,
 				DC56269E198B75E80040453F /* XNUT1.ROM in Resources */,
+				DC54543E1A234F61003DB27E /* BLDROM.MOD in Resources */,
+				DC54545D1A234F61003DB27E /* HEP-MEM.MOD in Resources */,
+				DC5454491A234F61003DB27E /* CVPAK.MOD in Resources */,
 				DC56269D198B75E80040453F /* XNUT2.ROM in Resources */,
 				DC46ED8F19B3A09B0091E143 /* hpchar.geom in Resources */,
+				DC54542E1A234F61003DB27E /* 83TRINH.MOD in Resources */,
 				DC5626A6198B75E80040453F /* CXFUNS0.ROM in Resources */,
-				DC2E47CA19957F5D00BCACAF /* HEPAX.MOD in Resources */,
+				DC54549E1A234F61003DB27E /* SERVICE.MOD in Resources */,
+				DC54548D1A234F61003DB27E /* PROTOPARIO.MOD in Resources */,
+				DC5454A81A234F61003DB27E /* SUP-R-ROM.MOD in Resources */,
+				DC5454311A234F61003DB27E /* AECROM.MOD in Resources */,
+				DC5454821A234F61003DB27E /* PANAME.MOD in Resources */,
+				DC5454541A234F61003DB27E /* EXT-IL.MOD in Resources */,
 				DC5626A2198B75E80040453F /* NUT2.ROM in Resources */,
-				DC2E47C819957F5D00BCACAF /* HEP-2MEM.MOD in Resources */,
+				DC5454411A234F61003DB27E /* CCD-MODIFIED.MOD in Resources */,
+				DC5454911A234F61003DB27E /* RAM8K.MOD in Resources */,
+				DC54548B1A234F61003DB27E /* PROFISET.MOD in Resources */,
 				DC799D881A155CA2002FACBE /* my41.icns in Resources */,
-				DC2E47BA19957F5D00BCACAF /* CCD.MOD in Resources */,
-				DC2E47E719957F5D00BCACAF /* RAM32K.MOD in Resources */,
-				DC2E47E519957F5D00BCACAF /* RAM8K.MOD in Resources */,
-				DC2E47F019957F5D00BCACAF /* STRUCTURAL.MOD in Resources */,
-				DC2E47DE19957F5D00BCACAF /* PLOTTER.MOD in Resources */,
-				DC2E47BB19957F5D00BCACAF /* CIRCUIT.MOD in Resources */,
+				DC5454A61A234F61003DB27E /* STRESS.MOD in Resources */,
 				DC75043919B2652200180161 /* hpfont.hpfont in Resources */,
-				DC2E47BF19957F5D00BCACAF /* DIAGNOSTIC.MOD in Resources */,
 				DC5626A8198B75E80040453F /* ADV1.ROM in Resources */,
-				DC2E47D219957F5D00BCACAF /* MACHINE.MOD in Resources */,
+				DC5454771A234F61003DB27E /* MLROM.MOD in Resources */,
+				DC5454571A234F61003DB27E /* FINANCE.MOD in Resources */,
+				DC54549A1A234F61003DB27E /* SANDMATH.MOD in Resources */,
+				DC5454B41A234F61003DB27E /* ZENROM.MOD in Resources */,
+				DC5454AC1A234F61003DB27E /* TOMSROM.MOD in Resources */,
+				DC5454641A234F61003DB27E /* HYDRACOMP.MOD in Resources */,
+				DC5454731A234F61003DB27E /* MEM.MOD in Resources */,
+				DC5454891A234F61003DB27E /* PRINTER.MOD in Resources */,
+				DC5454701A234F61003DB27E /* MDP1.MOD in Resources */,
 				DC5626A5198B75E80040453F /* CXFUNS1.ROM in Resources */,
-				DC2E47CB19957F5D00BCACAF /* HOME-MGT.MOD in Resources */,
-				DC2E47C219957F5D00BCACAF /* EXT-FUNS.MOD in Resources */,
-				DC2E47C919957F5D00BCACAF /* HEP-MEM.MOD in Resources */,
+				DC54547C1A234F61003DB27E /* NAVPAC2.MOD in Resources */,
+				DC5454651A234F61003DB27E /* ICEBOX.MOD in Resources */,
+				DC5454811A234F61003DB27E /* NUT-CX.MOD in Resources */,
+				DC54542D1A234F61003DB27E /* 41Z.MOD in Resources */,
+				DC5454341A234F61003DB27E /* ALPHA.MOD in Resources */,
+				DC54544F1A234F61003DB27E /* DISASM4D.MOD in Resources */,
+				DC5454841A234F61003DB27E /* PETROLEUM.MOD in Resources */,
+				DC5454AE1A234F61003DB27E /* TOOLBOX.MOD in Resources */,
+				DC5454601A234F61003DB27E /* HOME-MGT.MOD in Resources */,
+				DC54549F1A234F61003DB27E /* SGS-GAS.MOD in Resources */,
+				DC54543D1A234F61003DB27E /* BEECHCRAFT.MOD in Resources */,
+				DC5454751A234F61003DB27E /* MLDLOS.MOD in Resources */,
 				DC5626A0198B75E80040453F /* TIMER.ROM in Resources */,
-				DC2E47D819957F5D00BCACAF /* NAVIGATION.MOD in Resources */,
-				DC2E47DF19957F5D00BCACAF /* PPC.MOD in Resources */,
-				DC2E47D419957F5D00BCACAF /* MATHSTAT.MOD in Resources */,
-				DC2E47E819957F5D00BCACAF /* REAL-ESTATE.MOD in Resources */,
-				DC2E47DD19957F5D00BCACAF /* PETROLEUM.MOD in Resources */,
-				DC2E47EA19957F5D00BCACAF /* SANDMATH-III.MOD in Resources */,
+				DC5454B21A234F61003DB27E /* WWRAMBOXI.MOD in Resources */,
+				DC5454691A234F61003DB27E /* LANDNAV.MOD in Resources */,
+				DC54544B1A234F61003DB27E /* DAVID.MOD in Resources */,
+				DC5454351A234F61003DB27E /* APAC.MOD in Resources */,
+				DC54544C1A234F61003DB27E /* DIAGNOSTIC.MOD in Resources */,
 				DC5626A3198B75E80040453F /* NUT1.ROM in Resources */,
-				DC2E47C519957F5D00BCACAF /* FINANCE.MOD in Resources */,
-				DC2E47B919957F5D00BCACAF /* CARD-RDR.MOD in Resources */,
-				DC2E47C419957F5D00BCACAF /* EXT-MEM.MOD in Resources */,
-				DC2E47CF19957F5D00BCACAF /* IR-PRINT.MOD in Resources */,
-				DC2E47B219957F5D00BCACAF /* 41Z.MOD in Resources */,
-				DC2E47DA19957F5D00BCACAF /* NUT-C.MOD in Resources */,
-				DC2E47F219957F5D00BCACAF /* THERMAL.MOD in Resources */,
-				DC2E47CC19957F5D00BCACAF /* HPIL-DEV.MOD in Resources */,
-				DC2E47F419957F5D00BCACAF /* WAND.MOD in Resources */,
-				DC2E47C019957F5D00BCACAF /* ES-41.MOD in Resources */,
-				DC2E47EC19957F5D00BCACAF /* SERVICE.MOD in Resources */,
+				DC5454321A234F61003DB27E /* AFDC1.MOD in Resources */,
+				DC5454A91A234F61003DB27E /* SURVEY.MOD in Resources */,
+				DC54544A1A234F61003DB27E /* DATA-ACQ.MOD in Resources */,
+				DC5454A31A234F61003DB27E /* SPEED-MACHINE2.MOD in Resources */,
+				DC5454951A234F61003DB27E /* ROAM-0.MOD in Resources */,
+				DC5454871A234F61003DB27E /* PPC.MOD in Resources */,
+				DC5454621A234F61003DB27E /* HPIL-DIAG.MOD in Resources */,
 				DC5626AA198B75E80040453F /* CrdRdr-1E.rom in Resources */,
-				DC2E47E619957F5D00BCACAF /* RAM16K.MOD in Resources */,
-				DC2E47BE19957F5D00BCACAF /* DAVID.MOD in Resources */,
-				DC2E47B619957F5D00BCACAF /* AUTOSTART.MOD in Resources */,
-				DC2E47E919957F5D00BCACAF /* SANDBOX.MOD in Resources */,
-				DC2E47EE19957F5D00BCACAF /* STAT.MOD in Resources */,
-				DC2E47F319957F5D00BCACAF /* TIME.MOD in Resources */,
 				DC45285C19897DA600C40B6C /* Main.storyboard in Resources */,
+				DC5454471A234F61003DB27E /* CMT-200.MOD in Resources */,
+				DC5454A41A234F61003DB27E /* STANDARD.MOD in Resources */,
 				DC5626A7198B75E80040453F /* ADV2.ROM in Resources */,
-				DC2E47D119957F5D00BCACAF /* LANDNAV.MOD in Resources */,
-				DC2E47CD19957F5D00BCACAF /* HPIL-DIAG.MOD in Resources */,
-				DC2E47D919957F5D00BCACAF /* NFCROM.MOD in Resources */,
-				DC2E47D319957F5D00BCACAF /* MATH.MOD in Resources */,
-				DC2E47EB19957F5D00BCACAF /* SECURITIES.MOD in Resources */,
-				DC2E47B419957F5D00BCACAF /* ADVANTAGE.MOD in Resources */,
+				DC5454481A234F61003DB27E /* CMT-300.MOD in Resources */,
+				DC5454421A234F61003DB27E /* CCD-OSX.MOD in Resources */,
+				DC5454381A234F61003DB27E /* ASTROLOGY.MOD in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

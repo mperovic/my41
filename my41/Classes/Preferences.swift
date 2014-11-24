@@ -189,7 +189,7 @@ class PreferencesContainerViewController: NSViewController {
 		defaults.synchronize()
 		
 		if needsRestart {
-			CalculatorController.sharedInstance.resetCalculator()
+			CalculatorController.sharedInstance.resetCalculator(true)
 		}
 	}
 }
