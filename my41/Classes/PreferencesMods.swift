@@ -310,14 +310,18 @@ class ExpansionView: NSView, NSDraggingDestination {
 		path.fill()
 		
 		if let fPath: NSString = filePath {
-			let font = NSFont.systemFontOfSize(12.0)
+			let font = NSFont.systemFontOfSize(11.0)
 			var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
 			textStyle.alignment = .CenterTextAlignment
 			let attributes = [
 				NSFontAttributeName : font,
 				NSParagraphStyleAttributeName: textStyle
 			]
-			fPath.lastPathComponent.drawInRect(NSMakeRect(20.0, 85.0, 100.0, 17.0), withAttributes: attributes)
+			
+			let mod = MOD()
+			mod.readModFromFile(fPath)
+			mod.moduleHeader.title.drawInRect(NSMakeRect(20.0, 40.0, 100.0, 58.0), withAttributes: attributes)
+			println(mod.moduleHeader.title)
 		}
 	}
 	
@@ -344,6 +348,11 @@ class ExpansionView: NSView, NSDraggingDestination {
 	}
 	
 	override func performDragOperation(sender: NSDraggingInfo) -> Bool {
+		if filePath != nil {
+			return false
+		}
+		
+
 		let paste = sender.draggingPasteboard()
 		let theArray = [
 			"NSStringPboardType"

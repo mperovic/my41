@@ -254,15 +254,15 @@ final class Bus {
 					}
 					
 					// save the count of pages with each attribute as a negative number
-					if modulePage.page == Position.POSITION_LOWER.rawValue {
+					if modulePage.page == Position.PositionLower.rawValue {
 						lowerGroup[Int(modulePage.pageGroup) - 1] -= 1
-					} else if modulePage.page == Position.POSITION_UPPER.rawValue {
+					} else if modulePage.page == Position.PositionUpper.rawValue {
 						upperGroup[Int(modulePage.pageGroup) - 1] -= 1
-					} else if modulePage.page == Position.POSITION_ODD.rawValue {
+					} else if modulePage.page == Position.PositionOdd.rawValue {
 						oddGroup[Int(modulePage.pageGroup) - 1] -= 1
-					} else if modulePage.page == Position.POSITION_EVEN.rawValue {
+					} else if modulePage.page == Position.PositionEven.rawValue {
 						evenGroup[Int(modulePage.pageGroup) - 1] -= 1
-					} else if modulePage.page == Position.POSITION_ORDERED.rawValue {
+					} else if modulePage.page == Position.PositionOrdered.rawValue {
 						orderedGroup[Int(modulePage.pageGroup) - 1] -= 1
 					}
 					
@@ -274,27 +274,27 @@ final class Bus {
 					}
 					
 					// a matching page has already been loaded
-					if modulePage.page == Position.POSITION_LOWER.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					if modulePage.page == Position.PositionLower.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is the lower page and the upper page has already been loaded
 						page = byte(upperGroup[modulePage.pageGroup - 1] - 1)
-					} else if modulePage.page == Position.POSITION_LOWER.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.PositionLower.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is another lower page
 						page = byte(lowerGroup[modulePage.pageGroup - 1])
-					} else if modulePage.page == Position.POSITION_UPPER.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.PositionUpper.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is the upper page and the lower page has already been loaded
 						page = byte(lowerGroup[modulePage.pageGroup - 1] + 1)
-					} else if modulePage.page == Position.POSITION_UPPER.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.PositionUpper.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is another upper page
 						page = byte(upperGroup[modulePage.pageGroup - 1])
-					} else if modulePage.page == Position.POSITION_ODD.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.PositionOdd.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(evenGroup[modulePage.pageGroup - 1] + 1)
-					} else if modulePage.page == Position.POSITION_ODD.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.PositionOdd.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(oddGroup[Int(modulePage.pageGroup) - 1])
-					} else if modulePage.page == Position.POSITION_EVEN.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.PositionEven.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(oddGroup[Int(modulePage.pageGroup) - 1] - 1)
-					} else if modulePage.page == Position.POSITION_EVEN.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.PositionEven.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(evenGroup[Int(modulePage.pageGroup) - 1])
-					} else if modulePage.page == Position.POSITION_ORDERED.rawValue && orderedGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.PositionOrdered.rawValue && orderedGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(++orderedGroup[Int(modulePage.pageGroup) - 1])
 						// find first page in group
 					} else {
@@ -361,16 +361,17 @@ final class Bus {
 						}
 						
 						// save the position that was found in the appropriate array
-						if modulePage.page == Position.POSITION_LOWER.rawValue {
+						if modulePage.page == Position.PositionLower.rawValue {
 							lowerGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
-						} else if modulePage.page == Position.POSITION_UPPER.rawValue {
-							page++							// found two positions - take the upper one
+						} else if modulePage.page == Position.PositionUpper.rawValue {
+							// found two positions - take the upper one
+							page++
 							upperGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
-						} else if modulePage.page == Position.POSITION_EVEN.rawValue {
+						} else if modulePage.page == Position.PositionEven.rawValue {
 							evenGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
-						} else if modulePage.page == Position.POSITION_ODD.rawValue {
+						} else if modulePage.page == Position.PositionOdd.rawValue {
 							oddGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
-						} else if modulePage.page == Position.POSITION_ORDERED.rawValue {
+						} else if modulePage.page == Position.PositionOrdered.rawValue {
 							orderedGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
 						}
 					}
@@ -382,7 +383,7 @@ final class Bus {
 						break
 					}
 					
-					if modulePage.page == Position.POSITION_ANY.rawValue {
+					if modulePage.page == Position.PositionAny.rawValue {
 						// a single page that can be loaded anywhere 8-F
 						page = 8
 						while (page <= 0xf && romChips[Int(page)][Int(modulePage.bank) - 1] != nil) {

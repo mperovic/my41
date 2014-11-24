@@ -14,61 +14,63 @@ let MOD_FORMAT = "MOD1"
 
 /* Module type codes */
 enum Category: byte {
-	case Undef					= 0		/* not categorized */
-	case OS						= 1		/* base Operating System for C,CV,CX */
-	case HPApplicationPAC		= 2		/* HP Application PACs */
-	case HPILPeripheral			= 3		/* any HP-IL related modules and devices */
-	case StandardPeripheral		= 4		/* standard Peripherals: Wand, Printer, Card Reader, XFuns/Mem, Service, Time, IR Printer */
-	case CustomPeripheral		= 5		/* custom Peripherals: AECROM, CCD, HEPAX, PPC, ZENROM, etc */
-	case Beta					= 6		/* BETA releases not fully debugged and finished */
-	case Experimental			= 7		/* test programs not meant for normal usage */
+	case Undef					= 0		// not categorized
+	case OS						= 1		// base Operating System for C,CV,CX
+	case HPApplicationPAC		= 2		// HP Application PACs
+	case HPILPeripheral			= 3		// any HP-IL related modules and devices
+	case StandardPeripheral		= 4		// standard Peripherals: Wand, Printer, Card Reader, XFuns/Mem, Service, Time, IR Printer
+	case CustomPeripheral		= 5		// custom Peripherals: AECROM, CCD, HEPAX, PPC, ZENROM, etc
+	case Beta					= 6		// BETA releases not fully debugged and finished
+	case Experimental			= 7		// test programs not meant for normal usage
 }
-let CATEGORY_MAX: byte			= 7		/* maximum CATEGORY_ define value */
+let CategoryMax: byte			= 7		// maximum CATEGORY_ define value
 
 /* Hardware codes */
 enum Hardware: byte {
-	case None					= 0		/* no additional hardware specified */
-	case Printer				= 1		/* 82143A Printer */
-	case CardReader				= 2		/* 82104A Card Reader */
-	case Timer					= 3		/* 82182A Time Module or HP-41CX built in timer */
-	case WAND					= 4		/* 82153A Barcode Wand */
-	case HPIL					= 5		/* 82160A HP-IL Module */
-	case Infrared				= 6		/* 82242A Infrared Printer Module */
-	case HEPAX					= 7		/* HEPAX Module - has special hardware features (write protect, relocation) */
-	case WWRAMBox				= 8		/* W&W RAMBOX - has special hardware features (RAM block swap instructions) */
-	case MLDL2000				= 9		/* MLDL2000 */
-	case CLONIX					= 10	/* CLONIX-41 Module */
+	case None					= 0		// no additional hardware specified
+	case Printer				= 1		// 82143A Printer
+	case CardReader				= 2		// 82104A Card Reader
+	case Timer					= 3		// 82182A Time Module or HP-41CX built in timer
+	case WAND					= 4		// 82153A Barcode Wand
+	case HPIL					= 5		// 82160A HP-IL Module
+	case Infrared				= 6		// 82242A Infrared Printer Module
+	case HEPAX					= 7		// HEPAX Module - has special hardware features (write protect, relocation)
+	case WWRAMBox				= 8		// W&W RAMBOX - has special hardware features (RAM block swap instructions)
+	case MLDL2000				= 9		// MLDL2000
+	case CLONIX					= 10	// CLONIX-41 Module
 }
-let HARDWARE_MAX: byte			= 10	/* maximum HARDWARE_ define value */
+let HardwareMax: byte			= 10	// maximum HARDWARE_ define value
 
-/* relative position codes- do not mix these in a group except ODD/EVEN and UPPER/LOWER */
-/* ODD/EVEN, UPPER/LOWER can only place ROMS in 16K blocks */
+/* 
+   relative position codes- do not mix these in a group except ODD/EVEN and UPPER/LOWER
+   ODD/EVEN, UPPER/LOWER can only place ROMS in 16K blocks
+*/
 enum Position: byte {
-	case POSITION_ANY			= 0x1f	/* position in any port page (8-F) */
-	case POSITION_LOWER			= 0x2f	/* position in lower port page relative to any upper image(s) (8-F) */
-	case POSITION_UPPER			= 0x3f	/* position in upper port page */
-	case POSITION_EVEN			= 0x4f	/* position in any even port page (8,A,C,E) */
-	case POSITION_ODD			= 0x5f	/* position in any odd port page (9,B,D,F) */
-	case POSITION_ORDERED		= 0x6f	/* position sequentially in MOD file order, one image per page regardless of bank */
+	case PositionAny			= 0x1f	// position in any port page (8-F)
+	case PositionLower			= 0x2f	// position in lower port page relative to any upper image(s) (8-F)
+	case PositionUpper			= 0x3f	// position in upper port page
+	case PositionEven			= 0x4f	// position in any even port page (8,A,C,E)
+	case PositionOdd			= 0x5f	// position in any odd port page (9,B,D,F)
+	case PositionOrdered		= 0x6f	// position sequentially in MOD file order, one image per page regardless of bank
 }
-let POSITION_MIN: byte			= 0x1f	/* minimum POSITION_ define value */
-let POSITION_MAX: byte			= 0x6f	/* maximum POSITION_ define value */
+let PositionMin: byte			= 0x1f	// minimum POSITION_ define value
+let PositionMax: byte			= 0x6f	// maximum POSITION_ define value
 
-let PAGE_SIZE				= 5188		// Size of ModulePageFile Struct
-let HEADER_SIZE				= 729		// Size of ModuleFileHeader Struct
+let PageSize					= 5188	// Size of ModulePageFile Struct
+let HeaderSize					= 729	// Size of ModuleFileHeader Struct
 
 struct ModuleFilePage {
-	var name: [CChar]			/* normally the name of the original .ROM file, if any */
-	var ID: [CChar]				/* ROM ID code, normally two letters and a number are ID and last letter is revision - if all zeros, will show up as @@@@ */
-	var page: byte				/* the page that this image must be in (0-F, although 8-F is not normally used) or defines each page's position relative to other images in a page group, see codes below */
-	var pageGroup: byte			/* 0=not grouped, otherwise images with matching PageGroup values (1..8) are grouped according to POSITION code */
-	var bank: byte				/* the bank that this image must be in (1-4) */
-	var bankGroup: byte			/* 0=not grouped, otherwise images with matching BankGroup values (1..8) are bankswitched with each other */
-	var RAM: byte				/* 0=ROM, 1=RAM - normally RAM pages are all blank if Original=1 */
-	var writeProtect: byte		/* 0=No or N/A, 1=protected - for HEPAX RAM and others that might support it */
-	var FAT: byte				/* 0=no FAT, 1=has FAT */
-	var image: [byte]			/* the image in packed format (.BIN file format) */
-	var pageCustom: [byte]		/* for special hardware attributes */
+	var name: [CChar]			// normally the name of the original .ROM file, if any
+	var ID: [CChar]				// ROM ID code, normally two letters and a number are ID and last letter is revision - if all zeros, will show up as @@@@
+	var page: byte				// the page that this image must be in (0-F, although 8-F is not normally used) or defines each page's position relative to other images in a page group, see codes below
+	var pageGroup: byte			// 0=not grouped, otherwise images with matching PageGroup values (1..8) are grouped according to POSITION code */
+	var bank: byte				// the bank that this image must be in (1-4)
+	var bankGroup: byte			// 0=not grouped, otherwise images with matching BankGroup values (1..8) are bankswitched with each other
+	var RAM: byte				// 0=ROM, 1=RAM - normally RAM pages are all blank if Original=1
+	var writeProtect: byte		// 0=No or N/A, 1=protected - for HEPAX RAM and others that might support it
+	var FAT: byte				// 0=no FAT, 1=has FAT
+	var image: [byte]			// the image in packed format (.BIN file format)
+	var pageCustom: [byte]		// for special hardware attributes
 	
 	init() {
 		name = [CChar](count: 20, repeatedValue: 0)
@@ -86,22 +88,22 @@ struct ModuleFilePage {
 }
 
 struct ModuleFileHeader {
-	var fileFormat: [CChar]			/* constant value defines file format and revision */
-	var title: [CChar]				/* the full module name (the short name is the name of the file itself) */
-	var version: [CChar]			/* module version, if any */
-	var partNumber: [CChar]			/* module part number */
-	var author: [CChar]				/* author, if any */
-	var copyright: [CChar]			/* copyright notice, if any */
-	var license: [CChar]			/* license terms, if any */
-	var comments: [CChar]			/* free form comments, if any */
-	var category: Category			/* module category, see codes below */
-	var hardware: Hardware			/* defines special hardware that module contains */
-	var memModules: byte			/* defines number of main memory modules (0-4) */
-	var XMemModules: byte			/* defines number of extended memory modules (0=none, 1=Xfuns/XMem, 2,3=one or two additional XMem modules) */
-	var original: byte				/* allows validation of original contents: 1=images and data are original, 0=this file has been updated by a user application (data in RAM written back to MOD file, etc) */
-	var appAutoUpdate: byte			/* tells any application to: 1=overwrite this file automatically when saving other data, 0=do not update */
-	var numPages: byte				/* the number of pages in this file (0-256, but normally between 1-6) */
-	var headerCustom: [byte]		/* for special hardware attributes */
+	var fileFormat: [CChar]			// constant value defines file format and revision
+	var title: [CChar]				// the full module name (the short name is the name of the file itself)
+	var version: [CChar]			// module version, if any
+	var partNumber: [CChar]			// module part number
+	var author: [CChar]				// author, if any
+	var copyright: [CChar]			// copyright notice, if any
+	var license: [CChar]			// license terms, if any
+	var comments: [CChar]			// free form comments, if any
+	var category: Category			// module category, see codes below
+	var hardware: Hardware			// defines special hardware that module contains
+	var memModules: byte			// defines number of main memory modules (0-4)
+	var XMemModules: byte			// defines number of extended memory modules (0=none, 1=Xfuns/XMem, 2,3=one or two additional XMem modules)
+	var original: byte				// allows validation of original contents: 1=images and data are original, 0=this file has been updated by a user application (data in RAM written back to MOD file, etc)
+	var appAutoUpdate: byte			// tells any application to: 1=overwrite this file automatically when saving other data, 0=do not update
+	var numPages: byte				// the number of pages in this file (0-256, but normally between 1-6)
+	var headerCustom: [byte]		// for special hardware attributes
 	
 	init () {
 		fileFormat = [CChar](count: 5, repeatedValue: 0)
@@ -249,14 +251,13 @@ final class MOD {
 		
 		return false
 	}
-
 	
 	// Check Page
 	func checkPage(page: ModulePage) -> Result<Bool> {
-		if page.page > 0x0f && page.page < POSITION_MIN {
+		if page.page > 0x0f && page.page < PositionMin {
 			return .Error("page is out of range values")
 		}
-		if page.page > POSITION_MAX && page.pageGroup > 8 {
+		if page.page > PositionMax && page.pageGroup > 8 {
 			return .Error("page is out of range values")
 		}
 		
@@ -278,12 +279,12 @@ final class MOD {
 		}
 		
 		// group pages cannot use non-grouped position codes
-		if page.pageGroup == 1 && page.page <= Position.POSITION_ANY.rawValue {
+		if page.pageGroup == 1 && page.page <= Position.PositionAny.rawValue {
 			return .Error("group pages cannot use non-grouped position codes")
 		}
 		
 		// non-grouped pages cannot use grouped position codes
-		if page.pageGroup == 0 && page.page > Position.POSITION_ANY.rawValue {
+		if page.pageGroup == 0 && page.page > Position.PositionAny.rawValue {
 			return .Error("non-grouped pages cannot use grouped position codes")
 		}
 	
@@ -326,7 +327,7 @@ final class MOD {
 	
 	func validateModuleHeader() -> Result<Bool> {
 		// check size
-		if fileSize != HEADER_SIZE + Int(moduleHeader.numPages) * PAGE_SIZE {
+		if fileSize != HeaderSize + Int(moduleHeader.numPages) * PageSize {
 			return .Error("wrong file size")
 		}
 		
@@ -352,11 +353,11 @@ final class MOD {
 			return .Error("wrong appAutoUpdate value")
 		}
 		
-		if moduleHeader.category.rawValue > CATEGORY_MAX {
+		if moduleHeader.category.rawValue > CategoryMax {
 			return .Error("wrong category value")
 		}
 		
-		if moduleHeader.hardware.rawValue > HARDWARE_MAX {
+		if moduleHeader.hardware.rawValue > HardwareMax {
 			return .Error("wrong hardware value")
 		}
 		
@@ -364,7 +365,7 @@ final class MOD {
 	}
 	
 	func populateModulePage(pageNo: Int) {
-		let startPosition: Int = HEADER_SIZE + (PAGE_SIZE * pageNo)
+		let startPosition: Int = HeaderSize + (PageSize * pageNo)
 		var page = ModuleFilePage()
 		
 		data!.getBytes(&page.name, range: NSMakeRange(startPosition, 20))
