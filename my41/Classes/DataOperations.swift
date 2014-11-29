@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 enum ArithOp {
 	case ADD

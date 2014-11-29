@@ -187,7 +187,8 @@ class Timer : Peripheral {
 		cpu.reg.FI &= 0xcfff
 		
 		switch register {
-		case 0x0:		// WTIME
+		case 0x0:
+			// WTIME
 			copyDigits(
 				registers.CLK[timerSelected.rawValue],
 				sourceStartAt: 0,
@@ -198,7 +199,8 @@ class Timer : Peripheral {
 			convertToUint64(&clock[timerSelected.rawValue],
 				withRegister:registers.CLK[timerSelected.rawValue]
 			)
-		case 0x1:		// WTIME-
+		case 0x1:
+			// WTIME-
 			copyDigits(
 				registers.CLK[timerSelected.rawValue],
 				sourceStartAt: 0,
@@ -207,67 +209,80 @@ class Timer : Peripheral {
 				count: 14
 			)
 			convertToUint64(&clock[timerSelected.rawValue], withRegister:registers.CLK[timerSelected.rawValue])
-		case 0x2:		// WALM
+		case 0x2:
+			// WALM
 			copyDigits(registers.ALM[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 			convertToUint64(&clock[timerSelected.rawValue], withRegister:registers.ALM[timerSelected.rawValue])
-		case 0x3:		// WSTS
+		case 0x3:
+			// WSTS
 			if timerSelected == .TimerA {
 				registers.TMR_S[0] &= data[0]
 				registers.TMR_S[1] &= 0x0C | (data[1] & 0x03)
 			} else {
-				registers.ACC_F[3] = data[4] & 0x1;
-				registers.ACC_F[2] = data[3];
-				registers.ACC_F[1] = data[2];
-				registers.ACC_F[0] = data[1];
+				registers.ACC_F[3] = data[4] & 0x1
+				registers.ACC_F[2] = data[3]
+				registers.ACC_F[1] = data[2]
+				registers.ACC_F[0] = data[1]
 			}
-		case 0x4:		// WSCR
+		case 0x4:
+			// WSCR
 			copyDigits(registers.SCR[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
-		case 0x5:		// WINTST - set and start interval time
+		case 0x5:
+			// WINTST - set and start interval time
 			copyDigits(registers.INT[0], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 			convertToUint64(&intTimerEnd, withRegister:registers.INT[0])
 			intTimer = 0
 			registers.TMR_S[2] |= 0x04			// set bit 10- ITEN - Interval Timer Enable
-		case 0x7:		// STPINT - stop interval timer
+		case 0x7:
+			// STPINT - stop interval timer
 			registers.TMR_S[2] &= 0x0B			// clear bit 10
-		case 0x8:		// WKUPOFF - clear test mode
+		case 0x8:
+			// WKUPOFF - clear test mode
 			if timerSelected == .TimerA {
 				registers.TMR_S[2] &= 0x07		// clear bit 11 - Test A mode
 			} else {
 				registers.TMR_S[3] &= 0x0E		// clear bit 12 - Test B mode
 			}
-		case 0x9:		// WKUPON - set test mode
+		case 0x9:
+			// WKUPON - set test mode
 			if timerSelected == .TimerA {
 				registers.TMR_S[2] |= 0x08		// set bit 11
 			} else {
 				registers.TMR_S[3] |= 0x01		// set bit 12
 			}
-		case 0xA:	// ALMOFF
+		case 0xA:
+			// ALMOFF
 			if timerSelected == .TimerA {
 				registers.TMR_S[2] &= 0x0E		// clear bit 8
 			} else {
 				registers.TMR_S[2] &= 0x0D		// clear bit 9
 			}
-		case 0xB:	// ALMON
+		case 0xB:
+			// ALMON
 			if timerSelected == .TimerA {
 				registers.TMR_S[2] |= 0x01		// set bit 8
 			} else {
 				registers.TMR_S[2] |= 0x02		// set bit 9
 			}
-		case 0xC:	// STOPC
+		case 0xC:
+			// STOPC
 			if timerSelected == .TimerA {		// should never stop Clock A or time will get messed up!
 				registers.TMR_S[1] &= 0x0B		// clear bit 6 - Clock A incrementer
 			} else {
 				registers.TMR_S[1] &= 0x07		// clear bit 7 - Clock B incrementer
 			}
-		case 0xD:	// STARTC
+		case 0xD:
+			// STARTC
 			if timerSelected == .TimerA {
 				registers.TMR_S[1] |= 0x04		// set bit 6
 			} else {
 				registers.TMR_S[1] |= 0x08		// set bit 7
 			}
-		case 0xE:	// TIMER=B
+		case 0xE:
+			// TIMER=B
 			timerSelected = .TimerB
-		case 0xF:	// TIMER=A
+		case 0xF:
+			// TIMER=A
 			timerSelected = .TimerA
 		default:
 			break
@@ -280,18 +295,18 @@ class Timer : Peripheral {
 			clock[TimerType.TimerA.rawValue] += 1
 			if clock[TimerType.TimerA.rawValue] > 99999999999999 || clock[TimerType.TimerA.rawValue]  == 0 {
 				clock[TimerType.TimerA.rawValue] = 0
-				registers.TMR_S[0] |= 0x02;			// set bit 1 - overflow in clock A
-				cpu.reg.FI |= 0x2000;				// set flag 13 - general service request flag
-				cpu.reg.FI |= 0x1000;				// set flag 12 - timer request
+				registers.TMR_S[0] |= 0x02			// set bit 1 - overflow in clock A
+				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
+				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
 				cpu.setPowerMode(.PowerOn)
 			}
 			if ((UInt64(registers.TMR_S[2]) & 0x01) != 0 && (clock[TimerType.TimerA.rawValue] == UInt64(alarm[TimerType.TimerA.rawValue]))) {
 				// if bit 8 set - enable ClockA & AlarmA comparator
-				registers.TMR_S[0] |= 0x01;			// set bit 0 - valid compare
-				cpu.reg.FI |= 0x2000;				// set flag 13 - general service request flag
-				cpu.reg.FI |= 0x1000;				// set flag 12 - timer request
+				registers.TMR_S[0] |= 0x01			// set bit 0 - valid compare
+				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
+				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
 				cpu.setPowerMode(.PowerOn)
-				fAlert = 1;
+				fAlert = 1
 			}
 		}
 		if (registers.TMR_S[1] & 0x08) != 0 {		// bit 7 - Clock B enabled
@@ -309,7 +324,7 @@ class Timer : Peripheral {
 				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
 				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
 				cpu.setPowerMode(.PowerOn)
-				fAlert = 1;
+				fAlert = 1
 			}
 		}
 		

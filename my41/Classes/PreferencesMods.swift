@@ -78,7 +78,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 				
 				break
 			}
-			index++;
+			index++
 		}
 	}
 	
@@ -239,7 +239,7 @@ class ModDetailsView: NSView {
 	
 	override func drawRect(dirtyRect: NSRect) {
 		let backColor = NSColor(calibratedRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.95)
-		let rect = NSMakeRect(self.bounds.origin.x + 3, self.bounds.origin.y + 3, self.bounds.size.width - 6, self.bounds.size.height - 6);
+		let rect = NSMakeRect(self.bounds.origin.x + 3, self.bounds.origin.y + 3, self.bounds.size.width - 6, self.bounds.size.height - 6)
 		
 		var path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
 		path.addClip()
@@ -301,7 +301,7 @@ class ExpansionView: NSView, NSDraggingDestination {
 			self.bounds.origin.y + 3,
 			self.bounds.size.width - 6,
 			self.bounds.size.height - 6
-		);
+		)
 		
 		var path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
 		path.addClip()

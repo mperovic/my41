@@ -136,7 +136,6 @@ class SoundOutput {
 			incBufferPtr(&p)
 		}
 		
-		println("Room for \(Int(numFreeBuffers * Int(SAMPLES_PER_BUFFER))) samples")
 		return Int(numFreeBuffers * Int(SAMPLES_PER_BUFFER))
 	}
 	
@@ -168,7 +167,6 @@ class SoundOutput {
 	}
 	
 	func flushAndSuspendSoundOutput() {
-		println("Stopping buffering sound\n")
 		finishBuffer()
 		sendPendingBuffers()
 		gBufferingSound = false
@@ -215,7 +213,7 @@ class SoundOutput {
 			buf = gBuffers[gBufferAllocPtr]
 			if buf?.inUse == true {
 				if gDroppedSampleCount == 0 {
-					println("Buffer \(gBufferAllocPtr) is in use\n");
+					println("Buffer \(gBufferAllocPtr) is in use\n")
 				}
 				++gDroppedSampleCount
 				return nil

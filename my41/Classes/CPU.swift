@@ -214,10 +214,12 @@ final class CPU {
 	
 	func reset() {
 		clearRegisters()
-		// The H41 firmware relies on the ON key being down on wakeup from
-		// deep sleep, otherwise the display doesn't get turned on. But it does
-		// a dummy test & reset of the keyboard before testing for this, so we
-		// have to arrange for it to appear held down for at least 2 kbd tests.
+		/* 
+		   The H41 firmware relies on the ON key being down on wakeup from deep sleep,
+		   otherwise the display doesn't get turned on. But it does a dummy test & reset
+		   of the keyboard before testing for this, so we have to arrange for it to appear
+		   held down for at least 2 kbd tests.
+		*/
 		reg.KY = onKeyCode
 		keyReleaseDelay = 1
 		setPowerMode(.DeepSleep)
@@ -246,9 +248,7 @@ final class CPU {
 	
 	func abortInstruction(message: String) {
 		reg.PC = savedPC
-//		[debugController show: YES];
 		setRunning(false)
-//		[debugController alert: message];
 	}
 	
 	func running() -> Bool {
@@ -258,7 +258,6 @@ final class CPU {
 	func setRunning(state: Bool) {
 		if runFlag != state {
 			runFlag = state
-			//TODO: IMPLEMENT
 			debugCPUViewController?.updateDisplay()
 			debugMemoryViewController?.displaySelectedMemoryBank()
 		}
@@ -283,7 +282,6 @@ final class CPU {
 		} else {
 			simulationTime = currentTime
 		}
-		//TODO: IMPLEMENT
 		soundOutput.soundTimeslice()
 	}
 	
@@ -1059,13 +1057,13 @@ final class CPU {
 			if (R == 13) {
 				// 3 special cases
 				if ((lastTyte != 0x2d4) && (lastTyte != 0x3d4) && (lastTyte != 0x3dc)) {
-					temp = reg.G;
+					temp = reg.G
 					reg.G = (reg.C[13] << 4) | reg.C[0]
 					reg.C[13] = ((temp & 0xf0) >> 4)
 					reg.C[0] = (temp & 0xf)
 				}
 				else {
-					temp = reg.G;
+					temp = reg.G
 					reg.G = (reg.C[13] << 4) | ((reg.G & 0xf) >> 4)
 					reg.C[13] = (temp & 0xf)
 				}
@@ -1077,7 +1075,7 @@ final class CPU {
 				reg.C[12] = (temp & 0xf0) >> 4
 				reg.C[0] = temp & 0xf
 			} else {
-				temp = reg.G;
+				temp = reg.G
 				digitsToBitsWrap(digits: reg.C, bits: &reg.G, start: R, count: 2)
 				bitsToDigitsWrap(bits: temp, digits: &reg.C, start: R, count: 2)
 			}
@@ -1304,8 +1302,8 @@ final class CPU {
 			let temp1 = reg.C[1]
 			let temp0 = reg.C[0]
 			
-			reg.C[1] = (reg.ST & 0xf0) >> 4;
-			reg.C[0] = reg.ST & 0xf;
+			reg.C[1] = (reg.ST & 0xf0) >> 4
+			reg.C[0] = reg.ST & 0xf
 			reg.ST = (temp1 << 4) | temp0
 			
 		default:
@@ -1433,11 +1431,9 @@ final class CPU {
 			=========================================================================================
 			*/
 			if powerOffFlag {
-				//printf("POWOFF: going into deep sleep and resetting powerOffFlag\n");
 				setPowerMode(.DeepSleep)
 				powerOffFlag = false
 			} else {
-				//printf("POWOFF: going into light sleep\n");
 				setPowerMode(.LightSleep)
 			}
 			reg.PC = 0
@@ -1861,21 +1857,21 @@ final class CPU {
 			switch (reg.peripheral) {
 			case 0x10:
 				// Halfnut display
-				break;
+				break
 			case 0xfb:
 				// Timer write
-				break;
+				break
 			case 0xfc:
 				// Card reader
-				break;
+				break
 			case 0xfd:
 				// LCD display
-				break;
+				break
 			case 0xfe:
 				// Wand
-				break;
+				break
 			default:
-				break;
+				break
 			}
 			bus.writeToRegister(Bits4(param), ofPeripheral: reg.peripheral, from: &reg.C)
 		}
@@ -2392,7 +2388,6 @@ final class CPU {
 					
 				}
 			} else {
-				//printf("Peripheral Read: %02X %x \n", reg.peripheral, param);
 				bus.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
 			}
 		default:
@@ -2600,7 +2595,7 @@ final class CPU {
 				return
 			}
 			
-			reg.PC = Bits16(addr);
+			reg.PC = Bits16(addr)
 		}
 	}
 
@@ -2792,8 +2787,8 @@ final class CPU {
 			start = 0
 			cnt = 14
 		case 0x4: // P-Q
-			start = Int(reg.P);
-			cnt = (Int(reg.Q) >= Int(reg.P)) ? Int(reg.Q) - Int(reg.P) + 1 : 14 - Int(reg.P);
+			start = Int(reg.P)
+			cnt = (Int(reg.Q) >= Int(reg.P)) ? Int(reg.Q) - Int(reg.P) + 1 : 14 - Int(reg.P)
 		case 0x5: // XS
 			start = 2
 			cnt = 1
@@ -3083,7 +3078,7 @@ final class CPU {
 				carry: &carry,
 				zero: &zero
 			)
-			nextCarry = carry;
+			nextCarry = carry
 
 		case 0x0B:
 			/*
@@ -3116,7 +3111,7 @@ final class CPU {
 				carry: &carry,
 				zero: &zero
 			)
-			nextCarry = carry;
+			nextCarry = carry
 			
 		case 0x0C:
 			/*

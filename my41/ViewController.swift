@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+final class ViewController: NSViewController {
 	@IBOutlet weak var buttonCellOn: ButtonCell!
 	@IBOutlet weak var buttonCellUSER: ButtonCell!
 	@IBOutlet weak var buttonCellPRGM: ButtonCell!
@@ -124,7 +124,17 @@ class ViewController: NSViewController {
 	@IBOutlet weak var buttonCellRS: ButtonCell!
 	@IBOutlet weak var buttonRS: Key!
 	
+	@IBOutlet weak var calculatorLabel: NSTextField!
+		
+	var cpu = CPU.sharedInstance
+	
 	override func viewWillAppear() {
+		self.becomeFirstResponder()
+		
+		CalculatorController.sharedInstance.viewController = self
+		var aView = self.view as CalculatorView
+		aView.viewController = self
+
 		self.view.layer = CALayer()
 		self.view.layer?.cornerRadius = 6.0
 		self.view.layer?.backgroundColor = NSColor(calibratedRed: 0.221, green: 0.221, blue: 0.221, alpha: 1.0).CGColor
@@ -335,7 +345,7 @@ class ViewController: NSViewController {
 		// Label BST
 		labelBST.attributedStringValue = mutableAttributedStringFromString("BST", color: nil)
 		
-		// Button RCL
+		// Button SST
 		buttonCellSST.upperText = mutableAttributedStringFromString("SST", color: NSColor.whiteColor())
 		
 		// Label CATALOG
@@ -465,8 +475,7 @@ class ViewController: NSViewController {
 			divideString.addAttributes(divideAttributes, range: NSMakeRange(0, 1))
 			buttonCellDivide.upperText = divideString
 		}
-		
-		
+
 		// Label SF
 		labelSF.attributedStringValue = mutableAttributedStringFromString("SF", color: nil)
 		
@@ -496,7 +505,7 @@ class ViewController: NSViewController {
 		// Label FS?
 		labelFS.attributedStringValue = mutableAttributedStringFromString("FS?", color: nil)
 		
-		// Button 8
+		// Button 9
 		if let actualFont = Helvetica13Font {
 			var nineString = mutableAttributedStringFromString("9", color: NSColor.whiteColor())
 			let nineAttributes = [
@@ -647,12 +656,24 @@ class ViewController: NSViewController {
 		// Do any additional setup after loading the view.
 		                            
 	}
+	
+	override func viewDidAppear() {
+		if let cType = CalculatorController.sharedInstance.calculatorType {
+			switch cType {
+			case CalculatorType.HP41C:
+				calculatorLabel.stringValue = "my41C"
+			case CalculatorType.HP41CV:
+				calculatorLabel.stringValue = "my41CV"
+			case CalculatorType.HP41CX:
+				calculatorLabel.stringValue = "my41CX"
+			}
+		}
+	}
 
 	override var representedObject: AnyObject? {
 		didSet {
 		// Update the view, if already loaded.
 		}
-		                            
 	}
 	
 	func mutableAttributedStringFromString(aString: String, color: NSColor?) -> NSMutableAttributedString {
@@ -674,6 +695,18 @@ class ViewController: NSViewController {
 		} else {
 			return NSMutableAttributedString()
 		}
+	}
+	
+	override var acceptsFirstResponder: Bool { return true }
+
+	@IBAction func keyPressed(sender: AnyObject) {
+		let key = sender as Key
+		let keyCode = key.keyCode! as Int
+		println(keyCode)
+		
+		cpu.keyWithCode(keyCode, pressed: true)
+		println(keyCode)
+		cpu.keyWithCode(keyCode, pressed: false)
 	}
 }
 
@@ -698,6 +731,9 @@ class KeyboardView : NSView {
 class CalculatorView: NSView {
 	@IBOutlet weak var display: Display!
 	
+	var viewController: ViewController?
+	var pressedKey: Key?
+	
 	override func awakeFromNib() {
 		var rect: NSRect = self.bounds
 		rect.origin.x = 0.0
@@ -707,6 +743,7 @@ class CalculatorView: NSView {
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayOff", name: "displayOff", object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayToggle", name: "displayToggle", object: nil)
 	}
+	
 	override func drawRect(dirtyRect: NSRect) {
 		//// Color Declarations
 		let color = NSColor(calibratedRed: 0.604, green: 0.467, blue: 0.337, alpha: 1)
@@ -729,5 +766,108 @@ class CalculatorView: NSView {
 	
 	func displayToggle() {
 		display.displayToggle()
+	}
+	
+	override var acceptsFirstResponder: Bool { return true }
+	
+	override func keyDown(theEvent: NSEvent) {
+		if pressedKey == nil {
+			if let theButton = getKey(theEvent) {
+				pressedKey = theButton
+				theButton.downKey()
+				theButton.highlight(true)
+			}
+		}
+	}
+	
+	override func keyUp(theEvent: NSEvent) {
+		if let theButton = pressedKey {
+			theButton.upKey()
+			theButton.highlight(false)
+			pressedKey = nil
+		}
+	}
+	
+	func getKey(theEvent: NSEvent) -> Key? {
+		let char = theEvent.charactersIgnoringModifiers
+		let hasCommand = (theEvent.modifierFlags & .CommandKeyMask).rawValue != 0
+		
+		if hasCommand {
+			if char == "r" || char == "R" {
+				return viewController?.buttonRS!
+			} else if char == "f" || char == "F" {
+				return viewController?.buttonShift!
+			} else if char == "s" || char == "S" {
+				return viewController?.buttonSST!
+			} else if char == "x" || char == "X" {
+				return viewController?.buttonXexY!
+			} else if char == "a" || char == "A" {
+				return viewController?.buttonRArrrow!
+			} else if char == "+" {
+				return viewController?.buttonSigmaPlus!
+			} else if char == "1" {
+				return viewController?.buttonOneX!
+			} else if char == "l" || char == "L" {
+				return viewController?.buttonLn!
+			}
+		} else {
+			if char == "\r" {
+				return viewController?.buttonENTER!
+			} else if char == "." {
+				return viewController?.buttonPoint!
+			} else if char == "0" {
+				return viewController?.button0!
+			} else if char == "1" {
+				return viewController?.button1!
+			} else if char == "2" {
+				return viewController?.button2!
+			} else if char == "3" {
+				return viewController?.button3!
+			} else if char == "4" {
+				return viewController?.button4!
+			} else if char == "5" {
+				return viewController?.button5!
+			} else if char == "6" {
+				return viewController?.button6!
+			} else if char == "7" {
+				return viewController?.button7!
+			} else if char == "8" {
+				return viewController?.button8!
+			} else if char == "9" {
+				return viewController?.button9!
+			} else if char == "+" {
+				return viewController?.buttonPlus!
+			} else if char == "-" {
+				return viewController?.buttonMinus!
+			} else if char == "*" {
+				return viewController?.buttonMultiply!
+			} else if char == "/" {
+				return viewController?.buttonDivide!
+			} else if char == "c" || char == "C" {
+				return viewController?.buttonCHS!
+			} else if char == "e" || char == "E" {
+				return viewController?.buttonEEX!
+			} else if char == "\u{7f}" {
+				return viewController?.buttonBack!
+			} else if char == "x" || char == "X" {
+				return viewController?.buttonXEQ!
+			} else if char == "s" || char == "S" {
+				return viewController?.buttonSTO!
+			} else if char == "r" || char == "R" {
+				return viewController?.buttonRCL!
+			} else if char == "i" || char == "I" {
+				return viewController?.buttonSin!
+			} else if char == "o" || char == "O" {
+				return viewController?.buttonCos!
+			} else if char == "t" || char == "T" {
+				return viewController?.buttonTan!
+			} else if char == "q" || char == "Q" {
+				return viewController?.buttonSquareRoot!
+			} else if char == "l" || char == "L" {
+				return viewController?.buttonLog!
+			}
+		}
+		
+		return nil
 	}
 }

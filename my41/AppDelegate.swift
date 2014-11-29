@@ -9,21 +9,26 @@
 import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-	var calculatorController = CalculatorController.sharedInstance
-
+	var window: CalculatorWindow?
+	
 	func applicationDidFinishLaunching(aNotification: NSNotification?) {
 		// Insert code here to initialize your application
+		CalculatorApplication.sharedApplication().activateIgnoringOtherApps(true)
+		if let aWindow = self.window {
+			aWindow.becomeFirstResponder()
+			aWindow.becomeKeyWindow()
+			aWindow.becomeMainWindow()
+		}
 	}
+
 
 	func applicationWillTerminate(aNotification: NSNotification?) {
 		// Insert code here to tear down your application
-		calculatorController.saveMemory()
+		CalculatorController.sharedInstance.saveMemory()
 	}
-
 
 	@IBAction func masterClear(sender: AnyObject) {
 		CalculatorController.sharedInstance.resetCalculator(false)
-	}
-	
+	}	
 }
 

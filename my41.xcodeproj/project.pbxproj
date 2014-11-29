@@ -15,6 +15,8 @@
 		DC45286819897DA600C40B6C /* my41Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45286719897DA600C40B6C /* my41Tests.swift */; };
 		DC46ED8E19B3A09B0091E143 /* display.lookup in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8C19B3A09B0091E143 /* display.lookup */; };
 		DC46ED8F19B3A09B0091E143 /* hpchar.geom in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8D19B3A09B0091E143 /* hpchar.geom */; };
+		DC4AEB281A25CFAA00ABF0D8 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4AEB271A25CFAA00ABF0D8 /* Application.swift */; };
+		DC4AEB2A1A25E31A00ABF0D8 /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */; };
 		DC4E040D1A1774F1008D6DD5 /* DebugerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */; };
 		DC4E040F1A17783E008D6DD5 /* DebugCPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */; };
 		DC54542D1A234F61003DB27E /* 41Z.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A41A234F60003DB27E /* 41Z.MOD */; };
@@ -170,6 +172,7 @@
 		DC5626AA198B75E80040453F /* CrdRdr-1E.rom in Resources */ = {isa = PBXBuildFile; fileRef = DC56269C198B75E80040453F /* CrdRdr-1E.rom */; };
 		DC5626B1198B89FC0040453F /* RamChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5626B0198B89FC0040453F /* RamChip.swift */; };
 		DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E4BDC19F17E7B00BF831B /* Preferences.swift */; };
+		DC6728121A2769E800B4274F /* AlphaKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6728111A2769E800B4274F /* AlphaKeyboard.swift */; };
 		DC6DB98B19BA5C1800E26ADD /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */; };
 		DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98D19BB6A5200E26ADD /* Button.swift */; };
 		DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC74922619CF1E600012B5C0 /* Debuger.swift */; };
@@ -215,6 +218,8 @@
 		DC45286719897DA600C40B6C /* my41Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my41Tests.swift; sourceTree = "<group>"; };
 		DC46ED8C19B3A09B0091E143 /* display.lookup */ = {isa = PBXFileReference; lastKnownFileType = file; path = display.lookup; sourceTree = "<group>"; };
 		DC46ED8D19B3A09B0091E143 /* hpchar.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = hpchar.geom; sourceTree = "<group>"; };
+		DC4AEB271A25CFAA00ABF0D8 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = Classes/Application.swift; sourceTree = "<group>"; };
+		DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyboardShortcuts.swift; path = Classes/KeyboardShortcuts.swift; sourceTree = "<group>"; };
 		DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugerMenu.swift; path = Classes/DebugerMenu.swift; sourceTree = "<group>"; };
 		DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugCPU.swift; path = Classes/DebugCPU.swift; sourceTree = "<group>"; };
 		DC5453A41A234F60003DB27E /* 41Z.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = 41Z.MOD; path = MOD/41Z.MOD; sourceTree = "<group>"; };
@@ -370,6 +375,7 @@
 		DC56269C198B75E80040453F /* CrdRdr-1E.rom */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CrdRdr-1E.rom"; path = "ROMs/CrdRdr-1E.rom"; sourceTree = "<group>"; };
 		DC5626B0198B89FC0040453F /* RamChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RamChip.swift; path = Classes/RamChip.swift; sourceTree = "<group>"; };
 		DC5E4BDC19F17E7B00BF831B /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Classes/Preferences.swift; sourceTree = "<group>"; };
+		DC6728111A2769E800B4274F /* AlphaKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlphaKeyboard.swift; path = Classes/AlphaKeyboard.swift; sourceTree = "<group>"; };
 		DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Classes/Keyboard.swift; sourceTree = "<group>"; };
 		DC6DB98D19BB6A5200E26ADD /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = Classes/Button.swift; sourceTree = "<group>"; };
 		DC74922619CF1E600012B5C0 /* Debuger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Debuger.swift; path = Classes/Debuger.swift; sourceTree = "<group>"; };
@@ -597,13 +603,9 @@
 				DC2E476D19957F4C00BCACAF /* MODs */,
 				DC56268E198B75770040453F /* ROMs */,
 				DCD48906198AF40600F3B898 /* Classes */,
-				DC45285419897DA600C40B6C /* ViewController.swift */,
-				DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */,
-				DC45285619897DA600C40B6C /* AppDelegate.swift */,
 				DC45285819897DA600C40B6C /* Images.xcassets */,
 				DC45285A19897DA600C40B6C /* Main.storyboard */,
 				DC45285019897DA600C40B6C /* Supporting Files */,
-				DCF52A20199C971A006BF825 /* Extensions.swift */,
 			);
 			path = my41;
 			sourceTree = "<group>";
@@ -711,6 +713,13 @@
 		DCD48906198AF40600F3B898 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DC45285619897DA600C40B6C /* AppDelegate.swift */,
+				DC4AEB271A25CFAA00ABF0D8 /* Application.swift */,
+				DC6728111A2769E800B4274F /* AlphaKeyboard.swift */,
+				DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */,
+				DC45285419897DA600C40B6C /* ViewController.swift */,
+				DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */,
+				DCF52A20199C971A006BF825 /* Extensions.swift */,
 				DC74922519CF1E480012B5C0 /* Debuger */,
 				DC6DB98C19BB6A1700E26ADD /* Keyboard */,
 				DC7B7E1219AFAFA600C70269 /* Peripherals */,
@@ -986,6 +995,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCAD8860199D37CB0027C925 /* MOD.swift in Sources */,
+				DC4AEB2A1A25E31A00ABF0D8 /* KeyboardShortcuts.swift in Sources */,
 				DCEEC9681A18A270000ECA76 /* PreferencesMenu.swift in Sources */,
 				DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */,
 				DC4E040F1A17783E008D6DD5 /* DebugCPU.swift in Sources */,
@@ -1009,6 +1019,8 @@
 				DCF52A21199C971A006BF825 /* Extensions.swift in Sources */,
 				DCEEC96C1A18CD40000ECA76 /* PreferencesMods.swift in Sources */,
 				DC45285519897DA600C40B6C /* ViewController.swift in Sources */,
+				DC6728121A2769E800B4274F /* AlphaKeyboard.swift in Sources */,
+				DC4AEB281A25CFAA00ABF0D8 /* Application.swift in Sources */,
 				DC45285319897DA600C40B6C /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -350,7 +350,7 @@ final class Bus {
 								}
 								if count <= nFree {
 									// found a space
-									break;
+									break
 								}
 							}
 						} else {
@@ -387,7 +387,7 @@ final class Bus {
 						// a single page that can be loaded anywhere 8-F
 						page = 8
 						while (page <= 0xf && romChips[Int(page)][Int(modulePage.bank) - 1] != nil) {
-							page++;
+							page++
 						}
 					} else {
 						// page number is hardcoded
@@ -449,19 +449,21 @@ final class Bus {
 	}
 	
 	func removeAllRomChips() {
-		for page in 0..<16 {
-			for bank in 0..<8 {
-				romChips[page][bank] = nil
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+			for page in 0..<16 {
+				for bank in 0..<8 {
+					self.romChips[page][bank] = nil
+				}
+				
 			}
-			
-		}
+		})
 	}
 	
 	func readRomLocation(addr: Int) -> Result<Int> {
 		// Read ROM location at the given address and return true.
 		// If there is no ROM at that address, sets data to 0 and returns
 		var address = addr
-		address = address & 0xffff;
+		address = address & 0xffff
 		let page = Int(address >> 12)
 		let bank = Int(activeRomBank[address >> 12])
 		var rom: RomChip? = romChips[page][bank]

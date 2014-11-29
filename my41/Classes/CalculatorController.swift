@@ -33,6 +33,8 @@ class CalculatorController : NSObject {
 	var memModules: byte = 0
 	var XMemModules: byte = 0
 	
+	var viewController: ViewController?
+	
 	class var sharedInstance: CalculatorController {
 		struct Singleton {
 			static let instance = CalculatorController()
@@ -51,25 +53,32 @@ class CalculatorController : NSObject {
 	}
 	
 	func resetCalculator(restoringMemory: Bool) {
+		// Show progress indicator & status label
+		
 		memModules = 0
 		XMemModules = 0
 
 		cpu.setRunning(false)
-		bus.removeAllRomChips()
-		readCalculatorDescriptionFromDefaults()
-		installBuiltinRoms()
-		installExternalModules()
-		installBuiltinRam()
-		if restoringMemory {
-			restoreMemory()
-		}
-		cpu.reset()
-		cpu.setRunning(true)
-		startExecutionTimer()
+		
+		dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+			self.bus.removeAllRomChips()
+			
+			self.installBuiltinRoms()
+			
+			self.installExternalModules()
+			
+			self.installBuiltinRam()
+			if restoringMemory {
+				self.restoreMemory()
+			}
+		})
+		
+		self.cpu.reset()
+		self.cpu.setRunning(true)
+		self.startExecutionTimer()
 	}
 	
 	func readCalculatorDescriptionFromDefaults() {
-		println("readCalculatorDescriptionFromDefaults")
 		let defaults = NSUserDefaults.standardUserDefaults()
 		let cType = defaults.integerForKey(HPCalculatorType)
 		readROMModule(cType)
@@ -123,13 +132,15 @@ class CalculatorController : NSObject {
 	}
 	
 	func installBuiltinRoms() {
-		if calculatorMod.data? != nil {
+		self.readCalculatorDescriptionFromDefaults()
+		
+		if self.calculatorMod.data? != nil {
 			// Install ROMs which came with the calculator module
-			switch bus.installMod(calculatorMod) {
+			switch self.bus.installMod(self.calculatorMod) {
 			case .Success:
 				break
 			case .Error(let error): error
-				abort()
+			abort()
 			}
 		}
 	}
@@ -139,11 +150,11 @@ class CalculatorController : NSObject {
 		let empty = emptyDigit14
 		for idx in 0..<builtinRamTable.count {
 			var ramDesc = builtinRamTable[idx]
-			if let cType = calculatorType? {
-				if checkRam(ramDesc: ramDesc) {
+			if let cType = self.calculatorType? {
+				if self.checkRam(ramDesc: ramDesc) {
 					for address in ramDesc.firstAddress...ramDesc.lastAddress {
-						bus.installRamAtAddress(address)
-						bus.writeRamAddress(address, from: empty)
+						self.bus.installRamAtAddress(address)
+						self.bus.writeRamAddress(address, from: empty)
 					}
 				}
 			}
@@ -152,12 +163,12 @@ class CalculatorController : NSObject {
 	
 	func installExternalModules() {
 		for idx in 0...3 {
-			if portMod[idx]?.data != nil {
-				switch bus.installMod(portMod[idx]!) {
+			if self.portMod[idx]?.data != nil {
+				switch self.bus.installMod(self.portMod[idx]!) {
 				case .Success:
 					break
 				case .Error(let error): error
-					abort()
+				abort()
 				}
 			}
 		}

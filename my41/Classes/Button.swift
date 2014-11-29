@@ -20,22 +20,32 @@ class Key: NSButton {
 	
 	override func mouseDown(theEvent: NSEvent) {
 		if theEvent.modifierFlags & .ControlKeyMask == nil {
-			pressed = true
-			notifyKeyGroup()
+			downKey()
 		}
 		highlight(true)
 	}
 	
 	override func mouseUp(theEvent: NSEvent) {
 		if theEvent.modifierFlags & .ControlKeyMask == nil {
-			pressed = false
-			notifyKeyGroup()
+			upKey()
 		}
 		highlight(false)
 	}
 	
+	func downKey() {
+		pressed = true
+		notifyKeyGroup()
+	}
+	
+	func upKey() {
+		pressed = false
+		notifyKeyGroup()
+	}
+	
 	func notifyKeyGroup() {
-		keygroup.key(self, pressed: pressed)
+		if keygroup != nil {
+			keygroup.key(self, pressed: pressed)
+		}
 	}
 }
 
@@ -176,7 +186,7 @@ class ButtonCell: NSButtonCell {
 			
 			
 			var upperTextRect: NSRect
-			if upperText?.string == "ENTER ↑" {
+			if upperText?.string == "ENTER ↑" || upperText?.string == "N" {
 				upperTextRect = NSMakeRect(1.0, 3.0, 86.0, 15.0)
 			} else if upperText?.string == "÷" || upperText?.string == "×" {
 				upperTextRect = NSMakeRect(1.0, 0.0, 36.0, 15.0)
@@ -188,14 +198,14 @@ class ButtonCell: NSButtonCell {
 				upperTextRect = NSMakeRect(1.0, 1.0, 40.0, 15.0)
 			} else if upperText?.string == "1" || upperText?.string == "2" || upperText?.string == "3" {
 				upperTextRect = NSMakeRect(1.0, 1.0, 40.0, 15.0)
-			} else if upperText?.string == "0" || upperText?.string == "•" {
-				upperTextRect = NSMakeRect(1.0, 1.0, 40.0, 15.0)
-			} else if upperText?.string == "R/S" {
+			} else if upperText?.string == "0" || upperText?.string == "•" || upperText?.string == "," {
+				upperTextRect = NSMakeRect(1.0, 2.0, 40.0, 14.0)
+			} else if upperText?.string == "SPACE" || upperText?.string == "R/S" {
 				upperTextRect = NSMakeRect(1.0, 3.0, 40.0, 14.0)
 			} else if upperText?.string == "ON" || upperText?.string == "USER" || upperText?.string == "PRGM" || upperText?.string == "ALPHA" {
 				upperTextRect = NSMakeRect(3.0, 4.0, 48.0, 14.0)
 			} else {
-				upperTextRect = NSMakeRect(1.0, 3.0, 36.0, 15.0)
+				upperTextRect = NSMakeRect(1.0, 3.0, 40.0, 15.0)
 			}
 			upperText!.drawInRect(NSOffsetRect(upperTextRect, 0, -1))
 		}

@@ -21,10 +21,6 @@ class Keyboard : NSObject {
 	
 	var cpu: CPU
 	var calculatorController: CalculatorController
-
-	func keyWithCode(code: Int, pressed: Bool) {
-		cpu.keyWithCode(code, pressed: pressed)
-	}
 	
 	override func awakeFromNib() {
 		calculatorController.keyboard = self
@@ -35,6 +31,10 @@ class Keyboard : NSObject {
 		calculatorController = CalculatorController.sharedInstance
 		super.init()
 	}
+	
+	func keyWithCode(code: Int, pressed: Bool) {
+		cpu.keyWithCode(code, pressed: pressed)
+	}
 }
 
 class KeyGroup : NSView {
@@ -42,7 +42,7 @@ class KeyGroup : NSView {
 	
 	override func drawRect(dirtyRect: NSRect) {
 		NSColor.clearColor().setFill()
-		NSRectFill(dirtyRect);
+		NSRectFill(dirtyRect)
 		
 		super.drawRect(dirtyRect)
 	}
@@ -50,5 +50,13 @@ class KeyGroup : NSView {
 	func key(key: Key, pressed: Bool) {
 		let code: Int = key.keyCode! as Int
 		keyboard.keyWithCode(code, pressed: pressed)
+	}
+	
+	override var acceptsFirstResponder: Bool { return true }
+	
+	override func keyDown(theEvent: NSEvent) {
+	}
+	
+	override func keyUp(theEvent: NSEvent) {
 	}
 }

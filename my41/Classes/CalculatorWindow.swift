@@ -13,6 +13,10 @@ typealias DisplaySegmentMap = UInt32
 typealias DisplayFont = [DisplaySegmentMap]
 typealias DisplaySegmentPaths = [NSBezierPath]
 
+class CalculatorWindowController: NSWindowController {
+	
+}
+
 class CalculatorWindow : NSWindow {
 	//This point is used in dragging to mark the initial click location
 	var initialLocation: NSPoint?
@@ -22,12 +26,15 @@ class CalculatorWindow : NSWindow {
 	}
 	
 	required init?(coder: NSCoder) {
-//	    fatalError("init(coder:) has not been implemented")
 		super.init(coder: coder)
 	}
 	
+	override var acceptsFirstResponder: Bool { return true }
+
 	override func awakeFromNib() {
-		NSApp.activateIgnoringOtherApps(true)
+		var appDelegate =  CalculatorApplication.sharedApplication().delegate as AppDelegate
+		appDelegate.window = self
+		
 		self.excludedFromWindowsMenu = false
 		self.backgroundColor = NSColor.clearColor()
 		self.opaque = false
@@ -65,7 +72,7 @@ class CalculatorWindow : NSWindow {
 			
 			// Don't let window get dragged up under the menu bar
 			if ((newOrigin.y + windowFrame.size.height) > (screenVisibleFrame!.origin.y + screenVisibleFrame!.size.height)) {
-				newOrigin.y = screenVisibleFrame!.origin.y + (screenVisibleFrame!.size.height - windowFrame.size.height);
+				newOrigin.y = screenVisibleFrame!.origin.y + (screenVisibleFrame!.size.height - windowFrame.size.height)
 			}
 			
 			// Move the window to the new location
@@ -148,41 +155,42 @@ class Display : NSView, Peripheral {
 	}
 
 	required init?(coder: NSCoder) {
-//	    fatalError("init(coder:) has not been implemented")
 		super.init(coder: coder)
 	}
 	
 	override func awakeFromNib() {
-		calculatorController.display = self
-		foregroundColor = NSColorList(name: "HP41").colorWithKey("displayForegroundColor")
-		displayFont = loadFont("hpfont")
-		segmentPaths = loadSegmentPaths("hpchar")
-		annunciatorFont = NSFont(name: "Helvetica", size:annunciatorFontScale * annunciatorFontSize)
-		annunciatorPositions = calculateAnnunciatorPositions(annunciatorFont!, inRect: self.bounds)
-		on = true
-		updateCountdown = 2
-		Bus.sharedInstance.installPeripheral(self, inSlot: 0xFD)
-		
-		for idx in 0..<numDisplayCells {
-			registers.A[idx] = 0xA
-			registers.B[idx] = 0x3
-			registers.C[idx] = 0x2
-			registers.E = 0xfff;
-		}
-
-		//-- initialize the display character to unicode lookup table:
-		// The table simply contains one unicode character for each X-41 hardware character
-		// index (0x00..0x7f). The file can be tweaked for whatever translation is desired.
-		// Character groups (approximated):
-		// 0x00..0x1f: A-Z uppercase characters
-		// 0x20..0x3f: ASCII-like symbols and numbers
-		// 0x40..0x4f: a-e + "hangman"
-		// 0x50..0x5f: some greek characters + "hangman"
-		// 0x60..0x7f: a-z lowercase characters
-		let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
-		let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)!
-		CTULookup = String(mString)
-		CTULookupLength = countElements(CTULookup!)
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+			self.calculatorController.display = self
+			self.foregroundColor = NSColorList(name: "HP41").colorWithKey("displayForegroundColor")
+			self.displayFont = self.loadFont("hpfont")
+			self.segmentPaths = self.loadSegmentPaths("hpchar")
+			self.annunciatorFont = NSFont(name: "Helvetica", size:self.annunciatorFontScale * self.annunciatorFontSize)
+			self.annunciatorPositions = self.calculateAnnunciatorPositions(self.annunciatorFont!, inRect: self.bounds)
+			self.on = true
+			self.updateCountdown = 2
+			Bus.sharedInstance.installPeripheral(self, inSlot: 0xFD)
+			
+			for idx in 0..<self.numDisplayCells {
+				self.registers.A[idx] = 0xA
+				self.registers.B[idx] = 0x3
+				self.registers.C[idx] = 0x2
+				self.registers.E = 0xfff
+			}
+			
+			//-- initialize the display character to unicode lookup table:
+			// The table simply contains one unicode character for each X-41 hardware character
+			// index (0x00..0x7f). The file can be tweaked for whatever translation is desired.
+			// Character groups (approximated):
+			// 0x00..0x1f: A-Z uppercase characters
+			// 0x20..0x3f: ASCII-like symbols and numbers
+			// 0x40..0x4f: a-e + "hangman"
+			// 0x50..0x5f: some greek characters + "hangman"
+			// 0x60..0x7f: a-z lowercase characters
+			let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
+			let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)!
+			CTULookup = String(mString)
+			CTULookupLength = countElements(CTULookup!)
+		})
 	}
 
 	override var flipped:Bool{
@@ -200,7 +208,7 @@ class Display : NSView, Peripheral {
 					let segmentsOn = segmentsForCell(idx)
 					for seg in 0..<numDisplaySegments {
 						if (segmentsOn & (1 << UInt32(seg))) != 0 {
-							segmentPaths[seg].fill();
+							segmentPaths[seg].fill()
 						}
 					}
 					cellTranslation.concat()
@@ -239,10 +247,9 @@ class Display : NSView, Peripheral {
 	// unicode string (suppressing leading and trailing spaces).
 	func readDisplayAsText() -> String {
 		// access the hardware display registers A, B, C:
-		let r  = registers;
+		let r  = registers
 		
 		// we need up to two characters per display cell (character+punctuation):
-//		var text: Array<unichar> = Array(count: numDisplayCells * 2, repeatedValue: 0)
 		var text: String = ""
 		
 		// prepare the punctuation lookup table (8 characters for 3 bit punctuation code)
@@ -254,7 +261,7 @@ class Display : NSView, Peripheral {
 		for idx in reverse(0...numDisplayCells-1) {
 			// assemble the actual hardware character index from the register bits:
 			// charCode = C0 B1 B0  A3 A2 A1 A0
-			let charCode = ((r.C[idx] & 0x1) << 6) | ((r.B[idx] & 0x3) << 4) | (r.A[idx] & 0xf);
+			let charCode = ((r.C[idx] & 0x1) << 6) | ((r.B[idx] & 0x3) << 4) | (r.A[idx] & 0xf)
 			
 			// if valid, look up unicode for X-41 hardware character index:
 			if charCode < UInt8(CTULookupLength!) {
@@ -297,16 +304,16 @@ class Display : NSView, Peripheral {
 			annunciatorWidths[idx] = width
 			totalWidth += width
 		}
-		spaceWidth = (bounds.size.width - totalWidth) / CGFloat(numAnnunciators - 1);
+		spaceWidth = (bounds.size.width - totalWidth) / CGFloat(numAnnunciators - 1)
 		d -= font.descender
 		
 		let layoutManager = NSLayoutManager()
 		h = layoutManager.defaultLineHeightForFont(font)
-		y = bounds.size.height - annunciatorBottomMargin - (h - d) / annunciatorFontScale;
+		y = bounds.size.height - annunciatorBottomMargin - (h - d) / annunciatorFontScale
 		
 		for idx in 0..<numAnnunciators {
-			positions[idx] = NSMakePoint(x, y);
-			x += annunciatorWidths[idx] + spaceWidth;
+			positions[idx] = NSMakePoint(x, y)
+			x += annunciatorWidths[idx] + spaceWidth
 		}
 		
 		return positions
@@ -537,9 +544,9 @@ class Display : NSView, Peripheral {
 		// Determine whether annunciator number i should be on based on the contents of the E register.
 		// Note that i is not the same as the bit number in E, because the annunciators are
 		// numbered from left to right.
-		let j: Bits12 = 11 - Bits12(i);
+		let j: Bits12 = 11 - Bits12(i)
 		
-		return (registers.E & (1 << j)) != 0;
+		return (registers.E & (1 << j)) != 0
 	}
 	
 	
