@@ -122,11 +122,18 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 			modDetailsView.modDetails = modDetails
 		} else {
 			let mod = MOD()
-			mod.readModFromFile(filePath)
-			modDetailsView.modDetails = mod.moduleHeader
-			modDetailsView.category = mod.categoryDescription()
-			modDetailsView.hardware = mod.hardwareDescription()
-			modFileHeaders?[filePath.lastPathComponent] = mod.moduleHeader
+
+			switch mod.readModFromFile(filePath) {
+			case .Success:
+				modDetailsView.modDetails = mod.moduleHeader
+				modDetailsView.category = mod.categoryDescription()
+				modDetailsView.hardware = mod.hardwareDescription()
+				modFileHeaders?[filePath.lastPathComponent] = mod.moduleHeader
+			case .Error(let error): error
+				var alert:NSAlert = NSAlert()
+				alert.messageText = error
+				alert.runModal()
+			}
 		}
 		displayHeader()
 	}

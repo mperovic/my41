@@ -422,6 +422,7 @@ CA
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
+                                                    <outlet property="calculatorView" destination="m2S-Jp-Qdl" id="n4U-EJ-LkO"/>
                                                     <outlet property="keygroup" destination="ztL-T0-STV" id="Kn8-KO-B27"/>
                                                 </connections>
                                             </button>
@@ -453,6 +454,7 @@ CA
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
+                                                    <outlet property="calculatorView" destination="m2S-Jp-Qdl" id="9EQ-Tn-PmG"/>
                                                     <outlet property="keygroup" destination="ztL-T0-STV" id="1sY-Ek-RxA"/>
                                                 </connections>
                                             </button>
@@ -484,6 +486,7 @@ CA
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
+                                                    <outlet property="calculatorView" destination="m2S-Jp-Qdl" id="0wy-cn-d4v"/>
                                                     <outlet property="keygroup" destination="ztL-T0-STV" id="4Uv-bc-Ba9"/>
                                                 </connections>
                                             </button>
@@ -515,6 +518,7 @@ CA
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
+                                                    <outlet property="calculatorView" destination="m2S-Jp-Qdl" id="oc5-Fx-Rdg"/>
                                                     <outlet property="keygroup" destination="ztL-T0-STV" id="oz8-xf-BLB"/>
                                                 </connections>
                                             </button>
@@ -546,6 +550,7 @@ CA
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
+                                                    <outlet property="calculatorView" destination="m2S-Jp-Qdl" id="elW-r6-IEs"/>
                                                     <outlet property="keygroup" destination="ztL-T0-STV" id="mbF-Ca-WxA"/>
                                                 </connections>
                                             </button>

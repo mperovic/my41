@@ -127,7 +127,9 @@ class CalculatorController : NSObject {
 		case .Success:
 			break
 		case .Error(let error): error
-			abort()
+			var alert:NSAlert = NSAlert()
+			alert.messageText = error
+			alert.runModal()
 		}
 	}
 	
@@ -140,7 +142,9 @@ class CalculatorController : NSObject {
 			case .Success:
 				break
 			case .Error(let error): error
-			abort()
+				var alert:NSAlert = NSAlert()
+				alert.messageText = error
+				alert.runModal()
 			}
 		}
 	}
@@ -168,7 +172,28 @@ class CalculatorController : NSObject {
 				case .Success:
 					break
 				case .Error(let error): error
-				abort()
+					var alert:NSAlert = NSAlert()
+					alert.messageText = error
+					alert.runModal()
+					
+					let defaults = NSUserDefaults.standardUserDefaults()
+					switch idx {
+					case 0:
+						defaults.removeObjectForKey(HPPort1)
+						
+					case 1:
+						defaults.removeObjectForKey(HPPort2)
+						
+					case 2:
+						defaults.removeObjectForKey(HPPort3)
+						
+					case 3:
+						defaults.removeObjectForKey(HPPort4)
+						
+					default:
+						break
+					}
+					defaults.synchronize()
 				}
 			}
 		}

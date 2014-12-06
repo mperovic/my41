@@ -214,8 +214,10 @@ final class Bus {
 	}
 	
 	func installMod(mod: MOD) -> Result<Bool> {
-		// these are arrays indexed on the page group number (1-8) (unique only within each mod file)
-		// dual use: values are either a count stored as a negative number or a (positive) page number 1-f
+		/*
+			these are arrays indexed on the page group number (1-8) (unique only within each mod file)
+			dual use: values are either a count stored as a negative number or a (positive) page number 1-f
+		*/
 		var lowerGroup: [Int8]   = [0, 0, 0, 0, 0, 0, 0, 0]				// <0, or =page # if lower page(s) go in group
 		var upperGroup: [Int8]   = [0, 0, 0, 0, 0, 0, 0, 0]				// <0, or =page # if upper page(s) go in group
 		var oddGroup: [Int8]     = [0, 0, 0, 0, 0, 0, 0, 0]				// <0, or =page # if odd page(s) go in group
@@ -244,10 +246,7 @@ final class Bus {
 					
 						return .Error(error)
 					}
-//					if mod.checkPage(modulePage) == false {
-//						error.memory = NSError(domain: "badPage.my41.org", code: 100, userInfo: [:])
-//						return
-//					}
+
 					if modulePage.pageGroup == 0 {
 						// if not grouped do nothing in this pass
 						break
@@ -296,8 +295,8 @@ final class Bus {
 						page = byte(evenGroup[Int(modulePage.pageGroup) - 1])
 					} else if modulePage.page == Position.PositionOrdered.rawValue && orderedGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(++orderedGroup[Int(modulePage.pageGroup) - 1])
-						// find first page in group
 					} else {
+						// find first page in group
 						// find free space depending on which combination of positions are specified
 						if lowerGroup[Int(modulePage.pageGroup) - 1] != 0 && upperGroup[Int(modulePage.pageGroup) - 1] != 0 {
 							// lower and upper

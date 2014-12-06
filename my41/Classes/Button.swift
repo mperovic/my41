@@ -11,6 +11,7 @@ import Cocoa
 
 class Key: NSButton {
 	@IBOutlet weak var keygroup: KeyGroup!
+	@IBOutlet weak var calculatorView: CalculatorView!
 	var keyCode: NSNumber?
 	var pressed: Bool = false
 	
@@ -23,6 +24,9 @@ class Key: NSButton {
 			downKey()
 		}
 		highlight(true)
+		
+		let clickPoint = self.convertPoint(theEvent.locationInWindow, fromView: self.calculatorView)
+		println(clickPoint)
 	}
 	
 	override func mouseUp(theEvent: NSEvent) {
