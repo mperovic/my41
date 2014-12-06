@@ -79,6 +79,10 @@ class CalculatorWindow : NSWindow {
 			self.setFrameOrigin(newOrigin)
 		}
 	}
+	
+	override func mouseUp(theEvent: NSEvent) {
+		initialLocation = nil
+	}
 }
 
 typealias Digits12 = [Digit]
@@ -215,23 +219,24 @@ class Display : NSView, Peripheral {
 				}
 				NSGraphicsContext.restoreGraphicsState()
 			}
-		}
-		self.lockFocus()
-		let attrs: NSDictionary = NSDictionary(object: annunciatorFont!, forKey: NSFontAttributeName)
-		for idx in 0..<numAnnunciators {
-			if annunciatorOn(idx) {
-				var transformation = NSAffineTransform()
-				let point = annunciatorPositions[idx]
-				transformation.translateXBy(point.x, yBy: point.y)
-				transformation.scaleBy(1.0 / annunciatorFontScale)
-				NSGraphicsContext.saveGraphicsState()
-				transformation.concat()
-				let nsString = annunciatorStrings[idx] as NSString
-				nsString.drawAtPoint(NSMakePoint(0.0, 0.0), withAttributes: attrs)
-				NSGraphicsContext.restoreGraphicsState()
+			
+			self.lockFocus()
+			let attrs: NSDictionary = NSDictionary(object: annunciatorFont!, forKey: NSFontAttributeName)
+			for idx in 0..<numAnnunciators {
+				if annunciatorOn(idx) {
+					var transformation = NSAffineTransform()
+					let point = annunciatorPositions[idx]
+					transformation.translateXBy(point.x, yBy: point.y)
+					transformation.scaleBy(1.0 / annunciatorFontScale)
+					NSGraphicsContext.saveGraphicsState()
+					transformation.concat()
+					let nsString = annunciatorStrings[idx] as NSString
+					nsString.drawAtPoint(NSMakePoint(0.0, 0.0), withAttributes: attrs)
+					NSGraphicsContext.restoreGraphicsState()
+				}
 			}
+			self.unlockFocus()
 		}
-		self.unlockFocus()
 	}
 	
 	func cellWidth() -> CGFloat {

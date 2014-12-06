@@ -188,16 +188,15 @@ final class CPU {
 	
 	func setPowerMode(mode: PowerMode) {
 		if powerMode != mode {
-			if mode == .PowerOn && powerMode == .DeepSleep {
+			if mode == .PowerOn && self.powerMode == .DeepSleep {
 				reg.carry = 1
 			}
-			if mode == .PowerOn && powerMode == .LightSleep {
+			if mode == .PowerOn && self.powerMode == .LightSleep {
 				reg.carry = 0
 			}
 			
 			powerMode = mode
 			if mode != .PowerOn {
-				//TODO: IMPLEMENT
 				soundOutput.flushAndSuspendSoundOutput()
 				self.lineNo = 0
 			}
