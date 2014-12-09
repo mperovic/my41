@@ -190,23 +190,22 @@ func addOrSubtractDigits(
 	inout #carry: Bit,
 	inout #zero: Bit)
 {
-	var d: Digit = 0
-	var m: Digit = 0
-	var c: Bit = carry
+	var d: Int = 0
+	var c = Int(carry)
 	var z: Bit = 1
 	
-	if op == .SUB {
-		if mode == ArithMode.DEC_MODE {
-			m = 0x9
-		} else {
-			m = 0xF
-		}
-	}
 	for idx in from..<from+count {
 		if op == .ADD {
-			d = firstNum[idx] + secondNum[idx] + Digit(c)
+			d = Int(firstNum[idx]) + Int(secondNum[idx]) + Int(c)
 		} else {
-			d = firstNum[idx] + m - secondNum[idx] + Digit(c)
+			if mode == .DEC_MODE {
+				d = Int(firstNum[idx]) + 0x9 - Int(secondNum[idx]) + Int(c)
+			} else {
+				d = Int(firstNum[idx]) + 0xF - Int(secondNum[idx]) + Int(c)
+			}
+			if d < 0 {
+				println("\(idx) - \(firstNum), \(secondNum) -> \(d)")
+			}
 		}
 		if mode == ArithMode.DEC_MODE && d > 9 {
 			d += 6
@@ -216,9 +215,9 @@ func addOrSubtractDigits(
 		if d != 0 {
 			z = 0
 		}
-		destination[idx] = d
+		destination[idx] = Digit(d)
 	}
 	
-	carry = c
+	carry = Bit(c)
 	zero = z
 }

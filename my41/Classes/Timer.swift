@@ -49,10 +49,11 @@ struct TimerRegisters {
 class Timer : Peripheral {
 	var timerSelected: TimerType = .TimerA
 	var clock: [UInt64] = [0, 0]
-	var alarm: [UInt] = [0, 0]
+	var alarm: [UInt64] = [0, 0]
 	var intTimer: UInt64 = 0
 	var intTimerEnd: UInt64 = 0
 	var cpu: CPU
+	var bus: Bus?
 	
 	var registers: TimerRegisters = TimerRegisters()
 	
@@ -78,7 +79,7 @@ class Timer : Peripheral {
 			NSApplicationWillBecomeActiveNotification,
 			object: nil,
 			queue: nil) { active in
-				// This should help me detect when I'm being  activated.  I want to reset the clock
+				// This should help me detect when I'm being activated. I want to reset the clock
 				if (Int(self.registers.TMR_S[1]) & 0x04) != 0 {		// bit 6 - Clock A enabled
 					self.setToCurrentTime()
 				}
@@ -143,15 +144,24 @@ class Timer : Peripheral {
 	}
 	
 	// MARK: Peripheral Delegate Methods
-//	func pluggedIntoBus(aBus: Bus) {
-//		bus = aBus
-//	}
+	func pluggedIntoBus(aBus: Bus?) {
+		bus = aBus
+	}
 	
 	func readFromRegister(register: Bits4, inout into data: Digits14) {
 		switch register {
 		case 0x0:		// RTIME
-			convertToReg14(clock[timerSelected.rawValue], dst: &registers.CLK[timerSelected.rawValue])
-			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			convertToReg14(
+				clock[timerSelected.rawValue],
+				dst: &registers.CLK[timerSelected.rawValue]
+			)
+			copyDigits(
+				registers.CLK[timerSelected.rawValue],
+				sourceStartAt: 0,
+				destination: &data,
+				destinationStartAt: 0,
+				count: 14
+			)
 		case 0x1:		// RTIMEST
 			convertToReg14(clock[timerSelected.rawValue], dst: &registers.CLK[timerSelected.rawValue])
 			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
@@ -196,7 +206,8 @@ class Timer : Peripheral {
 				destinationStartAt: 0,
 				count: 14
 			)
-			convertToUint64(&clock[timerSelected.rawValue],
+			convertToUint64(
+				&clock[timerSelected.rawValue],
 				withRegister:registers.CLK[timerSelected.rawValue]
 			)
 		case 0x1:
@@ -208,11 +219,17 @@ class Timer : Peripheral {
 				destinationStartAt: 0,
 				count: 14
 			)
-			convertToUint64(&clock[timerSelected.rawValue], withRegister:registers.CLK[timerSelected.rawValue])
+			convertToUint64(
+				&clock[timerSelected.rawValue],
+				withRegister:registers.CLK[timerSelected.rawValue]
+			)
 		case 0x2:
 			// WALM
 			copyDigits(registers.ALM[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
-			convertToUint64(&clock[timerSelected.rawValue], withRegister:registers.ALM[timerSelected.rawValue])
+			convertToUint64(
+				&alarm[timerSelected.rawValue],
+				withRegister:registers.ALM[timerSelected.rawValue]
+			)
 		case 0x3:
 			// WSTS
 			if timerSelected == .TimerA {

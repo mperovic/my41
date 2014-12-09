@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 protocol Peripheral {
-//	func pluggedIntoBus(bus: Bus)
+	func pluggedIntoBus(bus: Bus?)
 	func readFromRegister(register: Bits4, inout into: Digits14)
 	func writeToRegister(register: Bits4, inout from data: Digits14)
 	func writeDataFrom(data: Digits14)
@@ -436,14 +436,16 @@ final class Bus {
 	}
 	
 	func readRamAddress(address: Bits12, inout into data: Digits14) -> Result<Bool> {
-		// Read specified location of specified chip. If chip or location is
-		// nonexistent, set data to 0 and return false.
-		if ramValid[Int(address)] {
+		/*
+			Read specified location of specified chip.
+			If chip or location is nonexistent, set data to 0 and return false.
+		*/
+		if Int(address) > ramValid.count || !ramValid[Int(address)] {
+			clearDigits(destination: &data)
+			return .Error("invalid ram address: \(address)")
+		} else {
 			copyDigits(ram[Int(address)], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
 			return .Success(Box(true))
-		} else {
-			clearDigits(destination: &data)
-			return .Error("invalid ram address")
 		}
 	}
 	
@@ -524,8 +526,11 @@ final class Bus {
 	}
 	
 	func installPeripheral(peripheral: Peripheral, inSlot slot: Bits8) {
+		if let oldPeripheral = peripherals[Int(slot)] {
+			oldPeripheral.pluggedIntoBus(nil)
+		}
 		peripherals[Int(slot)] = peripheral
-//		peripheral.pluggedIntoBus(self)
+		peripheral.pluggedIntoBus(self)
 	}
 	
 	func abortInstruction(message: String) {

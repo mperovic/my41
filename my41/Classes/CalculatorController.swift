@@ -17,6 +17,7 @@ enum CalculatorType: Int {
 
 let timeSliceInterval	= 0.01
 let MAX_RAM_SIZE		= 0x400
+let epromAddress		= 0x4000
 
 var timerModule: Timer?
 
@@ -135,6 +136,16 @@ class CalculatorController : NSObject {
 	
 	func installBuiltinRoms() {
 		self.readCalculatorDescriptionFromDefaults()
+		
+		let debugSupportRom = RomChip()
+		debugSupportRom.writable = true
+		debugSupportRom[0] = 0x3E0
+		debugSupportRom.writable = false
+		bus.installRomChip(
+			debugSupportRom,
+			inSlot: byte(epromAddress >> 12),
+			andBank: byte(0)
+		)
 		
 		if self.calculatorMod.data? != nil {
 			// Install ROMs which came with the calculator module
@@ -290,8 +301,7 @@ class CalculatorController : NSObject {
 					}
 					ptr += 14
 			case .Error (let error):
-				error
-				
+				println(error)
 			}
 		}
 		data.appendBytes(memoryArray, length: count)

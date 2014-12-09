@@ -58,6 +58,11 @@ class CalculatorWindow : NSWindow {
 	}
 	
 	override func mouseDragged(theEvent: NSEvent) {
+		let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+		if appDelegate.buttonPressed {
+			return
+		}
+
 		if let iLocation = initialLocation {
 			let screenVisibleFrame = NSScreen.mainScreen()?.visibleFrame
 			let windowFrame = self.frame
@@ -120,6 +125,7 @@ class Display : NSView, Peripheral {
 	var annunciatorBottomMargin: CGFloat = 2.0
 	var annunciatorPositions: [NSPoint] = [NSPoint](count: 12, repeatedValue: CGPointMake(0.0, 0.0))
 	var foregroundColor: NSColor?
+	var bus: Bus?
 	
 	var calculatorController: CalculatorController = CalculatorController.sharedInstance
 	
@@ -352,9 +358,9 @@ class Display : NSView, Peripheral {
 	
 	//MARK: - Peripheral Protocol Method
 	
-//	func pluggedIntoBus(aBus: Bus) {
-//		bus = aBus
-//	}
+	func pluggedIntoBus(aBus: Bus?) {
+		bus = aBus
+	}
 	
 	func readFromRegister(register: Bits4, inout into data: Digits14) {
 		// Implement READ f or READ DATA instruction with display as selected peripheral.
@@ -393,7 +399,7 @@ class Display : NSView, Peripheral {
 		case 0xF:	// FLSABC
 			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
 		default:
-			Bus.sharedInstance.abortInstruction("Unimplemented display operation")
+			self.bus?.abortInstruction("Unimplemented display operation")
 		}
 		scheduleUpdate()
 	}
@@ -434,7 +440,7 @@ class Display : NSView, Peripheral {
 		case 0xF:	// SLSABC
 			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
 		default:
-			Bus.sharedInstance.abortInstruction("Unimplemented display operation")
+			self.bus?.abortInstruction("Unimplemented display operation")
 		}
 		scheduleUpdate()
 	}

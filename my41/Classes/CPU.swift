@@ -323,7 +323,7 @@ final class CPU {
 			let newRom = bus.romChipInSlot(slot, bank: bankSet)
 			let slotBank = bus.activeRomBankInSlot(slot)
 			
-			if (currentRom == nil) && (newRom == nil) && (slotBank == currentBank) {
+			if (currentRom != nil) && (newRom != nil) && (slotBank == currentBank) {
 				bus.setActiveRomBankInSlot(slot, bank: bankSet)
 			}
 		}
@@ -360,12 +360,12 @@ final class CPU {
 		savedPC = reg.PC
 		nextCarry = 0
 		lastTyte = currentTyte
-		if DEBUG != 0 {
-			println("currentTyte: \(currentTyte)")
-		}
 		switch fetch() {
 		case .Success(let result):
 			currentTyte = result.unbox
+			if DEBUG != 0 {
+				println("currentTyte: \(currentTyte)")
+			}
 			switch currentTyte & 0x03 {
 			case 0:		 // miscellaneous
 				executeClass0(currentTyte)
@@ -379,6 +379,9 @@ final class CPU {
 				println("PROBLEM!")
 			}
 		case .Error(let error):
+			if DEBUG != 0 {
+				println("currentTyte: \(currentTyte)")
+			}
 			reg.PC = popReturnStack()
 		}
 		reg.carry = Bit(nextCarry)
@@ -2383,8 +2386,7 @@ final class CPU {
 				case .Success(let result):
 					break
 				case .Error (let error):
-					error
-					
+					println(error)
 				}
 			} else {
 				bus.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
@@ -2426,8 +2428,7 @@ final class CPU {
 				case .Success(let result):
 					break
 				case .Error (let error):
-					error
-					
+					println(error)
 				}
 			} else {
 				bus.readFromRegister(register: Bits4(param), ofPeripheral: reg.peripheral, into: &reg.C)
@@ -3132,6 +3133,7 @@ final class CPU {
 			=========================================================================================
 			*/
 			carry = 1
+//			println("addOrSubtractDigits \(reg.A), \(reg.B)")
 			addOrSubtractDigits(
 				arithOp: .SUB,
 				arithMode: reg.mode,

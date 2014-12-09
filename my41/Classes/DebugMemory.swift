@@ -95,8 +95,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 					}
 					ptr++
 				case .Error (let error):
-					error
-					
+					println(error)
 				}
 			}
 		} else {
