@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DC45284C19897DA500C40B6C"
-               BuildableName = "my41.app"
-               BlueprintName = "my41"
+               BuildableName = "my41cx.app"
+               BlueprintName = "my41cx"
                ReferencedContainer = "container:my41.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,8 +43,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC45284C19897DA500C40B6C"
-            BuildableName = "my41.app"
-            BlueprintName = "my41"
+            BuildableName = "my41cx.app"
+            BlueprintName = "my41cx"
             ReferencedContainer = "container:my41.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC45284C19897DA500C40B6C"
-            BuildableName = "my41.app"
-            BlueprintName = "my41"
+            BuildableName = "my41cx.app"
+            BlueprintName = "my41cx"
             ReferencedContainer = "container:my41.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -85,8 +85,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC45284C19897DA500C40B6C"
-            BuildableName = "my41.app"
-            BlueprintName = "my41"
+            BuildableName = "my41cx.app"
+            BlueprintName = "my41cx"
             ReferencedContainer = "container:my41.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
