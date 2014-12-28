@@ -127,7 +127,7 @@ class Display : NSView, Peripheral {
 	var foregroundColor: NSColor?
 	var bus: Bus?
 	
-	var calculatorController: CalculatorController = CalculatorController.sharedInstance
+	var calculatorController = CalculatorController.sharedInstance
 	
 	let punctSegmentTable: [DisplaySegmentMap] = [
 		0x00000, // no punctuation
@@ -228,8 +228,17 @@ class Display : NSView, Peripheral {
 			
 			self.lockFocus()
 			let attrs: NSDictionary = NSDictionary(object: annunciatorFont!, forKey: NSFontAttributeName)
+			calculatorController.prgmMode = false
+			calculatorController.alphaMode = false
 			for idx in 0..<numAnnunciators {
 				if annunciatorOn(idx) {
+					if idx == 10 {
+						calculatorController.prgmMode = true
+					}
+					if idx == 11 {
+						calculatorController.alphaMode = true
+					}
+					
 					var transformation = NSAffineTransform()
 					let point = annunciatorPositions[idx]
 					transformation.translateXBy(point.x, yBy: point.y)
@@ -445,7 +454,8 @@ class Display : NSView, Peripheral {
 		scheduleUpdate()
 	}
 	
-	func writeDataFrom(data: Digits14) {
+	func writeDataFrom(data: Digits14)
+	{
 		// Implement WRITE DATA instruction with display as selected peripheral.
 		registers.E = digitsToBits(digits: data, nbits: 12)
 		scheduleUpdate()
@@ -453,11 +463,20 @@ class Display : NSView, Peripheral {
 	
 	
 	//MARK: -
-	func fetch(inout registers: DisplayRegisters, withDirection direction:DisplayShiftDirection, andSize size:DisplayTransitionSize, withRegister regset:DisplayRegisterSet, inout andData data: Digits14) {
-		// Fetch digits from the specified registers, rotating them in the specified direction,
-		// and assemble them into the specified destination. For size == LONG, fetches a total
-		// of 12 digits into the destination; for size == SHORT, fetches one digit from
-		// each specified register.
+	func fetch(
+		inout registers: DisplayRegisters,
+		withDirection direction:DisplayShiftDirection,
+		andSize size:DisplayTransitionSize,
+		withRegister regset:DisplayRegisterSet,
+		inout andData data: Digits14
+		)
+	{
+		/*
+			Fetch digits from the specified registers, rotating them in the specified direction,
+			and assemble them into the specified destination.
+			For size == LONG, fetches a total of 12 digits into the destination;
+			for size == SHORT, fetches one digit from each specified register.
+		*/
 		var cp = 0
 		while cp < 12 {
 			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
@@ -475,9 +494,16 @@ class Display : NSView, Peripheral {
 		}
 	}
 	
-	func fetchDigit(direction: DisplayShiftDirection, inout from register: Digits12, inout to dst: Digit) -> Digits12 {
-		// Fetch a digit from the appropriate end of the given register into the specified destination,
-		// and rotate the register in the specified direction.
+	func fetchDigit(
+		direction: DisplayShiftDirection,
+		inout from register: Digits12,
+		inout to dst: Digit
+		) -> Digits12
+	{
+		/*
+			Fetch a digit from the appropriate end of the given register into the specified destination,
+			and rotate the register in the specified direction.
+		*/
 		switch direction {
 		case .Left:
 			dst = register[11]
@@ -490,7 +516,8 @@ class Display : NSView, Peripheral {
 		return register
 	}
 	
-	func rotateRegisterLeft(inout register: Digits12) {
+	func rotateRegisterLeft(inout register: Digits12)
+	{
 		let temp = register[11]
 		for idx in reverse(1...11) {
 			register[idx] = register[idx - 1]
@@ -506,10 +533,19 @@ class Display : NSView, Peripheral {
 		register[11] = temp
 	}
 	
-	func shift(inout registers: DisplayRegisters, withDirection direction:DisplayShiftDirection, andSize size:DisplayTransitionSize, withRegister regset:DisplayRegisterSet, inout andData data: Digits14) {
-		// Distribute digits from the given source and rotate them into the specified registers.
-		// For size == LONG, shifts a total of 12 digits from the source;
-		// for size == SHORT, shifts one digit into each specified register.
+	func shift(
+		inout registers: DisplayRegisters,
+		withDirection direction:DisplayShiftDirection,
+		andSize size:DisplayTransitionSize,
+		withRegister regset:DisplayRegisterSet,
+		inout andData data: Digits14
+		)
+	{
+		/*
+			Distribute digits from the given source and rotate them into the specified registers.
+			For size == LONG, shifts a total of 12 digits from the source;
+			for size == SHORT, shifts one digit into each specified register.
+		*/
 		var cp = 0
 		while cp < 12 {
 			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
@@ -540,9 +576,10 @@ class Display : NSView, Peripheral {
 	}
 	
 	func segmentsForCell(i: Int) -> DisplaySegmentMap {
-		// Determine which segments should be on for cell i based on the contents of the display registers.
-		// Note that cells are numbered from left to right, which is the opposite of the digit numbering
-		// in the display registers.
+		/*
+			Determine which segments should be on for cell i based on the contents of the display registers.
+			Note that cells are numbered from left to right, which is the opposite of the digit numbering in the display registers.
+		*/
 		let j = 11 - i
 		let nineBitCode: Int = Int((Int(registers.C[j]) << 8) | (Int(registers.B[j]) << 4) | (Int(registers.A[j]))) & 0x1ff
 		let charCode: Int = ((nineBitCode & 0x100) >> 2) | (nineBitCode & 0x3f)
@@ -552,9 +589,10 @@ class Display : NSView, Peripheral {
 	}
 	
 	func annunciatorOn(i: Int) -> Bool {
-		// Determine whether annunciator number i should be on based on the contents of the E register.
-		// Note that i is not the same as the bit number in E, because the annunciators are
-		// numbered from left to right.
+		/*
+			Determine whether annunciator number i should be on based on the contents of the E register.
+			Note that i is not the same as the bit number in E, because the annunciators are numbered from left to right.
+		*/
 		let j: Bits12 = 11 - Bits12(i)
 		
 		return (registers.E & (1 << j)) != 0

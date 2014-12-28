@@ -221,3 +221,52 @@ func addOrSubtractDigits(
 	carry = Bit(c)
 	zero = z
 }
+
+func adder(#nib1: Digit, #nib2: Digit) -> Digit
+{
+	var result = nib1 + nib2 + Digit(cpu.reg.carry)
+	if result >= cpu.reg.mode.rawValue {
+		result -= cpu.reg.mode.rawValue
+		cpu.reg.carry = 1
+	} else {
+		cpu.reg.carry = 0
+	}
+	
+//	result = result & 0x0f
+	
+	return result
+}
+
+func subtractor(#nib1: Digit, #nib2: Digit) -> Digit
+{
+	var result = Int(nib1) - Int(nib2) - Int(cpu.reg.carry)
+	if result < 0 {
+		result += Int(cpu.reg.mode.rawValue)
+		cpu.reg.carry = 1
+	} else {
+		cpu.reg.carry = 0
+	}
+	
+//	result = result & 0x0f
+	
+	return Digit(result)
+}
+
+func compareDigits(
+	source: Digits14,
+	withDigits destination: Digits14
+) -> Bool
+{
+	for idx in 0...13 {
+		if source[idx] != destination[idx] {
+			return false
+		}
+	}
+	
+	return true
+}
+
+func decToHex(dec: Int) -> String
+{
+	return NSString(format:"%2X", dec) as String
+}

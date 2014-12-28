@@ -36,6 +36,9 @@ class CalculatorController : NSObject {
 	
 	var viewController: ViewController?
 	
+	var alphaMode = false
+	var prgmMode = false
+	
 	class var sharedInstance: CalculatorController {
 		struct Singleton {
 			static let instance = CalculatorController()
@@ -169,7 +172,12 @@ class CalculatorController : NSObject {
 				if self.checkRam(ramDesc: ramDesc) {
 					for address in ramDesc.firstAddress...ramDesc.lastAddress {
 						self.bus.installRamAtAddress(address)
-						self.bus.writeRamAddress(address, from: empty)
+						switch bus.writeRamAddress(address, from: empty) {
+						case .Success(let result):
+							break
+						case .Error (let error):
+							println(error)
+						}
 					}
 				}
 			}
@@ -282,7 +290,12 @@ class CalculatorController : NSObject {
 		for addr in 0..<MAX_RAM_SIZE {
 			var tmpReg = emptyDigit14
 			digits14FromArray(memoryArray, position: ptr, to: &tmpReg)
-			bus.writeRamAddress(Bits12(addr), from: tmpReg)
+			switch bus.writeRamAddress(Bits12(addr), from: tmpReg) {
+			case .Success(let result):
+				break
+			case .Error (let error):
+				println(error)
+			}
 			ptr += 14
 		}
 	}

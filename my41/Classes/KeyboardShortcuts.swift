@@ -138,7 +138,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 				
 		// Label Σ-
 		if let actualFont = Helvetica09Font {
-			var sigmaMinusString = mutableAttributedStringFromString("⌘╋", color: nil, fontName: "Helvetica", fontSize: 11.0)
+			var sigmaMinusString = mutableAttributedStringFromString("⌘G", color: nil, fontName: "Helvetica", fontSize: 11.0)
 			let sigmaMinusAttributes = [
 				NSFontAttributeName : actualFont
 			]

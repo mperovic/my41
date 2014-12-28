@@ -180,6 +180,10 @@
 		DC799D881A155CA2002FACBE /* my41.icns in Resources */ = {isa = PBXBuildFile; fileRef = DC799D871A155CA2002FACBE /* my41.icns */; };
 		DC7B7E0F19AF99AB00C70269 /* CalculatorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */; };
 		DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E1019AFA4EE00C70269 /* Timer.swift */; };
+		DCA23A621A45EE2000BC2BD2 /* CPU_Class0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */; };
+		DCA23A641A46373300BC2BD2 /* CPU_Class1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */; };
+		DCA23A661A46D3BC00BC2BD2 /* CPU_Class2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A651A46D3BC00BC2BD2 /* CPU_Class2.swift */; };
+		DCA23A681A47332B00BC2BD2 /* CPU_Class3.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A671A47332B00BC2BD2 /* CPU_Class3.swift */; };
 		DCAD885C199D360B0027C925 /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885B199D360B0027C925 /* CPU.swift */; };
 		DCAD885E199D36150027C925 /* DataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885D199D36150027C925 /* DataOperations.swift */; };
 		DCAD8860199D37CB0027C925 /* MOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885F199D37CB0027C925 /* MOD.swift */; };
@@ -384,6 +388,10 @@
 		DC799D871A155CA2002FACBE /* my41.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = my41.icns; path = my41/my41.icns; sourceTree = "<group>"; };
 		DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatorWindow.swift; path = Classes/CalculatorWindow.swift; sourceTree = "<group>"; };
 		DC7B7E1019AFA4EE00C70269 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Classes/Timer.swift; sourceTree = "<group>"; };
+		DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class0.swift; path = Classes/CPU_Class0.swift; sourceTree = "<group>"; };
+		DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class1.swift; path = Classes/CPU_Class1.swift; sourceTree = "<group>"; };
+		DCA23A651A46D3BC00BC2BD2 /* CPU_Class2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class2.swift; path = Classes/CPU_Class2.swift; sourceTree = "<group>"; };
+		DCA23A671A47332B00BC2BD2 /* CPU_Class3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class3.swift; path = Classes/CPU_Class3.swift; sourceTree = "<group>"; };
 		DCAD885B199D360B0027C925 /* CPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU.swift; path = Classes/CPU.swift; sourceTree = "<group>"; };
 		DCAD885D199D36150027C925 /* DataOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataOperations.swift; path = Classes/DataOperations.swift; sourceTree = "<group>"; };
 		DCAD885F199D37CB0027C925 /* MOD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MOD.swift; path = Classes/MOD.swift; sourceTree = "<group>"; };
@@ -665,12 +673,12 @@
 		DC5626AB198B78540040453F /* CPU and Memory */ = {
 			isa = PBXGroup;
 			children = (
+				DCA23A601A45EDC200BC2BD2 /* CPU */,
 				DCAD8865199D38540027C925 /* SoundOutput.swift */,
 				DCAD8863199D380C0027C925 /* Bus.swift */,
 				DCAD8861199D37E70027C925 /* RomChip.swift */,
 				DCAD885F199D37CB0027C925 /* MOD.swift */,
 				DCAD885D199D36150027C925 /* DataOperations.swift */,
-				DCAD885B199D360B0027C925 /* CPU.swift */,
 				DC5626B0198B89FC0040453F /* RamChip.swift */,
 			);
 			name = "CPU and Memory";
@@ -710,6 +718,18 @@
 				DC7B7E1019AFA4EE00C70269 /* Timer.swift */,
 			);
 			name = Peripherals;
+			sourceTree = "<group>";
+		};
+		DCA23A601A45EDC200BC2BD2 /* CPU */ = {
+			isa = PBXGroup;
+			children = (
+				DCAD885B199D360B0027C925 /* CPU.swift */,
+				DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */,
+				DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */,
+				DCA23A651A46D3BC00BC2BD2 /* CPU_Class2.swift */,
+				DCA23A671A47332B00BC2BD2 /* CPU_Class3.swift */,
+			);
+			name = CPU;
 			sourceTree = "<group>";
 		};
 		DCD48906198AF40600F3B898 /* Classes */ = {
@@ -1002,6 +1022,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCA23A621A45EE2000BC2BD2 /* CPU_Class0.swift in Sources */,
 				DCAD8860199D37CB0027C925 /* MOD.swift in Sources */,
 				DC4AEB2A1A25E31A00ABF0D8 /* KeyboardShortcuts.swift in Sources */,
 				DCEEC9681A18A270000ECA76 /* PreferencesMenu.swift in Sources */,
@@ -1018,6 +1039,7 @@
 				DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */,
 				DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */,
 				DCAD885E199D36150027C925 /* DataOperations.swift in Sources */,
+				DCA23A641A46373300BC2BD2 /* CPU_Class1.swift in Sources */,
 				DCAD8864199D380C0027C925 /* Bus.swift in Sources */,
 				DC4E040D1A1774F1008D6DD5 /* DebugerMenu.swift in Sources */,
 				DC7B7E0F19AF99AB00C70269 /* CalculatorWindow.swift in Sources */,
@@ -1025,7 +1047,9 @@
 				DCAD8866199D38540027C925 /* SoundOutput.swift in Sources */,
 				DCAD885C199D360B0027C925 /* CPU.swift in Sources */,
 				DC6DB98B19BA5C1800E26ADD /* Keyboard.swift in Sources */,
+				DCA23A661A46D3BC00BC2BD2 /* CPU_Class2.swift in Sources */,
 				DCF52A21199C971A006BF825 /* Extensions.swift in Sources */,
+				DCA23A681A47332B00BC2BD2 /* CPU_Class3.swift in Sources */,
 				DCEEC96C1A18CD40000ECA76 /* PreferencesMods.swift in Sources */,
 				DC45285519897DA600C40B6C /* ViewController.swift in Sources */,
 				DC6728121A2769E800B4274F /* AlphaKeyboard.swift in Sources */,

@@ -52,25 +52,23 @@ class Timer : Peripheral {
 	var alarm: [UInt64] = [0, 0]
 	var intTimer: UInt64 = 0
 	var intTimerEnd: UInt64 = 0
-	var cpu: CPU
-	var bus: Bus?
+	var aBus: Bus?
 	
 	var registers: TimerRegisters = TimerRegisters()
 	
 	struct Static {
 		static var token : dispatch_once_t = 0
-		static var instance : Timer?
+		static var sharedInstance : Timer?
 	}
 	
-	class var instance: Timer {
-	dispatch_once(&Static.token) {  Static.instance = Timer() }
-		return Static.instance!
+	class var sharedInstance: Timer {
+	dispatch_once(&Static.token) {  Static.sharedInstance = Timer() }
+		return Static.sharedInstance!
 	}
 	
 	init() {
-		assert(Static.instance == nil, "Singleton already initialized!")
+		assert(Static.sharedInstance == nil, "Singleton already initialized!")
 
-		cpu = CPU.sharedInstance
 		Bus.sharedInstance.installPeripheral(self, inSlot: 0xFB)
 		
 		resetTimer()
@@ -144,8 +142,8 @@ class Timer : Peripheral {
 	}
 	
 	// MARK: Peripheral Delegate Methods
-	func pluggedIntoBus(aBus: Bus?) {
-		bus = aBus
+	func pluggedIntoBus(theBus: Bus?) {
+		self.aBus = theBus
 	}
 	
 	func readFromRegister(register: Bits4, inout into data: Digits14) {

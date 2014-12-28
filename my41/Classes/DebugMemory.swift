@@ -58,37 +58,37 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 				case .Success(let result):
 					switch ptr {
 					case 0x0:
-						memory0.stringValue = cpu.digits14ToString(tmpReg)
+						memory0.stringValue = cpu.digitsToString(tmpReg)
 					case 0x1:
-						memory1.stringValue = cpu.digits14ToString(tmpReg)
+						memory1.stringValue = cpu.digitsToString(tmpReg)
 					case 0x2:
-						memory2.stringValue = cpu.digits14ToString(tmpReg)
+						memory2.stringValue = cpu.digitsToString(tmpReg)
 					case 0x3:
-						memory3.stringValue = cpu.digits14ToString(tmpReg)
+						memory3.stringValue = cpu.digitsToString(tmpReg)
 					case 0x4:
-						memory4.stringValue = cpu.digits14ToString(tmpReg)
+						memory4.stringValue = cpu.digitsToString(tmpReg)
 					case 0x5:
-						memory5.stringValue = cpu.digits14ToString(tmpReg)
+						memory5.stringValue = cpu.digitsToString(tmpReg)
 					case 0x6:
-						memory6.stringValue = cpu.digits14ToString(tmpReg)
+						memory6.stringValue = cpu.digitsToString(tmpReg)
 					case 0x7:
-						memory7.stringValue = cpu.digits14ToString(tmpReg)
+						memory7.stringValue = cpu.digitsToString(tmpReg)
 					case 0x8:
-						memory8.stringValue = cpu.digits14ToString(tmpReg)
+						memory8.stringValue = cpu.digitsToString(tmpReg)
 					case 0x9:
-						memory9.stringValue = cpu.digits14ToString(tmpReg)
+						memory9.stringValue = cpu.digitsToString(tmpReg)
 					case 0xA:
-						memoryA.stringValue = cpu.digits14ToString(tmpReg)
+						memoryA.stringValue = cpu.digitsToString(tmpReg)
 					case 0xB:
-						memoryB.stringValue = cpu.digits14ToString(tmpReg)
+						memoryB.stringValue = cpu.digitsToString(tmpReg)
 					case 0xC:
-						memoryC.stringValue = cpu.digits14ToString(tmpReg)
+						memoryC.stringValue = cpu.digitsToString(tmpReg)
 					case 0xD:
-						memoryD.stringValue = cpu.digits14ToString(tmpReg)
+						memoryD.stringValue = cpu.digitsToString(tmpReg)
 					case 0xE:
-						memoryE.stringValue = cpu.digits14ToString(tmpReg)
+						memoryE.stringValue = cpu.digitsToString(tmpReg)
 					case 0xF:
-						memoryF.stringValue = cpu.digits14ToString(tmpReg)
+						memoryF.stringValue = cpu.digitsToString(tmpReg)
 					default:
 						// do nothing
 						break

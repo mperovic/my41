@@ -440,11 +440,27 @@ final class Bus {
 			Read specified location of specified chip.
 			If chip or location is nonexistent, set data to 0 and return false.
 		*/
-		if Int(address) > ramValid.count || !ramValid[Int(address)] {
+		if Int(address) > ramValid.count - 1 || !ramValid[Int(address)] {
 			clearDigits(destination: &data)
-			return .Error("invalid ram address: \(address)")
+			return .Error("readRamAddress: invalid address: \(address)")
 		} else {
-			copyDigits(ram[Int(address)], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			copyDigits(
+				ram[Int(address)],
+				sourceStartAt: 0,
+				destination: &data,
+				destinationStartAt: 0,
+				count: 14
+			)
+			return .Success(Box(true))
+		}
+	}
+	
+	func writeRamAddress(address: Bits12, from data: Digits14) -> Result<Bool> {
+		// Write to specified location of specified chip. If chip or location is nonexistent, do nothing and return false.
+		if Int(address) > ramValid.count - 1 || !ramValid[Int(address)] {
+			return .Error("writeRamAddress: invalid address: \(address)")
+		} else {
+			copyDigits(data, sourceStartAt: 0, destination: &ram[Int(address)], destinationStartAt: 0, count: 14)
 			return .Success(Box(true))
 		}
 	}
@@ -460,7 +476,7 @@ final class Bus {
 		})
 	}
 	
-	func readRomLocation(addr: Int) -> Result<Int> {
+	func readRomAddress(addr: Int) -> Result<Int> {
 		// Read ROM location at the given address and return true.
 		// If there is no ROM at that address, sets data to 0 and returns
 		var address = addr
@@ -471,17 +487,7 @@ final class Bus {
 		if let aRom = rom {
 			return .Success(Box(Int(aRom[Int(address & 0xfff)])))
 		} else {
-			return .Error("invalid rom address")
-		}
-	}
-	
-	func writeRamAddress(address: Bits12, from data: Digits14) -> Bool {
-		// Write to specified location of specified chip. If chip or location is nonexistent, do nothing and return false.
-		if ramValid[Int(address)] {
-			copyDigits(data, sourceStartAt: 0, destination: &ram[Int(address)], destinationStartAt: 0, count: 14)
-			return true
-		} else {
-			return false
+			return .Error("readRomAddress: invalid address: \(address)")
 		}
 	}
 

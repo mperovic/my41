@@ -71,15 +71,15 @@ class DebugCPUViewController: NSViewController {
 	}
 	
 	func populateCPURegisters() {
-		cpuRegisterA.stringValue = cpu.digits14ToString(cpu.reg.A)
-		cpuRegisterB.stringValue = cpu.digits14ToString(cpu.reg.B)
-		cpuRegisterC.stringValue = cpu.digits14ToString(cpu.reg.C)
-		cpuRegisterM.stringValue = cpu.digits14ToString(cpu.reg.M)
-		cpuRegisterN.stringValue = cpu.digits14ToString(cpu.reg.N)
+		cpuRegisterA.stringValue = cpu.digitsToString(cpu.reg.A)
+		cpuRegisterB.stringValue = cpu.digitsToString(cpu.reg.B)
+		cpuRegisterC.stringValue = cpu.digitsToString(cpu.reg.C)
+		cpuRegisterM.stringValue = cpu.digitsToString(cpu.reg.M)
+		cpuRegisterN.stringValue = cpu.digitsToString(cpu.reg.N)
 		cpuRegisterP.stringValue = cpu.bits4ToString(cpu.reg.P)
 		cpuRegisterQ.stringValue = cpu.bits4ToString(cpu.reg.Q)
 		cpuRegisterPC.stringValue = NSString(format:"%04X", cpu.reg.PC)
-		cpuRegisterG.stringValue = NSString(format:"%02X", cpu.reg.G)
+		cpuRegisterG.stringValue = cpu.digitsToString(cpu.reg.G)
 		cpuRegisterT.stringValue = NSString(format:"%02X", cpu.reg.T)
 		cpuRegisterXST.stringValue = NSString(format:"%02X", cpu.reg.XST)
 		cpuRegisterST.stringValue = NSString(format:"%02X", cpu.reg.ST)
