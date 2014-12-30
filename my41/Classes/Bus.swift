@@ -37,6 +37,8 @@ struct RamDesc {
 	var xFunction: Bool
 }
 
+let calculatorController = CalculatorController.sharedInstance
+
 var builtinRomTable: [RomDesc] = [
 	RomDesc(name: "XNUT0",   slot: 0, bank: 0),
 	RomDesc(name: "XNUT1",   slot: 1, bank: 0),
@@ -152,7 +154,7 @@ var builtinRamTable: [RamDesc] = [
 		lastAddress: 0x02EF,
 		inC: false,
 		inCV: false,
-		inCX: true,
+		inCX: false,
 		memModule1: false,
 		memModule2: false,
 		memModule3: false,
@@ -167,7 +169,7 @@ var builtinRamTable: [RamDesc] = [
 		lastAddress: 0x03EF,
 		inC: false,
 		inCV: false,
-		inCX: true,
+		inCX: false,
 		memModule1: false,
 		memModule2: false,
 		memModule3: false,
@@ -189,12 +191,22 @@ final class Bus {
 	var quadMemory: Bool?
 	var xMemory: Bool?
 	var xFunction: Bool?
-	var ramValid: [Bool]
+//	var ramValid: [Bool]
 	var ram: [Digits14]
-	var activeRomBank: [Bits4] = [Bits4](count: 0x10, repeatedValue: 0)
 	var peripherals: [Peripheral?] = [Peripheral?](count: 0x100, repeatedValue:nil)
 	
+	// Peripherals
+	var display: Display?
+	var timer: Timer?
+	
+	var memModules: byte = 0
+	var XMemModules: byte = 0
+
+	
+	// ROM variables
 	var romChips = Array<Array<RomChip?>>()
+	var nextActualBankGroup: byte = 1										// counter for loading actual bank groups
+	var activeBank: [Int] = [Int](count: 0x10, repeatedValue: 1)
 	
 	class var sharedInstance : Bus {
 		struct Singleton {
@@ -205,11 +217,14 @@ final class Bus {
 	}
 
 	init () {
-		// 16 pages of 8 banks
-		for _ in 0..<0x10 {
-			romChips.append(Array(count:8, repeatedValue:RomChip()))
+		// 16 pages of 4 banks
+		for page in 0...0xf {
+			romChips.append(Array(count:4, repeatedValue:RomChip()))
+			for bank in 1...4 {
+				romChips[page][bank - 1] = nil
+			}
 		}
-		ramValid = [Bool](count:0x400, repeatedValue:false)
+//		ramValid = [Bool](count:0x400, repeatedValue:false)
 		ram = [Digits14](count:0x400, repeatedValue:emptyDigit14)
 	}
 	
@@ -399,6 +414,12 @@ final class Bus {
 				}
 				
 				if load {
+					if modulePage.bankGroup != 0 {
+						// ensures each bank group has a number that is unique to the entire simulator
+						modulePage.actualBankGroup = modulePage.bankGroup + nextActualBankGroup * 8
+					} else {
+						modulePage.actualBankGroup = 0
+					}
 					// HEPAX special case
 					if hepPage != 0 && mod.moduleHeader.hardware == Hardware.HEPAX && modulePage.RAM == 1 {
 						// hepax was just loaded previously and this is the first RAM page after it
@@ -417,12 +438,13 @@ final class Bus {
 						return .Error("No free space")
 					} else {
 						// otherwise load into primary page
-						let romChip = RomChip(fromBIN: modulePage.image)
+						let romChip = RomChip(fromBIN: modulePage.image, actualBankGroup: modulePage.actualBankGroup)
 						installRomChip(romChip, inSlot: page, andBank: modulePage.bank-1)
 					}
 				}
 			}
 		}
+		nextActualBankGroup++
 		
 		return .Success(Box(true))
 	}
@@ -431,19 +453,16 @@ final class Bus {
 		romChips[Int(slot)][Int(bank)] = chip
 	}
 	
-	func installRamAtAddress(address: Bits12) {
-		ramValid[Int(address)] = true
-	}
+//	func installRamAtAddress(address: Bits12) {
+//		ramValid[Int(address)] = true
+//	}
 	
 	func readRamAddress(address: Bits12, inout into data: Digits14) -> Result<Bool> {
 		/*
 			Read specified location of specified chip.
 			If chip or location is nonexistent, set data to 0 and return false.
 		*/
-		if Int(address) > ramValid.count - 1 || !ramValid[Int(address)] {
-			clearDigits(destination: &data)
-			return .Error("readRamAddress: invalid address: \(address)")
-		} else {
+		if RAMExists(Int(address)) {
 			copyDigits(
 				ram[Int(address)],
 				sourceStartAt: 0,
@@ -452,38 +471,38 @@ final class Bus {
 				count: 14
 			)
 			return .Success(Box(true))
+		} else {
+			clearDigits(destination: &data)
+			return .Error("readRamAddress: invalid address: \(address)")
 		}
 	}
 	
 	func writeRamAddress(address: Bits12, from data: Digits14) -> Result<Bool> {
 		// Write to specified location of specified chip. If chip or location is nonexistent, do nothing and return false.
-		if Int(address) > ramValid.count - 1 || !ramValid[Int(address)] {
-			return .Error("writeRamAddress: invalid address: \(address)")
-		} else {
+		if RAMExists(Int(address)) {
 			copyDigits(data, sourceStartAt: 0, destination: &ram[Int(address)], destinationStartAt: 0, count: 14)
 			return .Success(Box(true))
+		} else {
+			return .Error("writeRamAddress: invalid address: \(address)")
 		}
 	}
 	
 	func removeAllRomChips() {
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-			for page in 0..<16 {
-				for bank in 0..<8 {
-					self.romChips[page][bank] = nil
-				}
-				
+		for page in 0...0xf {
+			for bank in 1...4 {
+				self.romChips[page][bank - 1] = nil
 			}
-		})
+			
+		}
 	}
 	
-	func readRomAddress(addr: Int) -> Result<Int> {
+	func readRomAddress(var addr: Int) -> Result<Int> {
 		// Read ROM location at the given address and return true.
 		// If there is no ROM at that address, sets data to 0 and returns
-		var address = addr
-		address = address & 0xffff
+		let address = addr & 0xffff
 		let page = Int(address >> 12)
-		let bank = Int(activeRomBank[address >> 12])
-		var rom: RomChip? = romChips[page][bank]
+		let bank = Int(activeBank[page])
+		var rom: RomChip? = romChips[page][bank - 1]
 		if let aRom = rom {
 			return .Success(Box(Int(aRom[Int(address & 0xfff)])))
 		} else {
@@ -492,26 +511,26 @@ final class Bus {
 	}
 
 	func romChipInSlot(slot: Bits4, bank: Bits4) -> RomChip? {
-		return romChips[Int(slot)][Int(bank)]
+		return romChips[Int(slot)][Int(bank) - 1]
 	}
 
 	func romChipInSlot(slot: Bits4) -> RomChip? {
-		let bank = activeRomBank[Int(slot)]
+		let bank = activeBank[Int(slot)]
 		
-		return romChips[Int(slot)][Int(bank)]
+		return romChips[Int(slot)][Int(bank) - 1]
 	}
 	
-	func activeRomBankAtAddr(addr: Bits16) -> Bits4 {
+	func activeBankAtAddr(addr: Bits16) -> Bits4 {
 		let slot = addr >> 12
-		return Bits4(activeRomBank[Int(slot)])
+		return Bits4(activeBank[Int(slot)])
 	}
 	
-	func activeRomBankInSlot(slot: Bits4) -> Bits4 {
-		return activeRomBank[Int(slot)]
+	func activeBankInSlot(slot: Bits4) -> Int {
+		return activeBank[Int(slot)]
 	}
 	
-	func setActiveRomBankInSlot(slot: Bits4, bank: Bits4) {
-		activeRomBank[Int(slot)] = bank
+	func setActiveBankInSlot(slot: Bits4, bank: Int) {
+		activeBank[Int(slot)] = bank
 	}
 	
 	func writeToRegister(register: Bits4, ofPeripheral slot: Bits8, inout from data: Digits14) {
@@ -540,7 +559,7 @@ final class Bus {
 	}
 	
 	func abortInstruction(message: String) {
-		CPU.sharedInstance.abortInstruction(message)
+		cpu.abortInstruction(message)
 	}
 	
 	func checkAddress(address: Bits12, calculatorModHeader: ModuleFileHeader) -> Bool {
@@ -579,6 +598,46 @@ final class Bus {
 		// void: 3f0-3ff
 		// end of memory: 3ff
 
+		return false
+	}
+	
+	func RAMExists(address: Int) -> Bool
+	{
+		if address >= 0x000 && address <= 0x00f	{			// status registers
+			return true
+		}
+		if address >= 0x010 && address <= 0x03f	{			// void
+			return false
+		}
+		if address >= 0x040 && address <= 0x0bf {			// extended functions - 128 regs
+			return self.XMemModules >= 1
+		}
+		if address >= 0x0c0 && address <= 0x0ff {			// main memory for C
+			return true
+		}
+		if address >= 0x100 && address <= 0x13f {			// memory module 1
+			return self.memModules >= 1
+		}
+		if address >= 0x140 && address <= 0x17f {			// memory module 2
+			return self.memModules >= 2
+		}
+		if address >= 0x180 && address <= 0x1bf {			// memory module 3
+			return self.memModules >= 3
+		}
+		if address >= 0x1c0 && address <= 0x1ff {			// memory module 4
+			return self.memModules >= 4
+		}
+		// void: 200
+		if address >= 0x201 && address <= 0x2ef {			// extended memory 1 - 239 regs
+			return self.XMemModules >= 2
+		}
+		// void: 2f0-300
+		if address >= 0x301 && address <= 0x3ef {			// extended memory 2 - 239 regs
+			return self.XMemModules >= 3
+		}
+		// void: 3f0-3ff
+		// end of memory: 3ff
+		
 		return false
 	}
 }

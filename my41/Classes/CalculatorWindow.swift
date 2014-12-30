@@ -125,9 +125,19 @@ class Display : NSView, Peripheral {
 	var annunciatorBottomMargin: CGFloat = 2.0
 	var annunciatorPositions: [NSPoint] = [NSPoint](count: 12, repeatedValue: CGPointMake(0.0, 0.0))
 	var foregroundColor: NSColor?
-	var bus: Bus?
+	var aBus: Bus?
 	
-	var calculatorController = CalculatorController.sharedInstance
+	var contrast: Digit {
+		set {
+			self.contrast = newValue & 0xf
+			
+			scheduleUpdate()
+		}
+		
+		get {
+			return self.contrast
+		}
+	}
 	
 	let punctSegmentTable: [DisplaySegmentMap] = [
 		0x00000, // no punctuation
@@ -169,38 +179,37 @@ class Display : NSView, Peripheral {
 	}
 	
 	override func awakeFromNib() {
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-			self.calculatorController.display = self
-			self.foregroundColor = NSColorList(name: "HP41").colorWithKey("displayForegroundColor")
-			self.displayFont = self.loadFont("hpfont")
-			self.segmentPaths = self.loadSegmentPaths("hpchar")
-			self.annunciatorFont = NSFont(name: "Helvetica", size:self.annunciatorFontScale * self.annunciatorFontSize)
-			self.annunciatorPositions = self.calculateAnnunciatorPositions(self.annunciatorFont!, inRect: self.bounds)
-			self.on = true
-			self.updateCountdown = 2
-			Bus.sharedInstance.installPeripheral(self, inSlot: 0xFD)
-			
-			for idx in 0..<self.numDisplayCells {
-				self.registers.A[idx] = 0xA
-				self.registers.B[idx] = 0x3
-				self.registers.C[idx] = 0x2
-				self.registers.E = 0xfff
-			}
-			
-			//-- initialize the display character to unicode lookup table:
-			// The table simply contains one unicode character for each X-41 hardware character
-			// index (0x00..0x7f). The file can be tweaked for whatever translation is desired.
-			// Character groups (approximated):
-			// 0x00..0x1f: A-Z uppercase characters
-			// 0x20..0x3f: ASCII-like symbols and numbers
-			// 0x40..0x4f: a-e + "hangman"
-			// 0x50..0x5f: some greek characters + "hangman"
-			// 0x60..0x7f: a-z lowercase characters
-			let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
-			let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)!
-			CTULookup = String(mString)
-			CTULookupLength = countElements(CTULookup!)
-		})
+		calculatorController.display = self
+		self.foregroundColor = NSColorList(name: "HP41").colorWithKey("displayForegroundColor")
+		self.displayFont = self.loadFont("hpfont")
+		self.segmentPaths = self.loadSegmentPaths("hpchar")
+		self.annunciatorFont = NSFont(name: "Helvetica", size:self.annunciatorFontScale * self.annunciatorFontSize)
+		self.annunciatorPositions = self.calculateAnnunciatorPositions(self.annunciatorFont!, inRect: self.bounds)
+		self.on = true
+		self.updateCountdown = 2
+		bus.installPeripheral(self, inSlot: 0xFD)
+		bus.display = self
+		
+		for idx in 0..<self.numDisplayCells {
+			self.registers.A[idx] = 0xA
+			self.registers.B[idx] = 0x3
+			self.registers.C[idx] = 0x2
+			self.registers.E = 0xfff
+		}
+		
+		//-- initialize the display character to unicode lookup table:
+		// The table simply contains one unicode character for each X-41 hardware character
+		// index (0x00..0x7f). The file can be tweaked for whatever translation is desired.
+		// Character groups (approximated):
+		// 0x00..0x1f: A-Z uppercase characters
+		// 0x20..0x3f: ASCII-like symbols and numbers
+		// 0x40..0x4f: a-e + "hangman"
+		// 0x50..0x5f: some greek characters + "hangman"
+		// 0x60..0x7f: a-z lowercase characters
+		let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
+		let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)!
+		CTULookup = String(mString)
+		CTULookupLength = countElements(CTULookup!)
 	}
 
 	override var flipped:Bool{
@@ -367,8 +376,8 @@ class Display : NSView, Peripheral {
 	
 	//MARK: - Peripheral Protocol Method
 	
-	func pluggedIntoBus(aBus: Bus?) {
-		bus = aBus
+	func pluggedIntoBus(theBus: Bus?) {
+		self.aBus = theBus
 	}
 	
 	func readFromRegister(register: Bits4, inout into data: Digits14) {
@@ -408,7 +417,7 @@ class Display : NSView, Peripheral {
 		case 0xF:	// FLSABC
 			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
 		default:
-			self.bus?.abortInstruction("Unimplemented display operation")
+			self.aBus?.abortInstruction("Unimplemented display operation")
 		}
 		scheduleUpdate()
 	}
@@ -449,8 +458,174 @@ class Display : NSView, Peripheral {
 		case 0xF:	// SLSABC
 			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
 		default:
-			self.bus?.abortInstruction("Unimplemented display operation")
+			self.aBus?.abortInstruction("Unimplemented display operation")
 		}
+		scheduleUpdate()
+	}
+	
+	func displayWrite()
+	{
+		switch cpu.opcode.row() {
+		case 0x0:
+			// 028          SRLDA    WRA12L   SRLDA
+			registers.A[0] = cpu.reg.C[0]
+			registers.A[1] = cpu.reg.C[1]
+			registers.A[2] = cpu.reg.C[2]
+			registers.A[3] = cpu.reg.C[3]
+			registers.A[4] = cpu.reg.C[4]
+			registers.A[5] = cpu.reg.C[5]
+			registers.A[6] = cpu.reg.C[6]
+			registers.A[7] = cpu.reg.C[7]
+			registers.A[8] = cpu.reg.C[8]
+			registers.A[9] = cpu.reg.C[9]
+			registers.A[10] = cpu.reg.C[10]
+			registers.A[11] = cpu.reg.C[11]
+		case 0x1:
+			// 068          SRLDB    WRB12L   SRLDB
+			registers.B[0] = cpu.reg.C[0]
+			registers.B[1] = cpu.reg.C[1]
+			registers.B[2] = cpu.reg.C[2]
+			registers.B[3] = cpu.reg.C[3]
+			registers.B[4] = cpu.reg.C[4]
+			registers.B[5] = cpu.reg.C[5]
+			registers.B[6] = cpu.reg.C[6]
+			registers.B[7] = cpu.reg.C[7]
+			registers.B[8] = cpu.reg.C[8]
+			registers.B[9] = cpu.reg.C[9]
+			registers.B[10] = cpu.reg.C[10]
+			registers.B[11] = cpu.reg.C[11]
+		case 0x2:
+			// 0A8          SRLDC    WRC12L   SRLDC
+			registers.C[0] = cpu.reg.C[0]
+			registers.C[1] = cpu.reg.C[1]
+			registers.C[2] = cpu.reg.C[2]
+			registers.C[3] = cpu.reg.C[3]
+			registers.C[4] = cpu.reg.C[4]
+			registers.C[5] = cpu.reg.C[5]
+			registers.C[6] = cpu.reg.C[6]
+			registers.C[7] = cpu.reg.C[7]
+			registers.C[8] = cpu.reg.C[8]
+			registers.C[9] = cpu.reg.C[9]
+			registers.C[10] = cpu.reg.C[10]
+			registers.C[11] = cpu.reg.C[11]
+		case 0x3:
+			// 0E8          SRLDAB   WRAB6L   SRLDAB
+			rotateRegisterLeft(&registers.A, times: 6)
+			rotateRegisterLeft(&registers.B, times: 6)
+			registers.A[6] = cpu.reg.C[0]
+			registers.B[6] = cpu.reg.C[1]
+			registers.A[7] = cpu.reg.C[2]
+			registers.B[7] = cpu.reg.C[3]
+			registers.A[8] = cpu.reg.C[4]
+			registers.B[8] = cpu.reg.C[5]
+			registers.A[9] = cpu.reg.C[6]
+			registers.B[9] = cpu.reg.C[7]
+			registers.A[10] = cpu.reg.C[8]
+			registers.B[10] = cpu.reg.C[9]
+			registers.A[11] = cpu.reg.C[10]
+			registers.B[11] = cpu.reg.C[11]
+		case 0x4:
+			// 128          SRLABC   WRABC4L  SRLABC                       ;also HP:SRLDABC
+			rotateRegisterLeft(&registers.A, times: 4)
+			rotateRegisterLeft(&registers.B, times: 4)
+			rotateRegisterLeft(&registers.C, times: 4)
+			registers.A[8] = cpu.reg.C[0]
+			registers.B[8] = cpu.reg.C[1]
+			registers.C[8] = cpu.reg.C[2] & 0x01
+			registers.A[9] = cpu.reg.C[3]
+			registers.B[9] = cpu.reg.C[4]
+			registers.C[9] = cpu.reg.C[5] & 0x01
+			registers.A[10] = cpu.reg.C[6]
+			registers.B[10] = cpu.reg.C[7]
+			registers.C[10] = cpu.reg.C[8] & 0x01
+			registers.A[11] = cpu.reg.C[9]
+			registers.B[11] = cpu.reg.C[10]
+			registers.C[11] = cpu.reg.C[11] & 0x01
+		case 0x5:
+			// 168          SLLDAB   WRAB6R   SLLDAB
+			rotateRegisterRight(&registers.A, times: 6)
+			rotateRegisterRight(&registers.B, times: 6)
+			registers.A[5] = cpu.reg.C[0]
+			registers.B[5] = cpu.reg.C[1]
+			registers.A[4] = cpu.reg.C[2]
+			registers.B[4] = cpu.reg.C[3]
+			registers.A[3] = cpu.reg.C[4]
+			registers.B[3] = cpu.reg.C[5]
+			registers.A[2] = cpu.reg.C[6]
+			registers.B[1] = cpu.reg.C[7]
+			registers.A[1] = cpu.reg.C[8]
+			registers.B[1] = cpu.reg.C[9]
+			registers.A[0] = cpu.reg.C[10]
+			registers.B[0] = cpu.reg.C[11]
+		case 0x6:
+			// 1A8          SLLABC   WRABC4R  SLLABC                       ;also HP:SLLDABC
+			rotateRegisterRight(&registers.A, times: 4)
+			rotateRegisterRight(&registers.B, times: 4)
+			rotateRegisterRight(&registers.C, times: 4)
+			registers.A[3] = cpu.reg.C[0]
+			registers.B[3] = cpu.reg.C[1]
+			registers.C[3] = cpu.reg.C[2] & 0x01
+			registers.A[2] = cpu.reg.C[3]
+			registers.B[2] = cpu.reg.C[4]
+			registers.C[2] = cpu.reg.C[5] & 0x01
+			registers.A[1] = cpu.reg.C[6]
+			registers.B[1] = cpu.reg.C[7]
+			registers.C[1] = cpu.reg.C[8] & 0x01
+			registers.A[0] = cpu.reg.C[9]
+			registers.B[0] = cpu.reg.C[10]
+			registers.C[0] = cpu.reg.C[11] & 0x01
+		case 0x7:
+			// 1E8          SRSDA    WRA1L    SRSDA
+			rotateRegisterLeft(&registers.A, times: 1)
+			registers.A[11] = cpu.reg.C[0]
+		case 0x8:
+			// 228          SRSDB    WRB1L    SRSDB
+			rotateRegisterLeft(&registers.B, times: 1)
+			registers.B[11] = cpu.reg.C[0]
+		case 0x9:
+			// 268          SRSDC    WRC1L    SRSDC
+			rotateRegisterLeft(&registers.C, times: 1)
+			registers.C[11] = cpu.reg.C[0] & 0x01
+		case 0xa:
+			// 2A8          SLSDA    WRA1R    SLSDA
+			rotateRegisterRight(&registers.A, times: 1)
+			registers.A[0] = cpu.reg.C[0]
+		case 0xb:
+			// 2E8          SLSDB    WRB1R    SLSDB
+			rotateRegisterRight(&registers.B, times: 1)
+			registers.B[0] = cpu.reg.C[0]
+		case 0xc:
+			// 328          SRSDAB   WRAB1L   SRSDAB                        ;Zenrom manual incorrectly says this is WRC1R
+			rotateRegisterLeft(&registers.A, times: 1)
+			rotateRegisterLeft(&registers.B, times: 1)
+			registers.A[11] = cpu.reg.C[0]
+			registers.B[11] = cpu.reg.C[1]
+		case 0xd:
+			// 368          SLSDAB   WRAB1R   SLSDAB
+			rotateRegisterRight(&registers.A, times: 1)
+			rotateRegisterRight(&registers.B, times: 1)
+			registers.A[0] = cpu.reg.C[0]
+			registers.B[0] = cpu.reg.C[1]
+		case 0xe:
+			// 3A8          SRSABC   WRABC1L  SRSABC                        ;also HP:SRSDABC
+			rotateRegisterLeft(&registers.A, times: 1)
+			rotateRegisterLeft(&registers.B, times: 1)
+			rotateRegisterLeft(&registers.C, times: 1)
+			registers.A[11] = cpu.reg.C[0]
+			registers.B[11] = cpu.reg.C[1]
+			registers.C[11] = cpu.reg.C[2] & 0x01
+		case 0xf:
+			// 3E8          SLSABC   WRABC1R  SLSABC                        ;also HP:SLSDABC
+			rotateRegisterRight(&registers.A, times: 1)
+			rotateRegisterRight(&registers.B, times: 1)
+			rotateRegisterRight(&registers.C, times: 1)
+			registers.A[0] = cpu.reg.C[0]
+			registers.B[0] = cpu.reg.C[1]
+			registers.C[0] = cpu.reg.C[2] & 0x01
+		default:
+			break
+		}
+		
 		scheduleUpdate()
 	}
 	
@@ -525,12 +700,37 @@ class Display : NSView, Peripheral {
 		register[0] = temp
 	}
 	
+	func rotateRegisterRight(inout register: Digits12, times: Int)
+	{
+		if times > 0 {
+			for pass in 0..<times {
+				let temp = register[11]
+				for idx in reverse(1...11) {
+					register[idx] = register[idx - 1]
+				}
+				register[0] = temp
+			}
+		}
+	}
+	
 	func rotateRegisterRight(inout register: Digits12) {
 		let temp = register[0]
 		for idx in 0...10 {
 			register[idx] = register[idx + 1]
 		}
 		register[11] = temp
+	}
+	
+	func rotateRegisterLeft(inout register: Digits12, times: Int) {
+		if times > 0 {
+			for pass in 0..<times {
+				let temp = register[0]
+				for idx in 0...10 {
+					register[idx] = register[idx + 1]
+				}
+				register[11] = temp
+			}
+		}
 	}
 	
 	func shift(
@@ -642,5 +842,21 @@ class Display : NSView, Peripheral {
 		}
 		
 		return result
+	}
+	
+	//MARK: - Halfnut
+	func halfnutWrite()
+	{
+		// REG=C 5
+		if cpu.opcode.row() == 5 {
+			contrast = cpu.reg.C[0]
+		}
+	}
+	
+	func halfnutRead()
+	{
+		if cpu.opcode.row() == 5 {
+			cpu.reg.C[0] = contrast
+		}
 	}
 }

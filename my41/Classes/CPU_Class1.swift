@@ -47,7 +47,7 @@ func op_GSUBNC(addr: Int) -> Bit													// GSUBNC
 	If the instruction at jump_addr is NOP, it is automatically executed as RET to protect
 	against executing from a non-existent ROM.
 	*/
-	if CPU.sharedInstance.reg.carry == 0 {
+	if cpu.reg.carry == 0 {
 		longJumpTo(addr, withReturn: true)
 	}
 
@@ -93,7 +93,7 @@ func op_GSUBC(addr: Int) -> Bit														// GSUBC
 	If the instruction at jump_addr is NOP, it is automatically executed as RET to protect
 	against executing from a non-existent ROM.
 	*/
-	if CPU.sharedInstance.reg.carry == 1 {
+	if cpu.reg.carry == 1 {
 		longJumpTo(addr, withReturn: true)
 	}
 	
@@ -161,7 +161,7 @@ func op_GOLC(addr: Int) -> Bit														 // GOLC
 	prevent external devices from incorrectly interpreting the contents of the isa_bus during
 	the second machine cycle as an instruction.
 	*/
-	if CPU.sharedInstance.reg.carry == 1 {
+	if cpu.reg.carry == 1 {
 		longJumpTo(addr, withReturn: false)
 	}
 	
@@ -170,10 +170,16 @@ func op_GOLC(addr: Int) -> Bit														 // GOLC
 
 
 func longJumpTo(addr: Int, withReturn push: Bool) {
-	let address: Bits4 = Bits4(addr >> 12)
-	if let rom = Bus.sharedInstance.romChipInSlot(address) {
+	let page = (addr & 0xf000) >> 12
+	let activePage = bus.activeBank[page]
+	if let rom = bus.romChips[page][activePage - 1] {
+		if rom.words[addr & 0x0fff] == 0 {
+			// long jumps dont jump to NOP
+			return
+		}
+		
 		if push {
-			CPU.sharedInstance.pushReturnStack(CPU.sharedInstance.reg.PC)
+			cpu.pushReturnStack(cpu.reg.PC)
 		}
 		
 		// We do not jump to a NOP tyte
@@ -181,6 +187,8 @@ func longJumpTo(addr: Int, withReturn push: Bool) {
 			return
 		}
 		
-		CPU.sharedInstance.reg.PC = Bits16(addr)
+		cpu.reg.PC = Bits16(addr)
+		cpu.currentPage = page
+		cpu.currentRomChip = rom
 	}
 }

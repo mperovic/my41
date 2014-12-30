@@ -1,4 +1,4 @@
-//
+ //
 //  CPU.swift
 //  my41
 //
@@ -23,10 +23,7 @@ typealias Bit = UInt8
 typealias byte = UInt8
 typealias word = UInt16
 
-let DEBUG = 0
-let TRACE = 0
-
-let timer = Timer.sharedInstance
+var TRACE = 0
 
 let emptyDigit14:[Digit] = [Digit](count: 14, repeatedValue: 0)
 
@@ -39,6 +36,19 @@ struct CPURegisters {
 	var P: Bits4			= 0
 	var Q: Bits4			= 0
 	var PC: Bits16			= 0
+		{
+		willSet(newValue) {
+			let page = Int((newValue & 0xf000) >> 12)
+			let activeBank = bus.activeBank[page]
+			if let romChip = bus.romChips[page][activeBank - 1] {
+				cpu.currentPage = page
+				cpu.currentRomChip = romChip
+			} else {
+				cpu.currentPage = 0
+				cpu.currentRomChip = bus.romChips[cpu.currentPage][bus.activeBank[cpu.currentPage]]
+			}
+		}
+	}
 	var G: [Digit]			= [0, 0]
 	var ST: Bits8			= 0
 	var T: Bits8			= 0
@@ -79,34 +89,29 @@ struct CPURegisters {
 		let bitsST = pad(strST, toSize: 8)
 		let strXST = String(XST, radix:2)
 		let bitsXST = pad(strXST, toSize: 6)
-		let CLK_A = timer.registers.CLK[1]
-		let CLK_B = timer.registers.CLK[0]
-		let ALM_A = timer.registers.ALM[1]
-		let ALM_B = timer.registers.ALM[0]
-		let SCR_A = timer.registers.SCR[1]
-		let SCR_B = timer.registers.SCR[0]
-		let INT_A = timer.registers.INT[1]
-		let INT_B = timer.registers.INT[0]
-		let TMR_Sb = digitsToBits(digits: timer.registers.TMR_S, nbits: 16)
-		let ACC_Fb = digitsToBits(digits: timer.registers.ACC_F, nbits: 16)
-		let TMR_S = NSString(format:"%04X", TMR_Sb) as String
-		let ACC_F = NSString(format:"%04X", ACC_Fb) as String
-		let aTimer = timer.timerSelected.rawValue == 0 ? "B" : "A"
 		let pP = NSString(format:"%1X", P) as String
 		let pQ = NSString(format:"%1X", Q) as String
 		println("A=\(displayOrderedDigits(A)) B=\(displayOrderedDigits(B)) C=\(displayOrderedDigits(C)) Stack=\(stack0) \(stack1) \(stack2) \(stack3)")
-		println("M=\(displayOrderedDigits(M)) N=\(displayOrderedDigits(N)) Cr=\(carry)\(pointP)P=\(pP)\(pointQ)Q=\(pQ) G=\(displayOrderedDigits(G)) ST=(\(XST), \(ST))\(bitsXST) \(bitsST)")
-		println("CLK_A=\(displayOrderedDigits(CLK_A)) ALM_A=\(displayOrderedDigits(ALM_A)) SCR_A=\(displayOrderedDigits(SCR_A))")
-		println("CLK_B=\(displayOrderedDigits(CLK_B)) ALM_B=\(displayOrderedDigits(CLK_B)) SCR_B=\(displayOrderedDigits(SCR_B))")
-		println("TMR_S=\(TMR_S) ACC_F=\(ACC_F) Timer=\(aTimer)")
+		println("M=\(displayOrderedDigits(M)) N=\(displayOrderedDigits(N)) Cr=\(carry)\(pointP)P=\(pP)\(pointQ)Q=\(pQ) G=\(displayOrderedDigits(G)) ST=\(bitsXST) \(bitsST)")
+		if let timer = bus.timer {
+			let CLK_A = timer.registers.CLK[1]
+			let CLK_B = timer.registers.CLK[0]
+			let ALM_A = timer.registers.ALM[1]
+			let ALM_B = timer.registers.ALM[0]
+			let SCR_A = timer.registers.SCR[1]
+			let SCR_B = timer.registers.SCR[0]
+			let INT_A = timer.registers.INT[1]
+			let INT_B = timer.registers.INT[0]
+			let TMR_Sb = digitsToBits(digits: timer.registers.TMR_S, nbits: 16)
+			let ACC_Fb = digitsToBits(digits: timer.registers.ACC_F, nbits: 16)
+			let TMR_S = NSString(format:"%04X", TMR_Sb) as String
+			let ACC_F = NSString(format:"%04X", ACC_Fb) as String
+			let aTimer = timer.timerSelected.rawValue == 0 ? "B" : "A"
+			println("CLK_A=\(displayOrderedDigits(CLK_A)) ALM_A=\(displayOrderedDigits(ALM_A)) SCR_A=\(displayOrderedDigits(SCR_A))")
+			println("CLK_B=\(displayOrderedDigits(CLK_B)) ALM_B=\(displayOrderedDigits(CLK_B)) SCR_B=\(displayOrderedDigits(SCR_B))")
+			println("TMR_S=\(TMR_S) ACC_F=\(ACC_F) Timer=\(aTimer)")
+		}
 		println("RAM Addr=\(ramAddr) Perph Addr=\(periph) Base=\(mode.rawValue) KY=\(KY) Keydown=\(keyDown)")
-//		println("PC=\(PC)")
-//		println("ST=\(ST)")
-//		println("T=\(T)")
-//		println("FI=\(FI)")
-//		println("KY=\(KY)")
-//		println("XST=\(XST)")
-//		println("Keydown=\(keyDown)")
 	}
 	
 	func displayOrderedDigits(digits: [Digit]) -> String
@@ -227,7 +232,6 @@ final class CPU {
 	var powerOffFlag = false
 	var debugCPUViewController: DebugCPUViewController?
 	var debugMemoryViewController: DebugMemoryViewController?
-	var bus = Bus.sharedInstance
 	
 	var opcode = OpCode(opcode: 0)
 	var prevPT: Bits4 = 0
@@ -235,6 +239,9 @@ final class CPU {
 	let onKeyCode: Bits8 = 0x18
 	
 	let keyColTable: [Int] = [0x10, 0x30, 0x70, 0x80, 0xC0]
+	
+	var currentRomChip: RomChip?
+	var currentPage: Int = 0
 	
 	class var sharedInstance :CPU {
 		struct Singleton {
@@ -245,6 +252,8 @@ final class CPU {
 	}
 		
 	init() {
+		let defaults = NSUserDefaults.standardUserDefaults()
+//		TRACE = defaults.integerForKey("traceActive")
 	}
 
 	func clearRegisters() {
@@ -306,7 +315,7 @@ final class CPU {
 		*/
 		reg.KY = onKeyCode
 		keyReleaseDelay = 1
-//		setPowerMode(.LightSleep)
+		setPowerMode(.DeepSleep)
 		setPowerMode(.PowerOn)
 	}
 	
@@ -390,28 +399,15 @@ final class CPU {
 		--cycleLimit
 		simulationTime? += simulatedInstructionTime
 		soundOutput.soundOutputForWordTime(Int(reg.T))
-		if DEBUG != 0 {
-			println("readRomAddress \(reg.PC)")
-		}
+//		if TRACE != 0 {
+//			println("readRomAddress \(reg.PC)")
+//		}
 		switch bus.readRomAddress(Int(reg.PC++)) {
 		case .Success(let result):
 			return .Success(result)
 		case .Error(let error):
-			println(error)
+//			println(error)
 			return .Error(error)
-		}
-	}
-	
-	func enableBank(bankSet: Bits4) {
-		let currentBank = bus.activeRomBankAtAddr(reg.PC)
-		for slot: Bits4 in 0...0xf {
-			let currentRom = bus.romChipInSlot(slot)
-			let newRom = bus.romChipInSlot(slot, bank: bankSet)
-			let slotBank = bus.activeRomBankInSlot(slot)
-			
-			if (currentRom != nil) && (newRom != nil) && (slotBank == currentBank) {
-				bus.setActiveRomBankInSlot(slot, bank: bankSet)
-			}
 		}
 	}
 	
@@ -450,26 +446,24 @@ final class CPU {
 	var lineNo = 0
 	
 	func executeNextInstruction() {
-		if DEBUG != 0 {
-			println("--------------------------------------------------------------------------------------------------")
-			println("Step: \(++lineNo)")
+		if TRACE != 0 {
+//			println("--------------------------------------------------------------------------------------------------")
+//			println("Step: \(++lineNo)")
+			println()
 			reg.description()
 		}
 		savedPC = reg.PC
 		prevPT = regR()
 		self.lastOpCode = self.opcode
-//		if lineNo == 5733 {
-//			println("stop")
-//		}
 		switch fetch() {
 		case .Success(let result):
 			currentTyte = result.unbox
 			
 			self.opcode = OpCode(opcode: result.unbox)
 			
-			if DEBUG != 0 {
-				println("currentTyte: \(currentTyte)")
-			}
+//			if TRACE != 0 {
+//				println("currentTyte: \(currentTyte)")
+//			}
 			switch self.opcode.set() {
 			case 0:	executeClass0()				// miscellaneous
 			case 1:	executeClass1()				// long jumps
@@ -478,10 +472,10 @@ final class CPU {
 			default: println("PROBLEM!")		// Error
 			}
 		case .Error(let error):
-			if DEBUG != 0 {
-				println("currentTyte: \(currentTyte)")
-			}
-			reg.PC = popReturnStack()
+//			if TRACE != 0 {
+//				println("currentTyte: \(currentTyte)")
+//			}
+			reg.PC = 0
 		}
 		if breakpointIsSet && reg.PC >= breakpointAddr {
 			setRunning(false)
@@ -496,9 +490,9 @@ final class CPU {
 	// MARK: - Class 0
 	
 	func executeClass0() {
-		if DEBUG != 0 {
-			println("executeClass0: opcode: \(self.opcode.col()) - param: \(self.opcode.row())")
-		}
+//		if TRACE != 0 {
+//			println("executeClass0: opcode: \(self.opcode.col()) - param: \(self.opcode.row())")
+//		}
 		switch self.opcode.col() {
 		case 0x0: executeClass0Line0()
 		case 0x1: executeClass0Line1()
@@ -809,8 +803,8 @@ final class CPU {
 			newTyte = OpCode(opcode: 0)
 		}
 		addr = (newTyte.opcode & 0x3fc) << 6 | (self.opcode.opcode & 0x3fc) >> 2
-		if DEBUG != 0 {
-			println("executeClass1: \(self.opcode.opcode) - addr: 0x\(decToHex(addr)) word: \(newTyte.row())")
+		if TRACE != 0 {
+//			println("executeClass1: \(self.opcode.opcode) - addr: 0x\(decToHex(addr)) word: \(newTyte.row())")
 			if TRACE != 0 {
 				println(Disassembly.sharedInstance.disassemblyClass1(self.opcode))
 			}
@@ -840,8 +834,8 @@ final class CPU {
 		var carry: Bit = 0
 		var zero: Bit = 0
 		var scratch = emptyDigit14
-		if DEBUG != 0 {
-			println("executeClass2: opcode: \(opcode) - field: \(field)")
+		if TRACE != 0 {
+//			println("executeClass2: opcode: \(opcode) - field: \(field)")
 			if TRACE != 0 {
 				println(Disassembly.sharedInstance.disassemblyClass2(self.opcode))
 			}
@@ -861,8 +855,7 @@ final class CPU {
 			cnt = 14
 		case 0x4: // P-Q
 			start = Int(reg.P)
-//			cnt = (Int(reg.Q) >= Int(reg.P)) ? Int(reg.Q) - Int(reg.P) + 1 : 14 - Int(reg.P)
-			cnt = (Int(reg.Q) >= Int(reg.P)) ? Int(reg.Q) - Int(reg.P) + 1 : 13
+			cnt = (Int(reg.Q) >= Int(reg.P)) ? Int(reg.Q) - Int(reg.P) + 1 : 14 - Int(reg.P)
 		case 0x5: // XS
 			start = 2
 			cnt = 1
@@ -952,20 +945,22 @@ final class CPU {
 	// MARK: - Class 3
 	
 	func executeClass3() {
-		if DEBUG != 0 {
-			println("executeClass3: \(self.opcode.opcode)")
+		if TRACE != 0 {
+//			println("executeClass3: \(self.opcode.opcode)")
 			if TRACE != 0 {
 				println(Disassembly.sharedInstance.disassemblyClass3(self.opcode))
 			}
 		}
 		let value = (self.opcode.opcode >> 2) & 1
-		var offset = self.opcode.opcode >> 3
-		if offset >= 64 {
-			offset -= 128
+		var offset = 0
+		if self.opcode.opcode & 0x0200 != 0 {
+			offset = ((self.opcode.opcode >> 3) & 0x03f) - 64
+		} else {
+			offset = (self.opcode.opcode >> 3) & 0x03f
 		}
-//		if Bit(v) == reg.carry {
-//			reg.PC = (reg.PC - 1 + disp) & 0xffff
-//		}
+		if offset == 0 {
+			offset = 1
+		}
 		
 		switch value {
 		case 0:

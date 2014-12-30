@@ -19,16 +19,11 @@ class Keyboard : NSObject {
 	@IBOutlet weak var keyPrgm: Key!
 	@IBOutlet weak var keyAlpha: Key!
 	
-	var cpu: CPU
-	var calculatorController: CalculatorController
-	
 	override func awakeFromNib() {
 		calculatorController.keyboard = self
 	}
 	
 	override init() {
-		cpu = CPU.sharedInstance
-		calculatorController = CalculatorController.sharedInstance
 		super.init()
 	}
 	

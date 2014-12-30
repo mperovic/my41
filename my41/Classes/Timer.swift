@@ -69,7 +69,8 @@ class Timer : Peripheral {
 	init() {
 		assert(Static.sharedInstance == nil, "Singleton already initialized!")
 
-		Bus.sharedInstance.installPeripheral(self, inSlot: 0xFB)
+		bus.installPeripheral(self, inSlot: 0xFB)
+		bus.timer = self
 		
 		resetTimer()
 

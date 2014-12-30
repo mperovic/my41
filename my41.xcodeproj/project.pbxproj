@@ -715,6 +715,7 @@
 		DC7B7E1219AFAFA600C70269 /* Peripherals */ = {
 			isa = PBXGroup;
 			children = (
+				DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */,
 				DC7B7E1019AFA4EE00C70269 /* Timer.swift */,
 			);
 			name = Peripherals;
@@ -740,7 +741,6 @@
 				DC6728111A2769E800B4274F /* AlphaKeyboard.swift */,
 				DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */,
 				DC45285419897DA600C40B6C /* ViewController.swift */,
-				DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */,
 				DCF52A20199C971A006BF825 /* Extensions.swift */,
 				DC74922519CF1E480012B5C0 /* Debuger */,
 				DC6DB98C19BB6A1700E26ADD /* Keyboard */,

@@ -335,12 +335,14 @@ final class MOD {
 			return .Error("file does not have MOD extension")
 		}
 		
-		if let calcController = calculatorController {
-			if calcController.memModules + moduleHeader.memModules > 4 {
+		if let cController = self.calculatorController {
+			let mem = bus.memModules + moduleHeader.memModules
+			if mem > 4 {
 				return .Error("too many mem modules")
 			}
 			
-			if calcController.XMemModules + moduleHeader.XMemModules > 3 {
+			let xmem = bus.XMemModules + moduleHeader.XMemModules
+			if xmem > 3 {
 				return .Error("too many xmem modules")
 			}
 		}
@@ -425,10 +427,8 @@ final class MOD {
 				return .Error(error)
 			}
 			
-			if let calcController = calculatorController {
-				calcController.memModules += moduleHeader.memModules
-				calcController.XMemModules += moduleHeader.memModules
-			}
+			bus.memModules += moduleHeader.memModules
+			bus.XMemModules += moduleHeader.XMemModules
 
 			for var idx: UInt8 = 0; idx < moduleHeader.numPages; idx++ {
 				populateModulePage(Int(idx))
@@ -437,6 +437,7 @@ final class MOD {
 			data = nil
 		}
 		
+//		description()
 		return .Success(Box(true))
 	}
 	

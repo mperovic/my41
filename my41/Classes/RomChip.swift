@@ -12,15 +12,18 @@ import Cocoa
 final class RomChip {
 	var writable: Bool
 	var words: [word]
+	var actualBankGroup: byte
 	var altPage: ModulePage?
 	
-	 init(isWritable: Bool) {
+	init(isWritable: Bool) {
 		words = [word](count: 0x1000, repeatedValue: 0x0)
 		writable = isWritable
+		actualBankGroup = 1
 	}
-	convenience init(fromBIN bin: [byte]) {
+	convenience init(fromBIN bin: [byte], actualBankGroup bankGroup: byte) {
 		self.init(isWritable: false)
 		binToWords(bin)
+		self.actualBankGroup = bankGroup
 	}
 	convenience init(fromFile path: String) {
 		self.init(isWritable: false)

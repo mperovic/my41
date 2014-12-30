@@ -126,16 +126,37 @@ func op_ENROM() -> Bit																// ENROMx
 	end of the current machine cycle.
 	*/
 	if cpu.opcode.row() == 0x4 {
-		cpu.enableBank(0)
+		enableBank(1)
 	} else if cpu.opcode.row() == 0x6 {
-		cpu.enableBank(1)
+		enableBank(2)
 	} else if cpu.opcode.row() == 0x5 {
-		cpu.enableBank(2)
+		enableBank(3)
 	} else if cpu.opcode.row() == 0x7 {
-		cpu.enableBank(3)
+		enableBank(4)
 	}
 	
 	return 0
+}
+
+func enableBank(bankSet: Bits4) {
+	if cpu.currentRomChip == nil || cpu.currentRomChip?.actualBankGroup == 0 {
+		return
+	}
+	
+	// search for banks that match ActualBankGroup
+	for slot in 0...0xf {
+		for bank in 1...4 {
+			if let rom1 = bus.romChips[slot][bank - 1] {
+				if let rom2 = bus.romChips[slot][bankSet - 1] {
+					if let currentROM = cpu.currentRomChip {
+						if currentROM.actualBankGroup == rom1.actualBankGroup {
+							bus.activeBank[slot] = Int(bankSet)
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 
@@ -807,9 +828,9 @@ func op_CeqM() -> Bit																   // C=M
 	*/
 //	cpu.reg.C = cpu.reg.M
 	copyDigits(
-		CPU.sharedInstance.reg.M,
+		cpu.reg.M,
 		sourceStartAt: 0,
-		destination: &CPU.sharedInstance.reg.C,
+		destination: &cpu.reg.C,
 		destinationStartAt: 0,
 		count: 14
 	)
@@ -1131,7 +1152,7 @@ func op_SPOPND() -> Bit																// SPOPND
 	SPOPND									0000_1000_00							1
 	=========================================================================================
 	*/
-	CPU.sharedInstance.popReturnStack()
+	cpu.popReturnStack()
 	
 	return 0
 }
@@ -1146,7 +1167,7 @@ func op_POWOFF() -> Bit																// POWOFF
 	
 	Operation: Power Down
 	=========================================================================================
-	Flag: Set if P equals Q; cleared otherwise.
+	Flag: Cleared
 	=========================================================================================
 	Dec/Hex: Independent
 	Turbo: Automatically fetched and executed at bus speed
@@ -1158,27 +1179,27 @@ func op_POWOFF() -> Bit																// POWOFF
 	=========================================================================================
 	*/
 	
-	let regN = CPU.sharedInstance.reg.N
+	let regN = cpu.reg.N
 	if regN[0] == 7 && regN[1] == 1 && regN[2] == 0 && regN[11] == 11 && regN[12] == 0 && regN[13] == 3 {
 		// Check if exiting ED mode
-		CPU.sharedInstance.powerOffFlag = false
-		CPU.sharedInstance.setPowerMode(.LightSleep)
+		cpu.powerOffFlag = false
+		cpu.setPowerMode(.LightSleep)
 	} else {
-		if CPU.sharedInstance.powerOffFlag {
-			CPU.sharedInstance.setPowerMode(.DeepSleep)
-			CPU.sharedInstance.powerOffFlag = false
+		if cpu.powerOffFlag {
+			cpu.setPowerMode(.DeepSleep)
+			cpu.powerOffFlag = false
 		} else {
-			CPU.sharedInstance.setPowerMode(.LightSleep)
+			cpu.setPowerMode(.LightSleep)
 		}
 	}
-	CPU.sharedInstance.reg.PC = 0
-	CPU.sharedInstance.enableBank(0)
 	
-	if CPU.sharedInstance.reg.P == CPU.sharedInstance.reg.Q {
-		return 1
-	} else {
-		return 0
+	for page in 0...0xf {
+		bus.activeBank[page] = 1
 	}
+	cpu.reg.PC = 0
+	enableBank(1)
+	
+	return 0
 }
 
 func op_SELP() -> Bit																 // SELP
@@ -1201,7 +1222,7 @@ func op_SELP() -> Bit																 // SELP
 	SELP									0010_1000_00							1
 	=========================================================================================
 	*/
-	CPU.sharedInstance.reg.R = 0
+	cpu.reg.R = 0
 	
 	return 0
 }
@@ -1226,7 +1247,7 @@ func op_SELQ() -> Bit																 // SELQ
 	SELQ									0011_1000_00							1
 	=========================================================================================
 	*/
-	CPU.sharedInstance.reg.R = 1
+	cpu.reg.R = 1
 	
 	return 0
 }
@@ -1390,7 +1411,7 @@ func op_SETHEX() -> Bit																// SETHEX
 	SETHEX									1001_1000_00							1
 	=========================================================================================
 	*/
-	CPU.sharedInstance.reg.mode = .HEX_MODE
+	cpu.reg.mode = .HEX_MODE
 	
 	return 0
 }
@@ -1415,7 +1436,7 @@ func op_SETDEC() -> Bit																// SETDEC
 	SETDEC									1010_1000_00							1
 	=========================================================================================
 	*/
-	CPU.sharedInstance.reg.mode = .DEC_MODE
+	cpu.reg.mode = .DEC_MODE
 	
 	return 0
 }
@@ -1500,8 +1521,8 @@ func op_RTNC() -> Bit																  // RTNC
 	RTNC									1101_1000_00							1
 	=========================================================================================
 	*/
-	if CPU.sharedInstance.reg.carry != 0 {
-		CPU.sharedInstance.reg.PC = CPU.sharedInstance.popReturnStack()
+	if cpu.reg.carry != 0 {
+		cpu.reg.PC = cpu.popReturnStack()
 	}
 	
 	return 0
@@ -1533,8 +1554,8 @@ func op_RTNNC() -> Bit																// RTNNC
 	RTNNC									1110_1000_00							1
 	=========================================================================================
 	*/
-	if CPU.sharedInstance.reg.carry == 0 {
-		CPU.sharedInstance.reg.PC = CPU.sharedInstance.popReturnStack()
+	if cpu.reg.carry == 0 {
+		cpu.reg.PC = cpu.popReturnStack()
 	}
 	
 	return 0
@@ -1564,7 +1585,7 @@ func op_RTN() -> Bit																  // RTN
 	RTN										1111_1000_00							1
 	=========================================================================================
 	*/
-	CPU.sharedInstance.reg.PC = CPU.sharedInstance.popReturnStack()
+	cpu.reg.PC = cpu.popReturnStack()
 	
 	return 0
 }
@@ -1609,8 +1630,8 @@ func op_SELPF(param: Int) -> Bit												 // SELPF
 	switch param {
 	case 0xE, 0x9:
 		// Printer ROM is loaded?
-		if let printerRom = Bus.sharedInstance.romChipInSlot(6) {
-			CPU.sharedInstance.reg.peripheral = 1
+		if let printerRom = bus.romChipInSlot(6) {
+			cpu.reg.peripheral = 1
 		}
 	default:
 		break
@@ -1660,33 +1681,41 @@ func op_REGNeqC(param: Int) -> Bit													// REGN=C
 		case .Success(let result):
 			break
 		case .Error (let error):
-			println(error)
+			break
 		}
 	} else {
-		switch (CPU.sharedInstance.reg.peripheral) {
+		switch (cpu.reg.peripheral) {
 		case 0x10:
 			// Halfnut display
-			break
+			if let display = bus.display {
+				display.halfnutWrite()
+			}
 		case 0xfb:
 			// Timer write
-			break
+			bus.writeToRegister(
+				Bits4(param),
+				ofPeripheral: cpu.reg.peripheral,
+				from: &cpu.reg.C
+			)
 		case 0xfc:
 			// Card reader
 			break
 		case 0xfd:
 			// LCD display
-			break
+			if let display = bus.display {
+				display.displayWrite()
+			}
+//			bus.writeToRegister(
+//				Bits4(param),
+//				ofPeripheral: cpu.reg.peripheral,
+//				from: &cpu.reg.C
+//			)
 		case 0xfe:
 			// Wand
 			break
 		default:
 			break
 		}
-		Bus.sharedInstance.writeToRegister(
-			Bits4(param),
-			ofPeripheral: CPU.sharedInstance.reg.peripheral,
-			from: &CPU.sharedInstance.reg.C
-		)
 	}
 	
 	return 0
@@ -1956,10 +1985,10 @@ func op_CeqSTK() -> Bit																// C=STK
 	C=STK									0110_1100_00							1
 	=========================================================================================
 	*/
-	var word = CPU.sharedInstance.popReturnStack()
+	var word = cpu.popReturnStack()
 	bitsToDigits(
 		bits: Int(word),
-		destination: &CPU.sharedInstance.reg.C,
+		destination: &cpu.reg.C,
 		start: 3,
 		count: 4
 	)
@@ -2090,7 +2119,8 @@ func op_DATAeqC() -> Bit														    // DATA=C
 		case .Success(let result):
 			break
 		case .Error (let error):
-			println(error)
+//			println(error)
+			break
 		}
 	} else {
 		bus.writeDataToPeripheral(
@@ -2127,32 +2157,53 @@ func op_CXISA() -> Bit																// CXISA
 		  location are then loaded into C<2:0>, right-justified, with the two most
 		  significant bits set to 0.
 	*/
-	var addr: UInt16 = 0
-	var digits: [Digit] = [Digit]()
-	for idx in 3...6 {
-		digits.append(cpu.reg.C[idx])
+	let page = Int(cpu.reg.C[6])
+	let addr = (Int(cpu.reg.C[5]) << 8) | (Int(cpu.reg.C[4]) << 4) | Int(cpu.reg.C[3])
+	var opcode: Int
+	if let rom = bus.romChips[page][bus.activeBank[page] - 1] {
+		opcode = Int(rom.words[addr])
+	} else {
+		opcode = 0
 	}
-	addr = digitsToBits(
-		digits: digits,
-		nbits: 16
-	)
-	switch bus.readRomAddress(Int(addr)) {
-	case .Success(let result):
-		bitsToDigits(
-			bits: result.unbox  & 0x3FF,
-			destination: &cpu.reg.C,
-			start: 0,
-			count: 3
-		)
-	case .Error(let error):
-		println(error)
-		bitsToDigits(
-			bits: 0,
-			destination: &cpu.reg.C,
-			start: 0,
-			count: 3
-		)
-	}
+	cpu.reg.C[2] = Digit(((opcode & 0x0300) >> 8))
+	cpu.reg.C[1] = Digit(((opcode & 0x00f0) >> 4))
+	cpu.reg.C[0] = Digit(opcode & 0x000f)
+	
+//	var addr: UInt16 = 0
+//	var digits: [Digit] = [Digit]()
+//	for idx in 3...6 {
+//		digits.append(cpu.reg.C[idx])
+//	}
+//	addr = digitsToBits(
+//		digits: digits,
+//		nbits: 16
+//	)
+//	if let rom = bus.romChips[page][bus.activeBank[page] - 1] {
+//		opcode = Int(rom.words[Int(addr)])
+//	} else {
+//		opcode = 0
+//	}
+//	cpu.reg.C[2] = Digit(((opcode & 0x0300) >> 8))
+//	cpu.reg.C[1] = Digit(((opcode & 0x00f0) >> 4))
+//	cpu.reg.C[0] = Digit(opcode & 0x000f)
+	
+//	switch bus.readRomAddress(Int(addr)) {
+//	case .Success(let result):
+//		bitsToDigits(
+//			bits: result.unbox  & 0x3FF,
+//			destination: &cpu.reg.C,
+//			start: 0,
+//			count: 3
+//		)
+//	case .Error(let error):
+//		println(error)
+//		bitsToDigits(
+//			bits: 0,
+//			destination: &cpu.reg.C,
+//			start: 0,
+//			count: 3
+//		)
+//	}
 	
 	return 0
 }
@@ -2213,9 +2264,9 @@ func op_CeqCandA() -> Bit															 // C=C&A
 	Note: In the original NUT implementation this instruction cannot immediately follow an
 		  arithmetic (type 10) instruction.
 	*/
-	CPU.sharedInstance.reg.C = andDigits(
-		X: CPU.sharedInstance.reg.C,
-		Y: CPU.sharedInstance.reg.A,
+	cpu.reg.C = andDigits(
+		X: cpu.reg.C,
+		Y: cpu.reg.A,
 		start: 0,
 		count: 14
 	)
@@ -2312,7 +2363,7 @@ func op_CeqDATA(param: Int) -> Bit													// C=DATA
 		case .Success(let result):
 			break
 		case .Error (let error):
-			println(error)
+			break
 		}
 	} else {
 		bus.readFromRegister(
@@ -2366,7 +2417,8 @@ func op_CeqREGN(param: Int) -> Bit												// C=REGN
 		case .Success(let result):
 			break
 		case .Error (let error):
-			println(error)
+//			println(error)
+			break
 		}
 	} else {
 		bus.readFromRegister(

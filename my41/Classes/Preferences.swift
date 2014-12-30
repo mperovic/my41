@@ -195,7 +195,6 @@ class PreferencesContainerViewController: NSViewController {
 }
 
 class PreferencesViewController: NSViewController {
-	var calculatorController = CalculatorController.sharedInstance
 	
 	@IBOutlet weak var modTitle: NSTextField!
 	@IBOutlet weak var modAuthor: NSTextField!

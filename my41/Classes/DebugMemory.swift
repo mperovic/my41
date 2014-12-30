@@ -11,8 +11,6 @@ import Cocoa
 
 class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 	var debugContainerViewController: DebugContainerViewController?
-	var bus = Bus.sharedInstance
-	var cpu = CPU.sharedInstance
 	var bankSelected: Int = 0
 
 	@IBOutlet weak var memory0: NSTextField!
@@ -48,7 +46,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 	}
 	
 	func displayCurrentRAM(address: Int) {
-		if bus.ramValid[address] {
+		if bus.RAMExists(address) {
 			displayMemory(false)
 
 			var ptr = 0
@@ -131,7 +129,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		var value: AnyObject?
 		
 		if tableColumn?.identifier == "avail" {
-			if bus.ramValid[row << 4] {
+			if bus.RAMExists(row << 4) {
 				value = NSNumber(integer: NSOnState)
 			} else {
 				value = NSNumber(integer: NSOffState)

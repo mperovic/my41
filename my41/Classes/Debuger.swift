@@ -89,6 +89,13 @@ class DebugContainerViewController: NSViewController {
 	
 	override func viewDidLoad() {
 		loadCPUViewController()
+		let defaults = NSUserDefaults.standardUserDefaults()
+		TRACE = defaults.integerForKey("traceActive")
+		if TRACE == 0 {
+			debugCPUViewController?.traceSwitch.state = NSOffState
+		} else {
+			debugCPUViewController?.traceSwitch.state = NSOnState
+		}
 	}
 	
 	func loadCPUViewController() {

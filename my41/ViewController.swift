@@ -127,8 +127,6 @@ final class ViewController: NSViewController {
 	
 	@IBOutlet weak var calculatorLabel: NSTextField!
 		
-	var cpu = CPU.sharedInstance
-	
 	override func viewWillAppear() {
 		self.becomeFirstResponder()
 		

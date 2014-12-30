@@ -43,8 +43,8 @@ class DebugCPUViewController: NSViewController {
 	@IBOutlet weak var displayRegisterC: NSTextField!
 	@IBOutlet weak var displayRegisterE: NSTextField!
 	
-	var cpu = CPU.sharedInstance
-	var calculatorController = CalculatorController.sharedInstance
+	@IBOutlet weak var traceSwitch: NSButton!
+	
 	var debugContainerViewController: DebugContainerViewController?
 	
 	override func viewDidLoad() {
@@ -81,8 +81,10 @@ class DebugCPUViewController: NSViewController {
 		cpuRegisterPC.stringValue = NSString(format:"%04X", cpu.reg.PC)
 		cpuRegisterG.stringValue = cpu.digitsToString(cpu.reg.G)
 		cpuRegisterT.stringValue = NSString(format:"%02X", cpu.reg.T)
-		cpuRegisterXST.stringValue = NSString(format:"%02X", cpu.reg.XST)
-		cpuRegisterST.stringValue = NSString(format:"%02X", cpu.reg.ST)
+		let strXST = String(cpu.reg.XST, radix:2)
+		cpuRegisterXST.stringValue = pad(strXST, toSize: 6)
+		let strST = String(cpu.reg.ST, radix:2)
+		cpuRegisterST.stringValue = pad(strST, toSize: 8)
 		if cpu.reg.R == 0 {
 			cpuRegisterR.stringValue = "P"
 		} else {
@@ -117,6 +119,14 @@ class DebugCPUViewController: NSViewController {
 		cpuSelectedPeripheral.stringValue = NSString(format:"%02X", cpu.reg.peripheral)
 	}
 	
+	func pad(string : String, toSize: Int) -> String {
+		var padded = string
+		for i in 0..<toSize - countElements(string) {
+			padded = "0" + padded
+		}
+		return padded
+	}
+	
 	func populateDisplayRegisters() {
 		if let display = calculatorController.display {
 			displayRegisterA.stringValue = display.digits12ToString(display.registers.A)
@@ -131,5 +141,17 @@ class DebugCPUViewController: NSViewController {
 		println("\(__FUNCTION__) hit, segue ID = \(segid)")
 	}
 	
-	
+	@IBAction func traceAction(sender: AnyObject)
+	{
+		if sender as NSObject == traceSwitch {
+			if traceSwitch.state == NSOnState {
+				TRACE = 1
+			} else {
+				TRACE = 0
+			}
+			let defaults = NSUserDefaults.standardUserDefaults()
+			defaults.setInteger(TRACE, forKey: "traceActive")
+			defaults.synchronize()
+		}
+	}
 }

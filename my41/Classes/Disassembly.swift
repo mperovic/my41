@@ -1587,7 +1587,7 @@ class Disassembly {
 		case .Success(let result):
 			return .Success(result)
 		case .Error(let error):
-			println(error)
+//			println(error)
 			return .Error(error)
 		}
 	}

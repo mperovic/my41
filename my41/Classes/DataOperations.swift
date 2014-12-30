@@ -232,7 +232,7 @@ func adder(#nib1: Digit, #nib2: Digit) -> Digit
 		cpu.reg.carry = 0
 	}
 	
-//	result = result & 0x0f
+	result = result & 0x0f
 	
 	return result
 }
@@ -247,7 +247,7 @@ func subtractor(#nib1: Digit, #nib2: Digit) -> Digit
 		cpu.reg.carry = 0
 	}
 	
-//	result = result & 0x0f
+	result = result & 0x0f
 	
 	return Digit(result)
 }

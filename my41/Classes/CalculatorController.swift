@@ -26,14 +26,9 @@ class CalculatorController : NSObject {
 	var portMod: [MOD?] = [nil, nil, nil, nil]
 	var calculatorType: CalculatorType?
 	var executionTimer: NSTimer?
-	var cpu = CPU.sharedInstance
 	var display: Display?
 	var keyboard: Keyboard?
-	var bus = Bus.sharedInstance
-	
-	var memModules: byte = 0
-	var XMemModules: byte = 0
-	
+		
 	var viewController: ViewController?
 	
 	var alphaMode = false
@@ -53,32 +48,32 @@ class CalculatorController : NSObject {
 		
 		super.init()
 		
+		calculatorMod.calculatorController = self
 		resetCalculator(true)
 	}
 	
 	func resetCalculator(restoringMemory: Bool) {
 		// Show progress indicator & status label
 		
-		memModules = 0
-		XMemModules = 0
-
+		bus.memModules = 0
+		bus.XMemModules = 0
 		cpu.setRunning(false)
 		
-		dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-			self.bus.removeAllRomChips()
-			
-			self.installBuiltinRoms()
-			
-			self.installExternalModules()
-			
-			self.installBuiltinRam()
-			if restoringMemory {
-				self.restoreMemory()
-			}
-		})
+		bus.removeAllRomChips()
 		
-		self.cpu.reset()
-		self.cpu.setRunning(true)
+		self.installBuiltinRoms()
+		
+		self.installExternalModules()
+		
+//		installBuiltinRam()
+		if restoringMemory {
+			restoreMemory()
+		} else {
+			emptyRAM()
+		}
+		
+		cpu.reset()
+		cpu.setRunning(true)
 		self.startExecutionTimer()
 	}
 	
@@ -125,7 +120,6 @@ class CalculatorController : NSObject {
 			defaults.setInteger(CalculatorType.HP41CX.rawValue, forKey: HPCalculatorType)
 			filename = NSBundle.mainBundle().resourcePath! + "/" + "nut-cx.mod"
 		}
-		calculatorMod.calculatorController = self
 		
 		switch calculatorMod.readModFromFile(filename) {
 		case .Success:
@@ -152,7 +146,7 @@ class CalculatorController : NSObject {
 		
 		if self.calculatorMod.data? != nil {
 			// Install ROMs which came with the calculator module
-			switch self.bus.installMod(self.calculatorMod) {
+			switch bus.installMod(self.calculatorMod) {
 			case .Success:
 				break
 			case .Error(let error): error
@@ -163,31 +157,30 @@ class CalculatorController : NSObject {
 		}
 	}
 	
-	func installBuiltinRam() {
-		var address: Bits12
-		let empty = emptyDigit14
-		for idx in 0..<builtinRamTable.count {
-			var ramDesc = builtinRamTable[idx]
-			if let cType = self.calculatorType? {
-				if self.checkRam(ramDesc: ramDesc) {
-					for address in ramDesc.firstAddress...ramDesc.lastAddress {
-						self.bus.installRamAtAddress(address)
-						switch bus.writeRamAddress(address, from: empty) {
-						case .Success(let result):
-							break
-						case .Error (let error):
-							println(error)
-						}
-					}
-				}
-			}
-		}
-	}
+//	func installBuiltinRam() {
+//		var address: Bits12
+//		for idx in 0..<builtinRamTable.count {
+//			var ramDesc = builtinRamTable[idx]
+//			if let cType = self.calculatorType? {
+//				if self.checkRam(ramDesc: ramDesc) {
+//					for address in ramDesc.firstAddress...ramDesc.lastAddress {
+//						bus.installRamAtAddress(address)
+//						switch bus.writeRamAddress(address, from: emptyDigit14) {
+//						case .Success(let result):
+//							break
+//						case .Error (let error):
+//							println(error)
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
 	
 	func installExternalModules() {
 		for idx in 0...3 {
 			if self.portMod[idx]?.data != nil {
-				switch self.bus.installMod(self.portMod[idx]!) {
+				switch bus.installMod(self.portMod[idx]!) {
 				case .Success:
 					break
 				case .Error(let error): error
@@ -273,7 +266,20 @@ class CalculatorController : NSObject {
 		for idx in 0...13 {
 			to[idx] = array[position + idx]
 		}
-		
+	}
+	
+	func emptyRAM()
+	{
+		var tmpReg = emptyDigit14
+		for addr in 0..<MAX_RAM_SIZE {
+			switch bus.writeRamAddress(Bits12(addr), from: tmpReg) {
+			case .Success(let result):
+				break
+			case .Error (let error):
+//				println(error)
+				break
+			}
+		}
 	}
 
 	func setMemoryContents(data: NSData) {
@@ -294,7 +300,8 @@ class CalculatorController : NSObject {
 			case .Success(let result):
 				break
 			case .Error (let error):
-				println(error)
+//				println(error)
+				break
 			}
 			ptr += 14
 		}
@@ -314,7 +321,8 @@ class CalculatorController : NSObject {
 					}
 					ptr += 14
 			case .Error (let error):
-				println(error)
+//				println(error)
+				break
 			}
 		}
 		data.appendBytes(memoryArray, length: count)
