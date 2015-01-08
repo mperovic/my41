@@ -2650,7 +2650,7 @@ CA
                             </textField>
                             <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dbV-Jh-5aE">
                                 <rect key="frame" x="428" y="21" width="56" height="18"/>
-                                <buttonCell key="cell" type="check" title="Trace" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FFx-kp-ReW">
+                                <buttonCell key="cell" type="check" title="Trace" bezelStyle="regularSquare" imagePosition="left" inset="2" id="FFx-kp-ReW">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -3337,6 +3337,13 @@ CA
                                     <action selector="applyChanges:" target="yKB-bG-0Dn" id="K1B-4N-jrz"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pm2-aQ-s7t">
+                                <rect key="frame" x="18" y="469" width="326" height="18"/>
+                                <buttonCell key="cell" type="check" title="Synchronize calculator clock with computer time " bezelStyle="regularSquare" imagePosition="left" inset="2" id="aZs-xZ-xDV">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ja4-0D-NdU" firstAttribute="top" secondItem="x9r-6v-4Nr" secondAttribute="bottom" constant="6" id="0qh-vb-UBd"/>
@@ -3353,11 +3360,12 @@ CA
                         <outlet property="calculatorSelector" destination="94m-H8-GBr" id="eT1-Xb-ifk"/>
                         <outlet property="cardReaderButton" destination="ja4-0D-NdU" id="VyE-l2-djc"/>
                         <outlet property="printerButton" destination="x9r-6v-4Nr" id="UWG-Kg-nWU"/>
+                        <outlet property="synchronyzeButton" destination="pm2-aQ-s7t" id="2tp-3k-MnZ"/>
                     </connections>
                 </viewController>
                 <customObject id="DGH-Ea-eyH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3604" y="859"/>
+            <point key="canvasLocation" x="3604" y="858.5"/>
         </scene>
         <!--Preferences Mods View Controller-->
         <scene sceneID="Gez-dl-icL">

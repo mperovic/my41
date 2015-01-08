@@ -1764,7 +1764,7 @@ class Disassembly {
 		switch cpu.reg.peripheral {
 		case 0x0:
 			// ram
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(10))\t\(anOpCode.row())"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(10))\t\(paramStr)"
 		case 0xfb:
 			// timer write
 			if cpu.reg.ramAddress > 0x39 || cpu.reg.ramAddress < 0x10 {

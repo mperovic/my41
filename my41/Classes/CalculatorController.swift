@@ -65,7 +65,6 @@ class CalculatorController : NSObject {
 		
 		self.installExternalModules()
 		
-//		installBuiltinRam()
 		if restoringMemory {
 			restoreMemory()
 		} else {
@@ -156,26 +155,6 @@ class CalculatorController : NSObject {
 			}
 		}
 	}
-	
-//	func installBuiltinRam() {
-//		var address: Bits12
-//		for idx in 0..<builtinRamTable.count {
-//			var ramDesc = builtinRamTable[idx]
-//			if let cType = self.calculatorType? {
-//				if self.checkRam(ramDesc: ramDesc) {
-//					for address in ramDesc.firstAddress...ramDesc.lastAddress {
-//						bus.installRamAtAddress(address)
-//						switch bus.writeRamAddress(address, from: emptyDigit14) {
-//						case .Success(let result):
-//							break
-//						case .Error (let error):
-//							println(error)
-//						}
-//					}
-//				}
-//			}
-//		}
-//	}
 	
 	func installExternalModules() {
 		for idx in 0...3 {

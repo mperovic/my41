@@ -1179,27 +1179,32 @@ func op_POWOFF() -> Bit																// POWOFF
 	=========================================================================================
 	*/
 	
+	for page in 0...0xf {
+		bus.activeBank[page] = 1
+	}
+	
+	cpu.reg.PC = 0
+	enableBank(1)
+
 	let regN = cpu.reg.N
-	if regN[0] == 7 && regN[1] == 1 && regN[2] == 0 && regN[11] == 11 && regN[12] == 0 && regN[13] == 3 {
+	if regN[11] == 11 && regN[12] == 0 && regN[13] == 3 {
 		// Check if exiting ED mode
 		cpu.powerOffFlag = false
 		cpu.setPowerMode(.LightSleep)
+		
+		return 0
 	} else {
 		if cpu.powerOffFlag {
 			cpu.setPowerMode(.DeepSleep)
 			cpu.powerOffFlag = false
+			
+			return 1
 		} else {
 			cpu.setPowerMode(.LightSleep)
+			
+			return 0
 		}
 	}
-	
-	for page in 0...0xf {
-		bus.activeBank[page] = 1
-	}
-	cpu.reg.PC = 0
-	enableBank(1)
-	
-	return 0
 }
 
 func op_SELP() -> Bit																 // SELP
@@ -1694,8 +1699,7 @@ func op_REGNeqC(param: Int) -> Bit													// REGN=C
 			// Timer write
 			bus.writeToRegister(
 				Bits4(param),
-				ofPeripheral: cpu.reg.peripheral,
-				from: &cpu.reg.C
+				ofPeripheral: cpu.reg.peripheral
 			)
 		case 0xfc:
 			// Card reader
@@ -1764,7 +1768,11 @@ func op_FDeq1(param: Int) -> Bit														// ?Fd=1
 				|     13      |   all  |   ?SER   |      Service Request       |
 				================================================================
 	*/
-	return (cpu.reg.FI & Bits14(1 << param)) != 0 ? 1 : 0
+	if param == 0x7 || param == 0xf {
+		return 0
+	} else {
+		return (cpu.reg.FI & Bits14(1 << param)) != 0 ? 1 : 0
+	}
 }
 
 
@@ -2368,8 +2376,7 @@ func op_CeqDATA(param: Int) -> Bit													// C=DATA
 	} else {
 		bus.readFromRegister(
 			register: Bits4(param),
-			ofPeripheral: cpu.reg.peripheral,
-			into: &cpu.reg.C
+			ofPeripheral: cpu.reg.peripheral
 		)
 	}
 	
@@ -2423,8 +2430,7 @@ func op_CeqREGN(param: Int) -> Bit												// C=REGN
 	} else {
 		bus.readFromRegister(
 			register: Bits4(param),
-			ofPeripheral: cpu.reg.peripheral,
-			into: &cpu.reg.C
+			ofPeripheral: cpu.reg.peripheral
 		)
 	}
 	

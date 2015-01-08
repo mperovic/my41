@@ -11,8 +11,8 @@ import Cocoa
 
 protocol Peripheral {
 	func pluggedIntoBus(bus: Bus?)
-	func readFromRegister(register: Bits4, inout into: Digits14)
-	func writeToRegister(register: Bits4, inout from data: Digits14)
+	func readFromRegister(param: Bits4)
+	func writeToRegister(param: Bits4)
 	func writeDataFrom(data: Digits14)
 }
 
@@ -533,9 +533,9 @@ final class Bus {
 		activeBank[Int(slot)] = bank
 	}
 	
-	func writeToRegister(register: Bits4, ofPeripheral slot: Bits8, inout from data: Digits14) {
+	func writeToRegister(register: Bits4, ofPeripheral slot: Bits8) {
 		if let peripheral = peripherals[Int(slot)] {
-			peripheral.writeToRegister(register, from: &data)
+			peripheral.writeToRegister(register)
 		}
 	}
 	
@@ -544,9 +544,9 @@ final class Bus {
 		peripheral.writeDataFrom(data)
 	}
 	
-	func readFromRegister(register reg: Bits4, ofPeripheral slot: Bits8, inout into data: Digits14) {
+	func readFromRegister(register reg: Bits4, ofPeripheral slot: Bits8) {
 		if let periph = peripherals[Int(slot)]? {
-			periph.readFromRegister(reg, into: &data)
+			periph.readFromRegister(reg)
 		}
 	}
 	

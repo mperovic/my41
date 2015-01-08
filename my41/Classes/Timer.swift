@@ -74,14 +74,26 @@ class Timer : Peripheral {
 		
 		resetTimer()
 
-		NSNotificationCenter.defaultCenter().addObserverForName(
-			NSApplicationWillBecomeActiveNotification,
-			object: nil,
-			queue: nil) { active in
-				// This should help me detect when I'm being activated. I want to reset the clock
-				if (Int(self.registers.TMR_S[1]) & 0x04) != 0 {		// bit 6 - Clock A enabled
-					self.setToCurrentTime()
-				}
+		let defaults = NSUserDefaults.standardUserDefaults()
+		SYNCHRONYZE = defaults.integerForKey("synchronyzeTime")
+
+		if SYNCHRONYZE == 1 {
+			synchronyzeWithComputer()
+
+			NSNotificationCenter.defaultCenter().addObserverForName(
+				NSApplicationWillBecomeActiveNotification,
+				object: nil,
+				queue: nil) { active in
+					self.synchronyzeWithComputer()
+			}
+		}
+	}
+	
+	func synchronyzeWithComputer()
+	{
+		// This should help me detect when I'm being activated. I want to reset the clock
+		if (Int(self.registers.TMR_S[1]) & 0x04) != 0 {		// bit 6 - Clock A enabled
+			self.setToCurrentTime()
 		}
 	}
 	
@@ -147,8 +159,8 @@ class Timer : Peripheral {
 		self.aBus = theBus
 	}
 	
-	func readFromRegister(register: Bits4, inout into data: Digits14) {
-		switch register {
+	func readFromRegister(param: Bits4) {
+		switch param {
 		case 0x0:		// RTIME
 			convertToReg14(
 				clock[timerSelected.rawValue],
@@ -157,30 +169,57 @@ class Timer : Peripheral {
 			copyDigits(
 				registers.CLK[timerSelected.rawValue],
 				sourceStartAt: 0,
-				destination: &data,
+				destination: &cpu.reg.C,
 				destinationStartAt: 0,
 				count: 14
 			)
 		case 0x1:		// RTIMEST
-			convertToReg14(clock[timerSelected.rawValue], dst: &registers.CLK[timerSelected.rawValue])
-			copyDigits(registers.CLK[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			convertToReg14(
+				clock[timerSelected.rawValue],
+				dst: &registers.CLK[timerSelected.rawValue]
+			)
+			copyDigits(
+				registers.CLK[timerSelected.rawValue],
+				sourceStartAt: 0,
+				destination: &cpu.reg.C,
+				destinationStartAt: 0,
+				count: 14
+			)
 		case 0x2:		// RALM
-			copyDigits(registers.ALM[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			copyDigits(
+				registers.ALM[timerSelected.rawValue],
+				sourceStartAt: 0,
+				destination: &cpu.reg.C,
+				destinationStartAt: 0,
+				count: 14
+			)
 		case 0x3:		// RSTS
 			if timerSelected.rawValue != 0 {
-				copyDigits(registers.TMR_S, sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+				copyDigits(
+					registers.TMR_S,
+					sourceStartAt: 0,
+					destination: &cpu.reg.C,
+					destinationStartAt: 0,
+					count: 14
+				)
 			} else {
-				data = emptyDigit14
+				cpu.reg.C = emptyDigit14
 				for idx in 0..<4 {
-					data[idx+1] = registers.ACC_F[idx]
+					cpu.reg.C[idx+1] = registers.ACC_F[idx]
 				}
 			}
 		case 0x4:		// RSCR
-			copyDigits(registers.SCR[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			copyDigits(
+				registers.SCR[timerSelected.rawValue],
+				sourceStartAt: 0,
+				destination: &cpu.reg.C,
+				destinationStartAt: 0,
+				count: 14
+			)
 		case 0x5:		// RINT
-			data = emptyDigit14
+			cpu.reg.C = emptyDigit14
 			for idx in 0..<5 {
-				data[idx] = registers.INT[0][idx]
+				cpu.reg.C[idx + 1] = registers.INT[0][idx]
 			}
 		default:
 			break
@@ -191,17 +230,14 @@ class Timer : Peripheral {
 		//TODO: Implement this method
 	}
 	
-	func writeToRegister(register: Bits4, inout from data: Digits14) {
-		// clearing flag 12,13 is in wrong place because SHIFT ON does not work.
-		cpu.reg.FI &= 0xcfff
-		
+	func writeToRegister(register: Bits4) {
 		switch register {
 		case 0x0:
 			// WTIME
 			copyDigits(
-				registers.CLK[timerSelected.rawValue],
+				cpu.reg.C,
 				sourceStartAt: 0,
-				destination: &data,
+				destination: &registers.CLK[timerSelected.rawValue],
 				destinationStartAt: 0,
 				count: 14
 			)
@@ -212,9 +248,9 @@ class Timer : Peripheral {
 		case 0x1:
 			// WTIME-
 			copyDigits(
-				registers.CLK[timerSelected.rawValue],
+				cpu.reg.C,
 				sourceStartAt: 0,
-				destination: &data,
+				destination: &registers.CLK[timerSelected.rawValue],
 				destinationStartAt: 0,
 				count: 14
 			)
@@ -224,7 +260,12 @@ class Timer : Peripheral {
 			)
 		case 0x2:
 			// WALM
-			copyDigits(registers.ALM[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			copyDigits(
+				cpu.reg.C,
+				sourceStartAt: 0,
+				destination: &registers.ALM[timerSelected.rawValue],
+				destinationStartAt: 0,
+				count: 14)
 			convertToUint64(
 				&alarm[timerSelected.rawValue],
 				withRegister:registers.ALM[timerSelected.rawValue]
@@ -232,21 +273,39 @@ class Timer : Peripheral {
 		case 0x3:
 			// WSTS
 			if timerSelected == .TimerA {
-				registers.TMR_S[0] &= data[0]
-				registers.TMR_S[1] &= 0x0C | (data[1] & 0x03)
+				registers.TMR_S[0] &= cpu.reg.C[0]
+				registers.TMR_S[1] &= (0x0C | (cpu.reg.C[1] & 0x03))
+				if registers.TMR_S[0] == 0 || (registers.TMR_S[1] & 0x03) == 0 {
+					// clearing flag 12,13 is in wrong place because SHIFT ON does not work.
+					cpu.reg.FI &= 0xcfff
+				}
 			} else {
-				registers.ACC_F[3] = data[4] & 0x1
-				registers.ACC_F[2] = data[3]
-				registers.ACC_F[1] = data[2]
-				registers.ACC_F[0] = data[1]
+				registers.ACC_F[3] = cpu.reg.C[4] & 0x1
+				registers.ACC_F[2] = cpu.reg.C[3]
+				registers.ACC_F[1] = cpu.reg.C[2]
+				registers.ACC_F[0] = cpu.reg.C[1]
 			}
 		case 0x4:
 			// WSCR
-			copyDigits(registers.SCR[timerSelected.rawValue], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
+			copyDigits(
+				cpu.reg.C,
+				sourceStartAt: 0,
+				destination: &registers.SCR[timerSelected.rawValue],
+				destinationStartAt: 0,
+				count: 14)
 		case 0x5:
 			// WINTST - set and start interval time
-			copyDigits(registers.INT[0], sourceStartAt: 0, destination: &data, destinationStartAt: 0, count: 14)
-			convertToUint64(&intTimerEnd, withRegister:registers.INT[0])
+			copyDigits(
+				cpu.reg.C,
+				sourceStartAt: 0,
+				destination: &registers.INT[0],
+				destinationStartAt: 0,
+				count: 5
+			)
+			convertToUint64(
+				&intTimerEnd,
+				withRegister:registers.INT[0]
+			)
 			intTimer = 0
 			registers.TMR_S[2] |= 0x04			// set bit 10- ITEN - Interval Timer Enable
 		case 0x7:
@@ -360,7 +419,7 @@ class Timer : Peripheral {
 		// alert for an alarm
 //		if fAlert != 0 {
 //			// I'll make the dock icon bounce
-//			NSApp.requestUserAttention(10)
+//			NSApp.requestUserAttention(NSInformationalRequest)
 //		}
 	}
 }

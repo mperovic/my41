@@ -24,6 +24,7 @@ typealias byte = UInt8
 typealias word = UInt16
 
 var TRACE = 0
+var SYNCHRONYZE = 0
 
 let emptyDigit14:[Digit] = [Digit](count: 14, repeatedValue: 0)
 
@@ -91,6 +92,8 @@ struct CPURegisters {
 		let bitsXST = pad(strXST, toSize: 6)
 		let pP = NSString(format:"%1X", P) as String
 		let pQ = NSString(format:"%1X", Q) as String
+		let strFI = String(self.FI, radix:2)
+		let FI = pad(strFI, toSize: 14)
 		println("A=\(displayOrderedDigits(A)) B=\(displayOrderedDigits(B)) C=\(displayOrderedDigits(C)) Stack=\(stack0) \(stack1) \(stack2) \(stack3)")
 		println("M=\(displayOrderedDigits(M)) N=\(displayOrderedDigits(N)) Cr=\(carry)\(pointP)P=\(pP)\(pointQ)Q=\(pQ) G=\(displayOrderedDigits(G)) ST=\(bitsXST) \(bitsST)")
 		if let timer = bus.timer {
@@ -109,7 +112,7 @@ struct CPURegisters {
 			let aTimer = timer.timerSelected.rawValue == 0 ? "B" : "A"
 			println("CLK_A=\(displayOrderedDigits(CLK_A)) ALM_A=\(displayOrderedDigits(ALM_A)) SCR_A=\(displayOrderedDigits(SCR_A))")
 			println("CLK_B=\(displayOrderedDigits(CLK_B)) ALM_B=\(displayOrderedDigits(CLK_B)) SCR_B=\(displayOrderedDigits(SCR_B))")
-			println("TMR_S=\(TMR_S) ACC_F=\(ACC_F) Timer=\(aTimer)")
+			println("TMR_S=\(TMR_S) ACC_F=\(ACC_F) Timer=\(aTimer) FI:\(FI)")
 		}
 		println("RAM Addr=\(ramAddr) Perph Addr=\(periph) Base=\(mode.rawValue) KY=\(KY) Keydown=\(keyDown)")
 	}
@@ -253,7 +256,7 @@ final class CPU {
 		
 	init() {
 		let defaults = NSUserDefaults.standardUserDefaults()
-//		TRACE = defaults.integerForKey("traceActive")
+		TRACE = defaults.integerForKey("traceActive")
 	}
 
 	func clearRegisters() {

@@ -46,11 +46,10 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 	}
 	
 	func displayCurrentRAM(address: Int) {
-		if bus.RAMExists(address) {
-			displayMemory(false)
-
-			var ptr = 0
-			for addr in address...(address + 0x0f) {
+		var ptr = 0
+		for addr in address...(address + 0x0f) {
+			var hidden = false
+			if bus.RAMExists(address) {
 				var tmpReg = emptyDigit14
 				switch bus.readRamAddress(Bits12(addr), into: &tmpReg) {
 				case .Success(let result):
@@ -91,33 +90,51 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 						// do nothing
 						break
 					}
-					ptr++
 				case .Error (let error):
 					println(error)
 				}
+			} else {
+				hidden = true
 			}
-		} else {
-			displayMemory(true)
+			switch ptr {
+			case 0x0:
+				memory0.hidden = hidden
+			case 0x1:
+				memory1.hidden = hidden
+			case 0x2:
+				memory2.hidden = hidden
+			case 0x3:
+				memory3.hidden = hidden
+			case 0x4:
+				memory4.hidden = hidden
+			case 0x5:
+				memory5.hidden = hidden
+			case 0x6:
+				memory6.hidden = hidden
+			case 0x7:
+				memory7.hidden = hidden
+			case 0x8:
+				memory8.hidden = hidden
+			case 0x9:
+				memory9.hidden = hidden
+			case 0xA:
+				memoryA.hidden = hidden
+			case 0xB:
+				memoryB.hidden = hidden
+			case 0xC:
+				memoryC.hidden = hidden
+			case 0xD:
+				memoryD.hidden = hidden
+			case 0xE:
+				memoryE.hidden = hidden
+			case 0xF:
+				memoryF.hidden = hidden
+			default:
+				// do nothing
+				break
+			}
+			ptr++
 		}
-	}
-	
-	func displayMemory(hidden: Bool) {
-		memory0.hidden = hidden
-		memory1.hidden = hidden
-		memory2.hidden = hidden
-		memory3.hidden = hidden
-		memory4.hidden = hidden
-		memory5.hidden = hidden
-		memory6.hidden = hidden
-		memory7.hidden = hidden
-		memory8.hidden = hidden
-		memory9.hidden = hidden
-		memoryA.hidden = hidden
-		memoryB.hidden = hidden
-		memoryC.hidden = hidden
-		memoryD.hidden = hidden
-		memoryE.hidden = hidden
-		memoryF.hidden = hidden
 	}
 
 	//MARK: - TableView DataSource & Delegate
@@ -129,11 +146,11 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		var value: AnyObject?
 		
 		if tableColumn?.identifier == "avail" {
-			if bus.RAMExists(row << 4) {
+//			if bus.RAMExists(row << 4) {
 				value = NSNumber(integer: NSOnState)
-			} else {
-				value = NSNumber(integer: NSOffState)
-			}
+//			} else {
+//				value = NSNumber(integer: NSOffState)
+//			}
 		}
 		
 		if tableColumn?.identifier == "bank" {

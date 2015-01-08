@@ -13,6 +13,7 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	@IBOutlet weak var calculatorSelector: NSComboBox!
 	@IBOutlet weak var printerButton: NSButton!
 	@IBOutlet weak var cardReaderButton: NSButton!
+	@IBOutlet weak var synchronyzeButton: NSButton!
 
 	var calculatorType: CalculatorType?
 	var preferencesContainerViewController: PreferencesContainerViewController?
@@ -40,13 +41,29 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	
 	//MARK: - Actions
 	
-	@IBAction func applyChanges(sender: AnyObject) {
+	@IBAction func applyChanges(sender: AnyObject)
+	{
 		preferencesContainerViewController?.applyChanges()
+	}
+	
+	@IBAction func synchronize(sender: AnyObject)
+	{
+		if sender as NSObject == synchronyzeButton {
+			if synchronyzeButton.state == NSOnState {
+				SYNCHRONYZE = 1
+			} else {
+				SYNCHRONYZE = 0
+			}
+			let defaults = NSUserDefaults.standardUserDefaults()
+			defaults.setInteger(SYNCHRONYZE, forKey: "synchronyzeTime")
+			defaults.synchronize()
+		}
 	}
 
 	
 	// MARK: - NSComboBoxDelegate Methods
-	func comboBoxSelectionDidChange(notification: NSNotification) {
+	func comboBoxSelectionDidChange(notification: NSNotification)
+	{
 		if notification.object as NSObject == calculatorSelector {
 			let selected = calculatorSelector.indexOfSelectedItem + 1
 			let defaults = NSUserDefaults.standardUserDefaults()

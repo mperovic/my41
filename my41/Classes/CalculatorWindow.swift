@@ -380,83 +380,83 @@ class Display : NSView, Peripheral {
 		self.aBus = theBus
 	}
 	
-	func readFromRegister(register: Bits4, inout into data: Digits14) {
+	func readFromRegister(param: Bits4) {
 		// Implement READ f or READ DATA instruction with display as selected peripheral.
-		switch register {
+		switch param {
 		case 0x0:	//FLLDA
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RA, andData: &data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RA, andData: &cpu.reg.C)
 		case 0x1:	// FLLDB
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RB, andData: &data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RB, andData: &cpu.reg.C)
 		case 0x2:	// FLLDC
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RC, andData: &data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RC, andData: &cpu.reg.C)
 		case 0x3:	// FLLDAB
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RAB, andData: &data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RAB, andData: &cpu.reg.C)
 		case 0x4:	// FLLABC
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &data)
+			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &cpu.reg.C)
 		case 0x5:	// READDEN
-			bitsToDigits(bits: Int(registers.E), destination: &data, start: 0, count: 4)
+			bitsToDigits(bits: Int(registers.E), destination: &cpu.reg.C, start: 0, count: 4)
 			return					// doesn't change display
 		case 0x6:	// FLSDC
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &data)
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
 		case 0x7:	// FRSDA
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
 		case 0x8:	// FRSDB
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
 		case 0x9:	// FRSDC
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &cpu.reg.C)
 		case 0xA:	// FLSDA
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &data) // Original: .RB
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C) // Original: .RB
 		case 0xB:	// FLSDB
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &data)
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
 		case 0xC:	// FRSDAB
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
 		case 0xD:	// FLSDAB
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &data)
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
 		case 0xE:	// FRSABC
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &data)
+			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
 		case 0xF:	// FLSABC
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
+			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
 		default:
 			self.aBus?.abortInstruction("Unimplemented display operation")
 		}
 		scheduleUpdate()
 	}
 	
-	func writeToRegister(register: Bits4, inout from data: Digits14) {
+	func writeToRegister(param: Bits4) {
 		// Implement WRITE f instruction with display as selected peripheral.
-		switch register {
+		switch param {
 		case 0x0:	// SRLDA
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RA, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RA, andData: &cpu.reg.C)
 		case 0x1:	// SRLDB
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RB, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RB, andData: &cpu.reg.C)
 		case 0x2:	// SRLDC
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RC, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RC, andData: &cpu.reg.C)
 		case 0x3:	// SRLDAB
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RAB, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RAB, andData: &cpu.reg.C)
 		case 0x4:	// SRLABC
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RABC, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RABC, andData: &cpu.reg.C)
 		case 0x5:	// SLLDAB
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &data)
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
 		case 0x6:	// SLLABC
-			shift(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &data)
+			shift(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &cpu.reg.C)
 		case 0x7:	// SRSDA
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
 		case 0x8:	// SRSDB
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
 		case 0x9:	// SRSDC
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &cpu.reg.C)
 		case 0xA:	// SLSDA
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &data)
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
 		case 0xB:	// SLSDB
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &data)
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
 		case 0xC:	// SRSDAB
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
 		case 0xD:	// SLSDAB
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &data)
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
 		case 0xE:	// SRSABC
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &data)
+			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
 		case 0xF:	// SLSABC
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &data)
+			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
 		default:
 			self.aBus?.abortInstruction("Unimplemented display operation")
 		}
