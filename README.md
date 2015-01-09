@@ -12,3 +12,7 @@ NOTE: Work in progress
 
 ![Screen shot]
 (https://github.com/mperovic/my41/blob/master/Picture%201.png)
+
+![Screen shot]
+(https://github.com/mperovic/my41/blob/master/MacAppStore.png)
+
