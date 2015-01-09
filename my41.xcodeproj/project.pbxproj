@@ -180,6 +180,12 @@
 		DC799D881A155CA2002FACBE /* my41.icns in Resources */ = {isa = PBXBuildFile; fileRef = DC799D871A155CA2002FACBE /* my41.icns */; };
 		DC7B7E0F19AF99AB00C70269 /* CalculatorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */; };
 		DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E1019AFA4EE00C70269 /* Timer.swift */; };
+		DC99DC571A5EADF500785EDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99DC561A5EADF500785EDF /* AppDelegate.swift */; };
+		DC99DC591A5EADF500785EDF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99DC581A5EADF500785EDF /* ViewController.swift */; };
+		DC99DC5C1A5EADF500785EDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC99DC5A1A5EADF500785EDF /* Main.storyboard */; };
+		DC99DC5E1A5EADF500785EDF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC99DC5D1A5EADF500785EDF /* Images.xcassets */; };
+		DC99DC611A5EADF500785EDF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC99DC5F1A5EADF500785EDF /* LaunchScreen.xib */; };
+		DC99DC6D1A5EADF600785EDF /* my41cx_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99DC6C1A5EADF600785EDF /* my41cx_iosTests.swift */; };
 		DCA23A621A45EE2000BC2BD2 /* CPU_Class0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */; };
 		DCA23A641A46373300BC2BD2 /* CPU_Class1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */; };
 		DCA23A661A46D3BC00BC2BD2 /* CPU_Class2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A651A46D3BC00BC2BD2 /* CPU_Class2.swift */; };
@@ -206,6 +212,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = DC45284C19897DA500C40B6C;
 			remoteInfo = my41;
+		};
+		DC99DC671A5EADF600785EDF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC45284519897DA500C40B6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC99DC511A5EADF500785EDF;
+			remoteInfo = my41cx.ios;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -388,6 +401,16 @@
 		DC799D871A155CA2002FACBE /* my41.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = my41.icns; path = my41/my41.icns; sourceTree = "<group>"; };
 		DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatorWindow.swift; path = Classes/CalculatorWindow.swift; sourceTree = "<group>"; };
 		DC7B7E1019AFA4EE00C70269 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Classes/Timer.swift; sourceTree = "<group>"; };
+		DC99DC521A5EADF500785EDF /* my41cx.ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my41cx.ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC99DC551A5EADF500785EDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC99DC561A5EADF500785EDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DC99DC581A5EADF500785EDF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DC99DC5B1A5EADF500785EDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DC99DC5D1A5EADF500785EDF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DC99DC601A5EADF500785EDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		DC99DC661A5EADF500785EDF /* my41cx.iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = my41cx.iosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC99DC6B1A5EADF600785EDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC99DC6C1A5EADF600785EDF /* my41cx_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my41cx_iosTests.swift; sourceTree = "<group>"; };
 		DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class0.swift; path = Classes/CPU_Class0.swift; sourceTree = "<group>"; };
 		DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class1.swift; path = Classes/CPU_Class1.swift; sourceTree = "<group>"; };
 		DCA23A651A46D3BC00BC2BD2 /* CPU_Class2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class2.swift; path = Classes/CPU_Class2.swift; sourceTree = "<group>"; };
@@ -416,6 +439,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DC45285E19897DA600C40B6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC99DC4F1A5EADF500785EDF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC99DC631A5EADF500785EDF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -594,6 +631,8 @@
 				DC799D871A155CA2002FACBE /* my41.icns */,
 				DC45284F19897DA600C40B6C /* my41 */,
 				DC45286419897DA600C40B6C /* my41Tests */,
+				DC99DC531A5EADF500785EDF /* my41cx.ios */,
+				DC99DC691A5EADF600785EDF /* my41cx.iosTests */,
 				DC45284E19897DA600C40B6C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -603,6 +642,8 @@
 			children = (
 				DC45284D19897DA600C40B6C /* my41cx.app */,
 				DC45286119897DA600C40B6C /* my41Tests.xctest */,
+				DC99DC521A5EADF500785EDF /* my41cx.ios.app */,
+				DC99DC661A5EADF500785EDF /* my41cx.iosTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -721,6 +762,44 @@
 			name = Peripherals;
 			sourceTree = "<group>";
 		};
+		DC99DC531A5EADF500785EDF /* my41cx.ios */ = {
+			isa = PBXGroup;
+			children = (
+				DC99DC561A5EADF500785EDF /* AppDelegate.swift */,
+				DC99DC581A5EADF500785EDF /* ViewController.swift */,
+				DC99DC5A1A5EADF500785EDF /* Main.storyboard */,
+				DC99DC5D1A5EADF500785EDF /* Images.xcassets */,
+				DC99DC5F1A5EADF500785EDF /* LaunchScreen.xib */,
+				DC99DC541A5EADF500785EDF /* Supporting Files */,
+			);
+			path = my41cx.ios;
+			sourceTree = "<group>";
+		};
+		DC99DC541A5EADF500785EDF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC99DC551A5EADF500785EDF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC99DC691A5EADF600785EDF /* my41cx.iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				DC99DC6C1A5EADF600785EDF /* my41cx_iosTests.swift */,
+				DC99DC6A1A5EADF600785EDF /* Supporting Files */,
+			);
+			path = my41cx.iosTests;
+			sourceTree = "<group>";
+		};
+		DC99DC6A1A5EADF600785EDF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC99DC6B1A5EADF600785EDF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DCA23A601A45EDC200BC2BD2 /* CPU */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +879,41 @@
 			productReference = DC45286119897DA600C40B6C /* my41Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DC99DC511A5EADF500785EDF /* my41cx.ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC99DC721A5EADF600785EDF /* Build configuration list for PBXNativeTarget "my41cx.ios" */;
+			buildPhases = (
+				DC99DC4E1A5EADF500785EDF /* Sources */,
+				DC99DC4F1A5EADF500785EDF /* Frameworks */,
+				DC99DC501A5EADF500785EDF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = my41cx.ios;
+			productName = my41cx.ios;
+			productReference = DC99DC521A5EADF500785EDF /* my41cx.ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DC99DC651A5EADF500785EDF /* my41cx.iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC99DC731A5EADF600785EDF /* Build configuration list for PBXNativeTarget "my41cx.iosTests" */;
+			buildPhases = (
+				DC99DC621A5EADF500785EDF /* Sources */,
+				DC99DC631A5EADF500785EDF /* Frameworks */,
+				DC99DC641A5EADF500785EDF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC99DC681A5EADF600785EDF /* PBXTargetDependency */,
+			);
+			name = my41cx.iosTests;
+			productName = my41cx.iosTests;
+			productReference = DC99DC661A5EADF500785EDF /* my41cx.iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -822,6 +936,14 @@
 						CreatedOnToolsVersion = 6.0;
 						TestTargetID = DC45284C19897DA500C40B6C;
 					};
+					DC99DC511A5EADF500785EDF = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = LS2ZZ4TR54;
+					};
+					DC99DC651A5EADF500785EDF = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = DC99DC511A5EADF500785EDF;
+					};
 				};
 			};
 			buildConfigurationList = DC45284819897DA500C40B6C /* Build configuration list for PBXProject "my41" */;
@@ -839,6 +961,8 @@
 			targets = (
 				DC45284C19897DA500C40B6C /* my41cx */,
 				DC45286019897DA600C40B6C /* my41Tests */,
+				DC99DC511A5EADF500785EDF /* my41cx.ios */,
+				DC99DC651A5EADF500785EDF /* my41cx.iosTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1015,6 +1139,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DC99DC501A5EADF500785EDF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC99DC5C1A5EADF500785EDF /* Main.storyboard in Resources */,
+				DC99DC611A5EADF500785EDF /* LaunchScreen.xib in Resources */,
+				DC99DC5E1A5EADF500785EDF /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC99DC641A5EADF500785EDF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1065,6 +1206,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DC99DC4E1A5EADF500785EDF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC99DC591A5EADF500785EDF /* ViewController.swift in Sources */,
+				DC99DC571A5EADF500785EDF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC99DC621A5EADF500785EDF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC99DC6D1A5EADF600785EDF /* my41cx_iosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1072,6 +1230,11 @@
 			isa = PBXTargetDependency;
 			target = DC45284C19897DA500C40B6C /* my41cx */;
 			targetProxy = DC45286219897DA600C40B6C /* PBXContainerItemProxy */;
+		};
+		DC99DC681A5EADF600785EDF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC99DC511A5EADF500785EDF /* my41cx.ios */;
+			targetProxy = DC99DC671A5EADF600785EDF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1082,6 +1245,22 @@
 				DC45285B19897DA600C40B6C /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DC99DC5A1A5EADF500785EDF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC99DC5B1A5EADF500785EDF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DC99DC5F1A5EADF500785EDF /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC99DC601A5EADF500785EDF /* Base */,
+			);
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1238,6 +1417,80 @@
 			};
 			name = Release;
 		};
+		DC99DC6E1A5EADF600785EDF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = my41cx.ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DC99DC6F1A5EADF600785EDF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = my41cx.ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DC99DC701A5EADF600785EDF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = my41cx.iosTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/my41cx.ios.app/my41cx.ios";
+			};
+			name = Debug;
+		};
+		DC99DC711A5EADF600785EDF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = my41cx.iosTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/my41cx.ios.app/my41cx.ios";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1267,6 +1520,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		DC99DC721A5EADF600785EDF /* Build configuration list for PBXNativeTarget "my41cx.ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC99DC6E1A5EADF600785EDF /* Debug */,
+				DC99DC6F1A5EADF600785EDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DC99DC731A5EADF600785EDF /* Build configuration list for PBXNativeTarget "my41cx.iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC99DC701A5EADF600785EDF /* Debug */,
+				DC99DC711A5EADF600785EDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
