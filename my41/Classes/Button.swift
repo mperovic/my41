@@ -67,11 +67,11 @@ class ButtonCell: NSButtonCell {
 	
 	override func drawBezelWithFrame(frame: NSRect, inView controlView: NSView) {
 		let ctx = NSGraphicsContext.currentContext()!
+		ctx.saveGraphicsState()
 		
 		let roundedRadius: CGFloat = 3.0
 		
 		// Outer stroke (drawn as gradient)
-		ctx.saveGraphicsState()
 		let outerClip: NSBezierPath = NSBezierPath(roundedRect: frame,
 			xRadius: roundedRadius,
 			yRadius: roundedRadius)
@@ -91,16 +91,16 @@ class ButtonCell: NSButtonCell {
 			yRadius: roundedRadius)
 		backgroundPath.setClip()
 		
-		if switchButton? == "Y" {
-			let backgroundGradient = NSGradient(colorsAndLocations:
+		var backgroundGradient: NSGradient
+		if switchButton == "Y" {
+			backgroundGradient = NSGradient(colorsAndLocations:
 				(NSColor(deviceWhite: 0.30, alpha: 1.0), 0.0),
 				(NSColor(deviceWhite: 0.42, alpha: 1.0), 0.5),
 				(NSColor(deviceWhite: 0.50, alpha: 1.0), 1.0)
 			)
-			backgroundGradient.drawInRect(backgroundPath.bounds, angle: 270.0)
 		} else {
-			if shiftButton? == "Y" {
-				let backgroundGradient = NSGradient(colorsAndLocations:
+			if shiftButton == "Y" {
+				backgroundGradient = NSGradient(colorsAndLocations:
 					(NSColor(calibratedRed: 0.4784, green: 0.2745, blue: 0.0471, alpha: 1.0), 0.0),
 					(NSColor(calibratedRed: 0.5804, green: 0.3961, blue: 0.1294, alpha: 1.0), 0.1),
 					(NSColor(calibratedRed: 0.6078, green: 0.3961, blue: 0.08235, alpha: 1.0), 0.49),
@@ -108,9 +108,8 @@ class ButtonCell: NSButtonCell {
 					(NSColor(calibratedRed: 0.7176, green: 0.4549, blue: 0.1765, alpha: 1.0), 0.9),
 					(NSColor(calibratedRed: 0.749, green: 0.4901, blue: 0.1765, alpha: 1.0), 1.0)
 				)
-				backgroundGradient.drawInRect(backgroundPath.bounds, angle: 270.0)
 			} else {
-				let backgroundGradient = NSGradient(colorsAndLocations:
+				backgroundGradient = NSGradient(colorsAndLocations:
 					(NSColor(deviceWhite: 0.17, alpha: 1.0), 0.0),
 					(NSColor(deviceWhite: 0.20, alpha: 1.0), 0.12),
 					(NSColor(deviceWhite: 0.27, alpha: 1.0), 0.49),
@@ -118,26 +117,26 @@ class ButtonCell: NSButtonCell {
 					(NSColor(deviceWhite: 0.42, alpha: 1.0), 0.98),
 					(NSColor(deviceWhite: 0.50, alpha: 1.0), 1.0)
 				)
-				backgroundGradient.drawInRect(backgroundPath.bounds, angle: 270.0)
 			}
 		}
+		backgroundGradient.drawInRect(backgroundPath.bounds, angle: 270.0)
 		ctx.restoreGraphicsState()
 		
 		// Dark stroke
-		ctx.saveGraphicsState()
-		NSColor(deviceWhite: 0.12, alpha: 1.0).setStroke()
-		NSBezierPath(roundedRect: NSInsetRect(frame, 1.5, 1.5),
-			xRadius: roundedRadius,
-			yRadius: roundedRadius)
-		ctx.restoreGraphicsState()
-		
-		// Inner light stroke
-		ctx.saveGraphicsState()
-		NSColor(deviceWhite: 1.0, alpha: 0.05).setStroke()
-		NSBezierPath(roundedRect: NSInsetRect(frame, 2.5, 2.5),
-			xRadius: roundedRadius,
-			yRadius: roundedRadius)
-		ctx.restoreGraphicsState()
+//		ctx.saveGraphicsState()
+//		NSColor(deviceWhite: 0.12, alpha: 1.0).setStroke()
+//		NSBezierPath(roundedRect: NSInsetRect(frame, 1.5, 1.5),
+//			xRadius: roundedRadius,
+//			yRadius: roundedRadius)
+//		ctx.restoreGraphicsState()
+//		
+//		// Inner light stroke
+//		ctx.saveGraphicsState()
+//		NSColor(deviceWhite: 1.0, alpha: 0.05).setStroke()
+//		NSBezierPath(roundedRect: NSInsetRect(frame, 2.5, 2.5),
+//			xRadius: roundedRadius,
+//			yRadius: roundedRadius)
+//		ctx.restoreGraphicsState()
 		
 		// Draw darker overlay if button is pressed
 		if highlighted {
@@ -151,7 +150,7 @@ class ButtonCell: NSButtonCell {
 		}
 		
 		// Text Drawing
-		if lowerText? != nil {
+		if lowerText != nil {
 			var lowerTextRect: NSRect
 			if lowerText == "N" {
 				lowerTextRect = NSMakeRect(1.0, 17.0, 86.0, 12.0)
@@ -185,7 +184,7 @@ class ButtonCell: NSButtonCell {
 			lowerText?.drawInRect(NSOffsetRect(lowerTextRect, 0, -1), withAttributes: lowerTextFontAttributes)
 		}
 		
-		if upperText? != nil {
+		if upperText != nil {
 			var paragrapStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
 			paragrapStyle.alignment = .CenterTextAlignment
 			upperText!.addAttribute(NSParagraphStyleAttributeName, value: paragrapStyle, range: NSMakeRange(0, upperText!.length))

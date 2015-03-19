@@ -11,4 +11,5 @@ Distributed under terms of Revised BSD License
 ![Screen shot]
 (https://github.com/mperovic/my41/blob/master/Picture%201.png)
 
-![Screen shot] (https://github.com/mperovic/my41/blob/master/MacAppStore.png)
+[![Mac App Store](https://github.com/mperovic/my41/blob/master/MacAppStore.png)](https://itunes.apple.com/us/app/my41cx/id94927240)
+

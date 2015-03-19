@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Cocoa
 
 final class RomChip {
 	var writable: Bool

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <scenes>
         <!--Calculator Application-->
@@ -385,6 +385,90 @@ CA
                                     <constraint firstAttribute="height" constant="50" id="VXu-6R-bYQ"/>
                                     <constraint firstAttribute="centerY" secondItem="ff7-dI-buL" secondAttribute="centerY" id="xq0-r5-QL6"/>
                                 </constraints>
+                            </customView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Df-Rd-Bzg" customClass="KeyGroup" customModule="my41cx" customModuleProvider="target">
+                                <rect key="frame" x="32" y="478" width="267" height="16"/>
+                                <subviews>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8jR-Nz-0Og" userLabel="ON" customClass="Key" customModule="my41cx" customModuleProvider="target">
+                                        <rect key="frame" x="-2" y="-3" width="54" height="21"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pKo-mo-jCd" customClass="ButtonCell" customModule="my41cx" customModuleProvider="target">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="shiftButton" value="N"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="switchButton" value="Y"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </buttonCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="keyCode">
+                                                <integer key="value" value="128"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="keygroup" destination="1Df-Rd-Bzg" id="vpr-cE-CQn"/>
+                                        </connections>
+                                    </button>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aeq-29-Z2K" userLabel="USER" customClass="Key" customModule="my41cx" customModuleProvider="target">
+                                        <rect key="frame" x="50" y="-3" width="54" height="21"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uA1-dL-0Ic" customClass="ButtonCell" customModule="my41cx" customModuleProvider="target">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="shiftButton" value="N"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="switchButton" value="Y"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </buttonCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="keyCode">
+                                                <integer key="value" value="100"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="keygroup" destination="1Df-Rd-Bzg" id="rJF-B6-cvD"/>
+                                        </connections>
+                                    </button>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fyk-Ae-dOA" userLabel="PRGM" customClass="Key" customModule="my41cx" customModuleProvider="target">
+                                        <rect key="frame" x="162" y="-3" width="54" height="21"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lPy-Dc-gYD" customClass="ButtonCell" customModule="my41cx" customModuleProvider="target">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="shiftButton" value="N"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="switchButton" value="Y"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </buttonCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="keyCode">
+                                                <integer key="value" value="84"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="keygroup" destination="1Df-Rd-Bzg" id="twQ-NO-L2P"/>
+                                        </connections>
+                                    </button>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dKm-To-kk1" userLabel="ALPHA" customClass="Key" customModule="my41cx" customModuleProvider="target">
+                                        <rect key="frame" x="214" y="-3" width="54" height="21"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PPF-sq-G1F" customClass="ButtonCell" customModule="my41cx" customModuleProvider="target">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="shiftButton" value="N"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="switchButton" value="Y"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </buttonCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="keyCode">
+                                                <integer key="value" value="68"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="keygroup" destination="1Df-Rd-Bzg" id="VHs-sp-J8G"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <connections>
+                                    <outlet property="keyboard" destination="54j-uB-qmv" id="B8l-AN-1cA"/>
+                                </connections>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="ryq-6g-Muf" customClass="KeyboardView" customModule="my41cx" customModuleProvider="target">
                                 <rect key="frame" x="32" y="43" width="266" height="410"/>
@@ -1657,90 +1741,6 @@ CA
                                     <constraint firstAttribute="trailing" secondItem="YQK-oq-nwC" secondAttribute="trailing" id="ncL-mb-c0Y"/>
                                 </constraints>
                             </customView>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Df-Rd-Bzg" customClass="KeyGroup" customModule="my41cx" customModuleProvider="target">
-                                <rect key="frame" x="32" y="478" width="267" height="16"/>
-                                <subviews>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8jR-Nz-0Og" userLabel="ON" customClass="Key" customModule="my41cx" customModuleProvider="target">
-                                        <rect key="frame" x="-2" y="-3" width="54" height="21"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pKo-mo-jCd" customClass="ButtonCell" customModule="my41cx" customModuleProvider="target">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="shiftButton" value="N"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="switchButton" value="Y"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </buttonCell>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="keyCode">
-                                                <integer key="value" value="128"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="keygroup" destination="1Df-Rd-Bzg" id="vpr-cE-CQn"/>
-                                        </connections>
-                                    </button>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aeq-29-Z2K" userLabel="USER" customClass="Key" customModule="my41cx" customModuleProvider="target">
-                                        <rect key="frame" x="50" y="-3" width="54" height="21"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uA1-dL-0Ic" customClass="ButtonCell" customModule="my41cx" customModuleProvider="target">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="shiftButton" value="N"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="switchButton" value="Y"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </buttonCell>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="keyCode">
-                                                <integer key="value" value="100"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="keygroup" destination="1Df-Rd-Bzg" id="rJF-B6-cvD"/>
-                                        </connections>
-                                    </button>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fyk-Ae-dOA" userLabel="PRGM" customClass="Key" customModule="my41cx" customModuleProvider="target">
-                                        <rect key="frame" x="162" y="-3" width="54" height="21"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lPy-Dc-gYD" customClass="ButtonCell" customModule="my41cx" customModuleProvider="target">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="shiftButton" value="N"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="switchButton" value="Y"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </buttonCell>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="keyCode">
-                                                <integer key="value" value="84"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="keygroup" destination="1Df-Rd-Bzg" id="twQ-NO-L2P"/>
-                                        </connections>
-                                    </button>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dKm-To-kk1" userLabel="ALPHA" customClass="Key" customModule="my41cx" customModuleProvider="target">
-                                        <rect key="frame" x="214" y="-3" width="54" height="21"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PPF-sq-G1F" customClass="ButtonCell" customModule="my41cx" customModuleProvider="target">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="shiftButton" value="N"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="switchButton" value="Y"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </buttonCell>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="keyCode">
-                                                <integer key="value" value="68"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="keygroup" destination="1Df-Rd-Bzg" id="VHs-sp-J8G"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <connections>
-                                    <outlet property="keyboard" destination="54j-uB-qmv" id="B8l-AN-1cA"/>
-                                </connections>
-                            </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAf-qv-6nw">
                                 <rect key="frame" x="241" y="576" width="60" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" id="Dck-Jm-DuQ">
@@ -1757,7 +1757,7 @@ CA
                             <constraint firstAttribute="centerX" secondItem="ryq-6g-Muf" secondAttribute="centerX" id="zRE-hh-NpC"/>
                         </constraints>
                         <connections>
-                            <outlet property="display" destination="ff7-dI-buL" id="3xR-H9-rRE"/>
+                            <outlet property="lcdDisplay" destination="ff7-dI-buL" id="qdk-w6-LNA"/>
                         </connections>
                     </view>
                     <connections>
@@ -6292,7 +6292,7 @@ CA
                 </windowController>
                 <customObject id="yTD-ff-AYy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1153.5" y="1038.5"/>
+            <point key="canvasLocation" x="1067.5" y="958.5"/>
         </scene>
     </scenes>
     <resources>

@@ -10,18 +10,6 @@ import Foundation
 import Cocoa
 import AppKit
 
-let HPCalculatorType = "CalculatorType"
-let HPPort1 = "ModulePort1"
-let HPPort2 = "ModulePort2"
-let HPPort3 = "ModulePort3"
-let HPPort4 = "ModulePort4"
-let HPPrinterAvailable = "PrinterAvailable"
-let HPCardReaderAvailable = "CardReaderAvailable"
-let HPDisplayDebug = "DisplayDebug"
-let HPConsoleForegroundColor = "ConsoleForegroundColor"
-let HPConsoleBackgroundColor = "ConsoleBackgroundColor"
-let HPResetCalculator = "ResetCalculator"
-
 class PreferencesWindowController: NSWindowController {
 	
 }

@@ -9,7 +9,6 @@
 import Foundation
 import Cocoa
 
-typealias DisplaySegmentMap = UInt32
 typealias DisplayFont = [DisplaySegmentMap]
 typealias DisplaySegmentPaths = [NSBezierPath]
 
@@ -90,42 +89,23 @@ class CalculatorWindow : NSWindow {
 	}
 }
 
-typealias Digits12 = [Digit]
-
-let emptyDigit12:[Digit] = [Digit](count: 12, repeatedValue: 0)
-
-struct DisplayRegisters {
-	var A: Digits12 = emptyDigit12
-	var B: Digits12 = emptyDigit12
-	var C: Digits12 = emptyDigit12
-	var E: Bits12 = 0
-}
-
-let annunciatorStrings: [String] = ["BAT  ", "USER  ", "G", "RAD  ", "SHIFT  ", "0", "1", "2", "3", "4  ", "PRGM  ", "ALPHA"]
-let CTULookupRsrcName = "display"
-let CTULookupRsrcType = "lookup"
-var CTULookup: String?					// lookup table hardware character index -> unichar
-var CTULookupLength: Int?				// actual lookup table length (file size)
-
 class Display : NSView, Peripheral {
 	let numDisplayCells = 12
 	let numAnnunciators = 12
-	
 	let numDisplaySegments = 17
 	let numFontChars = 128
 	
 	var on: Bool = true
 	var updateCountdown: Int = 0
 	var registers = DisplayRegisters()
-	var displayFont: DisplayFont = DisplayFont()
-	var segmentPaths: DisplaySegmentPaths = DisplaySegmentPaths()
+	var displayFont = DisplayFont()
+	var segmentPaths = DisplaySegmentPaths()
 	var annunciatorFont: NSFont?
-	var annunciatorFontScale: CGFloat = 2.0
+	var annunciatorFontScale: CGFloat = 1.2
 	var annunciatorFontSize: CGFloat = 9.0
-	var annunciatorBottomMargin: CGFloat = 2.0
-	var annunciatorPositions: [NSPoint] = [NSPoint](count: 12, repeatedValue: CGPointMake(0.0, 0.0))
+	var annunciatorBottomMargin: CGFloat = 4.0
+	var annunciatorPositions: [NSPoint] = [NSPoint](count: 12, repeatedValue: NSMakePoint(0.0, 0.0))
 	var foregroundColor: NSColor?
-	var aBus: Bus?
 	
 	var contrast: Digit {
 		set {
@@ -137,32 +117,6 @@ class Display : NSView, Peripheral {
 		get {
 			return self.contrast
 		}
-	}
-	
-	let punctSegmentTable: [DisplaySegmentMap] = [
-		0x00000, // no punctuation
-		0x08000, // .
-		0x0C000, // :
-		0x18000, // ,
-		0x1C000  // ;  (only used during startup segment test)
-	]
-
-	enum DisplayShiftDirection {
-		case Left
-		case Right
-	}
-	
-	enum DisplayTransitionSize {
-		case Short
-		case Long
-	}
-	
-	enum DisplayRegisterSet : Int {
-		case RA = 1
-		case RB = 2
-		case RC = 4
-		case RAB = 3
-		case RABC = 7
 	}
 	
 	override init() {
@@ -182,8 +136,9 @@ class Display : NSView, Peripheral {
 		calculatorController.display = self
 		self.foregroundColor = NSColorList(name: "HP41").colorWithKey("displayForegroundColor")
 		self.displayFont = self.loadFont("hpfont")
-		self.segmentPaths = self.loadSegmentPaths("hpchar")
-		self.annunciatorFont = NSFont(name: "Helvetica", size:self.annunciatorFontScale * self.annunciatorFontSize)
+//		self.segmentPaths = self.loadSegmentPaths("hpchar")
+		self.segmentPaths = bezierPaths()
+		self.annunciatorFont = NSFont(name: "Menlo", size:self.annunciatorFontScale * self.annunciatorFontSize)
 		self.annunciatorPositions = self.calculateAnnunciatorPositions(self.annunciatorFont!, inRect: self.bounds)
 		self.on = true
 		self.updateCountdown = 2
@@ -236,7 +191,10 @@ class Display : NSView, Peripheral {
 			}
 			
 			self.lockFocus()
-			let attrs: NSDictionary = NSDictionary(object: annunciatorFont!, forKey: NSFontAttributeName)
+			let attrs: NSDictionary = NSDictionary(
+				object: annunciatorFont!,
+				forKey: NSFontAttributeName
+			)
 			calculatorController.prgmMode = false
 			calculatorController.alphaMode = false
 			for idx in 0..<numAnnunciators {
@@ -255,7 +213,10 @@ class Display : NSView, Peripheral {
 					NSGraphicsContext.saveGraphicsState()
 					transformation.concat()
 					let nsString = annunciatorStrings[idx] as NSString
-					nsString.drawAtPoint(NSMakePoint(0.0, 0.0), withAttributes: attrs)
+					nsString.drawAtPoint(
+						NSMakePoint(0.0, 0.0),
+						withAttributes: attrs
+					)
 					NSGraphicsContext.restoreGraphicsState()
 				}
 			}
@@ -263,561 +224,450 @@ class Display : NSView, Peripheral {
 		}
 	}
 	
-	func cellWidth() -> CGFloat {
-		return self.bounds.size.width / CGFloat(numDisplayCells)
+	func bezierPaths() -> DisplaySegmentPaths
+	{
+		var paths: DisplaySegmentPaths = DisplaySegmentPaths()
+
+		//1
+		/*
+		Key: 0
+		Bounds: {{2.3755772113800049, 0}, {12.6975257396698, 2}}
+		Control point bounds: {{2.3755772113800049, 0}, {12.6975257396698, 2}}
+		4.617837 2.000000 moveto
+		2.375577 0.000000 lineto
+		15.073103 0.000000 lineto
+		12.304828 2.000000 lineto
+		4.617837 2.000000 lineto
+		closepath
+		4.617837 2.000000 moveto
+		*/
+		var bezierPath0 = NSBezierPath()
+		bezierPath0.moveToPoint(NSMakePoint(4.617837, 2.000000))
+		bezierPath0.lineToPoint(NSMakePoint(2.375577, 0.000000))
+		bezierPath0.lineToPoint(NSMakePoint(15.073103, 0.000000))
+		bezierPath0.lineToPoint(NSMakePoint(12.304828, 2.000000))
+		bezierPath0.lineToPoint(NSMakePoint(4.617837, 2.000000))
+		bezierPath0.closePath()
+		bezierPath0.moveToPoint(NSMakePoint(4.617837, 2.000000))
+		paths.append(bezierPath0)
+		
+		// 2
+		/*
+		Bounds: {{1.0269801616668701, 0.71005439758300781}, {2.4166390895843506, 9.9931669235229492}}
+		Control point bounds: {{1.0269801616668701, 0.71005439758300781}, {2.4166390895843506, 9.9931669235229492}}
+		1.026980 10.703221 moveto
+		1.935450 0.710054 lineto
+		3.443619 6.210914 lineto
+		3.136238 9.592111 lineto
+		1.026980 10.703221 lineto
+		closepath
+		1.026980 10.703221 moveto
+		*/
+		var bezierPath1 = NSBezierPath()
+		bezierPath1.moveToPoint(NSMakePoint(1.026980, 10.703221))
+		bezierPath1.lineToPoint(NSMakePoint(1.935450, 0.710054))
+		bezierPath1.lineToPoint(NSMakePoint(3.443619, 6.210914))
+		bezierPath1.lineToPoint(NSMakePoint(3.136238, 9.592111))
+		bezierPath1.lineToPoint(NSMakePoint(1.026980, 10.703221))
+		bezierPath1.closePath()
+		bezierPath1.moveToPoint(NSMakePoint(1.026980, 10.703221))
+		paths.append(bezierPath1)
+		
+		// 3
+		/*
+		Bounds: {{2.4647183418273926, 0.74950754642486572}, {4.684511661529541, 9.7398122549057007}}
+		Control point bounds: {{2.4647183418273926, 0.74950754642486572}, {4.684511661529541, 9.7398122549057007}}
+		3.931293 6.098653 moveto
+		2.464718 0.749508 lineto
+		4.320368 2.404667 lineto
+		6.413752 6.591435 lineto
+		7.149230 10.489320 lineto
+		5.669303 9.574674 lineto
+		3.931293 6.098653 lineto
+		closepath
+		3.931293 6.098653 moveto
+		*/
+		var bezierPath2 = NSBezierPath()
+		bezierPath2.moveToPoint(NSMakePoint(3.931293, 6.098653))
+		bezierPath2.lineToPoint(NSMakePoint(2.464718, 0.749508))
+		bezierPath2.lineToPoint(NSMakePoint(4.320368, 2.404667))
+		bezierPath2.lineToPoint(NSMakePoint(6.413752, 6.591435))
+		bezierPath2.lineToPoint(NSMakePoint(7.149230, 10.489320))
+		bezierPath2.lineToPoint(NSMakePoint(5.669303, 9.574674))
+		bezierPath2.lineToPoint(NSMakePoint(3.931293, 6.098653))
+		bezierPath2.closePath()
+		bezierPath2.moveToPoint(NSMakePoint(3.931293, 6.098653))
+		paths.append(bezierPath2)
+		
+		// 4
+		/*
+		Bounds: {{6.9050822257995605, 2.25}, {2.3944964408874512, 7.8533802032470703}}
+		Control point bounds: {{6.9050822257995605, 2.25}, {2.3944964408874512, 7.8533802032470703}}
+		6.905082 6.498730 moveto
+		7.291330 2.250000 lineto
+		9.299579 2.250000 lineto
+		8.884876 6.811726 lineto
+		7.585231 10.103380 lineto
+		6.905082 6.498730 lineto
+		closepath
+		6.905082 6.498730 moveto
+		*/
+		var bezierPath3 = NSBezierPath()
+		bezierPath3.moveToPoint(NSMakePoint(6.905082, 6.498730))
+		bezierPath3.lineToPoint(NSMakePoint(7.291330, 2.250000))
+		bezierPath3.lineToPoint(NSMakePoint(9.299579, 2.250000))
+		bezierPath3.lineToPoint(NSMakePoint(8.884876, 6.811726))
+		bezierPath3.lineToPoint(NSMakePoint(7.585231, 10.103380))
+		bezierPath3.lineToPoint(NSMakePoint(6.905082, 6.498730))
+		bezierPath3.closePath()
+		bezierPath3.moveToPoint(NSMakePoint(6.905082, 6.498730))
+		paths.append(bezierPath3)
+		
+		// 5
+		/*
+		Bounds: {{7.9639315605163574, 0.75679004192352295}, {6.9154620170593262, 9.7489453554153442}}
+		Control point bounds: {{7.9639315605163574, 0.75679004192352295}, {6.9154620170593262, 9.7489453554153442}}
+		9.352165 6.989707 moveto
+		12.565980 2.428165 lineto
+		14.879394 0.756790 lineto
+		12.461739 6.048622 lineto
+		9.993521 9.551898 lineto
+		7.963932 10.505735 lineto
+		9.352165 6.989707 lineto
+		closepath
+		9.352165 6.989707 moveto
+		*/
+		var bezierPath4 = NSBezierPath()
+		bezierPath4.moveToPoint(NSMakePoint(9.352165, 6.989707))
+		bezierPath4.lineToPoint(NSMakePoint(12.565980, 2.428165))
+		bezierPath4.lineToPoint(NSMakePoint(14.879394, 0.756790))
+		bezierPath4.lineToPoint(NSMakePoint(12.461739, 6.048622))
+		bezierPath4.lineToPoint(NSMakePoint(9.993521, 9.551898))
+		bezierPath4.lineToPoint(NSMakePoint(7.963932, 10.505735))
+		bezierPath4.lineToPoint(NSMakePoint(9.352165, 6.989707))
+		bezierPath4.closePath()
+		bezierPath4.moveToPoint(NSMakePoint(9.352165, 6.989707))
+		paths.append(bezierPath4)
+		
+		// 6
+		/*
+		Bounds: {{12.617741584777832, 0.75105857849121094}, {2.8139810562133789, 9.9741630554199219}}
+		Control point bounds: {{12.617741584777832, 0.75105857849121094}, {2.8139810562133789, 9.9741630554199219}}
+		14.524980 10.725222 moveto
+		12.617742 9.614111 lineto
+		12.924595 6.238729 lineto
+		15.431723 0.751059 lineto
+		14.524980 10.725222 lineto
+		closepath
+		14.524980 10.725222 moveto
+		*/
+		var bezierPath5 = NSBezierPath()
+		bezierPath5.moveToPoint(NSMakePoint(14.524980, 10.725222))
+		bezierPath5.lineToPoint(NSMakePoint(12.617742, 9.614111))
+		bezierPath5.lineToPoint(NSMakePoint(12.924595, 6.238729))
+		bezierPath5.lineToPoint(NSMakePoint(15.431723, 0.751059))
+		bezierPath5.lineToPoint(NSMakePoint(14.524980, 10.725222))
+		bezierPath5.closePath()
+		bezierPath5.moveToPoint(NSMakePoint(14.524980, 10.725222))
+		paths.append(bezierPath5)
+		
+		// 7
+		/*
+		Bounds: {{1.5155218839645386, 10}, {5.4815198183059692, 2}}
+		Control point bounds: {{1.5155218839645386, 10}, {5.4815198183059692, 2}}
+		3.213154 12.000000 moveto
+		1.515522 11.011001 lineto
+		3.434736 10.000000 lineto
+		5.406438 10.000000 lineto
+		6.997042 10.983047 lineto
+		5.072827 12.000000 lineto
+		3.213154 12.000000 lineto
+		closepath
+		3.213154 12.000000 moveto
+		*/
+		var bezierPath6 = NSBezierPath()
+		bezierPath6.moveToPoint(NSMakePoint(3.213154, 12.000000))
+		bezierPath6.lineToPoint(NSMakePoint(1.515522, 11.011001))
+		bezierPath6.lineToPoint(NSMakePoint(3.434736, 10.000000))
+		bezierPath6.lineToPoint(NSMakePoint(5.406438, 10.000000))
+		bezierPath6.lineToPoint(NSMakePoint(6.997042, 10.983047))
+		bezierPath6.lineToPoint(NSMakePoint(5.072827, 12.000000))
+		bezierPath6.lineToPoint(NSMakePoint(3.213154, 12.000000))
+		bezierPath6.closePath()
+		bezierPath6.moveToPoint(NSMakePoint(3.213154, 12.000000))
+		paths.append(bezierPath6)
+		
+		// 8
+		/*
+		Bounds: {{8.0330619812011719, 10}, {5.951416015625, 2}}
+		Control point bounds: {{8.0330619812011719, 10}, {5.951416015625, 2}}
+		9.674292 12.000000 moveto
+		8.033062 11.025712 lineto
+		10.215584 10.000000 lineto
+		12.286846 10.000000 lineto
+		13.984478 10.988999 lineto
+		12.065263 12.000000 lineto
+		9.674292 12.000000 lineto
+		closepath
+		9.674292 12.000000 moveto
+		*/
+		var bezierPath7 = NSBezierPath()
+		bezierPath7.moveToPoint(NSMakePoint(9.674292, 12.000000))
+		bezierPath7.lineToPoint(NSMakePoint(8.033062, 11.025712))
+		bezierPath7.lineToPoint(NSMakePoint(10.215584, 10.000000))
+		bezierPath7.lineToPoint(NSMakePoint(12.286846, 10.000000))
+		bezierPath7.lineToPoint(NSMakePoint(13.984478, 10.988999))
+		bezierPath7.lineToPoint(NSMakePoint(12.065263, 12.000000))
+		bezierPath7.lineToPoint(NSMakePoint(9.674292, 12.000000))
+		bezierPath7.closePath()
+		bezierPath7.moveToPoint(NSMakePoint(9.674292, 12.000000))
+		paths.append(bezierPath7)
+		
+		// 9
+		/*
+		Bounds: {{0.070283412933349609, 11.274778366088867}, {2.8119742870330811, 9.9521026611328125}}
+		Control point bounds: {{0.070283412933349609, 11.274778366088867}, {2.8119742870330811, 9.9521026611328125}}
+		0.070283 21.226881 moveto
+		0.975020 11.274778 lineto
+		2.882258 12.385889 lineto
+		2.594385 15.552494 lineto
+		0.070283 21.226881 lineto
+		closepath
+		0.070283 21.226881 moveto
+		*/
+		var bezierPath8 = NSBezierPath()
+		bezierPath8.moveToPoint(NSMakePoint(0.070283, 21.226881))
+		bezierPath8.lineToPoint(NSMakePoint(0.975020, 11.274778))
+		bezierPath8.lineToPoint(NSMakePoint(2.882258, 12.385889))
+		bezierPath8.lineToPoint(NSMakePoint(2.594385, 15.552494))
+		bezierPath8.lineToPoint(NSMakePoint(0.070283, 21.226881))
+		bezierPath8.closePath()
+		bezierPath8.moveToPoint(NSMakePoint(0.070283, 21.226881))
+		paths.append(bezierPath8)
+		
+		// 10
+		/*
+		Bounds: {{0.61331439018249512, 11.522175788879395}, {6.4336917400360107, 9.7141599655151367}}
+		Control point bounds: {{0.61331439018249512, 11.522175788879395}, {6.4336917400360107, 9.7141599655151367}}
+		3.058874 15.738516 moveto
+		5.306457 12.442060 lineto
+		7.047006 11.522176 lineto
+		5.594459 15.569930 lineto
+		2.864343 19.574100 lineto
+		0.613314 21.236336 lineto
+		3.058874 15.738516 lineto
+		closepath
+		3.058874 15.738516 moveto
+		*/
+		var bezierPath9 = NSBezierPath()
+		bezierPath9.moveToPoint(NSMakePoint(3.058874, 15.738516))
+		bezierPath9.lineToPoint(NSMakePoint(5.306457, 12.442060))
+		bezierPath9.lineToPoint(NSMakePoint(7.047006, 11.522176))
+		bezierPath9.lineToPoint(NSMakePoint(5.594459, 15.569930))
+		bezierPath9.lineToPoint(NSMakePoint(2.864343, 19.574100))
+		bezierPath9.lineToPoint(NSMakePoint(0.613314, 21.236336))
+		bezierPath9.lineToPoint(NSMakePoint(3.058874, 15.738516))
+		bezierPath9.closePath()
+		bezierPath9.moveToPoint(NSMakePoint(3.058874, 15.738516))
+		paths.append(bezierPath9)
+		
+		// 11
+		/*
+		Bounds: {{5.7004213333129883, 11.920211791992188}, {2.4196805953979492, 7.8297882080078125}}
+		Control point bounds: {{5.7004213333129883, 11.920211791992188}, {2.4196805953979492, 7.8297882080078125}}
+		6.065075 15.738811 moveto
+		7.435389 11.920212 lineto
+		8.120102 15.224238 lineto
+		7.708670 19.750000 lineto
+		5.700421 19.750000 lineto
+		6.065075 15.738811 lineto
+		closepath
+		6.065075 15.738811 moveto
+		*/
+		var bezierPath10 = NSBezierPath()
+		bezierPath10.moveToPoint(NSMakePoint(6.065075, 15.738811))
+		bezierPath10.lineToPoint(NSMakePoint(7.435389, 11.920212))
+		bezierPath10.lineToPoint(NSMakePoint(8.120102, 15.224238))
+		bezierPath10.lineToPoint(NSMakePoint(7.708670, 19.750000))
+		bezierPath10.lineToPoint(NSMakePoint(5.700421, 19.750000))
+		bezierPath10.lineToPoint(NSMakePoint(6.065075, 15.738811))
+		bezierPath10.closePath()
+		bezierPath10.moveToPoint(NSMakePoint(6.065075, 15.738811))
+		paths.append(bezierPath10)
+		
+		// 12
+		/*
+		Bounds: {{7.8598289489746094, 11.504337310791016}, {5.1586418151855469, 9.75909423828125}}
+		Control point bounds: {{7.8598289489746094, 11.504337310791016}, {5.1586418151855469, 9.75909423828125}}
+		8.609699 15.122776 moveto
+		7.859829 11.504337 lineto
+		9.419060 12.429949 lineto
+		11.534890 16.308971 lineto
+		13.018471 21.263432 lineto
+		11.046081 19.589474 lineto
+		8.609699 15.122776 lineto
+		closepath
+		8.609699 15.122776 moveto
+		*/
+		var bezierPath11 = NSBezierPath()
+		bezierPath11.moveToPoint(NSMakePoint(8.609699, 15.122776))
+		bezierPath11.lineToPoint(NSMakePoint(7.859829, 11.504337))
+		bezierPath11.lineToPoint(NSMakePoint(9.419060, 12.429949))
+		bezierPath11.lineToPoint(NSMakePoint(11.534890, 16.308971))
+		bezierPath11.lineToPoint(NSMakePoint(13.018471, 21.263432))
+		bezierPath11.lineToPoint(NSMakePoint(11.046081, 19.589474))
+		bezierPath11.lineToPoint(NSMakePoint(8.609699, 15.122776))
+		bezierPath11.closePath()
+		bezierPath11.moveToPoint(NSMakePoint(8.609699, 15.122776))
+		paths.append(bezierPath11)
+		
+		// 13
+		/*
+		Bounds: {{12.020228385925293, 11.296778678894043}, {2.4527921676635742, 10.034676551818848}}
+		Control point bounds: {{12.020228385925293, 11.296778678894043}, {2.4527921676635742, 10.034676551818848}}
+		12.020228 16.186754 moveto
+		12.363762 12.407889 lineto
+		14.473021 11.296779 lineto
+		13.560777 21.331455 lineto
+		12.020228 16.186754 lineto
+		closepath
+		12.020228 16.186754 moveto
+		*/
+		var bezierPath12 = NSBezierPath()
+		bezierPath12.moveToPoint(NSMakePoint(12.020228, 16.186754))
+		bezierPath12.lineToPoint(NSMakePoint(12.363762, 12.407889))
+		bezierPath12.lineToPoint(NSMakePoint(14.473021, 11.296779))
+		bezierPath12.lineToPoint(NSMakePoint(13.560777, 21.331455))
+		bezierPath12.lineToPoint(NSMakePoint(12.020228, 16.186754))
+		bezierPath12.closePath()
+		bezierPath12.moveToPoint(NSMakePoint(12.020228, 16.186754))
+		paths.append(bezierPath12)
+		
+		// 14
+		/*
+		Bounds: {{0.42085522413253784, 20}, {12.692788422107697, 2}}
+		Control point bounds: {{0.42085522413253784, 20}, {12.692788422107697, 2}}
+		0.420855 22.000000 moveto
+		3.129292 20.000000 lineto
+		10.757083 20.000000 lineto
+		13.113644 22.000000 lineto
+		0.420855 22.000000 lineto
+		closepath
+		0.420855 22.000000 moveto
+		*/
+		var bezierPath13 = NSBezierPath()
+		bezierPath13.moveToPoint(NSMakePoint(0.420855, 22.000000))
+		bezierPath13.lineToPoint(NSMakePoint(3.129292, 20.000000))
+		bezierPath13.lineToPoint(NSMakePoint(10.757083, 20.000000))
+		bezierPath13.lineToPoint(NSMakePoint(13.113644, 22.000000))
+		bezierPath13.lineToPoint(NSMakePoint(0.420855, 22.000000))
+		bezierPath13.closePath()
+		bezierPath13.moveToPoint(NSMakePoint(0.420855, 22.000000))
+		paths.append(bezierPath13)
+		
+		// 15
+		/*
+		Bounds: {{16.493814468383789, 9.4938144683837891}, {3.0123710632324219, 3.0123710632324219}}
+		Control point bounds: {{16.493814468383789, 9.4938144683837891}, {3.0123710632324219, 3.0123710632324219}}
+		19.506186 11.000000 moveto
+		19.506186 11.000000 lineto
+		19.506186 11.831843 18.831842 12.506186 18.000000 12.506186 curveto
+		17.168158 12.506186 16.493814 11.831843 16.493814 11.000000 curveto
+		16.493814 11.000000 lineto
+		16.493814 11.000000 lineto
+		16.493814 10.168157 17.168158 9.493814 18.000000 9.493814 curveto
+		18.831842 9.493814 19.506186 10.168157 19.506186 11.000000 curveto
+		19.506186 11.000000 lineto
+		closepath
+		19.506186 11.000000 moveto
+		*/
+		var bezierPath14 = NSBezierPath()
+		bezierPath14.moveToPoint(NSMakePoint(19.506186, 11.000000))
+		bezierPath14.lineToPoint(NSMakePoint(19.506186, 11.000000))
+		bezierPath14.curveToPoint(NSMakePoint(19.506186, 11.831843), controlPoint1: NSMakePoint(18.831842, 12.506186), controlPoint2: NSMakePoint(18.000000, 12.506186))
+		bezierPath14.curveToPoint(NSMakePoint(17.168158, 12.506186), controlPoint1: NSMakePoint(16.493814, 11.831843), controlPoint2: NSMakePoint(16.493814, 11.000000))
+		bezierPath14.lineToPoint(NSMakePoint(16.493814, 11.000000))
+		bezierPath14.lineToPoint(NSMakePoint(16.493814, 11.000000))
+		bezierPath14.curveToPoint(NSMakePoint(16.493814, 10.168157), controlPoint1: NSMakePoint(17.168158, 9.493814), controlPoint2: NSMakePoint(18.000000, 9.493814))
+		bezierPath14.curveToPoint(NSMakePoint(18.831842, 9.493814), controlPoint1: NSMakePoint(19.506186, 10.1681573), controlPoint2: NSMakePoint(19.506186, 11.000000))
+		bezierPath14.lineToPoint(NSMakePoint(19.506186, 11.000000))
+		bezierPath14.closePath()
+		bezierPath14.moveToPoint(NSMakePoint(19.506186, 11.000000))
+		paths.append(bezierPath14)
+		
+		// 16
+		/*
+		Bounds: {{15.590910911560059, 19.5}, {2.9999990463256836, 3}}
+		Control point bounds: {{15.590910911560059, 19.5}, {2.9999990463256836, 3}}
+		18.590910 21.000000 moveto
+		18.590910 21.000000 lineto
+		18.590910 21.828426 17.919336 22.500000 17.090910 22.500000 curveto
+		16.262484 22.500000 15.590911 21.828426 15.590911 21.000000 curveto
+		15.590911 21.000000 lineto
+		15.590911 21.000000 lineto
+		15.590911 20.171574 16.262484 19.500000 17.090910 19.500000 curveto
+		17.919336 19.500000 18.590910 20.171574 18.590910 21.000000 curveto
+		18.590910 21.000000 lineto
+		closepath
+		18.590910 21.000000 moveto
+		*/
+		var bezierPath15 = NSBezierPath()
+		bezierPath15.moveToPoint(NSMakePoint(18.590910, 21.000000))
+		bezierPath15.lineToPoint(NSMakePoint(18.590910, 21.000000))
+		bezierPath15.curveToPoint(NSMakePoint(18.590910, 21.828426), controlPoint1: NSMakePoint(17.919336, 22.500000), controlPoint2: NSMakePoint(17.090910, 22.500000))
+		bezierPath15.curveToPoint(NSMakePoint(16.262484, 22.500000), controlPoint1: NSMakePoint(15.590911, 21.828426), controlPoint2: NSMakePoint(15.590911, 21.000000))
+		bezierPath15.lineToPoint(NSMakePoint(15.590911, 21.000000))
+		bezierPath15.lineToPoint(NSMakePoint(15.590911, 21.000000))
+		bezierPath15.curveToPoint(NSMakePoint(15.590911, 20.1715747), controlPoint1: NSMakePoint(16.262484, 19.500000), controlPoint2: NSMakePoint(17.090910, 19.500000))
+		bezierPath15.curveToPoint(NSMakePoint(17.919336, 19.500000), controlPoint1: NSMakePoint(18.590910, 20.171574), controlPoint2: NSMakePoint(18.590910, 21.000000))
+		bezierPath15.lineToPoint(NSMakePoint(18.590910, 21.000000))
+		bezierPath15.closePath()
+		bezierPath15.moveToPoint(NSMakePoint(18.590910, 21.000000))
+		paths.append(bezierPath15)
+		
+		// 17
+		/*
+		Bounds: {{12.478299140930176, 21.263595581054688}, {5.9959535598754883, 4.8282829296589576}}
+		Control point bounds: {{12.478299140930176, 21.263595581054688}, {5.9959535598754883, 5.2830562591552734}}
+		18.474253 22.083590 moveto
+		18.474253 22.083590 lineto
+		17.881054 24.806688 15.208557 26.546652 12.478299 25.987333 curveto
+		12.478300 25.987331 lineto
+		12.478301 25.987333 lineto
+		14.211855 25.127237 15.191052 23.245596 14.900759 21.332298 curveto
+		15.353578 21.263596 lineto
+		15.353578 21.263596 lineto
+		15.499158 22.223097 16.395004 22.882912 17.354506 22.737331 curveto
+		17.797445 22.670126 18.197989 22.436277 18.474253 22.083590 curveto
+		18.474253 22.083590 lineto
+		closepath
+		18.474253 22.083590 moveto
+		*/
+		var bezierPath16 = NSBezierPath()
+		bezierPath16.moveToPoint(NSMakePoint(18.474253, 22.083590))
+		bezierPath16.lineToPoint(NSMakePoint(18.474253, 22.083590))
+		bezierPath16.curveToPoint(NSMakePoint(17.881054, 24.806688), controlPoint1: NSMakePoint(15.208557, 26.546652), controlPoint2: NSMakePoint(12.478299, 25.987333))
+		bezierPath16.lineToPoint(NSMakePoint(12.478300, 25.987331))
+		bezierPath16.lineToPoint(NSMakePoint(12.478301, 25.987333))
+		bezierPath16.curveToPoint(NSMakePoint(14.211855, 25.12723), controlPoint1: NSMakePoint(15.191052, 23.245596), controlPoint2: NSMakePoint(17.354506, 22.737331))
+		bezierPath16.lineToPoint(NSMakePoint(15.353578, 21.263596))
+		bezierPath16.lineToPoint(NSMakePoint(15.353578, 21.263596))
+		bezierPath16.curveToPoint(NSMakePoint(15.499158, 22.223097), controlPoint1: NSMakePoint(16.395004, 22.882912), controlPoint2: NSMakePoint(17.354506, 22.737331))
+		bezierPath16.curveToPoint(NSMakePoint(17.797445, 22.670126), controlPoint1: NSMakePoint(18.197989, 22.436277), controlPoint2: NSMakePoint(18.474253, 22.083590))
+		bezierPath16.lineToPoint(NSMakePoint(18.474253, 22.083590))
+		bezierPath16.closePath()
+		bezierPath16.moveToPoint(NSMakePoint(18.474253, 22.083590))
+		paths.append(bezierPath16)
+		
+		return paths
 	}
 	
 	override func acceptsFirstMouse(theEvent: NSEvent) -> Bool {
 		return true
 	}
 	
-	// Read the current content of the display as an String:
-	// Reads the actual hardware registers and converts the content to a normalized
-	// unicode string (suppressing leading and trailing spaces).
-	func readDisplayAsText() -> String {
-		// access the hardware display registers A, B, C:
-		let r  = registers
-		
-		// we need up to two characters per display cell (character+punctuation):
-		var text: String = ""
-		
-		// prepare the punctuation lookup table (8 characters for 3 bit punctuation code)
-		let punct: String = " .:,;???"
-		
-		// loop through the display cells and translate their content:
-		var idx: Int			// cell index (decreasing from left to right)
-
-		for idx in reverse(0...numDisplayCells-1) {
-			// assemble the actual hardware character index from the register bits:
-			// charCode = C0 B1 B0  A3 A2 A1 A0
-			let charCode = ((r.C[idx] & 0x1) << 6) | ((r.B[idx] & 0x3) << 4) | (r.A[idx] & 0xf)
-			
-			// if valid, look up unicode for X-41 hardware character index:
-			if charCode < UInt8(CTULookupLength!) {
-				// translate:
-				let aChar: Character = CTULookup![Int(charCode)]
-				let scalars = String(aChar).unicodeScalars
-
-				// only if we already have some valid characters or if this one is valid:
-				if scalars[scalars.startIndex].value != 0x20 {
-					// not a leading space: save
-					text.append(aChar)
-				}
-			}
-			
-			let punctCode = ((r.C[idx] & 0x2) << 1) | ((r.B[idx] & 0xc) >> 2)
-			
-			// if there is any punctuation, insert the respective character from the table:
-			if punctCode != 0 {
-				text.append(punct[Int(punctCode)])
-			}
-		}
-		
-		// now return the completed string as an NSString without any trailing spaces:
-		return text
-	}
-	
-	func calculateAnnunciatorPositions(font: NSFont, inRect bounds: NSRect) -> [NSPoint] {
-		// Distribute the annunciators evenly across the width of the display based on the sizes of their strings.
-		var positions: [NSPoint] = [NSPoint](count: numAnnunciators, repeatedValue: CGPointMake(0.0, 0.0))
-		var annunciatorWidths: [CGFloat] = [CGFloat](count: numAnnunciators, repeatedValue: 0.0)
-		var spaceWidth: CGFloat = 0.0
-		var x: CGFloat = 0.0
-		var y: CGFloat = 0.0
-		var d: CGFloat = 0.0
-		var h: CGFloat = 0.0
-		var totalWidth: CGFloat = 0.0
-		for idx in 0..<numAnnunciators {
-			let nsString: NSString = annunciatorStrings[idx] as NSString
-			let width = nsString.sizeWithAttributes(nil).width
-			annunciatorWidths[idx] = width
-			totalWidth += width
-		}
-		spaceWidth = (bounds.size.width - totalWidth) / CGFloat(numAnnunciators - 1)
-		d -= font.descender
-		
-		let layoutManager = NSLayoutManager()
-		h = layoutManager.defaultLineHeightForFont(font)
-		y = bounds.size.height - annunciatorBottomMargin - (h - d) / annunciatorFontScale
-		
-		for idx in 0..<numAnnunciators {
-			positions[idx] = NSMakePoint(x, y)
-			x += annunciatorWidths[idx] + spaceWidth
-		}
-		
-		return positions
-	}
-	
-	func displayToggle() {
-		// Toggle the display between on and off.
-		on = !on
-		scheduleUpdate()
-	}
-	
-	func scheduleUpdate() {
-		updateCountdown = 2
-	}
-	
-	func displayOff() {
-		if on {
-			on = false
-			scheduleUpdate()
-		}
-	}
-	
-	func timeSlice(timer: NSTimer) {
-		if (updateCountdown > 0) {
-			if (--updateCountdown == 0) {
-				setNeedsDisplayInRect(self.bounds)
-			}
-		}
-	}
-	
-	
-	//MARK: - Peripheral Protocol Method
-	
-	func pluggedIntoBus(theBus: Bus?) {
-		self.aBus = theBus
-	}
-	
-	func readFromRegister(param: Bits4) {
-		// Implement READ f or READ DATA instruction with display as selected peripheral.
-		switch param {
-		case 0x0:	//FLLDA
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RA, andData: &cpu.reg.C)
-		case 0x1:	// FLLDB
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RB, andData: &cpu.reg.C)
-		case 0x2:	// FLLDC
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RC, andData: &cpu.reg.C)
-		case 0x3:	// FLLDAB
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RAB, andData: &cpu.reg.C)
-		case 0x4:	// FLLABC
-			fetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &cpu.reg.C)
-		case 0x5:	// READDEN
-			bitsToDigits(bits: Int(registers.E), destination: &cpu.reg.C, start: 0, count: 4)
-			return					// doesn't change display
-		case 0x6:	// FLSDC
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
-		case 0x7:	// FRSDA
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
-		case 0x8:	// FRSDB
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
-		case 0x9:	// FRSDC
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &cpu.reg.C)
-		case 0xA:	// FLSDA
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C) // Original: .RB
-		case 0xB:	// FLSDB
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
-		case 0xC:	// FRSDAB
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
-		case 0xD:	// FLSDAB
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
-		case 0xE:	// FRSABC
-			fetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
-		case 0xF:	// FLSABC
-			fetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
-		default:
-			self.aBus?.abortInstruction("Unimplemented display operation")
-		}
-		scheduleUpdate()
-	}
-	
-	func writeToRegister(param: Bits4) {
-		// Implement WRITE f instruction with display as selected peripheral.
-		switch param {
-		case 0x0:	// SRLDA
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RA, andData: &cpu.reg.C)
-		case 0x1:	// SRLDB
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RB, andData: &cpu.reg.C)
-		case 0x2:	// SRLDC
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RC, andData: &cpu.reg.C)
-		case 0x3:	// SRLDAB
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RAB, andData: &cpu.reg.C)
-		case 0x4:	// SRLABC
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RABC, andData: &cpu.reg.C)
-		case 0x5:	// SLLDAB
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
-		case 0x6:	// SLLABC
-			shift(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &cpu.reg.C)
-		case 0x7:	// SRSDA
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
-		case 0x8:	// SRSDB
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
-		case 0x9:	// SRSDC
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &cpu.reg.C)
-		case 0xA:	// SLSDA
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
-		case 0xB:	// SLSDB
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
-		case 0xC:	// SRSDAB
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
-		case 0xD:	// SLSDAB
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
-		case 0xE:	// SRSABC
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
-		case 0xF:	// SLSABC
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
-		default:
-			self.aBus?.abortInstruction("Unimplemented display operation")
-		}
-		scheduleUpdate()
-	}
-	
-	func displayWrite()
-	{
-		switch cpu.opcode.row() {
-		case 0x0:
-			// 028          SRLDA    WRA12L   SRLDA
-			registers.A[0] = cpu.reg.C[0]
-			registers.A[1] = cpu.reg.C[1]
-			registers.A[2] = cpu.reg.C[2]
-			registers.A[3] = cpu.reg.C[3]
-			registers.A[4] = cpu.reg.C[4]
-			registers.A[5] = cpu.reg.C[5]
-			registers.A[6] = cpu.reg.C[6]
-			registers.A[7] = cpu.reg.C[7]
-			registers.A[8] = cpu.reg.C[8]
-			registers.A[9] = cpu.reg.C[9]
-			registers.A[10] = cpu.reg.C[10]
-			registers.A[11] = cpu.reg.C[11]
-		case 0x1:
-			// 068          SRLDB    WRB12L   SRLDB
-			registers.B[0] = cpu.reg.C[0]
-			registers.B[1] = cpu.reg.C[1]
-			registers.B[2] = cpu.reg.C[2]
-			registers.B[3] = cpu.reg.C[3]
-			registers.B[4] = cpu.reg.C[4]
-			registers.B[5] = cpu.reg.C[5]
-			registers.B[6] = cpu.reg.C[6]
-			registers.B[7] = cpu.reg.C[7]
-			registers.B[8] = cpu.reg.C[8]
-			registers.B[9] = cpu.reg.C[9]
-			registers.B[10] = cpu.reg.C[10]
-			registers.B[11] = cpu.reg.C[11]
-		case 0x2:
-			// 0A8          SRLDC    WRC12L   SRLDC
-			registers.C[0] = cpu.reg.C[0]
-			registers.C[1] = cpu.reg.C[1]
-			registers.C[2] = cpu.reg.C[2]
-			registers.C[3] = cpu.reg.C[3]
-			registers.C[4] = cpu.reg.C[4]
-			registers.C[5] = cpu.reg.C[5]
-			registers.C[6] = cpu.reg.C[6]
-			registers.C[7] = cpu.reg.C[7]
-			registers.C[8] = cpu.reg.C[8]
-			registers.C[9] = cpu.reg.C[9]
-			registers.C[10] = cpu.reg.C[10]
-			registers.C[11] = cpu.reg.C[11]
-		case 0x3:
-			// 0E8          SRLDAB   WRAB6L   SRLDAB
-			rotateRegisterLeft(&registers.A, times: 6)
-			rotateRegisterLeft(&registers.B, times: 6)
-			registers.A[6] = cpu.reg.C[0]
-			registers.B[6] = cpu.reg.C[1]
-			registers.A[7] = cpu.reg.C[2]
-			registers.B[7] = cpu.reg.C[3]
-			registers.A[8] = cpu.reg.C[4]
-			registers.B[8] = cpu.reg.C[5]
-			registers.A[9] = cpu.reg.C[6]
-			registers.B[9] = cpu.reg.C[7]
-			registers.A[10] = cpu.reg.C[8]
-			registers.B[10] = cpu.reg.C[9]
-			registers.A[11] = cpu.reg.C[10]
-			registers.B[11] = cpu.reg.C[11]
-		case 0x4:
-			// 128          SRLABC   WRABC4L  SRLABC                       ;also HP:SRLDABC
-			rotateRegisterLeft(&registers.A, times: 4)
-			rotateRegisterLeft(&registers.B, times: 4)
-			rotateRegisterLeft(&registers.C, times: 4)
-			registers.A[8] = cpu.reg.C[0]
-			registers.B[8] = cpu.reg.C[1]
-			registers.C[8] = cpu.reg.C[2] & 0x01
-			registers.A[9] = cpu.reg.C[3]
-			registers.B[9] = cpu.reg.C[4]
-			registers.C[9] = cpu.reg.C[5] & 0x01
-			registers.A[10] = cpu.reg.C[6]
-			registers.B[10] = cpu.reg.C[7]
-			registers.C[10] = cpu.reg.C[8] & 0x01
-			registers.A[11] = cpu.reg.C[9]
-			registers.B[11] = cpu.reg.C[10]
-			registers.C[11] = cpu.reg.C[11] & 0x01
-		case 0x5:
-			// 168          SLLDAB   WRAB6R   SLLDAB
-			rotateRegisterRight(&registers.A, times: 6)
-			rotateRegisterRight(&registers.B, times: 6)
-			registers.A[5] = cpu.reg.C[0]
-			registers.B[5] = cpu.reg.C[1]
-			registers.A[4] = cpu.reg.C[2]
-			registers.B[4] = cpu.reg.C[3]
-			registers.A[3] = cpu.reg.C[4]
-			registers.B[3] = cpu.reg.C[5]
-			registers.A[2] = cpu.reg.C[6]
-			registers.B[1] = cpu.reg.C[7]
-			registers.A[1] = cpu.reg.C[8]
-			registers.B[1] = cpu.reg.C[9]
-			registers.A[0] = cpu.reg.C[10]
-			registers.B[0] = cpu.reg.C[11]
-		case 0x6:
-			// 1A8          SLLABC   WRABC4R  SLLABC                       ;also HP:SLLDABC
-			rotateRegisterRight(&registers.A, times: 4)
-			rotateRegisterRight(&registers.B, times: 4)
-			rotateRegisterRight(&registers.C, times: 4)
-			registers.A[3] = cpu.reg.C[0]
-			registers.B[3] = cpu.reg.C[1]
-			registers.C[3] = cpu.reg.C[2] & 0x01
-			registers.A[2] = cpu.reg.C[3]
-			registers.B[2] = cpu.reg.C[4]
-			registers.C[2] = cpu.reg.C[5] & 0x01
-			registers.A[1] = cpu.reg.C[6]
-			registers.B[1] = cpu.reg.C[7]
-			registers.C[1] = cpu.reg.C[8] & 0x01
-			registers.A[0] = cpu.reg.C[9]
-			registers.B[0] = cpu.reg.C[10]
-			registers.C[0] = cpu.reg.C[11] & 0x01
-		case 0x7:
-			// 1E8          SRSDA    WRA1L    SRSDA
-			rotateRegisterLeft(&registers.A, times: 1)
-			registers.A[11] = cpu.reg.C[0]
-		case 0x8:
-			// 228          SRSDB    WRB1L    SRSDB
-			rotateRegisterLeft(&registers.B, times: 1)
-			registers.B[11] = cpu.reg.C[0]
-		case 0x9:
-			// 268          SRSDC    WRC1L    SRSDC
-			rotateRegisterLeft(&registers.C, times: 1)
-			registers.C[11] = cpu.reg.C[0] & 0x01
-		case 0xa:
-			// 2A8          SLSDA    WRA1R    SLSDA
-			rotateRegisterRight(&registers.A, times: 1)
-			registers.A[0] = cpu.reg.C[0]
-		case 0xb:
-			// 2E8          SLSDB    WRB1R    SLSDB
-			rotateRegisterRight(&registers.B, times: 1)
-			registers.B[0] = cpu.reg.C[0]
-		case 0xc:
-			// 328          SRSDAB   WRAB1L   SRSDAB                        ;Zenrom manual incorrectly says this is WRC1R
-			rotateRegisterLeft(&registers.A, times: 1)
-			rotateRegisterLeft(&registers.B, times: 1)
-			registers.A[11] = cpu.reg.C[0]
-			registers.B[11] = cpu.reg.C[1]
-		case 0xd:
-			// 368          SLSDAB   WRAB1R   SLSDAB
-			rotateRegisterRight(&registers.A, times: 1)
-			rotateRegisterRight(&registers.B, times: 1)
-			registers.A[0] = cpu.reg.C[0]
-			registers.B[0] = cpu.reg.C[1]
-		case 0xe:
-			// 3A8          SRSABC   WRABC1L  SRSABC                        ;also HP:SRSDABC
-			rotateRegisterLeft(&registers.A, times: 1)
-			rotateRegisterLeft(&registers.B, times: 1)
-			rotateRegisterLeft(&registers.C, times: 1)
-			registers.A[11] = cpu.reg.C[0]
-			registers.B[11] = cpu.reg.C[1]
-			registers.C[11] = cpu.reg.C[2] & 0x01
-		case 0xf:
-			// 3E8          SLSABC   WRABC1R  SLSABC                        ;also HP:SLSDABC
-			rotateRegisterRight(&registers.A, times: 1)
-			rotateRegisterRight(&registers.B, times: 1)
-			rotateRegisterRight(&registers.C, times: 1)
-			registers.A[0] = cpu.reg.C[0]
-			registers.B[0] = cpu.reg.C[1]
-			registers.C[0] = cpu.reg.C[2] & 0x01
-		default:
-			break
-		}
-		
-		scheduleUpdate()
-	}
-	
-	func writeDataFrom(data: Digits14)
-	{
-		// Implement WRITE DATA instruction with display as selected peripheral.
-		registers.E = digitsToBits(digits: data, nbits: 12)
-		scheduleUpdate()
-	}
-	
-	
-	//MARK: -
-	func fetch(
-		inout registers: DisplayRegisters,
-		withDirection direction:DisplayShiftDirection,
-		andSize size:DisplayTransitionSize,
-		withRegister regset:DisplayRegisterSet,
-		inout andData data: Digits14
-		)
-	{
-		/*
-			Fetch digits from the specified registers, rotating them in the specified direction,
-			and assemble them into the specified destination.
-			For size == LONG, fetches a total of 12 digits into the destination;
-			for size == SHORT, fetches one digit from each specified register.
-		*/
-		var cp = 0
-		while cp < 12 {
-			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
-				fetchDigit(direction, from: &registers.A, to: &data[cp++])
-			}
-			if (regset.rawValue & DisplayRegisterSet.RB.rawValue) != 0 {
-				fetchDigit(direction, from: &registers.B, to: &data[cp++])
-			}
-			if (regset.rawValue & DisplayRegisterSet.RC.rawValue) != 0 {
-				fetchDigit(direction, from: &registers.C, to: &data[cp++])
-			}
-			if size == .Short {
-				break
-			}
-		}
-	}
-	
-	func fetchDigit(
-		direction: DisplayShiftDirection,
-		inout from register: Digits12,
-		inout to dst: Digit
-		) -> Digits12
-	{
-		/*
-			Fetch a digit from the appropriate end of the given register into the specified destination,
-			and rotate the register in the specified direction.
-		*/
-		switch direction {
-		case .Left:
-			dst = register[11]
-			rotateRegisterLeft(&register)
-		case .Right:
-			dst = register[0]
-			rotateRegisterRight(&register)
-		}
-		
-		return register
-	}
-	
-	func rotateRegisterLeft(inout register: Digits12)
-	{
-		let temp = register[11]
-		for idx in reverse(1...11) {
-			register[idx] = register[idx - 1]
-		}
-		register[0] = temp
-	}
-	
-	func rotateRegisterRight(inout register: Digits12, times: Int)
-	{
-		if times > 0 {
-			for pass in 0..<times {
-				let temp = register[11]
-				for idx in reverse(1...11) {
-					register[idx] = register[idx - 1]
-				}
-				register[0] = temp
-			}
-		}
-	}
-	
-	func rotateRegisterRight(inout register: Digits12) {
-		let temp = register[0]
-		for idx in 0...10 {
-			register[idx] = register[idx + 1]
-		}
-		register[11] = temp
-	}
-	
-	func rotateRegisterLeft(inout register: Digits12, times: Int) {
-		if times > 0 {
-			for pass in 0..<times {
-				let temp = register[0]
-				for idx in 0...10 {
-					register[idx] = register[idx + 1]
-				}
-				register[11] = temp
-			}
-		}
-	}
-	
-	func shift(
-		inout registers: DisplayRegisters,
-		withDirection direction:DisplayShiftDirection,
-		andSize size:DisplayTransitionSize,
-		withRegister regset:DisplayRegisterSet,
-		inout andData data: Digits14
-		)
-	{
-		/*
-			Distribute digits from the given source and rotate them into the specified registers.
-			For size == LONG, shifts a total of 12 digits from the source;
-			for size == SHORT, shifts one digit into each specified register.
-		*/
-		var cp = 0
-		while cp < 12 {
-			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
-				shiftDigit(direction, from: &registers.A, withFilter: data[cp++])
-			}
-			if (regset.rawValue & DisplayRegisterSet.RB.rawValue) != 0 {
-				shiftDigit(direction, from: &registers.B, withFilter: data[cp++])
-			}
-			if (regset.rawValue & DisplayRegisterSet.RC.rawValue) != 0 {
-				shiftDigit(direction, from: &registers.C, withFilter: data[cp++])
-			}
-			if size == .Short {
-				break
-			}
-		}
-	}
-	
-	func shiftDigit(direction: DisplayShiftDirection, inout from register: Digits12, withFilter src: Digit) {
-		// Rotate the given digit into the specified register in the specified direction.
-		switch direction {
-		case .Left:
-			rotateRegisterLeft(&register)
-			register[0] = src
-		case .Right:
-			rotateRegisterRight(&register)
-			register[11] = src
-		}
-	}
-	
-	func segmentsForCell(i: Int) -> DisplaySegmentMap {
-		/*
-			Determine which segments should be on for cell i based on the contents of the display registers.
-			Note that cells are numbered from left to right, which is the opposite of the digit numbering in the display registers.
-		*/
-		let j = 11 - i
-		let nineBitCode: Int = Int((Int(registers.C[j]) << 8) | (Int(registers.B[j]) << 4) | (Int(registers.A[j]))) & 0x1ff
-		let charCode: Int = ((nineBitCode & 0x100) >> 2) | (nineBitCode & 0x3f)
-		let punctCode = Int((Int(registers.C[j]) & 0x2) << 1) | (nineBitCode & 0xc0) >> 6
-
-		return displayFont[Int(charCode)] | punctSegmentTable[Int(punctCode)]
-	}
-	
-	func annunciatorOn(i: Int) -> Bool {
-		/*
-			Determine whether annunciator number i should be on based on the contents of the E register.
-			Note that i is not the same as the bit number in E, because the annunciators are numbered from left to right.
-		*/
-		let j: Bits12 = 11 - Bits12(i)
-		
-		return (registers.E & (1 << j)) != 0
-	}
-	
 	
 	//MARK: - Font support
-	
-	func loadFont(resourceName: String) -> DisplayFont {
-		var font: DisplayFont = DisplayFont(count:128, repeatedValue: 0)
-		let filename = NSBundle.mainBundle().pathForResource(resourceName, ofType: "hpfont")
-		var data = NSData(contentsOfFile: filename!, options: .DataReadingMappedIfSafe, error: nil)
-		var range = NSRange(location: 0, length: 4)
-		for idx in 0..<127 {
-			var tmp: UInt32 = 0
-			var tmp2: UInt32 = 0
-			data?.getBytes(&tmp, range: range)
-			range.location += 4
-			tmp2 = UInt32(bigEndian: tmp)
-			
-			font[idx] = tmp2
-		}
-		
-		return font
-	}
 	
 	func loadSegmentPaths(file: String) -> DisplaySegmentPaths {
 		var paths: DisplaySegmentPaths = DisplaySegmentPaths()
@@ -835,28 +685,38 @@ class Display : NSView, Peripheral {
 		return paths
 	}
 	
-	func digits12ToString(register: Digits12) -> String {
-		var result = String()
-		for idx in reverse(0...11) {
-			result += NSString(format:"%1X", register[idx])
+	func calculateAnnunciatorPositions(font: NSFont, inRect bounds: NSRect) -> [NSPoint] {
+		// Distribute the annunciators evenly across the width of the display based on the sizes of their strings.
+		var positions: [NSPoint] = [NSPoint](count: numAnnunciators, repeatedValue: NSMakePoint(0.0, 0.0))
+		var annunciatorWidths: [CGFloat] = [CGFloat](count: numAnnunciators, repeatedValue: 0.0)
+		var spaceWidth: CGFloat = 0.0
+		var x: CGFloat = 0.0
+		var y: CGFloat = 0.0
+		var d: CGFloat = 0.0
+		var h: CGFloat = 0.0
+		var totalWidth: CGFloat = 0.0
+		
+		let attrs: NSDictionary = NSDictionary(
+			object: annunciatorFont!,
+			forKey: NSFontAttributeName
+		)
+		for idx in 0..<numAnnunciators {
+			let nsString: NSString = annunciatorStrings[idx] as NSString
+			let width = nsString.sizeWithAttributes(attrs).width
+			annunciatorWidths[idx] = width
+			totalWidth += width
+		}
+		spaceWidth = (bounds.size.width - totalWidth) / CGFloat(numAnnunciators - 1)
+		d -= font.descender
+		
+		h = NSLayoutManager().defaultLineHeightForFont(font)
+		y = bounds.size.height - annunciatorBottomMargin - (h - d) / annunciatorFontScale
+		
+		for idx in 0..<numAnnunciators {
+			positions[idx] = NSMakePoint(x, y)
+			x += annunciatorWidths[idx] + spaceWidth
 		}
 		
-		return result
-	}
-	
-	//MARK: - Halfnut
-	func halfnutWrite()
-	{
-		// REG=C 5
-		if cpu.opcode.row() == 5 {
-			contrast = cpu.reg.C[0]
-		}
-	}
-	
-	func halfnutRead()
-	{
-		if cpu.opcode.row() == 5 {
-			cpu.reg.C[0] = contrast
-		}
+		return positions
 	}
 }

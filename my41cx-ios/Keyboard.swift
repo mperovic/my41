@@ -2,24 +2,24 @@
 //  Keyboard.swift
 //  my41
 //
-//  Created by Miroslav Perovic on 9/5/14.
-//  Copyright (c) 2014 iPera. All rights reserved.
+//  Created by Miroslav Perovic on 2/7/15.
+//  Copyright (c) 2015 iPera. All rights reserved.
 //
 
 import Foundation
-import Cocoa
+import UIKit
 import AVFoundation
 
-class Keyboard : NSObject {
+class iOSKeyboard : NSObject {
 	@IBOutlet weak var functionGroup: KeyGroup!
 	@IBOutlet weak var arithmeticGroup: KeyGroup!
 	@IBOutlet weak var numberGroup: KeyGroup!
-
+	
 	@IBOutlet weak var keyOn: Key!
 	@IBOutlet weak var keyUser: Key!
 	@IBOutlet weak var keyPrgm: Key!
 	@IBOutlet weak var keyAlpha: Key!
-	
+
 	override init() {
 		super.init()
 	}
@@ -29,16 +29,21 @@ class Keyboard : NSObject {
 	}
 }
 
-class KeyGroup : NSView {
-	@IBOutlet weak var keyboard: Keyboard!
+class KeyGroup: UIView {
+	@IBOutlet weak var keyboard: iOSKeyboard!
 	
 	var audioPlayer:AVAudioPlayer? = nil
-	
-	override func drawRect(dirtyRect: NSRect) {
-		NSColor.clearColor().setFill()
-		NSRectFill(dirtyRect)
+
+	override func drawRect(rect: CGRect) {
+		let context = UIGraphicsGetCurrentContext()
 		
-		super.drawRect(dirtyRect)
+		CGContextSaveGState(context)
+		CGContextSetFillColorWithColor(context, UIColor.clearColor().CGColor)
+		CGContextDrawPath(context, kCGPathFill)
+		
+		CGContextRestoreGState(context)
+		
+		super.drawRect(rect)
 	}
 	
 	func key(key: Key, pressed: Bool) {
@@ -49,15 +54,7 @@ class KeyGroup : NSView {
 			playSound()
 		}
 	}
-	
-	override var acceptsFirstResponder: Bool { return true }
-	
-	override func keyDown(theEvent: NSEvent) {
-	}
-	
-	override func keyUp(theEvent: NSEvent) {
-	}
-	
+
 	func playSound() {
 		var error: NSError?
 		let url = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("keyPressSound", ofType: "wav")!)

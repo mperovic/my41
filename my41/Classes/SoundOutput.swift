@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Carbon
 
 enum SoundCmds: Int {
 	case nullCmd                       = 0
@@ -57,7 +56,7 @@ let AMPLITUDE			= 10
 //--------------------------------------------------------------------------------
 
 // Fixed point representation of the sample rate.
-let SAMPLE_RATE_FIXED: ULONG		= ULONG(65536.0 * SAMPLE_RATE)
+let SAMPLE_RATE_FIXED: UInt64		= UInt64(65536.0 * SAMPLE_RATE)
 
 // We will wait until at least LATENCY_BUFFERS buffers of sound are filled before
 // starting to send them to the sound channel. The buffer size is
@@ -65,8 +64,8 @@ let SAMPLE_RATE_FIXED: ULONG		= ULONG(65536.0 * SAMPLE_RATE)
 let SAMPLES_PER_BUFFER: Int		= Int(Double(SOUND_LATENCY) * Double(SAMPLE_RATE) / Double(LATENCY_BUFFERS))
 
 // Sample values for high and low levels of the square wave
-let LOW_SAMPLE: UInt8				= (0x80 - AMPLITUDE)
-let HIGH_SAMPLE: UInt8				= (0x80 + AMPLITUDE)
+let LOW_SAMPLE: UInt8				= UInt8(0x80 - AMPLITUDE)
+let HIGH_SAMPLE: UInt8				= UInt8(0x80 + AMPLITUDE)
 
 var gDroppedSampleCount: Int = 0
 
@@ -94,14 +93,14 @@ class SoundOutput {
 	}
 	
 	struct SoundHeader {
-		var samplePtr: [SoundSample]? = nil				/*if NIL then samples are in sampleArea*/
-		var length: Int = 0								/*length of sound in bytes*/
-		var sampleRate: ULONG = 0						/*sample rate for this sound*/
-		var loopStart: ULONG = 0						/*start of looping portion*/
-		var loopEnd: ULONG = 0							/*end of looping portion*/
-		var encode: UInt8 = 0							/*header encoding*/
-		var baseFrequency: UInt8 = 0					/*baseFrequency value*/
-		var sampleArea: UInt8 = 0						/*space for when samples follow directly*/
+		var samplePtr: [SoundSample]?	= nil				/*if NIL then samples are in sampleArea*/
+		var length: Int					= 0					/*length of sound in bytes*/
+		var sampleRate: UInt64			= 0					/*sample rate for this sound*/
+		var loopStart: UInt64			= 0					/*start of looping portion*/
+		var loopEnd: UInt64				= 0					/*end of looping portion*/
+		var encode: UInt8				= 0					/*header encoding*/
+		var baseFrequency: UInt8		= 0					/*baseFrequency value*/
+		var sampleArea: UInt8			= 0					/*space for when samples follow directly*/
 	}
 	
 	struct SoundBuffer {

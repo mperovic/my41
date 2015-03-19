@@ -130,7 +130,6 @@ final class ViewController: NSViewController {
 	override func viewWillAppear() {
 		self.becomeFirstResponder()
 		
-		CalculatorController.sharedInstance.viewController = self
 		var aView = self.view as CalculatorView
 		aView.viewController = self
 
@@ -717,10 +716,10 @@ class KeyboardView : NSView {
 		//// Bezier Drawing
 		var bezierPath = NSBezierPath()
 		bezierPath.moveToPoint(NSMakePoint(5, 0))
-		bezierPath.lineToPoint(NSMakePoint(261, 0))
-		bezierPath.curveToPoint(NSMakePoint(261, 410), controlPoint1: NSMakePoint(266, 205), controlPoint2: NSMakePoint(261, 410))
-		bezierPath.lineToPoint(NSMakePoint(5, 410))
-		bezierPath.curveToPoint(NSMakePoint(5, 0), controlPoint1: NSMakePoint(0, 205), controlPoint2: NSMakePoint(5, 0))
+		bezierPath.lineToPoint(NSMakePoint(self.bounds.width - 5.0, 0))
+		bezierPath.curveToPoint(NSMakePoint(self.bounds.width - 5.0, self.bounds.height), controlPoint1: NSMakePoint(self.bounds.width, self.bounds.height / 2.0), controlPoint2: NSMakePoint(self.bounds.width - 5.0, self.bounds.height))
+		bezierPath.lineToPoint(NSMakePoint(5, self.bounds.height))
+		bezierPath.curveToPoint(NSMakePoint(5, 0), controlPoint1: NSMakePoint(0, self.bounds.height / 2.0), controlPoint2: NSMakePoint(5, 0))
 		color.setStroke()
 		bezierPath.lineWidth = 2
 		bezierPath.stroke()
@@ -728,43 +727,19 @@ class KeyboardView : NSView {
 }
 
 class CalculatorView: NSView {
-	@IBOutlet weak var display: Display!
+	@IBOutlet weak var lcdDisplay: Display!
 	
 	var viewController: ViewController?
 	var pressedKey: Key?
 	
 	override func awakeFromNib() {
-		var rect: NSRect = self.bounds
+		var rect = self.bounds
 		rect.origin.x = 0.0
 		rect.origin.y = 0.0
 		self.setNeedsDisplayInRect(rect)
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayOff", name: "displayOff", object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayToggle", name: "displayToggle", object: nil)
-	}
-	
-	override func drawRect(dirtyRect: NSRect) {
-		//// Color Declarations
-		let color = NSColor(calibratedRed: 0.604, green: 0.467, blue: 0.337, alpha: 1)
-		
-		//// Bezier Drawing
-		var bezierPath = NSBezierPath()
-		bezierPath.moveToPoint(NSMakePoint(30, 148))
-		bezierPath.curveToPoint(NSMakePoint(297, 148), controlPoint1: NSMakePoint(300.48, 148), controlPoint2: NSMakePoint(297, 148))
-		bezierPath.lineToPoint(NSMakePoint(297, 562))
-		bezierPath.lineToPoint(NSMakePoint(30, 562))
-		bezierPath.lineToPoint(NSMakePoint(30, 148))
-		color.setStroke()
-		bezierPath.lineWidth = 2
-		bezierPath.stroke()
-	}
-	
-	func displayOff() {
-		display.displayOff()
-	}
-	
-	func displayToggle() {
-		display.displayToggle()
 	}
 	
 	override var acceptsFirstResponder: Bool { return true }
@@ -785,6 +760,14 @@ class CalculatorView: NSView {
 			theButton.highlight(false)
 			pressedKey = nil
 		}
+	}
+	
+	func displayOff() {
+		lcdDisplay.displayOff()
+	}
+	
+	func displayToggle() {
+		lcdDisplay.displayToggle()
 	}
 	
 	func getKey(theEvent: NSEvent) -> Key? {

@@ -139,7 +139,7 @@ class SelectedPreferencesView: NSView {
 					NSParagraphStyleAttributeName: textStyle
 				]
 				
-				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
+				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as [NSObject : AnyObject])
 			}
 		} else {
 			if let actualFont = font {
@@ -149,7 +149,7 @@ class SelectedPreferencesView: NSView {
 					NSParagraphStyleAttributeName: textStyle
 				]
 				
-				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
+				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as [NSObject : AnyObject])
 			}
 		}
 	}

@@ -30,7 +30,6 @@
 // This code does not do any accuracy factor corrections
 
 import Foundation
-import Cocoa
 
 enum TimerType : Int {
 	case TimerB = 0
@@ -79,13 +78,6 @@ class Timer : Peripheral {
 
 		if SYNCHRONYZE == 1 {
 			synchronyzeWithComputer()
-
-			NSNotificationCenter.defaultCenter().addObserverForName(
-				NSApplicationWillBecomeActiveNotification,
-				object: nil,
-				queue: nil) { active in
-					self.synchronyzeWithComputer()
-			}
 		}
 	}
 	

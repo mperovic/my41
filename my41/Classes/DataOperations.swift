@@ -7,7 +7,9 @@
 //
 
 import Foundation
-import Cocoa
+
+let kCPUDebugUpdateDisplay = "com.my41cx.debuger.cpudebugupdatedisplay"
+let kMemoryDebugUpdateDisplay = "com.my41cx.debuger.memorydebugupdatedisplay"
 
 enum ArithOp {
 	case ADD

@@ -62,6 +62,13 @@ class DebugCPUViewController: NSViewController {
 		
 		cpu.debugCPUViewController = self
 		
+		NSNotificationCenter.defaultCenter().addObserver(
+			self,
+			selector: "updateDisplay",
+			name: kCPUDebugUpdateDisplay,
+			object: nil
+		)
+		
 		updateDisplay()
 	}
 	
@@ -78,9 +85,9 @@ class DebugCPUViewController: NSViewController {
 		cpuRegisterN.stringValue = cpu.digitsToString(cpu.reg.N)
 		cpuRegisterP.stringValue = cpu.bits4ToString(cpu.reg.P)
 		cpuRegisterQ.stringValue = cpu.bits4ToString(cpu.reg.Q)
-		cpuRegisterPC.stringValue = NSString(format:"%04X", cpu.reg.PC)
+		cpuRegisterPC.stringValue = NSString(format:"%04X", cpu.reg.PC) as String
 		cpuRegisterG.stringValue = cpu.digitsToString(cpu.reg.G)
-		cpuRegisterT.stringValue = NSString(format:"%02X", cpu.reg.T)
+		cpuRegisterT.stringValue = NSString(format:"%02X", cpu.reg.T) as String
 		let strXST = String(cpu.reg.XST, radix:2)
 		cpuRegisterXST.stringValue = pad(strXST, toSize: 6)
 		let strST = String(cpu.reg.ST, radix:2)
@@ -109,14 +116,14 @@ class DebugCPUViewController: NSViewController {
 		case .HEX_MODE:
 			cpuMode.stringValue = "H"
 		}
-		cpuStack1.stringValue = NSString(format:"%04X", cpu.reg.stack[0])
-		cpuStack2.stringValue = NSString(format:"%04X", cpu.reg.stack[1])
-		cpuStack3.stringValue = NSString(format:"%04X", cpu.reg.stack[2])
-		cpuStack4.stringValue = NSString(format:"%04X", cpu.reg.stack[3])
-		cpuRegisterKY.stringValue = NSString(format:"%02X", cpu.reg.KY)
-		cpuRegisterFI.stringValue = NSString(format:"%04X", cpu.reg.FI)
-		cpuSelectedRAM.stringValue = NSString(format:"%03X", cpu.reg.ramAddress)
-		cpuSelectedPeripheral.stringValue = NSString(format:"%02X", cpu.reg.peripheral)
+		cpuStack1.stringValue = NSString(format:"%04X", cpu.reg.stack[0]) as String
+		cpuStack2.stringValue = NSString(format:"%04X", cpu.reg.stack[1]) as String
+		cpuStack3.stringValue = NSString(format:"%04X", cpu.reg.stack[2]) as String
+		cpuStack4.stringValue = NSString(format:"%04X", cpu.reg.stack[3]) as String
+		cpuRegisterKY.stringValue = NSString(format:"%02X", cpu.reg.KY) as String
+		cpuRegisterFI.stringValue = NSString(format:"%04X", cpu.reg.FI) as String
+		cpuSelectedRAM.stringValue = NSString(format:"%03X", cpu.reg.ramAddress) as String
+		cpuSelectedPeripheral.stringValue = NSString(format:"%02X", cpu.reg.peripheral) as String
 	}
 	
 	func pad(string : String, toSize: Int) -> String {
@@ -132,7 +139,7 @@ class DebugCPUViewController: NSViewController {
 			displayRegisterA.stringValue = display.digits12ToString(display.registers.A)
 			displayRegisterB.stringValue = display.digits12ToString(display.registers.B)
 			displayRegisterC.stringValue = display.digits12ToString(display.registers.C)
-			displayRegisterE.stringValue = NSString(format:"%03X", display.registers.E)
+			displayRegisterE.stringValue = NSString(format:"%03X", display.registers.E) as String
 		}
 	}
 

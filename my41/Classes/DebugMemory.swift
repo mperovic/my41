@@ -35,6 +35,16 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		cpu.debugMemoryViewController = self
 	}
 	
+	override func viewDidLoad() {
+		NSNotificationCenter.defaultCenter().addObserver(
+			self,
+			selector: "displaySelectedMemoryBank",
+			name: kMemoryDebugUpdateDisplay,
+			object: nil
+		)
+
+	}
+	
 	override func viewDidAppear() {
 		let indexSet = NSIndexSet(index: 0)
 		tableView.selectRowIndexes(indexSet, byExtendingSelection: false)

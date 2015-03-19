@@ -130,9 +130,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 				modDetailsView.hardware = mod.hardwareDescription()
 				modFileHeaders?[filePath.lastPathComponent] = mod.moduleHeader
 			case .Error(let error): error
-				var alert:NSAlert = NSAlert()
-				alert.messageText = error
-				alert.runModal()
+				displayAlert(error)
 			}
 		}
 		displayHeader()
@@ -141,11 +139,11 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	// MARK: -
 	func modFilesInBundle() -> [String] {
 		let resourceURL = NSBundle.mainBundle().resourceURL
-		let modFiles = NSBundle.mainBundle().pathsForResourcesOfType("MOD", inDirectory: nil)
+		let modFiles = NSBundle.mainBundle().pathsForResourcesOfType("mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
 			let filePath = modFile as String
-			if filePath.lastPathComponent != "NUT-C.MOD" && filePath.lastPathComponent != "NUT-CV.MOD" && filePath.lastPathComponent != "NUT-CX.MOD" {
+			if filePath.lastPathComponent != "nut-c.mod" && filePath.lastPathComponent != "nut-cv.mod" && filePath.lastPathComponent != "nut-cx.mod" {
 				realModFiles.append(modFile as String)
 			}
 		}
@@ -326,7 +324,7 @@ class ExpansionView: NSView, NSDraggingDestination {
 			]
 			
 			let mod = MOD()
-			mod.readModFromFile(fPath)
+			mod.readModFromFile(fPath as String)
 			mod.moduleHeader.title.drawInRect(NSMakeRect(20.0, 40.0, 100.0, 58.0), withAttributes: attributes)
 		}
 	}
@@ -365,7 +363,7 @@ class ExpansionView: NSView, NSDraggingDestination {
 		]
 		let desiredType = paste.availableTypeFromArray(theArray)
 		if let data = paste.dataForType(desiredType!) {
-			filePath = NSString(data: data, encoding: NSUTF8StringEncoding)
+			filePath = NSString(data: data, encoding: NSUTF8StringEncoding) as String
 			preferencesModsViewController.removeModFile(filePath!)
 			preferencesModsViewController.tableView.reloadData()
 			

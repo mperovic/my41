@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Cocoa
 
 protocol Peripheral {
 	func pluggedIntoBus(bus: Bus?)
@@ -255,9 +254,7 @@ final class Bus {
 					case .Success:
 						break
 					case .Error(let error): error
-						var alert:NSAlert = NSAlert()
-						alert.messageText = error
-						alert.runModal()
+						displayAlert(error)
 					
 						return .Error(error)
 					}
@@ -290,18 +287,18 @@ final class Bus {
 					// a matching page has already been loaded
 					if modulePage.page == Position.PositionLower.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is the lower page and the upper page has already been loaded
-						page = byte(upperGroup[modulePage.pageGroup - 1] - 1)
+						page = byte(upperGroup[Int(modulePage.pageGroup - 1)] - 1)
 					} else if modulePage.page == Position.PositionLower.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is another lower page
-						page = byte(lowerGroup[modulePage.pageGroup - 1])
+						page = byte(lowerGroup[Int(modulePage.pageGroup - 1)])
 					} else if modulePage.page == Position.PositionUpper.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is the upper page and the lower page has already been loaded
-						page = byte(lowerGroup[modulePage.pageGroup - 1] + 1)
+						page = byte(lowerGroup[Int(modulePage.pageGroup - 1)] + 1)
 					} else if modulePage.page == Position.PositionUpper.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is another upper page
-						page = byte(upperGroup[modulePage.pageGroup - 1])
+						page = byte(upperGroup[Int(modulePage.pageGroup - 1)])
 					} else if modulePage.page == Position.PositionOdd.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
-						page = byte(evenGroup[modulePage.pageGroup - 1] + 1)
+						page = byte(evenGroup[Int(modulePage.pageGroup - 1)] + 1)
 					} else if modulePage.page == Position.PositionOdd.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(oddGroup[Int(modulePage.pageGroup) - 1])
 					} else if modulePage.page == Position.PositionEven.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
@@ -545,7 +542,7 @@ final class Bus {
 	}
 	
 	func readFromRegister(register reg: Bits4, ofPeripheral slot: Bits8) {
-		if let periph = peripherals[Int(slot)]? {
+		if let periph = peripherals[Int(slot)] {
 			periph.readFromRegister(reg)
 		}
 	}

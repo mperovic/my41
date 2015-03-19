@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Cocoa
 
 typealias Digit = UInt8
 typealias Digits14 = [Digit]
@@ -27,6 +26,8 @@ var TRACE = 0
 var SYNCHRONYZE = 0
 
 let emptyDigit14:[Digit] = [Digit](count: 14, repeatedValue: 0)
+
+let timeSliceInterval	= 0.01
 
 struct CPURegisters {
 	var A = emptyDigit14
@@ -121,7 +122,7 @@ struct CPURegisters {
 	{
 		var result = ""
 		for idx in reverse(0...digits.count-1) {
-			result = result + NSString(format: "%1X", digits[idx]) as String
+			result = result + (NSString(format: "%1X", digits[idx]) as String)
 		}
 		
 		return result
@@ -297,15 +298,15 @@ final class CPU {
 				soundOutput.flushAndSuspendSoundOutput()
 				self.lineNo = 0
 			}
-			debugCPUViewController?.updateDisplay()
-			debugMemoryViewController?.displaySelectedMemoryBank()
+			NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
+			NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
 		}
 	}
 	
 	func step() {
 		executeNextInstruction()
-		debugCPUViewController?.updateDisplay()
-		debugMemoryViewController?.displaySelectedMemoryBank()
+		NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
+		NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
 	}
 	
 	func reset() {
@@ -338,8 +339,8 @@ final class CPU {
 		} else {
 			reg.keyDown = 0
 		}
-		debugCPUViewController?.updateDisplay()
-		debugMemoryViewController?.displaySelectedMemoryBank()
+		NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
+		NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
 	}
 	
 	func abortInstruction(message: String) {
@@ -354,8 +355,8 @@ final class CPU {
 	func setRunning(state: Bool) {
 		if runFlag != state {
 			runFlag = state
-			debugCPUViewController?.updateDisplay()
-			debugMemoryViewController?.displaySelectedMemoryBank()
+			NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
+			NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
 		}
 		simulationTime = NSDate.timeIntervalSinceReferenceDate()
 	}
@@ -372,8 +373,8 @@ final class CPU {
 				while self.running() && cycleLimit > 2 && simulationTime < currentTime {
 					executeNextInstruction()
 				}
-				debugCPUViewController?.updateDisplay()
-				debugMemoryViewController?.displaySelectedMemoryBank()
+				NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
+				NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
 			}
 		} else {
 			simulationTime = currentTime
@@ -402,9 +403,9 @@ final class CPU {
 		--cycleLimit
 		simulationTime? += simulatedInstructionTime
 		soundOutput.soundOutputForWordTime(Int(reg.T))
-//		if TRACE != 0 {
-//			println("readRomAddress \(reg.PC)")
-//		}
+		if TRACE != 0 {
+			println("readRomAddress \(reg.PC)")
+		}
 		switch bus.readRomAddress(Int(reg.PC++)) {
 		case .Success(let result):
 			return .Success(result)
@@ -450,8 +451,8 @@ final class CPU {
 	
 	func executeNextInstruction() {
 		if TRACE != 0 {
-//			println("--------------------------------------------------------------------------------------------------")
-//			println("Step: \(++lineNo)")
+			println("--------------------------------------------------------------------------------------------------")
+			println("Step: \(++lineNo)")
 			println()
 			reg.description()
 		}
@@ -464,9 +465,9 @@ final class CPU {
 			
 			self.opcode = OpCode(opcode: result.unbox)
 			
-//			if TRACE != 0 {
-//				println("currentTyte: \(currentTyte)")
-//			}
+			if TRACE != 0 {
+				println("currentTyte: \(currentTyte)")
+			}
 			switch self.opcode.set() {
 			case 0:	executeClass0()				// miscellaneous
 			case 1:	executeClass1()				// long jumps
@@ -475,9 +476,9 @@ final class CPU {
 			default: println("PROBLEM!")		// Error
 			}
 		case .Error(let error):
-//			if TRACE != 0 {
-//				println("currentTyte: \(currentTyte)")
-//			}
+			if TRACE != 0 {
+				println("currentTyte: \(currentTyte)")
+			}
 			reg.PC = 0
 		}
 		if breakpointIsSet && reg.PC >= breakpointAddr {
@@ -493,9 +494,9 @@ final class CPU {
 	// MARK: - Class 0
 	
 	func executeClass0() {
-//		if TRACE != 0 {
-//			println("executeClass0: opcode: \(self.opcode.col()) - param: \(self.opcode.row())")
-//		}
+		if TRACE != 0 {
+			println("executeClass0: opcode: \(self.opcode.col()) - param: \(self.opcode.row())")
+		}
 		switch self.opcode.col() {
 		case 0x0: executeClass0Line0()
 		case 0x1: executeClass0Line1()
@@ -949,10 +950,7 @@ final class CPU {
 	
 	func executeClass3() {
 		if TRACE != 0 {
-//			println("executeClass3: \(self.opcode.opcode)")
-			if TRACE != 0 {
-				println(Disassembly.sharedInstance.disassemblyClass3(self.opcode))
-			}
+			println(Disassembly.sharedInstance.disassemblyClass3(self.opcode))
 		}
 		let value = (self.opcode.opcode >> 2) & 1
 		var offset = 0
@@ -982,14 +980,14 @@ final class CPU {
 		var result = String()
 		var limit = register.count - 1
 		for idx in reverse(0...limit) {
-			result += NSString(format:"%1X", register[idx])
+			result += NSString(format:"%1X", register[idx]) as String
 		}
 		
 		return result
 	}
 	
 	func bits4ToString(register: Bits4) -> String {
-		return NSString(format:"%1X", register)
+		return NSString(format:"%1X", register) as String
 	}
 	
 	

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC34A71F1A949CC900C90AB5 /* hpfont.hpfont in Resources */ = {isa = PBXBuildFile; fileRef = DC75043819B2652200180161 /* hpfont.hpfont */; };
 		DC447DE61A34AD8B008FAB28 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC447DE51A34AD8B008FAB28 /* Application.swift */; };
 		DC45285319897DA600C40B6C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285219897DA600C40B6C /* main.swift */; };
 		DC45285519897DA600C40B6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285419897DA600C40B6C /* ViewController.swift */; };
@@ -19,143 +20,6 @@
 		DC4AEB2A1A25E31A00ABF0D8 /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */; };
 		DC4E040D1A1774F1008D6DD5 /* DebugerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */; };
 		DC4E040F1A17783E008D6DD5 /* DebugCPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */; };
-		DC54542D1A234F61003DB27E /* 41Z.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A41A234F60003DB27E /* 41Z.MOD */; };
-		DC54542E1A234F61003DB27E /* 83TRINH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A51A234F60003DB27E /* 83TRINH.MOD */; };
-		DC54542F1A234F61003DB27E /* ADV-APP.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A61A234F60003DB27E /* ADV-APP.MOD */; };
-		DC5454301A234F61003DB27E /* ADVANTAGE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A71A234F60003DB27E /* ADVANTAGE.MOD */; };
-		DC5454311A234F61003DB27E /* AECROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A81A234F60003DB27E /* AECROM.MOD */; };
-		DC5454321A234F61003DB27E /* AFDC1.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453A91A234F60003DB27E /* AFDC1.MOD */; };
-		DC5454331A234F61003DB27E /* AFDC2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AA1A234F60003DB27E /* AFDC2.MOD */; };
-		DC5454341A234F61003DB27E /* ALPHA.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AB1A234F60003DB27E /* ALPHA.MOD */; };
-		DC5454351A234F61003DB27E /* APAC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AC1A234F60003DB27E /* APAC.MOD */; };
-		DC5454361A234F61003DB27E /* ASSEMBLER3.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AD1A234F60003DB27E /* ASSEMBLER3.MOD */; };
-		DC5454371A234F61003DB27E /* ASSEMBLER4.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AE1A234F60003DB27E /* ASSEMBLER4.MOD */; };
-		DC5454381A234F61003DB27E /* ASTROLOGY.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453AF1A234F60003DB27E /* ASTROLOGY.MOD */; };
-		DC5454391A234F61003DB27E /* AUTOFINANCE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B01A234F60003DB27E /* AUTOFINANCE.MOD */; };
-		DC54543A1A234F61003DB27E /* AUTOSTART.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B11A234F60003DB27E /* AUTOSTART.MOD */; };
-		DC54543B1A234F61003DB27E /* AVIATION.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B21A234F60003DB27E /* AVIATION.MOD */; };
-		DC54543C1A234F61003DB27E /* BCMW.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B31A234F60003DB27E /* BCMW.MOD */; };
-		DC54543D1A234F61003DB27E /* BEECHCRAFT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B41A234F60003DB27E /* BEECHCRAFT.MOD */; };
-		DC54543E1A234F61003DB27E /* BLDROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B51A234F60003DB27E /* BLDROM.MOD */; };
-		DC54543F1A234F61003DB27E /* BOEING-B52.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B61A234F60003DB27E /* BOEING-B52.MOD */; };
-		DC5454401A234F61003DB27E /* CARD-RDR.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B71A234F60003DB27E /* CARD-RDR.MOD */; };
-		DC5454411A234F61003DB27E /* CCD-MODIFIED.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B81A234F60003DB27E /* CCD-MODIFIED.MOD */; };
-		DC5454421A234F61003DB27E /* CCD-OSX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453B91A234F60003DB27E /* CCD-OSX.MOD */; };
-		DC5454431A234F61003DB27E /* CCD.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BA1A234F60003DB27E /* CCD.MOD */; };
-		DC5454441A234F61003DB27E /* CHEMUSER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BB1A234F60003DB27E /* CHEMUSER.MOD */; };
-		DC5454451A234F61003DB27E /* CIRCUIT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BC1A234F60003DB27E /* CIRCUIT.MOD */; };
-		DC5454461A234F61003DB27E /* CLINICAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BD1A234F60003DB27E /* CLINICAL.MOD */; };
-		DC5454471A234F61003DB27E /* CMT-200.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BE1A234F60003DB27E /* CMT-200.MOD */; };
-		DC5454481A234F61003DB27E /* CMT-300.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453BF1A234F60003DB27E /* CMT-300.MOD */; };
-		DC5454491A234F61003DB27E /* CVPAK.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C01A234F60003DB27E /* CVPAK.MOD */; };
-		DC54544A1A234F61003DB27E /* DATA-ACQ.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C11A234F60003DB27E /* DATA-ACQ.MOD */; };
-		DC54544B1A234F61003DB27E /* DAVID.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C21A234F60003DB27E /* DAVID.MOD */; };
-		DC54544C1A234F61003DB27E /* DIAGNOSTIC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C31A234F60003DB27E /* DIAGNOSTIC.MOD */; };
-		DC54544D1A234F61003DB27E /* DIAMOND.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C41A234F60003DB27E /* DIAMOND.MOD */; };
-		DC54544E1A234F61003DB27E /* DISASM4C.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C51A234F60003DB27E /* DISASM4C.MOD */; };
-		DC54544F1A234F61003DB27E /* DISASM4D.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C61A234F60003DB27E /* DISASM4D.MOD */; };
-		DC5454501A234F61003DB27E /* DYERKA.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C71A234F60003DB27E /* DYERKA.MOD */; };
-		DC5454511A234F61003DB27E /* ES-41.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C81A234F60003DB27E /* ES-41.MOD */; };
-		DC5454521A234F61003DB27E /* ES-MLDL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453C91A234F60003DB27E /* ES-MLDL.MOD */; };
-		DC5454531A234F61003DB27E /* EXT-FUNS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CA1A234F60003DB27E /* EXT-FUNS.MOD */; };
-		DC5454541A234F61003DB27E /* EXT-IL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CB1A234F60003DB27E /* EXT-IL.MOD */; };
-		DC5454551A234F61003DB27E /* EXT-IO.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CC1A234F60003DB27E /* EXT-IO.MOD */; };
-		DC5454561A234F61003DB27E /* EXT-MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CD1A234F60003DB27E /* EXT-MEM.MOD */; };
-		DC5454571A234F61003DB27E /* FINANCE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CE1A234F60003DB27E /* FINANCE.MOD */; };
-		DC5454581A234F61003DB27E /* FORTH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453CF1A234F60003DB27E /* FORTH.MOD */; };
-		DC5454591A234F61003DB27E /* GAMES.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D01A234F60003DB27E /* GAMES.MOD */; };
-		DC54545A1A234F61003DB27E /* GMAC2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D11A234F60003DB27E /* GMAC2.MOD */; };
-		DC54545B1A234F61003DB27E /* GMAC3.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D21A234F60003DB27E /* GMAC3.MOD */; };
-		DC54545C1A234F61003DB27E /* HEP-2MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D31A234F60003DB27E /* HEP-2MEM.MOD */; };
-		DC54545D1A234F61003DB27E /* HEP-MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D41A234F60003DB27E /* HEP-MEM.MOD */; };
-		DC54545E1A234F61003DB27E /* Hepax-1C.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D51A234F60003DB27E /* Hepax-1C.mod */; };
-		DC54545F1A234F61003DB27E /* HEPAX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D61A234F60003DB27E /* HEPAX.MOD */; };
-		DC5454601A234F61003DB27E /* HOME-MGT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D71A234F60003DB27E /* HOME-MGT.MOD */; };
-		DC5454611A234F61003DB27E /* HPIL-DEV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D81A234F60003DB27E /* HPIL-DEV.MOD */; };
-		DC5454621A234F61003DB27E /* HPIL-DIAG.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453D91A234F60003DB27E /* HPIL-DIAG.MOD */; };
-		DC5454631A234F61003DB27E /* HPIL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DA1A234F60003DB27E /* HPIL.MOD */; };
-		DC5454641A234F61003DB27E /* HYDRACOMP.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DB1A234F60003DB27E /* HYDRACOMP.MOD */; };
-		DC5454651A234F61003DB27E /* ICEBOX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DC1A234F60003DB27E /* ICEBOX.MOD */; };
-		DC5454661A234F61003DB27E /* ICODE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DD1A234F60003DB27E /* ICODE.MOD */; };
-		DC5454671A234F61003DB27E /* IR-PRINT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DE1A234F60003DB27E /* IR-PRINT.MOD */; };
-		DC5454681A234F61003DB27E /* LAITRAM-XQ2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453DF1A234F60003DB27E /* LAITRAM-XQ2.MOD */; };
-		DC5454691A234F61003DB27E /* LANDNAV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E01A234F60003DB27E /* LANDNAV.MOD */; };
-		DC54546A1A234F61003DB27E /* LBLAPP1A.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E11A234F60003DB27E /* LBLAPP1A.MOD */; };
-		DC54546B1A234F61003DB27E /* MACHINE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E21A234F60003DB27E /* MACHINE.MOD */; };
-		DC54546C1A234F61003DB27E /* MATH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E31A234F60003DB27E /* MATH.MOD */; };
-		DC54546D1A234F61003DB27E /* MATHSTAT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E41A234F60003DB27E /* MATHSTAT.MOD */; };
-		DC54546E1A234F61003DB27E /* MC-EPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E51A234F60003DB27E /* MC-EPROM.MOD */; };
-		DC54546F1A234F61003DB27E /* MCTEST.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E61A234F60003DB27E /* MCTEST.MOD */; };
-		DC5454701A234F61003DB27E /* MDP1.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E71A234F60003DB27E /* MDP1.MOD */; };
-		DC5454711A234F61003DB27E /* MDP2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E81A234F60003DB27E /* MDP2.MOD */; };
-		DC5454721A234F61003DB27E /* MELBOURNE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453E91A234F60003DB27E /* MELBOURNE.MOD */; };
-		DC5454731A234F61003DB27E /* MEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EA1A234F60003DB27E /* MEM.MOD */; };
-		DC5454741A234F61003DB27E /* MIL-ENG.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EB1A234F60003DB27E /* MIL-ENG.MOD */; };
-		DC5454751A234F61003DB27E /* MLDLOS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EC1A234F60003DB27E /* MLDLOS.MOD */; };
-		DC5454761A234F61003DB27E /* MLEPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453ED1A234F60003DB27E /* MLEPROM.MOD */; };
-		DC5454771A234F61003DB27E /* MLROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EE1A234F60003DB27E /* MLROM.MOD */; };
-		DC5454781A234F61003DB27E /* MMEPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453EF1A234F60003DB27E /* MMEPROM.MOD */; };
-		DC5454791A234F61003DB27E /* MUECKE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F01A234F60003DB27E /* MUECKE.MOD */; };
-		DC54547A1A234F61003DB27E /* NAVCOM2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F11A234F60003DB27E /* NAVCOM2.MOD */; };
-		DC54547B1A234F61003DB27E /* NAVIGATION.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F21A234F60003DB27E /* NAVIGATION.MOD */; };
-		DC54547C1A234F61003DB27E /* NAVPAC2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F31A234F60003DB27E /* NAVPAC2.MOD */; };
-		DC54547D1A234F61003DB27E /* NFCROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F41A234F60003DB27E /* NFCROM.MOD */; };
-		DC54547E1A234F61003DB27E /* NUT-C.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F51A234F60003DB27E /* NUT-C.MOD */; };
-		DC54547F1A234F61003DB27E /* NUT-CV-GFF.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F61A234F60003DB27E /* NUT-CV-GFF.MOD */; };
-		DC5454801A234F61003DB27E /* NUT-CV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F71A234F60003DB27E /* NUT-CV.MOD */; };
-		DC5454811A234F61003DB27E /* NUT-CX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F81A234F60003DB27E /* NUT-CX.MOD */; };
-		DC5454821A234F61003DB27E /* PANAME.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453F91A234F60003DB27E /* PANAME.MOD */; };
-		DC5454831A234F61003DB27E /* PCCOM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FA1A234F60003DB27E /* PCCOM.MOD */; };
-		DC5454841A234F61003DB27E /* PETROLEUM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FB1A234F60003DB27E /* PETROLEUM.MOD */; };
-		DC5454851A234F61003DB27E /* PLOTTER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FC1A234F60003DB27E /* PLOTTER.MOD */; };
-		DC5454861A234F61003DB27E /* PPC-MELB.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FD1A234F60003DB27E /* PPC-MELB.MOD */; };
-		DC5454871A234F61003DB27E /* PPC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FE1A234F60003DB27E /* PPC.MOD */; };
-		DC5454881A234F61003DB27E /* PRIDE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5453FF1A234F60003DB27E /* PRIDE.MOD */; };
-		DC5454891A234F61003DB27E /* PRINTER.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454001A234F60003DB27E /* PRINTER.MOD */; };
-		DC54548A1A234F61003DB27E /* PRINTERSERVICE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454011A234F60003DB27E /* PRINTERSERVICE.MOD */; };
-		DC54548B1A234F61003DB27E /* PROFISET.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454021A234F60003DB27E /* PROFISET.MOD */; };
-		DC54548C1A234F61003DB27E /* PROTOCODER2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454031A234F60003DB27E /* PROTOCODER2.MOD */; };
-		DC54548D1A234F61003DB27E /* PROTOPARIO.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454041A234F60003DB27E /* PROTOPARIO.MOD */; };
-		DC54548E1A234F61003DB27E /* PS0F.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454051A234F60003DB27E /* PS0F.MOD */; };
-		DC54548F1A234F61003DB27E /* QUADMEM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454061A234F60003DB27E /* QUADMEM.MOD */; };
-		DC5454901A234F61003DB27E /* RAM4K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454071A234F60003DB27E /* RAM4K.MOD */; };
-		DC5454911A234F61003DB27E /* RAM8K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454081A234F60003DB27E /* RAM8K.MOD */; };
-		DC5454921A234F61003DB27E /* RAM16K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454091A234F60003DB27E /* RAM16K.MOD */; };
-		DC5454931A234F61003DB27E /* RAM32K.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540A1A234F60003DB27E /* RAM32K.MOD */; };
-		DC5454941A234F61003DB27E /* REAL-ESTATE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540B1A234F61003DB27E /* REAL-ESTATE.MOD */; };
-		DC5454951A234F61003DB27E /* ROAM-0.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540C1A234F61003DB27E /* ROAM-0.MOD */; };
-		DC5454961A234F61003DB27E /* ROAM-0A.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540D1A234F61003DB27E /* ROAM-0A.MOD */; };
-		DC5454971A234F61003DB27E /* ROMSV01.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540E1A234F61003DB27E /* ROMSV01.MOD */; };
-		DC5454981A234F61003DB27E /* SANDBOX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54540F1A234F61003DB27E /* SANDBOX.MOD */; };
-		DC5454991A234F61003DB27E /* SANDMATH-III.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454101A234F61003DB27E /* SANDMATH-III.MOD */; };
-		DC54549A1A234F61003DB27E /* SANDMATH.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454111A234F61003DB27E /* SANDMATH.MOD */; };
-		DC54549B1A234F61003DB27E /* SECURITIES.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454121A234F61003DB27E /* SECURITIES.MOD */; };
-		DC54549C1A234F61003DB27E /* SENDPGM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454131A234F61003DB27E /* SENDPGM.MOD */; };
-		DC54549D1A234F61003DB27E /* SERVICE-CV.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454141A234F61003DB27E /* SERVICE-CV.MOD */; };
-		DC54549E1A234F61003DB27E /* SERVICE.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454151A234F61003DB27E /* SERVICE.MOD */; };
-		DC54549F1A234F61003DB27E /* SGS-GAS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454161A234F61003DB27E /* SGS-GAS.MOD */; };
-		DC5454A01A234F61003DB27E /* SIM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454171A234F61003DB27E /* SIM.MOD */; };
-		DC5454A11A234F61003DB27E /* SIMPLEX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454181A234F61003DB27E /* SIMPLEX.MOD */; };
-		DC5454A21A234F61003DB27E /* SKWIDBC.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454191A234F61003DB27E /* SKWIDBC.MOD */; };
-		DC5454A31A234F61003DB27E /* SPEED-MACHINE2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541A1A234F61003DB27E /* SPEED-MACHINE2.MOD */; };
-		DC5454A41A234F61003DB27E /* STANDARD.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541B1A234F61003DB27E /* STANDARD.MOD */; };
-		DC5454A51A234F61003DB27E /* STAT.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541C1A234F61003DB27E /* STAT.MOD */; };
-		DC5454A61A234F61003DB27E /* STRESS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541D1A234F61003DB27E /* STRESS.MOD */; };
-		DC5454A71A234F61003DB27E /* STRUCTURAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541E1A234F61003DB27E /* STRUCTURAL.MOD */; };
-		DC5454A81A234F61003DB27E /* SUP-R-ROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54541F1A234F61003DB27E /* SUP-R-ROM.MOD */; };
-		DC5454A91A234F61003DB27E /* SURVEY.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454201A234F61003DB27E /* SURVEY.MOD */; };
-		DC5454AA1A234F61003DB27E /* THERMAL.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454211A234F61003DB27E /* THERMAL.MOD */; };
-		DC5454AB1A234F61003DB27E /* TIME.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454221A234F61003DB27E /* TIME.MOD */; };
-		DC5454AC1A234F61003DB27E /* TOMSROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454231A234F61003DB27E /* TOMSROM.MOD */; };
-		DC5454AD1A234F61003DB27E /* TOMSROM1.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454241A234F61003DB27E /* TOMSROM1.MOD */; };
-		DC5454AE1A234F61003DB27E /* TOOLBOX.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454251A234F61003DB27E /* TOOLBOX.MOD */; };
-		DC5454AF1A234F61003DB27E /* USPS.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454261A234F61003DB27E /* USPS.MOD */; };
-		DC5454B01A234F61003DB27E /* WAND.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454271A234F61003DB27E /* WAND.MOD */; };
-		DC5454B11A234F61003DB27E /* WWRAMBOX2.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454281A234F61003DB27E /* WWRAMBOX2.MOD */; };
-		DC5454B21A234F61003DB27E /* WWRAMBOXI.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC5454291A234F61003DB27E /* WWRAMBOXI.MOD */; };
-		DC5454B31A234F61003DB27E /* WWRAMBOXII.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54542A1A234F61003DB27E /* WWRAMBOXII.MOD */; };
-		DC5454B41A234F61003DB27E /* ZENROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54542B1A234F61003DB27E /* ZENROM.MOD */; };
-		DC5454B51A234F61003DB27E /* ZEPROM.MOD in Resources */ = {isa = PBXBuildFile; fileRef = DC54542C1A234F61003DB27E /* ZEPROM.MOD */; };
 		DC56269D198B75E80040453F /* XNUT2.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC56268F198B75E80040453F /* XNUT2.ROM */; };
 		DC56269E198B75E80040453F /* XNUT1.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562690198B75E80040453F /* XNUT1.ROM */; };
 		DC56269F198B75E80040453F /* XNUT0.ROM in Resources */ = {isa = PBXBuildFile; fileRef = DC562691198B75E80040453F /* XNUT0.ROM */; };
@@ -173,13 +37,303 @@
 		DC5626B1198B89FC0040453F /* RamChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5626B0198B89FC0040453F /* RamChip.swift */; };
 		DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E4BDC19F17E7B00BF831B /* Preferences.swift */; };
 		DC6728121A2769E800B4274F /* AlphaKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6728111A2769E800B4274F /* AlphaKeyboard.swift */; };
+		DC676D661A8F6C0A00D0C296 /* CalculatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC676D651A8F6C0A00D0C296 /* CalculatorController.swift */; };
+		DC676D681A8F6D7A00D0C296 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC676D671A8F6D7A00D0C296 /* Calculator.swift */; };
+		DC676D691A8F6DED00D0C296 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC676D671A8F6D7A00D0C296 /* Calculator.swift */; };
+		DC676D6B1A8F76F800D0C296 /* DisplayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC676D6A1A8F76F800D0C296 /* DisplayExtensions.swift */; };
+		DC676D6C1A8F7C3C00D0C296 /* DisplayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC676D6A1A8F76F800D0C296 /* DisplayExtensions.swift */; };
 		DC6DB98B19BA5C1800E26ADD /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */; };
 		DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6DB98D19BB6A5200E26ADD /* Button.swift */; };
+		DC705C881A951B16009C98D3 /* hpchar.geom in Resources */ = {isa = PBXBuildFile; fileRef = DC705C871A951B16009C98D3 /* hpchar.geom */; };
+		DC705C891A952F7C009C98D3 /* display.lookup in Resources */ = {isa = PBXBuildFile; fileRef = DC46ED8C19B3A09B0091E143 /* display.lookup */; };
 		DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC74922619CF1E600012B5C0 /* Debuger.swift */; };
 		DC75043919B2652200180161 /* hpfont.hpfont in Resources */ = {isa = PBXBuildFile; fileRef = DC75043819B2652200180161 /* hpfont.hpfont */; };
 		DC799D881A155CA2002FACBE /* my41.icns in Resources */ = {isa = PBXBuildFile; fileRef = DC799D871A155CA2002FACBE /* my41.icns */; };
+		DC7B24A21A79141E0080F85A /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8863199D380C0027C925 /* Bus.swift */; };
+		DC7B24A31A79144C0080F85A /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885B199D360B0027C925 /* CPU.swift */; };
+		DC7B24A41A79144C0080F85A /* CPU_Class0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */; };
+		DC7B24A51A79144C0080F85A /* CPU_Class1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */; };
+		DC7B24A61A79144C0080F85A /* CPU_Class2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A651A46D3BC00BC2BD2 /* CPU_Class2.swift */; };
+		DC7B24A71A79144C0080F85A /* CPU_Class3.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A671A47332B00BC2BD2 /* CPU_Class3.swift */; };
 		DC7B7E0F19AF99AB00C70269 /* CalculatorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */; };
 		DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E1019AFA4EE00C70269 /* Timer.swift */; };
+		DC9CB7E11ABABAF500363462 /* 41z.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7591ABABAF400363462 /* 41z.mod */; };
+		DC9CB7E21ABABAF500363462 /* 83trinh.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75A1ABABAF400363462 /* 83trinh.mod */; };
+		DC9CB7E31ABABAF500363462 /* adv-app.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75B1ABABAF400363462 /* adv-app.mod */; };
+		DC9CB7E41ABABAF500363462 /* advantage.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75C1ABABAF400363462 /* advantage.mod */; };
+		DC9CB7E51ABABAF500363462 /* aecrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75D1ABABAF400363462 /* aecrom.mod */; };
+		DC9CB7E61ABABAF500363462 /* afdc1.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75E1ABABAF400363462 /* afdc1.mod */; };
+		DC9CB7E71ABABAF500363462 /* afdc2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75F1ABABAF400363462 /* afdc2.mod */; };
+		DC9CB7E81ABABAF500363462 /* alpha.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7601ABABAF400363462 /* alpha.mod */; };
+		DC9CB7E91ABABAF500363462 /* apac.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7611ABABAF400363462 /* apac.mod */; };
+		DC9CB7EA1ABABAF500363462 /* assembler3.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7621ABABAF400363462 /* assembler3.mod */; };
+		DC9CB7EB1ABABAF500363462 /* assembler4.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7631ABABAF400363462 /* assembler4.mod */; };
+		DC9CB7EC1ABABAF500363462 /* astrology.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7641ABABAF400363462 /* astrology.mod */; };
+		DC9CB7ED1ABABAF500363462 /* autofinance.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7651ABABAF400363462 /* autofinance.mod */; };
+		DC9CB7EE1ABABAF500363462 /* autostart.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7661ABABAF400363462 /* autostart.mod */; };
+		DC9CB7EF1ABABAF500363462 /* aviation.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7671ABABAF400363462 /* aviation.mod */; };
+		DC9CB7F01ABABAF500363462 /* bcmw.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7681ABABAF400363462 /* bcmw.mod */; };
+		DC9CB7F11ABABAF500363462 /* beechcraft.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7691ABABAF400363462 /* beechcraft.mod */; };
+		DC9CB7F21ABABAF500363462 /* bldrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76A1ABABAF400363462 /* bldrom.mod */; };
+		DC9CB7F31ABABAF500363462 /* boeing-b52.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76B1ABABAF400363462 /* boeing-b52.mod */; };
+		DC9CB7F41ABABAF500363462 /* card-rdr.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76C1ABABAF400363462 /* card-rdr.mod */; };
+		DC9CB7F51ABABAF500363462 /* ccd-modified.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76D1ABABAF400363462 /* ccd-modified.mod */; };
+		DC9CB7F61ABABAF500363462 /* ccd-osx.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76E1ABABAF400363462 /* ccd-osx.mod */; };
+		DC9CB7F71ABABAF500363462 /* ccd.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76F1ABABAF400363462 /* ccd.mod */; };
+		DC9CB7F81ABABAF500363462 /* chemuser.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7701ABABAF400363462 /* chemuser.mod */; };
+		DC9CB7F91ABABAF500363462 /* circuit.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7711ABABAF400363462 /* circuit.mod */; };
+		DC9CB7FA1ABABAF500363462 /* clinical.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7721ABABAF400363462 /* clinical.mod */; };
+		DC9CB7FB1ABABAF500363462 /* cmt-200.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7731ABABAF400363462 /* cmt-200.mod */; };
+		DC9CB7FC1ABABAF500363462 /* cmt-300.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7741ABABAF400363462 /* cmt-300.mod */; };
+		DC9CB7FD1ABABAF500363462 /* cvpak.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7751ABABAF400363462 /* cvpak.mod */; };
+		DC9CB7FE1ABABAF500363462 /* data-acq.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7761ABABAF400363462 /* data-acq.mod */; };
+		DC9CB7FF1ABABAF500363462 /* david.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7771ABABAF400363462 /* david.mod */; };
+		DC9CB8001ABABAF500363462 /* diagnostic.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7781ABABAF400363462 /* diagnostic.mod */; };
+		DC9CB8011ABABAF500363462 /* diamond.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7791ABABAF400363462 /* diamond.mod */; };
+		DC9CB8021ABABAF500363462 /* disasm4c.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77A1ABABAF400363462 /* disasm4c.mod */; };
+		DC9CB8031ABABAF500363462 /* disasm4d.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77B1ABABAF400363462 /* disasm4d.mod */; };
+		DC9CB8041ABABAF500363462 /* dyerka.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77C1ABABAF400363462 /* dyerka.mod */; };
+		DC9CB8051ABABAF500363462 /* es-41.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77D1ABABAF400363462 /* es-41.mod */; };
+		DC9CB8061ABABAF500363462 /* es-mldl.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77E1ABABAF400363462 /* es-mldl.mod */; };
+		DC9CB8071ABABAF500363462 /* ext-funs.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77F1ABABAF400363462 /* ext-funs.mod */; };
+		DC9CB8081ABABAF500363462 /* ext-il.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7801ABABAF400363462 /* ext-il.mod */; };
+		DC9CB8091ABABAF500363462 /* ext-io.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7811ABABAF400363462 /* ext-io.mod */; };
+		DC9CB80A1ABABAF500363462 /* ext-mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7821ABABAF400363462 /* ext-mem.mod */; };
+		DC9CB80B1ABABAF500363462 /* finance.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7831ABABAF400363462 /* finance.mod */; };
+		DC9CB80C1ABABAF500363462 /* forth.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7841ABABAF400363462 /* forth.mod */; };
+		DC9CB80D1ABABAF500363462 /* games.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7851ABABAF400363462 /* games.mod */; };
+		DC9CB80E1ABABAF500363462 /* gmac2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7861ABABAF400363462 /* gmac2.mod */; };
+		DC9CB80F1ABABAF500363462 /* gmac3.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7871ABABAF400363462 /* gmac3.mod */; };
+		DC9CB8101ABABAF500363462 /* hem-2mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7881ABABAF400363462 /* hem-2mem.mod */; };
+		DC9CB8111ABABAF500363462 /* hep-mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7891ABABAF400363462 /* hep-mem.mod */; };
+		DC9CB8121ABABAF500363462 /* hepax-1c.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78A1ABABAF400363462 /* hepax-1c.mod */; };
+		DC9CB8131ABABAF500363462 /* hepax.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78B1ABABAF400363462 /* hepax.mod */; };
+		DC9CB8141ABABAF500363462 /* home-mgt.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78C1ABABAF400363462 /* home-mgt.mod */; };
+		DC9CB8151ABABAF500363462 /* hpil-dev.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78D1ABABAF400363462 /* hpil-dev.mod */; };
+		DC9CB8161ABABAF500363462 /* hpil-diag.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78E1ABABAF400363462 /* hpil-diag.mod */; };
+		DC9CB8171ABABAF500363462 /* hpil.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78F1ABABAF400363462 /* hpil.mod */; };
+		DC9CB8181ABABAF500363462 /* hydracomp.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7901ABABAF400363462 /* hydracomp.mod */; };
+		DC9CB8191ABABAF500363462 /* icebox.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7911ABABAF400363462 /* icebox.mod */; };
+		DC9CB81A1ABABAF500363462 /* icode.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7921ABABAF400363462 /* icode.mod */; };
+		DC9CB81B1ABABAF500363462 /* ir-print.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7931ABABAF400363462 /* ir-print.mod */; };
+		DC9CB81C1ABABAF500363462 /* laitram-xq2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7941ABABAF400363462 /* laitram-xq2.mod */; };
+		DC9CB81D1ABABAF500363462 /* landnav.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7951ABABAF400363462 /* landnav.mod */; };
+		DC9CB81E1ABABAF500363462 /* lblapp1a.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7961ABABAF400363462 /* lblapp1a.mod */; };
+		DC9CB81F1ABABAF500363462 /* machine.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7971ABABAF400363462 /* machine.mod */; };
+		DC9CB8201ABABAF500363462 /* math.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7981ABABAF400363462 /* math.mod */; };
+		DC9CB8211ABABAF500363462 /* mathstat.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7991ABABAF400363462 /* mathstat.mod */; };
+		DC9CB8221ABABAF500363462 /* mc-eprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79A1ABABAF400363462 /* mc-eprom.mod */; };
+		DC9CB8231ABABAF500363462 /* mctest.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79B1ABABAF400363462 /* mctest.mod */; };
+		DC9CB8241ABABAF500363462 /* mdp1.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79C1ABABAF400363462 /* mdp1.mod */; };
+		DC9CB8251ABABAF500363462 /* mdp2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79D1ABABAF400363462 /* mdp2.mod */; };
+		DC9CB8261ABABAF500363462 /* melbourne.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79E1ABABAF400363462 /* melbourne.mod */; };
+		DC9CB8271ABABAF500363462 /* mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79F1ABABAF400363462 /* mem.mod */; };
+		DC9CB8281ABABAF500363462 /* mil-eng.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A01ABABAF400363462 /* mil-eng.mod */; };
+		DC9CB8291ABABAF500363462 /* mldlos.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A11ABABAF400363462 /* mldlos.mod */; };
+		DC9CB82A1ABABAF500363462 /* mleprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A21ABABAF400363462 /* mleprom.mod */; };
+		DC9CB82B1ABABAF500363462 /* mlrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A31ABABAF400363462 /* mlrom.mod */; };
+		DC9CB82C1ABABAF500363462 /* mmeprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A41ABABAF500363462 /* mmeprom.mod */; };
+		DC9CB82D1ABABAF500363462 /* muecke.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A51ABABAF500363462 /* muecke.mod */; };
+		DC9CB82E1ABABAF500363462 /* navcom2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A61ABABAF500363462 /* navcom2.mod */; };
+		DC9CB82F1ABABAF500363462 /* navigation.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A71ABABAF500363462 /* navigation.mod */; };
+		DC9CB8301ABABAF500363462 /* navpac2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A81ABABAF500363462 /* navpac2.mod */; };
+		DC9CB8311ABABAF500363462 /* nfcrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A91ABABAF500363462 /* nfcrom.mod */; };
+		DC9CB8321ABABAF500363462 /* nut-c.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AA1ABABAF500363462 /* nut-c.mod */; };
+		DC9CB8331ABABAF500363462 /* nut-cv-gff.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AB1ABABAF500363462 /* nut-cv-gff.mod */; };
+		DC9CB8341ABABAF500363462 /* nut-cv.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AC1ABABAF500363462 /* nut-cv.mod */; };
+		DC9CB8351ABABAF500363462 /* paname.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AD1ABABAF500363462 /* paname.mod */; };
+		DC9CB8361ABABAF500363462 /* pccom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AE1ABABAF500363462 /* pccom.mod */; };
+		DC9CB8371ABABAF500363462 /* petroleum.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AF1ABABAF500363462 /* petroleum.mod */; };
+		DC9CB8381ABABAF500363462 /* plotter.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B01ABABAF500363462 /* plotter.mod */; };
+		DC9CB8391ABABAF500363462 /* ppc-melb.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B11ABABAF500363462 /* ppc-melb.mod */; };
+		DC9CB83A1ABABAF500363462 /* ppc.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B21ABABAF500363462 /* ppc.mod */; };
+		DC9CB83B1ABABAF500363462 /* pride.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B31ABABAF500363462 /* pride.mod */; };
+		DC9CB83C1ABABAF500363462 /* printer.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B41ABABAF500363462 /* printer.mod */; };
+		DC9CB83D1ABABAF500363462 /* printerservice.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B51ABABAF500363462 /* printerservice.mod */; };
+		DC9CB83E1ABABAF500363462 /* profiset.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B61ABABAF500363462 /* profiset.mod */; };
+		DC9CB83F1ABABAF500363462 /* protocoder2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B71ABABAF500363462 /* protocoder2.mod */; };
+		DC9CB8401ABABAF500363462 /* protopario.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B81ABABAF500363462 /* protopario.mod */; };
+		DC9CB8411ABABAF500363462 /* ps0f.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B91ABABAF500363462 /* ps0f.mod */; };
+		DC9CB8421ABABAF500363462 /* quadmem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BA1ABABAF500363462 /* quadmem.mod */; };
+		DC9CB8431ABABAF500363462 /* ram4k.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BB1ABABAF500363462 /* ram4k.mod */; };
+		DC9CB8441ABABAF500363462 /* ram8k.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BC1ABABAF500363462 /* ram8k.mod */; };
+		DC9CB8451ABABAF500363462 /* ram16k.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BD1ABABAF500363462 /* ram16k.mod */; };
+		DC9CB8461ABABAF500363462 /* ram32k.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BE1ABABAF500363462 /* ram32k.mod */; };
+		DC9CB8471ABABAF500363462 /* real-estate.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BF1ABABAF500363462 /* real-estate.mod */; };
+		DC9CB8481ABABAF500363462 /* roam-0.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C01ABABAF500363462 /* roam-0.mod */; };
+		DC9CB8491ABABAF500363462 /* roam-0a.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C11ABABAF500363462 /* roam-0a.mod */; };
+		DC9CB84A1ABABAF500363462 /* romsv01.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C21ABABAF500363462 /* romsv01.mod */; };
+		DC9CB84B1ABABAF500363462 /* sandbox.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C31ABABAF500363462 /* sandbox.mod */; };
+		DC9CB84C1ABABAF500363462 /* sandmath-III.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C41ABABAF500363462 /* sandmath-III.mod */; };
+		DC9CB84D1ABABAF500363462 /* sandmath.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C51ABABAF500363462 /* sandmath.mod */; };
+		DC9CB84E1ABABAF500363462 /* securities.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C61ABABAF500363462 /* securities.mod */; };
+		DC9CB84F1ABABAF500363462 /* sendpgm.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C71ABABAF500363462 /* sendpgm.mod */; };
+		DC9CB8501ABABAF500363462 /* service-cv.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C81ABABAF500363462 /* service-cv.mod */; };
+		DC9CB8511ABABAF500363462 /* service.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C91ABABAF500363462 /* service.mod */; };
+		DC9CB8521ABABAF500363462 /* sgs-gas.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CA1ABABAF500363462 /* sgs-gas.mod */; };
+		DC9CB8531ABABAF500363462 /* sim.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CB1ABABAF500363462 /* sim.mod */; };
+		DC9CB8541ABABAF500363462 /* simplex.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CC1ABABAF500363462 /* simplex.mod */; };
+		DC9CB8551ABABAF500363462 /* skwidbc.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CD1ABABAF500363462 /* skwidbc.mod */; };
+		DC9CB8561ABABAF500363462 /* speed-machine2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CE1ABABAF500363462 /* speed-machine2.mod */; };
+		DC9CB8571ABABAF500363462 /* standard.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CF1ABABAF500363462 /* standard.mod */; };
+		DC9CB8581ABABAF500363462 /* stat.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D01ABABAF500363462 /* stat.mod */; };
+		DC9CB8591ABABAF500363462 /* stress.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D11ABABAF500363462 /* stress.mod */; };
+		DC9CB85A1ABABAF500363462 /* structural.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D21ABABAF500363462 /* structural.mod */; };
+		DC9CB85B1ABABAF500363462 /* sup-r-rom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D31ABABAF500363462 /* sup-r-rom.mod */; };
+		DC9CB85C1ABABAF500363462 /* survey.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D41ABABAF500363462 /* survey.mod */; };
+		DC9CB85D1ABABAF500363462 /* thermal.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D51ABABAF500363462 /* thermal.mod */; };
+		DC9CB85E1ABABAF500363462 /* time.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D61ABABAF500363462 /* time.mod */; };
+		DC9CB85F1ABABAF500363462 /* tomsrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D71ABABAF500363462 /* tomsrom.mod */; };
+		DC9CB8601ABABAF500363462 /* tomsrom1.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D81ABABAF500363462 /* tomsrom1.mod */; };
+		DC9CB8611ABABAF500363462 /* toolbox.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D91ABABAF500363462 /* toolbox.mod */; };
+		DC9CB8621ABABAF500363462 /* usps.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DA1ABABAF500363462 /* usps.mod */; };
+		DC9CB8631ABABAF500363462 /* wand.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DB1ABABAF500363462 /* wand.mod */; };
+		DC9CB8641ABABAF500363462 /* wwrambox2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DC1ABABAF500363462 /* wwrambox2.mod */; };
+		DC9CB8651ABABAF500363462 /* wwramboxi.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DD1ABABAF500363462 /* wwramboxi.mod */; };
+		DC9CB8661ABABAF500363462 /* wwramboxii.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DE1ABABAF500363462 /* wwramboxii.mod */; };
+		DC9CB8671ABABAF500363462 /* zenrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DF1ABABAF500363462 /* zenrom.mod */; };
+		DC9CB8681ABABAF500363462 /* zeprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7E01ABABAF500363462 /* zeprom.mod */; };
+		DC9CB8691ABABB0F00363462 /* 41z.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7591ABABAF400363462 /* 41z.mod */; };
+		DC9CB86A1ABABB0F00363462 /* 83trinh.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75A1ABABAF400363462 /* 83trinh.mod */; };
+		DC9CB86B1ABABB0F00363462 /* adv-app.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75B1ABABAF400363462 /* adv-app.mod */; };
+		DC9CB86C1ABABB0F00363462 /* advantage.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75C1ABABAF400363462 /* advantage.mod */; };
+		DC9CB86D1ABABB0F00363462 /* aecrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75D1ABABAF400363462 /* aecrom.mod */; };
+		DC9CB86E1ABABB0F00363462 /* afdc1.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75E1ABABAF400363462 /* afdc1.mod */; };
+		DC9CB86F1ABABB0F00363462 /* afdc2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75F1ABABAF400363462 /* afdc2.mod */; };
+		DC9CB8701ABABB0F00363462 /* alpha.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7601ABABAF400363462 /* alpha.mod */; };
+		DC9CB8711ABABB0F00363462 /* apac.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7611ABABAF400363462 /* apac.mod */; };
+		DC9CB8721ABABB0F00363462 /* assembler3.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7621ABABAF400363462 /* assembler3.mod */; };
+		DC9CB8731ABABB0F00363462 /* assembler4.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7631ABABAF400363462 /* assembler4.mod */; };
+		DC9CB8741ABABB0F00363462 /* astrology.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7641ABABAF400363462 /* astrology.mod */; };
+		DC9CB8751ABABB0F00363462 /* autofinance.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7651ABABAF400363462 /* autofinance.mod */; };
+		DC9CB8761ABABB0F00363462 /* autostart.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7661ABABAF400363462 /* autostart.mod */; };
+		DC9CB8771ABABB0F00363462 /* aviation.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7671ABABAF400363462 /* aviation.mod */; };
+		DC9CB8781ABABB0F00363462 /* bcmw.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7681ABABAF400363462 /* bcmw.mod */; };
+		DC9CB8791ABABB0F00363462 /* beechcraft.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7691ABABAF400363462 /* beechcraft.mod */; };
+		DC9CB87A1ABABB0F00363462 /* bldrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76A1ABABAF400363462 /* bldrom.mod */; };
+		DC9CB87B1ABABB0F00363462 /* boeing-b52.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76B1ABABAF400363462 /* boeing-b52.mod */; };
+		DC9CB87C1ABABB0F00363462 /* card-rdr.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76C1ABABAF400363462 /* card-rdr.mod */; };
+		DC9CB87D1ABABB0F00363462 /* ccd-modified.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76D1ABABAF400363462 /* ccd-modified.mod */; };
+		DC9CB87E1ABABB0F00363462 /* ccd-osx.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76E1ABABAF400363462 /* ccd-osx.mod */; };
+		DC9CB87F1ABABB0F00363462 /* ccd.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB76F1ABABAF400363462 /* ccd.mod */; };
+		DC9CB8801ABABB0F00363462 /* chemuser.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7701ABABAF400363462 /* chemuser.mod */; };
+		DC9CB8811ABABB0F00363462 /* circuit.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7711ABABAF400363462 /* circuit.mod */; };
+		DC9CB8821ABABB0F00363462 /* clinical.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7721ABABAF400363462 /* clinical.mod */; };
+		DC9CB8831ABABB0F00363462 /* cmt-200.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7731ABABAF400363462 /* cmt-200.mod */; };
+		DC9CB8841ABABB0F00363462 /* cmt-300.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7741ABABAF400363462 /* cmt-300.mod */; };
+		DC9CB8851ABABB0F00363462 /* cvpak.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7751ABABAF400363462 /* cvpak.mod */; };
+		DC9CB8861ABABB0F00363462 /* data-acq.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7761ABABAF400363462 /* data-acq.mod */; };
+		DC9CB8871ABABB0F00363462 /* david.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7771ABABAF400363462 /* david.mod */; };
+		DC9CB8881ABABB0F00363462 /* diagnostic.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7781ABABAF400363462 /* diagnostic.mod */; };
+		DC9CB8891ABABB0F00363462 /* diamond.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7791ABABAF400363462 /* diamond.mod */; };
+		DC9CB88A1ABABB0F00363462 /* disasm4c.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77A1ABABAF400363462 /* disasm4c.mod */; };
+		DC9CB88B1ABABB0F00363462 /* disasm4d.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77B1ABABAF400363462 /* disasm4d.mod */; };
+		DC9CB88C1ABABB0F00363462 /* dyerka.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77C1ABABAF400363462 /* dyerka.mod */; };
+		DC9CB88D1ABABB0F00363462 /* es-41.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77D1ABABAF400363462 /* es-41.mod */; };
+		DC9CB88E1ABABB0F00363462 /* es-mldl.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77E1ABABAF400363462 /* es-mldl.mod */; };
+		DC9CB88F1ABABB0F00363462 /* ext-funs.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB77F1ABABAF400363462 /* ext-funs.mod */; };
+		DC9CB8901ABABB0F00363462 /* ext-il.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7801ABABAF400363462 /* ext-il.mod */; };
+		DC9CB8911ABABB0F00363462 /* ext-io.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7811ABABAF400363462 /* ext-io.mod */; };
+		DC9CB8921ABABB0F00363462 /* ext-mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7821ABABAF400363462 /* ext-mem.mod */; };
+		DC9CB8931ABABB0F00363462 /* finance.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7831ABABAF400363462 /* finance.mod */; };
+		DC9CB8941ABABB0F00363462 /* forth.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7841ABABAF400363462 /* forth.mod */; };
+		DC9CB8951ABABB0F00363462 /* games.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7851ABABAF400363462 /* games.mod */; };
+		DC9CB8961ABABB0F00363462 /* gmac2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7861ABABAF400363462 /* gmac2.mod */; };
+		DC9CB8971ABABB0F00363462 /* gmac3.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7871ABABAF400363462 /* gmac3.mod */; };
+		DC9CB8981ABABB0F00363462 /* hem-2mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7881ABABAF400363462 /* hem-2mem.mod */; };
+		DC9CB8991ABABB0F00363462 /* hep-mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7891ABABAF400363462 /* hep-mem.mod */; };
+		DC9CB89A1ABABB0F00363462 /* hepax-1c.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78A1ABABAF400363462 /* hepax-1c.mod */; };
+		DC9CB89B1ABABB0F00363462 /* hepax.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78B1ABABAF400363462 /* hepax.mod */; };
+		DC9CB89C1ABABB0F00363462 /* home-mgt.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78C1ABABAF400363462 /* home-mgt.mod */; };
+		DC9CB89D1ABABB0F00363462 /* hpil-dev.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78D1ABABAF400363462 /* hpil-dev.mod */; };
+		DC9CB89E1ABABB0F00363462 /* hpil-diag.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78E1ABABAF400363462 /* hpil-diag.mod */; };
+		DC9CB89F1ABABB0F00363462 /* hpil.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78F1ABABAF400363462 /* hpil.mod */; };
+		DC9CB8A01ABABB0F00363462 /* hydracomp.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7901ABABAF400363462 /* hydracomp.mod */; };
+		DC9CB8A11ABABB0F00363462 /* icebox.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7911ABABAF400363462 /* icebox.mod */; };
+		DC9CB8A21ABABB0F00363462 /* icode.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7921ABABAF400363462 /* icode.mod */; };
+		DC9CB8A31ABABB0F00363462 /* ir-print.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7931ABABAF400363462 /* ir-print.mod */; };
+		DC9CB8A41ABABB0F00363462 /* laitram-xq2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7941ABABAF400363462 /* laitram-xq2.mod */; };
+		DC9CB8A51ABABB0F00363462 /* landnav.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7951ABABAF400363462 /* landnav.mod */; };
+		DC9CB8A61ABABB0F00363462 /* lblapp1a.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7961ABABAF400363462 /* lblapp1a.mod */; };
+		DC9CB8A71ABABB0F00363462 /* machine.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7971ABABAF400363462 /* machine.mod */; };
+		DC9CB8A81ABABB0F00363462 /* math.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7981ABABAF400363462 /* math.mod */; };
+		DC9CB8A91ABABB0F00363462 /* mathstat.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7991ABABAF400363462 /* mathstat.mod */; };
+		DC9CB8AA1ABABB0F00363462 /* mc-eprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79A1ABABAF400363462 /* mc-eprom.mod */; };
+		DC9CB8AB1ABABB0F00363462 /* mctest.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79B1ABABAF400363462 /* mctest.mod */; };
+		DC9CB8AC1ABABB0F00363462 /* mdp1.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79C1ABABAF400363462 /* mdp1.mod */; };
+		DC9CB8AD1ABABB0F00363462 /* mdp2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79D1ABABAF400363462 /* mdp2.mod */; };
+		DC9CB8AE1ABABB0F00363462 /* melbourne.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79E1ABABAF400363462 /* melbourne.mod */; };
+		DC9CB8AF1ABABB0F00363462 /* mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB79F1ABABAF400363462 /* mem.mod */; };
+		DC9CB8B01ABABB0F00363462 /* mil-eng.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A01ABABAF400363462 /* mil-eng.mod */; };
+		DC9CB8B11ABABB0F00363462 /* mldlos.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A11ABABAF400363462 /* mldlos.mod */; };
+		DC9CB8B21ABABB0F00363462 /* mleprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A21ABABAF400363462 /* mleprom.mod */; };
+		DC9CB8B31ABABB0F00363462 /* mlrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A31ABABAF400363462 /* mlrom.mod */; };
+		DC9CB8B41ABABB0F00363462 /* mmeprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A41ABABAF500363462 /* mmeprom.mod */; };
+		DC9CB8B51ABABB0F00363462 /* muecke.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A51ABABAF500363462 /* muecke.mod */; };
+		DC9CB8B61ABABB0F00363462 /* navcom2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A61ABABAF500363462 /* navcom2.mod */; };
+		DC9CB8B71ABABB0F00363462 /* navigation.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A71ABABAF500363462 /* navigation.mod */; };
+		DC9CB8B81ABABB0F00363462 /* navpac2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A81ABABAF500363462 /* navpac2.mod */; };
+		DC9CB8B91ABABB0F00363462 /* nfcrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7A91ABABAF500363462 /* nfcrom.mod */; };
+		DC9CB8BA1ABABB0F00363462 /* nut-c.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AA1ABABAF500363462 /* nut-c.mod */; };
+		DC9CB8BB1ABABB0F00363462 /* nut-cv-gff.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AB1ABABAF500363462 /* nut-cv-gff.mod */; };
+		DC9CB8BC1ABABB0F00363462 /* nut-cv.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AC1ABABAF500363462 /* nut-cv.mod */; };
+		DC9CB8BD1ABABB0F00363462 /* paname.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AD1ABABAF500363462 /* paname.mod */; };
+		DC9CB8BE1ABABB0F00363462 /* pccom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AE1ABABAF500363462 /* pccom.mod */; };
+		DC9CB8BF1ABABB0F00363462 /* petroleum.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7AF1ABABAF500363462 /* petroleum.mod */; };
+		DC9CB8C01ABABB0F00363462 /* plotter.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B01ABABAF500363462 /* plotter.mod */; };
+		DC9CB8C11ABABB0F00363462 /* ppc-melb.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B11ABABAF500363462 /* ppc-melb.mod */; };
+		DC9CB8C21ABABB0F00363462 /* ppc.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B21ABABAF500363462 /* ppc.mod */; };
+		DC9CB8C31ABABB0F00363462 /* pride.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B31ABABAF500363462 /* pride.mod */; };
+		DC9CB8C41ABABB0F00363462 /* printer.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B41ABABAF500363462 /* printer.mod */; };
+		DC9CB8C51ABABB0F00363462 /* printerservice.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B51ABABAF500363462 /* printerservice.mod */; };
+		DC9CB8C61ABABB0F00363462 /* profiset.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B61ABABAF500363462 /* profiset.mod */; };
+		DC9CB8C71ABABB1000363462 /* protocoder2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B71ABABAF500363462 /* protocoder2.mod */; };
+		DC9CB8C81ABABB1000363462 /* protopario.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B81ABABAF500363462 /* protopario.mod */; };
+		DC9CB8C91ABABB1000363462 /* ps0f.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7B91ABABAF500363462 /* ps0f.mod */; };
+		DC9CB8CA1ABABB1000363462 /* quadmem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BA1ABABAF500363462 /* quadmem.mod */; };
+		DC9CB8CB1ABABB1000363462 /* ram4k.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BB1ABABAF500363462 /* ram4k.mod */; };
+		DC9CB8CC1ABABB1000363462 /* ram8k.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BC1ABABAF500363462 /* ram8k.mod */; };
+		DC9CB8CD1ABABB1000363462 /* ram16k.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BD1ABABAF500363462 /* ram16k.mod */; };
+		DC9CB8CE1ABABB1000363462 /* ram32k.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BE1ABABAF500363462 /* ram32k.mod */; };
+		DC9CB8CF1ABABB1000363462 /* real-estate.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7BF1ABABAF500363462 /* real-estate.mod */; };
+		DC9CB8D01ABABB1000363462 /* roam-0.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C01ABABAF500363462 /* roam-0.mod */; };
+		DC9CB8D11ABABB1000363462 /* roam-0a.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C11ABABAF500363462 /* roam-0a.mod */; };
+		DC9CB8D21ABABB1000363462 /* romsv01.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C21ABABAF500363462 /* romsv01.mod */; };
+		DC9CB8D31ABABB1000363462 /* sandbox.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C31ABABAF500363462 /* sandbox.mod */; };
+		DC9CB8D41ABABB1000363462 /* sandmath-III.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C41ABABAF500363462 /* sandmath-III.mod */; };
+		DC9CB8D51ABABB1000363462 /* sandmath.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C51ABABAF500363462 /* sandmath.mod */; };
+		DC9CB8D61ABABB1000363462 /* securities.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C61ABABAF500363462 /* securities.mod */; };
+		DC9CB8D71ABABB1000363462 /* sendpgm.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C71ABABAF500363462 /* sendpgm.mod */; };
+		DC9CB8D81ABABB1000363462 /* service-cv.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C81ABABAF500363462 /* service-cv.mod */; };
+		DC9CB8D91ABABB1000363462 /* service.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7C91ABABAF500363462 /* service.mod */; };
+		DC9CB8DA1ABABB1000363462 /* sgs-gas.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CA1ABABAF500363462 /* sgs-gas.mod */; };
+		DC9CB8DB1ABABB1000363462 /* sim.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CB1ABABAF500363462 /* sim.mod */; };
+		DC9CB8DC1ABABB1000363462 /* simplex.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CC1ABABAF500363462 /* simplex.mod */; };
+		DC9CB8DD1ABABB1000363462 /* skwidbc.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CD1ABABAF500363462 /* skwidbc.mod */; };
+		DC9CB8DE1ABABB1000363462 /* speed-machine2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CE1ABABAF500363462 /* speed-machine2.mod */; };
+		DC9CB8DF1ABABB1000363462 /* standard.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7CF1ABABAF500363462 /* standard.mod */; };
+		DC9CB8E01ABABB1000363462 /* stat.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D01ABABAF500363462 /* stat.mod */; };
+		DC9CB8E11ABABB1000363462 /* stress.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D11ABABAF500363462 /* stress.mod */; };
+		DC9CB8E21ABABB1000363462 /* structural.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D21ABABAF500363462 /* structural.mod */; };
+		DC9CB8E31ABABB1000363462 /* sup-r-rom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D31ABABAF500363462 /* sup-r-rom.mod */; };
+		DC9CB8E41ABABB1000363462 /* survey.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D41ABABAF500363462 /* survey.mod */; };
+		DC9CB8E51ABABB1000363462 /* thermal.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D51ABABAF500363462 /* thermal.mod */; };
+		DC9CB8E61ABABB1000363462 /* time.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D61ABABAF500363462 /* time.mod */; };
+		DC9CB8E71ABABB1000363462 /* tomsrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D71ABABAF500363462 /* tomsrom.mod */; };
+		DC9CB8E81ABABB1000363462 /* tomsrom1.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D81ABABAF500363462 /* tomsrom1.mod */; };
+		DC9CB8E91ABABB1000363462 /* toolbox.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D91ABABAF500363462 /* toolbox.mod */; };
+		DC9CB8EA1ABABB1000363462 /* usps.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DA1ABABAF500363462 /* usps.mod */; };
+		DC9CB8EB1ABABB1000363462 /* wand.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DB1ABABAF500363462 /* wand.mod */; };
+		DC9CB8EC1ABABB1000363462 /* wwrambox2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DC1ABABAF500363462 /* wwrambox2.mod */; };
+		DC9CB8ED1ABABB1000363462 /* wwramboxi.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DD1ABABAF500363462 /* wwramboxi.mod */; };
+		DC9CB8EE1ABABB1000363462 /* wwramboxii.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DE1ABABAF500363462 /* wwramboxii.mod */; };
+		DC9CB8EF1ABABB1000363462 /* zenrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DF1ABABAF500363462 /* zenrom.mod */; };
+		DC9CB8F01ABABB1000363462 /* zeprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7E01ABABAF500363462 /* zeprom.mod */; };
+		DC9CB8F21ABABC9C00363462 /* nut-cx.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB8F11ABABC9C00363462 /* nut-cx.mod */; };
+		DC9CB8F31ABABCC000363462 /* nut-cx.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB8F11ABABC9C00363462 /* nut-cx.mod */; };
+		DC9CB8F51ABAC5C800363462 /* keyPressSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB8F41ABAC5C800363462 /* keyPressSound.wav */; };
+		DC9CB8F71ABAC70900363462 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9CB8F61ABAC70900363462 /* AVFoundation.framework */; };
+		DC9CB8F81ABAC87900363462 /* keyPressSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB8F41ABAC5C800363462 /* keyPressSound.wav */; };
 		DCA23A621A45EE2000BC2BD2 /* CPU_Class0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */; };
 		DCA23A641A46373300BC2BD2 /* CPU_Class1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */; };
 		DCA23A661A46D3BC00BC2BD2 /* CPU_Class2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A651A46D3BC00BC2BD2 /* CPU_Class2.swift */; };
@@ -190,7 +344,27 @@
 		DCAD8862199D37E70027C925 /* RomChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8861199D37E70027C925 /* RomChip.swift */; };
 		DCAD8864199D380C0027C925 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8863199D380C0027C925 /* Bus.swift */; };
 		DCAD8866199D38540027C925 /* SoundOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8865199D38540027C925 /* SoundOutput.swift */; };
+		DCD09B071A86260000F8D785 /* Disassembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */; };
+		DCD09B081A86261600F8D785 /* SoundOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8865199D38540027C925 /* SoundOutput.swift */; };
+		DCD09B091A86281900F8D785 /* MOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885F199D37CB0027C925 /* MOD.swift */; };
+		DCD09B0B1A8628A700F8D785 /* CocoaSpecific.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD09B0A1A8628A700F8D785 /* CocoaSpecific.swift */; };
+		DCD09B0D1A8628E000F8D785 /* CocoaTouchSpecific.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD09B0C1A8628E000F8D785 /* CocoaTouchSpecific.swift */; };
+		DCD09B0E1A862A5600F8D785 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E1019AFA4EE00C70269 /* Timer.swift */; };
+		DCD09B0F1A862A9100F8D785 /* DataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885D199D36150027C925 /* DataOperations.swift */; };
+		DCD09B101A862ABE00F8D785 /* RomChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8861199D37E70027C925 /* RomChip.swift */; };
+		DCD09B131A86319E00F8D785 /* DebugCPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD09B121A86319E00F8D785 /* DebugCPU.swift */; };
+		DCD09B151A86320000F8D785 /* DebugMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD09B141A86320000F8D785 /* DebugMemory.swift */; };
+		DCD09B231A8660E300F8D785 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD09B211A8660E200F8D785 /* Keyboard.swift */; };
+		DCD09B261A8663D500F8D785 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD09B241A8663D500F8D785 /* Key.swift */; };
+		DCD147F91A9381FA00AE256B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF52A20199C971A006BF825 /* Extensions.swift */; };
 		DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD48908198AF42B00F3B898 /* CalculatorController.swift */; };
+		DCE75C061A61B4FE002B2D7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE75C051A61B4FE002B2D7C /* AppDelegate.swift */; };
+		DCE75C081A61B4FE002B2D7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE75C071A61B4FE002B2D7C /* ViewController.swift */; };
+		DCE75C0B1A61B4FE002B2D7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE75C091A61B4FE002B2D7C /* Main.storyboard */; };
+		DCE75C0D1A61B4FE002B2D7C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE75C0C1A61B4FE002B2D7C /* Images.xcassets */; };
+		DCE75C101A61B4FE002B2D7C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE75C0E1A61B4FE002B2D7C /* LaunchScreen.xib */; };
+		DCE75C1C1A61B4FE002B2D7C /* my41cx_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE75C1B1A61B4FE002B2D7C /* my41cx_iosTests.swift */; };
+		DCE75C271A61BCBD002B2D7C /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE75C261A61BCBD002B2D7C /* Display.swift */; };
 		DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */; };
 		DCEEC9681A18A270000ECA76 /* PreferencesMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEC9671A18A270000ECA76 /* PreferencesMenu.swift */; };
 		DCEEC96A1A18BE39000ECA76 /* PreferencesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEC9691A18BE39000ECA76 /* PreferencesCalculator.swift */; };
@@ -206,6 +380,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = DC45284C19897DA500C40B6C;
 			remoteInfo = my41;
+		};
+		DCE75C161A61B4FE002B2D7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC45284519897DA500C40B6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCE75C001A61B4FE002B2D7C;
+			remoteInfo = "my41cx-ios";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -225,145 +406,8 @@
 		DC46ED8C19B3A09B0091E143 /* display.lookup */ = {isa = PBXFileReference; lastKnownFileType = file; path = display.lookup; sourceTree = "<group>"; };
 		DC46ED8D19B3A09B0091E143 /* hpchar.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = hpchar.geom; sourceTree = "<group>"; };
 		DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyboardShortcuts.swift; path = Classes/KeyboardShortcuts.swift; sourceTree = "<group>"; };
-		DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugerMenu.swift; path = Classes/DebugerMenu.swift; sourceTree = "<group>"; };
-		DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugCPU.swift; path = Classes/DebugCPU.swift; sourceTree = "<group>"; };
-		DC5453A41A234F60003DB27E /* 41Z.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = 41Z.MOD; path = MOD/41Z.MOD; sourceTree = "<group>"; };
-		DC5453A51A234F60003DB27E /* 83TRINH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = 83TRINH.MOD; path = MOD/83TRINH.MOD; sourceTree = "<group>"; };
-		DC5453A61A234F60003DB27E /* ADV-APP.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ADV-APP.MOD"; path = "MOD/ADV-APP.MOD"; sourceTree = "<group>"; };
-		DC5453A71A234F60003DB27E /* ADVANTAGE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADVANTAGE.MOD; path = MOD/ADVANTAGE.MOD; sourceTree = "<group>"; };
-		DC5453A81A234F60003DB27E /* AECROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AECROM.MOD; path = MOD/AECROM.MOD; sourceTree = "<group>"; };
-		DC5453A91A234F60003DB27E /* AFDC1.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AFDC1.MOD; path = MOD/AFDC1.MOD; sourceTree = "<group>"; };
-		DC5453AA1A234F60003DB27E /* AFDC2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AFDC2.MOD; path = MOD/AFDC2.MOD; sourceTree = "<group>"; };
-		DC5453AB1A234F60003DB27E /* ALPHA.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ALPHA.MOD; path = MOD/ALPHA.MOD; sourceTree = "<group>"; };
-		DC5453AC1A234F60003DB27E /* APAC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = APAC.MOD; path = MOD/APAC.MOD; sourceTree = "<group>"; };
-		DC5453AD1A234F60003DB27E /* ASSEMBLER3.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ASSEMBLER3.MOD; path = MOD/ASSEMBLER3.MOD; sourceTree = "<group>"; };
-		DC5453AE1A234F60003DB27E /* ASSEMBLER4.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ASSEMBLER4.MOD; path = MOD/ASSEMBLER4.MOD; sourceTree = "<group>"; };
-		DC5453AF1A234F60003DB27E /* ASTROLOGY.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ASTROLOGY.MOD; path = MOD/ASTROLOGY.MOD; sourceTree = "<group>"; };
-		DC5453B01A234F60003DB27E /* AUTOFINANCE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AUTOFINANCE.MOD; path = MOD/AUTOFINANCE.MOD; sourceTree = "<group>"; };
-		DC5453B11A234F60003DB27E /* AUTOSTART.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AUTOSTART.MOD; path = MOD/AUTOSTART.MOD; sourceTree = "<group>"; };
-		DC5453B21A234F60003DB27E /* AVIATION.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = AVIATION.MOD; path = MOD/AVIATION.MOD; sourceTree = "<group>"; };
-		DC5453B31A234F60003DB27E /* BCMW.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = BCMW.MOD; path = MOD/BCMW.MOD; sourceTree = "<group>"; };
-		DC5453B41A234F60003DB27E /* BEECHCRAFT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = BEECHCRAFT.MOD; path = MOD/BEECHCRAFT.MOD; sourceTree = "<group>"; };
-		DC5453B51A234F60003DB27E /* BLDROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = BLDROM.MOD; path = MOD/BLDROM.MOD; sourceTree = "<group>"; };
-		DC5453B61A234F60003DB27E /* BOEING-B52.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BOEING-B52.MOD"; path = "MOD/BOEING-B52.MOD"; sourceTree = "<group>"; };
-		DC5453B71A234F60003DB27E /* CARD-RDR.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CARD-RDR.MOD"; path = "MOD/CARD-RDR.MOD"; sourceTree = "<group>"; };
-		DC5453B81A234F60003DB27E /* CCD-MODIFIED.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CCD-MODIFIED.MOD"; path = "MOD/CCD-MODIFIED.MOD"; sourceTree = "<group>"; };
-		DC5453B91A234F60003DB27E /* CCD-OSX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CCD-OSX.MOD"; path = "MOD/CCD-OSX.MOD"; sourceTree = "<group>"; };
-		DC5453BA1A234F60003DB27E /* CCD.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CCD.MOD; path = MOD/CCD.MOD; sourceTree = "<group>"; };
-		DC5453BB1A234F60003DB27E /* CHEMUSER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CHEMUSER.MOD; path = MOD/CHEMUSER.MOD; sourceTree = "<group>"; };
-		DC5453BC1A234F60003DB27E /* CIRCUIT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CIRCUIT.MOD; path = MOD/CIRCUIT.MOD; sourceTree = "<group>"; };
-		DC5453BD1A234F60003DB27E /* CLINICAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CLINICAL.MOD; path = MOD/CLINICAL.MOD; sourceTree = "<group>"; };
-		DC5453BE1A234F60003DB27E /* CMT-200.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CMT-200.MOD"; path = "MOD/CMT-200.MOD"; sourceTree = "<group>"; };
-		DC5453BF1A234F60003DB27E /* CMT-300.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CMT-300.MOD"; path = "MOD/CMT-300.MOD"; sourceTree = "<group>"; };
-		DC5453C01A234F60003DB27E /* CVPAK.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = CVPAK.MOD; path = MOD/CVPAK.MOD; sourceTree = "<group>"; };
-		DC5453C11A234F60003DB27E /* DATA-ACQ.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DATA-ACQ.MOD"; path = "MOD/DATA-ACQ.MOD"; sourceTree = "<group>"; };
-		DC5453C21A234F60003DB27E /* DAVID.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DAVID.MOD; path = MOD/DAVID.MOD; sourceTree = "<group>"; };
-		DC5453C31A234F60003DB27E /* DIAGNOSTIC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DIAGNOSTIC.MOD; path = MOD/DIAGNOSTIC.MOD; sourceTree = "<group>"; };
-		DC5453C41A234F60003DB27E /* DIAMOND.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DIAMOND.MOD; path = MOD/DIAMOND.MOD; sourceTree = "<group>"; };
-		DC5453C51A234F60003DB27E /* DISASM4C.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DISASM4C.MOD; path = MOD/DISASM4C.MOD; sourceTree = "<group>"; };
-		DC5453C61A234F60003DB27E /* DISASM4D.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DISASM4D.MOD; path = MOD/DISASM4D.MOD; sourceTree = "<group>"; };
-		DC5453C71A234F60003DB27E /* DYERKA.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = DYERKA.MOD; path = MOD/DYERKA.MOD; sourceTree = "<group>"; };
-		DC5453C81A234F60003DB27E /* ES-41.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ES-41.MOD"; path = "MOD/ES-41.MOD"; sourceTree = "<group>"; };
-		DC5453C91A234F60003DB27E /* ES-MLDL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ES-MLDL.MOD"; path = "MOD/ES-MLDL.MOD"; sourceTree = "<group>"; };
-		DC5453CA1A234F60003DB27E /* EXT-FUNS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-FUNS.MOD"; path = "MOD/EXT-FUNS.MOD"; sourceTree = "<group>"; };
-		DC5453CB1A234F60003DB27E /* EXT-IL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-IL.MOD"; path = "MOD/EXT-IL.MOD"; sourceTree = "<group>"; };
-		DC5453CC1A234F60003DB27E /* EXT-IO.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-IO.MOD"; path = "MOD/EXT-IO.MOD"; sourceTree = "<group>"; };
-		DC5453CD1A234F60003DB27E /* EXT-MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "EXT-MEM.MOD"; path = "MOD/EXT-MEM.MOD"; sourceTree = "<group>"; };
-		DC5453CE1A234F60003DB27E /* FINANCE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = FINANCE.MOD; path = MOD/FINANCE.MOD; sourceTree = "<group>"; };
-		DC5453CF1A234F60003DB27E /* FORTH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = FORTH.MOD; path = MOD/FORTH.MOD; sourceTree = "<group>"; };
-		DC5453D01A234F60003DB27E /* GAMES.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = GAMES.MOD; path = MOD/GAMES.MOD; sourceTree = "<group>"; };
-		DC5453D11A234F60003DB27E /* GMAC2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = GMAC2.MOD; path = MOD/GMAC2.MOD; sourceTree = "<group>"; };
-		DC5453D21A234F60003DB27E /* GMAC3.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = GMAC3.MOD; path = MOD/GMAC3.MOD; sourceTree = "<group>"; };
-		DC5453D31A234F60003DB27E /* HEP-2MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HEP-2MEM.MOD"; path = "MOD/HEP-2MEM.MOD"; sourceTree = "<group>"; };
-		DC5453D41A234F60003DB27E /* HEP-MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HEP-MEM.MOD"; path = "MOD/HEP-MEM.MOD"; sourceTree = "<group>"; };
-		DC5453D51A234F60003DB27E /* Hepax-1C.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Hepax-1C.mod"; path = "MOD/Hepax-1C.mod"; sourceTree = "<group>"; };
-		DC5453D61A234F60003DB27E /* HEPAX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HEPAX.MOD; path = MOD/HEPAX.MOD; sourceTree = "<group>"; };
-		DC5453D71A234F60003DB27E /* HOME-MGT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HOME-MGT.MOD"; path = "MOD/HOME-MGT.MOD"; sourceTree = "<group>"; };
-		DC5453D81A234F60003DB27E /* HPIL-DEV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HPIL-DEV.MOD"; path = "MOD/HPIL-DEV.MOD"; sourceTree = "<group>"; };
-		DC5453D91A234F60003DB27E /* HPIL-DIAG.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HPIL-DIAG.MOD"; path = "MOD/HPIL-DIAG.MOD"; sourceTree = "<group>"; };
-		DC5453DA1A234F60003DB27E /* HPIL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HPIL.MOD; path = MOD/HPIL.MOD; sourceTree = "<group>"; };
-		DC5453DB1A234F60003DB27E /* HYDRACOMP.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = HYDRACOMP.MOD; path = MOD/HYDRACOMP.MOD; sourceTree = "<group>"; };
-		DC5453DC1A234F60003DB27E /* ICEBOX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICEBOX.MOD; path = MOD/ICEBOX.MOD; sourceTree = "<group>"; };
-		DC5453DD1A234F60003DB27E /* ICODE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICODE.MOD; path = MOD/ICODE.MOD; sourceTree = "<group>"; };
-		DC5453DE1A234F60003DB27E /* IR-PRINT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "IR-PRINT.MOD"; path = "MOD/IR-PRINT.MOD"; sourceTree = "<group>"; };
-		DC5453DF1A234F60003DB27E /* LAITRAM-XQ2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "LAITRAM-XQ2.MOD"; path = "MOD/LAITRAM-XQ2.MOD"; sourceTree = "<group>"; };
-		DC5453E01A234F60003DB27E /* LANDNAV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = LANDNAV.MOD; path = MOD/LANDNAV.MOD; sourceTree = "<group>"; };
-		DC5453E11A234F60003DB27E /* LBLAPP1A.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = LBLAPP1A.MOD; path = MOD/LBLAPP1A.MOD; sourceTree = "<group>"; };
-		DC5453E21A234F60003DB27E /* MACHINE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MACHINE.MOD; path = MOD/MACHINE.MOD; sourceTree = "<group>"; };
-		DC5453E31A234F60003DB27E /* MATH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MATH.MOD; path = MOD/MATH.MOD; sourceTree = "<group>"; };
-		DC5453E41A234F60003DB27E /* MATHSTAT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MATHSTAT.MOD; path = MOD/MATHSTAT.MOD; sourceTree = "<group>"; };
-		DC5453E51A234F60003DB27E /* MC-EPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MC-EPROM.MOD"; path = "MOD/MC-EPROM.MOD"; sourceTree = "<group>"; };
-		DC5453E61A234F60003DB27E /* MCTEST.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MCTEST.MOD; path = MOD/MCTEST.MOD; sourceTree = "<group>"; };
-		DC5453E71A234F60003DB27E /* MDP1.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MDP1.MOD; path = MOD/MDP1.MOD; sourceTree = "<group>"; };
-		DC5453E81A234F60003DB27E /* MDP2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MDP2.MOD; path = MOD/MDP2.MOD; sourceTree = "<group>"; };
-		DC5453E91A234F60003DB27E /* MELBOURNE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MELBOURNE.MOD; path = MOD/MELBOURNE.MOD; sourceTree = "<group>"; };
-		DC5453EA1A234F60003DB27E /* MEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MEM.MOD; path = MOD/MEM.MOD; sourceTree = "<group>"; };
-		DC5453EB1A234F60003DB27E /* MIL-ENG.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MIL-ENG.MOD"; path = "MOD/MIL-ENG.MOD"; sourceTree = "<group>"; };
-		DC5453EC1A234F60003DB27E /* MLDLOS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MLDLOS.MOD; path = MOD/MLDLOS.MOD; sourceTree = "<group>"; };
-		DC5453ED1A234F60003DB27E /* MLEPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MLEPROM.MOD; path = MOD/MLEPROM.MOD; sourceTree = "<group>"; };
-		DC5453EE1A234F60003DB27E /* MLROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MLROM.MOD; path = MOD/MLROM.MOD; sourceTree = "<group>"; };
-		DC5453EF1A234F60003DB27E /* MMEPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MMEPROM.MOD; path = MOD/MMEPROM.MOD; sourceTree = "<group>"; };
-		DC5453F01A234F60003DB27E /* MUECKE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = MUECKE.MOD; path = MOD/MUECKE.MOD; sourceTree = "<group>"; };
-		DC5453F11A234F60003DB27E /* NAVCOM2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NAVCOM2.MOD; path = MOD/NAVCOM2.MOD; sourceTree = "<group>"; };
-		DC5453F21A234F60003DB27E /* NAVIGATION.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NAVIGATION.MOD; path = MOD/NAVIGATION.MOD; sourceTree = "<group>"; };
-		DC5453F31A234F60003DB27E /* NAVPAC2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NAVPAC2.MOD; path = MOD/NAVPAC2.MOD; sourceTree = "<group>"; };
-		DC5453F41A234F60003DB27E /* NFCROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = NFCROM.MOD; path = MOD/NFCROM.MOD; sourceTree = "<group>"; };
-		DC5453F51A234F60003DB27E /* NUT-C.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-C.MOD"; path = "MOD/NUT-C.MOD"; sourceTree = "<group>"; };
-		DC5453F61A234F60003DB27E /* NUT-CV-GFF.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CV-GFF.MOD"; path = "MOD/NUT-CV-GFF.MOD"; sourceTree = "<group>"; };
-		DC5453F71A234F60003DB27E /* NUT-CV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CV.MOD"; path = "MOD/NUT-CV.MOD"; sourceTree = "<group>"; };
-		DC5453F81A234F60003DB27E /* NUT-CX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NUT-CX.MOD"; path = "MOD/NUT-CX.MOD"; sourceTree = "<group>"; };
-		DC5453F91A234F60003DB27E /* PANAME.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PANAME.MOD; path = MOD/PANAME.MOD; sourceTree = "<group>"; };
-		DC5453FA1A234F60003DB27E /* PCCOM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PCCOM.MOD; path = MOD/PCCOM.MOD; sourceTree = "<group>"; };
-		DC5453FB1A234F60003DB27E /* PETROLEUM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PETROLEUM.MOD; path = MOD/PETROLEUM.MOD; sourceTree = "<group>"; };
-		DC5453FC1A234F60003DB27E /* PLOTTER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PLOTTER.MOD; path = MOD/PLOTTER.MOD; sourceTree = "<group>"; };
-		DC5453FD1A234F60003DB27E /* PPC-MELB.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PPC-MELB.MOD"; path = "MOD/PPC-MELB.MOD"; sourceTree = "<group>"; };
-		DC5453FE1A234F60003DB27E /* PPC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PPC.MOD; path = MOD/PPC.MOD; sourceTree = "<group>"; };
-		DC5453FF1A234F60003DB27E /* PRIDE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PRIDE.MOD; path = MOD/PRIDE.MOD; sourceTree = "<group>"; };
-		DC5454001A234F60003DB27E /* PRINTER.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PRINTER.MOD; path = MOD/PRINTER.MOD; sourceTree = "<group>"; };
-		DC5454011A234F60003DB27E /* PRINTERSERVICE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PRINTERSERVICE.MOD; path = MOD/PRINTERSERVICE.MOD; sourceTree = "<group>"; };
-		DC5454021A234F60003DB27E /* PROFISET.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROFISET.MOD; path = MOD/PROFISET.MOD; sourceTree = "<group>"; };
-		DC5454031A234F60003DB27E /* PROTOCODER2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROTOCODER2.MOD; path = MOD/PROTOCODER2.MOD; sourceTree = "<group>"; };
-		DC5454041A234F60003DB27E /* PROTOPARIO.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PROTOPARIO.MOD; path = MOD/PROTOPARIO.MOD; sourceTree = "<group>"; };
-		DC5454051A234F60003DB27E /* PS0F.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = PS0F.MOD; path = MOD/PS0F.MOD; sourceTree = "<group>"; };
-		DC5454061A234F60003DB27E /* QUADMEM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = QUADMEM.MOD; path = MOD/QUADMEM.MOD; sourceTree = "<group>"; };
-		DC5454071A234F60003DB27E /* RAM4K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM4K.MOD; path = MOD/RAM4K.MOD; sourceTree = "<group>"; };
-		DC5454081A234F60003DB27E /* RAM8K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM8K.MOD; path = MOD/RAM8K.MOD; sourceTree = "<group>"; };
-		DC5454091A234F60003DB27E /* RAM16K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM16K.MOD; path = MOD/RAM16K.MOD; sourceTree = "<group>"; };
-		DC54540A1A234F60003DB27E /* RAM32K.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = RAM32K.MOD; path = MOD/RAM32K.MOD; sourceTree = "<group>"; };
-		DC54540B1A234F61003DB27E /* REAL-ESTATE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "REAL-ESTATE.MOD"; path = "MOD/REAL-ESTATE.MOD"; sourceTree = "<group>"; };
-		DC54540C1A234F61003DB27E /* ROAM-0.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ROAM-0.MOD"; path = "MOD/ROAM-0.MOD"; sourceTree = "<group>"; };
-		DC54540D1A234F61003DB27E /* ROAM-0A.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ROAM-0A.MOD"; path = "MOD/ROAM-0A.MOD"; sourceTree = "<group>"; };
-		DC54540E1A234F61003DB27E /* ROMSV01.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ROMSV01.MOD; path = MOD/ROMSV01.MOD; sourceTree = "<group>"; };
-		DC54540F1A234F61003DB27E /* SANDBOX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SANDBOX.MOD; path = MOD/SANDBOX.MOD; sourceTree = "<group>"; };
-		DC5454101A234F61003DB27E /* SANDMATH-III.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SANDMATH-III.MOD"; path = "MOD/SANDMATH-III.MOD"; sourceTree = "<group>"; };
-		DC5454111A234F61003DB27E /* SANDMATH.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SANDMATH.MOD; path = MOD/SANDMATH.MOD; sourceTree = "<group>"; };
-		DC5454121A234F61003DB27E /* SECURITIES.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SECURITIES.MOD; path = MOD/SECURITIES.MOD; sourceTree = "<group>"; };
-		DC5454131A234F61003DB27E /* SENDPGM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SENDPGM.MOD; path = MOD/SENDPGM.MOD; sourceTree = "<group>"; };
-		DC5454141A234F61003DB27E /* SERVICE-CV.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SERVICE-CV.MOD"; path = "MOD/SERVICE-CV.MOD"; sourceTree = "<group>"; };
-		DC5454151A234F61003DB27E /* SERVICE.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SERVICE.MOD; path = MOD/SERVICE.MOD; sourceTree = "<group>"; };
-		DC5454161A234F61003DB27E /* SGS-GAS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SGS-GAS.MOD"; path = "MOD/SGS-GAS.MOD"; sourceTree = "<group>"; };
-		DC5454171A234F61003DB27E /* SIM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SIM.MOD; path = MOD/SIM.MOD; sourceTree = "<group>"; };
-		DC5454181A234F61003DB27E /* SIMPLEX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SIMPLEX.MOD; path = MOD/SIMPLEX.MOD; sourceTree = "<group>"; };
-		DC5454191A234F61003DB27E /* SKWIDBC.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SKWIDBC.MOD; path = MOD/SKWIDBC.MOD; sourceTree = "<group>"; };
-		DC54541A1A234F61003DB27E /* SPEED-MACHINE2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SPEED-MACHINE2.MOD"; path = "MOD/SPEED-MACHINE2.MOD"; sourceTree = "<group>"; };
-		DC54541B1A234F61003DB27E /* STANDARD.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STANDARD.MOD; path = MOD/STANDARD.MOD; sourceTree = "<group>"; };
-		DC54541C1A234F61003DB27E /* STAT.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STAT.MOD; path = MOD/STAT.MOD; sourceTree = "<group>"; };
-		DC54541D1A234F61003DB27E /* STRESS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STRESS.MOD; path = MOD/STRESS.MOD; sourceTree = "<group>"; };
-		DC54541E1A234F61003DB27E /* STRUCTURAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = STRUCTURAL.MOD; path = MOD/STRUCTURAL.MOD; sourceTree = "<group>"; };
-		DC54541F1A234F61003DB27E /* SUP-R-ROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SUP-R-ROM.MOD"; path = "MOD/SUP-R-ROM.MOD"; sourceTree = "<group>"; };
-		DC5454201A234F61003DB27E /* SURVEY.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = SURVEY.MOD; path = MOD/SURVEY.MOD; sourceTree = "<group>"; };
-		DC5454211A234F61003DB27E /* THERMAL.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = THERMAL.MOD; path = MOD/THERMAL.MOD; sourceTree = "<group>"; };
-		DC5454221A234F61003DB27E /* TIME.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TIME.MOD; path = MOD/TIME.MOD; sourceTree = "<group>"; };
-		DC5454231A234F61003DB27E /* TOMSROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TOMSROM.MOD; path = MOD/TOMSROM.MOD; sourceTree = "<group>"; };
-		DC5454241A234F61003DB27E /* TOMSROM1.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TOMSROM1.MOD; path = MOD/TOMSROM1.MOD; sourceTree = "<group>"; };
-		DC5454251A234F61003DB27E /* TOOLBOX.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = TOOLBOX.MOD; path = MOD/TOOLBOX.MOD; sourceTree = "<group>"; };
-		DC5454261A234F61003DB27E /* USPS.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = USPS.MOD; path = MOD/USPS.MOD; sourceTree = "<group>"; };
-		DC5454271A234F61003DB27E /* WAND.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WAND.MOD; path = MOD/WAND.MOD; sourceTree = "<group>"; };
-		DC5454281A234F61003DB27E /* WWRAMBOX2.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WWRAMBOX2.MOD; path = MOD/WWRAMBOX2.MOD; sourceTree = "<group>"; };
-		DC5454291A234F61003DB27E /* WWRAMBOXI.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WWRAMBOXI.MOD; path = MOD/WWRAMBOXI.MOD; sourceTree = "<group>"; };
-		DC54542A1A234F61003DB27E /* WWRAMBOXII.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = WWRAMBOXII.MOD; path = MOD/WWRAMBOXII.MOD; sourceTree = "<group>"; };
-		DC54542B1A234F61003DB27E /* ZENROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ZENROM.MOD; path = MOD/ZENROM.MOD; sourceTree = "<group>"; };
-		DC54542C1A234F61003DB27E /* ZEPROM.MOD */ = {isa = PBXFileReference; lastKnownFileType = file; name = ZEPROM.MOD; path = MOD/ZEPROM.MOD; sourceTree = "<group>"; };
+		DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DebugerMenu.swift; path = Classes/DebugerMenu.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DebugCPU.swift; path = Classes/DebugCPU.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC56268F198B75E80040453F /* XNUT2.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT2.ROM; path = ROMs/XNUT2.ROM; sourceTree = "<group>"; };
 		DC562690198B75E80040453F /* XNUT1.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT1.ROM; path = ROMs/XNUT1.ROM; sourceTree = "<group>"; };
 		DC562691198B75E80040453F /* XNUT0.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = XNUT0.ROM; path = ROMs/XNUT0.ROM; sourceTree = "<group>"; };
@@ -378,32 +422,192 @@
 		DC56269A198B75E80040453F /* ADV1.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADV1.ROM; path = ROMs/ADV1.ROM; sourceTree = "<group>"; };
 		DC56269B198B75E80040453F /* ADV0.ROM */ = {isa = PBXFileReference; lastKnownFileType = file; name = ADV0.ROM; path = ROMs/ADV0.ROM; sourceTree = "<group>"; };
 		DC56269C198B75E80040453F /* CrdRdr-1E.rom */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CrdRdr-1E.rom"; path = "ROMs/CrdRdr-1E.rom"; sourceTree = "<group>"; };
-		DC5626B0198B89FC0040453F /* RamChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RamChip.swift; path = Classes/RamChip.swift; sourceTree = "<group>"; };
+		DC5626B0198B89FC0040453F /* RamChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RamChip.swift; path = my41/Classes/RamChip.swift; sourceTree = "<group>"; };
 		DC5E4BDC19F17E7B00BF831B /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Classes/Preferences.swift; sourceTree = "<group>"; };
 		DC6728111A2769E800B4274F /* AlphaKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlphaKeyboard.swift; path = Classes/AlphaKeyboard.swift; sourceTree = "<group>"; };
+		DC676D651A8F6C0A00D0C296 /* CalculatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorController.swift; sourceTree = "<group>"; };
+		DC676D671A8F6D7A00D0C296 /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		DC676D6A1A8F76F800D0C296 /* DisplayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayExtensions.swift; sourceTree = "<group>"; };
 		DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Classes/Keyboard.swift; sourceTree = "<group>"; };
-		DC6DB98D19BB6A5200E26ADD /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = Classes/Button.swift; sourceTree = "<group>"; };
-		DC74922619CF1E600012B5C0 /* Debuger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Debuger.swift; path = Classes/Debuger.swift; sourceTree = "<group>"; };
+		DC6DB98D19BB6A5200E26ADD /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Button.swift; path = Classes/Button.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DC705C871A951B16009C98D3 /* hpchar.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = hpchar.geom; sourceTree = "<group>"; };
+		DC74922619CF1E600012B5C0 /* Debuger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Debuger.swift; path = Classes/Debuger.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC75043819B2652200180161 /* hpfont.hpfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = hpfont.hpfont; sourceTree = "<group>"; };
 		DC799D871A155CA2002FACBE /* my41.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = my41.icns; path = my41/my41.icns; sourceTree = "<group>"; };
-		DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatorWindow.swift; path = Classes/CalculatorWindow.swift; sourceTree = "<group>"; };
-		DC7B7E1019AFA4EE00C70269 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Classes/Timer.swift; sourceTree = "<group>"; };
+		DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CalculatorWindow.swift; path = Classes/CalculatorWindow.swift; sourceTree = "<group>"; };
+		DC7B7E1019AFA4EE00C70269 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = my41/Classes/Timer.swift; sourceTree = "<group>"; };
+		DC9CB7591ABABAF400363462 /* 41z.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = 41z.mod; path = MOD/41z.mod; sourceTree = "<group>"; };
+		DC9CB75A1ABABAF400363462 /* 83trinh.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = 83trinh.mod; path = MOD/83trinh.mod; sourceTree = "<group>"; };
+		DC9CB75B1ABABAF400363462 /* adv-app.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "adv-app.mod"; path = "MOD/adv-app.mod"; sourceTree = "<group>"; };
+		DC9CB75C1ABABAF400363462 /* advantage.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = advantage.mod; path = MOD/advantage.mod; sourceTree = "<group>"; };
+		DC9CB75D1ABABAF400363462 /* aecrom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = aecrom.mod; path = MOD/aecrom.mod; sourceTree = "<group>"; };
+		DC9CB75E1ABABAF400363462 /* afdc1.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = afdc1.mod; path = MOD/afdc1.mod; sourceTree = "<group>"; };
+		DC9CB75F1ABABAF400363462 /* afdc2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = afdc2.mod; path = MOD/afdc2.mod; sourceTree = "<group>"; };
+		DC9CB7601ABABAF400363462 /* alpha.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = alpha.mod; path = MOD/alpha.mod; sourceTree = "<group>"; };
+		DC9CB7611ABABAF400363462 /* apac.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = apac.mod; path = MOD/apac.mod; sourceTree = "<group>"; };
+		DC9CB7621ABABAF400363462 /* assembler3.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = assembler3.mod; path = MOD/assembler3.mod; sourceTree = "<group>"; };
+		DC9CB7631ABABAF400363462 /* assembler4.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = assembler4.mod; path = MOD/assembler4.mod; sourceTree = "<group>"; };
+		DC9CB7641ABABAF400363462 /* astrology.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = astrology.mod; path = MOD/astrology.mod; sourceTree = "<group>"; };
+		DC9CB7651ABABAF400363462 /* autofinance.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = autofinance.mod; path = MOD/autofinance.mod; sourceTree = "<group>"; };
+		DC9CB7661ABABAF400363462 /* autostart.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = autostart.mod; path = MOD/autostart.mod; sourceTree = "<group>"; };
+		DC9CB7671ABABAF400363462 /* aviation.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = aviation.mod; path = MOD/aviation.mod; sourceTree = "<group>"; };
+		DC9CB7681ABABAF400363462 /* bcmw.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = bcmw.mod; path = MOD/bcmw.mod; sourceTree = "<group>"; };
+		DC9CB7691ABABAF400363462 /* beechcraft.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = beechcraft.mod; path = MOD/beechcraft.mod; sourceTree = "<group>"; };
+		DC9CB76A1ABABAF400363462 /* bldrom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = bldrom.mod; path = MOD/bldrom.mod; sourceTree = "<group>"; };
+		DC9CB76B1ABABAF400363462 /* boeing-b52.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "boeing-b52.mod"; path = "MOD/boeing-b52.mod"; sourceTree = "<group>"; };
+		DC9CB76C1ABABAF400363462 /* card-rdr.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "card-rdr.mod"; path = "MOD/card-rdr.mod"; sourceTree = "<group>"; };
+		DC9CB76D1ABABAF400363462 /* ccd-modified.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ccd-modified.mod"; path = "MOD/ccd-modified.mod"; sourceTree = "<group>"; };
+		DC9CB76E1ABABAF400363462 /* ccd-osx.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ccd-osx.mod"; path = "MOD/ccd-osx.mod"; sourceTree = "<group>"; };
+		DC9CB76F1ABABAF400363462 /* ccd.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = ccd.mod; path = MOD/ccd.mod; sourceTree = "<group>"; };
+		DC9CB7701ABABAF400363462 /* chemuser.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = chemuser.mod; path = MOD/chemuser.mod; sourceTree = "<group>"; };
+		DC9CB7711ABABAF400363462 /* circuit.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = circuit.mod; path = MOD/circuit.mod; sourceTree = "<group>"; };
+		DC9CB7721ABABAF400363462 /* clinical.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = clinical.mod; path = MOD/clinical.mod; sourceTree = "<group>"; };
+		DC9CB7731ABABAF400363462 /* cmt-200.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cmt-200.mod"; path = "MOD/cmt-200.mod"; sourceTree = "<group>"; };
+		DC9CB7741ABABAF400363462 /* cmt-300.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cmt-300.mod"; path = "MOD/cmt-300.mod"; sourceTree = "<group>"; };
+		DC9CB7751ABABAF400363462 /* cvpak.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = cvpak.mod; path = MOD/cvpak.mod; sourceTree = "<group>"; };
+		DC9CB7761ABABAF400363462 /* data-acq.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-acq.mod"; path = "MOD/data-acq.mod"; sourceTree = "<group>"; };
+		DC9CB7771ABABAF400363462 /* david.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = david.mod; path = MOD/david.mod; sourceTree = "<group>"; };
+		DC9CB7781ABABAF400363462 /* diagnostic.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = diagnostic.mod; path = MOD/diagnostic.mod; sourceTree = "<group>"; };
+		DC9CB7791ABABAF400363462 /* diamond.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = diamond.mod; path = MOD/diamond.mod; sourceTree = "<group>"; };
+		DC9CB77A1ABABAF400363462 /* disasm4c.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = disasm4c.mod; path = MOD/disasm4c.mod; sourceTree = "<group>"; };
+		DC9CB77B1ABABAF400363462 /* disasm4d.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = disasm4d.mod; path = MOD/disasm4d.mod; sourceTree = "<group>"; };
+		DC9CB77C1ABABAF400363462 /* dyerka.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = dyerka.mod; path = MOD/dyerka.mod; sourceTree = "<group>"; };
+		DC9CB77D1ABABAF400363462 /* es-41.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "es-41.mod"; path = "MOD/es-41.mod"; sourceTree = "<group>"; };
+		DC9CB77E1ABABAF400363462 /* es-mldl.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "es-mldl.mod"; path = "MOD/es-mldl.mod"; sourceTree = "<group>"; };
+		DC9CB77F1ABABAF400363462 /* ext-funs.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ext-funs.mod"; path = "MOD/ext-funs.mod"; sourceTree = "<group>"; };
+		DC9CB7801ABABAF400363462 /* ext-il.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ext-il.mod"; path = "MOD/ext-il.mod"; sourceTree = "<group>"; };
+		DC9CB7811ABABAF400363462 /* ext-io.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ext-io.mod"; path = "MOD/ext-io.mod"; sourceTree = "<group>"; };
+		DC9CB7821ABABAF400363462 /* ext-mem.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ext-mem.mod"; path = "MOD/ext-mem.mod"; sourceTree = "<group>"; };
+		DC9CB7831ABABAF400363462 /* finance.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = finance.mod; path = MOD/finance.mod; sourceTree = "<group>"; };
+		DC9CB7841ABABAF400363462 /* forth.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = forth.mod; path = MOD/forth.mod; sourceTree = "<group>"; };
+		DC9CB7851ABABAF400363462 /* games.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = games.mod; path = MOD/games.mod; sourceTree = "<group>"; };
+		DC9CB7861ABABAF400363462 /* gmac2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = gmac2.mod; path = MOD/gmac2.mod; sourceTree = "<group>"; };
+		DC9CB7871ABABAF400363462 /* gmac3.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = gmac3.mod; path = MOD/gmac3.mod; sourceTree = "<group>"; };
+		DC9CB7881ABABAF400363462 /* hem-2mem.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hem-2mem.mod"; path = "MOD/hem-2mem.mod"; sourceTree = "<group>"; };
+		DC9CB7891ABABAF400363462 /* hep-mem.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hep-mem.mod"; path = "MOD/hep-mem.mod"; sourceTree = "<group>"; };
+		DC9CB78A1ABABAF400363462 /* hepax-1c.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hepax-1c.mod"; path = "MOD/hepax-1c.mod"; sourceTree = "<group>"; };
+		DC9CB78B1ABABAF400363462 /* hepax.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = hepax.mod; path = MOD/hepax.mod; sourceTree = "<group>"; };
+		DC9CB78C1ABABAF400363462 /* home-mgt.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "home-mgt.mod"; path = "MOD/home-mgt.mod"; sourceTree = "<group>"; };
+		DC9CB78D1ABABAF400363462 /* hpil-dev.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hpil-dev.mod"; path = "MOD/hpil-dev.mod"; sourceTree = "<group>"; };
+		DC9CB78E1ABABAF400363462 /* hpil-diag.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hpil-diag.mod"; path = "MOD/hpil-diag.mod"; sourceTree = "<group>"; };
+		DC9CB78F1ABABAF400363462 /* hpil.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = hpil.mod; path = MOD/hpil.mod; sourceTree = "<group>"; };
+		DC9CB7901ABABAF400363462 /* hydracomp.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = hydracomp.mod; path = MOD/hydracomp.mod; sourceTree = "<group>"; };
+		DC9CB7911ABABAF400363462 /* icebox.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = icebox.mod; path = MOD/icebox.mod; sourceTree = "<group>"; };
+		DC9CB7921ABABAF400363462 /* icode.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = icode.mod; path = MOD/icode.mod; sourceTree = "<group>"; };
+		DC9CB7931ABABAF400363462 /* ir-print.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ir-print.mod"; path = "MOD/ir-print.mod"; sourceTree = "<group>"; };
+		DC9CB7941ABABAF400363462 /* laitram-xq2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "laitram-xq2.mod"; path = "MOD/laitram-xq2.mod"; sourceTree = "<group>"; };
+		DC9CB7951ABABAF400363462 /* landnav.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = landnav.mod; path = MOD/landnav.mod; sourceTree = "<group>"; };
+		DC9CB7961ABABAF400363462 /* lblapp1a.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = lblapp1a.mod; path = MOD/lblapp1a.mod; sourceTree = "<group>"; };
+		DC9CB7971ABABAF400363462 /* machine.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = machine.mod; path = MOD/machine.mod; sourceTree = "<group>"; };
+		DC9CB7981ABABAF400363462 /* math.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = math.mod; path = MOD/math.mod; sourceTree = "<group>"; };
+		DC9CB7991ABABAF400363462 /* mathstat.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = mathstat.mod; path = MOD/mathstat.mod; sourceTree = "<group>"; };
+		DC9CB79A1ABABAF400363462 /* mc-eprom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "mc-eprom.mod"; path = "MOD/mc-eprom.mod"; sourceTree = "<group>"; };
+		DC9CB79B1ABABAF400363462 /* mctest.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = mctest.mod; path = MOD/mctest.mod; sourceTree = "<group>"; };
+		DC9CB79C1ABABAF400363462 /* mdp1.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = mdp1.mod; path = MOD/mdp1.mod; sourceTree = "<group>"; };
+		DC9CB79D1ABABAF400363462 /* mdp2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = mdp2.mod; path = MOD/mdp2.mod; sourceTree = "<group>"; };
+		DC9CB79E1ABABAF400363462 /* melbourne.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = melbourne.mod; path = MOD/melbourne.mod; sourceTree = "<group>"; };
+		DC9CB79F1ABABAF400363462 /* mem.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = mem.mod; path = MOD/mem.mod; sourceTree = "<group>"; };
+		DC9CB7A01ABABAF400363462 /* mil-eng.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "mil-eng.mod"; path = "MOD/mil-eng.mod"; sourceTree = "<group>"; };
+		DC9CB7A11ABABAF400363462 /* mldlos.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = mldlos.mod; path = MOD/mldlos.mod; sourceTree = "<group>"; };
+		DC9CB7A21ABABAF400363462 /* mleprom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = mleprom.mod; path = MOD/mleprom.mod; sourceTree = "<group>"; };
+		DC9CB7A31ABABAF400363462 /* mlrom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = mlrom.mod; path = MOD/mlrom.mod; sourceTree = "<group>"; };
+		DC9CB7A41ABABAF500363462 /* mmeprom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = mmeprom.mod; path = MOD/mmeprom.mod; sourceTree = "<group>"; };
+		DC9CB7A51ABABAF500363462 /* muecke.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = muecke.mod; path = MOD/muecke.mod; sourceTree = "<group>"; };
+		DC9CB7A61ABABAF500363462 /* navcom2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = navcom2.mod; path = MOD/navcom2.mod; sourceTree = "<group>"; };
+		DC9CB7A71ABABAF500363462 /* navigation.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = navigation.mod; path = MOD/navigation.mod; sourceTree = "<group>"; };
+		DC9CB7A81ABABAF500363462 /* navpac2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = navpac2.mod; path = MOD/navpac2.mod; sourceTree = "<group>"; };
+		DC9CB7A91ABABAF500363462 /* nfcrom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = nfcrom.mod; path = MOD/nfcrom.mod; sourceTree = "<group>"; };
+		DC9CB7AA1ABABAF500363462 /* nut-c.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nut-c.mod"; path = "MOD/nut-c.mod"; sourceTree = "<group>"; };
+		DC9CB7AB1ABABAF500363462 /* nut-cv-gff.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nut-cv-gff.mod"; path = "MOD/nut-cv-gff.mod"; sourceTree = "<group>"; };
+		DC9CB7AC1ABABAF500363462 /* nut-cv.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nut-cv.mod"; path = "MOD/nut-cv.mod"; sourceTree = "<group>"; };
+		DC9CB7AD1ABABAF500363462 /* paname.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = paname.mod; path = MOD/paname.mod; sourceTree = "<group>"; };
+		DC9CB7AE1ABABAF500363462 /* pccom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = pccom.mod; path = MOD/pccom.mod; sourceTree = "<group>"; };
+		DC9CB7AF1ABABAF500363462 /* petroleum.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = petroleum.mod; path = MOD/petroleum.mod; sourceTree = "<group>"; };
+		DC9CB7B01ABABAF500363462 /* plotter.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = plotter.mod; path = MOD/plotter.mod; sourceTree = "<group>"; };
+		DC9CB7B11ABABAF500363462 /* ppc-melb.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ppc-melb.mod"; path = "MOD/ppc-melb.mod"; sourceTree = "<group>"; };
+		DC9CB7B21ABABAF500363462 /* ppc.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = ppc.mod; path = MOD/ppc.mod; sourceTree = "<group>"; };
+		DC9CB7B31ABABAF500363462 /* pride.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = pride.mod; path = MOD/pride.mod; sourceTree = "<group>"; };
+		DC9CB7B41ABABAF500363462 /* printer.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = printer.mod; path = MOD/printer.mod; sourceTree = "<group>"; };
+		DC9CB7B51ABABAF500363462 /* printerservice.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = printerservice.mod; path = MOD/printerservice.mod; sourceTree = "<group>"; };
+		DC9CB7B61ABABAF500363462 /* profiset.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = profiset.mod; path = MOD/profiset.mod; sourceTree = "<group>"; };
+		DC9CB7B71ABABAF500363462 /* protocoder2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = protocoder2.mod; path = MOD/protocoder2.mod; sourceTree = "<group>"; };
+		DC9CB7B81ABABAF500363462 /* protopario.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = protopario.mod; path = MOD/protopario.mod; sourceTree = "<group>"; };
+		DC9CB7B91ABABAF500363462 /* ps0f.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = ps0f.mod; path = MOD/ps0f.mod; sourceTree = "<group>"; };
+		DC9CB7BA1ABABAF500363462 /* quadmem.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = quadmem.mod; path = MOD/quadmem.mod; sourceTree = "<group>"; };
+		DC9CB7BB1ABABAF500363462 /* ram4k.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = ram4k.mod; path = MOD/ram4k.mod; sourceTree = "<group>"; };
+		DC9CB7BC1ABABAF500363462 /* ram8k.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = ram8k.mod; path = MOD/ram8k.mod; sourceTree = "<group>"; };
+		DC9CB7BD1ABABAF500363462 /* ram16k.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = ram16k.mod; path = MOD/ram16k.mod; sourceTree = "<group>"; };
+		DC9CB7BE1ABABAF500363462 /* ram32k.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = ram32k.mod; path = MOD/ram32k.mod; sourceTree = "<group>"; };
+		DC9CB7BF1ABABAF500363462 /* real-estate.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "real-estate.mod"; path = "MOD/real-estate.mod"; sourceTree = "<group>"; };
+		DC9CB7C01ABABAF500363462 /* roam-0.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "roam-0.mod"; path = "MOD/roam-0.mod"; sourceTree = "<group>"; };
+		DC9CB7C11ABABAF500363462 /* roam-0a.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "roam-0a.mod"; path = "MOD/roam-0a.mod"; sourceTree = "<group>"; };
+		DC9CB7C21ABABAF500363462 /* romsv01.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = romsv01.mod; path = MOD/romsv01.mod; sourceTree = "<group>"; };
+		DC9CB7C31ABABAF500363462 /* sandbox.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = sandbox.mod; path = MOD/sandbox.mod; sourceTree = "<group>"; };
+		DC9CB7C41ABABAF500363462 /* sandmath-III.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sandmath-III.mod"; path = "MOD/sandmath-III.mod"; sourceTree = "<group>"; };
+		DC9CB7C51ABABAF500363462 /* sandmath.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = sandmath.mod; path = MOD/sandmath.mod; sourceTree = "<group>"; };
+		DC9CB7C61ABABAF500363462 /* securities.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = securities.mod; path = MOD/securities.mod; sourceTree = "<group>"; };
+		DC9CB7C71ABABAF500363462 /* sendpgm.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = sendpgm.mod; path = MOD/sendpgm.mod; sourceTree = "<group>"; };
+		DC9CB7C81ABABAF500363462 /* service-cv.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "service-cv.mod"; path = "MOD/service-cv.mod"; sourceTree = "<group>"; };
+		DC9CB7C91ABABAF500363462 /* service.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = service.mod; path = MOD/service.mod; sourceTree = "<group>"; };
+		DC9CB7CA1ABABAF500363462 /* sgs-gas.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sgs-gas.mod"; path = "MOD/sgs-gas.mod"; sourceTree = "<group>"; };
+		DC9CB7CB1ABABAF500363462 /* sim.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = sim.mod; path = MOD/sim.mod; sourceTree = "<group>"; };
+		DC9CB7CC1ABABAF500363462 /* simplex.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = simplex.mod; path = MOD/simplex.mod; sourceTree = "<group>"; };
+		DC9CB7CD1ABABAF500363462 /* skwidbc.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = skwidbc.mod; path = MOD/skwidbc.mod; sourceTree = "<group>"; };
+		DC9CB7CE1ABABAF500363462 /* speed-machine2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "speed-machine2.mod"; path = "MOD/speed-machine2.mod"; sourceTree = "<group>"; };
+		DC9CB7CF1ABABAF500363462 /* standard.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = standard.mod; path = MOD/standard.mod; sourceTree = "<group>"; };
+		DC9CB7D01ABABAF500363462 /* stat.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = stat.mod; path = MOD/stat.mod; sourceTree = "<group>"; };
+		DC9CB7D11ABABAF500363462 /* stress.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = stress.mod; path = MOD/stress.mod; sourceTree = "<group>"; };
+		DC9CB7D21ABABAF500363462 /* structural.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = structural.mod; path = MOD/structural.mod; sourceTree = "<group>"; };
+		DC9CB7D31ABABAF500363462 /* sup-r-rom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sup-r-rom.mod"; path = "MOD/sup-r-rom.mod"; sourceTree = "<group>"; };
+		DC9CB7D41ABABAF500363462 /* survey.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = survey.mod; path = MOD/survey.mod; sourceTree = "<group>"; };
+		DC9CB7D51ABABAF500363462 /* thermal.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = thermal.mod; path = MOD/thermal.mod; sourceTree = "<group>"; };
+		DC9CB7D61ABABAF500363462 /* time.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = time.mod; path = MOD/time.mod; sourceTree = "<group>"; };
+		DC9CB7D71ABABAF500363462 /* tomsrom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = tomsrom.mod; path = MOD/tomsrom.mod; sourceTree = "<group>"; };
+		DC9CB7D81ABABAF500363462 /* tomsrom1.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = tomsrom1.mod; path = MOD/tomsrom1.mod; sourceTree = "<group>"; };
+		DC9CB7D91ABABAF500363462 /* toolbox.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = toolbox.mod; path = MOD/toolbox.mod; sourceTree = "<group>"; };
+		DC9CB7DA1ABABAF500363462 /* usps.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = usps.mod; path = MOD/usps.mod; sourceTree = "<group>"; };
+		DC9CB7DB1ABABAF500363462 /* wand.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = wand.mod; path = MOD/wand.mod; sourceTree = "<group>"; };
+		DC9CB7DC1ABABAF500363462 /* wwrambox2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = wwrambox2.mod; path = MOD/wwrambox2.mod; sourceTree = "<group>"; };
+		DC9CB7DD1ABABAF500363462 /* wwramboxi.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = wwramboxi.mod; path = MOD/wwramboxi.mod; sourceTree = "<group>"; };
+		DC9CB7DE1ABABAF500363462 /* wwramboxii.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = wwramboxii.mod; path = MOD/wwramboxii.mod; sourceTree = "<group>"; };
+		DC9CB7DF1ABABAF500363462 /* zenrom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = zenrom.mod; path = MOD/zenrom.mod; sourceTree = "<group>"; };
+		DC9CB7E01ABABAF500363462 /* zeprom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = zeprom.mod; path = MOD/zeprom.mod; sourceTree = "<group>"; };
+		DC9CB8F11ABABC9C00363462 /* nut-cx.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nut-cx.mod"; path = "MOD/nut-cx.mod"; sourceTree = "<group>"; };
+		DC9CB8F41ABAC5C800363462 /* keyPressSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = keyPressSound.wav; sourceTree = SOURCE_ROOT; };
+		DC9CB8F61ABAC70900363462 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class0.swift; path = Classes/CPU_Class0.swift; sourceTree = "<group>"; };
 		DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class1.swift; path = Classes/CPU_Class1.swift; sourceTree = "<group>"; };
 		DCA23A651A46D3BC00BC2BD2 /* CPU_Class2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class2.swift; path = Classes/CPU_Class2.swift; sourceTree = "<group>"; };
 		DCA23A671A47332B00BC2BD2 /* CPU_Class3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class3.swift; path = Classes/CPU_Class3.swift; sourceTree = "<group>"; };
-		DCAD885B199D360B0027C925 /* CPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU.swift; path = Classes/CPU.swift; sourceTree = "<group>"; };
-		DCAD885D199D36150027C925 /* DataOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataOperations.swift; path = Classes/DataOperations.swift; sourceTree = "<group>"; };
-		DCAD885F199D37CB0027C925 /* MOD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MOD.swift; path = Classes/MOD.swift; sourceTree = "<group>"; };
-		DCAD8861199D37E70027C925 /* RomChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RomChip.swift; path = Classes/RomChip.swift; sourceTree = "<group>"; };
-		DCAD8863199D380C0027C925 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bus.swift; path = Classes/Bus.swift; sourceTree = "<group>"; };
-		DCAD8865199D38540027C925 /* SoundOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundOutput.swift; path = Classes/SoundOutput.swift; sourceTree = "<group>"; };
+		DCAD885B199D360B0027C925 /* CPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CPU.swift; path = Classes/CPU.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DCAD885D199D36150027C925 /* DataOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataOperations.swift; path = my41/Classes/DataOperations.swift; sourceTree = "<group>"; };
+		DCAD885F199D37CB0027C925 /* MOD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MOD.swift; path = my41/Classes/MOD.swift; sourceTree = "<group>"; };
+		DCAD8861199D37E70027C925 /* RomChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RomChip.swift; path = my41/Classes/RomChip.swift; sourceTree = "<group>"; };
+		DCAD8863199D380C0027C925 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bus.swift; path = my41/Classes/Bus.swift; sourceTree = "<group>"; };
+		DCAD8865199D38540027C925 /* SoundOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundOutput.swift; path = my41/Classes/SoundOutput.swift; sourceTree = "<group>"; };
+		DCD09B0A1A8628A700F8D785 /* CocoaSpecific.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CocoaSpecific.swift; path = Classes/CocoaSpecific.swift; sourceTree = "<group>"; };
+		DCD09B0C1A8628E000F8D785 /* CocoaTouchSpecific.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaTouchSpecific.swift; sourceTree = "<group>"; };
+		DCD09B121A86319E00F8D785 /* DebugCPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugCPU.swift; sourceTree = "<group>"; };
+		DCD09B141A86320000F8D785 /* DebugMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMemory.swift; sourceTree = "<group>"; };
+		DCD09B211A8660E200F8D785 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		DCD09B241A8663D500F8D785 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		DCD48908198AF42B00F3B898 /* CalculatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatorController.swift; path = Classes/CalculatorController.swift; sourceTree = "<group>"; };
-		DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Disassembly.swift; path = Classes/Disassembly.swift; sourceTree = "<group>"; };
+		DCE75C011A61B4FE002B2D7C /* my41cx-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "my41cx-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCE75C041A61B4FE002B2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCE75C051A61B4FE002B2D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DCE75C071A61B4FE002B2D7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DCE75C0A1A61B4FE002B2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DCE75C0C1A61B4FE002B2D7C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DCE75C0F1A61B4FE002B2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		DCE75C151A61B4FE002B2D7C /* my41cx-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "my41cx-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCE75C1A1A61B4FE002B2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCE75C1B1A61B4FE002B2D7C /* my41cx_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my41cx_iosTests.swift; sourceTree = "<group>"; };
+		DCE75C261A61BCBD002B2D7C /* Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
+		DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Disassembly.swift; path = my41/Classes/Disassembly.swift; sourceTree = "<group>"; };
 		DCEEC9671A18A270000ECA76 /* PreferencesMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesMenu.swift; path = Classes/PreferencesMenu.swift; sourceTree = "<group>"; };
 		DCEEC9691A18BE39000ECA76 /* PreferencesCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesCalculator.swift; path = Classes/PreferencesCalculator.swift; sourceTree = "<group>"; };
 		DCEEC96B1A18CD40000ECA76 /* PreferencesMods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesMods.swift; path = Classes/PreferencesMods.swift; sourceTree = "<group>"; };
-		DCF52A20199C971A006BF825 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Classes/Extensions.swift; sourceTree = "<group>"; };
+		DCF52A20199C971A006BF825 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = my41/Classes/Extensions.swift; sourceTree = "<group>"; };
 		DCFF74AF1A1FE74A00C0DE9A /* DebugMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugMemory.swift; path = Classes/DebugMemory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -422,16 +626,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DCE75BFE1A61B4FE002B2D7C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC9CB8F71ABAC70900363462 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCE75C121A61B4FE002B2D7C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DC0B8E6B1999461C0092BDD3 /* Sound */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Sound;
-			sourceTree = "<group>";
-		};
 		DC2E476A1995766000BCACAF /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,154 +658,161 @@
 		DC2E476D19957F4C00BCACAF /* MODs */ = {
 			isa = PBXGroup;
 			children = (
-				DC5453A41A234F60003DB27E /* 41Z.MOD */,
-				DC5453A51A234F60003DB27E /* 83TRINH.MOD */,
-				DC5453A61A234F60003DB27E /* ADV-APP.MOD */,
-				DC5453A71A234F60003DB27E /* ADVANTAGE.MOD */,
-				DC5453A81A234F60003DB27E /* AECROM.MOD */,
-				DC5453A91A234F60003DB27E /* AFDC1.MOD */,
-				DC5453AA1A234F60003DB27E /* AFDC2.MOD */,
-				DC5453AB1A234F60003DB27E /* ALPHA.MOD */,
-				DC5453AC1A234F60003DB27E /* APAC.MOD */,
-				DC5453AD1A234F60003DB27E /* ASSEMBLER3.MOD */,
-				DC5453AE1A234F60003DB27E /* ASSEMBLER4.MOD */,
-				DC5453AF1A234F60003DB27E /* ASTROLOGY.MOD */,
-				DC5453B01A234F60003DB27E /* AUTOFINANCE.MOD */,
-				DC5453B11A234F60003DB27E /* AUTOSTART.MOD */,
-				DC5453B21A234F60003DB27E /* AVIATION.MOD */,
-				DC5453B31A234F60003DB27E /* BCMW.MOD */,
-				DC5453B41A234F60003DB27E /* BEECHCRAFT.MOD */,
-				DC5453B51A234F60003DB27E /* BLDROM.MOD */,
-				DC5453B61A234F60003DB27E /* BOEING-B52.MOD */,
-				DC5453B71A234F60003DB27E /* CARD-RDR.MOD */,
-				DC5453B81A234F60003DB27E /* CCD-MODIFIED.MOD */,
-				DC5453B91A234F60003DB27E /* CCD-OSX.MOD */,
-				DC5453BA1A234F60003DB27E /* CCD.MOD */,
-				DC5453BB1A234F60003DB27E /* CHEMUSER.MOD */,
-				DC5453BC1A234F60003DB27E /* CIRCUIT.MOD */,
-				DC5453BD1A234F60003DB27E /* CLINICAL.MOD */,
-				DC5453BE1A234F60003DB27E /* CMT-200.MOD */,
-				DC5453BF1A234F60003DB27E /* CMT-300.MOD */,
-				DC5453C01A234F60003DB27E /* CVPAK.MOD */,
-				DC5453C11A234F60003DB27E /* DATA-ACQ.MOD */,
-				DC5453C21A234F60003DB27E /* DAVID.MOD */,
-				DC5453C31A234F60003DB27E /* DIAGNOSTIC.MOD */,
-				DC5453C41A234F60003DB27E /* DIAMOND.MOD */,
-				DC5453C51A234F60003DB27E /* DISASM4C.MOD */,
-				DC5453C61A234F60003DB27E /* DISASM4D.MOD */,
-				DC5453C71A234F60003DB27E /* DYERKA.MOD */,
-				DC5453C81A234F60003DB27E /* ES-41.MOD */,
-				DC5453C91A234F60003DB27E /* ES-MLDL.MOD */,
-				DC5453CA1A234F60003DB27E /* EXT-FUNS.MOD */,
-				DC5453CB1A234F60003DB27E /* EXT-IL.MOD */,
-				DC5453CC1A234F60003DB27E /* EXT-IO.MOD */,
-				DC5453CD1A234F60003DB27E /* EXT-MEM.MOD */,
-				DC5453CE1A234F60003DB27E /* FINANCE.MOD */,
-				DC5453CF1A234F60003DB27E /* FORTH.MOD */,
-				DC5453D01A234F60003DB27E /* GAMES.MOD */,
-				DC5453D11A234F60003DB27E /* GMAC2.MOD */,
-				DC5453D21A234F60003DB27E /* GMAC3.MOD */,
-				DC5453D31A234F60003DB27E /* HEP-2MEM.MOD */,
-				DC5453D41A234F60003DB27E /* HEP-MEM.MOD */,
-				DC5453D51A234F60003DB27E /* Hepax-1C.mod */,
-				DC5453D61A234F60003DB27E /* HEPAX.MOD */,
-				DC5453D71A234F60003DB27E /* HOME-MGT.MOD */,
-				DC5453D81A234F60003DB27E /* HPIL-DEV.MOD */,
-				DC5453D91A234F60003DB27E /* HPIL-DIAG.MOD */,
-				DC5453DA1A234F60003DB27E /* HPIL.MOD */,
-				DC5453DB1A234F60003DB27E /* HYDRACOMP.MOD */,
-				DC5453DC1A234F60003DB27E /* ICEBOX.MOD */,
-				DC5453DD1A234F60003DB27E /* ICODE.MOD */,
-				DC5453DE1A234F60003DB27E /* IR-PRINT.MOD */,
-				DC5453DF1A234F60003DB27E /* LAITRAM-XQ2.MOD */,
-				DC5453E01A234F60003DB27E /* LANDNAV.MOD */,
-				DC5453E11A234F60003DB27E /* LBLAPP1A.MOD */,
-				DC5453E21A234F60003DB27E /* MACHINE.MOD */,
-				DC5453E31A234F60003DB27E /* MATH.MOD */,
-				DC5453E41A234F60003DB27E /* MATHSTAT.MOD */,
-				DC5453E51A234F60003DB27E /* MC-EPROM.MOD */,
-				DC5453E61A234F60003DB27E /* MCTEST.MOD */,
-				DC5453E71A234F60003DB27E /* MDP1.MOD */,
-				DC5453E81A234F60003DB27E /* MDP2.MOD */,
-				DC5453E91A234F60003DB27E /* MELBOURNE.MOD */,
-				DC5453EA1A234F60003DB27E /* MEM.MOD */,
-				DC5453EB1A234F60003DB27E /* MIL-ENG.MOD */,
-				DC5453EC1A234F60003DB27E /* MLDLOS.MOD */,
-				DC5453ED1A234F60003DB27E /* MLEPROM.MOD */,
-				DC5453EE1A234F60003DB27E /* MLROM.MOD */,
-				DC5453EF1A234F60003DB27E /* MMEPROM.MOD */,
-				DC5453F01A234F60003DB27E /* MUECKE.MOD */,
-				DC5453F11A234F60003DB27E /* NAVCOM2.MOD */,
-				DC5453F21A234F60003DB27E /* NAVIGATION.MOD */,
-				DC5453F31A234F60003DB27E /* NAVPAC2.MOD */,
-				DC5453F41A234F60003DB27E /* NFCROM.MOD */,
-				DC5453F51A234F60003DB27E /* NUT-C.MOD */,
-				DC5453F61A234F60003DB27E /* NUT-CV-GFF.MOD */,
-				DC5453F71A234F60003DB27E /* NUT-CV.MOD */,
-				DC5453F81A234F60003DB27E /* NUT-CX.MOD */,
-				DC5453F91A234F60003DB27E /* PANAME.MOD */,
-				DC5453FA1A234F60003DB27E /* PCCOM.MOD */,
-				DC5453FB1A234F60003DB27E /* PETROLEUM.MOD */,
-				DC5453FC1A234F60003DB27E /* PLOTTER.MOD */,
-				DC5453FD1A234F60003DB27E /* PPC-MELB.MOD */,
-				DC5453FE1A234F60003DB27E /* PPC.MOD */,
-				DC5453FF1A234F60003DB27E /* PRIDE.MOD */,
-				DC5454001A234F60003DB27E /* PRINTER.MOD */,
-				DC5454011A234F60003DB27E /* PRINTERSERVICE.MOD */,
-				DC5454021A234F60003DB27E /* PROFISET.MOD */,
-				DC5454031A234F60003DB27E /* PROTOCODER2.MOD */,
-				DC5454041A234F60003DB27E /* PROTOPARIO.MOD */,
-				DC5454051A234F60003DB27E /* PS0F.MOD */,
-				DC5454061A234F60003DB27E /* QUADMEM.MOD */,
-				DC5454071A234F60003DB27E /* RAM4K.MOD */,
-				DC5454081A234F60003DB27E /* RAM8K.MOD */,
-				DC5454091A234F60003DB27E /* RAM16K.MOD */,
-				DC54540A1A234F60003DB27E /* RAM32K.MOD */,
-				DC54540B1A234F61003DB27E /* REAL-ESTATE.MOD */,
-				DC54540C1A234F61003DB27E /* ROAM-0.MOD */,
-				DC54540D1A234F61003DB27E /* ROAM-0A.MOD */,
-				DC54540E1A234F61003DB27E /* ROMSV01.MOD */,
-				DC54540F1A234F61003DB27E /* SANDBOX.MOD */,
-				DC5454101A234F61003DB27E /* SANDMATH-III.MOD */,
-				DC5454111A234F61003DB27E /* SANDMATH.MOD */,
-				DC5454121A234F61003DB27E /* SECURITIES.MOD */,
-				DC5454131A234F61003DB27E /* SENDPGM.MOD */,
-				DC5454141A234F61003DB27E /* SERVICE-CV.MOD */,
-				DC5454151A234F61003DB27E /* SERVICE.MOD */,
-				DC5454161A234F61003DB27E /* SGS-GAS.MOD */,
-				DC5454171A234F61003DB27E /* SIM.MOD */,
-				DC5454181A234F61003DB27E /* SIMPLEX.MOD */,
-				DC5454191A234F61003DB27E /* SKWIDBC.MOD */,
-				DC54541A1A234F61003DB27E /* SPEED-MACHINE2.MOD */,
-				DC54541B1A234F61003DB27E /* STANDARD.MOD */,
-				DC54541C1A234F61003DB27E /* STAT.MOD */,
-				DC54541D1A234F61003DB27E /* STRESS.MOD */,
-				DC54541E1A234F61003DB27E /* STRUCTURAL.MOD */,
-				DC54541F1A234F61003DB27E /* SUP-R-ROM.MOD */,
-				DC5454201A234F61003DB27E /* SURVEY.MOD */,
-				DC5454211A234F61003DB27E /* THERMAL.MOD */,
-				DC5454221A234F61003DB27E /* TIME.MOD */,
-				DC5454231A234F61003DB27E /* TOMSROM.MOD */,
-				DC5454241A234F61003DB27E /* TOMSROM1.MOD */,
-				DC5454251A234F61003DB27E /* TOOLBOX.MOD */,
-				DC5454261A234F61003DB27E /* USPS.MOD */,
-				DC5454271A234F61003DB27E /* WAND.MOD */,
-				DC5454281A234F61003DB27E /* WWRAMBOX2.MOD */,
-				DC5454291A234F61003DB27E /* WWRAMBOXI.MOD */,
-				DC54542A1A234F61003DB27E /* WWRAMBOXII.MOD */,
-				DC54542B1A234F61003DB27E /* ZENROM.MOD */,
-				DC54542C1A234F61003DB27E /* ZEPROM.MOD */,
+				DC9CB7591ABABAF400363462 /* 41z.mod */,
+				DC9CB75A1ABABAF400363462 /* 83trinh.mod */,
+				DC9CB75B1ABABAF400363462 /* adv-app.mod */,
+				DC9CB75C1ABABAF400363462 /* advantage.mod */,
+				DC9CB75D1ABABAF400363462 /* aecrom.mod */,
+				DC9CB75E1ABABAF400363462 /* afdc1.mod */,
+				DC9CB75F1ABABAF400363462 /* afdc2.mod */,
+				DC9CB7601ABABAF400363462 /* alpha.mod */,
+				DC9CB7611ABABAF400363462 /* apac.mod */,
+				DC9CB7621ABABAF400363462 /* assembler3.mod */,
+				DC9CB7631ABABAF400363462 /* assembler4.mod */,
+				DC9CB7641ABABAF400363462 /* astrology.mod */,
+				DC9CB7651ABABAF400363462 /* autofinance.mod */,
+				DC9CB7661ABABAF400363462 /* autostart.mod */,
+				DC9CB7671ABABAF400363462 /* aviation.mod */,
+				DC9CB7681ABABAF400363462 /* bcmw.mod */,
+				DC9CB7691ABABAF400363462 /* beechcraft.mod */,
+				DC9CB76A1ABABAF400363462 /* bldrom.mod */,
+				DC9CB76B1ABABAF400363462 /* boeing-b52.mod */,
+				DC9CB76C1ABABAF400363462 /* card-rdr.mod */,
+				DC9CB76D1ABABAF400363462 /* ccd-modified.mod */,
+				DC9CB76E1ABABAF400363462 /* ccd-osx.mod */,
+				DC9CB76F1ABABAF400363462 /* ccd.mod */,
+				DC9CB7701ABABAF400363462 /* chemuser.mod */,
+				DC9CB7711ABABAF400363462 /* circuit.mod */,
+				DC9CB7721ABABAF400363462 /* clinical.mod */,
+				DC9CB7731ABABAF400363462 /* cmt-200.mod */,
+				DC9CB7741ABABAF400363462 /* cmt-300.mod */,
+				DC9CB7751ABABAF400363462 /* cvpak.mod */,
+				DC9CB7761ABABAF400363462 /* data-acq.mod */,
+				DC9CB7771ABABAF400363462 /* david.mod */,
+				DC9CB7781ABABAF400363462 /* diagnostic.mod */,
+				DC9CB7791ABABAF400363462 /* diamond.mod */,
+				DC9CB77A1ABABAF400363462 /* disasm4c.mod */,
+				DC9CB77B1ABABAF400363462 /* disasm4d.mod */,
+				DC9CB77C1ABABAF400363462 /* dyerka.mod */,
+				DC9CB77D1ABABAF400363462 /* es-41.mod */,
+				DC9CB77E1ABABAF400363462 /* es-mldl.mod */,
+				DC9CB77F1ABABAF400363462 /* ext-funs.mod */,
+				DC9CB7801ABABAF400363462 /* ext-il.mod */,
+				DC9CB7811ABABAF400363462 /* ext-io.mod */,
+				DC9CB7821ABABAF400363462 /* ext-mem.mod */,
+				DC9CB7831ABABAF400363462 /* finance.mod */,
+				DC9CB7841ABABAF400363462 /* forth.mod */,
+				DC9CB7851ABABAF400363462 /* games.mod */,
+				DC9CB7861ABABAF400363462 /* gmac2.mod */,
+				DC9CB7871ABABAF400363462 /* gmac3.mod */,
+				DC9CB7881ABABAF400363462 /* hem-2mem.mod */,
+				DC9CB7891ABABAF400363462 /* hep-mem.mod */,
+				DC9CB78A1ABABAF400363462 /* hepax-1c.mod */,
+				DC9CB78B1ABABAF400363462 /* hepax.mod */,
+				DC9CB78C1ABABAF400363462 /* home-mgt.mod */,
+				DC9CB78D1ABABAF400363462 /* hpil-dev.mod */,
+				DC9CB78E1ABABAF400363462 /* hpil-diag.mod */,
+				DC9CB78F1ABABAF400363462 /* hpil.mod */,
+				DC9CB7901ABABAF400363462 /* hydracomp.mod */,
+				DC9CB7911ABABAF400363462 /* icebox.mod */,
+				DC9CB7921ABABAF400363462 /* icode.mod */,
+				DC9CB7931ABABAF400363462 /* ir-print.mod */,
+				DC9CB7941ABABAF400363462 /* laitram-xq2.mod */,
+				DC9CB7951ABABAF400363462 /* landnav.mod */,
+				DC9CB7961ABABAF400363462 /* lblapp1a.mod */,
+				DC9CB7971ABABAF400363462 /* machine.mod */,
+				DC9CB7981ABABAF400363462 /* math.mod */,
+				DC9CB7991ABABAF400363462 /* mathstat.mod */,
+				DC9CB79A1ABABAF400363462 /* mc-eprom.mod */,
+				DC9CB79B1ABABAF400363462 /* mctest.mod */,
+				DC9CB79C1ABABAF400363462 /* mdp1.mod */,
+				DC9CB79D1ABABAF400363462 /* mdp2.mod */,
+				DC9CB79E1ABABAF400363462 /* melbourne.mod */,
+				DC9CB79F1ABABAF400363462 /* mem.mod */,
+				DC9CB7A01ABABAF400363462 /* mil-eng.mod */,
+				DC9CB7A11ABABAF400363462 /* mldlos.mod */,
+				DC9CB7A21ABABAF400363462 /* mleprom.mod */,
+				DC9CB7A31ABABAF400363462 /* mlrom.mod */,
+				DC9CB7A41ABABAF500363462 /* mmeprom.mod */,
+				DC9CB7A51ABABAF500363462 /* muecke.mod */,
+				DC9CB7A61ABABAF500363462 /* navcom2.mod */,
+				DC9CB7A71ABABAF500363462 /* navigation.mod */,
+				DC9CB7A81ABABAF500363462 /* navpac2.mod */,
+				DC9CB7A91ABABAF500363462 /* nfcrom.mod */,
+				DC9CB7AA1ABABAF500363462 /* nut-c.mod */,
+				DC9CB7AB1ABABAF500363462 /* nut-cv-gff.mod */,
+				DC9CB7AC1ABABAF500363462 /* nut-cv.mod */,
+				DC9CB8F11ABABC9C00363462 /* nut-cx.mod */,
+				DC9CB7AD1ABABAF500363462 /* paname.mod */,
+				DC9CB7AE1ABABAF500363462 /* pccom.mod */,
+				DC9CB7AF1ABABAF500363462 /* petroleum.mod */,
+				DC9CB7B01ABABAF500363462 /* plotter.mod */,
+				DC9CB7B11ABABAF500363462 /* ppc-melb.mod */,
+				DC9CB7B21ABABAF500363462 /* ppc.mod */,
+				DC9CB7B31ABABAF500363462 /* pride.mod */,
+				DC9CB7B41ABABAF500363462 /* printer.mod */,
+				DC9CB7B51ABABAF500363462 /* printerservice.mod */,
+				DC9CB7B61ABABAF500363462 /* profiset.mod */,
+				DC9CB7B71ABABAF500363462 /* protocoder2.mod */,
+				DC9CB7B81ABABAF500363462 /* protopario.mod */,
+				DC9CB7B91ABABAF500363462 /* ps0f.mod */,
+				DC9CB7BA1ABABAF500363462 /* quadmem.mod */,
+				DC9CB7BB1ABABAF500363462 /* ram4k.mod */,
+				DC9CB7BC1ABABAF500363462 /* ram8k.mod */,
+				DC9CB7BD1ABABAF500363462 /* ram16k.mod */,
+				DC9CB7BE1ABABAF500363462 /* ram32k.mod */,
+				DC9CB7BF1ABABAF500363462 /* real-estate.mod */,
+				DC9CB7C01ABABAF500363462 /* roam-0.mod */,
+				DC9CB7C11ABABAF500363462 /* roam-0a.mod */,
+				DC9CB7C21ABABAF500363462 /* romsv01.mod */,
+				DC9CB7C31ABABAF500363462 /* sandbox.mod */,
+				DC9CB7C41ABABAF500363462 /* sandmath-III.mod */,
+				DC9CB7C51ABABAF500363462 /* sandmath.mod */,
+				DC9CB7C61ABABAF500363462 /* securities.mod */,
+				DC9CB7C71ABABAF500363462 /* sendpgm.mod */,
+				DC9CB7C81ABABAF500363462 /* service-cv.mod */,
+				DC9CB7C91ABABAF500363462 /* service.mod */,
+				DC9CB7CA1ABABAF500363462 /* sgs-gas.mod */,
+				DC9CB7CB1ABABAF500363462 /* sim.mod */,
+				DC9CB7CC1ABABAF500363462 /* simplex.mod */,
+				DC9CB7CD1ABABAF500363462 /* skwidbc.mod */,
+				DC9CB7CE1ABABAF500363462 /* speed-machine2.mod */,
+				DC9CB7CF1ABABAF500363462 /* standard.mod */,
+				DC9CB7D01ABABAF500363462 /* stat.mod */,
+				DC9CB7D11ABABAF500363462 /* stress.mod */,
+				DC9CB7D21ABABAF500363462 /* structural.mod */,
+				DC9CB7D31ABABAF500363462 /* sup-r-rom.mod */,
+				DC9CB7D41ABABAF500363462 /* survey.mod */,
+				DC9CB7D51ABABAF500363462 /* thermal.mod */,
+				DC9CB7D61ABABAF500363462 /* time.mod */,
+				DC9CB7D71ABABAF500363462 /* tomsrom.mod */,
+				DC9CB7D81ABABAF500363462 /* tomsrom1.mod */,
+				DC9CB7D91ABABAF500363462 /* toolbox.mod */,
+				DC9CB7DA1ABABAF500363462 /* usps.mod */,
+				DC9CB7DB1ABABAF500363462 /* wand.mod */,
+				DC9CB7DC1ABABAF500363462 /* wwrambox2.mod */,
+				DC9CB7DD1ABABAF500363462 /* wwramboxi.mod */,
+				DC9CB7DE1ABABAF500363462 /* wwramboxii.mod */,
+				DC9CB7DF1ABABAF500363462 /* zenrom.mod */,
+				DC9CB7E01ABABAF500363462 /* zeprom.mod */,
 			);
 			name = MODs;
+			path = my41;
 			sourceTree = "<group>";
 		};
 		DC45284419897DA500C40B6C = {
 			isa = PBXGroup;
 			children = (
+				DC9CB8F61ABAC70900363462 /* AVFoundation.framework */,
+				DC56268E198B75770040453F /* ROMs */,
+				DC2E476D19957F4C00BCACAF /* MODs */,
+				DCC3974F1A77DE0B000867BD /* Common code */,
 				DC447DE41A349C54008FAB28 /* my41cx.entitlements */,
 				DC799D871A155CA2002FACBE /* my41.icns */,
 				DC45284F19897DA600C40B6C /* my41 */,
 				DC45286419897DA600C40B6C /* my41Tests */,
+				DCE75C021A61B4FE002B2D7C /* my41cx-ios */,
+				DCE75C181A61B4FE002B2D7C /* my41cx-iosTests */,
 				DC45284E19897DA600C40B6C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -603,6 +822,8 @@
 			children = (
 				DC45284D19897DA600C40B6C /* my41cx.app */,
 				DC45286119897DA600C40B6C /* my41Tests.xctest */,
+				DCE75C011A61B4FE002B2D7C /* my41cx-ios.app */,
+				DCE75C151A61B4FE002B2D7C /* my41cx-iosTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -610,12 +831,11 @@
 		DC45284F19897DA600C40B6C /* my41 */ = {
 			isa = PBXGroup;
 			children = (
-				DC2E476D19957F4C00BCACAF /* MODs */,
-				DC56268E198B75770040453F /* ROMs */,
 				DCD48906198AF40600F3B898 /* Classes */,
 				DC45285819897DA600C40B6C /* Images.xcassets */,
 				DC45285A19897DA600C40B6C /* Main.storyboard */,
 				DC45285019897DA600C40B6C /* Supporting Files */,
+				DCD09B0A1A8628A700F8D785 /* CocoaSpecific.swift */,
 			);
 			path = my41;
 			sourceTree = "<group>";
@@ -623,6 +843,7 @@
 		DC45285019897DA600C40B6C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DC9CB8F41ABAC5C800363462 /* keyPressSound.wav */,
 				DC46ED8C19B3A09B0091E143 /* display.lookup */,
 				DC46ED8D19B3A09B0091E143 /* hpchar.geom */,
 				DC75043819B2652200180161 /* hpfont.hpfont */,
@@ -668,20 +889,7 @@
 				DC56269C198B75E80040453F /* CrdRdr-1E.rom */,
 			);
 			name = ROMs;
-			sourceTree = "<group>";
-		};
-		DC5626AB198B78540040453F /* CPU and Memory */ = {
-			isa = PBXGroup;
-			children = (
-				DCA23A601A45EDC200BC2BD2 /* CPU */,
-				DCAD8865199D38540027C925 /* SoundOutput.swift */,
-				DCAD8863199D380C0027C925 /* Bus.swift */,
-				DCAD8861199D37E70027C925 /* RomChip.swift */,
-				DCAD885F199D37CB0027C925 /* MOD.swift */,
-				DCAD885D199D36150027C925 /* DataOperations.swift */,
-				DC5626B0198B89FC0040453F /* RamChip.swift */,
-			);
-			name = "CPU and Memory";
+			path = my41;
 			sourceTree = "<group>";
 		};
 		DC6DB98C19BB6A1700E26ADD /* Keyboard */ = {
@@ -697,7 +905,6 @@
 			isa = PBXGroup;
 			children = (
 				DC74922619CF1E600012B5C0 /* Debuger.swift */,
-				DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */,
 				DC4E040C1A1774F1008D6DD5 /* DebugerMenu.swift */,
 				DC4E040E1A17783E008D6DD5 /* DebugCPU.swift */,
 				DCFF74AF1A1FE74A00C0DE9A /* DebugMemory.swift */,
@@ -708,15 +915,42 @@
 		DC78A1D81992C49400258BD5 /* Display */ = {
 			isa = PBXGroup;
 			children = (
+				DC45285419897DA600C40B6C /* ViewController.swift */,
 			);
 			name = Display;
+			sourceTree = "<group>";
+		};
+		DC7B249F1A78E0370080F85A /* Bus */ = {
+			isa = PBXGroup;
+			children = (
+				DCAD8865199D38540027C925 /* SoundOutput.swift */,
+				DCAD8863199D380C0027C925 /* Bus.swift */,
+			);
+			name = Bus;
+			sourceTree = "<group>";
+		};
+		DC7B24A01A78E2080080F85A /* Memory */ = {
+			isa = PBXGroup;
+			children = (
+				DCAD8861199D37E70027C925 /* RomChip.swift */,
+				DCAD885F199D37CB0027C925 /* MOD.swift */,
+				DC5626B0198B89FC0040453F /* RamChip.swift */,
+			);
+			name = Memory;
+			sourceTree = "<group>";
+		};
+		DC7B24A11A79135E0080F85A /* Peripherals */ = {
+			isa = PBXGroup;
+			children = (
+				DC7B7E1019AFA4EE00C70269 /* Timer.swift */,
+			);
+			name = Peripherals;
 			sourceTree = "<group>";
 		};
 		DC7B7E1219AFAFA600C70269 /* Peripherals */ = {
 			isa = PBXGroup;
 			children = (
 				DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */,
-				DC7B7E1019AFA4EE00C70269 /* Timer.swift */,
 			);
 			name = Peripherals;
 			sourceTree = "<group>";
@@ -731,6 +965,57 @@
 				DCA23A671A47332B00BC2BD2 /* CPU_Class3.swift */,
 			);
 			name = CPU;
+			path = my41;
+			sourceTree = "<group>";
+		};
+		DCC3974F1A77DE0B000867BD /* Common code */ = {
+			isa = PBXGroup;
+			children = (
+				DCF52A20199C971A006BF825 /* Extensions.swift */,
+				DCD09B161A863B1700F8D785 /* Display */,
+				DCD09B061A86259A00F8D785 /* Disassembly */,
+				DC7B24A11A79135E0080F85A /* Peripherals */,
+				DC7B24A01A78E2080080F85A /* Memory */,
+				DCAD885D199D36150027C925 /* DataOperations.swift */,
+				DC7B249F1A78E0370080F85A /* Bus */,
+				DCA23A601A45EDC200BC2BD2 /* CPU */,
+				DC676D671A8F6D7A00D0C296 /* Calculator.swift */,
+			);
+			name = "Common code";
+			sourceTree = "<group>";
+		};
+		DCD09B061A86259A00F8D785 /* Disassembly */ = {
+			isa = PBXGroup;
+			children = (
+				DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */,
+			);
+			name = Disassembly;
+			sourceTree = "<group>";
+		};
+		DCD09B111A86318000F8D785 /* Debuger */ = {
+			isa = PBXGroup;
+			children = (
+				DCD09B121A86319E00F8D785 /* DebugCPU.swift */,
+				DCD09B141A86320000F8D785 /* DebugMemory.swift */,
+			);
+			name = Debuger;
+			sourceTree = "<group>";
+		};
+		DCD09B161A863B1700F8D785 /* Display */ = {
+			isa = PBXGroup;
+			children = (
+				DC676D6A1A8F76F800D0C296 /* DisplayExtensions.swift */,
+			);
+			name = Display;
+			sourceTree = "<group>";
+		};
+		DCD09B201A8660CF00F8D785 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				DCD09B211A8660E200F8D785 /* Keyboard.swift */,
+				DCD09B241A8663D500F8D785 /* Key.swift */,
+			);
+			name = Keyboard;
 			sourceTree = "<group>";
 		};
 		DCD48906198AF40600F3B898 /* Classes */ = {
@@ -740,15 +1025,11 @@
 				DC45285619897DA600C40B6C /* AppDelegate.swift */,
 				DC6728111A2769E800B4274F /* AlphaKeyboard.swift */,
 				DC4AEB291A25E31A00ABF0D8 /* KeyboardShortcuts.swift */,
-				DC45285419897DA600C40B6C /* ViewController.swift */,
-				DCF52A20199C971A006BF825 /* Extensions.swift */,
 				DC74922519CF1E480012B5C0 /* Debuger */,
 				DC6DB98C19BB6A1700E26ADD /* Keyboard */,
 				DC7B7E1219AFAFA600C70269 /* Peripherals */,
-				DC0B8E6B1999461C0092BDD3 /* Sound */,
 				DC2E476A1995766000BCACAF /* Preferences */,
 				DC78A1D81992C49400258BD5 /* Display */,
-				DC5626AB198B78540040453F /* CPU and Memory */,
 				DCD48907198AF41000F3B898 /* Main Body */,
 			);
 			name = Classes;
@@ -760,6 +1041,74 @@
 				DCD48908198AF42B00F3B898 /* CalculatorController.swift */,
 			);
 			name = "Main Body";
+			sourceTree = "<group>";
+		};
+		DCE75C021A61B4FE002B2D7C /* my41cx-ios */ = {
+			isa = PBXGroup;
+			children = (
+				DC705C871A951B16009C98D3 /* hpchar.geom */,
+				DCD09B201A8660CF00F8D785 /* Keyboard */,
+				DCD09B111A86318000F8D785 /* Debuger */,
+				DCE75C251A61BC9C002B2D7C /* Peripherals */,
+				DCE75C231A61B860002B2D7C /* CPU and Memory */,
+				DCE75C051A61B4FE002B2D7C /* AppDelegate.swift */,
+				DCE75C071A61B4FE002B2D7C /* ViewController.swift */,
+				DCE75C091A61B4FE002B2D7C /* Main.storyboard */,
+				DCE75C0C1A61B4FE002B2D7C /* Images.xcassets */,
+				DCE75C0E1A61B4FE002B2D7C /* LaunchScreen.xib */,
+				DCE75C031A61B4FE002B2D7C /* Supporting Files */,
+				DCD09B0C1A8628E000F8D785 /* CocoaTouchSpecific.swift */,
+				DC676D651A8F6C0A00D0C296 /* CalculatorController.swift */,
+			);
+			path = "my41cx-ios";
+			sourceTree = "<group>";
+		};
+		DCE75C031A61B4FE002B2D7C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DCE75C041A61B4FE002B2D7C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DCE75C181A61B4FE002B2D7C /* my41cx-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				DCE75C1B1A61B4FE002B2D7C /* my41cx_iosTests.swift */,
+				DCE75C191A61B4FE002B2D7C /* Supporting Files */,
+			);
+			path = "my41cx-iosTests";
+			sourceTree = "<group>";
+		};
+		DCE75C191A61B4FE002B2D7C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DCE75C1A1A61B4FE002B2D7C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DCE75C231A61B860002B2D7C /* CPU and Memory */ = {
+			isa = PBXGroup;
+			children = (
+				DCE75C241A61B86F002B2D7C /* CPU */,
+			);
+			name = "CPU and Memory";
+			sourceTree = "<group>";
+		};
+		DCE75C241A61B86F002B2D7C /* CPU */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CPU;
+			sourceTree = "<group>";
+		};
+		DCE75C251A61BC9C002B2D7C /* Peripherals */ = {
+			isa = PBXGroup;
+			children = (
+				DCE75C261A61BCBD002B2D7C /* Display.swift */,
+			);
+			name = Peripherals;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -800,6 +1149,41 @@
 			productReference = DC45286119897DA600C40B6C /* my41Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DCE75C001A61B4FE002B2D7C /* my41cx-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCE75C211A61B4FE002B2D7C /* Build configuration list for PBXNativeTarget "my41cx-ios" */;
+			buildPhases = (
+				DCE75BFD1A61B4FE002B2D7C /* Sources */,
+				DCE75BFE1A61B4FE002B2D7C /* Frameworks */,
+				DCE75BFF1A61B4FE002B2D7C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "my41cx-ios";
+			productName = "my41cx-ios";
+			productReference = DCE75C011A61B4FE002B2D7C /* my41cx-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DCE75C141A61B4FE002B2D7C /* my41cx-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCE75C221A61B4FE002B2D7C /* Build configuration list for PBXNativeTarget "my41cx-iosTests" */;
+			buildPhases = (
+				DCE75C111A61B4FE002B2D7C /* Sources */,
+				DCE75C121A61B4FE002B2D7C /* Frameworks */,
+				DCE75C131A61B4FE002B2D7C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCE75C171A61B4FE002B2D7C /* PBXTargetDependency */,
+			);
+			name = "my41cx-iosTests";
+			productName = "my41cx-iosTests";
+			productReference = DCE75C151A61B4FE002B2D7C /* my41cx-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -822,6 +1206,14 @@
 						CreatedOnToolsVersion = 6.0;
 						TestTargetID = DC45284C19897DA500C40B6C;
 					};
+					DCE75C001A61B4FE002B2D7C = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = LS2ZZ4TR54;
+					};
+					DCE75C141A61B4FE002B2D7C = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = DCE75C001A61B4FE002B2D7C;
+					};
 				};
 			};
 			buildConfigurationList = DC45284819897DA500C40B6C /* Build configuration list for PBXProject "my41" */;
@@ -839,6 +1231,8 @@
 			targets = (
 				DC45284C19897DA500C40B6C /* my41cx */,
 				DC45286019897DA600C40B6C /* my41Tests */,
+				DCE75C001A61B4FE002B2D7C /* my41cx-ios */,
+				DCE75C141A61B4FE002B2D7C /* my41cx-iosTests */,
 			);
 		};
 /* End PBXProject section */
@@ -848,167 +1242,326 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC5454941A234F61003DB27E /* REAL-ESTATE.MOD in Resources */,
-				DC5454711A234F61003DB27E /* MDP2.MOD in Resources */,
-				DC5454A21A234F61003DB27E /* SKWIDBC.MOD in Resources */,
-				DC54547F1A234F61003DB27E /* NUT-CV-GFF.MOD in Resources */,
-				DC5454501A234F61003DB27E /* DYERKA.MOD in Resources */,
-				DC54546B1A234F61003DB27E /* MACHINE.MOD in Resources */,
-				DC5454431A234F61003DB27E /* CCD.MOD in Resources */,
-				DC5454B51A234F61003DB27E /* ZEPROM.MOD in Resources */,
-				DC5454991A234F61003DB27E /* SANDMATH-III.MOD in Resources */,
-				DC54543A1A234F61003DB27E /* AUTOSTART.MOD in Resources */,
-				DC5454AF1A234F61003DB27E /* USPS.MOD in Resources */,
-				DC5454921A234F61003DB27E /* RAM16K.MOD in Resources */,
-				DC5454401A234F61003DB27E /* CARD-RDR.MOD in Resources */,
-				DC54543B1A234F61003DB27E /* AVIATION.MOD in Resources */,
-				DC54549C1A234F61003DB27E /* SENDPGM.MOD in Resources */,
-				DC54545E1A234F61003DB27E /* Hepax-1C.mod in Resources */,
+				DC9CB8531ABABAF500363462 /* sim.mod in Resources */,
+				DC9CB8201ABABAF500363462 /* math.mod in Resources */,
+				DC9CB81B1ABABAF500363462 /* ir-print.mod in Resources */,
+				DC9CB81E1ABABAF500363462 /* lblapp1a.mod in Resources */,
+				DC9CB8041ABABAF500363462 /* dyerka.mod in Resources */,
+				DC9CB8221ABABAF500363462 /* mc-eprom.mod in Resources */,
+				DC9CB85C1ABABAF500363462 /* survey.mod in Resources */,
+				DC9CB7F71ABABAF500363462 /* ccd.mod in Resources */,
 				DC5626A1198B75E80040453F /* PRINTER.ROM in Resources */,
-				DC5454B01A234F61003DB27E /* WAND.MOD in Resources */,
-				DC5454861A234F61003DB27E /* PPC-MELB.MOD in Resources */,
-				DC5454661A234F61003DB27E /* ICODE.MOD in Resources */,
-				DC5454461A234F61003DB27E /* CLINICAL.MOD in Resources */,
-				DC5454A71A234F61003DB27E /* STRUCTURAL.MOD in Resources */,
-				DC54548E1A234F61003DB27E /* PS0F.MOD in Resources */,
-				DC54543C1A234F61003DB27E /* BCMW.MOD in Resources */,
-				DC5454801A234F61003DB27E /* NUT-CV.MOD in Resources */,
-				DC5454671A234F61003DB27E /* IR-PRINT.MOD in Resources */,
-				DC5454A11A234F61003DB27E /* SIMPLEX.MOD in Resources */,
+				DC9CB8501ABABAF500363462 /* service-cv.mod in Resources */,
+				DC9CB84D1ABABAF500363462 /* sandmath.mod in Resources */,
 				DC5626A9198B75E80040453F /* ADV0.ROM in Resources */,
-				DC54544E1A234F61003DB27E /* DISASM4C.MOD in Resources */,
-				DC54546E1A234F61003DB27E /* MC-EPROM.MOD in Resources */,
-				DC5454B11A234F61003DB27E /* WWRAMBOX2.MOD in Resources */,
-				DC5454561A234F61003DB27E /* EXT-MEM.MOD in Resources */,
-				DC5454511A234F61003DB27E /* ES-41.MOD in Resources */,
-				DC5454741A234F61003DB27E /* MIL-ENG.MOD in Resources */,
-				DC5454681A234F61003DB27E /* LAITRAM-XQ2.MOD in Resources */,
-				DC5454551A234F61003DB27E /* EXT-IO.MOD in Resources */,
-				DC54547D1A234F61003DB27E /* NFCROM.MOD in Resources */,
+				DC9CB83F1ABABAF500363462 /* protocoder2.mod in Resources */,
+				DC9CB7F61ABABAF500363462 /* ccd-osx.mod in Resources */,
+				DC9CB8441ABABAF500363462 /* ram8k.mod in Resources */,
+				DC9CB8621ABABAF500363462 /* usps.mod in Resources */,
 				DC5626A4198B75E80040453F /* NUT0.ROM in Resources */,
-				DC5454A51A234F61003DB27E /* STAT.MOD in Resources */,
-				DC5454851A234F61003DB27E /* PLOTTER.MOD in Resources */,
-				DC5454881A234F61003DB27E /* PRIDE.MOD in Resources */,
-				DC5454781A234F61003DB27E /* MMEPROM.MOD in Resources */,
-				DC54549B1A234F61003DB27E /* SECURITIES.MOD in Resources */,
-				DC5454931A234F61003DB27E /* RAM32K.MOD in Resources */,
-				DC5454901A234F61003DB27E /* RAM4K.MOD in Resources */,
-				DC5454591A234F61003DB27E /* GAMES.MOD in Resources */,
-				DC5454A01A234F61003DB27E /* SIM.MOD in Resources */,
-				DC5454721A234F61003DB27E /* MELBOURNE.MOD in Resources */,
-				DC5454371A234F61003DB27E /* ASSEMBLER4.MOD in Resources */,
-				DC54544D1A234F61003DB27E /* DIAMOND.MOD in Resources */,
-				DC5454631A234F61003DB27E /* HPIL.MOD in Resources */,
-				DC5454761A234F61003DB27E /* MLEPROM.MOD in Resources */,
-				DC5454981A234F61003DB27E /* SANDBOX.MOD in Resources */,
-				DC5454AD1A234F61003DB27E /* TOMSROM1.MOD in Resources */,
-				DC5454391A234F61003DB27E /* AUTOFINANCE.MOD in Resources */,
 				DC45285919897DA600C40B6C /* Images.xcassets in Resources */,
+				DC9CB84A1ABABAF500363462 /* romsv01.mod in Resources */,
+				DC9CB7EE1ABABAF500363462 /* autostart.mod in Resources */,
+				DC9CB7FD1ABABAF500363462 /* cvpak.mod in Resources */,
 				DC46ED8E19B3A09B0091E143 /* display.lookup in Resources */,
-				DC54546A1A234F61003DB27E /* LBLAPP1A.MOD in Resources */,
-				DC54545F1A234F61003DB27E /* HEPAX.MOD in Resources */,
-				DC5454521A234F61003DB27E /* ES-MLDL.MOD in Resources */,
+				DC9CB7E81ABABAF500363462 /* alpha.mod in Resources */,
+				DC9CB8121ABABAF500363462 /* hepax-1c.mod in Resources */,
+				DC9CB8571ABABAF500363462 /* standard.mod in Resources */,
+				DC9CB8611ABABAF500363462 /* toolbox.mod in Resources */,
+				DC9CB8431ABABAF500363462 /* ram4k.mod in Resources */,
+				DC9CB8081ABABAF500363462 /* ext-il.mod in Resources */,
+				DC9CB7ED1ABABAF500363462 /* autofinance.mod in Resources */,
+				DC9CB8421ABABAF500363462 /* quadmem.mod in Resources */,
 				DC56269F198B75E80040453F /* XNUT0.ROM in Resources */,
-				DC5454301A234F61003DB27E /* ADVANTAGE.MOD in Resources */,
-				DC5454441A234F61003DB27E /* CHEMUSER.MOD in Resources */,
-				DC54548C1A234F61003DB27E /* PROTOCODER2.MOD in Resources */,
-				DC54549D1A234F61003DB27E /* SERVICE-CV.MOD in Resources */,
-				DC5454611A234F61003DB27E /* HPIL-DEV.MOD in Resources */,
-				DC54548A1A234F61003DB27E /* PRINTERSERVICE.MOD in Resources */,
-				DC54547A1A234F61003DB27E /* NAVCOM2.MOD in Resources */,
-				DC54546D1A234F61003DB27E /* MATHSTAT.MOD in Resources */,
-				DC54548F1A234F61003DB27E /* QUADMEM.MOD in Resources */,
-				DC5454331A234F61003DB27E /* AFDC2.MOD in Resources */,
-				DC54545B1A234F61003DB27E /* GMAC3.MOD in Resources */,
-				DC5454531A234F61003DB27E /* EXT-FUNS.MOD in Resources */,
-				DC54546C1A234F61003DB27E /* MATH.MOD in Resources */,
-				DC54543F1A234F61003DB27E /* BOEING-B52.MOD in Resources */,
-				DC5454581A234F61003DB27E /* FORTH.MOD in Resources */,
-				DC54547B1A234F61003DB27E /* NAVIGATION.MOD in Resources */,
-				DC5454961A234F61003DB27E /* ROAM-0A.MOD in Resources */,
-				DC54542F1A234F61003DB27E /* ADV-APP.MOD in Resources */,
-				DC54546F1A234F61003DB27E /* MCTEST.MOD in Resources */,
-				DC5454AB1A234F61003DB27E /* TIME.MOD in Resources */,
-				DC5454831A234F61003DB27E /* PCCOM.MOD in Resources */,
-				DC5454AA1A234F61003DB27E /* THERMAL.MOD in Resources */,
-				DC54545A1A234F61003DB27E /* GMAC2.MOD in Resources */,
-				DC5454451A234F61003DB27E /* CIRCUIT.MOD in Resources */,
-				DC5454791A234F61003DB27E /* MUECKE.MOD in Resources */,
-				DC5454361A234F61003DB27E /* ASSEMBLER3.MOD in Resources */,
-				DC5454B31A234F61003DB27E /* WWRAMBOXII.MOD in Resources */,
-				DC5454971A234F61003DB27E /* ROMSV01.MOD in Resources */,
-				DC54545C1A234F61003DB27E /* HEP-2MEM.MOD in Resources */,
-				DC54547E1A234F61003DB27E /* NUT-C.MOD in Resources */,
+				DC9CB8561ABABAF500363462 /* speed-machine2.mod in Resources */,
+				DC9CB8521ABABAF500363462 /* sgs-gas.mod in Resources */,
+				DC9CB8101ABABAF500363462 /* hem-2mem.mod in Resources */,
+				DC9CB85A1ABABAF500363462 /* structural.mod in Resources */,
+				DC9CB8461ABABAF500363462 /* ram32k.mod in Resources */,
+				DC9CB8251ABABAF500363462 /* mdp2.mod in Resources */,
+				DC9CB7E61ABABAF500363462 /* afdc1.mod in Resources */,
+				DC9CB8401ABABAF500363462 /* protopario.mod in Resources */,
+				DC9CB8471ABABAF500363462 /* real-estate.mod in Resources */,
+				DC9CB8F51ABAC5C800363462 /* keyPressSound.wav in Resources */,
+				DC9CB7F91ABABAF500363462 /* circuit.mod in Resources */,
+				DC9CB7FC1ABABAF500363462 /* cmt-300.mod in Resources */,
 				DC56269E198B75E80040453F /* XNUT1.ROM in Resources */,
-				DC54543E1A234F61003DB27E /* BLDROM.MOD in Resources */,
-				DC54545D1A234F61003DB27E /* HEP-MEM.MOD in Resources */,
-				DC5454491A234F61003DB27E /* CVPAK.MOD in Resources */,
+				DC9CB8661ABABAF500363462 /* wwramboxii.mod in Resources */,
 				DC56269D198B75E80040453F /* XNUT2.ROM in Resources */,
+				DC9CB83B1ABABAF500363462 /* pride.mod in Resources */,
 				DC46ED8F19B3A09B0091E143 /* hpchar.geom in Resources */,
-				DC54542E1A234F61003DB27E /* 83TRINH.MOD in Resources */,
+				DC9CB8671ABABAF500363462 /* zenrom.mod in Resources */,
+				DC9CB82A1ABABAF500363462 /* mleprom.mod in Resources */,
+				DC9CB83D1ABABAF500363462 /* printerservice.mod in Resources */,
+				DC9CB83A1ABABAF500363462 /* ppc.mod in Resources */,
+				DC9CB8131ABABAF500363462 /* hepax.mod in Resources */,
+				DC9CB7EA1ABABAF500363462 /* assembler3.mod in Resources */,
+				DC9CB8111ABABAF500363462 /* hep-mem.mod in Resources */,
+				DC9CB8591ABABAF500363462 /* stress.mod in Resources */,
+				DC9CB8361ABABAF500363462 /* pccom.mod in Resources */,
+				DC9CB80B1ABABAF500363462 /* finance.mod in Resources */,
+				DC9CB7E51ABABAF500363462 /* aecrom.mod in Resources */,
+				DC9CB7FE1ABABAF500363462 /* data-acq.mod in Resources */,
+				DC9CB7F31ABABAF500363462 /* boeing-b52.mod in Resources */,
+				DC9CB8601ABABAF500363462 /* tomsrom1.mod in Resources */,
+				DC9CB8051ABABAF500363462 /* es-41.mod in Resources */,
+				DC9CB80C1ABABAF500363462 /* forth.mod in Resources */,
+				DC9CB7F01ABABAF500363462 /* bcmw.mod in Resources */,
+				DC9CB85B1ABABAF500363462 /* sup-r-rom.mod in Resources */,
+				DC9CB8161ABABAF500363462 /* hpil-diag.mod in Resources */,
+				DC9CB84F1ABABAF500363462 /* sendpgm.mod in Resources */,
+				DC9CB7E91ABABAF500363462 /* apac.mod in Resources */,
+				DC9CB8181ABABAF500363462 /* hydracomp.mod in Resources */,
+				DC9CB84B1ABABAF500363462 /* sandbox.mod in Resources */,
+				DC9CB8541ABABAF500363462 /* simplex.mod in Resources */,
+				DC9CB82B1ABABAF500363462 /* mlrom.mod in Resources */,
+				DC9CB83C1ABABAF500363462 /* printer.mod in Resources */,
+				DC9CB8681ABABAF500363462 /* zeprom.mod in Resources */,
+				DC9CB8321ABABAF500363462 /* nut-c.mod in Resources */,
+				DC9CB7F11ABABAF500363462 /* beechcraft.mod in Resources */,
+				DC9CB85D1ABABAF500363462 /* thermal.mod in Resources */,
+				DC9CB8411ABABAF500363462 /* ps0f.mod in Resources */,
+				DC9CB8271ABABAF500363462 /* mem.mod in Resources */,
+				DC9CB8391ABABAF500363462 /* ppc-melb.mod in Resources */,
+				DC9CB8291ABABAF500363462 /* mldlos.mod in Resources */,
+				DC9CB8381ABABAF500363462 /* plotter.mod in Resources */,
+				DC9CB8001ABABAF500363462 /* diagnostic.mod in Resources */,
+				DC9CB85E1ABABAF500363462 /* time.mod in Resources */,
+				DC9CB8021ABABAF500363462 /* disasm4c.mod in Resources */,
+				DC9CB7E31ABABAF500363462 /* adv-app.mod in Resources */,
+				DC9CB8481ABABAF500363462 /* roam-0.mod in Resources */,
+				DC9CB8311ABABAF500363462 /* nfcrom.mod in Resources */,
 				DC5626A6198B75E80040453F /* CXFUNS0.ROM in Resources */,
-				DC54549E1A234F61003DB27E /* SERVICE.MOD in Resources */,
-				DC54548D1A234F61003DB27E /* PROTOPARIO.MOD in Resources */,
-				DC5454A81A234F61003DB27E /* SUP-R-ROM.MOD in Resources */,
-				DC5454311A234F61003DB27E /* AECROM.MOD in Resources */,
-				DC5454821A234F61003DB27E /* PANAME.MOD in Resources */,
-				DC5454541A234F61003DB27E /* EXT-IL.MOD in Resources */,
 				DC5626A2198B75E80040453F /* NUT2.ROM in Resources */,
-				DC5454411A234F61003DB27E /* CCD-MODIFIED.MOD in Resources */,
-				DC5454911A234F61003DB27E /* RAM8K.MOD in Resources */,
-				DC54548B1A234F61003DB27E /* PROFISET.MOD in Resources */,
+				DC9CB7E21ABABAF500363462 /* 83trinh.mod in Resources */,
+				DC9CB8141ABABAF500363462 /* home-mgt.mod in Resources */,
+				DC9CB8301ABABAF500363462 /* navpac2.mod in Resources */,
 				DC799D881A155CA2002FACBE /* my41.icns in Resources */,
-				DC5454A61A234F61003DB27E /* STRESS.MOD in Resources */,
+				DC9CB8281ABABAF500363462 /* mil-eng.mod in Resources */,
+				DC9CB8491ABABAF500363462 /* roam-0a.mod in Resources */,
+				DC9CB8631ABABAF500363462 /* wand.mod in Resources */,
+				DC9CB82C1ABABAF500363462 /* mmeprom.mod in Resources */,
+				DC9CB7FB1ABABAF500363462 /* cmt-200.mod in Resources */,
+				DC9CB8F21ABABC9C00363462 /* nut-cx.mod in Resources */,
+				DC9CB7EB1ABABAF500363462 /* assembler4.mod in Resources */,
+				DC9CB8171ABABAF500363462 /* hpil.mod in Resources */,
+				DC9CB81A1ABABAF500363462 /* icode.mod in Resources */,
+				DC9CB7F21ABABAF500363462 /* bldrom.mod in Resources */,
+				DC9CB7F51ABABAF500363462 /* ccd-modified.mod in Resources */,
+				DC9CB8191ABABAF500363462 /* icebox.mod in Resources */,
+				DC9CB8351ABABAF500363462 /* paname.mod in Resources */,
+				DC9CB82F1ABABAF500363462 /* navigation.mod in Resources */,
+				DC9CB84C1ABABAF500363462 /* sandmath-III.mod in Resources */,
+				DC9CB7E41ABABAF500363462 /* advantage.mod in Resources */,
+				DC9CB82E1ABABAF500363462 /* navcom2.mod in Resources */,
+				DC9CB7E11ABABAF500363462 /* 41z.mod in Resources */,
+				DC9CB8641ABABAF500363462 /* wwrambox2.mod in Resources */,
+				DC9CB8031ABABAF500363462 /* disasm4d.mod in Resources */,
+				DC9CB80A1ABABAF500363462 /* ext-mem.mod in Resources */,
+				DC9CB80E1ABABAF500363462 /* gmac2.mod in Resources */,
 				DC75043919B2652200180161 /* hpfont.hpfont in Resources */,
+				DC9CB8011ABABAF500363462 /* diamond.mod in Resources */,
 				DC5626A8198B75E80040453F /* ADV1.ROM in Resources */,
-				DC5454771A234F61003DB27E /* MLROM.MOD in Resources */,
-				DC5454571A234F61003DB27E /* FINANCE.MOD in Resources */,
-				DC54549A1A234F61003DB27E /* SANDMATH.MOD in Resources */,
-				DC5454B41A234F61003DB27E /* ZENROM.MOD in Resources */,
-				DC5454AC1A234F61003DB27E /* TOMSROM.MOD in Resources */,
-				DC5454641A234F61003DB27E /* HYDRACOMP.MOD in Resources */,
-				DC5454731A234F61003DB27E /* MEM.MOD in Resources */,
-				DC5454891A234F61003DB27E /* PRINTER.MOD in Resources */,
-				DC5454701A234F61003DB27E /* MDP1.MOD in Resources */,
+				DC9CB81D1ABABAF500363462 /* landnav.mod in Resources */,
+				DC9CB84E1ABABAF500363462 /* securities.mod in Resources */,
+				DC9CB7EF1ABABAF500363462 /* aviation.mod in Resources */,
+				DC9CB8551ABABAF500363462 /* skwidbc.mod in Resources */,
+				DC9CB8451ABABAF500363462 /* ram16k.mod in Resources */,
+				DC9CB7E71ABABAF500363462 /* afdc2.mod in Resources */,
+				DC9CB85F1ABABAF500363462 /* tomsrom.mod in Resources */,
 				DC5626A5198B75E80040453F /* CXFUNS1.ROM in Resources */,
-				DC54547C1A234F61003DB27E /* NAVPAC2.MOD in Resources */,
-				DC5454651A234F61003DB27E /* ICEBOX.MOD in Resources */,
-				DC5454811A234F61003DB27E /* NUT-CX.MOD in Resources */,
-				DC54542D1A234F61003DB27E /* 41Z.MOD in Resources */,
-				DC5454341A234F61003DB27E /* ALPHA.MOD in Resources */,
-				DC54544F1A234F61003DB27E /* DISASM4D.MOD in Resources */,
-				DC5454841A234F61003DB27E /* PETROLEUM.MOD in Resources */,
-				DC5454AE1A234F61003DB27E /* TOOLBOX.MOD in Resources */,
-				DC5454601A234F61003DB27E /* HOME-MGT.MOD in Resources */,
-				DC54549F1A234F61003DB27E /* SGS-GAS.MOD in Resources */,
-				DC54543D1A234F61003DB27E /* BEECHCRAFT.MOD in Resources */,
-				DC5454751A234F61003DB27E /* MLDLOS.MOD in Resources */,
+				DC9CB81C1ABABAF500363462 /* laitram-xq2.mod in Resources */,
+				DC9CB8651ABABAF500363462 /* wwramboxi.mod in Resources */,
+				DC9CB8071ABABAF500363462 /* ext-funs.mod in Resources */,
+				DC9CB8231ABABAF500363462 /* mctest.mod in Resources */,
+				DC9CB7FA1ABABAF500363462 /* clinical.mod in Resources */,
+				DC9CB7F41ABABAF500363462 /* card-rdr.mod in Resources */,
+				DC9CB80D1ABABAF500363462 /* games.mod in Resources */,
+				DC9CB82D1ABABAF500363462 /* muecke.mod in Resources */,
 				DC5626A0198B75E80040453F /* TIMER.ROM in Resources */,
-				DC5454B21A234F61003DB27E /* WWRAMBOXI.MOD in Resources */,
-				DC5454691A234F61003DB27E /* LANDNAV.MOD in Resources */,
-				DC54544B1A234F61003DB27E /* DAVID.MOD in Resources */,
-				DC5454351A234F61003DB27E /* APAC.MOD in Resources */,
-				DC54544C1A234F61003DB27E /* DIAGNOSTIC.MOD in Resources */,
+				DC9CB7F81ABABAF500363462 /* chemuser.mod in Resources */,
 				DC5626A3198B75E80040453F /* NUT1.ROM in Resources */,
-				DC5454321A234F61003DB27E /* AFDC1.MOD in Resources */,
-				DC5454A91A234F61003DB27E /* SURVEY.MOD in Resources */,
-				DC54544A1A234F61003DB27E /* DATA-ACQ.MOD in Resources */,
-				DC5454A31A234F61003DB27E /* SPEED-MACHINE2.MOD in Resources */,
-				DC5454951A234F61003DB27E /* ROAM-0.MOD in Resources */,
-				DC5454871A234F61003DB27E /* PPC.MOD in Resources */,
-				DC5454621A234F61003DB27E /* HPIL-DIAG.MOD in Resources */,
 				DC5626AA198B75E80040453F /* CrdRdr-1E.rom in Resources */,
+				DC9CB80F1ABABAF500363462 /* gmac3.mod in Resources */,
+				DC9CB81F1ABABAF500363462 /* machine.mod in Resources */,
+				DC9CB83E1ABABAF500363462 /* profiset.mod in Resources */,
+				DC9CB8511ABABAF500363462 /* service.mod in Resources */,
+				DC9CB8331ABABAF500363462 /* nut-cv-gff.mod in Resources */,
+				DC9CB8211ABABAF500363462 /* mathstat.mod in Resources */,
+				DC9CB8241ABABAF500363462 /* mdp1.mod in Resources */,
+				DC9CB8151ABABAF500363462 /* hpil-dev.mod in Resources */,
+				DC9CB8581ABABAF500363462 /* stat.mod in Resources */,
 				DC45285C19897DA600C40B6C /* Main.storyboard in Resources */,
-				DC5454471A234F61003DB27E /* CMT-200.MOD in Resources */,
-				DC5454A41A234F61003DB27E /* STANDARD.MOD in Resources */,
+				DC9CB8261ABABAF500363462 /* melbourne.mod in Resources */,
 				DC5626A7198B75E80040453F /* ADV2.ROM in Resources */,
-				DC5454481A234F61003DB27E /* CMT-300.MOD in Resources */,
-				DC5454421A234F61003DB27E /* CCD-OSX.MOD in Resources */,
-				DC5454381A234F61003DB27E /* ASTROLOGY.MOD in Resources */,
+				DC9CB8061ABABAF500363462 /* es-mldl.mod in Resources */,
+				DC9CB8371ABABAF500363462 /* petroleum.mod in Resources */,
+				DC9CB7FF1ABABAF500363462 /* david.mod in Resources */,
+				DC9CB8341ABABAF500363462 /* nut-cv.mod in Resources */,
+				DC9CB7EC1ABABAF500363462 /* astrology.mod in Resources */,
+				DC9CB8091ABABAF500363462 /* ext-io.mod in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DC45285F19897DA600C40B6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCE75BFF1A61B4FE002B2D7C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC9CB8F81ABAC87900363462 /* keyPressSound.wav in Resources */,
+				DC9CB8691ABABB0F00363462 /* 41z.mod in Resources */,
+				DC9CB86A1ABABB0F00363462 /* 83trinh.mod in Resources */,
+				DC9CB86B1ABABB0F00363462 /* adv-app.mod in Resources */,
+				DC9CB86C1ABABB0F00363462 /* advantage.mod in Resources */,
+				DC9CB86D1ABABB0F00363462 /* aecrom.mod in Resources */,
+				DC9CB86E1ABABB0F00363462 /* afdc1.mod in Resources */,
+				DC9CB86F1ABABB0F00363462 /* afdc2.mod in Resources */,
+				DC9CB8701ABABB0F00363462 /* alpha.mod in Resources */,
+				DC9CB8711ABABB0F00363462 /* apac.mod in Resources */,
+				DC9CB8721ABABB0F00363462 /* assembler3.mod in Resources */,
+				DC9CB8731ABABB0F00363462 /* assembler4.mod in Resources */,
+				DC9CB8741ABABB0F00363462 /* astrology.mod in Resources */,
+				DC9CB8751ABABB0F00363462 /* autofinance.mod in Resources */,
+				DC9CB8761ABABB0F00363462 /* autostart.mod in Resources */,
+				DC9CB8771ABABB0F00363462 /* aviation.mod in Resources */,
+				DC9CB8781ABABB0F00363462 /* bcmw.mod in Resources */,
+				DC9CB8791ABABB0F00363462 /* beechcraft.mod in Resources */,
+				DC9CB87A1ABABB0F00363462 /* bldrom.mod in Resources */,
+				DC9CB87B1ABABB0F00363462 /* boeing-b52.mod in Resources */,
+				DC9CB87C1ABABB0F00363462 /* card-rdr.mod in Resources */,
+				DC9CB87D1ABABB0F00363462 /* ccd-modified.mod in Resources */,
+				DC9CB87E1ABABB0F00363462 /* ccd-osx.mod in Resources */,
+				DC9CB87F1ABABB0F00363462 /* ccd.mod in Resources */,
+				DC9CB8801ABABB0F00363462 /* chemuser.mod in Resources */,
+				DC9CB8811ABABB0F00363462 /* circuit.mod in Resources */,
+				DC9CB8821ABABB0F00363462 /* clinical.mod in Resources */,
+				DC9CB8831ABABB0F00363462 /* cmt-200.mod in Resources */,
+				DC9CB8841ABABB0F00363462 /* cmt-300.mod in Resources */,
+				DC9CB8851ABABB0F00363462 /* cvpak.mod in Resources */,
+				DC9CB8861ABABB0F00363462 /* data-acq.mod in Resources */,
+				DC9CB8871ABABB0F00363462 /* david.mod in Resources */,
+				DC9CB8881ABABB0F00363462 /* diagnostic.mod in Resources */,
+				DC9CB8891ABABB0F00363462 /* diamond.mod in Resources */,
+				DC9CB88A1ABABB0F00363462 /* disasm4c.mod in Resources */,
+				DC9CB88B1ABABB0F00363462 /* disasm4d.mod in Resources */,
+				DC9CB88C1ABABB0F00363462 /* dyerka.mod in Resources */,
+				DC9CB88D1ABABB0F00363462 /* es-41.mod in Resources */,
+				DC9CB88E1ABABB0F00363462 /* es-mldl.mod in Resources */,
+				DC9CB88F1ABABB0F00363462 /* ext-funs.mod in Resources */,
+				DC9CB8901ABABB0F00363462 /* ext-il.mod in Resources */,
+				DC9CB8911ABABB0F00363462 /* ext-io.mod in Resources */,
+				DC9CB8921ABABB0F00363462 /* ext-mem.mod in Resources */,
+				DC9CB8931ABABB0F00363462 /* finance.mod in Resources */,
+				DC9CB8941ABABB0F00363462 /* forth.mod in Resources */,
+				DC9CB8951ABABB0F00363462 /* games.mod in Resources */,
+				DC9CB8961ABABB0F00363462 /* gmac2.mod in Resources */,
+				DC9CB8971ABABB0F00363462 /* gmac3.mod in Resources */,
+				DC9CB8981ABABB0F00363462 /* hem-2mem.mod in Resources */,
+				DC9CB8991ABABB0F00363462 /* hep-mem.mod in Resources */,
+				DC9CB89A1ABABB0F00363462 /* hepax-1c.mod in Resources */,
+				DC9CB89B1ABABB0F00363462 /* hepax.mod in Resources */,
+				DC9CB89C1ABABB0F00363462 /* home-mgt.mod in Resources */,
+				DC9CB89D1ABABB0F00363462 /* hpil-dev.mod in Resources */,
+				DC9CB89E1ABABB0F00363462 /* hpil-diag.mod in Resources */,
+				DC9CB89F1ABABB0F00363462 /* hpil.mod in Resources */,
+				DC9CB8A01ABABB0F00363462 /* hydracomp.mod in Resources */,
+				DC9CB8A11ABABB0F00363462 /* icebox.mod in Resources */,
+				DC9CB8A21ABABB0F00363462 /* icode.mod in Resources */,
+				DC9CB8A31ABABB0F00363462 /* ir-print.mod in Resources */,
+				DC9CB8A41ABABB0F00363462 /* laitram-xq2.mod in Resources */,
+				DC9CB8A51ABABB0F00363462 /* landnav.mod in Resources */,
+				DC9CB8A61ABABB0F00363462 /* lblapp1a.mod in Resources */,
+				DC9CB8A71ABABB0F00363462 /* machine.mod in Resources */,
+				DC9CB8A81ABABB0F00363462 /* math.mod in Resources */,
+				DC9CB8A91ABABB0F00363462 /* mathstat.mod in Resources */,
+				DC9CB8AA1ABABB0F00363462 /* mc-eprom.mod in Resources */,
+				DC9CB8AB1ABABB0F00363462 /* mctest.mod in Resources */,
+				DC9CB8AC1ABABB0F00363462 /* mdp1.mod in Resources */,
+				DC9CB8AD1ABABB0F00363462 /* mdp2.mod in Resources */,
+				DC9CB8AE1ABABB0F00363462 /* melbourne.mod in Resources */,
+				DC9CB8AF1ABABB0F00363462 /* mem.mod in Resources */,
+				DC9CB8B01ABABB0F00363462 /* mil-eng.mod in Resources */,
+				DC9CB8B11ABABB0F00363462 /* mldlos.mod in Resources */,
+				DC9CB8B21ABABB0F00363462 /* mleprom.mod in Resources */,
+				DC9CB8B31ABABB0F00363462 /* mlrom.mod in Resources */,
+				DC9CB8B41ABABB0F00363462 /* mmeprom.mod in Resources */,
+				DC9CB8B51ABABB0F00363462 /* muecke.mod in Resources */,
+				DC9CB8B61ABABB0F00363462 /* navcom2.mod in Resources */,
+				DC9CB8B71ABABB0F00363462 /* navigation.mod in Resources */,
+				DC9CB8B81ABABB0F00363462 /* navpac2.mod in Resources */,
+				DC9CB8B91ABABB0F00363462 /* nfcrom.mod in Resources */,
+				DC9CB8BA1ABABB0F00363462 /* nut-c.mod in Resources */,
+				DC9CB8BB1ABABB0F00363462 /* nut-cv-gff.mod in Resources */,
+				DC9CB8BC1ABABB0F00363462 /* nut-cv.mod in Resources */,
+				DC9CB8F31ABABCC000363462 /* nut-cx.mod in Resources */,
+				DC9CB8BD1ABABB0F00363462 /* paname.mod in Resources */,
+				DC9CB8BE1ABABB0F00363462 /* pccom.mod in Resources */,
+				DC9CB8BF1ABABB0F00363462 /* petroleum.mod in Resources */,
+				DC9CB8C01ABABB0F00363462 /* plotter.mod in Resources */,
+				DC9CB8C11ABABB0F00363462 /* ppc-melb.mod in Resources */,
+				DC9CB8C21ABABB0F00363462 /* ppc.mod in Resources */,
+				DC9CB8C31ABABB0F00363462 /* pride.mod in Resources */,
+				DC9CB8C41ABABB0F00363462 /* printer.mod in Resources */,
+				DC9CB8C51ABABB0F00363462 /* printerservice.mod in Resources */,
+				DC9CB8C61ABABB0F00363462 /* profiset.mod in Resources */,
+				DC9CB8C71ABABB1000363462 /* protocoder2.mod in Resources */,
+				DC9CB8C81ABABB1000363462 /* protopario.mod in Resources */,
+				DC9CB8C91ABABB1000363462 /* ps0f.mod in Resources */,
+				DC9CB8CA1ABABB1000363462 /* quadmem.mod in Resources */,
+				DC9CB8CB1ABABB1000363462 /* ram4k.mod in Resources */,
+				DC9CB8CC1ABABB1000363462 /* ram8k.mod in Resources */,
+				DC9CB8CD1ABABB1000363462 /* ram16k.mod in Resources */,
+				DC9CB8CE1ABABB1000363462 /* ram32k.mod in Resources */,
+				DC9CB8CF1ABABB1000363462 /* real-estate.mod in Resources */,
+				DC9CB8D01ABABB1000363462 /* roam-0.mod in Resources */,
+				DC9CB8D11ABABB1000363462 /* roam-0a.mod in Resources */,
+				DC9CB8D21ABABB1000363462 /* romsv01.mod in Resources */,
+				DC9CB8D31ABABB1000363462 /* sandbox.mod in Resources */,
+				DC9CB8D41ABABB1000363462 /* sandmath-III.mod in Resources */,
+				DC9CB8D51ABABB1000363462 /* sandmath.mod in Resources */,
+				DC9CB8D61ABABB1000363462 /* securities.mod in Resources */,
+				DC9CB8D71ABABB1000363462 /* sendpgm.mod in Resources */,
+				DC9CB8D81ABABB1000363462 /* service-cv.mod in Resources */,
+				DC9CB8D91ABABB1000363462 /* service.mod in Resources */,
+				DC9CB8DA1ABABB1000363462 /* sgs-gas.mod in Resources */,
+				DC9CB8DB1ABABB1000363462 /* sim.mod in Resources */,
+				DC9CB8DC1ABABB1000363462 /* simplex.mod in Resources */,
+				DC9CB8DD1ABABB1000363462 /* skwidbc.mod in Resources */,
+				DC9CB8DE1ABABB1000363462 /* speed-machine2.mod in Resources */,
+				DC9CB8DF1ABABB1000363462 /* standard.mod in Resources */,
+				DC9CB8E01ABABB1000363462 /* stat.mod in Resources */,
+				DC9CB8E11ABABB1000363462 /* stress.mod in Resources */,
+				DC9CB8E21ABABB1000363462 /* structural.mod in Resources */,
+				DC9CB8E31ABABB1000363462 /* sup-r-rom.mod in Resources */,
+				DC9CB8E41ABABB1000363462 /* survey.mod in Resources */,
+				DC9CB8E51ABABB1000363462 /* thermal.mod in Resources */,
+				DC9CB8E61ABABB1000363462 /* time.mod in Resources */,
+				DC9CB8E71ABABB1000363462 /* tomsrom.mod in Resources */,
+				DC9CB8E81ABABB1000363462 /* tomsrom1.mod in Resources */,
+				DC9CB8E91ABABB1000363462 /* toolbox.mod in Resources */,
+				DC9CB8EA1ABABB1000363462 /* usps.mod in Resources */,
+				DC9CB8EB1ABABB1000363462 /* wand.mod in Resources */,
+				DC9CB8EC1ABABB1000363462 /* wwrambox2.mod in Resources */,
+				DC9CB8ED1ABABB1000363462 /* wwramboxi.mod in Resources */,
+				DC9CB8EE1ABABB1000363462 /* wwramboxii.mod in Resources */,
+				DC9CB8EF1ABABB1000363462 /* zenrom.mod in Resources */,
+				DC9CB8F01ABABB1000363462 /* zeprom.mod in Resources */,
+				DC705C891A952F7C009C98D3 /* display.lookup in Resources */,
+				DC34A71F1A949CC900C90AB5 /* hpfont.hpfont in Resources */,
+				DC705C881A951B16009C98D3 /* hpchar.geom in Resources */,
+				DCE75C0B1A61B4FE002B2D7C /* Main.storyboard in Resources */,
+				DCE75C101A61B4FE002B2D7C /* LaunchScreen.xib in Resources */,
+				DCE75C0D1A61B4FE002B2D7C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCE75C131A61B4FE002B2D7C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1022,6 +1575,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC676D6C1A8F7C3C00D0C296 /* DisplayExtensions.swift in Sources */,
+				DC676D691A8F6DED00D0C296 /* Calculator.swift in Sources */,
 				DCA23A621A45EE2000BC2BD2 /* CPU_Class0.swift in Sources */,
 				DCAD8860199D37CB0027C925 /* MOD.swift in Sources */,
 				DC4AEB2A1A25E31A00ABF0D8 /* KeyboardShortcuts.swift in Sources */,
@@ -1032,6 +1587,7 @@
 				DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */,
 				DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */,
 				DC447DE61A34AD8B008FAB28 /* Application.swift in Sources */,
+				DCD09B0B1A8628A700F8D785 /* CocoaSpecific.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
 				DCFF74B01A1FE74A00C0DE9A /* DebugMemory.swift in Sources */,
 				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
@@ -1065,6 +1621,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DCE75BFD1A61B4FE002B2D7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCD147F91A9381FA00AE256B /* Extensions.swift in Sources */,
+				DCD09B151A86320000F8D785 /* DebugMemory.swift in Sources */,
+				DCD09B101A862ABE00F8D785 /* RomChip.swift in Sources */,
+				DCD09B231A8660E300F8D785 /* Keyboard.swift in Sources */,
+				DC676D661A8F6C0A00D0C296 /* CalculatorController.swift in Sources */,
+				DCD09B0F1A862A9100F8D785 /* DataOperations.swift in Sources */,
+				DCD09B0E1A862A5600F8D785 /* Timer.swift in Sources */,
+				DCD09B091A86281900F8D785 /* MOD.swift in Sources */,
+				DCD09B081A86261600F8D785 /* SoundOutput.swift in Sources */,
+				DCD09B071A86260000F8D785 /* Disassembly.swift in Sources */,
+				DC7B24A31A79144C0080F85A /* CPU.swift in Sources */,
+				DC7B24A41A79144C0080F85A /* CPU_Class0.swift in Sources */,
+				DC7B24A51A79144C0080F85A /* CPU_Class1.swift in Sources */,
+				DC7B24A61A79144C0080F85A /* CPU_Class2.swift in Sources */,
+				DC7B24A71A79144C0080F85A /* CPU_Class3.swift in Sources */,
+				DCD09B261A8663D500F8D785 /* Key.swift in Sources */,
+				DC676D6B1A8F76F800D0C296 /* DisplayExtensions.swift in Sources */,
+				DC676D681A8F6D7A00D0C296 /* Calculator.swift in Sources */,
+				DCD09B131A86319E00F8D785 /* DebugCPU.swift in Sources */,
+				DCD09B0D1A8628E000F8D785 /* CocoaTouchSpecific.swift in Sources */,
+				DC7B24A21A79141E0080F85A /* Bus.swift in Sources */,
+				DCE75C081A61B4FE002B2D7C /* ViewController.swift in Sources */,
+				DCE75C271A61BCBD002B2D7C /* Display.swift in Sources */,
+				DCE75C061A61B4FE002B2D7C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCE75C111A61B4FE002B2D7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCE75C1C1A61B4FE002B2D7C /* my41cx_iosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1072,6 +1667,11 @@
 			isa = PBXTargetDependency;
 			target = DC45284C19897DA500C40B6C /* my41cx */;
 			targetProxy = DC45286219897DA600C40B6C /* PBXContainerItemProxy */;
+		};
+		DCE75C171A61B4FE002B2D7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCE75C001A61B4FE002B2D7C /* my41cx-ios */;
+			targetProxy = DCE75C161A61B4FE002B2D7C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1082,6 +1682,22 @@
 				DC45285B19897DA600C40B6C /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DCE75C091A61B4FE002B2D7C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCE75C0A1A61B4FE002B2D7C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DCE75C0E1A61B4FE002B2D7C /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCE75C0F1A61B4FE002B2D7C /* Base */,
+			);
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1238,6 +1854,82 @@
 			};
 			name = Release;
 		};
+		DCE75C1D1A61B4FE002B2D7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iOS Development: Miroslav Perovic (RP33E49JG5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Miroslav Perovic (RP33E49JG5)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "my41cx-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1e0943ff-7688-4d3d-8494-f045db980703";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		DCE75C1E1A61B4FE002B2D7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Miroslav Perovic (LS2ZZ4TR54)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Miroslav Perovic (LS2ZZ4TR54)";
+				INFOPLIST_FILE = "my41cx-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8a215045-6930-4dd7-80e7-dfe7501da322";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCE75C1F1A61B4FE002B2D7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "my41cx-iosTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/my41cx-ios.app/my41cx-ios";
+			};
+			name = Debug;
+		};
+		DCE75C201A61B4FE002B2D7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "my41cx-iosTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/my41cx-ios.app/my41cx-ios";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1264,6 +1956,24 @@
 			buildConfigurations = (
 				DC45286F19897DA600C40B6C /* Debug */,
 				DC45287019897DA600C40B6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCE75C211A61B4FE002B2D7C /* Build configuration list for PBXNativeTarget "my41cx-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCE75C1D1A61B4FE002B2D7C /* Debug */,
+				DCE75C1E1A61B4FE002B2D7C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCE75C221A61B4FE002B2D7C /* Build configuration list for PBXNativeTarget "my41cx-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCE75C1F1A61B4FE002B2D7C /* Debug */,
+				DCE75C201A61B4FE002B2D7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

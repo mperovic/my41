@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Cocoa
 
 
 let MOD_FORMAT = "MOD1"
@@ -214,39 +213,40 @@ final class ModulePage {
 
 final class MOD {
 	var data: NSData?
-	var shortName: String
+	var shortName: String?
 	var fileSize = 0
 	var moduleHeader = ModuleHeader()
 	var modulePages = [ModulePage]()
-	var calculatorController: CalculatorController?
 
 	init () {
-		shortName = ""
 		data = nil
 	}
 	
 	func is41C() -> Bool {
-		let sName: NSString = shortName
-		if moduleHeader.category == .OS && sName.rangeOfString("nut-c.mod").location != NSNotFound {
-			return true
+		if let sName = self.shortName {
+			if moduleHeader.category == .OS && sName.rangeOfString("nut-c.mod") != nil {
+				return true
+			}
 		}
 		
 		return false
 	}
 	
 	func is41CV() -> Bool {
-		let sName: NSString = shortName
-		if moduleHeader.category == .OS && sName.rangeOfString("nut-cv.mod").location != NSNotFound {
-			return true
+		if let sName = self.shortName {
+			if moduleHeader.category == .OS && sName.rangeOfString("nut-cv.mod") != nil {
+				return true
+			}
 		}
 		
 		return false
 	}
 	
 	func is41CX() -> Bool {
-		let sName: NSString = shortName
-		if moduleHeader.category == .OS && sName.rangeOfString("nut-cx.mod").location != NSNotFound {
-			return true
+		if let sName = self.shortName {
+			if moduleHeader.category == .OS && sName.rangeOfString("nut-cx.mod") != nil {
+				return true
+			}
 		}
 		
 		return false
@@ -335,16 +335,14 @@ final class MOD {
 			return .Error("file does not have MOD extension")
 		}
 		
-		if let cController = self.calculatorController {
-			let mem = bus.memModules + moduleHeader.memModules
-			if mem > 4 {
-				return .Error("too many mem modules")
-			}
-			
-			let xmem = bus.XMemModules + moduleHeader.XMemModules
-			if xmem > 3 {
-				return .Error("too many xmem modules")
-			}
+		let mem = bus.memModules + moduleHeader.memModules
+		if mem > 4 {
+			return .Error("too many mem modules")
+		}
+		
+		let xmem = bus.XMemModules + moduleHeader.XMemModules
+		if xmem > 3 {
+			return .Error("too many xmem modules")
 		}
 		
 		if moduleHeader.original > 1 {
@@ -409,9 +407,9 @@ final class MOD {
 				return .Error("problem with loading file")
 			}
 			
-			fileSize = fileAttributes[NSFileSize]! as Int
-			data = NSData(contentsOfFile: filename, options: .DataReadingMappedIfSafe, error: nil)
-			shortName = filename.lastPathComponent.lowercaseString
+			self.fileSize = fileAttributes[NSFileSize]! as Int
+			self.data = NSData(contentsOfFile: filename, options: .DataReadingMappedIfSafe, error: nil)
+			self.shortName = filename.lastPathComponent.lowercaseString
 			
 			moduleHeader.fullFileName = filename
 			
@@ -420,9 +418,7 @@ final class MOD {
 			case .Success:
 				break
 			case .Error(let error): error
-				var alert:NSAlert = NSAlert()
-				alert.messageText = error
-				alert.runModal()
+				displayAlert(error)
 
 				return .Error(error)
 			}
@@ -433,12 +429,13 @@ final class MOD {
 			for var idx: UInt8 = 0; idx < moduleHeader.numPages; idx++ {
 				populateModulePage(Int(idx))
 			}
+			return .Success(Box(true))
 		} else {
 			data = nil
+			return .Success(Box(false))
 		}
 		
 //		description()
-		return .Success(Box(true))
 	}
 	
 	func categoryDescription() -> String? {
@@ -549,5 +546,5 @@ final class MOD {
 }
 
 func convertCCharToString(cstring: [CChar]) -> String {
-	return NSString(bytes: cstring, length: Int(cstring.count), encoding: NSASCIIStringEncoding)!
+	return NSString(bytes: cstring, length: Int(cstring.count), encoding: NSASCIIStringEncoding) as String!
 }
