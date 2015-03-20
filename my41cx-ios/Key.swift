@@ -159,7 +159,7 @@ class Key: UIButton {
 			} else if upperText?.string == "÷" || upperText?.string == "×" {
 				upperTextLayer.frame = CGRectMake(1.0, 0.0, rect.width - 2.0, (rect.height - 2.0) - 2.0)
 			} else {
-				upperTextLayer.frame = CGRectMake(1.0, 1.0, rect.width - 2.0, (rect.height / 2.0) - 2.0)
+				upperTextLayer.frame = CGRectMake(1.0, 2.0, rect.width - 2.0, (rect.height / 2.0) - 3.0)
 			}
 			upperTextLayer.string = upperText!
 			self.layer.addSublayer(upperTextLayer)
