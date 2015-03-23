@@ -20,6 +20,7 @@ class Key: UIButton {
 	var pressed: Bool = false
 
 	let roundedRadius: CGFloat = 3.0
+	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -49,8 +50,6 @@ class Key: UIButton {
 		
 		downKey()
 		highlighted = true
-		var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-		appDelegate.buttonPressed = true
 	}
 	
 	override func touchesEnded(touches: NSSet, withEvent event: UIEvent)
@@ -59,13 +58,12 @@ class Key: UIButton {
 		
 		upKey()
 		highlighted = false
-		var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-		appDelegate.buttonPressed = false
 	}
 	
 	override func drawRect(rect: CGRect) {
 		let context = UIGraphicsGetCurrentContext()
-		let yRatio = self.bounds.size.height / 38.0
+		let xRatio = self.bounds.size.height / 51.0
+		let yRatio = self.bounds.size.height / 42.0
 
 		CGContextSaveGState(context)
 		let backgroundGradient = CAGradientLayer()
@@ -140,9 +138,9 @@ class Key: UIButton {
 			
 			lowerTextLayer.font = "Helvetica"
 			if countElements(lowerText!) > 1 {
-				lowerTextLayer.fontSize = 11.0 * yRatio
-			} else {
 				lowerTextLayer.fontSize = 13.0 * yRatio
+			} else {
+				lowerTextLayer.fontSize = 15.0 * yRatio
 			}
 			lowerTextLayer.foregroundColor = UIColor(red: 0.341, green: 0.643, blue: 0.78, alpha: 1.0).CGColor
 			lowerTextLayer.string = lowerText!
@@ -153,13 +151,13 @@ class Key: UIButton {
 			let upperTextLayer = CATextLayer()
 			upperTextLayer.alignmentMode = kCAAlignmentCenter
 			if upperText?.string == "ON" || upperText?.string == "USER" || upperText?.string == "PRGM" || upperText?.string == "ALPHA" {
-				upperTextLayer.frame = CGRectMake(1.0, 3.0, rect.width - 2.0, (rect.height - 2.0) - 4.0)
+				upperTextLayer.frame = CGRectMake(1.0, 2.0, rect.width - 2.0, rect.height - 4.0)
 			} else if upperText?.string == "╋" || upperText?.string == "━" {
-				upperTextLayer.frame = CGRectMake(1.0, 2.0, rect.width - 2.0, (rect.height - 2.0) - 4.0)
+				upperTextLayer.frame = CGRectMake(1.0, 2.0, rect.width - 2.0, (rect.height / 2.0) - 2.0)
 			} else if upperText?.string == "÷" || upperText?.string == "×" {
-				upperTextLayer.frame = CGRectMake(1.0, 0.0, rect.width - 2.0, (rect.height - 2.0) - 2.0)
+				upperTextLayer.frame = CGRectMake(1.0, 0.0, rect.width - 2.0, (rect.height / 2.0))
 			} else {
-				upperTextLayer.frame = CGRectMake(1.0, 2.0, rect.width - 2.0, (rect.height / 2.0) - 3.0)
+				upperTextLayer.frame = CGRectMake(1.0, 1.0, rect.width - 2.0, (rect.height / 2.0))
 			}
 			upperTextLayer.string = upperText!
 			self.layer.addSublayer(upperTextLayer)

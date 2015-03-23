@@ -8,7 +8,7 @@
 
 import UIKit
 
-class iOSViewController: UIViewController {
+class iOSViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 	typealias theEvent = UIEvent
 	
 	@IBOutlet weak var displayBackgroundView: UIView!
@@ -88,7 +88,10 @@ class iOSViewController: UIViewController {
 	@IBOutlet weak var labelVIEW: UILabel!
 	@IBOutlet weak var buttonRS: Key!
 	
+	@IBOutlet weak var my41CX: UIButton!
+	
 	var yRatio: CGFloat = 1.0
+	var popoverController: UIPopoverController? = nil
 
 	override func viewWillAppear(animated: Bool) {
 		var aView = self.view as CalculatorView
@@ -104,23 +107,63 @@ class iOSViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		let defaults = NSUserDefaults.standardUserDefaults()
+		if defaults.boolForKey("firstRun") == false {
+			defaults.setBool(true, forKey: "firstRun")
+			defaults.setBool(false, forKey: "sound")
+			SOUND = false
+			defaults.synchronize()
+		}
+		
 		self.setNeedsStatusBarAppearanceUpdate()
 		
 		self.yRatio = self.view.bounds.size.height / 800.0
+		
+		my41CX.titleLabel?.font = UIFont(name: "Helvetica", size: 22.0 * yRatio)
 
 		// Do any additional setup after loading the view, typically from a nib.
+		let upperButtonsFont = UIFont(name: "Helvetica", size: 12.0)
 		
 		// ON
-		buttonOn.upperText = mutableAttributedStringFromString("ON", color: UIColor.whiteColor())
-		
+		var onString = mutableAttributedStringFromString("ON", color: UIColor.whiteColor())
+		if let actualFont = upperButtonsFont {
+			var onString = mutableAttributedStringFromString("ON", color: UIColor.whiteColor())
+			let onAttributes = [
+				NSFontAttributeName : actualFont,
+			]
+			onString.addAttributes(onAttributes, range: NSMakeRange(0, 2))
+			buttonOn.upperText = onString
+		}
+
 		// USER
-		buttonUSER.upperText = mutableAttributedStringFromString("USER", color: UIColor.whiteColor())
+		var userString = mutableAttributedStringFromString("USER", color: UIColor.whiteColor())
+		if let actualFont = upperButtonsFont {
+			let userAttributes = [
+				NSFontAttributeName : actualFont,
+			]
+			userString.addAttributes(userAttributes, range: NSMakeRange(0, 4))
+			buttonUSER.upperText = userString
+		}
 		
 		// PRGM
-		buttonPRGM.upperText = mutableAttributedStringFromString("PRGM", color: UIColor.whiteColor())
+		var prgmString = mutableAttributedStringFromString("PRGM", color: UIColor.whiteColor())
+		if let actualFont = upperButtonsFont {
+			let prgmAttributes = [
+				NSFontAttributeName : actualFont,
+			]
+			prgmString.addAttributes(prgmAttributes, range: NSMakeRange(0, 4))
+			buttonPRGM.upperText = prgmString
+		}
 		
 		// ALPHA
-		buttonALPHA.upperText = mutableAttributedStringFromString("ALPHA", color: UIColor.whiteColor())
+		var alphaString = mutableAttributedStringFromString("ALPHA", color: UIColor.whiteColor())
+		if let actualFont = upperButtonsFont {
+			let alphaAttributes = [
+				NSFontAttributeName : actualFont,
+			]
+			alphaString.addAttributes(alphaAttributes, range: NSMakeRange(0, 5))
+			buttonALPHA.upperText = alphaString
+		}
 		
 		// Label Σ-
 		let Helvetica13Font = UIFont(name: "Helvetica", size: 15.0 * yRatio)
@@ -177,11 +220,7 @@ class iOSViewController: UIViewController {
 		
 		// Button √x
 		if let actualFont = TimesNewRoman10Font {
-			var rootXString = mutableAttributedStringFromString("√x\u{0304}", color: UIColor.whiteColor())
-			let rootXAttributes1 = [
-				NSBaselineOffsetAttributeName: 1
-			]
-			rootXString.addAttributes(rootXAttributes1, range: NSMakeRange(2, 1))
+			var rootXString = mutableAttributedStringFromString("√x", color: UIColor.whiteColor())
 			let rootXAttributes2 = [
 				NSFontAttributeName : actualFont,
 			]
@@ -641,6 +680,40 @@ class iOSViewController: UIViewController {
 		} else {
 			return NSMutableAttributedString()
 		}
+	}
+	
+	@IBAction func unwindSettingsViewController(unwindSegue:UIStoryboardSegue) {
+		
+	}
+	
+	@IBAction func displaySettings(sender: UIButton) {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		var settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as SettingsViewController
+		settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+		settingsViewController.popoverPresentationController?.sourceView = my41CX
+		settingsViewController.popoverPresentationController?.sourceRect = my41CX.bounds
+		
+		var settingsPopover: UIPopoverPresentationController = settingsViewController.popoverPresentationController!
+		settingsPopover.permittedArrowDirections = UIPopoverArrowDirection.Any
+		settingsPopover.delegate = self
+		
+		presentViewController(
+			settingsViewController,
+			animated: true,
+			completion: nil);
+	}
+	
+	// #pragma mark - UIAdaptivePresentationControllerDelegate
+	func adaptivePresentationStyleForPresentationController(controller: UIPresentationController!) ->UIModalPresentationStyle {
+		return UIModalPresentationStyle.None
+	}
+	
+	func presentationController(controller:UIPresentationController!, viewControllerForAdaptivePresentationStyle style:UIModalPresentationStyle) -> UIViewController! {
+		let navController = UINavigationController(
+			rootViewController: controller.presentedViewController
+		)
+		
+		return navController
 	}
 }
 

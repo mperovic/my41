@@ -363,7 +363,7 @@ class ExpansionView: NSView, NSDraggingDestination {
 		]
 		let desiredType = paste.availableTypeFromArray(theArray)
 		if let data = paste.dataForType(desiredType!) {
-			filePath = NSString(data: data, encoding: NSUTF8StringEncoding) as String
+			filePath = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
 			preferencesModsViewController.removeModFile(filePath!)
 			preferencesModsViewController.tableView.reloadData()
 			

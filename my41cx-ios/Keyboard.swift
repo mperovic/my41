@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AVFoundation
+import AudioToolbox
 
 class iOSKeyboard : NSObject {
 	@IBOutlet weak var functionGroup: KeyGroup!
@@ -32,7 +33,14 @@ class iOSKeyboard : NSObject {
 class KeyGroup: UIView {
 	@IBOutlet weak var keyboard: iOSKeyboard!
 	
-	var audioPlayer:AVAudioPlayer? = nil
+	var mySound: SystemSoundID = 0
+	
+	required init(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		
+		let url = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("keyPressSound", ofType: "wav")!)
+		AudioServicesCreateSystemSoundID(url, &self.mySound)
+	}
 
 	override func drawRect(rect: CGRect) {
 		let context = UIGraphicsGetCurrentContext()
@@ -50,17 +58,11 @@ class KeyGroup: UIView {
 		let code: Int = key.keyCode! as Int
 		keyboard.keyWithCode(code, pressed: pressed)
 		
-		if pressed {
-			playSound()
+		if pressed && SOUND {
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {
+				AudioServicesPlaySystemSound(self.mySound)
+				return
+			}
 		}
-	}
-
-	func playSound() {
-		var error: NSError?
-		let url = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("keyPressSound", ofType: "wav")!)
-		
-		self.audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
-		self.audioPlayer?.prepareToPlay()
-		self.audioPlayer?.play()
 	}
 }

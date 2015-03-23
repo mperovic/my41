@@ -50,12 +50,12 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	{
 		if sender as NSObject == synchronyzeButton {
 			if synchronyzeButton.state == NSOnState {
-				SYNCHRONYZE = 1
+				SYNCHRONYZE = true
 			} else {
-				SYNCHRONYZE = 0
+				SYNCHRONYZE = false
 			}
 			let defaults = NSUserDefaults.standardUserDefaults()
-			defaults.setInteger(SYNCHRONYZE, forKey: "synchronyzeTime")
+			defaults.setBool(SYNCHRONYZE, forKey: "synchronyzeTime")
 			defaults.synchronize()
 		}
 	}

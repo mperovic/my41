@@ -73,10 +73,9 @@ class Timer : Peripheral {
 		
 		resetTimer()
 
-		let defaults = NSUserDefaults.standardUserDefaults()
-		SYNCHRONYZE = defaults.integerForKey("synchronyzeTime")
+		SYNCHRONYZE =  NSUserDefaults.standardUserDefaults().boolForKey("synchronyzeTime")
 
-		if SYNCHRONYZE == 1 {
+		if SYNCHRONYZE {
 			synchronyzeWithComputer()
 		}
 	}

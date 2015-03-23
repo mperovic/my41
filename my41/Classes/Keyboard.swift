@@ -45,9 +45,9 @@ class KeyGroup : NSView {
 		let code: Int = key.keyCode! as Int
 		keyboard.keyWithCode(code, pressed: pressed)
 		
-		if pressed {
-			playSound()
-		}
+//		if pressed {
+//			playSound()
+//		}
 	}
 	
 	override var acceptsFirstResponder: Bool { return true }

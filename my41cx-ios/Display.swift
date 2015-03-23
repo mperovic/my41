@@ -24,7 +24,7 @@ class Display: UIView, Peripheral {
 	var displayFont = DisplayFont()
 	var segmentPaths = DisplaySegmentPaths()
 	var annunciatorFont: UIFont?
-	let annunciatorFontScale: CGFloat = 1.0
+	var annunciatorFontScale: CGFloat = 1.0
 	let annunciatorFontSize: CGFloat = 10.0
 	let annunciatorBottomMargin: CGFloat = 0.0
 	var annunciatorPositions: [CGPoint] = [CGPoint](count: 12, repeatedValue: CGPointMake(0.0, 0.0))
@@ -46,10 +46,6 @@ class Display: UIView, Peripheral {
 		calculatorController.display = self
 		self.displayFont = self.loadFont("hpfont")
 		self.segmentPaths = DisplaySegmentPaths()
-		self.annunciatorFont = UIFont(
-			name: "Menlo",
-			size:self.annunciatorFontScale * self.annunciatorFontSize
-		)
 		self.on = true
 		self.updateCountdown = 2
 		bus.installPeripheral(self, inSlot: 0xFD)
@@ -79,6 +75,11 @@ class Display: UIView, Peripheral {
 
 	override func drawRect(rect: CGRect) {
 		if countElements(self.segmentPaths) == 0 {
+			self.annunciatorFont = UIFont(
+				name: "Menlo",
+				size:self.annunciatorFontScale * self.annunciatorFontSize
+			)
+			
 			self.segmentPaths = bezierPaths()
 			self.annunciatorPositions = self.calculateAnnunciatorPositions(self.annunciatorFont!, inRect: self.bounds)
 		}
@@ -137,8 +138,10 @@ class Display: UIView, Peripheral {
 	
 	func bezierPaths() -> DisplaySegmentPaths
 	{
-		let xRatio = self.bounds.size.width / 240.0
-		let yRatio = self.bounds.size.height / 38.0
+//		let xRatio = self.bounds.size.width / 240.0
+//		let yRatio = self.bounds.size.height / 38.0
+		let xRatio: CGFloat = 1.0
+		let yRatio: CGFloat = 1.0
 		var paths: DisplaySegmentPaths = DisplaySegmentPaths()
 
 		var bezierPath0 = UIBezierPath()
@@ -371,6 +374,7 @@ class Display: UIView, Peripheral {
 		// Distribute the annunciators evenly across the width of the display based on the sizes of their strings.
 		let xRatio = self.bounds.size.width / 240.0
 		let yRatio = self.bounds.size.height / 38.0
+
 		var positions: [CGPoint] = [CGPoint](count: numAnnunciators, repeatedValue: CGPointMake(0.0, 0.0))
 		var annunciatorWidths: [CGFloat] = [CGFloat](count: numAnnunciators, repeatedValue: 0.0)
 		var spaceWidth: CGFloat = 0.0

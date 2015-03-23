@@ -23,7 +23,8 @@ typealias byte = UInt8
 typealias word = UInt16
 
 var TRACE = 0
-var SYNCHRONYZE = 0
+var SYNCHRONYZE = false
+var SOUND = false
 
 let emptyDigit14:[Digit] = [Digit](count: 14, repeatedValue: 0)
 
@@ -322,7 +323,7 @@ final class CPU {
 		setPowerMode(.DeepSleep)
 		setPowerMode(.PowerOn)
 	}
-	
+
 	func keyWithCode(code: Int, pressed: Bool) {
 		if pressed {
 			let row = code >> 4

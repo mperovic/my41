@@ -18,10 +18,6 @@ class PreferencesContainerViewController: NSViewController {
 	var preferencesCalculatorViewController: PreferencesCalculatorViewController?
 	var preferencesModsViewController: PreferencesModsViewController?
 	
-	var oldMod1: String?
-	var oldMod2: String?
-	var oldMod3: String?
-	var oldMod4: String?
 	var newMod1: String?
 	var newMod2: String?
 	var newMod3: String?
@@ -43,20 +39,16 @@ class PreferencesContainerViewController: NSViewController {
 	override func viewDidLoad() {
 		let defaults = NSUserDefaults.standardUserDefaults()
 		if (defaults.stringForKey(HPPort1) != nil) {
-			oldMod1 = defaults.stringForKey(HPPort1)!
-			newMod1 = oldMod1
+			newMod1 = defaults.stringForKey(HPPort1)!
 		}
 		if (defaults.stringForKey(HPPort2) != nil) {
-			oldMod2 = defaults.stringForKey(HPPort2)!
-			newMod2 = oldMod2
+			newMod2 = defaults.stringForKey(HPPort2)!
 		}
 		if (defaults.stringForKey(HPPort3) != nil) {
-			oldMod3 = defaults.stringForKey(HPPort3)!
-			newMod3 = oldMod3
+			newMod3 = defaults.stringForKey(HPPort3)!
 		}
 		if (defaults.stringForKey(HPPort4) != nil) {
-			oldMod4 = defaults.stringForKey(HPPort4)!
-			newMod4 = oldMod4
+			newMod4 = defaults.stringForKey(HPPort4)!
 		}
 
 		loadPreferencesCalculatorViewController()
