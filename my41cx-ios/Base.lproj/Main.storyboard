@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7528.3" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7518.3"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -3110,16 +3110,19 @@
                                 <exclude reference="jzk-I0-jdH"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="gAH-ml-wIe"/>
+                                <exclude reference="7B8-cp-qw7"/>
+                                <exclude reference="agA-yd-ti3"/>
                                 <exclude reference="0DJ-sn-SQ3"/>
                                 <exclude reference="Inz-aN-AbG"/>
                                 <exclude reference="pVy-SN-Tn0"/>
+                                <exclude reference="8xs-Vg-KRn"/>
+                                <exclude reference="CTe-YN-n56"/>
+                                <exclude reference="nek-G4-tFb"/>
                                 <exclude reference="ArA-JL-Hae"/>
                                 <exclude reference="FaB-hR-da4"/>
                                 <exclude reference="GIN-mG-kri"/>
                                 <exclude reference="j2D-Ar-aXJ"/>
-                                <exclude reference="8xs-Vg-KRn"/>
-                                <exclude reference="CTe-YN-n56"/>
-                                <exclude reference="nek-G4-tFb"/>
                                 <exclude reference="AGg-Sn-Vf1"/>
                                 <exclude reference="Cc0-YY-Pa2"/>
                                 <exclude reference="RGZ-yU-oX6"/>
@@ -3128,9 +3131,6 @@
                                 <exclude reference="MFW-rQ-T21"/>
                                 <exclude reference="Vb1-Bn-NqE"/>
                                 <exclude reference="tPM-ZR-Vzx"/>
-                                <exclude reference="7B8-cp-qw7"/>
-                                <exclude reference="agA-yd-ti3"/>
-                                <exclude reference="gAH-ml-wIe"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3143,16 +3143,19 @@
                                 <include reference="jzk-I0-jdH"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="gAH-ml-wIe"/>
+                                <include reference="7B8-cp-qw7"/>
+                                <include reference="agA-yd-ti3"/>
                                 <include reference="0DJ-sn-SQ3"/>
                                 <include reference="Inz-aN-AbG"/>
                                 <include reference="pVy-SN-Tn0"/>
+                                <include reference="8xs-Vg-KRn"/>
+                                <include reference="CTe-YN-n56"/>
+                                <include reference="nek-G4-tFb"/>
                                 <include reference="ArA-JL-Hae"/>
                                 <include reference="FaB-hR-da4"/>
                                 <include reference="GIN-mG-kri"/>
                                 <exclude reference="j2D-Ar-aXJ"/>
-                                <include reference="8xs-Vg-KRn"/>
-                                <include reference="CTe-YN-n56"/>
-                                <include reference="nek-G4-tFb"/>
                                 <include reference="AGg-Sn-Vf1"/>
                                 <exclude reference="Cc0-YY-Pa2"/>
                                 <include reference="RGZ-yU-oX6"/>
@@ -3161,9 +3164,6 @@
                                 <include reference="MFW-rQ-T21"/>
                                 <include reference="Vb1-Bn-NqE"/>
                                 <include reference="tPM-ZR-Vzx"/>
-                                <include reference="7B8-cp-qw7"/>
-                                <include reference="agA-yd-ti3"/>
-                                <include reference="gAH-ml-wIe"/>
                             </mask>
                         </variation>
                         <connections>
