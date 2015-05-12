@@ -31,7 +31,7 @@ class CalculatorWindow : NSWindow {
 	override var acceptsFirstResponder: Bool { return true }
 
 	override func awakeFromNib() {
-		var appDelegate =  CalculatorApplication.sharedApplication().delegate as AppDelegate
+		var appDelegate =  CalculatorApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.window = self
 		
 		self.excludedFromWindowsMenu = false
@@ -57,7 +57,7 @@ class CalculatorWindow : NSWindow {
 	}
 	
 	override func mouseDragged(theEvent: NSEvent) {
-		let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+		let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
 		if appDelegate.buttonPressed {
 			return
 		}
@@ -119,10 +119,10 @@ class Display : NSView, Peripheral {
 		}
 	}
 	
-	override init() {
-		
-		super.init()
-	}
+//	override init() {
+//		
+//		super.init()
+//	}
 	
 	override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
@@ -164,7 +164,7 @@ class Display : NSView, Peripheral {
 		let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
 		let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)!
 		CTULookup = String(mString)
-		CTULookupLength = countElements(CTULookup!)
+		CTULookupLength = count(CTULookup!)
 	}
 
 	override var flipped:Bool{
@@ -215,7 +215,7 @@ class Display : NSView, Peripheral {
 					let nsString = annunciatorStrings[idx] as NSString
 					nsString.drawAtPoint(
 						NSMakePoint(0.0, 0.0),
-						withAttributes: attrs
+						withAttributes: attrs as [NSObject : AnyObject]
 					)
 					NSGraphicsContext.restoreGraphicsState()
 				}
@@ -674,11 +674,11 @@ class Display : NSView, Peripheral {
 		let path = NSBundle.mainBundle().pathForResource(file, ofType: "geom")
 		var data = NSData(contentsOfFile: path!, options: .DataReadingMappedIfSafe, error: nil)
 		var unarchiver = NSKeyedUnarchiver(forReadingWithData: data!)
-		let dict = unarchiver.decodeObjectForKey("bezierPaths") as NSDictionary
+		let dict = unarchiver.decodeObjectForKey("bezierPaths") as! NSDictionary
 		unarchiver.finishDecoding()
 		for idx in 0..<numDisplaySegments {
 			let key = String(idx)
-			let path = dict[key]! as NSBezierPath
+			let path = dict[key]! as! NSBezierPath
 			paths.append(path)
 		}
 		
@@ -702,7 +702,7 @@ class Display : NSView, Peripheral {
 		)
 		for idx in 0..<numAnnunciators {
 			let nsString: NSString = annunciatorStrings[idx] as NSString
-			let width = nsString.sizeWithAttributes(attrs).width
+			let width = nsString.sizeWithAttributes(attrs as [NSObject : AnyObject]).width
 			annunciatorWidths[idx] = width
 			totalWidth += width
 		}

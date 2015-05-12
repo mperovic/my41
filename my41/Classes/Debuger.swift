@@ -19,8 +19,8 @@ class DebugWindowController: NSWindowController {
 class DebugSplitViewController: NSSplitViewController {
 	
 	override func viewWillAppear() {
-		let menuVC = self.splitViewItems[0].viewController as DebugMenuViewController
-		let containerVC = self.splitViewItems[1].viewController as DebugContainerViewController
+		let menuVC = self.splitViewItems[0].viewController as! DebugMenuViewController
+		let containerVC = self.splitViewItems[1].viewController as! DebugContainerViewController
 		menuVC.debugContainerViewController = containerVC
 
 		self.view.addConstraint(
@@ -112,8 +112,8 @@ class DebugContainerViewController: NSViewController {
 
 class DebugerSegue: NSStoryboardSegue {
 	override func perform() {
-		let source = self.sourceController as NSViewController
-		let destination = self.destinationController as NSViewController
+		let source = self.sourceController as! NSViewController
+		let destination = self.destinationController as! NSViewController
 		
 		if source.view.subviews.count > 0 {
 			let aView: AnyObject = source.view.subviews[0]

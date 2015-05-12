@@ -131,7 +131,7 @@ struct CPURegisters {
 	
 	func pad(string : String, toSize: Int) -> String {
 		var padded = string
-		for i in 0..<toSize - countElements(string) {
+		for i in 0..<toSize - count(string) {
 			padded = "0" + padded
 		}
 		return padded

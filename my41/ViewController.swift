@@ -130,7 +130,7 @@ final class ViewController: NSViewController {
 	override func viewWillAppear() {
 		self.becomeFirstResponder()
 		
-		var aView = self.view as CalculatorView
+		var aView = self.view as! CalculatorView
 		aView.viewController = self
 
 		self.view.layer = CALayer()
@@ -698,7 +698,7 @@ final class ViewController: NSViewController {
 	override var acceptsFirstResponder: Bool { return true }
 
 	@IBAction func keyPressed(sender: AnyObject) {
-		let key = sender as Key
+		let key = sender as! Key
 		let keyCode = key.keyCode! as Int
 		println(keyCode)
 		

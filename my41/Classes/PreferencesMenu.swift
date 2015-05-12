@@ -105,7 +105,7 @@ class SelectedPreferencesView: NSView {
 		let font = NSFont(name: "Helvetica Bold", size: 14.0)
 		
 		let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
-		let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+		let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = NSTextAlignment.LeftTextAlignment
 		
 		if selected! {

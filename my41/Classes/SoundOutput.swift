@@ -56,7 +56,7 @@ let AMPLITUDE			= 10
 //--------------------------------------------------------------------------------
 
 // Fixed point representation of the sample rate.
-let SAMPLE_RATE_FIXED: UInt64		= UInt64(65536.0 * SAMPLE_RATE)
+let SAMPLE_RATE_FIXED: UInt64		= UInt64(44100.0 * SAMPLE_RATE)
 
 // We will wait until at least LATENCY_BUFFERS buffers of sound are filled before
 // starting to send them to the sound channel. The buffer size is
@@ -135,7 +135,7 @@ class SoundOutput {
 			incBufferPtr(&p)
 		}
 		
-		return Int(numFreeBuffers * Int(SAMPLES_PER_BUFFER))
+		return numFreeBuffers * SAMPLES_PER_BUFFER
 	}
 	
 	func incBufferPtr(inout ptr: Int) {
