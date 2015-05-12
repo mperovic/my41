@@ -142,9 +142,9 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		let modFiles = NSBundle.mainBundle().pathsForResourcesOfType("mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
-			let filePath = modFile as String
+			let filePath = modFile as! String
 			if filePath.lastPathComponent != "nut-c.mod" && filePath.lastPathComponent != "nut-cv.mod" && filePath.lastPathComponent != "nut-cx.mod" {
-				realModFiles.append(modFile as String)
+				realModFiles.append(modFile as! String)
 			}
 		}
 		
@@ -208,7 +208,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		
 		var cellView: NSTableCellView?
 		if let tColumn = tableColumn {
-			let cView = tableView.makeViewWithIdentifier(tColumn.identifier, owner: self) as NSTableCellView
+			let cView = tableView.makeViewWithIdentifier(tColumn.identifier, owner: self) as! NSTableCellView
 			cView.textField?.stringValue = filePath.lastPathComponent
 			cellView = cView
 		}
@@ -263,7 +263,9 @@ class ExpansionView: NSView, NSDraggingDestination {
 	
 	var preferencesModsViewController: PreferencesModsViewController!
 	
-	init(port: Int) {
+	convenience init(port: Int) {
+		self.init()
+		
 		let defaults = NSUserDefaults.standardUserDefaults()
 		switch port {
 		case 1:
@@ -282,9 +284,11 @@ class ExpansionView: NSView, NSDraggingDestination {
 			break
 		}
 		
-		super.init()
-		
 		self.port = port
+	}
+	
+	override init(frame frameRect: NSRect) {
+		super.init(frame: frameRect)
 	}
 	
 	required init?(coder: NSCoder) {
@@ -316,7 +320,7 @@ class ExpansionView: NSView, NSDraggingDestination {
 		
 		if let fPath: NSString = filePath {
 			let font = NSFont.systemFontOfSize(11.0)
-			var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+			var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
 			textStyle.alignment = .CenterTextAlignment
 			let attributes = [
 				NSFontAttributeName : font,

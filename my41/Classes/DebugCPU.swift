@@ -128,7 +128,7 @@ class DebugCPUViewController: NSViewController {
 	
 	func pad(string : String, toSize: Int) -> String {
 		var padded = string
-		for i in 0..<toSize - countElements(string) {
+		for i in 0..<toSize - count(string) {
 			padded = "0" + padded
 		}
 		return padded
@@ -150,7 +150,7 @@ class DebugCPUViewController: NSViewController {
 	
 	@IBAction func traceAction(sender: AnyObject)
 	{
-		if sender as NSObject == traceSwitch {
+		if sender as! NSObject == traceSwitch {
 			if traceSwitch.state == NSOnState {
 				TRACE = 1
 			} else {

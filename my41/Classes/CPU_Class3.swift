@@ -32,7 +32,7 @@ func op_GONC(#offset: Int) -> Bit													  // GONC
 		  a jump in the range of -64 to +63 from the address of this instruction.
 	*/
 	if cpu.reg.carry == 0 {
-		cpu.reg.PC = (cpu.reg.PC - 1 + offset) & 0xffff
+		cpu.reg.PC = Bits16(Int(cpu.reg.PC) - 1 + offset) & 0xffff
 	}
 	
 	return 0
@@ -62,7 +62,7 @@ func op_GOC(#offset: Int) -> Bit													   // GOC
 	      a jump in the range of -64 to +63 from the address of this instruction.
 	*/
 	if cpu.reg.carry == 1 {
-		cpu.reg.PC = (cpu.reg.PC - 1 + offset) & 0xffff
+		cpu.reg.PC = Bits16(Int(cpu.reg.PC) - 1 + offset) & 0xffff
 	}
 	
 	return 0

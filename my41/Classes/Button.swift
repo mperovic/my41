@@ -24,7 +24,7 @@ class Key: NSButton {
 		}
 		highlight(true)
 		
-		var appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+		var appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.buttonPressed = true
 	}
 	
@@ -34,7 +34,7 @@ class Key: NSButton {
 		}
 		highlight(false)
 		
-		var appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+		var appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.buttonPressed = false
 	}
 	
@@ -167,11 +167,11 @@ class ButtonCell: NSButtonCell {
 			} else {
 				lowerTextRect = NSMakeRect(1.0, 17.0, 36.0, 12.0)
 			}
-			var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+			var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
 			textStyle.alignment = .CenterTextAlignment
 			
 			var font: NSFont
-			if countElements(lowerText!) > 1 {
+			if count(lowerText!) > 1 {
 				font = NSFont(name: "Helvetica", size: 9.0)!
 			} else {
 				font = NSFont(name: "Helvetica", size: 11.0)!

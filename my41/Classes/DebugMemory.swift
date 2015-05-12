@@ -183,7 +183,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 	}
 	
 	func tableViewSelectionDidChange(notification: NSNotification) {
-		let tv = notification.object as NSTableView
+		let tv = notification.object as! NSTableView
 		bankSelected = tv.selectedRow
 		displaySelectedMemoryBank()
 	}

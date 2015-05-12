@@ -407,7 +407,7 @@ final class MOD {
 				return .Error("problem with loading file")
 			}
 			
-			self.fileSize = fileAttributes[NSFileSize]! as Int
+			self.fileSize = fileAttributes[NSFileSize]! as! Int
 			self.data = NSData(contentsOfFile: filename, options: .DataReadingMappedIfSafe, error: nil)
 			self.shortName = filename.lastPathComponent.lowercaseString
 			

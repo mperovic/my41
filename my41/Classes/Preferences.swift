@@ -216,8 +216,8 @@ class PreferencesViewController: NSViewController {
 class PreferencesSplitViewController: NSSplitViewController {
 	
 	override func viewWillAppear() {
-		let menuVC = self.splitViewItems[0].viewController as PreferencesMenuViewController
-		let containerVC = self.splitViewItems[1].viewController as PreferencesContainerViewController
+		let menuVC = self.splitViewItems[0].viewController as! PreferencesMenuViewController
+		let containerVC = self.splitViewItems[1].viewController as! PreferencesContainerViewController
 		menuVC.preferencesContainerViewController = containerVC
 		
 		self.view.addConstraint(
@@ -272,8 +272,8 @@ class PreferencesSplitViewController: NSSplitViewController {
 
 class PreferencesSegue: NSStoryboardSegue {
 	override func perform() {
-		let source = self.sourceController as NSViewController
-		let destination = self.destinationController as NSViewController
+		let source = self.sourceController as! NSViewController
+		let destination = self.destinationController as! NSViewController
 		
 		if source.view.subviews.count > 0 {
 			let aView: AnyObject = source.view.subviews[0]

@@ -1595,7 +1595,7 @@ class Disassembly {
 	func getLabelForCurrentAddress() -> String
 	{
 		if let label = getLocForAddress(Int(cpu.savedPC)) {
-			if countElements(label) < 8 {
+			if count(label) < 8 {
 				return label + "\t"
 			} else {
 				return label
