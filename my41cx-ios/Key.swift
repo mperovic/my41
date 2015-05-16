@@ -20,7 +20,7 @@ class Key: UIButton {
 	var pressed: Bool = false
 
 	let roundedRadius: CGFloat = 3.0
-	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+	let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -44,17 +44,15 @@ class Key: UIButton {
 		self.setNeedsDisplay()
 	}
 	
-	override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
-	{
-		super.touchesBegan(touches, withEvent: event)
+	override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+		super.touchesBegan(touches as Set<NSObject>, withEvent: event)
 		
 		downKey()
 		highlighted = true
 	}
 	
-	override func touchesEnded(touches: NSSet, withEvent event: UIEvent)
-	{
-		super.touchesEnded(touches, withEvent: event)
+	override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+		super.touchesEnded(touches as Set<NSObject>, withEvent: event)
 		
 		upKey()
 		highlighted = false
@@ -137,7 +135,7 @@ class Key: UIButton {
 			lowerTextLayer.alignmentMode = kCAAlignmentCenter
 			
 			lowerTextLayer.font = "Helvetica"
-			if countElements(lowerText!) > 1 {
+			if count(lowerText!) > 1 {
 				lowerTextLayer.fontSize = 13.0 * yRatio
 			} else {
 				lowerTextLayer.fontSize = 15.0 * yRatio

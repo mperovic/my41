@@ -94,7 +94,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 	var popoverController: UIPopoverController? = nil
 
 	override func viewWillAppear(animated: Bool) {
-		var aView = self.view as CalculatorView
+		var aView = self.view as! CalculatorView
 		aView.viewController = self
 		
 //		self.view.layer.cornerRadius = 6.0
@@ -688,7 +688,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 	
 	@IBAction func displaySettings(sender: UIButton) {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		var settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as SettingsViewController
+		var settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
 		settingsViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
 		settingsViewController.popoverPresentationController?.sourceView = my41CX
 		settingsViewController.popoverPresentationController?.sourceRect = my41CX.bounds

@@ -70,11 +70,11 @@ class Display: UIView, Peripheral {
 		let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
 		let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)!
 		CTULookup = String(mString)
-		CTULookupLength = countElements(CTULookup!)
+		CTULookupLength = count(CTULookup!)
 	}
 
 	override func drawRect(rect: CGRect) {
-		if countElements(self.segmentPaths) == 0 {
+		if count(self.segmentPaths) == 0 {
 			self.annunciatorFont = UIFont(
 				name: "Menlo",
 				size:self.annunciatorFontScale * self.annunciatorFontSize
@@ -389,7 +389,7 @@ class Display: UIView, Peripheral {
 		)
 		for idx in 0..<numAnnunciators {
 			let nsString: NSString = annunciatorStrings[idx] as NSString
-			let width = nsString.sizeWithAttributes(attrs).width
+			let width = nsString.sizeWithAttributes(attrs as [NSObject : AnyObject]).width
 			annunciatorWidths[idx] = width
 			totalWidth += width
 		}

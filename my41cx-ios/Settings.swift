@@ -297,7 +297,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 		path.fill()
 		
 		let font = UIFont.systemFontOfSize(15.0 * settingsViewController.yRatio)
-		var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+		var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = NSTextAlignment.Center
 		let attributes = [
 			NSFontAttributeName : font,
@@ -363,9 +363,9 @@ class MODsView: UIView, UIAlertViewDelegate {
 		let modFiles = NSBundle.mainBundle().pathsForResourcesOfType("mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
-			let filePath = modFile as String
+			let filePath = modFile as! String
 			if filePath.lastPathComponent != "nut-c.mod" && filePath.lastPathComponent != "nut-cv.mod" && filePath.lastPathComponent != "nut-cx.mod" {
-				realModFiles.append(modFile as String)
+				realModFiles.append(modFile as! String)
 			}
 		}
 		

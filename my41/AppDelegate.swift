@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var window: CalculatorWindow?
 	var buttonPressed = false
 	
-	func applicationDidFinishLaunching(aNotification: NSNotification?) {
+	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// Insert code here to initialize your application
 		let defaults = NSUserDefaults.standardUserDefaults()
 		if let memory = defaults.objectForKey("memory") as? NSData {
@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 
-	func applicationWillTerminate(aNotification: NSNotification?) {
+	func applicationWillTerminate(aNotification: NSNotification) {
 		// Insert code here to tear down your application
 		CalculatorController.sharedInstance.saveMemory()
 	}
