@@ -1587,7 +1587,9 @@ class Disassembly {
 			let result = try bus.readRomAddress(nextAddress)
 			return result
 		} catch {
-			print("error read ROM at Address: \(nextAddress)")
+			if TRACE != 0 {
+				print("error read ROM at Address: \(nextAddress)")
+			}
 			throw RomError.invalidAddress
 		}
 	}

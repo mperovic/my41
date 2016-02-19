@@ -206,7 +206,9 @@ func addOrSubtractDigits(
 				d = Int(firstNum[idx]) + 0xF - Int(secondNum[idx]) + Int(c)
 			}
 			if d < 0 {
-				print("\(idx) - \(firstNum), \(secondNum) -> \(d)")
+				if TRACE != 0 {
+					print("\(idx) - \(firstNum), \(secondNum) -> \(d)")
+				}
 			}
 		}
 		if mode == ArithMode.DEC_MODE && d > 9 {

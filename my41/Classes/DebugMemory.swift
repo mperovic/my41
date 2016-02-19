@@ -102,7 +102,9 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 						break
 					}
 				} catch {
-					print("error RAM address: \(addr)")
+					if TRACE != 0 {
+						print("error RAM address: \(addr)")
+					}
 				}
 			} else {
 				hidden = true

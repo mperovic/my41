@@ -189,7 +189,9 @@ class Calculator: NSObject {
 				}
 				ptr += 14
 			} catch {
-				print("error RAM address: \(addr)")
+				if TRACE != 0 {
+					print("error RAM address: \(addr)")
+				}
 			}
 		}
 		data.appendBytes(memoryArray, length: count)

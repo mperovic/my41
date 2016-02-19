@@ -2155,7 +2155,9 @@ func op_DATAeqC() -> Bit														    // DATA=C
 		do {
 			try bus.writeRamAddress(cpu.reg.ramAddress, from: cpu.reg.C)
 		} catch _ {
-			print("error writing ram at address: \(cpu.reg.ramAddress)")
+			if TRACE != 0 {
+				print("error writing ram at address: \(cpu.reg.ramAddress)")
+			}
 		}
 	} else {
 		bus.writeDataToPeripheral(
@@ -2394,7 +2396,9 @@ func op_CeqDATA(param: Int) -> Bit													// C=DATA
 		do {
 			try bus.readRamAddress(cpu.reg.ramAddress, into: &cpu.reg.C)
 		} catch {
-			print("error RAM address: \(cpu.reg.ramAddress)")
+			if TRACE != 0 {
+				print("error RAM address: \(cpu.reg.ramAddress)")
+			}
 		}
 	} else {
 		bus.readFromRegister(
@@ -2443,7 +2447,9 @@ func op_CeqREGN(param: Int) -> Bit												// C=REGN
 		do {
 			try bus.readRamAddress(cpu.reg.ramAddress, into: &cpu.reg.C)
 		} catch {
-			print("error RAM address: \(cpu.reg.ramAddress)")
+			if TRACE != 0 {
+				print("error RAM address: \(cpu.reg.ramAddress)")
+			}
 		}
 	} else {
 		bus.readFromRegister(

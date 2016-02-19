@@ -700,10 +700,14 @@ final class ViewController: NSViewController {
 	@IBAction func keyPressed(sender: AnyObject) {
 		let key = sender as! Key
 		let keyCode = key.keyCode! as Int
-		print(keyCode)
+		if TRACE != 0 {
+			print(keyCode)
+		}
 		
 		cpu.keyWithCode(keyCode, pressed: true)
-		print(keyCode)
+		if TRACE != 0 {
+			print(keyCode)
+		}
 		cpu.keyWithCode(keyCode, pressed: false)
 	}
 }

@@ -145,7 +145,9 @@ class DebugCPUViewController: NSViewController {
 
 	override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
 		let segid = segue.identifier ?? "(none)"
-		print("\(__FUNCTION__) hit, segue ID = \(segid)")
+		if TRACE != 0 {
+			print("\(__FUNCTION__) hit, segue ID = \(segid)")
+		}
 	}
 	
 	@IBAction func traceAction(sender: AnyObject)

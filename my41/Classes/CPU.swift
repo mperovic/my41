@@ -96,8 +96,10 @@ struct CPURegisters {
 		let pQ = NSString(format:"%1X", Q) as String
 		let strFI = String(self.FI, radix:2)
 		let FI = pad(strFI, toSize: 14)
-		print("A=\(displayOrderedDigits(A)) B=\(displayOrderedDigits(B)) C=\(displayOrderedDigits(C)) Stack=\(stack0) \(stack1) \(stack2) \(stack3)")
-		print("M=\(displayOrderedDigits(M)) N=\(displayOrderedDigits(N)) Cr=\(carry)\(pointP)P=\(pP)\(pointQ)Q=\(pQ) G=\(displayOrderedDigits(G)) ST=\(bitsXST) \(bitsST)")
+		if TRACE != 0 {
+			print("A=\(displayOrderedDigits(A)) B=\(displayOrderedDigits(B)) C=\(displayOrderedDigits(C)) Stack=\(stack0) \(stack1) \(stack2) \(stack3)")
+			print("M=\(displayOrderedDigits(M)) N=\(displayOrderedDigits(N)) Cr=\(carry)\(pointP)P=\(pP)\(pointQ)Q=\(pQ) G=\(displayOrderedDigits(G)) ST=\(bitsXST) \(bitsST)")
+		}
 		if let timer = bus.timer {
 			let CLK_A = timer.registers.CLK[1]
 			let CLK_B = timer.registers.CLK[0]
@@ -112,11 +114,15 @@ struct CPURegisters {
 			let TMR_S = NSString(format:"%04X", TMR_Sb) as String
 			let ACC_F = NSString(format:"%04X", ACC_Fb) as String
 			let aTimer = timer.timerSelected.rawValue == 0 ? "B" : "A"
-			print("CLK_A=\(displayOrderedDigits(CLK_A)) ALM_A=\(displayOrderedDigits(ALM_A)) SCR_A=\(displayOrderedDigits(SCR_A))")
-			print("CLK_B=\(displayOrderedDigits(CLK_B)) ALM_B=\(displayOrderedDigits(ALM_B)) SCR_B=\(displayOrderedDigits(SCR_B))")
-			print("TMR_S=\(TMR_S) ACC_F=\(ACC_F) Timer=\(aTimer) FI:\(FI)")
+			if TRACE != 0 {
+				print("CLK_A=\(displayOrderedDigits(CLK_A)) ALM_A=\(displayOrderedDigits(ALM_A)) SCR_A=\(displayOrderedDigits(SCR_A))")
+				print("CLK_B=\(displayOrderedDigits(CLK_B)) ALM_B=\(displayOrderedDigits(ALM_B)) SCR_B=\(displayOrderedDigits(SCR_B))")
+				print("TMR_S=\(TMR_S) ACC_F=\(ACC_F) Timer=\(aTimer) FI:\(FI)")
+			}
 		}
-		print("RAM Addr=\(ramAddr) Perph Addr=\(periph) Base=\(mode.rawValue) KY=\(KY) Keydown=\(keyDown)")
+		if TRACE != 0 {
+			print("RAM Addr=\(ramAddr) Perph Addr=\(periph) Base=\(mode.rawValue) KY=\(KY) Keydown=\(keyDown)")
+		}
 	}
 	
 	func displayOrderedDigits(digits: [Digit]) -> String
@@ -411,7 +417,9 @@ final class CPU {
 			let result = try bus.readRomAddress(Int(reg.PC++))
 			return result
 		} catch {
-			print("error read ROM at Address: \(reg.PC)")
+			if TRACE != 0 {
+				print("error read ROM at Address: \(reg.PC)")
+			}
 			throw RomError.invalidAddress
 		}
 	}
@@ -997,7 +1005,9 @@ final class CPU {
 	
 	func op_INVALID(parameter: String) -> Bit
 	{
-		print("Invalid: " + parameter)
+		if TRACE != 0 {
+			print("Invalid: " + parameter)
+		}
 		return 0
 	}
 }

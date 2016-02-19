@@ -188,7 +188,9 @@ class SoundOutput {
 	func sendPendingBuffers() {
 		while gNumPendingBuffers != 0  {
 			startUpSoundChannel()
-			print("Sending buffer \(gBufferSendPtr)")
+			if TRACE != 0 {
+				print("Sending buffer \(gBufferSendPtr)")
+			}
 			let buf: SoundBuffer = gBuffers[gBufferSendPtr]
 			var cmd = SndCommand()
 			cmd.cmd = .bufferCmd
@@ -207,7 +209,9 @@ class SoundOutput {
 	
 	func startUpSoundChannel() {
 		if gSndChannel != nil {
-			print("Allocating sound channel\n")
+			if TRACE != 0 {
+				print("Allocating sound channel\n")
+			}
 //			SndNewChannel(&gSndChannel, sampledSynth, 0, (SndCallBackUPP)SoundCallback)
 		}
 	}
@@ -218,16 +222,22 @@ class SoundOutput {
 			buf = gBuffers[gBufferAllocPtr]
 			if buf?.inUse == true {
 				if gDroppedSampleCount == 0 {
-					print("Buffer \(gBufferAllocPtr) is in use\n")
+					if TRACE != 0 {
+						print("Buffer \(gBufferAllocPtr) is in use\n")
+					}
 				}
 				++gDroppedSampleCount
 				return nil
 			}
 			if gDroppedSampleCount != 0 {
-				print("Buffer \(gBufferAllocPtr) is free after \(gDroppedSampleCount) dropped samples\n")
+				if TRACE != 0 {
+					print("Buffer \(gBufferAllocPtr) is free after \(gDroppedSampleCount) dropped samples\n")
+				}
 				gDroppedSampleCount = 0
 			}
-			print("Starting to fill buffer \(gBufferAllocPtr)\n")
+			if TRACE != 0 {
+				print("Starting to fill buffer \(gBufferAllocPtr)\n")
+			}
 			initBuffer(&buf!)
 			buf?.inUse = true
 			incBufferPtr(&gBufferAllocPtr)
@@ -243,7 +253,9 @@ class SoundOutput {
 			if sample == gLastSample {
 				return
 			}
-			print("Starting to buffer sound\n")
+			if TRACE != 0 {
+				print("Starting to buffer sound\n")
+			}
 			gBufferingSound = true
 		}
 		
