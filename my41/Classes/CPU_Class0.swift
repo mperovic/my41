@@ -959,9 +959,18 @@ func op_FEXSB() -> Bit																 // FEXSB
 		  timing loop that times the duration of the fo_bus output should be tagged to
 		  execute at normal bus speed
 	*/
-	let temp = cpu.reg.ST
-	cpu.reg.ST = cpu.reg.T
-	cpu.reg.T = temp
+	
+	// this is used to create tones.  Normally FF and 00 are switched back and forth.
+	// one machine cycle is about 158 microseconds.
+	// frequency = 1/((number of FFh cycles + number of 00h cycles)x 158 10E-6
+	// Hepax Vol II pg 111,131, Zenrom Manual pg. 81, HP41 Schematic
+	swap(&cpu.reg.ST, &cpu.reg.T)
+//	let temp = cpu.reg.ST
+//	cpu.reg.ST = cpu.reg.T
+//	cpu.reg.T = temp
+	if cpu.soundOutput.soundMode == .Speaker {
+//		Speaker(F_REG, 1)
+	}
 	
 	return 0
 }
@@ -1635,7 +1644,7 @@ func op_SELPF(param: Int) -> Bit												 // SELPF
 	switch param {
 	case 0xE, 0x9:
 		// Printer ROM is loaded?
-		if let printerRom = bus.romChipInSlot(6) {
+		if let _ = bus.romChipInSlot(6) {
 			cpu.reg.peripheral = 1
 		}
 	default:
@@ -1679,14 +1688,10 @@ func op_REGNeqC(param: Int) -> Bit													// REGN=C
 	if cpu.reg.peripheral == 0 || cpu.reg.ramAddress <= 0x00F || cpu.reg.ramAddress >= 0x020 {
 		// RAM is currently selected peripheral
 		cpu.reg.ramAddress = (cpu.reg.ramAddress & 0x0FF0) | Bits12(param)
-		switch bus.writeRamAddress(
-			cpu.reg.ramAddress,
-			from: cpu.reg.C
-		) {
-		case .Success(let result):
-			break
-		case .Error (let error):
-			break
+		do {
+			try bus.writeRamAddress(cpu.reg.ramAddress, from: cpu.reg.C)
+		} catch _ {
+//			displayAlert("error writing ram at address: \(cpu.reg.ramAddress)")
 		}
 	} else {
 		switch (cpu.reg.peripheral) {
@@ -1787,6 +1792,29 @@ func op_ROMBLK() -> Bit																  // ROMBLK
 		HEPAX may be on top of a RAM page and when it moves the RAM (alternate)
 		becomes visible
 	*/
+	
+	//TODO: CHECK!!!!
+	let destination = cpu.reg.C[0] - 1
+	for slot in 0x5..<0xf {
+		for bank in 1..<4 {
+			guard (bus.romChips[slot][bank - 1] != nil) else {
+				continue
+			}
+			if let rom = bus.romChips[slot][bank - 1] {
+				if rom.HEPAX == 0 || rom.RAM != 0 {
+					// only move hepax ROM and not RAM
+					continue
+				}
+			}
+			
+			let altRom = bus.romChips[Int(destination)][bank - 1]							// if there is something at the dest page, save it as the dest alt page (does not normally happen)
+			bus.romChips[Int(destination)][bank - 1] = bus.romChips[slot][bank - 1]
+			if let modulePage = bus.romChips[slot][bank - 1]?.altPage {
+				bus.romChips[slot][bank - 1] = RomChip(fromBIN: modulePage.image, actualBankGroup: modulePage.actualBankGroup)		// move src alt page to primary now that hepax is moved off it
+				bus.romChips[Int(destination)][bank - 1] = altRom
+			}
+		}
+	}
 
 	return 0
 }
@@ -1916,10 +1944,9 @@ func op_LDI() -> Bit																  // LDI
 		  instruction.
 	*/
 	var value: Int
-	switch cpu.fetch() {
-	case .Success(let result):
-		value = result.unbox
-	case .Error(let error):
+	do {
+		value = try cpu.fetch()
+	} catch {
 		value = 0
 	}
 	bitsToDigits(
@@ -1993,7 +2020,7 @@ func op_CeqSTK() -> Bit																// C=STK
 	C=STK									0110_1100_00							1
 	=========================================================================================
 	*/
-	var word = cpu.popReturnStack()
+	let word = cpu.popReturnStack()
 	bitsToDigits(
 		bits: Int(word),
 		destination: &cpu.reg.C,
@@ -2007,9 +2034,13 @@ func op_CeqSTK() -> Bit																// C=STK
 func op_WPTOG() -> Bit
 {
 	/* WPTOG - Toggles write protection on HEPAX RAM at page C[0] */
-	
-	//TODO: Implement
-	
+	let page = cpu.reg.C[0] - 1
+	if let romChip = bus.romChipInSlot(Bits4(page), bank: Bits4(1)) {
+		if romChip.HEPAX != 0 || romChip.RAM != 0 {
+			romChip.writable = !romChip.writable
+		}
+	}
+
 	return 0
 }
 
@@ -2121,14 +2152,10 @@ func op_DATAeqC() -> Bit														    // DATA=C
 		  the RAM chip select.
 	*/
 	if cpu.reg.peripheral == 0 || cpu.reg.peripheral == 0xFB {
-		switch bus.writeRamAddress(
-			cpu.reg.ramAddress,
-			from: cpu.reg.C) {
-		case .Success(let result):
-			break
-		case .Error (let error):
-//			println(error)
-			break
+		do {
+			try bus.writeRamAddress(cpu.reg.ramAddress, from: cpu.reg.C)
+		} catch _ {
+			print("error writing ram at address: \(cpu.reg.ramAddress)")
 		}
 	} else {
 		bus.writeDataToPeripheral(
@@ -2364,14 +2391,10 @@ func op_CeqDATA(param: Int) -> Bit													// C=DATA
 	data_bus.
 	*/
 	if (cpu.reg.peripheral == 0 || (cpu.reg.ramAddress <= 0x000F) || (cpu.reg.ramAddress >= 0x0020)) {
-		switch bus.readRamAddress(
-			cpu.reg.ramAddress,
-			into: &cpu.reg.C
-		) {
-		case .Success(let result):
-			break
-		case .Error (let error):
-			break
+		do {
+			try bus.readRamAddress(cpu.reg.ramAddress, into: &cpu.reg.C)
+		} catch {
+			print("error RAM address: \(cpu.reg.ramAddress)")
 		}
 	} else {
 		bus.readFromRegister(
@@ -2417,15 +2440,10 @@ func op_CeqREGN(param: Int) -> Bit												// C=REGN
 	*/
 	if (cpu.reg.peripheral == 0 || (cpu.reg.ramAddress <= 0x000F) || (cpu.reg.ramAddress >= 0x0020)) {
 		cpu.reg.ramAddress = Bits12(cpu.reg.ramAddress & 0x03F0) | Bits12(param)
-		switch bus.readRamAddress(
-			cpu.reg.ramAddress,
-			into: &cpu.reg.C
-		) {
-		case .Success(let result):
-			break
-		case .Error (let error):
-//			println(error)
-			break
+		do {
+			try bus.readRamAddress(cpu.reg.ramAddress, into: &cpu.reg.C)
+		} catch {
+			print("error RAM address: \(cpu.reg.ramAddress)")
 		}
 	} else {
 		bus.readFromRegister(

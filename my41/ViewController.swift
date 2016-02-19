@@ -130,7 +130,7 @@ final class ViewController: NSViewController {
 	override func viewWillAppear() {
 		self.becomeFirstResponder()
 		
-		var aView = self.view as! CalculatorView
+		let aView = self.view as! CalculatorView
 		aView.viewController = self
 
 		self.view.layer = CALayer()
@@ -158,7 +158,7 @@ final class ViewController: NSViewController {
 		// Label Σ-
 		let Helvetica13Font = NSFont(name: "Helvetica", size: 13.0)
 		if let actualFont = Helvetica13Font {
-			var sigmaMinusString = mutableAttributedStringFromString("Σ-", color: nil)
+			let sigmaMinusString = mutableAttributedStringFromString("Σ-", color: nil)
 			let sigmaMinusAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
@@ -168,7 +168,7 @@ final class ViewController: NSViewController {
 		}
 		
 		// Button Σ+
-		var sigmaPlusString = mutableAttributedStringFromString("Σ+", color: NSColor.whiteColor())
+		let sigmaPlusString = mutableAttributedStringFromString("Σ+", color: NSColor.whiteColor())
 		let sigmaPlusAttributes = [
 			NSBaselineOffsetAttributeName: 1
 		]
@@ -178,7 +178,7 @@ final class ViewController: NSViewController {
 		// Label yx
 		let TimesNewRoman10Font = NSFont(name: "Times New Roman", size: 10.0)
 		if let actualFont = TimesNewRoman10Font {
-			var yxString = mutableAttributedStringFromString("yx", color: nil)
+			let yxString = mutableAttributedStringFromString("yx", color: nil)
 			let yxAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
@@ -189,7 +189,7 @@ final class ViewController: NSViewController {
 		
 		// Button 1/x
 		if let actualFont = TimesNewRoman10Font {
-			var oneXString = mutableAttributedStringFromString("1/x", color: NSColor.whiteColor())
+			let oneXString = mutableAttributedStringFromString("1/x", color: NSColor.whiteColor())
 			let oneXAttributes = [
 				NSFontAttributeName : actualFont,
 			]
@@ -200,7 +200,7 @@ final class ViewController: NSViewController {
 		// Label x^2
 		let TimesNewRoman12Font = NSFont(name: "Times New Roman", size: 12.0)
 		if let actualFont = TimesNewRoman12Font {
-			var xSquareString = mutableAttributedStringFromString("x\u{00B2}", color: nil)
+			let xSquareString = mutableAttributedStringFromString("x\u{00B2}", color: nil)
 			let xSquareAttributes = [
 				NSFontAttributeName : actualFont,
 			]
@@ -210,7 +210,7 @@ final class ViewController: NSViewController {
 		
 		// Button √x
 		if let actualFont = TimesNewRoman10Font {
-			var rootXString = mutableAttributedStringFromString("√x\u{0304}", color: NSColor.whiteColor())
+			let rootXString = mutableAttributedStringFromString("√x\u{0304}", color: NSColor.whiteColor())
 			let rootXAttributes1 = [
 				NSBaselineOffsetAttributeName: 1
 			]
@@ -224,7 +224,7 @@ final class ViewController: NSViewController {
 		
 		// Label 10^x
 		if let actualFont = TimesNewRoman10Font {
-			var tenXString = mutableAttributedStringFromString("10x", color: nil)
+			let tenXString = mutableAttributedStringFromString("10x", color: nil)
 			let tenXAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
@@ -239,7 +239,7 @@ final class ViewController: NSViewController {
 		// Label e^x
 		let Helvetica12Font = NSFont(name: "Helvetica", size: 12.0)
 		if let actualFont = TimesNewRoman10Font {
-			var eXString = mutableAttributedStringFromString("ex", color: nil)
+			let eXString = mutableAttributedStringFromString("ex", color: nil)
 			let eXAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
@@ -264,7 +264,7 @@ final class ViewController: NSViewController {
 		// Button x≷y
 		let TimesNewRoman14Font = NSFont(name: "Times New Roman", size: 14.0)
 		if let actualFont = TimesNewRoman14Font {
-			var XexYString = mutableAttributedStringFromString("x≷y", color: NSColor.whiteColor())
+			let XexYString = mutableAttributedStringFromString("x≷y", color: NSColor.whiteColor())
 			let XexYAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
@@ -282,7 +282,7 @@ final class ViewController: NSViewController {
 		// Label SIN-1
 		let TimesNewRoman09Font = NSFont(name: "Times New Roman", size: 9.0)
 		if let actualFont = TimesNewRoman09Font {
-			var sin1String = mutableAttributedStringFromString("SIN-1", color: nil)
+			let sin1String = mutableAttributedStringFromString("SIN-1", color: nil)
 			let sinAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
@@ -296,7 +296,7 @@ final class ViewController: NSViewController {
 		
 		// Label COS-1
 		if let actualFont = TimesNewRoman09Font {
-			var cos1String = mutableAttributedStringFromString("COS-1", color: nil)
+			let cos1String = mutableAttributedStringFromString("COS-1", color: nil)
 			let cosAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
@@ -310,7 +310,7 @@ final class ViewController: NSViewController {
 		
 		// Label TAN-1
 		if let actualFont = TimesNewRoman09Font {
-			var tan1String = mutableAttributedStringFromString("TAN-1", color: nil)
+			let tan1String = mutableAttributedStringFromString("TAN-1", color: nil)
 			let tanAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
@@ -367,7 +367,7 @@ final class ViewController: NSViewController {
 		// Label CL X/A
 		let TimesNewRoman11Font = NSFont(name: "Times New Roman", size: 11.0)
 		if let actualFont = TimesNewRoman11Font {
-			var clxaString = mutableAttributedStringFromString("CL X/A", color: nil)
+			let clxaString = mutableAttributedStringFromString("CL X/A", color: nil)
 			let clxaAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -378,7 +378,7 @@ final class ViewController: NSViewController {
 		// Button Back
 		let Helvetica11Font = NSFont(name: "Helvetica", size: 11.0)
 		if let actualFont = Helvetica11Font {
-			var backString = mutableAttributedStringFromString("←", color: NSColor.whiteColor())
+			let backString = mutableAttributedStringFromString("←", color: NSColor.whiteColor())
 			let backAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -388,7 +388,7 @@ final class ViewController: NSViewController {
 		
 		// Label x=y ?
 		if let actualFont = TimesNewRoman14Font {
-			var xeqyString = mutableAttributedStringFromString("x=y ?", color: nil)
+			let xeqyString = mutableAttributedStringFromString("x=y ?", color: nil)
 			let xeqyAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -399,7 +399,7 @@ final class ViewController: NSViewController {
 		// Button Minus
 		let Helvetica09Font = NSFont(name: "Helvetica", size: 9.0)
 		if let actualFont = Helvetica09Font {
-			var minusString = mutableAttributedStringFromString("━", color: NSColor.whiteColor())
+			let minusString = mutableAttributedStringFromString("━", color: NSColor.whiteColor())
 			let minusAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: -1
@@ -411,7 +411,7 @@ final class ViewController: NSViewController {
 		// Label x≤y ?
 		let TimesNewRoman13Font = NSFont(name: "Times New Roman", size: 13.0)
 		if let actualFont = TimesNewRoman13Font {
-			var xlessthanyString = mutableAttributedStringFromString("x≤y ?", color: nil)
+			let xlessthanyString = mutableAttributedStringFromString("x≤y ?", color: nil)
 			let xlessthanyAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -421,7 +421,7 @@ final class ViewController: NSViewController {
 		
 		// Button Plus
 		if let actualFont = Helvetica09Font {
-			var plusString = mutableAttributedStringFromString("╋", color: NSColor.whiteColor())
+			let plusString = mutableAttributedStringFromString("╋", color: NSColor.whiteColor())
 			let plusAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -431,7 +431,7 @@ final class ViewController: NSViewController {
 		
 		// Label x≥y ?
 		if let actualFont = TimesNewRoman13Font {
-			var xgreaterthanyString = mutableAttributedStringFromString("x>y ?", color: nil)
+			let xgreaterthanyString = mutableAttributedStringFromString("x>y ?", color: nil)
 			let xgreaterthanyAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: -1
@@ -443,7 +443,7 @@ final class ViewController: NSViewController {
 		// Button Multiply
 		let Helvetica15Font = NSFont(name: "Helvetica", size: 15.0)
 		if let actualFont = Helvetica15Font {
-			var multiplyString = mutableAttributedStringFromString("×", color: NSColor.whiteColor())
+			let multiplyString = mutableAttributedStringFromString("×", color: NSColor.whiteColor())
 			let multiplyAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
@@ -454,7 +454,7 @@ final class ViewController: NSViewController {
 		
 		// Label x=0 ?
 		if let actualFont = TimesNewRoman13Font {
-			var xeq0String = mutableAttributedStringFromString("x=0 ?", color: nil)
+			let xeq0String = mutableAttributedStringFromString("x=0 ?", color: nil)
 			let xeq0Attributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: -1
@@ -465,7 +465,7 @@ final class ViewController: NSViewController {
 		
 		// Button Divide
 		if let actualFont = Helvetica15Font {
-			var divideString = mutableAttributedStringFromString("÷", color: NSColor.whiteColor())
+			let divideString = mutableAttributedStringFromString("÷", color: NSColor.whiteColor())
 			let divideAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
@@ -479,7 +479,7 @@ final class ViewController: NSViewController {
 		
 		// Button 7
 		if let actualFont = Helvetica13Font {
-			var sevenString = mutableAttributedStringFromString("7", color: NSColor.whiteColor())
+			let sevenString = mutableAttributedStringFromString("7", color: NSColor.whiteColor())
 			let sevenAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -492,7 +492,7 @@ final class ViewController: NSViewController {
 		
 		// Button 8
 		if let actualFont = Helvetica13Font {
-			var eightString = mutableAttributedStringFromString("8", color: NSColor.whiteColor())
+			let eightString = mutableAttributedStringFromString("8", color: NSColor.whiteColor())
 			let eightAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -505,7 +505,7 @@ final class ViewController: NSViewController {
 		
 		// Button 9
 		if let actualFont = Helvetica13Font {
-			var nineString = mutableAttributedStringFromString("9", color: NSColor.whiteColor())
+			let nineString = mutableAttributedStringFromString("9", color: NSColor.whiteColor())
 			let nineAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -518,7 +518,7 @@ final class ViewController: NSViewController {
 		
 		// Button 4
 		if let actualFont = Helvetica13Font {
-			var fourString = mutableAttributedStringFromString("4", color: NSColor.whiteColor())
+			let fourString = mutableAttributedStringFromString("4", color: NSColor.whiteColor())
 			let fourAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -531,7 +531,7 @@ final class ViewController: NSViewController {
 		
 		// Button 5
 		if let actualFont = Helvetica13Font {
-			var fiveString = mutableAttributedStringFromString("5", color: NSColor.whiteColor())
+			let fiveString = mutableAttributedStringFromString("5", color: NSColor.whiteColor())
 			let fiveAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -544,7 +544,7 @@ final class ViewController: NSViewController {
 		
 		// Button 6
 		if let actualFont = Helvetica13Font {
-			var sixString = mutableAttributedStringFromString("6", color: NSColor.whiteColor())
+			let sixString = mutableAttributedStringFromString("6", color: NSColor.whiteColor())
 			let sixAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -557,7 +557,7 @@ final class ViewController: NSViewController {
 		
 		// Button 1
 		if let actualFont = Helvetica13Font {
-			var oneString = mutableAttributedStringFromString("1", color: NSColor.whiteColor())
+			let oneString = mutableAttributedStringFromString("1", color: NSColor.whiteColor())
 			let oneAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -570,7 +570,7 @@ final class ViewController: NSViewController {
 		
 		// Button 2
 		if let actualFont = Helvetica13Font {
-			var twoString = mutableAttributedStringFromString("2", color: NSColor.whiteColor())
+			let twoString = mutableAttributedStringFromString("2", color: NSColor.whiteColor())
 			let twoAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -583,7 +583,7 @@ final class ViewController: NSViewController {
 		
 		// Button 3
 		if let actualFont = Helvetica13Font {
-			var thtreeString = mutableAttributedStringFromString("3", color: NSColor.whiteColor())
+			let thtreeString = mutableAttributedStringFromString("3", color: NSColor.whiteColor())
 			let thtreeAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -594,7 +594,7 @@ final class ViewController: NSViewController {
 		// Label PI
 		let TimesNewRoman15Font = NSFont(name: "Times New Roman", size: 15.0)
 		if let actualFont = TimesNewRoman15Font {
-			var piString = mutableAttributedStringFromString("π", color: nil)
+			let piString = mutableAttributedStringFromString("π", color: nil)
 			let piAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -604,7 +604,7 @@ final class ViewController: NSViewController {
 		
 		// Button 0
 		if let actualFont = Helvetica13Font {
-			var zeroString = mutableAttributedStringFromString("0", color: NSColor.whiteColor())
+			let zeroString = mutableAttributedStringFromString("0", color: NSColor.whiteColor())
 			let zeroAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -614,7 +614,7 @@ final class ViewController: NSViewController {
 		
 		// Label LAST X
 		if let actualFont = TimesNewRoman13Font {
-			var lastxString = mutableAttributedStringFromString("LAST X", color: nil)
+			let lastxString = mutableAttributedStringFromString("LAST X", color: nil)
 			let lastxAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -624,7 +624,7 @@ final class ViewController: NSViewController {
 		
 		// Button •
 		if let actualFont = Helvetica13Font {
-			var pointString = mutableAttributedStringFromString("•", color: NSColor.whiteColor())
+			let pointString = mutableAttributedStringFromString("•", color: NSColor.whiteColor())
 			let pointAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -637,7 +637,7 @@ final class ViewController: NSViewController {
 		
 		// Button R/S
 		if let actualFont = Helvetica12Font {
-			var rsString = mutableAttributedStringFromString("R/S", color: NSColor.whiteColor())
+			let rsString = mutableAttributedStringFromString("R/S", color: NSColor.whiteColor())
 			let rsAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -700,10 +700,10 @@ final class ViewController: NSViewController {
 	@IBAction func keyPressed(sender: AnyObject) {
 		let key = sender as! Key
 		let keyCode = key.keyCode! as Int
-		println(keyCode)
+		print(keyCode)
 		
 		cpu.keyWithCode(keyCode, pressed: true)
-		println(keyCode)
+		print(keyCode)
 		cpu.keyWithCode(keyCode, pressed: false)
 	}
 }
@@ -714,7 +714,7 @@ class KeyboardView : NSView {
 		let color = NSColor(calibratedRed: 0.604, green: 0.467, blue: 0.337, alpha: 1)
 		
 		//// Bezier Drawing
-		var bezierPath = NSBezierPath()
+		let bezierPath = NSBezierPath()
 		bezierPath.moveToPoint(NSMakePoint(5, 0))
 		bezierPath.lineToPoint(NSMakePoint(self.bounds.width - 5.0, 0))
 		bezierPath.curveToPoint(NSMakePoint(self.bounds.width - 5.0, self.bounds.height), controlPoint1: NSMakePoint(self.bounds.width, self.bounds.height / 2.0), controlPoint2: NSMakePoint(self.bounds.width - 5.0, self.bounds.height))
@@ -772,8 +772,8 @@ class CalculatorView: NSView {
 	
 	func getKey(theEvent: NSEvent) -> Key? {
 		let char = theEvent.charactersIgnoringModifiers
-		let hasCommand = (theEvent.modifierFlags & .CommandKeyMask).rawValue != 0
-		let hasAlt = (theEvent.modifierFlags & .AlternateKeyMask).rawValue != 0
+		let hasCommand = (theEvent.modifierFlags.intersect(.CommandKeyMask)).rawValue != 0
+		let hasAlt = (theEvent.modifierFlags.intersect(.AlternateKeyMask)).rawValue != 0
 		
 		if CalculatorController.sharedInstance.alphaMode {
 			if hasCommand {

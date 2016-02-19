@@ -59,10 +59,13 @@ class KeyGroup : NSView {
 	}
 	
 	func playSound() {
-		var error: NSError?
 		let url = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("keyPressSound", ofType: "wav")!)
 		
-		self.audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
+		do {
+			self.audioPlayer = try AVAudioPlayer(contentsOfURL: url)
+		} catch _ as NSError {
+			self.audioPlayer = nil
+		}
 		self.audioPlayer?.prepareToPlay()
 		self.audioPlayer?.play()
 	}

@@ -20,8 +20,8 @@ class CalculatorWindow : NSWindow {
 	//This point is used in dragging to mark the initial click location
 	var initialLocation: NSPoint?
 	
-	override init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool) {
-		super.init(contentRect: contentRect, styleMask: aStyle, backing: bufferingType, defer: flag)
+	override init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, `defer` flag: Bool) {
+		super.init(contentRect: contentRect, styleMask: aStyle, backing: bufferingType, `defer`: flag)
 	}
 	
 	required init?(coder: NSCoder) {
@@ -31,7 +31,7 @@ class CalculatorWindow : NSWindow {
 	override var acceptsFirstResponder: Bool { return true }
 
 	override func awakeFromNib() {
-		var appDelegate =  CalculatorApplication.sharedApplication().delegate as! AppDelegate
+		let appDelegate =  CalculatorApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.window = self
 		
 		self.excludedFromWindowsMenu = false
@@ -162,9 +162,9 @@ class Display : NSView, Peripheral {
 		// 0x50..0x5f: some greek characters + "hangman"
 		// 0x60..0x7f: a-z lowercase characters
 		let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
-		let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)!
+		let mString: NSMutableString = try! NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding)
 		CTULookup = String(mString)
-		CTULookupLength = count(CTULookup!)
+		CTULookupLength = (CTULookup!).characters.count
 	}
 
 	override var flipped:Bool{
@@ -173,7 +173,7 @@ class Display : NSView, Peripheral {
 	
 	override func drawRect(dirtyRect: NSRect) {
 		if on {
-			var cellTranslation = NSAffineTransform()
+			let cellTranslation = NSAffineTransform()
 			cellTranslation.translateXBy(cellWidth(), yBy: 0.0)
 			foregroundColor?.set()
 			if true {
@@ -191,10 +191,9 @@ class Display : NSView, Peripheral {
 			}
 			
 			self.lockFocus()
-			let attrs: NSDictionary = NSDictionary(
-				object: annunciatorFont!,
-				forKey: NSFontAttributeName
-			)
+			let attrs = [
+				NSFontAttributeName: annunciatorFont!
+			]
 			calculatorController.prgmMode = false
 			calculatorController.alphaMode = false
 			for idx in 0..<numAnnunciators {
@@ -206,7 +205,7 @@ class Display : NSView, Peripheral {
 						calculatorController.alphaMode = true
 					}
 					
-					var transformation = NSAffineTransform()
+					let transformation = NSAffineTransform()
 					let point = annunciatorPositions[idx]
 					transformation.translateXBy(point.x, yBy: point.y)
 					transformation.scaleBy(1.0 / annunciatorFontScale)
@@ -215,7 +214,7 @@ class Display : NSView, Peripheral {
 					let nsString = annunciatorStrings[idx] as NSString
 					nsString.drawAtPoint(
 						NSMakePoint(0.0, 0.0),
-						withAttributes: attrs as [NSObject : AnyObject]
+						withAttributes: attrs
 					)
 					NSGraphicsContext.restoreGraphicsState()
 				}
@@ -241,7 +240,7 @@ class Display : NSView, Peripheral {
 		closepath
 		4.617837 2.000000 moveto
 		*/
-		var bezierPath0 = NSBezierPath()
+		let bezierPath0 = NSBezierPath()
 		bezierPath0.moveToPoint(NSMakePoint(4.617837, 2.000000))
 		bezierPath0.lineToPoint(NSMakePoint(2.375577, 0.000000))
 		bezierPath0.lineToPoint(NSMakePoint(15.073103, 0.000000))
@@ -263,7 +262,7 @@ class Display : NSView, Peripheral {
 		closepath
 		1.026980 10.703221 moveto
 		*/
-		var bezierPath1 = NSBezierPath()
+		let bezierPath1 = NSBezierPath()
 		bezierPath1.moveToPoint(NSMakePoint(1.026980, 10.703221))
 		bezierPath1.lineToPoint(NSMakePoint(1.935450, 0.710054))
 		bezierPath1.lineToPoint(NSMakePoint(3.443619, 6.210914))
@@ -287,7 +286,7 @@ class Display : NSView, Peripheral {
 		closepath
 		3.931293 6.098653 moveto
 		*/
-		var bezierPath2 = NSBezierPath()
+		let bezierPath2 = NSBezierPath()
 		bezierPath2.moveToPoint(NSMakePoint(3.931293, 6.098653))
 		bezierPath2.lineToPoint(NSMakePoint(2.464718, 0.749508))
 		bezierPath2.lineToPoint(NSMakePoint(4.320368, 2.404667))
@@ -312,7 +311,7 @@ class Display : NSView, Peripheral {
 		closepath
 		6.905082 6.498730 moveto
 		*/
-		var bezierPath3 = NSBezierPath()
+		let bezierPath3 = NSBezierPath()
 		bezierPath3.moveToPoint(NSMakePoint(6.905082, 6.498730))
 		bezierPath3.lineToPoint(NSMakePoint(7.291330, 2.250000))
 		bezierPath3.lineToPoint(NSMakePoint(9.299579, 2.250000))
@@ -337,7 +336,7 @@ class Display : NSView, Peripheral {
 		closepath
 		9.352165 6.989707 moveto
 		*/
-		var bezierPath4 = NSBezierPath()
+		let bezierPath4 = NSBezierPath()
 		bezierPath4.moveToPoint(NSMakePoint(9.352165, 6.989707))
 		bezierPath4.lineToPoint(NSMakePoint(12.565980, 2.428165))
 		bezierPath4.lineToPoint(NSMakePoint(14.879394, 0.756790))
@@ -361,7 +360,7 @@ class Display : NSView, Peripheral {
 		closepath
 		14.524980 10.725222 moveto
 		*/
-		var bezierPath5 = NSBezierPath()
+		let bezierPath5 = NSBezierPath()
 		bezierPath5.moveToPoint(NSMakePoint(14.524980, 10.725222))
 		bezierPath5.lineToPoint(NSMakePoint(12.617742, 9.614111))
 		bezierPath5.lineToPoint(NSMakePoint(12.924595, 6.238729))
@@ -385,7 +384,7 @@ class Display : NSView, Peripheral {
 		closepath
 		3.213154 12.000000 moveto
 		*/
-		var bezierPath6 = NSBezierPath()
+		let bezierPath6 = NSBezierPath()
 		bezierPath6.moveToPoint(NSMakePoint(3.213154, 12.000000))
 		bezierPath6.lineToPoint(NSMakePoint(1.515522, 11.011001))
 		bezierPath6.lineToPoint(NSMakePoint(3.434736, 10.000000))
@@ -411,7 +410,7 @@ class Display : NSView, Peripheral {
 		closepath
 		9.674292 12.000000 moveto
 		*/
-		var bezierPath7 = NSBezierPath()
+		let bezierPath7 = NSBezierPath()
 		bezierPath7.moveToPoint(NSMakePoint(9.674292, 12.000000))
 		bezierPath7.lineToPoint(NSMakePoint(8.033062, 11.025712))
 		bezierPath7.lineToPoint(NSMakePoint(10.215584, 10.000000))
@@ -435,7 +434,7 @@ class Display : NSView, Peripheral {
 		closepath
 		0.070283 21.226881 moveto
 		*/
-		var bezierPath8 = NSBezierPath()
+		let bezierPath8 = NSBezierPath()
 		bezierPath8.moveToPoint(NSMakePoint(0.070283, 21.226881))
 		bezierPath8.lineToPoint(NSMakePoint(0.975020, 11.274778))
 		bezierPath8.lineToPoint(NSMakePoint(2.882258, 12.385889))
@@ -459,7 +458,7 @@ class Display : NSView, Peripheral {
 		closepath
 		3.058874 15.738516 moveto
 		*/
-		var bezierPath9 = NSBezierPath()
+		let bezierPath9 = NSBezierPath()
 		bezierPath9.moveToPoint(NSMakePoint(3.058874, 15.738516))
 		bezierPath9.lineToPoint(NSMakePoint(5.306457, 12.442060))
 		bezierPath9.lineToPoint(NSMakePoint(7.047006, 11.522176))
@@ -484,7 +483,7 @@ class Display : NSView, Peripheral {
 		closepath
 		6.065075 15.738811 moveto
 		*/
-		var bezierPath10 = NSBezierPath()
+		let bezierPath10 = NSBezierPath()
 		bezierPath10.moveToPoint(NSMakePoint(6.065075, 15.738811))
 		bezierPath10.lineToPoint(NSMakePoint(7.435389, 11.920212))
 		bezierPath10.lineToPoint(NSMakePoint(8.120102, 15.224238))
@@ -509,7 +508,7 @@ class Display : NSView, Peripheral {
 		closepath
 		8.609699 15.122776 moveto
 		*/
-		var bezierPath11 = NSBezierPath()
+		let bezierPath11 = NSBezierPath()
 		bezierPath11.moveToPoint(NSMakePoint(8.609699, 15.122776))
 		bezierPath11.lineToPoint(NSMakePoint(7.859829, 11.504337))
 		bezierPath11.lineToPoint(NSMakePoint(9.419060, 12.429949))
@@ -533,7 +532,7 @@ class Display : NSView, Peripheral {
 		closepath
 		12.020228 16.186754 moveto
 		*/
-		var bezierPath12 = NSBezierPath()
+		let bezierPath12 = NSBezierPath()
 		bezierPath12.moveToPoint(NSMakePoint(12.020228, 16.186754))
 		bezierPath12.lineToPoint(NSMakePoint(12.363762, 12.407889))
 		bezierPath12.lineToPoint(NSMakePoint(14.473021, 11.296779))
@@ -555,7 +554,7 @@ class Display : NSView, Peripheral {
 		closepath
 		0.420855 22.000000 moveto
 		*/
-		var bezierPath13 = NSBezierPath()
+		let bezierPath13 = NSBezierPath()
 		bezierPath13.moveToPoint(NSMakePoint(0.420855, 22.000000))
 		bezierPath13.lineToPoint(NSMakePoint(3.129292, 20.000000))
 		bezierPath13.lineToPoint(NSMakePoint(10.757083, 20.000000))
@@ -581,7 +580,7 @@ class Display : NSView, Peripheral {
 		closepath
 		19.506186 11.000000 moveto
 		*/
-		var bezierPath14 = NSBezierPath()
+		let bezierPath14 = NSBezierPath()
 		bezierPath14.moveToPoint(NSMakePoint(19.506186, 11.000000))
 		bezierPath14.lineToPoint(NSMakePoint(19.506186, 11.000000))
 		bezierPath14.curveToPoint(NSMakePoint(19.506186, 11.831843), controlPoint1: NSMakePoint(18.831842, 12.506186), controlPoint2: NSMakePoint(18.000000, 12.506186))
@@ -611,7 +610,7 @@ class Display : NSView, Peripheral {
 		closepath
 		18.590910 21.000000 moveto
 		*/
-		var bezierPath15 = NSBezierPath()
+		let bezierPath15 = NSBezierPath()
 		bezierPath15.moveToPoint(NSMakePoint(18.590910, 21.000000))
 		bezierPath15.lineToPoint(NSMakePoint(18.590910, 21.000000))
 		bezierPath15.curveToPoint(NSMakePoint(18.590910, 21.828426), controlPoint1: NSMakePoint(17.919336, 22.500000), controlPoint2: NSMakePoint(17.090910, 22.500000))
@@ -643,7 +642,7 @@ class Display : NSView, Peripheral {
 		closepath
 		18.474253 22.083590 moveto
 		*/
-		var bezierPath16 = NSBezierPath()
+		let bezierPath16 = NSBezierPath()
 		bezierPath16.moveToPoint(NSMakePoint(18.474253, 22.083590))
 		bezierPath16.lineToPoint(NSMakePoint(18.474253, 22.083590))
 		bezierPath16.curveToPoint(NSMakePoint(17.881054, 24.806688), controlPoint1: NSMakePoint(15.208557, 26.546652), controlPoint2: NSMakePoint(12.478299, 25.987333))
@@ -662,7 +661,7 @@ class Display : NSView, Peripheral {
 		return paths
 	}
 	
-	override func acceptsFirstMouse(theEvent: NSEvent) -> Bool {
+	override func acceptsFirstMouse(theEvent: NSEvent?) -> Bool {
 		return true
 	}
 	
@@ -672,8 +671,13 @@ class Display : NSView, Peripheral {
 	func loadSegmentPaths(file: String) -> DisplaySegmentPaths {
 		var paths: DisplaySegmentPaths = DisplaySegmentPaths()
 		let path = NSBundle.mainBundle().pathForResource(file, ofType: "geom")
-		var data = NSData(contentsOfFile: path!, options: .DataReadingMappedIfSafe, error: nil)
-		var unarchiver = NSKeyedUnarchiver(forReadingWithData: data!)
+		var data: NSData?
+		do {
+			data = try NSData(contentsOfFile: path!, options: .DataReadingMappedIfSafe)
+		} catch _ {
+			data = nil
+		}
+		let unarchiver = NSKeyedUnarchiver(forReadingWithData: data!)
 		let dict = unarchiver.decodeObjectForKey("bezierPaths") as! NSDictionary
 		unarchiver.finishDecoding()
 		for idx in 0..<numDisplaySegments {
@@ -696,13 +700,12 @@ class Display : NSView, Peripheral {
 		var h: CGFloat = 0.0
 		var totalWidth: CGFloat = 0.0
 		
-		let attrs: NSDictionary = NSDictionary(
-			object: annunciatorFont!,
-			forKey: NSFontAttributeName
-		)
+		let attrs = [
+			NSFontAttributeName: annunciatorFont!
+		]
 		for idx in 0..<numAnnunciators {
 			let nsString: NSString = annunciatorStrings[idx] as NSString
-			let width = nsString.sizeWithAttributes(attrs as [NSObject : AnyObject]).width
+			let width = nsString.sizeWithAttributes(attrs).width
 			annunciatorWidths[idx] = width
 			totalWidth += width
 		}

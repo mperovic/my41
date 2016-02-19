@@ -35,7 +35,7 @@ class KeyGroup: UIView {
 	
 	var mySound: SystemSoundID = 0
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
 		let url = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("keyPressSound", ofType: "wav")!)
@@ -47,7 +47,7 @@ class KeyGroup: UIView {
 		
 		CGContextSaveGState(context)
 		CGContextSetFillColorWithColor(context, UIColor.clearColor().CGColor)
-		CGContextDrawPath(context, kCGPathFill)
+		CGContextDrawPath(context, CGPathDrawingMode.Fill)
 		
 		CGContextRestoreGState(context)
 		

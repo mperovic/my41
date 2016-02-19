@@ -180,6 +180,18 @@ var builtinRamTable: [RamDesc] = [
 	//0x03f nonexistent
 ]
 
+enum RamError: ErrorType {
+	case invalidAddress
+}
+
+enum RomError: ErrorType {
+	case invalidAddress
+}
+
+enum MODError: ErrorType {
+	case freeSpace
+}
+
 
 final class Bus {
 	// Section defining what type of memory we have
@@ -227,7 +239,7 @@ final class Bus {
 		ram = [Digits14](count:0x400, repeatedValue:emptyDigit14)
 	}
 	
-	func installMod(mod: MOD) -> Result<Bool> {
+	func installMod(mod: MOD) throws {
 		/*
 			these are arrays indexed on the page group number (1-8) (unique only within each mod file)
 			dual use: values are either a count stored as a negative number or a (positive) page number 1-f
@@ -245,20 +257,33 @@ final class Bus {
 		// load ROM pages with three pass process
 		for pass in 1...3 {
 			for pageIndex in 0..<mod.moduleHeader.numPages {
-				var modulePage = mod.modulePages[Int(pageIndex)]
+				let modulePage = mod.modulePages[Int(pageIndex)]
 				var load = false
 				switch pass {
 				case 1:
 					// pass 1: validate page variables, flag grouped pages
-					switch mod.checkPage(modulePage) {
-					case .Success:
-						break
-					case .Error(let error): error
-						displayAlert(error)
-					
-						return .Error(error)
+					do {
+						try mod.checkPage(modulePage)
+					} catch CheckPageError.pageOutOfRange {
+						displayAlert("page: \(modulePage) is out of range")
+					} catch CheckPageError.pageGroupOutOfRange {
+						displayAlert("group pages cannot use non-grouped position codes")
+					} catch CheckPageError.bankOutOfRange {
+						displayAlert("bank: \(modulePage.bank) is out of range")
+					} catch CheckPageError.bankGroupOutOfRange {
+						displayAlert("bank group: \(modulePage.bankGroup) is out of range")
+					} catch CheckPageError.ramOutOfRange {
+						displayAlert("ram: \(modulePage.RAM) is out of range")
+					} catch CheckPageError.writeProtect {
+						displayAlert("wrong write protect value")
+					} catch CheckPageError.fatOutOfRange {
+						displayAlert("FAT: \(modulePage.FAT) is out of range")
+					} catch CheckPageError.nonGroupedPagesError {
+						displayAlert("non-grouped pages cannot use grouped position codes")
+					} catch {
+						
 					}
-
+					
 					if modulePage.pageGroup == 0 {
 						// if not grouped do nothing in this pass
 						break
@@ -351,7 +376,7 @@ final class Bus {
 							let count: Int8 = -1 * orderedGroup[Int(modulePage.pageGroup) - 1]
 							for page in 8..<0x10-count {
 								var nFree: Int8 = 0
-								for page2 in page..<0x0f {
+								for _ in page..<0x0f {
 									// count up free spaces
 									if romChips[Int(page)][Int(modulePage.bank) - 1] == nil {
 										nFree++
@@ -411,6 +436,12 @@ final class Bus {
 				}
 				
 				if load {
+					if mod.moduleHeader.hardware == Hardware.HEPAX {
+						modulePage.HEPAX = 1
+					}
+					if mod.moduleHeader.hardware == Hardware.WWRAMBox {
+						modulePage.WWRAMBOX = 1
+					}
 					if modulePage.bankGroup != 0 {
 						// ensures each bank group has a number that is unique to the entire simulator
 						modulePage.actualBankGroup = modulePage.bankGroup + nextActualBankGroup * 8
@@ -418,32 +449,44 @@ final class Bus {
 						modulePage.actualBankGroup = 0
 					}
 					// HEPAX special case
-					if hepPage != 0 && mod.moduleHeader.hardware == Hardware.HEPAX && modulePage.RAM == 1 {
+					if hepPage != 0 && modulePage.HEPAX == 1 && modulePage.RAM == 1 {
 						// hepax was just loaded previously and this is the first RAM page after it
-						modulePage.page = hepPage
-						let romChip = romChipInSlot(Bits4(hepPage), bank: Bits4(modulePage.bank - 1))
+						modulePage.actualPage = hepPage
+						let romChip = romChipInSlot(Bits4(hepPage), bank: Bits4(modulePage.bank))
 						// load this RAM into alternate page
 						romChip?.altPage = modulePage
 					} else if wwPage != 0 && modulePage.WWRAMBOX != 0 && modulePage.RAM != 0 {
 						// W&W code was just loaded previously and this is the first RAM page after it
 						modulePage.actualPage = wwPage
-						let romChip = romChipInSlot(Bits4(wwPage), bank: Bits4(modulePage.bank - 1))
+						let romChip = romChipInSlot(Bits4(wwPage), bank: Bits4(modulePage.bank))
 						// load this RAM into alternate page
 						romChip?.altPage = modulePage
 					} else if page > 0xf || romChips[Int(page)][Int(modulePage.bank) - 1] != nil {
 						// there is no free space or some load conflict exists
-						return .Error("No free space")
+						throw MODError.freeSpace
 					} else {
 						// otherwise load into primary page
 						let romChip = RomChip(fromBIN: modulePage.image, actualBankGroup: modulePage.actualBankGroup)
+						romChip.HEPAX = modulePage.HEPAX
+						romChip.WWRAMBOX = modulePage.WWRAMBOX
+						romChip.RAM = modulePage.RAM
 						installRomChip(romChip, inSlot: page, andBank: modulePage.bank-1)
+					}
+					
+					hepPage = 0
+					wwPage = 0
+					if modulePage.HEPAX == 1 && modulePage.RAM == 0 {
+						// detect HEPAX ROM
+						hepPage = page
+					}
+					if modulePage.HEPAX == 1 && modulePage.RAM == 0 {
+						// detect W&W RAMBOXII ROM
+						wwPage = page
 					}
 				}
 			}
 		}
 		nextActualBankGroup++
-		
-		return .Success(Box(true))
 	}
 	
 	func installRomChip(chip: RomChip, inSlot slot: byte, andBank bank: byte) {
@@ -454,7 +497,7 @@ final class Bus {
 //		ramValid[Int(address)] = true
 //	}
 	
-	func readRamAddress(address: Bits12, inout into data: Digits14) -> Result<Bool> {
+	func readRamAddress(address: Bits12, inout into data: Digits14) throws {
 		/*
 			Read specified location of specified chip.
 			If chip or location is nonexistent, set data to 0 and return false.
@@ -467,20 +510,18 @@ final class Bus {
 				destinationStartAt: 0,
 				count: 14
 			)
-			return .Success(Box(true))
 		} else {
 			clearDigits(destination: &data)
-			return .Error("readRamAddress: invalid address: \(address)")
+			throw RamError.invalidAddress
 		}
 	}
 	
-	func writeRamAddress(address: Bits12, from data: Digits14) -> Result<Bool> {
+	func writeRamAddress(address: Bits12, from data: Digits14) throws {
 		// Write to specified location of specified chip. If chip or location is nonexistent, do nothing and return false.
 		if RAMExists(Int(address)) {
 			copyDigits(data, sourceStartAt: 0, destination: &ram[Int(address)], destinationStartAt: 0, count: 14)
-			return .Success(Box(true))
 		} else {
-			return .Error("writeRamAddress: invalid address: \(address)")
+			throw RamError.invalidAddress
 		}
 	}
 	
@@ -493,17 +534,17 @@ final class Bus {
 		}
 	}
 	
-	func readRomAddress(var addr: Int) -> Result<Int> {
+	func readRomAddress(addr: Int) throws -> Int {
 		// Read ROM location at the given address and return true.
 		// If there is no ROM at that address, sets data to 0 and returns
 		let address = addr & 0xffff
 		let page = Int(address >> 12)
 		let bank = Int(activeBank[page])
-		var rom: RomChip? = romChips[page][bank - 1]
+		let rom: RomChip? = romChips[page][bank - 1]
 		if let aRom = rom {
-			return .Success(Box(Int(aRom[Int(address & 0xfff)])))
+			return Int(aRom[Int(address & 0xfff)])
 		} else {
-			return .Error("readRomAddress: invalid address: \(address)")
+			throw RomError.invalidAddress
 		}
 	}
 
@@ -537,7 +578,7 @@ final class Bus {
 	}
 	
 	func writeDataToPeripheral(slot aSlot: Bits8, from data: Digits14) {
-		var peripheral: Peripheral = peripherals[Int(aSlot)]!
+		let peripheral: Peripheral = peripherals[Int(aSlot)]!
 		peripheral.writeDataFrom(data)
 	}
 	

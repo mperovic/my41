@@ -69,9 +69,15 @@ let HIGH_SAMPLE: UInt8				= UInt8(0x80 + AMPLITUDE)
 
 var gDroppedSampleCount: Int = 0
 
+enum SoundMode {
+	case None, Speaker, Wawe
+}
+
 class SoundOutput {
 	typealias SoundSample = UInt8
 	
+	var soundMode = SoundMode.None
+
 	struct SndCommand {
 		var cmd: SoundCmds			= .nullCmd
 		var param1: Int16			= 0
@@ -182,8 +188,8 @@ class SoundOutput {
 	func sendPendingBuffers() {
 		while gNumPendingBuffers != 0  {
 			startUpSoundChannel()
-			println("Sending buffer \(gBufferSendPtr)")
-			var buf: SoundBuffer = gBuffers[gBufferSendPtr]
+			print("Sending buffer \(gBufferSendPtr)")
+			let buf: SoundBuffer = gBuffers[gBufferSendPtr]
 			var cmd = SndCommand()
 			cmd.cmd = .bufferCmd
 			cmd.param1 = 0
@@ -201,7 +207,7 @@ class SoundOutput {
 	
 	func startUpSoundChannel() {
 		if gSndChannel != nil {
-			println("Allocating sound channel\n")
+			print("Allocating sound channel\n")
 //			SndNewChannel(&gSndChannel, sampledSynth, 0, (SndCallBackUPP)SoundCallback)
 		}
 	}
@@ -212,16 +218,16 @@ class SoundOutput {
 			buf = gBuffers[gBufferAllocPtr]
 			if buf?.inUse == true {
 				if gDroppedSampleCount == 0 {
-					println("Buffer \(gBufferAllocPtr) is in use\n")
+					print("Buffer \(gBufferAllocPtr) is in use\n")
 				}
 				++gDroppedSampleCount
 				return nil
 			}
 			if gDroppedSampleCount != 0 {
-				println("Buffer \(gBufferAllocPtr) is free after \(gDroppedSampleCount) dropped samples\n")
+				print("Buffer \(gBufferAllocPtr) is free after \(gDroppedSampleCount) dropped samples\n")
 				gDroppedSampleCount = 0
 			}
-			println("Starting to fill buffer \(gBufferAllocPtr)\n")
+			print("Starting to fill buffer \(gBufferAllocPtr)\n")
 			initBuffer(&buf!)
 			buf?.inUse = true
 			incBufferPtr(&gBufferAllocPtr)
@@ -232,12 +238,12 @@ class SoundOutput {
 	}
 	
 	func soundOutputForWordTime(state: Int) {
-		var sample = state != 0 ? HIGH_SAMPLE : LOW_SAMPLE
+		let sample = state != 0 ? HIGH_SAMPLE : LOW_SAMPLE
 		if !gBufferingSound {
 			if sample == gLastSample {
 				return
 			}
-			println("Starting to buffer sound\n")
+			print("Starting to buffer sound\n")
 			gBufferingSound = true
 		}
 		

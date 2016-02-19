@@ -68,7 +68,7 @@ class SelectedDebugView: NSView {
 		
 		let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
 		let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-		textStyle.alignment = NSTextAlignment.LeftTextAlignment
+		textStyle.alignment = .Left
 		
 		if selected! {
 			//// Rectangle Drawing
@@ -100,8 +100,8 @@ class SelectedDebugView: NSView {
 					NSForegroundColorAttributeName: textColor,
 					NSParagraphStyleAttributeName: textStyle
 				]
-				
-				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as [NSObject : AnyObject])
+
+				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [String : AnyObject])
 			}
 		} else {
 			if let actualFont = font {
@@ -111,7 +111,7 @@ class SelectedDebugView: NSView {
 					NSParagraphStyleAttributeName: textStyle
 				]
 				
-				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as [NSObject : AnyObject])
+				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [String : AnyObject])
 			}
 		}
 	}
@@ -122,7 +122,7 @@ class SelectedDebugView: NSView {
 
 class DebugMenuLabelView: NSView {
 	override func awakeFromNib() {
-		var viewLayer: CALayer = CALayer()
+		let viewLayer: CALayer = CALayer()
 		viewLayer.backgroundColor = CGColorCreateGenericRGB(0.5412, 0.7098, 0.3804, 1.0)
 		self.wantsLayer = true
 		self.layer = viewLayer

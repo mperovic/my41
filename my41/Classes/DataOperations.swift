@@ -18,9 +18,9 @@ enum ArithOp {
 
 func copyDigits(
 	src: Digits14,
-	var #sourceStartAt: Int,
-	inout #destination: Digits14,
-	#destinationStartAt: Int,
+	sourceStartAt: Int,
+	inout destination: Digits14,
+	destinationStartAt: Int,
 	count cnt: Int)
 {
 	for idx in 0..<cnt {
@@ -31,26 +31,26 @@ func copyDigits(
 func fillDigits(
 	inout src: Digits14,
 	value v: Digit,
-	#start: Int,
-	#count: Int)
+	start: Int,
+	count: Int)
 {
 	for idx in start..<start+count  {
 		src[idx] = v
 	}
 }
 
-func clearDigits(inout #destination: [Digit])
+func clearDigits(inout destination destination: [Digit])
 {
-	for idx in reverse(0...13) {
+	for idx in Array((0...13).reverse()) {
 		destination[idx] = Digit(0)
 	}
 }
 
 func digitsToBitsWrap(
-	#digits: Digits14,
-	inout #bits: Bits8,
-	#start: Digit,
-	var #count: Int)
+	digits digits: Digits14,
+	inout bits: Bits8,
+	start: Digit,
+	var count: Int)
 {
 	var result: Bits8 = 0
 	var i: Int = Int(start)
@@ -67,10 +67,10 @@ func digitsToBitsWrap(
 }
 
 func bitsToDigitsWrap(
-	var #bits: Bits8,
-	inout #digits: Digits14,
-	#start: Digit,
-	var #count: Int)
+	var bits bits: Bits8,
+	inout digits: Digits14,
+	start: Digit,
+	var count: Int)
 {
 	var i: Int = Int(start)
 	while count-- > 0 {
@@ -84,10 +84,10 @@ func bitsToDigitsWrap(
 }
 
 func exchangeDigits(
-	inout #X: Digits14,
-	inout #Y: Digits14,
+	inout X X: Digits14,
+	inout Y: Digits14,
 	startPos start: Int,
-	var #count: Int)
+	var count: Int)
 {
 	var i = start
 	while count-- > 0 {
@@ -97,8 +97,8 @@ func exchangeDigits(
 }
 
 func digitsToBits(
-	#digits: [Digit],
-	#nbits: Int) -> UInt16
+	digits digits: [Digit],
+	nbits: Int) -> UInt16
 {
 	var result: UInt16 = 0
 	var ndigits = (nbits + 3) >> 2
@@ -106,16 +106,16 @@ func digitsToBits(
 	while ndigits-- > 0 {
 		result = UInt16(result << 4) | UInt16(digits[--dp])
 	}
-	var res = ((1 << nbits) - 1)
+	let res = ((1 << nbits) - 1)
 	
 	return (result & UInt16(res))
 }
 
 func bitsToDigits(
-	var #bits: Int,
+	var bits bits: Int,
 	inout destination digits: Digits14,
-	var #start: Int,
-	var #count: Int)
+	var start: Int,
+	var count: Int)
 {
 	while count-- > 0 {
 		digits[start++] = Digit(bits & 0xF)
@@ -124,10 +124,10 @@ func bitsToDigits(
 }
 
 func orDigits(
-	#X: [Digit],
-	#Y: [Digit],
-	#start: Int,
-	#count: Int) -> [Digit]
+	X X: [Digit],
+	Y: [Digit],
+	start: Int,
+	count: Int) -> [Digit]
 {
 	var z: Digits14 = emptyDigit14
 	for i in start..<count {
@@ -137,10 +137,10 @@ func orDigits(
 }
 
 func andDigits(
-	#X: [Digit],
-	#Y: [Digit],
-	#start: Int,
-	#count: Int) -> [Digit]
+	X X: [Digit],
+	Y: [Digit],
+	start: Int,
+	count: Int) -> [Digit]
 {
 	var z: Digits14 = emptyDigit14
 	for i in start..<count {
@@ -150,9 +150,9 @@ func andDigits(
 }
 
 func shiftDigitsLeft(
-	var #X: [Digit],
-	#start: Int,
-	#count: Int) -> [Digit]
+	var X X: [Digit],
+	start: Int,
+	count: Int) -> [Digit]
 {
 	for var idx = start + count - 1; idx > start; idx-- {
 		X[idx] = X[idx-1]
@@ -163,9 +163,9 @@ func shiftDigitsLeft(
 }
 
 func shiftDigitsRight(
-	var #X: [Digit],
-	#start: Int,
-	#count: Int) -> [Digit]
+	var X X: [Digit],
+	start: Int,
+	count: Int) -> [Digit]
 {
 	for idx in start+1..<start+count {
 		X[idx-1] = X[idx]
@@ -184,13 +184,13 @@ func shiftDigitsRight(
 func addOrSubtractDigits(
 	arithOp op: ArithOp,
 	arithMode mode: ArithMode,
-	#firstNum: [Digit],
-	#secondNum: [Digit],
-	inout #destination: [Digit],
-	#from: Int,
-	#count: Int,
-	inout #carry: Bit,
-	inout #zero: Bit)
+	firstNum: [Digit],
+	secondNum: [Digit],
+	inout destination: [Digit],
+	from: Int,
+	count: Int,
+	inout carry: Bit,
+	inout zero: Bit)
 {
 	var d: Int = 0
 	var c = Int(carry)
@@ -206,7 +206,7 @@ func addOrSubtractDigits(
 				d = Int(firstNum[idx]) + 0xF - Int(secondNum[idx]) + Int(c)
 			}
 			if d < 0 {
-				println("\(idx) - \(firstNum), \(secondNum) -> \(d)")
+				print("\(idx) - \(firstNum), \(secondNum) -> \(d)")
 			}
 		}
 		if mode == ArithMode.DEC_MODE && d > 9 {
@@ -224,7 +224,7 @@ func addOrSubtractDigits(
 	zero = z
 }
 
-func adder(#nib1: Digit, #nib2: Digit) -> Digit
+func adder(nib1 nib1: Digit, nib2: Digit) -> Digit
 {
 	var result = nib1 + nib2 + Digit(cpu.reg.carry)
 	if result >= cpu.reg.mode.rawValue {
@@ -239,7 +239,7 @@ func adder(#nib1: Digit, #nib2: Digit) -> Digit
 	return result
 }
 
-func subtractor(#nib1: Digit, #nib2: Digit) -> Digit
+func subtractor(nib1 nib1: Digit, nib2: Digit) -> Digit
 {
 	var result = Int(nib1) - Int(nib2) - Int(cpu.reg.carry)
 	if result < 0 {

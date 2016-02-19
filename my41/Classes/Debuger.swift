@@ -127,7 +127,7 @@ class DebugerSegue: NSStoryboardSegue {
 		source.view.addConstraints(
 			NSLayoutConstraint.constraintsWithVisualFormat(
 				"H:|[dView]|",
-				options: nil,
+				options: [],
 				metrics: nil,
 				views: ["dView": dView]
 			)
@@ -135,7 +135,7 @@ class DebugerSegue: NSStoryboardSegue {
 		source.view.addConstraints(
 			NSLayoutConstraint.constraintsWithVisualFormat(
 				"V:|[dView]|",
-				options: nil,
+				options: [],
 				metrics: nil,
 				views: ["dView": dView]
 			)

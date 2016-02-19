@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// Insert code here to initialize your application
 		let defaults = NSUserDefaults.standardUserDefaults()
-		if let memory = defaults.objectForKey("memory") as? NSData {
+		if let _ = defaults.objectForKey("memory") as? NSData {
 			CalculatorApplication.sharedApplication().activateIgnoringOtherApps(false)
 		} else {
 			CalculatorApplication.sharedApplication().activateIgnoringOtherApps(true)
@@ -39,6 +39,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		defaults.removeObjectForKey("memory")
 		defaults.synchronize()
 		CalculatorController.sharedInstance.resetCalculator(false)
-	}	
+	}
+	
+	func application(app: NSApplication, willEncodeRestorableState coder: NSCoder) {
+		// Implement this functionality
+	}
+	
+	func application(app: NSApplication, didDecodeRestorableState coder: NSCoder) {
+		// Implement this functionality
+	}
 }
 

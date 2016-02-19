@@ -118,19 +118,20 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	
 	func selectedRow(row: Int) {
 		let filePath = modFiles[row]
-		if let modDetails = modFileHeaders?[filePath.lastPathComponent] {
+		if let modDetails = modFileHeaders?[(filePath as NSString).lastPathComponent] {
 			modDetailsView.modDetails = modDetails
 		} else {
 			let mod = MOD()
 
-			switch mod.readModFromFile(filePath) {
-			case .Success:
+			do {
+				try mod.readModFromFile(filePath)
+				
 				modDetailsView.modDetails = mod.moduleHeader
 				modDetailsView.category = mod.categoryDescription()
 				modDetailsView.hardware = mod.hardwareDescription()
-				modFileHeaders?[filePath.lastPathComponent] = mod.moduleHeader
-			case .Error(let error): error
-				displayAlert(error)
+				modFileHeaders?[(filePath as NSString).lastPathComponent] = mod.moduleHeader
+			} catch let error as NSError {
+				displayAlert(error.localizedDescription)
 			}
 		}
 		displayHeader()
@@ -138,13 +139,13 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	
 	// MARK: -
 	func modFilesInBundle() -> [String] {
-		let resourceURL = NSBundle.mainBundle().resourceURL
+//		let resourceURL = NSBundle.mainBundle().resourceURL
 		let modFiles = NSBundle.mainBundle().pathsForResourcesOfType("mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
-			let filePath = modFile as! String
-			if filePath.lastPathComponent != "nut-c.mod" && filePath.lastPathComponent != "nut-cv.mod" && filePath.lastPathComponent != "nut-cx.mod" {
-				realModFiles.append(modFile as! String)
+			let filePath = modFile 
+			if (filePath as NSString).lastPathComponent != "nut-c.mod" && (filePath as NSString).lastPathComponent != "nut-cv.mod" && (filePath as NSString).lastPathComponent != "nut-cx.mod" {
+				realModFiles.append(modFile )
 			}
 		}
 		
@@ -209,7 +210,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		var cellView: NSTableCellView?
 		if let tColumn = tableColumn {
 			let cView = tableView.makeViewWithIdentifier(tColumn.identifier, owner: self) as! NSTableCellView
-			cView.textField?.stringValue = filePath.lastPathComponent
+			cView.textField?.stringValue = (filePath as NSString).lastPathComponent
 			cellView = cView
 		}
 		
@@ -226,7 +227,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		if rowIndexes.count > 1 {
 			return false
 		} else {
-			let title = modDetailsView.modDetails?.title
+//			let title = modDetailsView.modDetails?.title
 			let row = rowIndexes.firstIndex
 			let filePath = modFiles[row]
 			pboard.setString(filePath, forType: NSPasteboardTypeString)
@@ -246,7 +247,7 @@ class ModDetailsView: NSView {
 		let backColor = NSColor(calibratedRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.95)
 		let rect = NSMakeRect(self.bounds.origin.x + 3, self.bounds.origin.y + 3, self.bounds.size.width - 6, self.bounds.size.height - 6)
 		
-		var path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
+		let path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
 		path.addClip()
 		
 		backColor.setFill()
@@ -254,7 +255,7 @@ class ModDetailsView: NSView {
 	}
 }
 
-class ExpansionView: NSView, NSDraggingDestination {
+class ExpansionView: NSView {
 	var modDetails: ModuleHeader?
 	var category: String?
 	var hardware: String?
@@ -312,31 +313,35 @@ class ExpansionView: NSView, NSDraggingDestination {
 			self.bounds.size.height - 6
 		)
 		
-		var path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
+		let path = NSBezierPath(roundedRect: rect, xRadius: 5.0, yRadius: 5.0)
 		path.addClip()
 		
 		backColor.setFill()
 		path.fill()
 		
-		if let fPath: NSString = filePath {
+		if let fPath = filePath {
 			let font = NSFont.systemFontOfSize(11.0)
-			var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-			textStyle.alignment = .CenterTextAlignment
+			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+			textStyle.alignment = .Center
 			let attributes = [
 				NSFontAttributeName : font,
 				NSParagraphStyleAttributeName: textStyle
 			]
 			
 			let mod = MOD()
-			mod.readModFromFile(fPath as String)
-			mod.moduleHeader.title.drawInRect(NSMakeRect(20.0, 40.0, 100.0, 58.0), withAttributes: attributes)
+			do {
+				try mod.readModFromFile(fPath as String)
+				mod.moduleHeader.title.drawInRect(NSMakeRect(20.0, 40.0, 100.0, 58.0), withAttributes: attributes)
+			} catch _ {
+				
+			}
 		}
 	}
 	
 	
 	//MARK: - Drag & Drop
 	override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
-		if NSDragOperation.Generic & sender.draggingSourceOperationMask() == NSDragOperation.Generic {
+		if NSDragOperation.Generic.intersect(sender.draggingSourceOperationMask()) == NSDragOperation.Generic {
 			return NSDragOperation.Generic
 		} else {
 			return NSDragOperation.None
@@ -344,7 +349,7 @@ class ExpansionView: NSView, NSDraggingDestination {
 	}
 	
 	override func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
-		if NSDragOperation.Generic & sender.draggingSourceOperationMask() == NSDragOperation.Generic {
+		if NSDragOperation.Generic.intersect(sender.draggingSourceOperationMask()) == NSDragOperation.Generic {
 			return NSDragOperation.Generic
 		} else {
 			return NSDragOperation.None
@@ -359,7 +364,6 @@ class ExpansionView: NSView, NSDraggingDestination {
 		if filePath != nil {
 			return false
 		}
-		
 
 		let paste = sender.draggingPasteboard()
 		let theArray = [
@@ -367,29 +371,32 @@ class ExpansionView: NSView, NSDraggingDestination {
 		]
 		let desiredType = paste.availableTypeFromArray(theArray)
 		if let data = paste.dataForType(desiredType!) {
-			filePath = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
-			preferencesModsViewController.removeModFile(filePath!)
-			preferencesModsViewController.tableView.reloadData()
-			
-			switch port {
-			case 1:
-				preferencesModsViewController.removeModule1.enabled = true
-				preferencesModsViewController.preferencesContainerViewController?.newMod1 = filePath?.lastPathComponent
+			if let fPath = NSString(data: data, encoding: NSUTF8StringEncoding) {
+				filePath = fPath as String
+				preferencesModsViewController.removeModFile(fPath as String)
+				preferencesModsViewController.tableView.reloadData()
 				
-			case 2:
-				preferencesModsViewController.removeModule2.enabled = true
-				preferencesModsViewController.preferencesContainerViewController?.newMod2 = filePath?.lastPathComponent
-				
-			case 3:
-				preferencesModsViewController.removeModule3.enabled = true
-				preferencesModsViewController.preferencesContainerViewController?.newMod3 = filePath?.lastPathComponent
-				
-			case 4:
-				preferencesModsViewController.removeModule4.enabled = true
-				preferencesModsViewController.preferencesContainerViewController?.newMod4 = filePath?.lastPathComponent
-				
-			default:
-				break
+				switch port {
+				case 1:
+					preferencesModsViewController.removeModule1.enabled = true
+					preferencesModsViewController.preferencesContainerViewController?.newMod1 = fPath.lastPathComponent
+					preferencesModsViewController.expansionModule1.setNeedsDisplayInRect(preferencesModsViewController.expansionModule1.bounds)
+					
+				case 2:
+					preferencesModsViewController.removeModule2.enabled = true
+					preferencesModsViewController.preferencesContainerViewController?.newMod2 = fPath.lastPathComponent
+					
+				case 3:
+					preferencesModsViewController.removeModule3.enabled = true
+					preferencesModsViewController.preferencesContainerViewController?.newMod3 = fPath.lastPathComponent
+					
+				case 4:
+					preferencesModsViewController.removeModule4.enabled = true
+					preferencesModsViewController.preferencesContainerViewController?.newMod4 = fPath.lastPathComponent
+					
+				default:
+					break
+				}
 			}
 		}
 		

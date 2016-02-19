@@ -108,10 +108,10 @@
 		DC9CB80D1ABABAF500363462 /* games.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7851ABABAF400363462 /* games.mod */; };
 		DC9CB80E1ABABAF500363462 /* gmac2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7861ABABAF400363462 /* gmac2.mod */; };
 		DC9CB80F1ABABAF500363462 /* gmac3.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7871ABABAF400363462 /* gmac3.mod */; };
-		DC9CB8101ABABAF500363462 /* hem-2mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7881ABABAF400363462 /* hem-2mem.mod */; };
-		DC9CB8111ABABAF500363462 /* hep-mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7891ABABAF400363462 /* hep-mem.mod */; };
-		DC9CB8121ABABAF500363462 /* hepax-1c.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78A1ABABAF400363462 /* hepax-1c.mod */; };
-		DC9CB8131ABABAF500363462 /* hepax.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78B1ABABAF400363462 /* hepax.mod */; };
+		DC9CB8101ABABAF500363462 /* hem-2mem.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7881ABABAF400363462 /* hem-2mem.mod.dont_install */; };
+		DC9CB8111ABABAF500363462 /* hep-mem.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7891ABABAF400363462 /* hep-mem.mod.dont_install */; };
+		DC9CB8121ABABAF500363462 /* hepax-1c.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78A1ABABAF400363462 /* hepax-1c.mod.dont_install */; };
+		DC9CB8131ABABAF500363462 /* hepax.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78B1ABABAF400363462 /* hepax.mod.dont_install */; };
 		DC9CB8141ABABAF500363462 /* home-mgt.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78C1ABABAF400363462 /* home-mgt.mod */; };
 		DC9CB8151ABABAF500363462 /* hpil-dev.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78D1ABABAF400363462 /* hpil-dev.mod */; };
 		DC9CB8161ABABAF500363462 /* hpil-diag.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78E1ABABAF400363462 /* hpil-diag.mod */; };
@@ -192,9 +192,9 @@
 		DC9CB8611ABABAF500363462 /* toolbox.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D91ABABAF500363462 /* toolbox.mod */; };
 		DC9CB8621ABABAF500363462 /* usps.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DA1ABABAF500363462 /* usps.mod */; };
 		DC9CB8631ABABAF500363462 /* wand.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DB1ABABAF500363462 /* wand.mod */; };
-		DC9CB8641ABABAF500363462 /* wwrambox2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DC1ABABAF500363462 /* wwrambox2.mod */; };
-		DC9CB8651ABABAF500363462 /* wwramboxi.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DD1ABABAF500363462 /* wwramboxi.mod */; };
-		DC9CB8661ABABAF500363462 /* wwramboxii.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DE1ABABAF500363462 /* wwramboxii.mod */; };
+		DC9CB8641ABABAF500363462 /* wwrambox2.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DC1ABABAF500363462 /* wwrambox2.mod.dont_install */; };
+		DC9CB8651ABABAF500363462 /* wwramboxi.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DD1ABABAF500363462 /* wwramboxi.mod.dont_install */; };
+		DC9CB8661ABABAF500363462 /* wwramboxii.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DE1ABABAF500363462 /* wwramboxii.mod.dont_install */; };
 		DC9CB8671ABABAF500363462 /* zenrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DF1ABABAF500363462 /* zenrom.mod */; };
 		DC9CB8681ABABAF500363462 /* zeprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7E01ABABAF500363462 /* zeprom.mod */; };
 		DC9CB8691ABABB0F00363462 /* 41z.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7591ABABAF400363462 /* 41z.mod */; };
@@ -244,10 +244,10 @@
 		DC9CB8951ABABB0F00363462 /* games.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7851ABABAF400363462 /* games.mod */; };
 		DC9CB8961ABABB0F00363462 /* gmac2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7861ABABAF400363462 /* gmac2.mod */; };
 		DC9CB8971ABABB0F00363462 /* gmac3.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7871ABABAF400363462 /* gmac3.mod */; };
-		DC9CB8981ABABB0F00363462 /* hem-2mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7881ABABAF400363462 /* hem-2mem.mod */; };
-		DC9CB8991ABABB0F00363462 /* hep-mem.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7891ABABAF400363462 /* hep-mem.mod */; };
-		DC9CB89A1ABABB0F00363462 /* hepax-1c.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78A1ABABAF400363462 /* hepax-1c.mod */; };
-		DC9CB89B1ABABB0F00363462 /* hepax.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78B1ABABAF400363462 /* hepax.mod */; };
+		DC9CB8981ABABB0F00363462 /* hem-2mem.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7881ABABAF400363462 /* hem-2mem.mod.dont_install */; };
+		DC9CB8991ABABB0F00363462 /* hep-mem.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7891ABABAF400363462 /* hep-mem.mod.dont_install */; };
+		DC9CB89A1ABABB0F00363462 /* hepax-1c.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78A1ABABAF400363462 /* hepax-1c.mod.dont_install */; };
+		DC9CB89B1ABABB0F00363462 /* hepax.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78B1ABABAF400363462 /* hepax.mod.dont_install */; };
 		DC9CB89C1ABABB0F00363462 /* home-mgt.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78C1ABABAF400363462 /* home-mgt.mod */; };
 		DC9CB89D1ABABB0F00363462 /* hpil-dev.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78D1ABABAF400363462 /* hpil-dev.mod */; };
 		DC9CB89E1ABABB0F00363462 /* hpil-diag.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB78E1ABABAF400363462 /* hpil-diag.mod */; };
@@ -328,9 +328,9 @@
 		DC9CB8E91ABABB1000363462 /* toolbox.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7D91ABABAF500363462 /* toolbox.mod */; };
 		DC9CB8EA1ABABB1000363462 /* usps.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DA1ABABAF500363462 /* usps.mod */; };
 		DC9CB8EB1ABABB1000363462 /* wand.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DB1ABABAF500363462 /* wand.mod */; };
-		DC9CB8EC1ABABB1000363462 /* wwrambox2.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DC1ABABAF500363462 /* wwrambox2.mod */; };
-		DC9CB8ED1ABABB1000363462 /* wwramboxi.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DD1ABABAF500363462 /* wwramboxi.mod */; };
-		DC9CB8EE1ABABB1000363462 /* wwramboxii.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DE1ABABAF500363462 /* wwramboxii.mod */; };
+		DC9CB8EC1ABABB1000363462 /* wwrambox2.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DC1ABABAF500363462 /* wwrambox2.mod.dont_install */; };
+		DC9CB8ED1ABABB1000363462 /* wwramboxi.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DD1ABABAF500363462 /* wwramboxi.mod.dont_install */; };
+		DC9CB8EE1ABABB1000363462 /* wwramboxii.mod.dont_install in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DE1ABABAF500363462 /* wwramboxii.mod.dont_install */; };
 		DC9CB8EF1ABABB1000363462 /* zenrom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7DF1ABABAF500363462 /* zenrom.mod */; };
 		DC9CB8F01ABABB1000363462 /* zeprom.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7E01ABABAF500363462 /* zeprom.mod */; };
 		DC9CB8F21ABABC9C00363462 /* nut-cx.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB8F11ABABC9C00363462 /* nut-cx.mod */; };
@@ -486,10 +486,10 @@
 		DC9CB7851ABABAF400363462 /* games.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = games.mod; path = MOD/games.mod; sourceTree = "<group>"; };
 		DC9CB7861ABABAF400363462 /* gmac2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = gmac2.mod; path = MOD/gmac2.mod; sourceTree = "<group>"; };
 		DC9CB7871ABABAF400363462 /* gmac3.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = gmac3.mod; path = MOD/gmac3.mod; sourceTree = "<group>"; };
-		DC9CB7881ABABAF400363462 /* hem-2mem.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hem-2mem.mod"; path = "MOD/hem-2mem.mod"; sourceTree = "<group>"; };
-		DC9CB7891ABABAF400363462 /* hep-mem.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hep-mem.mod"; path = "MOD/hep-mem.mod"; sourceTree = "<group>"; };
-		DC9CB78A1ABABAF400363462 /* hepax-1c.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hepax-1c.mod"; path = "MOD/hepax-1c.mod"; sourceTree = "<group>"; };
-		DC9CB78B1ABABAF400363462 /* hepax.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = hepax.mod; path = MOD/hepax.mod; sourceTree = "<group>"; };
+		DC9CB7881ABABAF400363462 /* hem-2mem.mod.dont_install */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hem-2mem.mod.dont_install"; path = "MOD/hem-2mem.mod.dont_install"; sourceTree = "<group>"; };
+		DC9CB7891ABABAF400363462 /* hep-mem.mod.dont_install */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hep-mem.mod.dont_install"; path = "MOD/hep-mem.mod.dont_install"; sourceTree = "<group>"; };
+		DC9CB78A1ABABAF400363462 /* hepax-1c.mod.dont_install */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hepax-1c.mod.dont_install"; path = "MOD/hepax-1c.mod.dont_install"; sourceTree = "<group>"; };
+		DC9CB78B1ABABAF400363462 /* hepax.mod.dont_install */ = {isa = PBXFileReference; lastKnownFileType = file; name = hepax.mod.dont_install; path = MOD/hepax.mod.dont_install; sourceTree = "<group>"; };
 		DC9CB78C1ABABAF400363462 /* home-mgt.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "home-mgt.mod"; path = "MOD/home-mgt.mod"; sourceTree = "<group>"; };
 		DC9CB78D1ABABAF400363462 /* hpil-dev.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hpil-dev.mod"; path = "MOD/hpil-dev.mod"; sourceTree = "<group>"; };
 		DC9CB78E1ABABAF400363462 /* hpil-diag.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "hpil-diag.mod"; path = "MOD/hpil-diag.mod"; sourceTree = "<group>"; };
@@ -570,9 +570,9 @@
 		DC9CB7D91ABABAF500363462 /* toolbox.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = toolbox.mod; path = MOD/toolbox.mod; sourceTree = "<group>"; };
 		DC9CB7DA1ABABAF500363462 /* usps.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = usps.mod; path = MOD/usps.mod; sourceTree = "<group>"; };
 		DC9CB7DB1ABABAF500363462 /* wand.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = wand.mod; path = MOD/wand.mod; sourceTree = "<group>"; };
-		DC9CB7DC1ABABAF500363462 /* wwrambox2.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = wwrambox2.mod; path = MOD/wwrambox2.mod; sourceTree = "<group>"; };
-		DC9CB7DD1ABABAF500363462 /* wwramboxi.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = wwramboxi.mod; path = MOD/wwramboxi.mod; sourceTree = "<group>"; };
-		DC9CB7DE1ABABAF500363462 /* wwramboxii.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = wwramboxii.mod; path = MOD/wwramboxii.mod; sourceTree = "<group>"; };
+		DC9CB7DC1ABABAF500363462 /* wwrambox2.mod.dont_install */ = {isa = PBXFileReference; lastKnownFileType = file; name = wwrambox2.mod.dont_install; path = MOD/wwrambox2.mod.dont_install; sourceTree = "<group>"; };
+		DC9CB7DD1ABABAF500363462 /* wwramboxi.mod.dont_install */ = {isa = PBXFileReference; lastKnownFileType = file; name = wwramboxi.mod.dont_install; path = MOD/wwramboxi.mod.dont_install; sourceTree = "<group>"; };
+		DC9CB7DE1ABABAF500363462 /* wwramboxii.mod.dont_install */ = {isa = PBXFileReference; lastKnownFileType = file; name = wwramboxii.mod.dont_install; path = MOD/wwramboxii.mod.dont_install; sourceTree = "<group>"; };
 		DC9CB7DF1ABABAF500363462 /* zenrom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = zenrom.mod; path = MOD/zenrom.mod; sourceTree = "<group>"; };
 		DC9CB7E01ABABAF500363462 /* zeprom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = zeprom.mod; path = MOD/zeprom.mod; sourceTree = "<group>"; };
 		DC9CB8F11ABABC9C00363462 /* nut-cx.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nut-cx.mod"; path = "MOD/nut-cx.mod"; sourceTree = "<group>"; };
@@ -707,10 +707,10 @@
 				DC9CB7851ABABAF400363462 /* games.mod */,
 				DC9CB7861ABABAF400363462 /* gmac2.mod */,
 				DC9CB7871ABABAF400363462 /* gmac3.mod */,
-				DC9CB7881ABABAF400363462 /* hem-2mem.mod */,
-				DC9CB7891ABABAF400363462 /* hep-mem.mod */,
-				DC9CB78A1ABABAF400363462 /* hepax-1c.mod */,
-				DC9CB78B1ABABAF400363462 /* hepax.mod */,
+				DC9CB7881ABABAF400363462 /* hem-2mem.mod.dont_install */,
+				DC9CB7891ABABAF400363462 /* hep-mem.mod.dont_install */,
+				DC9CB78A1ABABAF400363462 /* hepax-1c.mod.dont_install */,
+				DC9CB78B1ABABAF400363462 /* hepax.mod.dont_install */,
 				DC9CB78C1ABABAF400363462 /* home-mgt.mod */,
 				DC9CB78D1ABABAF400363462 /* hpil-dev.mod */,
 				DC9CB78E1ABABAF400363462 /* hpil-diag.mod */,
@@ -792,9 +792,9 @@
 				DC9CB7D91ABABAF500363462 /* toolbox.mod */,
 				DC9CB7DA1ABABAF500363462 /* usps.mod */,
 				DC9CB7DB1ABABAF500363462 /* wand.mod */,
-				DC9CB7DC1ABABAF500363462 /* wwrambox2.mod */,
-				DC9CB7DD1ABABAF500363462 /* wwramboxi.mod */,
-				DC9CB7DE1ABABAF500363462 /* wwramboxii.mod */,
+				DC9CB7DC1ABABAF500363462 /* wwrambox2.mod.dont_install */,
+				DC9CB7DD1ABABAF500363462 /* wwramboxi.mod.dont_install */,
+				DC9CB7DE1ABABAF500363462 /* wwramboxii.mod.dont_install */,
 				DC9CB7DF1ABABAF500363462 /* zenrom.mod */,
 				DC9CB7E01ABABAF500363462 /* zeprom.mod */,
 			);
@@ -925,7 +925,6 @@
 		DC7B249F1A78E0370080F85A /* Bus */ = {
 			isa = PBXGroup;
 			children = (
-				DCAD8865199D38540027C925 /* SoundOutput.swift */,
 				DCAD8863199D380C0027C925 /* Bus.swift */,
 			);
 			name = Bus;
@@ -944,6 +943,7 @@
 		DC7B24A11A79135E0080F85A /* Peripherals */ = {
 			isa = PBXGroup;
 			children = (
+				DCAD8865199D38540027C925 /* SoundOutput.swift */,
 				DC7B7E1019AFA4EE00C70269 /* Timer.swift */,
 			);
 			name = Peripherals;
@@ -1052,7 +1052,6 @@
 				DCD09B201A8660CF00F8D785 /* Keyboard */,
 				DCD09B111A86318000F8D785 /* Debuger */,
 				DCE75C251A61BC9C002B2D7C /* Peripherals */,
-				DCE75C231A61B860002B2D7C /* CPU and Memory */,
 				DCE75C051A61B4FE002B2D7C /* AppDelegate.swift */,
 				DCE75C071A61B4FE002B2D7C /* ViewController.swift */,
 				DCE75C091A61B4FE002B2D7C /* Main.storyboard */,
@@ -1089,21 +1088,6 @@
 				DCE75C1A1A61B4FE002B2D7C /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DCE75C231A61B860002B2D7C /* CPU and Memory */ = {
-			isa = PBXGroup;
-			children = (
-				DCE75C241A61B86F002B2D7C /* CPU */,
-			);
-			name = "CPU and Memory";
-			sourceTree = "<group>";
-		};
-		DCE75C241A61B86F002B2D7C /* CPU */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = CPU;
 			sourceTree = "<group>";
 		};
 		DCE75C251A61BC9C002B2D7C /* Peripherals */ = {
@@ -1193,6 +1177,8 @@
 		DC45284519897DA500C40B6C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = iPera;
 				TargetAttributes = {
@@ -1268,7 +1254,7 @@
 				DC9CB7FD1ABABAF500363462 /* cvpak.mod in Resources */,
 				DC46ED8E19B3A09B0091E143 /* display.lookup in Resources */,
 				DC9CB7E81ABABAF500363462 /* alpha.mod in Resources */,
-				DC9CB8121ABABAF500363462 /* hepax-1c.mod in Resources */,
+				DC9CB8121ABABAF500363462 /* hepax-1c.mod.dont_install in Resources */,
 				DC9CB8571ABABAF500363462 /* standard.mod in Resources */,
 				DC9CB8611ABABAF500363462 /* toolbox.mod in Resources */,
 				DC9CB8431ABABAF500363462 /* ram4k.mod in Resources */,
@@ -1278,7 +1264,7 @@
 				DC56269F198B75E80040453F /* XNUT0.ROM in Resources */,
 				DC9CB8561ABABAF500363462 /* speed-machine2.mod in Resources */,
 				DC9CB8521ABABAF500363462 /* sgs-gas.mod in Resources */,
-				DC9CB8101ABABAF500363462 /* hem-2mem.mod in Resources */,
+				DC9CB8101ABABAF500363462 /* hem-2mem.mod.dont_install in Resources */,
 				DC9CB85A1ABABAF500363462 /* structural.mod in Resources */,
 				DC9CB8461ABABAF500363462 /* ram32k.mod in Resources */,
 				DC9CB8251ABABAF500363462 /* mdp2.mod in Resources */,
@@ -1289,7 +1275,7 @@
 				DC9CB7F91ABABAF500363462 /* circuit.mod in Resources */,
 				DC9CB7FC1ABABAF500363462 /* cmt-300.mod in Resources */,
 				DC56269E198B75E80040453F /* XNUT1.ROM in Resources */,
-				DC9CB8661ABABAF500363462 /* wwramboxii.mod in Resources */,
+				DC9CB8661ABABAF500363462 /* wwramboxii.mod.dont_install in Resources */,
 				DC56269D198B75E80040453F /* XNUT2.ROM in Resources */,
 				DC9CB83B1ABABAF500363462 /* pride.mod in Resources */,
 				DC46ED8F19B3A09B0091E143 /* hpchar.geom in Resources */,
@@ -1297,9 +1283,9 @@
 				DC9CB82A1ABABAF500363462 /* mleprom.mod in Resources */,
 				DC9CB83D1ABABAF500363462 /* printerservice.mod in Resources */,
 				DC9CB83A1ABABAF500363462 /* ppc.mod in Resources */,
-				DC9CB8131ABABAF500363462 /* hepax.mod in Resources */,
+				DC9CB8131ABABAF500363462 /* hepax.mod.dont_install in Resources */,
 				DC9CB7EA1ABABAF500363462 /* assembler3.mod in Resources */,
-				DC9CB8111ABABAF500363462 /* hep-mem.mod in Resources */,
+				DC9CB8111ABABAF500363462 /* hep-mem.mod.dont_install in Resources */,
 				DC9CB8591ABABAF500363462 /* stress.mod in Resources */,
 				DC9CB8361ABABAF500363462 /* pccom.mod in Resources */,
 				DC9CB80B1ABABAF500363462 /* finance.mod in Resources */,
@@ -1358,7 +1344,7 @@
 				DC9CB7E41ABABAF500363462 /* advantage.mod in Resources */,
 				DC9CB82E1ABABAF500363462 /* navcom2.mod in Resources */,
 				DC9CB7E11ABABAF500363462 /* 41z.mod in Resources */,
-				DC9CB8641ABABAF500363462 /* wwrambox2.mod in Resources */,
+				DC9CB8641ABABAF500363462 /* wwrambox2.mod.dont_install in Resources */,
 				DC9CB8031ABABAF500363462 /* disasm4d.mod in Resources */,
 				DC9CB80A1ABABAF500363462 /* ext-mem.mod in Resources */,
 				DC9CB80E1ABABAF500363462 /* gmac2.mod in Resources */,
@@ -1374,7 +1360,7 @@
 				DC9CB85F1ABABAF500363462 /* tomsrom.mod in Resources */,
 				DC5626A5198B75E80040453F /* CXFUNS1.ROM in Resources */,
 				DC9CB81C1ABABAF500363462 /* laitram-xq2.mod in Resources */,
-				DC9CB8651ABABAF500363462 /* wwramboxi.mod in Resources */,
+				DC9CB8651ABABAF500363462 /* wwramboxi.mod.dont_install in Resources */,
 				DC9CB8071ABABAF500363462 /* ext-funs.mod in Resources */,
 				DC9CB8231ABABAF500363462 /* mctest.mod in Resources */,
 				DC9CB7FA1ABABAF500363462 /* clinical.mod in Resources */,
@@ -1468,10 +1454,10 @@
 				DC9CB8951ABABB0F00363462 /* games.mod in Resources */,
 				DC9CB8961ABABB0F00363462 /* gmac2.mod in Resources */,
 				DC9CB8971ABABB0F00363462 /* gmac3.mod in Resources */,
-				DC9CB8981ABABB0F00363462 /* hem-2mem.mod in Resources */,
-				DC9CB8991ABABB0F00363462 /* hep-mem.mod in Resources */,
-				DC9CB89A1ABABB0F00363462 /* hepax-1c.mod in Resources */,
-				DC9CB89B1ABABB0F00363462 /* hepax.mod in Resources */,
+				DC9CB8981ABABB0F00363462 /* hem-2mem.mod.dont_install in Resources */,
+				DC9CB8991ABABB0F00363462 /* hep-mem.mod.dont_install in Resources */,
+				DC9CB89A1ABABB0F00363462 /* hepax-1c.mod.dont_install in Resources */,
+				DC9CB89B1ABABB0F00363462 /* hepax.mod.dont_install in Resources */,
 				DC9CB89C1ABABB0F00363462 /* home-mgt.mod in Resources */,
 				DC9CB89D1ABABB0F00363462 /* hpil-dev.mod in Resources */,
 				DC9CB89E1ABABB0F00363462 /* hpil-diag.mod in Resources */,
@@ -1553,9 +1539,9 @@
 				DC9CB8E91ABABB1000363462 /* toolbox.mod in Resources */,
 				DC9CB8EA1ABABB1000363462 /* usps.mod in Resources */,
 				DC9CB8EB1ABABB1000363462 /* wand.mod in Resources */,
-				DC9CB8EC1ABABB1000363462 /* wwrambox2.mod in Resources */,
-				DC9CB8ED1ABABB1000363462 /* wwramboxi.mod in Resources */,
-				DC9CB8EE1ABABB1000363462 /* wwramboxii.mod in Resources */,
+				DC9CB8EC1ABABB1000363462 /* wwrambox2.mod.dont_install in Resources */,
+				DC9CB8ED1ABABB1000363462 /* wwramboxi.mod.dont_install in Resources */,
+				DC9CB8EE1ABABB1000363462 /* wwramboxii.mod.dont_install in Resources */,
 				DC9CB8EF1ABABB1000363462 /* zenrom.mod in Resources */,
 				DC9CB8F01ABABB1000363462 /* zeprom.mod in Resources */,
 				DC705C891A952F7C009C98D3 /* display.lookup in Resources */,

@@ -361,7 +361,7 @@ extension Display {
 	func rotateRegisterLeft(inout register: Digits12)
 	{
 		let temp = register[11]
-		for idx in reverse(1...11) {
+		for idx in Array((1...11).reverse()) {
 			register[idx] = register[idx - 1]
 		}
 		register[0] = temp
@@ -369,7 +369,7 @@ extension Display {
 	
 	func rotateDisplayRegisterLeft(inout register: Digits12, times: Int) {
 		if times > 0 {
-			for pass in 0..<times {
+			for _ in 0..<times {
 				let temp = register[0]
 				for idx in 0...10 {
 					register[idx] = register[idx + 1]
@@ -390,9 +390,9 @@ extension Display {
 	func rotateDisplayRegisterRight(inout register: Digits12, times: Int)
 	{
 		if times > 0 {
-			for pass in 0..<times {
+			for _ in 0..<times {
 				let temp = register[11]
-				for idx in reverse(1...11) {
+				for idx in Array((1...11).reverse()) {
 					register[idx] = register[idx - 1]
 				}
 				register[0] = temp
@@ -504,9 +504,7 @@ extension Display {
 		let punct: String = " .:,;???"
 		
 		// loop through the display cells and translate their content:
-		var idx: Int			// cell index (decreasing from left to right)
-		
-		for idx in reverse(0...numDisplayCells-1) {
+		for idx in Array((0...numDisplayCells-1).reverse()) {
 			// assemble the actual hardware character index from the register bits:
 			// charCode = C0 B1 B0  A3 A2 A1 A0
 			let charCode = ((r.C[idx] & 0x1) << 6) | ((r.B[idx] & 0x3) << 4) | (r.A[idx] & 0xf)
@@ -562,7 +560,7 @@ extension Display {
 	
 	func digits12ToString(register: Digits12) -> String {
 		var result = String()
-		for idx in reverse(0...11) {
+		for idx in Array((0...11).reverse()) {
 			result += NSString(format:"%1X", register[idx]) as String
 		}
 		
@@ -575,7 +573,12 @@ extension Display {
 	func loadFont(resourceName: String) -> DisplayFont {
 		var font: DisplayFont = DisplayFont(count:128, repeatedValue: 0)
 		let filename = NSBundle.mainBundle().pathForResource(resourceName, ofType: "hpfont")
-		var data = NSData(contentsOfFile: filename!, options: .DataReadingMappedIfSafe, error: nil)
+		var data: NSData?
+		do {
+			data = try NSData(contentsOfFile: filename!, options: .DataReadingMappedIfSafe)
+		} catch _ {
+			data = nil
+		}
 		var range = NSRange(location: 0, length: 4)
 		for idx in 0..<127 {
 			var tmp: UInt32 = 0

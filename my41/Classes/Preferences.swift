@@ -76,22 +76,22 @@ class PreferencesContainerViewController: NSViewController {
 		
 		if let fPath = preferencesModsViewController?.expansionModule1.filePath {
 			// We have something in Port1
-			let moduleName = fPath.lastPathComponent
+			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.stringForKey(HPPort1) {
 				// And we had something in Port1 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(fPath.lastPathComponent, forKey: HPPort1)
+					defaults.setObject((fPath as NSString).lastPathComponent, forKey: HPPort1)
 					needsRestart = true
 				}
 			} else {
 				// Port1 was empty
-				defaults.setObject(fPath.lastPathComponent, forKey: HPPort1)
+				defaults.setObject((fPath as NSString).lastPathComponent, forKey: HPPort1)
 				needsRestart = true
 			}
 		} else {
 			// Port1 is empty now
-			if let dModuleName = defaults.stringForKey(HPPort1) {
+			if let _ = defaults.stringForKey(HPPort1) {
 				// But we had something in Port1
 				defaults.removeObjectForKey(HPPort1)
 			}
@@ -99,22 +99,22 @@ class PreferencesContainerViewController: NSViewController {
 		
 		if let fPath = preferencesModsViewController?.expansionModule2.filePath {
 			// We have something in Port2
-			let moduleName = fPath.lastPathComponent
+			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.stringForKey(HPPort2) {
 				// And we had something in Port2 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(fPath.lastPathComponent, forKey: HPPort2)
+					defaults.setObject((fPath as NSString).lastPathComponent, forKey: HPPort2)
 					needsRestart = true
 				}
 			} else {
 				// Port2 was empty
-				defaults.setObject(fPath.lastPathComponent, forKey: HPPort2)
+				defaults.setObject((fPath as NSString).lastPathComponent, forKey: HPPort2)
 				needsRestart = true
 			}
 		} else {
 			// Port2 is empty now
-			if let dModuleName = defaults.stringForKey(HPPort2) {
+			if let _ = defaults.stringForKey(HPPort2) {
 				// But we had something in Port2
 				defaults.removeObjectForKey(HPPort2)
 			}
@@ -122,22 +122,22 @@ class PreferencesContainerViewController: NSViewController {
 		
 		if let fPath = preferencesModsViewController?.expansionModule3.filePath {
 			// We have something in Port3
-			let moduleName = fPath.lastPathComponent
+			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.stringForKey(HPPort3) {
 				// And we had something in Port3 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(fPath.lastPathComponent, forKey: HPPort3)
+					defaults.setObject((fPath as NSString).lastPathComponent, forKey: HPPort3)
 					needsRestart = true
 				}
 			} else {
 				// Port3 was empty
-				defaults.setObject(fPath.lastPathComponent, forKey: HPPort3)
+				defaults.setObject((fPath as NSString).lastPathComponent, forKey: HPPort3)
 				needsRestart = true
 			}
 		} else {
 			// Port3 is empty now
-			if let dModuleName = defaults.stringForKey(HPPort3) {
+			if let _ = defaults.stringForKey(HPPort3) {
 				// But we had something in Port3
 				defaults.removeObjectForKey(HPPort3)
 			}
@@ -145,22 +145,22 @@ class PreferencesContainerViewController: NSViewController {
 		
 		if let fPath = preferencesModsViewController?.expansionModule4.filePath {
 			// We have something in Port4
-			let moduleName = fPath.lastPathComponent
+			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.stringForKey(HPPort4) {
 				// And we had something in Port4 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(fPath.lastPathComponent, forKey: HPPort4)
+					defaults.setObject((fPath as NSString).lastPathComponent, forKey: HPPort4)
 					needsRestart = true
 				}
 			} else {
 				// Port4 was empty
-				defaults.setObject(fPath.lastPathComponent, forKey: HPPort4)
+				defaults.setObject((fPath as NSString).lastPathComponent, forKey: HPPort4)
 				needsRestart = true
 			}
 		} else {
 			// Port4 is empty now
-			if let dModuleName = defaults.stringForKey(HPPort4) {
+			if let _ = defaults.stringForKey(HPPort4) {
 				// But we had something in Port4
 				defaults.removeObjectForKey(HPPort4)
 			}
@@ -287,7 +287,7 @@ class PreferencesSegue: NSStoryboardSegue {
 		source.view.addConstraints(
 			NSLayoutConstraint.constraintsWithVisualFormat(
 				"H:|[dView]|",
-				options: nil,
+				options: [],
 				metrics: nil,
 				views: ["dView": dView]
 			)
@@ -295,7 +295,7 @@ class PreferencesSegue: NSStoryboardSegue {
 		source.view.addConstraints(
 			NSLayoutConstraint.constraintsWithVisualFormat(
 				"V:|[dView]|",
-				options: nil,
+				options: [],
 				metrics: nil,
 				views: ["dView": dView]
 			)

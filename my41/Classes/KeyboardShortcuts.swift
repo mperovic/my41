@@ -124,21 +124,14 @@ final class KeyboardShortcutsViewController: NSViewController {
 		self.view.wantsLayer = true
 		
 		let Helvetica09Font = NSFont(name: "Helvetica", size:  9.0)
-		let Helvetica11Font = NSFont(name: "Helvetica", size: 11.0)
-		let Helvetica12Font = NSFont(name: "Helvetica", size: 12.0)
-		let Helvetica13Font = NSFont(name: "Helvetica", size: 13.0)
 		let Helvetica15Font = NSFont(name: "Helvetica", size: 15.0)
 
 		let TimesNewRoman10Font = NSFont(name: "Times New Roman", size: 10.0)
-		let TimesNewRoman11Font = NSFont(name: "Times New Roman", size: 11.0)
-		let TimesNewRoman12Font = NSFont(name: "Times New Roman", size: 12.0)
 		let TimesNewRoman13Font = NSFont(name: "Times New Roman", size: 13.0)
-		let TimesNewRoman14Font = NSFont(name: "Times New Roman", size: 14.0)
-		let TimesNewRoman15Font = NSFont(name: "Times New Roman", size: 15.0)
-				
+		
 		// Label Σ-
 		if let actualFont = Helvetica09Font {
-			var sigmaMinusString = mutableAttributedStringFromString("⌘G", color: nil, fontName: "Helvetica", fontSize: 11.0)
+			let sigmaMinusString = mutableAttributedStringFromString("⌘G", color: nil, fontName: "Helvetica", fontSize: 11.0)
 			let sigmaMinusAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -147,7 +140,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		}
 		
 		// Button Σ+
-		var sigmaPlusString = mutableAttributedStringFromString("Σ+", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 11.0)
+		let sigmaPlusString = mutableAttributedStringFromString("Σ+", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 11.0)
 		let sigmaPlusAttributes = [
 			NSBaselineOffsetAttributeName: 1
 		]
@@ -156,7 +149,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Label yx
 		if let actualFont = TimesNewRoman13Font {
-			var yxString = mutableAttributedStringFromString("⌘1", color: nil, fontName: "Helvetica", fontSize: 11.0)
+			let yxString = mutableAttributedStringFromString("⌘1", color: nil, fontName: "Helvetica", fontSize: 11.0)
 			let yxAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -166,7 +159,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Button 1/x
 		if let actualFont = TimesNewRoman10Font {
-			var oneXString = mutableAttributedStringFromString("1/x", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 11.0)
+			let oneXString = mutableAttributedStringFromString("1/x", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 11.0)
 			let oneXAttributes = [
 				NSFontAttributeName : actualFont,
 			]
@@ -179,7 +172,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Button √x
 		if let actualFont = TimesNewRoman10Font {
-			var rootXString = mutableAttributedStringFromString("√x\u{0304}", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 11.0)
+			let rootXString = mutableAttributedStringFromString("√x\u{0304}", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 11.0)
 			let rootXAttributes1 = [
 				NSBaselineOffsetAttributeName: 1
 			]
@@ -199,7 +192,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Label e^x
 		if let actualFont = TimesNewRoman13Font {
-			var EXString = mutableAttributedStringFromString("⌘L", color: nil, fontName: "Helvetica", fontSize: 11.0)
+			let EXString = mutableAttributedStringFromString("⌘L", color: nil, fontName: "Helvetica", fontSize: 11.0)
 			let EXAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -212,7 +205,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Label CLΣ
 		if let actualFont = TimesNewRoman13Font {
-			var CLSigmaString = mutableAttributedStringFromString("⌘X", color: nil, fontName: "Helvetica", fontSize: 11.0)
+			let CLSigmaString = mutableAttributedStringFromString("⌘X", color: nil, fontName: "Helvetica", fontSize: 11.0)
 			let CLSigmaAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -225,7 +218,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Label %
 		if let actualFont = TimesNewRoman13Font {
-			var percentString = mutableAttributedStringFromString("⌘A", color: nil, fontName: "Helvetica", fontSize: 11.0)
+			let percentString = mutableAttributedStringFromString("⌘A", color: nil, fontName: "Helvetica", fontSize: 11.0)
 			let percentAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -238,7 +231,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Label SIN-1
 		if let actualFont = TimesNewRoman13Font {
-			var sin1String = mutableAttributedStringFromString("I", color: nil, fontName: "Times New Roman", fontSize: 13.0)
+			let sin1String = mutableAttributedStringFromString("I", color: nil, fontName: "Times New Roman", fontSize: 13.0)
 			let sinAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
@@ -252,7 +245,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Label COS-1
 		if let actualFont = TimesNewRoman13Font {
-			var cos1String = mutableAttributedStringFromString("O", color: nil, fontName: "Times New Roman", fontSize: 13.0)
+			let cos1String = mutableAttributedStringFromString("O", color: nil, fontName: "Times New Roman", fontSize: 13.0)
 			let cosAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
@@ -266,7 +259,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Label TAN-1
 		if let actualFont = TimesNewRoman13Font {
-			var tan1String = mutableAttributedStringFromString("T", color: nil, fontName: "Times New Roman", fontSize: 13.0)
+			let tan1String = mutableAttributedStringFromString("T", color: nil, fontName: "Times New Roman", fontSize: 13.0)
 			let tanAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
@@ -301,7 +294,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Label BST
 		if let actualFont = TimesNewRoman13Font {
-			var BSTString = mutableAttributedStringFromString("⌘S", color: nil, fontName: "Helvetica", fontSize: 11.0)
+			let BSTString = mutableAttributedStringFromString("⌘S", color: nil, fontName: "Helvetica", fontSize: 11.0)
 			let BSTAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -341,7 +334,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Button Minus
 		if let actualFont = Helvetica09Font {
-			var minusString = mutableAttributedStringFromString("━", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 9.0)
+			let minusString = mutableAttributedStringFromString("━", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 9.0)
 			let minusAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: -1
@@ -356,7 +349,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		// Button Plus
 		buttonCellPlus.upperText = mutableAttributedStringFromString("╋", color: NSColor.whiteColor(), fontName: "Times New Roman", fontSize: 9.0)
 		if let actualFont = Helvetica09Font {
-			var plusString = mutableAttributedStringFromString("╋", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 9.0)
+			let plusString = mutableAttributedStringFromString("╋", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 9.0)
 			let plusAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -368,7 +361,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Button Multiply
 		if let actualFont = Helvetica15Font {
-			var multiplyString = mutableAttributedStringFromString("×", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 15.0)
+			let multiplyString = mutableAttributedStringFromString("×", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 15.0)
 			let multiplyAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
@@ -382,7 +375,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Button Divide
 		if let actualFont = Helvetica15Font {
-			var divideString = mutableAttributedStringFromString("÷", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 15.0)
+			let divideString = mutableAttributedStringFromString("÷", color: NSColor.whiteColor(), fontName: "Helvetica", fontSize: 15.0)
 			let divideAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
@@ -459,7 +452,7 @@ final class KeyboardShortcutsViewController: NSViewController {
 		
 		// Label VIEW
 		if let actualFont = TimesNewRoman13Font {
-			var viewString = mutableAttributedStringFromString("⌘R", color: nil, fontName: "Helvetica", fontSize: 11.0)
+			let viewString = mutableAttributedStringFromString("⌘R", color: nil, fontName: "Helvetica", fontSize: 11.0)
 			let viewAttributes = [
 				NSFontAttributeName : actualFont
 			]

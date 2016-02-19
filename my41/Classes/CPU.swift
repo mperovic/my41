@@ -96,8 +96,8 @@ struct CPURegisters {
 		let pQ = NSString(format:"%1X", Q) as String
 		let strFI = String(self.FI, radix:2)
 		let FI = pad(strFI, toSize: 14)
-		println("A=\(displayOrderedDigits(A)) B=\(displayOrderedDigits(B)) C=\(displayOrderedDigits(C)) Stack=\(stack0) \(stack1) \(stack2) \(stack3)")
-		println("M=\(displayOrderedDigits(M)) N=\(displayOrderedDigits(N)) Cr=\(carry)\(pointP)P=\(pP)\(pointQ)Q=\(pQ) G=\(displayOrderedDigits(G)) ST=\(bitsXST) \(bitsST)")
+		print("A=\(displayOrderedDigits(A)) B=\(displayOrderedDigits(B)) C=\(displayOrderedDigits(C)) Stack=\(stack0) \(stack1) \(stack2) \(stack3)")
+		print("M=\(displayOrderedDigits(M)) N=\(displayOrderedDigits(N)) Cr=\(carry)\(pointP)P=\(pP)\(pointQ)Q=\(pQ) G=\(displayOrderedDigits(G)) ST=\(bitsXST) \(bitsST)")
 		if let timer = bus.timer {
 			let CLK_A = timer.registers.CLK[1]
 			let CLK_B = timer.registers.CLK[0]
@@ -112,17 +112,17 @@ struct CPURegisters {
 			let TMR_S = NSString(format:"%04X", TMR_Sb) as String
 			let ACC_F = NSString(format:"%04X", ACC_Fb) as String
 			let aTimer = timer.timerSelected.rawValue == 0 ? "B" : "A"
-			println("CLK_A=\(displayOrderedDigits(CLK_A)) ALM_A=\(displayOrderedDigits(ALM_A)) SCR_A=\(displayOrderedDigits(SCR_A))")
-			println("CLK_B=\(displayOrderedDigits(CLK_B)) ALM_B=\(displayOrderedDigits(CLK_B)) SCR_B=\(displayOrderedDigits(SCR_B))")
-			println("TMR_S=\(TMR_S) ACC_F=\(ACC_F) Timer=\(aTimer) FI:\(FI)")
+			print("CLK_A=\(displayOrderedDigits(CLK_A)) ALM_A=\(displayOrderedDigits(ALM_A)) SCR_A=\(displayOrderedDigits(SCR_A))")
+			print("CLK_B=\(displayOrderedDigits(CLK_B)) ALM_B=\(displayOrderedDigits(ALM_B)) SCR_B=\(displayOrderedDigits(SCR_B))")
+			print("TMR_S=\(TMR_S) ACC_F=\(ACC_F) Timer=\(aTimer) FI:\(FI)")
 		}
-		println("RAM Addr=\(ramAddr) Perph Addr=\(periph) Base=\(mode.rawValue) KY=\(KY) Keydown=\(keyDown)")
+		print("RAM Addr=\(ramAddr) Perph Addr=\(periph) Base=\(mode.rawValue) KY=\(KY) Keydown=\(keyDown)")
 	}
 	
 	func displayOrderedDigits(digits: [Digit]) -> String
 	{
 		var result = ""
-		for idx in reverse(0...digits.count-1) {
+		for idx in Array((0...digits.count-1).reverse()) {
 			result = result + (NSString(format: "%1X", digits[idx]) as String)
 		}
 		
@@ -131,7 +131,7 @@ struct CPURegisters {
 	
 	func pad(string : String, toSize: Int) -> String {
 		var padded = string
-		for i in 0..<toSize - count(string) {
+		for _ in 0..<toSize - string.characters.count {
 			padded = "0" + padded
 		}
 		return padded
@@ -224,7 +224,7 @@ final class CPU {
 
 	var runFlag = false
 	var simulationTime: NSTimeInterval?
-	var reg: CPURegisters = CPURegisters()
+	var reg = CPURegisters()
 	var keyReleaseDelay = 0
 	var powerMode: PowerMode = .DeepSleep
 	var soundOutput = SoundOutput()
@@ -248,7 +248,7 @@ final class CPU {
 	var currentRomChip: RomChip?
 	var currentPage: Int = 0
 	
-	class var sharedInstance :CPU {
+	class var sharedInstance: CPU {
 		struct Singleton {
 			static let instance = CPU()
 		}
@@ -363,7 +363,7 @@ final class CPU {
 	}
 	
 	func timeSlice(timer: NSTimer) {
-		var currentTime = NSDate.timeIntervalSinceReferenceDate()
+		let currentTime = NSDate.timeIntervalSinceReferenceDate()
 		if running() {
 			let sTime = simulationTime!
 			if sTime != 0 {
@@ -384,7 +384,7 @@ final class CPU {
 	}
 	
 	func popReturnStack() -> Bits16 {
-		var result = reg.stack[0]
+		let result = reg.stack[0]
 		reg.stack[0] = reg.stack[1]
 		reg.stack[1] = reg.stack[2]
 		reg.stack[2] = reg.stack[3]
@@ -400,19 +400,19 @@ final class CPU {
 		reg.stack[0] = word
 	}
 	
-	func fetch() -> Result<Int> {
+	func fetch() throws -> Int {
 		--cycleLimit
 		simulationTime? += simulatedInstructionTime
 		soundOutput.soundOutputForWordTime(Int(reg.T))
 		if TRACE != 0 {
-			println("readRomAddress \(reg.PC)")
+			print("readRomAddress \(reg.PC)")
 		}
-		switch bus.readRomAddress(Int(reg.PC++)) {
-		case .Success(let result):
-			return .Success(result)
-		case .Error(let error):
-//			println(error)
-			return .Error(error)
+		do {
+			let result = try bus.readRomAddress(Int(reg.PC++))
+			return result
+		} catch {
+			print("error read ROM at Address: \(reg.PC)")
+			throw RomError.invalidAddress
 		}
 	}
 	
@@ -452,33 +452,34 @@ final class CPU {
 	
 	func executeNextInstruction() {
 		if TRACE != 0 {
-			println("--------------------------------------------------------------------------------------------------")
-			println("Step: \(++lineNo)")
-			println()
+			print("--------------------------------------------------------------------------------------------------")
+			print("Step: \(++lineNo)")
+			print("")
 			reg.description()
 		}
 		savedPC = reg.PC
 		prevPT = regR()
 		self.lastOpCode = self.opcode
-		switch fetch() {
-		case .Success(let result):
-			currentTyte = result.unbox
+		do {
+			let result = try fetch()
 			
-			self.opcode = OpCode(opcode: result.unbox)
+			currentTyte = result
+			
+			self.opcode = OpCode(opcode: result)
 			
 			if TRACE != 0 {
-				println("currentTyte: \(currentTyte)")
+				print("currentTyte: \(currentTyte)")
 			}
 			switch self.opcode.set() {
 			case 0:	executeClass0()				// miscellaneous
 			case 1:	executeClass1()				// long jumps
 			case 2:	executeClass2()				// Arithmetic operations
 			case 3:	executeClass3()				// short jumps
-			default: println("PROBLEM!")		// Error
+			default: print("PROBLEM!")		// Error
 			}
-		case .Error(let error):
+		} catch {
 			if TRACE != 0 {
-				println("currentTyte: \(currentTyte)")
+				print("currentTyte: \(currentTyte)")
 			}
 			reg.PC = 0
 		}
@@ -496,7 +497,7 @@ final class CPU {
 	
 	func executeClass0() {
 		if TRACE != 0 {
-			println("executeClass0: opcode: \(self.opcode.col()) - param: \(self.opcode.row())")
+			print("executeClass0: opcode: \(self.opcode.col()) - param: \(self.opcode.row())")
 		}
 		switch self.opcode.col() {
 		case 0x0: executeClass0Line0()
@@ -522,7 +523,7 @@ final class CPU {
 	func executeClass0Line0()
 	{
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line0(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line0(self.opcode))
 		}
 		switch self.opcode.row() {
 		case 0x0:
@@ -539,7 +540,7 @@ final class CPU {
 	func executeClass0Line1()
 	{
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line1(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line1(self.opcode))
 		}
 		switch self.opcode.row() {
 		case 0x7:
@@ -554,7 +555,7 @@ final class CPU {
 	func executeClass0Line2()
 	{
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line2(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line2(self.opcode))
 		}
 		switch self.opcode.row() {
 		case 0x7:
@@ -569,7 +570,7 @@ final class CPU {
 	func executeClass0Line3()
 	{
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line3(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line3(self.opcode))
 		}
 		switch self.opcode.row() {
 		case 0x7:
@@ -584,7 +585,7 @@ final class CPU {
 	func executeClass0Line4()
 	{
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line4(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line4(self.opcode))
 		}
 		reg.carry = op_LC(self.opcode.row())
 	}
@@ -592,7 +593,7 @@ final class CPU {
 	func executeClass0Line5()
 	{
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line5(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line5(self.opcode))
 		}
 		switch self.opcode.row() {
 		case 0x7:
@@ -607,7 +608,7 @@ final class CPU {
 	func executeClass0Line6()
 	{
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line6(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line6(self.opcode))
 		}
 		switch self.opcode.row() {
 		case 0x1:
@@ -641,7 +642,7 @@ final class CPU {
 	
 	func executeClass0Line7() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line7(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line7(self.opcode))
 		}
 		var R: Bits4 = regR()
 		switch self.opcode.row() {
@@ -656,7 +657,7 @@ final class CPU {
 	
 	func executeClass0Line8() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line8(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line8(self.opcode))
 		}
 		switch self.opcode.row() {
 		case 0x0:
@@ -698,21 +699,21 @@ final class CPU {
 	
 	func executeClass0Line9() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0Line9(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0Line9(self.opcode))
 		}
 		reg.carry = op_SELPF(self.opcode.row())
 	}
 	
 	func executeClass0LineA() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0LineA(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0LineA(self.opcode))
 		}
 		reg.carry = op_REGNeqC(self.opcode.row())
 	}
 	
 	func executeClass0LineB() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0LineB(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0LineB(self.opcode))
 		}
 		switch fTable[self.opcode.row()] {
 		case 0xE, 0xF:
@@ -724,7 +725,7 @@ final class CPU {
 	
 	func executeClass0LineC() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0LineC(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0LineC(self.opcode))
 		}
 		switch self.opcode.row() {
 		case 0x0:
@@ -766,14 +767,14 @@ final class CPU {
 	
 	func executeClass0LineD() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0LineD(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0LineD(self.opcode))
 		}
 		op_INVALID("executeClass0LineD: \(self.opcode.row())")
 	}
 	
 	func executeClass0LineE() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0LineE(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0LineE(self.opcode))
 		}
 		switch self.opcode.row() {
 		case 0:
@@ -785,7 +786,7 @@ final class CPU {
 	
 	func executeClass0LineF() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass0LineF(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass0LineF(self.opcode))
 		}
 		switch (self.opcode.row()) {
 		case 0x7, 0xF:
@@ -801,17 +802,17 @@ final class CPU {
 	func executeClass1() {
 		var newTyte = OpCode(opcode: 0)
 		var addr: Int = 0
-		switch fetch() {
-		case .Success(let result):
-			newTyte = OpCode(opcode: result.unbox)
-		case .Error(let error):
+		do {
+			let result = try fetch()
+			newTyte = OpCode(opcode: result)
+		} catch {
 			newTyte = OpCode(opcode: 0)
 		}
 		addr = (newTyte.opcode & 0x3fc) << 6 | (self.opcode.opcode & 0x3fc) >> 2
 		if TRACE != 0 {
 //			println("executeClass1: \(self.opcode.opcode) - addr: 0x\(decToHex(addr)) word: \(newTyte.row())")
 			if TRACE != 0 {
-				println(Disassembly.sharedInstance.disassemblyClass1(self.opcode))
+				print(Disassembly.sharedInstance.disassemblyClass1(self.opcode))
 			}
 		}
 		switch (newTyte.set()) {
@@ -838,11 +839,10 @@ final class CPU {
 		var cnt = 0
 		var carry: Bit = 0
 		var zero: Bit = 0
-		var scratch = emptyDigit14
 		if TRACE != 0 {
 //			println("executeClass2: opcode: \(opcode) - field: \(field)")
 			if TRACE != 0 {
-				println(Disassembly.sharedInstance.disassemblyClass2(self.opcode))
+				print(Disassembly.sharedInstance.disassemblyClass2(self.opcode))
 			}
 		}
 		switch field {
@@ -951,7 +951,7 @@ final class CPU {
 	
 	func executeClass3() {
 		if TRACE != 0 {
-			println(Disassembly.sharedInstance.disassemblyClass3(self.opcode))
+			print(Disassembly.sharedInstance.disassemblyClass3(self.opcode))
 		}
 		let value = (self.opcode.opcode >> 2) & 1
 		var offset = 0
@@ -979,8 +979,8 @@ final class CPU {
 	
 	func digitsToString(register: [Digit]) -> String {
 		var result = String()
-		var limit = register.count - 1
-		for idx in reverse(0...limit) {
+		let limit = register.count - 1
+		for idx in Array((0...limit).reverse()) {
 			result += NSString(format:"%1X", register[idx]) as String
 		}
 		
@@ -997,7 +997,7 @@ final class CPU {
 	
 	func op_INVALID(parameter: String) -> Bit
 	{
-		println("Invalid: " + parameter)
+		print("Invalid: " + parameter)
 		return 0
 	}
 }

@@ -30,7 +30,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	}
 	
 	@IBAction func clearMemory(sender: AnyObject) {
-		var action = UIAlertView(
+		let action = UIAlertView(
 			title: "Reset Calculator",
 			message: "This operation will clear all programs and memory registers",
 			delegate: self,
@@ -42,7 +42,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	
 	@IBAction func applyChanges(sender: AnyObject) {
 		var needsRestart = false
-
+		
 		let defaults = NSUserDefaults.standardUserDefaults()
 		
 		// Sound settings
@@ -72,96 +72,95 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		// Modules
 		if let fPath = self.expansionModule1.filePath {
 			// We have something in Port1
-			let moduleName = fPath.lastPathComponent
+			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.stringForKey(HPPort1) {
 				// And we had something in Port1 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(fPath.lastPathComponent, forKey: HPPort1)
+					defaults.setObject(moduleName, forKey: HPPort1)
 					needsRestart = true
 				}
 			} else {
 				// Port1 was empty
-				defaults.setObject(fPath.lastPathComponent, forKey: HPPort1)
+				defaults.setObject(moduleName, forKey: HPPort1)
 				needsRestart = true
 			}
 		} else {
 			// Port1 is empty now
-			if let dModuleName = defaults.stringForKey(HPPort1) {
+			if let _ = defaults.stringForKey(HPPort1) {
 				// But we had something in Port1
 				defaults.removeObjectForKey(HPPort1)
 			}
 		}
-		
+
 		if let fPath = self.expansionModule2.filePath {
 			// We have something in Port2
-			let moduleName = fPath.lastPathComponent
+			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.stringForKey(HPPort2) {
 				// And we had something in Port2 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(fPath.lastPathComponent, forKey: HPPort2)
+					defaults.setObject(moduleName, forKey: HPPort2)
 					needsRestart = true
 				}
 			} else {
 				// Port2 was empty
-				defaults.setObject(fPath.lastPathComponent, forKey: HPPort2)
+				defaults.setObject(moduleName, forKey: HPPort2)
 				needsRestart = true
 			}
 		} else {
 			// Port2 is empty now
-			if let dModuleName = defaults.stringForKey(HPPort2) {
+			if let _ = defaults.stringForKey(HPPort2) {
 				// But we had something in Port2
 				defaults.removeObjectForKey(HPPort2)
 			}
 		}
-		
+
 		if let fPath = self.expansionModule3.filePath {
 			// We have something in Port3
-			let moduleName = fPath.lastPathComponent
+			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.stringForKey(HPPort3) {
 				// And we had something in Port3 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(fPath.lastPathComponent, forKey: HPPort3)
+					defaults.setObject(moduleName, forKey: HPPort3)
 					needsRestart = true
 				}
 			} else {
 				// Port3 was empty
-				defaults.setObject(fPath.lastPathComponent, forKey: HPPort3)
+				defaults.setObject(moduleName, forKey: HPPort3)
 				needsRestart = true
 			}
 		} else {
 			// Port3 is empty now
-			if let dModuleName = defaults.stringForKey(HPPort3) {
+			if let _ = defaults.stringForKey(HPPort3) {
 				// But we had something in Port3
 				defaults.removeObjectForKey(HPPort3)
 			}
 		}
-		
+
 		if let fPath = self.expansionModule4.filePath {
 			// We have something in Port4
-			let moduleName = fPath.lastPathComponent
+			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.stringForKey(HPPort4) {
 				// And we had something in Port4 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(fPath.lastPathComponent, forKey: HPPort4)
+					defaults.setObject(moduleName, forKey: HPPort4)
 					needsRestart = true
 				}
 			} else {
 				// Port4 was empty
-				defaults.setObject(fPath.lastPathComponent, forKey: HPPort4)
+				defaults.setObject(moduleName, forKey: HPPort4)
 				needsRestart = true
 			}
 		} else {
 			// Port4 is empty now
-			if let dModuleName = defaults.stringForKey(HPPort4) {
+			if let _ = defaults.stringForKey(HPPort4) {
 				// But we had something in Port4
 				defaults.removeObjectForKey(HPPort4)
 			}
 		}
-		
 		defaults.synchronize()
 
 		dismissViewControllerAnimated(
@@ -229,7 +228,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 		}
 	}
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		self.button = UIButton()
 		super.init(coder: aDecoder)
 
@@ -246,7 +245,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 	
 	func buttonAction(sender: AnyObject) {
 		if self.filePath != nil {
-			var action = UIAlertView(
+			let action = UIAlertView(
 				title: "Port \(port)",
 				message: "What do you want to do with module",
 				delegate: self,
@@ -260,15 +259,15 @@ class MODsView: UIView, UIAlertViewDelegate {
 	}
 	
 	func selectModule() {
-		var action = UIAlertView(
+		let action = UIAlertView(
 			title: "Port \(port)",
 			message: "Choose module",
 			delegate: self,
 			cancelButtonTitle: "Cancel"
 		)
 		self.reloadModFiles()
-		for (index, element) in enumerate(modFiles) {
-			action.addButtonWithTitle(element.lastPathComponent)
+		for (_, element) in modFiles.enumerate() {
+			action.addButtonWithTitle((element as NSString).lastPathComponent)
 		}
 		action.show()
 	}
@@ -287,7 +286,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 			self.bounds.size.height - 6
 		)
 		
-		var path = UIBezierPath(
+		let path = UIBezierPath(
 			roundedRect: rect,
 			cornerRadius: 5.0
 		)
@@ -297,19 +296,23 @@ class MODsView: UIView, UIAlertViewDelegate {
 		path.fill()
 		
 		let font = UIFont.systemFontOfSize(15.0 * settingsViewController.yRatio)
-		var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+		let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = NSTextAlignment.Center
 		let attributes = [
 			NSFontAttributeName : font,
 			NSParagraphStyleAttributeName: textStyle
 		]
-		if let fPath: NSString = filePath {
+		if let fPath = filePath {
 			let mod = MOD()
-			mod.readModFromFile(fPath as String)
-			mod.moduleHeader.title.drawInRect(
-				CGRectMake(10.0, 10.0, self.bounds.size.width - 20.0, self.bounds.size.height - 20.0),
-				withAttributes: attributes
-			)
+			do {
+				try mod.readModFromFile(fPath)
+				mod.moduleHeader.title.drawInRect(
+					CGRectMake(10.0, 10.0, self.bounds.size.width - 20.0, self.bounds.size.height - 20.0),
+					withAttributes: attributes
+				)
+			} catch {
+				
+			}
 		} else {
 			let title = "Empty module"
 			title.drawInRect(
@@ -359,13 +362,12 @@ class MODsView: UIView, UIAlertViewDelegate {
 	}
 	
 	func modFilesInBundle() -> [String] {
-		let resourceURL = NSBundle.mainBundle().resourceURL
+//		let resourceURL = NSBundle.mainBundle().resourceURL
 		let modFiles = NSBundle.mainBundle().pathsForResourcesOfType("mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
-			let filePath = modFile as! String
-			if filePath.lastPathComponent != "nut-c.mod" && filePath.lastPathComponent != "nut-cv.mod" && filePath.lastPathComponent != "nut-cx.mod" {
-				realModFiles.append(modFile as! String)
+			if (modFile as NSString).lastPathComponent != "nut-c.mod" && (modFile as NSString).lastPathComponent != "nut-cv.mod" && (modFile as NSString).lastPathComponent != "nut-cx.mod" {
+				realModFiles.append(modFile)
 			}
 		}
 		
@@ -427,7 +429,7 @@ class MODDetailsView: UIView {
 			self.bounds.size.width - 6.0,
 			self.bounds.size.height - 6.0
 		)
-		var path = UIBezierPath(
+		let path = UIBezierPath(
 			roundedRect: rect,
 			cornerRadius: 5.0
 		)

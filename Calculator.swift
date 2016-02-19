@@ -89,11 +89,12 @@ class Calculator: NSObject {
 		
 		if self.calculatorMod.data != nil {
 			// Install ROMs which came with the calculator module
-			switch bus.installMod(self.calculatorMod) {
-			case .Success:
-				break
-			case .Error(let error): error
-			displayAlert(error)
+			do {
+				try bus.installMod(self.calculatorMod)
+			} catch MODError.freeSpace {
+				displayAlert("No free space")
+			} catch {
+				
 			}
 		}
 	}
@@ -101,30 +102,12 @@ class Calculator: NSObject {
 	func installExternalModules() {
 		for idx in 0...3 {
 			if self.portMod[idx]?.data != nil {
-				switch bus.installMod(self.portMod[idx]!) {
-				case .Success:
-					break
-				case .Error(let error): error
-				displayAlert(error)
-				
-				let defaults = NSUserDefaults.standardUserDefaults()
-				switch idx {
-				case 0:
-					defaults.removeObjectForKey(HPPort1)
+				do {
+					try bus.installMod(self.portMod[idx]!)
+				} catch MODError.freeSpace {
+					displayAlert("No free space")
+				} catch {
 					
-				case 1:
-					defaults.removeObjectForKey(HPPort2)
-					
-				case 2:
-					defaults.removeObjectForKey(HPPort3)
-					
-				case 3:
-					defaults.removeObjectForKey(HPPort4)
-					
-				default:
-					break
-				}
-				defaults.synchronize()
 				}
 			}
 		}
@@ -132,14 +115,12 @@ class Calculator: NSObject {
 	
 	func emptyRAM()
 	{
-		var tmpReg = emptyDigit14
+		let tmpReg = emptyDigit14
 		for addr in 0..<MAX_RAM_SIZE {
-			switch bus.writeRamAddress(Bits12(addr), from: tmpReg) {
-			case .Success(let result):
-				break
-			case .Error (let error):
-//				println(error)
-				break
+			do {
+				try bus.writeRamAddress(Bits12(addr), from: tmpReg)
+			} catch _ {
+//				displayAlert("error writing ram at address: \(addr)")
 			}
 		}
 	}
@@ -183,33 +164,32 @@ class Calculator: NSObject {
 		for addr in 0..<MAX_RAM_SIZE {
 			var tmpReg = emptyDigit14
 			digits14FromArray(memoryArray, position: ptr, to: &tmpReg)
-			switch bus.writeRamAddress(Bits12(addr), from: tmpReg) {
-			case .Success(let result):
-				break
-			case .Error (let error):
-//				println(error)
-				break
+			do {
+				try bus.writeRamAddress(Bits12(addr), from: tmpReg)
+			} catch _ {
+//				displayAlert("error writing ram at address: \(addr)")
 			}
+
 			ptr += 14
 		}
 	}
 	
 	func getMemoryContents() -> NSData {
-		var data: NSMutableData = NSMutableData()
+		let data: NSMutableData = NSMutableData()
 		let count = 14 * MAX_RAM_SIZE
 		var memoryArray = [UInt8](count: count, repeatedValue: 0)
 		var ptr = 0
 		for addr in 0..<MAX_RAM_SIZE {
 			var tmpReg = emptyDigit14
-			switch bus.readRamAddress(Bits12(addr), into: &tmpReg) {
-			case .Success(let result):
+			do {
+				try bus.readRamAddress(Bits12(addr), into: &tmpReg)
+				
 				for idx in 0...13 {
 					memoryArray[ptr+idx] = tmpReg[idx]
 				}
 				ptr += 14
-			case .Error (let error):
-//				println(error)
-				break
+			} catch {
+				print("error RAM address: \(addr)")
 			}
 		}
 		data.appendBytes(memoryArray, length: count)
@@ -223,21 +203,25 @@ class Calculator: NSObject {
 		readROMModule(cType)
 		
 		// Now we fill each port
-		if defaults.stringForKey(HPPort1) != nil {
-			portMod[0] = MOD()
-			portMod[0]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!)
-		}
-		if defaults.stringForKey(HPPort2) != nil {
-			portMod[1] = MOD()
-			portMod[1]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!)
-		}
-		if defaults.stringForKey(HPPort3) != nil {
-			portMod[2] = MOD()
-			portMod[2]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!)
-		}
-		if defaults.stringForKey(HPPort4) != nil {
-			portMod[3] = MOD()
-			portMod[3]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!)
+		do {
+			if defaults.stringForKey(HPPort1) != nil {
+				portMod[0] = MOD()
+				try portMod[0]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!)
+			}
+			if defaults.stringForKey(HPPort2) != nil {
+				portMod[1] = MOD()
+				try portMod[1]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!)
+			}
+			if defaults.stringForKey(HPPort3) != nil {
+				portMod[2] = MOD()
+				try portMod[2]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!)
+			}
+			if defaults.stringForKey(HPPort4) != nil {
+				portMod[3] = MOD()
+				try portMod[3]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!)
+			}
+		} catch _ {
+			
 		}
 	}
 	
@@ -261,11 +245,10 @@ class Calculator: NSObject {
 			filename = NSBundle.mainBundle().resourcePath! + "/" + "nut-cx.mod"
 		}
 		
-		switch calculatorMod.readModFromFile(filename) {
-		case .Success:
-			break
-		case .Error(let error): error
-		displayAlert(error)
+		do {
+			try calculatorMod.readModFromFile(filename)
+		} catch let error as NSError {
+			displayAlert(error.description)
 		}
 	}
 	

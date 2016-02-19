@@ -170,11 +170,6 @@ class Box<T> {
 	}
 }
 
-enum Result<T> {
-	case Success(Box<T>)
-	case Error(String)
-}
-
 final class ModulePage {
 	var moduleHeader: ModuleHeader?		// pointer to module that this page is a part of, or NULL if none
 	var altPage: ModulePage?			// pointer to alternate page if any (HEPAX, W&W RAMBOX2 use)
@@ -209,6 +204,17 @@ final class ModulePage {
 		WWRAMBOX = 0
 		image = [byte](count: 4096, repeatedValue: 0)
 	}
+}
+
+enum CheckPageError: ErrorType {
+	case pageOutOfRange
+	case pageGroupOutOfRange
+	case bankOutOfRange
+	case bankGroupOutOfRange
+	case nonGroupedPagesError
+	case ramOutOfRange
+	case writeProtect
+	case fatOutOfRange
 }
 
 final class MOD {
@@ -253,42 +259,40 @@ final class MOD {
 	}
 	
 	// Check Page
-	func checkPage(page: ModulePage) -> Result<Bool> {
+	func checkPage(page: ModulePage) throws {
 		if page.page > 0x0f && page.page < PositionMin {
-			return .Error("page is out of range values")
+			throw CheckPageError.pageOutOfRange
 		}
 		if page.page > PositionMax && page.pageGroup > 8 {
-			return .Error("page is out of range values")
+			throw CheckPageError.pageOutOfRange
 		}
 		
 		// out of range values
 		if page.bank == 0 || page.bank > 4 {
-			return .Error("bank is out of range values")
+			throw CheckPageError.bankOutOfRange
 		}
 		if page.bankGroup > 8 {
-			return .Error("bankGroup is out of range values")
+			throw CheckPageError.bankGroupOutOfRange
 		}
 		if page.RAM > 1 {
-			return .Error("ram is out of range values")
+			throw CheckPageError.ramOutOfRange
 		}
 		if page.writeProtect > 1 {
-			return .Error("writeProtect is out of range values")
+			throw CheckPageError.writeProtect
 		}
 		if page.FAT > 1 {
-			return .Error("fat is out of range values")
+			throw CheckPageError.fatOutOfRange
 		}
 		
 		// group pages cannot use non-grouped position codes
 		if page.pageGroup == 1 && page.page <= Position.PositionAny.rawValue {
-			return .Error("group pages cannot use non-grouped position codes")
+			throw CheckPageError.pageGroupOutOfRange
 		}
 		
 		// non-grouped pages cannot use grouped position codes
 		if page.pageGroup == 0 && page.page > Position.PositionAny.rawValue {
-			return .Error("non-grouped pages cannot use grouped position codes")
+			throw CheckPageError.nonGroupedPagesError
 		}
-	
-		return .Success(Box(true))
 	}
 	
 	func populateModuleHeader() {
@@ -325,43 +329,52 @@ final class MOD {
 		moduleHeader.numPages = header.numPages
 	}
 	
-	func validateModuleHeader() -> Result<Bool> {
+	enum modHeaderError: ErrorType {
+		case wrongFileSize
+		case noModExtension
+		case tooManyMEMModules
+		case tooManyXMEMModules
+		case wrongOriginalValue
+		case wrongAppAutoUpdateValue
+		case wrongCategoryValue
+		case wrongHardwareValue
+	}
+	
+	func validateModuleHeader() throws {
 		// check size
 		if fileSize != HeaderSize + Int(moduleHeader.numPages) * PageSize {
-			return .Error("wrong file size")
+			throw modHeaderError.wrongFileSize
 		}
 		
 		if !moduleHeader.fileFormat.hasPrefix(MOD_FORMAT) {
-			return .Error("file does not have MOD extension")
+			throw modHeaderError.noModExtension
 		}
 		
 		let mem = bus.memModules + moduleHeader.memModules
 		if mem > 4 {
-			return .Error("too many mem modules")
+			throw modHeaderError.tooManyMEMModules
 		}
 		
 		let xmem = bus.XMemModules + moduleHeader.XMemModules
 		if xmem > 3 {
-			return .Error("too many xmem modules")
+			throw modHeaderError.tooManyXMEMModules
 		}
 		
 		if moduleHeader.original > 1 {
-			return .Error("wrong original value")
+			throw modHeaderError.wrongOriginalValue
 		}
 		
 		if moduleHeader.appAutoUpdate > 1 {
-			return .Error("wrong appAutoUpdate value")
+			throw modHeaderError.wrongAppAutoUpdateValue
 		}
 		
 		if moduleHeader.category.rawValue > CategoryMax {
-			return .Error("wrong category value")
+			throw modHeaderError.wrongCategoryValue
 		}
 		
 		if moduleHeader.hardware.rawValue > HardwareMax {
-			return .Error("wrong hardware value")
+			throw modHeaderError.wrongHardwareValue
 		}
-		
-		return .Success(Box(true))
 	}
 	
 	func populateModulePage(pageNo: Int) {
@@ -380,7 +393,7 @@ final class MOD {
 		data!.getBytes(&page.image, range: NSMakeRange(startPosition+36, 5120))
 		data!.getBytes(&page.pageCustom, range: NSMakeRange(startPosition+5156, 32))
 
-		var modulePage = ModulePage()
+		let modulePage = ModulePage()
 		modulePage.moduleHeader = self.moduleHeader
 		modulePage.name = convertCCharToString(page.name)
 		modulePage.ID = convertCCharToString(page.ID)
@@ -396,43 +409,36 @@ final class MOD {
 		modulePages.append(modulePage)
 	}
 	
-	func readModFromFile(filename: String) -> Result<Bool> {
+	enum readModFileError: ErrorType {
+		case errorLoadingFile
+	}
+	
+	func readModFromFile(filename: String) throws {
 		// Read the file
-		var error: NSError?
 		let fileManager = NSFileManager.defaultManager()
 		if fileManager.fileExistsAtPath(filename) {
-			let fileAttributes: NSDictionary = fileManager.attributesOfItemAtPath(filename, error: &error)!
-			if error != nil {
-				println(error!)
-				return .Error("problem with loading file")
+			do {
+				let fileAttributes: NSDictionary = try fileManager.attributesOfItemAtPath(filename)
+				self.fileSize = fileAttributes[NSFileSize]! as! Int
+				self.data = try NSData(contentsOfFile: filename, options: .DataReadingMappedIfSafe)
+				self.shortName = (filename as NSString).lastPathComponent.lowercaseString
+				moduleHeader.fullFileName = filename
+				
+				populateModuleHeader()
+				
+				try validateModuleHeader()
+				bus.memModules += moduleHeader.memModules
+				bus.XMemModules += moduleHeader.XMemModules
+				
+				for var idx: UInt8 = 0; idx < moduleHeader.numPages; idx++ {
+					populateModulePage(Int(idx))
+				}
+			} catch let error as NSError {
+				data = nil
+				displayAlert(error.localizedDescription)
 			}
-			
-			self.fileSize = fileAttributes[NSFileSize]! as! Int
-			self.data = NSData(contentsOfFile: filename, options: .DataReadingMappedIfSafe, error: nil)
-			self.shortName = filename.lastPathComponent.lowercaseString
-			
-			moduleHeader.fullFileName = filename
-			
-			populateModuleHeader()
-			switch validateModuleHeader() {
-			case .Success:
-				break
-			case .Error(let error): error
-				displayAlert(error)
-
-				return .Error(error)
-			}
-			
-			bus.memModules += moduleHeader.memModules
-			bus.XMemModules += moduleHeader.XMemModules
-
-			for var idx: UInt8 = 0; idx < moduleHeader.numPages; idx++ {
-				populateModulePage(Int(idx))
-			}
-			return .Success(Box(true))
 		} else {
 			data = nil
-			return .Success(Box(false))
 		}
 		
 //		description()
@@ -460,8 +466,6 @@ final class MOD {
 			return "BETA releases"
 		case .Experimental:
 			return "Test programs"
-		default:
-			return nil
 		}
 	}
 	
@@ -497,8 +501,6 @@ final class MOD {
 			return "MLDL2000"
 		case .CLONIX:
 			return "CLONIX-41 Module"
-		default:
-			return nil
 		}
 	}
 	
@@ -511,37 +513,37 @@ final class MOD {
 	}
 	
 	func headerDescription() {
-		println(">>>>>     HEADER     <<<<<")
-		println("fileFormat: \(moduleHeader.fileFormat)")
-		println("title: \(moduleHeader.title)")
-		println("version: \(moduleHeader.version)")
-		println("partNumber: \(moduleHeader.partNumber)")
-		println("copyright: \(moduleHeader.copyright)")
-		println("author: \(moduleHeader.author)")
-		println("license: \(moduleHeader.license)")
-		println("comments: \(moduleHeader.comments)")
-		println("category: \(moduleHeader.category)")
-		println("hardware: \(moduleHeader.hardware)")
-		println("memModules: \(moduleHeader.memModules)")
-		println("XMemModules: \(moduleHeader.XMemModules)")
-		println("original: \(moduleHeader.original)")
-		println("appAutoUpdate: \(moduleHeader.appAutoUpdate)")
-		println("numPages: \(moduleHeader.numPages)")
-		println(">>>>>     END HEADER     <<<<<")
+		print(">>>>>     HEADER     <<<<<")
+		print("fileFormat: \(moduleHeader.fileFormat)")
+		print("title: \(moduleHeader.title)")
+		print("version: \(moduleHeader.version)")
+		print("partNumber: \(moduleHeader.partNumber)")
+		print("copyright: \(moduleHeader.copyright)")
+		print("author: \(moduleHeader.author)")
+		print("license: \(moduleHeader.license)")
+		print("comments: \(moduleHeader.comments)")
+		print("category: \(moduleHeader.category)")
+		print("hardware: \(moduleHeader.hardware)")
+		print("memModules: \(moduleHeader.memModules)")
+		print("XMemModules: \(moduleHeader.XMemModules)")
+		print("original: \(moduleHeader.original)")
+		print("appAutoUpdate: \(moduleHeader.appAutoUpdate)")
+		print("numPages: \(moduleHeader.numPages)")
+		print(">>>>>     END HEADER     <<<<<")
 	}
 	
 	func pageDescription(pageNo: UInt8) {
 		let page = modulePages[Int(pageNo)]
-		println(">>>>>     PAGE: \(pageNo)     <<<<<")
-		println("name: \(page.name)")
-		println("ID: \(page.ID)")
-		println("page: \(page.page)")
-		println("pageGroup: \(page.pageGroup)")
-		println("bank: \(page.bank)")
-		println("bankGroup: \(page.bankGroup)")
-		println("RAM: \(page.RAM)")
-		println("writeProtect: \(page.writeProtect)")
-		println(">>>>>     END PAGE     <<<<<")
+		print(">>>>>     PAGE: \(pageNo)     <<<<<")
+		print("name: \(page.name)")
+		print("ID: \(page.ID)")
+		print("page: \(page.page)")
+		print("pageGroup: \(page.pageGroup)")
+		print("bank: \(page.bank)")
+		print("bankGroup: \(page.bankGroup)")
+		print("RAM: \(page.RAM)")
+		print("writeProtect: \(page.writeProtect)")
+		print(">>>>>     END PAGE     <<<<<")
 	}
 }
 

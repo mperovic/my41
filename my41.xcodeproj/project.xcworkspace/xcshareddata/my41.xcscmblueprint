@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D0ED7248DAF6DB4A69FE9D171FBD7CDD5F4B35A0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "f09ba73e-6d4f-0410-9022-f8ad7a05a6eb++4037" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D0ED7248DAF6DB4A69FE9D171FBD7CDD5F4B35A0" : 0,
+    "f09ba73e-6d4f-0410-9022-f8ad7a05a6eb++4037" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8C722431-1956-411C-B35E-376351AC4C09",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D0ED7248DAF6DB4A69FE9D171FBD7CDD5F4B35A0" : "my41\/",
+    "f09ba73e-6d4f-0410-9022-f8ad7a05a6eb++4037" : "my41\/my41\/MOD\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "my41",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "my41.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mperovic\/my41.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D0ED7248DAF6DB4A69FE9D171FBD7CDD5F4B35A0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/x-41.svn.sourceforge.net\/svnroot\/x-41",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "f09ba73e-6d4f-0410-9022-f8ad7a05a6eb++4037"
+    }
+  ]
+}

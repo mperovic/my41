@@ -14,27 +14,27 @@ class Key: NSButton {
 	var keyCode: NSNumber?
 	var pressed: Bool = false
 	
-	override func acceptsFirstMouse(theEvent: NSEvent) -> Bool {
+	override func acceptsFirstMouse(theEvent: NSEvent?) -> Bool {
 		return true
 	}
 	
 	override func mouseDown(theEvent: NSEvent) {
-		if theEvent.modifierFlags & .ControlKeyMask == nil {
+		if theEvent.modifierFlags.intersect(.ControlKeyMask) == [] {
 			downKey()
 		}
 		highlight(true)
 		
-		var appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+		let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.buttonPressed = true
 	}
 	
 	override func mouseUp(theEvent: NSEvent) {
-		if theEvent.modifierFlags & .ControlKeyMask == nil {
+		if theEvent.modifierFlags.intersect(.ControlKeyMask) == [] {
 			upKey()
 		}
 		highlight(false)
 		
-		var appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+		let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.buttonPressed = false
 	}
 	
@@ -61,7 +61,7 @@ class ButtonCell: NSButtonCell {
 	var shiftButton: String?
 	var switchButton: String?
 	
-	required init(coder: NSCoder) {
+	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 	}
 	
@@ -81,7 +81,7 @@ class ButtonCell: NSButtonCell {
 			(NSColor(deviceWhite: 0.20, alpha: 1.0), 0.0),
 			(NSColor(deviceWhite: 0.21, alpha: 1.0), 1.0)
 		)
-		outerGradient.drawInRect(outerClip.bounds, angle: 90.0)
+		outerGradient?.drawInRect(outerClip.bounds, angle: 90.0)
 		ctx.restoreGraphicsState()
 		
 		// Background gradient
@@ -91,7 +91,7 @@ class ButtonCell: NSButtonCell {
 			yRadius: roundedRadius)
 		backgroundPath.setClip()
 		
-		var backgroundGradient: NSGradient
+		var backgroundGradient: NSGradient?
 		if switchButton == "Y" {
 			backgroundGradient = NSGradient(colorsAndLocations:
 				(NSColor(deviceWhite: 0.30, alpha: 1.0), 0.0),
@@ -119,7 +119,7 @@ class ButtonCell: NSButtonCell {
 				)
 			}
 		}
-		backgroundGradient.drawInRect(backgroundPath.bounds, angle: 270.0)
+		backgroundGradient?.drawInRect(backgroundPath.bounds, angle: 270.0)
 		ctx.restoreGraphicsState()
 		
 		// Dark stroke
@@ -168,10 +168,10 @@ class ButtonCell: NSButtonCell {
 				lowerTextRect = NSMakeRect(1.0, 17.0, 36.0, 12.0)
 			}
 			var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-			textStyle.alignment = .CenterTextAlignment
+			textStyle.alignment = .Center
 			
 			var font: NSFont
-			if count(lowerText!) > 1 {
+			if (lowerText!).characters.count > 1 {
 				font = NSFont(name: "Helvetica", size: 9.0)!
 			} else {
 				font = NSFont(name: "Helvetica", size: 11.0)!
@@ -186,7 +186,7 @@ class ButtonCell: NSButtonCell {
 		
 		if upperText != nil {
 			var paragrapStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
-			paragrapStyle.alignment = .CenterTextAlignment
+			paragrapStyle.alignment = .Center
 			upperText!.addAttribute(NSParagraphStyleAttributeName, value: paragrapStyle, range: NSMakeRange(0, upperText!.length))
 			
 			

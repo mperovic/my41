@@ -128,7 +128,7 @@ class DebugCPUViewController: NSViewController {
 	
 	func pad(string : String, toSize: Int) -> String {
 		var padded = string
-		for i in 0..<toSize - count(string) {
+		for _ in 0..<toSize - string.characters.count {
 			padded = "0" + padded
 		}
 		return padded
@@ -145,7 +145,7 @@ class DebugCPUViewController: NSViewController {
 
 	override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
 		let segid = segue.identifier ?? "(none)"
-		println("\(__FUNCTION__) hit, segue ID = \(segid)")
+		print("\(__FUNCTION__) hit, segue ID = \(segid)")
 	}
 	
 	@IBAction func traceAction(sender: AnyObject)

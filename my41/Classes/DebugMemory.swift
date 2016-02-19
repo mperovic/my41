@@ -61,8 +61,9 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 			var hidden = false
 			if bus.RAMExists(address) {
 				var tmpReg = emptyDigit14
-				switch bus.readRamAddress(Bits12(addr), into: &tmpReg) {
-				case .Success(let result):
+				do {
+					try bus.readRamAddress(Bits12(addr), into: &tmpReg)
+					
 					switch ptr {
 					case 0x0:
 						memory0.stringValue = cpu.digitsToString(tmpReg)
@@ -100,8 +101,8 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 						// do nothing
 						break
 					}
-				case .Error (let error):
-					println(error)
+				} catch {
+					print("error RAM address: \(addr)")
 				}
 			} else {
 				hidden = true

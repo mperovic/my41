@@ -67,14 +67,17 @@ class Display: UIView, Peripheral {
 		// 0x40..0x4f: a-e + "hangman"
 		// 0x50..0x5f: some greek characters + "hangman"
 		// 0x60..0x7f: a-z lowercase characters
-		let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
-		let mString: NSMutableString = NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding, error: nil)!
-		CTULookup = String(mString)
-		CTULookupLength = count(CTULookup!)
+		do {
+			let filename: String = NSBundle.mainBundle().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
+			let CTULookup = try NSMutableString(contentsOfFile: filename, encoding: NSUnicodeStringEncoding) as String
+			CTULookupLength = CTULookup.characters.count
+		} catch _ {
+			
+		}
 	}
 
 	override func drawRect(rect: CGRect) {
-		if count(self.segmentPaths) == 0 {
+		if self.segmentPaths.count == 0 {
 			self.annunciatorFont = UIFont(
 				name: "Menlo",
 				size:self.annunciatorFontScale * self.annunciatorFontSize
@@ -97,14 +100,13 @@ class Display: UIView, Peripheral {
 					}
 					CGContextTranslateCTM(context, cellWidth(), 0.0)
 				}
-				CGContextDrawPath(context, kCGPathFill)
+				CGContextDrawPath(context, CGPathDrawingMode.Fill)
 				CGContextRestoreGState(context)
 			}
 
-			let attrs: NSDictionary = NSDictionary(
-				object: annunciatorFont!,
-				forKey: NSFontAttributeName
-			)
+			let attrs = [
+				NSFontAttributeName: annunciatorFont!
+			]
 			calculatorController.prgmMode = false
 			calculatorController.alphaMode = false
 			for idx in 0..<numAnnunciators {
@@ -128,7 +130,7 @@ class Display: UIView, Peripheral {
 					let nsString = annunciatorStrings[idx] as NSString
 					nsString.drawAtPoint(
 						CGPointMake(0.0, 0.0),
-						withAttributes: attrs as [NSObject : AnyObject]
+						withAttributes: attrs
 					)
 					CGContextRestoreGState(context)
 				}
@@ -144,7 +146,7 @@ class Display: UIView, Peripheral {
 		let yRatio: CGFloat = 1.0
 		var paths: DisplaySegmentPaths = DisplaySegmentPaths()
 
-		var bezierPath0 = UIBezierPath()
+		let bezierPath0 = UIBezierPath()
 		bezierPath0.moveToPoint(CGPointMake(4.617837 * xRatio, 2.000000 * yRatio))
 		bezierPath0.addLineToPoint(CGPointMake(2.375577 * xRatio, 0.000000 * yRatio))
 		bezierPath0.addLineToPoint(CGPointMake(15.073103 * xRatio, 0.000000 * yRatio))
@@ -154,7 +156,7 @@ class Display: UIView, Peripheral {
 		bezierPath0.moveToPoint(CGPointMake(4.617837 * xRatio, 2.000000 * yRatio))
 		paths.append(bezierPath0)
 		
-		var bezierPath1 = UIBezierPath()
+		let bezierPath1 = UIBezierPath()
 		bezierPath1.moveToPoint(CGPointMake(1.026980 * xRatio, 10.703221 * yRatio))
 		bezierPath1.addLineToPoint(CGPointMake(1.935450 * xRatio, 0.710054 * yRatio))
 		bezierPath1.addLineToPoint(CGPointMake(3.443619 * xRatio, 6.210914 * yRatio))
@@ -164,7 +166,7 @@ class Display: UIView, Peripheral {
 		bezierPath1.moveToPoint(CGPointMake(1.026980 * xRatio, 10.703221 * yRatio))
 		paths.append(bezierPath1)
 		
-		var bezierPath2 = UIBezierPath()
+		let bezierPath2 = UIBezierPath()
 		bezierPath2.moveToPoint(CGPointMake(3.931293 * xRatio, 6.098653 * yRatio))
 		bezierPath2.addLineToPoint(CGPointMake(2.464718 * xRatio, 0.749508 * yRatio))
 		bezierPath2.addLineToPoint(CGPointMake(4.320368 * xRatio, 2.404667 * yRatio))
@@ -176,7 +178,7 @@ class Display: UIView, Peripheral {
 		bezierPath2.moveToPoint(CGPointMake(3.931293 * xRatio, 6.098653 * yRatio))
 		paths.append(bezierPath2)
 		
-		var bezierPath3 = UIBezierPath()
+		let bezierPath3 = UIBezierPath()
 		bezierPath3.moveToPoint(CGPointMake(6.905082 * xRatio, 6.498730 * yRatio))
 		bezierPath3.addLineToPoint(CGPointMake(7.291330 * xRatio, 2.250000 * yRatio))
 		bezierPath3.addLineToPoint(CGPointMake(9.299579 * xRatio, 2.250000 * yRatio))
@@ -187,7 +189,7 @@ class Display: UIView, Peripheral {
 		bezierPath3.moveToPoint(CGPointMake(6.905082 * xRatio, 6.498730 * yRatio))
 		paths.append(bezierPath3)
 		
-		var bezierPath4 = UIBezierPath()
+		let bezierPath4 = UIBezierPath()
 		bezierPath4.moveToPoint(CGPointMake(9.352165 * xRatio, 6.989707 * yRatio))
 		bezierPath4.addLineToPoint(CGPointMake(12.565980 * xRatio, 2.428165 * yRatio))
 		bezierPath4.addLineToPoint(CGPointMake(14.879394 * xRatio, 0.756790 * yRatio))
@@ -199,7 +201,7 @@ class Display: UIView, Peripheral {
 		bezierPath4.moveToPoint(CGPointMake(9.352165 * xRatio, 6.989707 * yRatio))
 		paths.append(bezierPath4)
 		
-		var bezierPath5 = UIBezierPath()
+		let bezierPath5 = UIBezierPath()
 		bezierPath5.moveToPoint(CGPointMake(14.524980 * xRatio, 10.725222 * yRatio))
 		bezierPath5.addLineToPoint(CGPointMake(12.617742 * xRatio, 9.614111 * yRatio))
 		bezierPath5.addLineToPoint(CGPointMake(12.924595 * xRatio, 6.238729 * yRatio))
@@ -209,7 +211,7 @@ class Display: UIView, Peripheral {
 		bezierPath5.moveToPoint(CGPointMake(14.524980 * xRatio, 10.725222 * yRatio))
 		paths.append(bezierPath5)
 		
-		var bezierPath6 = UIBezierPath()
+		let bezierPath6 = UIBezierPath()
 		bezierPath6.moveToPoint(CGPointMake(3.213154 * xRatio, 12.000000 * yRatio))
 		bezierPath6.addLineToPoint(CGPointMake(1.515522 * xRatio, 11.011001 * yRatio))
 		bezierPath6.addLineToPoint(CGPointMake(3.434736 * xRatio, 10.000000 * yRatio))
@@ -221,7 +223,7 @@ class Display: UIView, Peripheral {
 		bezierPath6.moveToPoint(CGPointMake(3.213154 * xRatio, 12.000000 * yRatio))
 		paths.append(bezierPath6)
 		
-		var bezierPath7 = UIBezierPath()
+		let bezierPath7 = UIBezierPath()
 		bezierPath7.moveToPoint(CGPointMake(9.674292 * xRatio, 12.000000 * yRatio))
 		bezierPath7.addLineToPoint(CGPointMake(8.033062 * xRatio, 11.025712 * yRatio))
 		bezierPath7.addLineToPoint(CGPointMake(10.215584 * xRatio, 10.000000 * yRatio))
@@ -233,7 +235,7 @@ class Display: UIView, Peripheral {
 		bezierPath7.moveToPoint(CGPointMake(9.674292 * xRatio, 12.000000 * yRatio))
 		paths.append(bezierPath7)
 		
-		var bezierPath8 = UIBezierPath()
+		let bezierPath8 = UIBezierPath()
 		bezierPath8.moveToPoint(CGPointMake(0.070283 * xRatio, 21.226881 * yRatio))
 		bezierPath8.addLineToPoint(CGPointMake(0.975020 * xRatio, 11.274778 * yRatio))
 		bezierPath8.addLineToPoint(CGPointMake(2.882258 * xRatio, 12.385889 * yRatio))
@@ -243,7 +245,7 @@ class Display: UIView, Peripheral {
 		bezierPath8.moveToPoint(CGPointMake(0.070283 * xRatio, 21.226881 * yRatio))
 		paths.append(bezierPath8)
 		
-		var bezierPath9 = UIBezierPath()
+		let bezierPath9 = UIBezierPath()
 		bezierPath9.moveToPoint(CGPointMake(3.058874 * xRatio, 15.738516 * yRatio))
 		bezierPath9.addLineToPoint(CGPointMake(5.306457 * xRatio, 12.442060 * yRatio))
 		bezierPath9.addLineToPoint(CGPointMake(7.047006 * xRatio, 11.522176 * yRatio))
@@ -255,7 +257,7 @@ class Display: UIView, Peripheral {
 		bezierPath9.moveToPoint(CGPointMake(3.058874 * xRatio, 15.738516 * yRatio))
 		paths.append(bezierPath9)
 		
-		var bezierPath10 = UIBezierPath()
+		let bezierPath10 = UIBezierPath()
 		bezierPath10.moveToPoint(CGPointMake(6.065075 * xRatio, 15.738811 * yRatio))
 		bezierPath10.addLineToPoint(CGPointMake(7.435389 * xRatio, 11.920212 * yRatio))
 		bezierPath10.addLineToPoint(CGPointMake(8.120102 * xRatio, 15.224238 * yRatio))
@@ -266,7 +268,7 @@ class Display: UIView, Peripheral {
 		bezierPath10.moveToPoint(CGPointMake(6.065075 * xRatio, 15.738811 * yRatio))
 		paths.append(bezierPath10)
 		
-		var bezierPath11 = UIBezierPath()
+		let bezierPath11 = UIBezierPath()
 		bezierPath11.moveToPoint(CGPointMake(8.609699 * xRatio, 15.122776 * yRatio))
 		bezierPath11.addLineToPoint(CGPointMake(7.859829 * xRatio, 11.504337 * yRatio))
 		bezierPath11.addLineToPoint(CGPointMake(9.419060 * xRatio, 12.429949 * yRatio))
@@ -278,7 +280,7 @@ class Display: UIView, Peripheral {
 		bezierPath11.moveToPoint(CGPointMake(8.609699 * xRatio, 15.122776 * yRatio))
 		paths.append(bezierPath11)
 		
-		var bezierPath12 = UIBezierPath()
+		let bezierPath12 = UIBezierPath()
 		bezierPath12.moveToPoint(CGPointMake(12.020228 * xRatio, 16.186754 * yRatio))
 		bezierPath12.addLineToPoint(CGPointMake(12.363762 * xRatio, 12.407889 * yRatio))
 		bezierPath12.addLineToPoint(CGPointMake(14.473021 * xRatio, 11.296779 * yRatio))
@@ -288,7 +290,7 @@ class Display: UIView, Peripheral {
 		bezierPath12.moveToPoint(CGPointMake(12.020228 * xRatio, 16.186754 * yRatio))
 		paths.append(bezierPath12)
 		
-		var bezierPath13 = UIBezierPath()
+		let bezierPath13 = UIBezierPath()
 		bezierPath13.moveToPoint(CGPointMake(0.420855 * xRatio, 22.000000 * yRatio))
 		bezierPath13.addLineToPoint(CGPointMake(3.129292 * xRatio, 20.000000 * yRatio))
 		bezierPath13.addLineToPoint(CGPointMake(10.757083 * xRatio, 20.000000 * yRatio))
@@ -298,7 +300,7 @@ class Display: UIView, Peripheral {
 		bezierPath13.moveToPoint(CGPointMake(0.420855 * xRatio, 22.000000 * yRatio))
 		paths.append(bezierPath13)
 		
-		var bezierPath14 = UIBezierPath()
+		let bezierPath14 = UIBezierPath()
 		bezierPath14.moveToPoint(CGPointMake(19.506186 * xRatio, 11.000000 * yRatio))
 		bezierPath14.addLineToPoint(CGPointMake(19.506186 * xRatio, 11.000000 * yRatio))
 		bezierPath14.addCurveToPoint(CGPointMake(19.506186 * xRatio, 11.831843 * yRatio), controlPoint1: CGPointMake(18.831842 * xRatio, 12.506186 * yRatio), controlPoint2: CGPointMake(18.000000 * xRatio, 12.506186 * yRatio))
@@ -312,7 +314,7 @@ class Display: UIView, Peripheral {
 		bezierPath14.moveToPoint(CGPointMake(19.506186 * xRatio, 11.000000 * yRatio))
 		paths.append(bezierPath14)
 		
-		var bezierPath15 = UIBezierPath()
+		let bezierPath15 = UIBezierPath()
 		bezierPath15.moveToPoint(CGPointMake(18.590910 * xRatio, 21.000000 * yRatio))
 		bezierPath15.addLineToPoint(CGPointMake(18.590910 * xRatio, 21.000000 * yRatio))
 		bezierPath15.addCurveToPoint(CGPointMake(18.590910 * xRatio, 21.828426 * yRatio), controlPoint1: CGPointMake(17.919336 * xRatio, 22.500000 * yRatio), controlPoint2: CGPointMake(17.090910 * xRatio, 22.500000 * yRatio))
@@ -326,7 +328,7 @@ class Display: UIView, Peripheral {
 		bezierPath15.moveToPoint(CGPointMake(18.590910 * xRatio, 21.000000 * yRatio))
 		paths.append(bezierPath15)
 		
-		var bezierPath16 = UIBezierPath()
+		let bezierPath16 = UIBezierPath()
 		bezierPath16.moveToPoint(CGPointMake(18.474253 * xRatio, 22.083590 * yRatio))
 		bezierPath16.addLineToPoint(CGPointMake(18.474253 * xRatio, 22.083590 * yRatio))
 		bezierPath16.addCurveToPoint(CGPointMake(17.881054 * xRatio, 24.806688), controlPoint1: CGPointMake(15.208557 * xRatio, 26.546652 * yRatio), controlPoint2: CGPointMake(12.478299 * xRatio, 25.987333 * yRatio))
@@ -372,8 +374,8 @@ class Display: UIView, Peripheral {
 	
 	func calculateAnnunciatorPositions(font: UIFont, inRect bounds: CGRect) -> [CGPoint] {
 		// Distribute the annunciators evenly across the width of the display based on the sizes of their strings.
-		let xRatio = self.bounds.size.width / 240.0
-		let yRatio = self.bounds.size.height / 38.0
+//		let xRatio = self.bounds.size.width / 240.0
+//		let yRatio = self.bounds.size.height / 38.0
 
 		var positions: [CGPoint] = [CGPoint](count: numAnnunciators, repeatedValue: CGPointMake(0.0, 0.0))
 		var annunciatorWidths: [CGFloat] = [CGFloat](count: numAnnunciators, repeatedValue: 0.0)
@@ -383,13 +385,12 @@ class Display: UIView, Peripheral {
 		var d: CGFloat = 0.0
 		var h: CGFloat = 0.0
 		var totalWidth: CGFloat = 0.0
-		let attrs: NSDictionary = NSDictionary(
-			object: annunciatorFont!,
-			forKey: NSFontAttributeName
-		)
+		let attrs = [
+			NSFontAttributeName: annunciatorFont!
+		]
 		for idx in 0..<numAnnunciators {
 			let nsString: NSString = annunciatorStrings[idx] as NSString
-			let width = nsString.sizeWithAttributes(attrs as [NSObject : AnyObject]).width
+			let width = nsString.sizeWithAttributes(attrs).width
 			annunciatorWidths[idx] = width
 			totalWidth += width
 		}

@@ -8,7 +8,7 @@
 
 import Foundation
 
-func op_Aeq0(#start: Int, #count: Int) -> Bit										   // A=0
+func op_Aeq0(start start: Int, count: Int) -> Bit										   // A=0
 {
 	/*
 	A=0
@@ -38,7 +38,7 @@ func op_Aeq0(#start: Int, #count: Int) -> Bit										   // A=0
 	return 0
 }
 
-func op_Beq0(#start: Int, #count: Int) -> Bit										   // B=0
+func op_Beq0(start start: Int, count: Int) -> Bit										   // B=0
 {
 	/*
 	B=0
@@ -68,7 +68,7 @@ func op_Beq0(#start: Int, #count: Int) -> Bit										   // B=0
 	return 0
 }
 
-func op_Ceq0(#start: Int, #count: Int) -> Bit										   // C=0
+func op_Ceq0(start start: Int, count: Int) -> Bit										   // C=0
 {
 	/*
 	C=0
@@ -98,7 +98,7 @@ func op_Ceq0(#start: Int, #count: Int) -> Bit										   // C=0
 	return 0
 }
 
-func op_ABEX(#start: Int, #count: Int) -> Bit										  // ABEX
+func op_ABEX(start start: Int, count: Int) -> Bit										  // ABEX
 {
 	/*
 	ABEX
@@ -135,7 +135,7 @@ func op_ABEX(#start: Int, #count: Int) -> Bit										  // ABEX
 	return 0
 }
 
-func op_BeqA(#start: Int, #count: Int) -> Bit										   // B=A
+func op_BeqA(start start: Int, count: Int) -> Bit										   // B=A
 {
 	/*
 	B=A
@@ -165,7 +165,7 @@ func op_BeqA(#start: Int, #count: Int) -> Bit										   // B=A
 	return 0
 }
 
-func op_ACEX(#start: Int, #count: Int) -> Bit										  // ACEX
+func op_ACEX(start start: Int, count: Int) -> Bit										  // ACEX
 {
 	/*
 	ACEX
@@ -202,7 +202,7 @@ func op_ACEX(#start: Int, #count: Int) -> Bit										  // ACEX
 	return 0
 }
 
-func op_CeqB(#start: Int, #count: Int) -> Bit										   // C=B
+func op_CeqB(start start: Int, count: Int) -> Bit										   // C=B
 {
 	/*
 	C=B
@@ -233,7 +233,7 @@ func op_CeqB(#start: Int, #count: Int) -> Bit										   // C=B
 	return 0
 }
 
-func op_BCEX(#start: Int, #count: Int) -> Bit										  // ACEX
+func op_BCEX(start start: Int, count: Int) -> Bit										  // ACEX
 {
 	/*
 	BCEX
@@ -270,7 +270,7 @@ func op_BCEX(#start: Int, #count: Int) -> Bit										  // ACEX
 	return 0
 }
 
-func op_AeqC(#start: Int, #count: Int) -> Bit										   // A=C
+func op_AeqC(start start: Int, count: Int) -> Bit										   // A=C
 {
 	/*
 	A=C
@@ -301,7 +301,7 @@ func op_AeqC(#start: Int, #count: Int) -> Bit										   // A=C
 	return 0
 }
 
-func op_AeqAplusB(#start: Int, #count: Int)											// A=A+B
+func op_AeqAplusB(start start: Int, count: Int)											// A=A+B
 {
 	/*
 	A=A+B
@@ -341,7 +341,7 @@ func op_AeqAplusB(#start: Int, #count: Int)											// A=A+B
 	}
 }
 
-func op_AeqAplusC(#start: Int, #count: Int)											// A=A+C
+func op_AeqAplusC(start start: Int, count: Int)											// A=A+C
 {
 	/*
 	A=A+C
@@ -381,7 +381,7 @@ func op_AeqAplusC(#start: Int, #count: Int)											// A=A+C
 	}
 }
 
-func op_AeqAplus1(#start: Int, #count: Int)											// A=A+1
+func op_AeqAplus1(start start: Int, count: Int)											// A=A+1
 {
 	/*
 	A=A+1
@@ -422,7 +422,7 @@ func op_AeqAplus1(#start: Int, #count: Int)											// A=A+1
 	}
 }
 
-func op_AeqAminuB(#start: Int, #count: Int)											// A=A-B
+func op_AeqAminuB(start start: Int, count: Int)											// A=A-B
 {
 	/*
 	A=A-B
@@ -462,7 +462,7 @@ func op_AeqAminuB(#start: Int, #count: Int)											// A=A-B
 	}
 }
 
-func op_AeqAminus1(#start: Int, #count: Int)										 // A=A-1
+func op_AeqAminus1(start start: Int, count: Int)										 // A=A-1
 {
 	/*
 	A=A-1
@@ -503,7 +503,7 @@ func op_AeqAminus1(#start: Int, #count: Int)										 // A=A-1
 	}
 }
 
-func op_AeqAminuC(#start: Int, #count: Int)											// A=A-C
+func op_AeqAminuC(start start: Int, count: Int)											// A=A-C
 {
 	/*
 	A=A-C
@@ -543,7 +543,7 @@ func op_AeqAminuC(#start: Int, #count: Int)											// A=A-C
 	}
 }
 
-func op_CeqCplusC(#start: Int, #count: Int)											// C=C+C
+func op_CeqCplusC(start start: Int, count: Int)											// C=C+C
 {
 	/*
 	C=C+C
@@ -583,7 +583,7 @@ func op_CeqCplusC(#start: Int, #count: Int)											// C=C+C
 	}
 }
 
-func op_CeqAplusC(#start: Int, #count: Int)									 // C=A+C
+func op_CeqAplusC(start start: Int, count: Int)									 // C=A+C
 {
 	/*
 	C=A+C
@@ -623,7 +623,7 @@ func op_CeqAplusC(#start: Int, #count: Int)									 // C=A+C
 	}
 }
 
-func op_CeqCplus1(#start: Int, #count: Int)											// C=C+1
+func op_CeqCplus1(start start: Int, count: Int)											// C=C+1
 {
 	/*
 	C=C+1
@@ -664,7 +664,7 @@ func op_CeqCplus1(#start: Int, #count: Int)											// C=C+1
 	}
 }
 
-func op_CeqAminusC(#start: Int, #count: Int)										// C=A-C
+func op_CeqAminusC(start start: Int, count: Int)										// C=A-C
 {
 	/*
 	C=A-C
@@ -705,7 +705,7 @@ func op_CeqAminusC(#start: Int, #count: Int)										// C=A-C
 	}
 }
 
-func op_CeqCminus1(#start: Int, #count: Int)										 // C=C-1
+func op_CeqCminus1(start start: Int, count: Int)										 // C=C-1
 {
 	/*
 	C=C-1
@@ -746,7 +746,7 @@ func op_CeqCminus1(#start: Int, #count: Int)										 // C=C-1
 	}
 }
 
-func op_CeqminusC(#start: Int, #count: Int)											  // C=-C
+func op_CeqminusC(start start: Int, count: Int)											  // C=-C
 {
 	/*
 	C=-C
@@ -787,7 +787,7 @@ func op_CeqminusC(#start: Int, #count: Int)											  // C=-C
 	}
 }
 
-func op_CeqminusCminus1(#start: Int, #count: Int)									 // C=C-1
+func op_CeqminusCminus1(start start: Int, count: Int)									 // C=C-1
 {
 	/*
 	C=-C-1
@@ -830,7 +830,7 @@ func op_CeqminusCminus1(#start: Int, #count: Int)									 // C=C-1
 	}
 }
 
-func op_isBeq0(#start: Int, #count: Int) -> Bit										  // ?B#0
+func op_isBeq0(start start: Int, count: Int) -> Bit										  // ?B#0
 {
 	/*
 	?B=0
@@ -876,7 +876,7 @@ func op_isBeq0(#start: Int, #count: Int) -> Bit										  // ?B#0
 	return 0
 }
 
-func op_isCeq0(#start: Int, #count: Int) -> Bit										  // ?C#0
+func op_isCeq0(start start: Int, count: Int) -> Bit										  // ?C#0
 {
 	/*
 	?C=0
@@ -922,7 +922,7 @@ func op_isCeq0(#start: Int, #count: Int) -> Bit										  // ?C#0
 	return 0
 }
 
-func op_isAlessthanC(#start: Int, #count: Int)										  // ?A<C
+func op_isAlessthanC(start start: Int, count: Int)										  // ?A<C
 {
 	/*
 	?A<C
@@ -960,11 +960,11 @@ func op_isAlessthanC(#start: Int, #count: Int)										  // ?A<C
 //	
 //	return carry == 0 ? 1 : 0
 	for idx in start..<start+count {
-		let dummy = subtractor(nib1: cpu.reg.A[idx], nib2: cpu.reg.C[idx])
+		_ = subtractor(nib1: cpu.reg.A[idx], nib2: cpu.reg.C[idx])
 	}
 }
 
-func op_isAlessthanB(#start: Int, #count: Int)										  // ?A<B
+func op_isAlessthanB(start start: Int, count: Int)										  // ?A<B
 {
 	/*
 	?A<B
@@ -1002,11 +1002,11 @@ func op_isAlessthanB(#start: Int, #count: Int)										  // ?A<B
 //
 //	return carry == 0 ? 1 : 0
 	for idx in start..<start+count {
-		let dummy = subtractor(nib1: cpu.reg.A[idx], nib2: cpu.reg.B[idx])
+		_ = subtractor(nib1: cpu.reg.A[idx], nib2: cpu.reg.B[idx])
 	}
 }
 
-func op_isAnoteq0(#start: Int, #count: Int) -> Bit									  // ?A#0
+func op_isAnoteq0(start start: Int, count: Int) -> Bit									  // ?A#0
 {
 	/*
 	?A#0
@@ -1052,7 +1052,7 @@ func op_isAnoteq0(#start: Int, #count: Int) -> Bit									  // ?A#0
 	return 0
 }
 
-func op_isAnoteqC(#start: Int, #count: Int) -> Bit									  // ?A#C
+func op_isAnoteqC(start start: Int, count: Int) -> Bit									  // ?A#C
 {
 	/*
 	?A#C
@@ -1098,7 +1098,7 @@ func op_isAnoteqC(#start: Int, #count: Int) -> Bit									  // ?A#C
 	return 0
 }
 
-func op_shiftrigthA(#start: Int, #count: Int) -> Bit								   // ASR
+func op_shiftrigthA(start start: Int, count: Int) -> Bit								   // ASR
 {
 	/*
 	ASR
@@ -1128,7 +1128,7 @@ func op_shiftrigthA(#start: Int, #count: Int) -> Bit								   // ASR
 	return 0
 }
 
-func op_shiftrigthB(#start: Int, #count: Int) -> Bit								   // BSR
+func op_shiftrigthB(start start: Int, count: Int) -> Bit								   // BSR
 {
 	/*
 	BSR
@@ -1158,7 +1158,7 @@ func op_shiftrigthB(#start: Int, #count: Int) -> Bit								   // BSR
 	return 0
 }
 
-func op_shiftrigthC(#start: Int, #count: Int) -> Bit								   // CSR
+func op_shiftrigthC(start start: Int, count: Int) -> Bit								   // CSR
 {
 	/*
 	CSR
@@ -1188,7 +1188,7 @@ func op_shiftrigthC(#start: Int, #count: Int) -> Bit								   // CSR
 	return 0
 }
 
-func op_shiftleftA(#start: Int, #count: Int) -> Bit									   // ASL
+func op_shiftleftA(start start: Int, count: Int) -> Bit									   // ASL
 {
 	/*
 	ASL

@@ -33,7 +33,7 @@ class Key: UIButton {
 		self.setNeedsDisplay()
 	}
 
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
 		self.layer.cornerRadius = roundedRadius
@@ -44,15 +44,15 @@ class Key: UIButton {
 		self.setNeedsDisplay()
 	}
 	
-	override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-		super.touchesBegan(touches as Set<NSObject>, withEvent: event)
+	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+		super.touchesBegan(touches, withEvent: event)
 		
 		downKey()
 		highlighted = true
 	}
 	
-	override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-		super.touchesEnded(touches as Set<NSObject>, withEvent: event)
+	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+		super.touchesEnded(touches, withEvent: event)
 		
 		upKey()
 		highlighted = false
@@ -60,7 +60,7 @@ class Key: UIButton {
 	
 	override func drawRect(rect: CGRect) {
 		let context = UIGraphicsGetCurrentContext()
-		let xRatio = self.bounds.size.height / 51.0
+//		let xRatio = self.bounds.size.height / 51.0
 		let yRatio = self.bounds.size.height / 42.0
 
 		CGContextSaveGState(context)
@@ -115,8 +115,8 @@ class Key: UIButton {
 			]
 		}
 		if self.layer.sublayers != nil {
-			if self.layer.sublayers.count > 0 {
-				self.layer.sublayers.removeAtIndex(0)
+			if self.layer.sublayers?.count > 0 {
+				self.layer.sublayers?.removeAtIndex(0)
 			}
 		}
 		self.layer.insertSublayer(backgroundGradient, atIndex: 0)
@@ -135,7 +135,7 @@ class Key: UIButton {
 			lowerTextLayer.alignmentMode = kCAAlignmentCenter
 			
 			lowerTextLayer.font = "Helvetica"
-			if count(lowerText!) > 1 {
+			if lowerText!.characters.count > 1 {
 				lowerTextLayer.fontSize = 13.0 * yRatio
 			} else {
 				lowerTextLayer.fontSize = 15.0 * yRatio

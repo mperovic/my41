@@ -126,7 +126,7 @@ class Timer : Peripheral {
 	// Converts Reg14 (BCD) to UINT64
 	func convertToUint64(inout dest: UInt64, withRegister reg: Digits14) {
 		var temp: UInt64 = 0
-		for idx in reverse(0...13) {
+		for idx in Array((0...13).reverse()) {
 			temp *= 10
 			temp += UInt64(reg[idx]) % 10
 		}
@@ -136,7 +136,7 @@ class Timer : Peripheral {
 	
 	func setToCurrentTime() {
 		let daylightSavingTimeOffset: Int = NSTimeZone.localTimeZone().daylightSavingTime ? 3600 : 0
-		var dateComponents: NSDateComponents = NSDateComponents()
+		let dateComponents: NSDateComponents = NSDateComponents()
 		dateComponents.day = 1
 		dateComponents.month = 1
 		dateComponents.year = 1900
@@ -356,7 +356,7 @@ class Timer : Peripheral {
 	}
 	
 	func timeSlice(timer: NSTimer) {
-		var fAlert = 0
+		var fAlert: Int
 		if (registers.TMR_S[1] & 0x04) != 0 {		// bit 6 - Clock A enabled
 			clock[TimerType.TimerA.rawValue] += 1
 			if clock[TimerType.TimerA.rawValue] > 99999999999999 || clock[TimerType.TimerA.rawValue]  == 0 {

@@ -8,8 +8,8 @@
 
 import Foundation
 
-let cpu = CPU.sharedInstance
-let bus = Bus.sharedInstance
+var cpu = CPU.sharedInstance
+var bus = Bus.sharedInstance
 
 enum DisassemblyMode: Int {
 	case disassemblyHex = 0
@@ -1561,14 +1561,14 @@ class Disassembly {
 	}
 	
 	func bitRepresentation(var value intValue: Int, lenght aLenght: Int) -> String? {
-		var max: Int = Int(pow(Double(2), Double(aLenght)) - 1)
+		let max: Int = Int(pow(Double(2), Double(aLenght)) - 1)
 		if intValue > max {
 			return nil
 		}
 		
 		var rep = ""
-		for idx in reverse(0..<aLenght) {
-			var m: Int = Int(pow(Double(2), Double(idx)))
+		for idx in Array((0..<aLenght).reverse()) {
+			let m: Int = Int(pow(Double(2), Double(idx)))
 			if intValue >= m {
 				rep += "1"
 				intValue -= m
@@ -1580,22 +1580,22 @@ class Disassembly {
 		return rep
 	}
 	
-	func fetchNextROMAddress() -> Result<Int>
+	func fetchNextROMAddress() throws -> Int
 	{
 		let nextAddress = Int(cpu.savedPC) + 1
-		switch bus.readRomAddress(nextAddress) {
-		case .Success(let result):
-			return .Success(result)
-		case .Error(let error):
-//			println(error)
-			return .Error(error)
+		do {
+			let result = try bus.readRomAddress(nextAddress)
+			return result
+		} catch {
+			print("error read ROM at Address: \(nextAddress)")
+			throw RomError.invalidAddress
 		}
 	}
 	
 	func getLabelForCurrentAddress() -> String
 	{
 		if let label = getLocForAddress(Int(cpu.savedPC)) {
-			if count(label) < 8 {
+			if label.characters.count < 8 {
 				return label + "\t"
 			} else {
 				return label
@@ -1607,34 +1607,35 @@ class Disassembly {
 
 	func disassemblyClass0Line0(anOpCode: OpCode) -> String
 	{
-		switch fetchNextROMAddress() {
-		case .Success(let result):
-			var pc = NSString(format:"%04X", cpu.savedPC) as String
-			var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-			var nextTyteStr = NSString(format: "%03X", result.unbox) as String
+		do {
+			let result = try fetchNextROMAddress()
+			
+			let pc = NSString(format:"%04X", cpu.savedPC) as String
+			let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+			let nextTyteStr = NSString(format: "%03X", result) as String
 			switch anOpCode.row() {
 			case 0x0,	// NOP
-				 0x1,	// WMLDL
-				 0x4,	// ENBANK1
-				 0x6,	// ENBANK2
-				 0x5,	// ENBANK3
-				 0x7,	// ENBANK4
-				 0x2,	// NOT USED
-				 0x3:
+			0x1,	// WMLDL
+			0x4,	// ENBANK1
+			0x6,	// ENBANK2
+			0x5,	// ENBANK3
+			0x7,	// ENBANK4
+			0x2,	// NOT USED
+			0x3:
 				return "\(pc)\t\(tyteStr)\(nextTyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(16 + anOpCode.row()))"
 			default:
-				var paramStr = NSString(format: "%X", anOpCode.row() - 8) as String
+				let paramStr = NSString(format: "%X", anOpCode.row() - 8) as String
 				return "\(pc)\t\(tyteStr)\(nextTyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(121))\t\(paramStr)"
 			}
-		case .Error(let error):
+		} catch {
 			return "ERROR: NO NEXT ROM LOCATION"
 		}
 	}
 
 	func disassemblyClass0Line1(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		switch anOpCode.row() {
 		case 0x7:
 			// NOT USED
@@ -1650,8 +1651,8 @@ class Disassembly {
 	
 	func disassemblyClass0Line2(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		switch anOpCode.row() {
 		case 0x7:
 			// NOT USED
@@ -1667,8 +1668,8 @@ class Disassembly {
 
 	func disassemblyClass0Line3(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		switch anOpCode.row() {
 		case 0x7:
 			// NOT USED
@@ -1685,20 +1686,20 @@ class Disassembly {
 	func disassemblyClass0Line4(anOpCode: OpCode) -> String
 	{
 		// LC 0-15 (HP) OR LC 0-9,A-F (OTHERS)
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		if names == opcodeNames.HP {
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(4))\t\(anOpCode.row())"
 		} else {
-			var paramStr = NSString(format: "%1X", anOpCode.row()) as String
+			let paramStr = NSString(format: "%1X", anOpCode.row()) as String
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(4))\t\(paramStr)"
 		}
 	}
 
 	func disassemblyClass0Line5(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		switch anOpCode.row() {
 		case 0x7:
 			// NOT USED
@@ -1714,15 +1715,15 @@ class Disassembly {
 
 	func disassemblyClass0Line6(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(24 + anOpCode.row()))"
 	}
 	
 	func disassemblyClass0Line7(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		switch anOpCode.row() {
 		case 0x7:
 			// LITERAL
@@ -1738,29 +1739,29 @@ class Disassembly {
 	
 	func disassemblyClass0Line8(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(40 + anOpCode.row()))"
 	}
 	
 	func disassemblyClass0Line9(anOpCode: OpCode) -> String
 	{
 		// PERTCT 0-15 (HP) OR PERTCT 0-9,A-F (OTHERS)
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		if names == opcodeNames.HP {
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(9)) \t\(anOpCode.row())"
 		} else {
-			var paramStr = NSString(format: "%1X", anOpCode.row()) as String
+			let paramStr = NSString(format: "%1X", anOpCode.row()) as String
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(9))\t\(paramStr)"
 		}
 	}
 	
 	func disassemblyClass0LineA(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		var paramStr = NSString(format: "%1X", anOpCode.row()) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let paramStr = NSString(format: "%1X", anOpCode.row()) as String
 		switch cpu.reg.peripheral {
 		case 0x0:
 			// ram
@@ -1791,16 +1792,16 @@ class Disassembly {
 	
 	func disassemblyClass0LineB(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(72 + anOpCode.row()))"
 	}
 	
 	func disassemblyClass0LineC(anOpCode: OpCode) -> String
 	{
-			var pc = NSString(format:"%04X", cpu.savedPC) as String
-			var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-			var paramStr = NSString(format: "%1X", fTable[Int(anOpCode.row())]) as String
+			let pc = NSString(format:"%04X", cpu.savedPC) as String
+			let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+//			var paramStr = NSString(format: "%1X", fTable[Int(anOpCode.row())]) as String
 			switch anOpCode.row() {
 			case 0x1:
 				// N=C
@@ -1813,11 +1814,12 @@ class Disassembly {
 				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
 			case 0x4:
 				// LDI
-				switch fetchNextROMAddress() {
-				case .Success(let result):
-					var nextTyteStr = NSString(format: "%03X", result.unbox) as String
+				do {
+					let result = try fetchNextROMAddress()
+					
+					let nextTyteStr = NSString(format: "%03X", result) as String
 					return "\(pc)\t\(tyteStr)\(nextTyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))\t\(nextTyteStr)"
-				case .Error(let error):
+				} catch {
 					return "ERROR: NO NEXT ROM LOCATION"
 				}
 			case 0x5:
@@ -1869,15 +1871,15 @@ class Disassembly {
 	
 	func disassemblyClass0LineD(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())"							// Not used
 	}
 	
 	func disassemblyClass0LineE(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		switch cpu.reg.peripheral {
 		case 0x0:
 			// ram
@@ -1912,8 +1914,8 @@ class Disassembly {
 	
 	func disassemblyClass0LineF(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		switch anOpCode.row() {
 		case 0x7, 0xF:
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())"
@@ -1925,12 +1927,13 @@ class Disassembly {
 	
 	func disassemblyClass1(anOpCode: OpCode) -> String
 	{
-		switch fetchNextROMAddress() {
-		case .Success(let result):
-			var pc = NSString(format:"%04X", cpu.savedPC) as String
-			var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-			let nextType = OpCode(opcode: result.unbox)
-			var nextTyteStr = NSString(format: "%03X", nextType.opcode) as String
+		do {
+			let result = try fetchNextROMAddress()
+			
+			let pc = NSString(format:"%04X", cpu.savedPC) as String
+			let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+			let nextType = OpCode(opcode: result)
+			let nextTyteStr = NSString(format: "%03X", nextType.opcode) as String
 			let addr = (nextType.opcode & 0x3fc) << 6 | (anOpCode.opcode & 0x3fc) >> 2
 			let addrStr = NSString(format: "%04X", addr) as String
 			switch nextType.set() {
@@ -1965,16 +1968,16 @@ class Disassembly {
 			default:
 				return "\(pc)\t\(tyteStr)\(nextTyteStr)"
 			}
-		case .Error(let error):
+		} catch {
 			return "ERROR: NO NEXT ROM LOCATION"
 		}
 	}
 	
 	func disassemblyClass2(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		let tef = bitRepresentation(value: anOpCode.tef(), lenght: 3)
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		_ = bitRepresentation(value: anOpCode.tef(), lenght: 3)
 		let subclass = (anOpCode.opcode & 0x3e0) >> 5
 		
 		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(172 + subclass)) \t\(getTEFName(anOpCode.tef()))"
@@ -1982,8 +1985,8 @@ class Disassembly {
 	
 	func disassemblyClass3(anOpCode: OpCode) -> String
 	{
-		var pc = NSString(format:"%04X", cpu.savedPC) as String
-		var tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
+		let pc = NSString(format:"%04X", cpu.savedPC) as String
+		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 
 		let oncarry = (anOpCode.opcode & 0x0004) >> 2;
 		var displacement = (anOpCode.opcode & 0x01f8) >> 3

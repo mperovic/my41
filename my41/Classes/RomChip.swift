@@ -13,6 +13,9 @@ final class RomChip {
 	var words: [word]
 	var actualBankGroup: byte
 	var altPage: ModulePage?
+	var HEPAX: UInt8 = 0
+	var WWRAMBOX: UInt8 = 0
+	var RAM: byte = 0
 	
 	init(isWritable: Bool) {
 		words = [word](count: 0x1000, repeatedValue: 0x0)
@@ -47,7 +50,12 @@ final class RomChip {
 	}
 	
 	func loadFromFile(path: String) {
-		let data = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)
+		let data: NSData?
+		do {
+			data = try NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
+		} catch _ {
+			data = nil
+		}
 		var range = NSRange(location: 0, length: 2)
 		for idx in 0..<0x1000 {
 			var i16be: UInt16 = 0

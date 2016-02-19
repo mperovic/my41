@@ -75,7 +75,7 @@ class PreferencesMenuViewController: NSViewController {
 
 class PreferencesMenuView: NSView {
 	override func awakeFromNib() {
-		var viewLayer: CALayer = CALayer()
+		let viewLayer: CALayer = CALayer()
 		viewLayer.backgroundColor = CGColorCreateGenericRGB(0.9843, 0.9804, 0.9725, 1.0)
 		self.wantsLayer = true
 		self.layer = viewLayer
@@ -86,7 +86,7 @@ class PreferencesMenuView: NSView {
 
 class PreferencesMenuLabelView: NSView {
 	override func awakeFromNib() {
-		var viewLayer: CALayer = CALayer()
+		let viewLayer: CALayer = CALayer()
 		viewLayer.backgroundColor = CGColorCreateGenericRGB(0.8843, 0.8804, 0.8725, 1.0)
 		self.wantsLayer = true
 		self.layer = viewLayer
@@ -106,7 +106,7 @@ class SelectedPreferencesView: NSView {
 		
 		let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
 		let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-		textStyle.alignment = NSTextAlignment.LeftTextAlignment
+		textStyle.alignment = .Left
 		
 		if selected! {
 			//// Rectangle Drawing
@@ -133,23 +133,23 @@ class SelectedPreferencesView: NSView {
 			rectanglePath.fill()
 			
 			if let actualFont = font {
-				let textFontAttributes: NSDictionary = [
+				let textFontAttributes = [
 					NSFontAttributeName: actualFont,
 					NSForegroundColorAttributeName: textColor,
 					NSParagraphStyleAttributeName: textStyle
 				]
 				
-				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as [NSObject : AnyObject])
+				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
 			}
 		} else {
 			if let actualFont = font {
-				let textFontAttributes: NSDictionary = [
+				let textFontAttributes = [
 					NSFontAttributeName: actualFont,
 					NSForegroundColorAttributeName: backColor,
 					NSParagraphStyleAttributeName: textStyle
 				]
 				
-				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as [NSObject : AnyObject])
+				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
 			}
 		}
 	}
