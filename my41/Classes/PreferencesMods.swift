@@ -78,7 +78,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 				
 				break
 			}
-			index++
+			index += 1
 		}
 	}
 	

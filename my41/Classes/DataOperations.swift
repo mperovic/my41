@@ -50,14 +50,15 @@ func digitsToBitsWrap(
 	digits digits: Digits14,
 	inout bits: Bits8,
 	start: Digit,
-	var count: Int)
+	count: Int)
 {
 	var result: Bits8 = 0
 	var i: Int = Int(start)
 	var j: Digit = 0
-	while count-- > 0 {
+//	while count-- > 0 {
+	for _ in (1...count) {
 		result |= Bits8(digits[i] << j)
-		i++
+		i += 1
 		if i > 13 {
 			i = 0
 		}
@@ -67,16 +68,18 @@ func digitsToBitsWrap(
 }
 
 func bitsToDigitsWrap(
-	var bits bits: Bits8,
+	bits bits: Bits8,
 	inout digits: Digits14,
 	start: Digit,
-	var count: Int)
+	count: Int)
 {
 	var i: Int = Int(start)
-	while count-- > 0 {
+	var b = bits
+//	while count-- > 0 {
+	for _ in (1...count) {
 		digits[i] = Digit(bits & 0xF)
-		bits >>= 4
-		++i
+		b >>= 4
+		i += 1
 		if i > 13 {
 			i = 0
 		}
@@ -87,12 +90,13 @@ func exchangeDigits(
 	inout X X: Digits14,
 	inout Y: Digits14,
 	startPos start: Int,
-	var count: Int)
+	count: Int)
 {
 	var i = start
-	while count-- > 0 {
+//	while count-- > 0 {
+	for _ in (1...count) {
 		swap(&X[i], &Y[i])
-		++i
+		i += 1
 	}
 }
 
@@ -101,10 +105,12 @@ func digitsToBits(
 	nbits: Int) -> UInt16
 {
 	var result: UInt16 = 0
-	var ndigits = (nbits + 3) >> 2
+	let ndigits = (nbits + 3) >> 2
 	var dp = ndigits
-	while ndigits-- > 0 {
-		result = UInt16(result << 4) | UInt16(digits[--dp])
+//	while ndigits-- > 0 {
+	for _ in (1...ndigits) {
+		dp -= 1
+		result = UInt16(result << 4) | UInt16(digits[dp])
 	}
 	let res = ((1 << nbits) - 1)
 	
@@ -112,13 +118,17 @@ func digitsToBits(
 }
 
 func bitsToDigits(
-	var bits bits: Int,
+	bits b: Int,
 	inout destination digits: Digits14,
-	var start: Int,
-	var count: Int)
+	start s: Int,
+	count: Int)
 {
-	while count-- > 0 {
-		digits[start++] = Digit(bits & 0xF)
+	var start = s
+	var bits = b
+//	while count-- > 0 {
+	for _ in (1...count) {
+		digits[start] = Digit(bits & 0xF)
+		start += 1
 		bits >>= 4
 	}
 }
@@ -150,29 +160,36 @@ func andDigits(
 }
 
 func shiftDigitsLeft(
-	var X X: [Digit],
+	X X: [Digit],
 	start: Int,
-	count: Int) -> [Digit]
+	count: Int
+	) -> [Digit]
 {
-	for var idx = start + count - 1; idx > start; idx-- {
-		X[idx] = X[idx-1]
+	var x = X
+	var idx = start + count - 1
+//	for var idx = start + count - 1; idx > start; idx-- {
+	while idx > start {
+		x[idx] = x[idx-1]
+		idx -= 1
 	}
-	X[start] = 0
+	x[start] = 0
 	
-	return X
+	return x
 }
 
 func shiftDigitsRight(
-	var X X: [Digit],
+	X X: [Digit],
 	start: Int,
-	count: Int) -> [Digit]
+	count: Int
+	) -> [Digit]
 {
+	var x = X
 	for idx in start+1..<start+count {
-		X[idx-1] = X[idx]
+		x[idx-1] = x[idx]
 	}
-	X[start + count - 1] = 0
+	x[start + count - 1] = 0
 	
-	return X
+	return x
 }
 
 /*

@@ -146,12 +146,10 @@ func enableBank(bankSet: Bits4) {
 	// search for banks that match ActualBankGroup
 	for slot in 0...0xf {
 		for bank in 1...4 {
-			if let rom1 = bus.romChips[slot][bank - 1] {
-				if let rom2 = bus.romChips[slot][Int(bankSet) - 1] {
-					if let currentROM = cpu.currentRomChip {
-						if currentROM.actualBankGroup == rom1.actualBankGroup {
-							bus.activeBank[slot] = Int(bankSet)
-						}
+			if let rom1 = bus.romChips[slot][bank - 1], let _ = bus.romChips[slot][Int(bankSet) - 1] {
+				if let currentROM = cpu.currentRomChip {
+					if currentROM.actualBankGroup == rom1.actualBankGroup {
+						bus.activeBank[slot] = Int(bankSet)
 					}
 				}
 			}
@@ -278,7 +276,7 @@ func op_RSTKB() -> Bit																 // RSTKB
 	*/
 	if cpu.reg.keyDown == 0 {
 		if cpu.keyReleaseDelay != 0 {		// See comment in reset:
-			cpu.keyReleaseDelay--
+			cpu.keyReleaseDelay -= 1
 		} else {
 			cpu.reg.KY = 0
 			cpu.reg.keyDown = 0

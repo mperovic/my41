@@ -322,13 +322,16 @@ extension Display {
 		var cp = 0
 		while cp < 12 {
 			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
-				fetchDigit(direction, from: &registers.A, to: &data[cp++])
+				fetchDigit(direction, from: &registers.A, to: &data[cp])
+				cp += 1
 			}
 			if (regset.rawValue & DisplayRegisterSet.RB.rawValue) != 0 {
-				fetchDigit(direction, from: &registers.B, to: &data[cp++])
+				fetchDigit(direction, from: &registers.B, to: &data[cp])
+				cp += 1
 			}
 			if (regset.rawValue & DisplayRegisterSet.RC.rawValue) != 0 {
-				fetchDigit(direction, from: &registers.C, to: &data[cp++])
+				fetchDigit(direction, from: &registers.C, to: &data[cp])
+				cp += 1
 			}
 			if size == .Short {
 				break
@@ -419,13 +422,16 @@ extension Display {
 		var cp = 0
 		while cp < 12 {
 			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
-				shiftDigit(direction, from: &registers.A, withFilter: data[cp++])
+				shiftDigit(direction, from: &registers.A, withFilter: data[cp])
+				cp += 1
 			}
 			if (regset.rawValue & DisplayRegisterSet.RB.rawValue) != 0 {
-				shiftDigit(direction, from: &registers.B, withFilter: data[cp++])
+				shiftDigit(direction, from: &registers.B, withFilter: data[cp])
+				cp += 1
 			}
 			if (regset.rawValue & DisplayRegisterSet.RC.rawValue) != 0 {
-				shiftDigit(direction, from: &registers.C, withFilter: data[cp++])
+				shiftDigit(direction, from: &registers.C, withFilter: data[cp])
+				cp += 1
 			}
 			if size == .Short {
 				break
@@ -536,7 +542,8 @@ extension Display {
 	
 	func timeSlice(timer: NSTimer) {
 		if (updateCountdown > 0) {
-			if (--updateCountdown == 0) {
+			updateCountdown -= 1
+			if (updateCountdown == 0) {
 				setNeedsDisplayInRect(self.bounds)
 			}
 		}

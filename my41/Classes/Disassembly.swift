@@ -1560,7 +1560,8 @@ class Disassembly {
 		return nil
 	}
 	
-	func bitRepresentation(var value intValue: Int, lenght aLenght: Int) -> String? {
+	func bitRepresentation(value value: Int, lenght aLenght: Int) -> String? {
+		var intValue = value
 		let max: Int = Int(pow(Double(2), Double(aLenght)) - 1)
 		if intValue > max {
 			return nil

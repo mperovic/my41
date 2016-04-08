@@ -331,7 +331,8 @@ final class Bus {
 					} else if modulePage.page == Position.PositionEven.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(evenGroup[Int(modulePage.pageGroup) - 1])
 					} else if modulePage.page == Position.PositionOrdered.rawValue && orderedGroup[Int(modulePage.pageGroup) - 1] > 0 {
-						page = byte(++orderedGroup[Int(modulePage.pageGroup) - 1])
+//						page = byte(++orderedGroup[Int(modulePage.pageGroup) - 1])
+						page = byte(1 + orderedGroup[Int(modulePage.pageGroup) - 1])
 					} else {
 						// find first page in group
 						// find free space depending on which combination of positions are specified
@@ -339,19 +340,19 @@ final class Bus {
 							// lower and upper
 							page = 8
 							while (page <= 0xe && (romChips[Int(page)][Int(modulePage.bank) - 1] != nil || romChips[Int(page) + 1][Int(modulePage.bank) - 1] != nil)) {
-								page++
+								page += 1
 							}
 						} else if lowerGroup[Int(modulePage.pageGroup) - 1] != 0 {
 							// lower but no upper
 							page = 8
 							while (page <= 0xf && romChips[Int(page)][Int(modulePage.bank) - 1] != nil) {
-								page++
+								page += 1
 							}
 						} else if upperGroup[Int(modulePage.pageGroup) - 1] != 0 {
 							// upper but no lower
 							page = 8
 							while (page <= 0xf && romChips[Int(page)][Int(modulePage.bank) - 1] != nil) {
-								page++
+								page += 1
 							}
 						} else if evenGroup[Int(modulePage.pageGroup) - 1] != 0 && oddGroup[Int(modulePage.pageGroup) - 1] != 0 {
 							// even and odd
@@ -379,7 +380,7 @@ final class Bus {
 								for _ in page..<0x0f {
 									// count up free spaces
 									if romChips[Int(page)][Int(modulePage.bank) - 1] == nil {
-										nFree++
+										nFree += 1
 									} else {
 										break
 									}
@@ -392,7 +393,7 @@ final class Bus {
 						} else {
 							page = 8
 							while page <= 0xf && romChips[Int(page)][Int(modulePage.bank) - 1] != nil {
-								page++
+								page += 1
 							}
 						}
 						
@@ -401,7 +402,7 @@ final class Bus {
 							lowerGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
 						} else if modulePage.page == Position.PositionUpper.rawValue {
 							// found two positions - take the upper one
-							page++
+							page += 1
 							upperGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
 						} else if modulePage.page == Position.PositionEven.rawValue {
 							evenGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
@@ -423,7 +424,7 @@ final class Bus {
 						// a single page that can be loaded anywhere 8-F
 						page = 8
 						while (page <= 0xf && romChips[Int(page)][Int(modulePage.bank) - 1] != nil) {
-							page++
+							page += 1
 						}
 					} else {
 						// page number is hardcoded
@@ -486,7 +487,7 @@ final class Bus {
 				}
 			}
 		}
-		nextActualBankGroup++
+		nextActualBankGroup += 1
 	}
 	
 	func installRomChip(chip: RomChip, inSlot slot: byte, andBank bank: byte) {

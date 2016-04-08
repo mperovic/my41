@@ -763,8 +763,18 @@ class CalculatorView: UIView {
 		rect.origin.y = 0.0
 		self.setNeedsDisplayInRect(rect)
 		
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayOff", name: "displayOff", object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayToggle", name: "displayToggle", object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(
+			self,
+			selector: #selector(CalculatorView.displayOff),
+			name: "displayOff",
+			object: nil
+		)
+		NSNotificationCenter.defaultCenter().addObserver(
+			self,
+			selector: #selector(CalculatorView.displayToggle),
+			name: "displayToggle",
+			object: nil
+		)
 	}
 	
 	func displayOff() {

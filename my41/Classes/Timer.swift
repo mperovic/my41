@@ -116,7 +116,8 @@ class Timer : Peripheral {
 	}
 	
 	// Converts UINT64 to Reg14 (BCD)
-	func convertToReg14(var src: UInt64, inout dst: Digits14) {
+	func convertToReg14(source: UInt64, inout dst: Digits14) {
+		var src = source
 		for idx in 0...13 {
 			dst[idx] = (Digit)(src % 10)
 			src /= 10

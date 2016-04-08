@@ -237,7 +237,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 		self.button.backgroundColor = UIColor.clearColor()
 		self.button.addTarget(
 			self,
-			action: "buttonAction:",
+			action: #selector(MODsView.buttonAction(_:)),
 			forControlEvents: UIControlEvents.TouchUpInside
 		)
 		self.addSubview(self.button)
@@ -406,7 +406,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 				
 				break
 			}
-			index++
+			index += 1
 		}
 	}
 }

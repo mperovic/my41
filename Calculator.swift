@@ -130,7 +130,7 @@ class Calculator: NSObject {
 		executionTimer = NSTimer.scheduledTimerWithTimeInterval(
 			timeSliceInterval,
 			target: self,
-			selector: Selector("timeSlice:"),
+			selector: #selector(Calculator.timeSlice(_:)),
 			userInfo: nil,
 			repeats: true
 		)

@@ -322,7 +322,6 @@
 		DC9CB8F21ABABC9C00363462 /* nut-cx.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB8F11ABABC9C00363462 /* nut-cx.mod */; };
 		DC9CB8F31ABABCC000363462 /* nut-cx.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB8F11ABABC9C00363462 /* nut-cx.mod */; };
 		DC9CB8F51ABAC5C800363462 /* keyPressSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB8F41ABAC5C800363462 /* keyPressSound.wav */; };
-		DC9CB8F71ABAC70900363462 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9CB8F61ABAC70900363462 /* AVFoundation.framework */; };
 		DC9CB8F81ABAC87900363462 /* keyPressSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB8F41ABAC5C800363462 /* keyPressSound.wav */; };
 		DCA23A621A45EE2000BC2BD2 /* CPU_Class0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */; };
 		DCA23A641A46373300BC2BD2 /* CPU_Class1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */; };
@@ -556,7 +555,6 @@
 		DC9CB7E01ABABAF500363462 /* zeprom.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = zeprom.mod; path = MOD/zeprom.mod; sourceTree = "<group>"; };
 		DC9CB8F11ABABC9C00363462 /* nut-cx.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nut-cx.mod"; path = "MOD/nut-cx.mod"; sourceTree = "<group>"; };
 		DC9CB8F41ABAC5C800363462 /* keyPressSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = keyPressSound.wav; sourceTree = SOURCE_ROOT; };
-		DC9CB8F61ABAC70900363462 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class0.swift; path = Classes/CPU_Class0.swift; sourceTree = "<group>"; };
 		DCA23A631A46373300BC2BD2 /* CPU_Class1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class1.swift; path = Classes/CPU_Class1.swift; sourceTree = "<group>"; };
 		DCA23A651A46D3BC00BC2BD2 /* CPU_Class2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CPU_Class2.swift; path = Classes/CPU_Class2.swift; sourceTree = "<group>"; };
@@ -611,7 +609,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC9CB8F71ABAC70900363462 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,7 +774,6 @@
 		DC45284419897DA500C40B6C = {
 			isa = PBXGroup;
 			children = (
-				DC9CB8F61ABAC70900363462 /* AVFoundation.framework */,
 				DC56268E198B75770040453F /* ROMs */,
 				DC2E476D19957F4C00BCACAF /* MODs */,
 				DCC3974F1A77DE0B000867BD /* Common code */,
@@ -1151,7 +1147,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = iPera;
 				TargetAttributes = {
 					DC45284C19897DA500C40B6C = {
@@ -1672,6 +1668,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer: Miroslav Perovic (RP33E49JG5)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1735,17 +1732,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = my41cx.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Mac Developer: Miroslav Perovic (77PJCYU6P5)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Miroslav Perovic (77PJCYU6P5)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = my41/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier).osx";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Debug;
 		};
@@ -1755,17 +1752,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = my41cx.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				INFOPLIST_FILE = my41/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier).osx";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -1784,6 +1782,7 @@
 				);
 				INFOPLIST_FILE = my41Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -1800,6 +1799,7 @@
 				);
 				INFOPLIST_FILE = my41Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -1810,8 +1810,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Miroslav Perovic (RP33E49JG5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Miroslav Perovic (RP33E49JG5)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1819,8 +1819,9 @@
 				INFOPLIST_FILE = "my41cx-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.my41cx.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "fb29cc7d-38ac-415d-b271-bba21917d7ca";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1831,13 +1832,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Miroslav Perovic (LS2ZZ4TR54)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Miroslav Perovic (LS2ZZ4TR54)";
 				INFOPLIST_FILE = "my41cx-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.my41cx.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0b755fc1-5093-4110-ae1b-b5e437218709";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -1861,6 +1863,7 @@
 				INFOPLIST_FILE = "my41cx-iosTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1881,6 +1884,7 @@
 				INFOPLIST_FILE = "my41cx-iosTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

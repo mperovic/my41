@@ -430,7 +430,8 @@ final class MOD {
 				bus.memModules += moduleHeader.memModules
 				bus.XMemModules += moduleHeader.XMemModules
 				
-				for var idx: UInt8 = 0; idx < moduleHeader.numPages; idx++ {
+//				for var idx: UInt8 = 0; idx < moduleHeader.numPages; idx++ {
+				for idx: UInt8 in 0..<moduleHeader.numPages {
 					populateModulePage(Int(idx))
 				}
 			} catch let error as NSError {
@@ -506,8 +507,8 @@ final class MOD {
 	
 	func description() {
 		headerDescription()
-		var idx: UInt8
-		for idx = 0; idx < moduleHeader.numPages; idx++ {
+//		for idx = 0; idx < moduleHeader.numPages; idx++ {
+		for idx: UInt8 in 0..<moduleHeader.numPages {
 			pageDescription(idx)
 		}
 	}

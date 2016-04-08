@@ -107,8 +107,8 @@ struct CPURegisters {
 			let ALM_B = timer.registers.ALM[0]
 			let SCR_A = timer.registers.SCR[1]
 			let SCR_B = timer.registers.SCR[0]
-			let INT_A = timer.registers.INT[1]
-			let INT_B = timer.registers.INT[0]
+//			let INT_A = timer.registers.INT[1]
+//			let INT_B = timer.registers.INT[0]
 			let TMR_Sb = digitsToBits(digits: timer.registers.TMR_S, nbits: 16)
 			let ACC_Fb = digitsToBits(digits: timer.registers.ACC_F, nbits: 16)
 			let TMR_S = NSString(format:"%04X", TMR_Sb) as String
@@ -407,14 +407,16 @@ final class CPU {
 	}
 	
 	func fetch() throws -> Int {
-		--cycleLimit
+		cycleLimit -= 1
 		simulationTime? += simulatedInstructionTime
 		soundOutput.soundOutputForWordTime(Int(reg.T))
 		if TRACE != 0 {
 			print("readRomAddress \(reg.PC)")
 		}
 		do {
-			let result = try bus.readRomAddress(Int(reg.PC++))
+			let result = try bus.readRomAddress(Int(reg.PC))
+			reg.PC += 1
+			
 			return result
 		} catch {
 			if TRACE != 0 {
@@ -461,7 +463,8 @@ final class CPU {
 	func executeNextInstruction() {
 		if TRACE != 0 {
 			print("--------------------------------------------------------------------------------------------------")
-			print("Step: \(++lineNo)")
+			lineNo += 1
+			print("Step: \(lineNo)")
 			print("")
 			reg.description()
 		}
@@ -652,7 +655,7 @@ final class CPU {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line7(self.opcode))
 		}
-		var R: Bits4 = regR()
+		var _: Bits4 = regR()
 		switch self.opcode.row() {
 		case 0x7:
 			reg.carry = 0				// Not used
@@ -845,8 +848,8 @@ final class CPU {
 		let field = (self.opcode.opcode & 0x1c) >> 2
 		var start = 0
 		var cnt = 0
-		var carry: Bit = 0
-		var zero: Bit = 0
+//		var carry: Bit = 0
+//		var zero: Bit = 0
 		if TRACE != 0 {
 //			println("executeClass2: opcode: \(opcode) - field: \(field)")
 			if TRACE != 0 {

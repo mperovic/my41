@@ -64,7 +64,7 @@ class DebugCPUViewController: NSViewController {
 		
 		NSNotificationCenter.defaultCenter().addObserver(
 			self,
-			selector: "updateDisplay",
+			selector: #selector(DebugCPUViewController.updateDisplay),
 			name: kCPUDebugUpdateDisplay,
 			object: nil
 		)
@@ -146,7 +146,7 @@ class DebugCPUViewController: NSViewController {
 	override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
 		let segid = segue.identifier ?? "(none)"
 		if TRACE != 0 {
-			print("\(__FUNCTION__) hit, segue ID = \(segid)")
+			print("\(#function) hit, segue ID = \(segid)")
 		}
 	}
 	

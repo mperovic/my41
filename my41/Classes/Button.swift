@@ -77,7 +77,7 @@ class ButtonCell: NSButtonCell {
 			yRadius: roundedRadius)
 		outerClip.setClip()
 		
-		var outerGradient = NSGradient(colorsAndLocations:
+		let outerGradient = NSGradient(colorsAndLocations:
 			(NSColor(deviceWhite: 0.20, alpha: 1.0), 0.0),
 			(NSColor(deviceWhite: 0.21, alpha: 1.0), 1.0)
 		)
@@ -167,7 +167,7 @@ class ButtonCell: NSButtonCell {
 			} else {
 				lowerTextRect = NSMakeRect(1.0, 17.0, 36.0, 12.0)
 			}
-			var textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
 			textStyle.alignment = .Center
 			
 			var font: NSFont
@@ -185,7 +185,7 @@ class ButtonCell: NSButtonCell {
 		}
 		
 		if upperText != nil {
-			var paragrapStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
+			let paragrapStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
 			paragrapStyle.alignment = .Center
 			upperText!.addAttribute(NSParagraphStyleAttributeName, value: paragrapStyle, range: NSMakeRange(0, upperText!.length))
 			

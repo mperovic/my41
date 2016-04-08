@@ -127,8 +127,9 @@ class SoundOutput {
 	var gLastSample: SoundSample = SoundSample(LOW_SAMPLE)
 
 	init() {
-		var idx: Int
-		for idx = 0; idx < TOTAL_BUFFERS; idx++ {
+//		var idx: Int
+//		for idx = 0; idx < TOTAL_BUFFERS; idx++ {
+		for _ in 0..<TOTAL_BUFFERS {
 			gBuffers.append(SoundBuffer())
 		}
 	}
@@ -137,7 +138,7 @@ class SoundOutput {
 		var p = gBufferAllocPtr
 		var numFreeBuffers: Int = 0
 		while numFreeBuffers < TOTAL_BUFFERS && !gBuffers[p].inUse {
-			++numFreeBuffers
+			numFreeBuffers += 1
 			incBufferPtr(&p)
 		}
 		
@@ -151,8 +152,9 @@ class SoundOutput {
 	}
 	
 	func anyBuffersInUse() -> Bool {
-		var idx: Int
-		for idx = 0; idx < TOTAL_BUFFERS; idx++ {
+//		var idx: Int
+//		for idx = 0; idx < TOTAL_BUFFERS; idx++ {
+		for idx in 0..<TOTAL_BUFFERS {
 			if gBuffers[idx].inUse {
 				return true
 			}
@@ -180,7 +182,7 @@ class SoundOutput {
 	func finishBuffer() {
 		if gCurrentBuffer != nil {
 //			println("Finished filling buffer \(gCurrentBuffer - gBuffers)")
-			++gNumPendingBuffers
+			gNumPendingBuffers += 1
 			gCurrentBuffer = nil
 		}
 	}
@@ -203,7 +205,7 @@ class SoundOutput {
 //			SndDoCommand(gSndChannel, &cmd, YES)
 			
 			incBufferPtr(&gBufferSendPtr)
-			--gNumPendingBuffers
+			gNumPendingBuffers -= 1
 		}
 	}
 	
@@ -226,7 +228,7 @@ class SoundOutput {
 						print("Buffer \(gBufferAllocPtr) is in use\n")
 					}
 				}
-				++gDroppedSampleCount
+				gDroppedSampleCount += 1
 				return nil
 			}
 			if gDroppedSampleCount != 0 {
@@ -261,7 +263,8 @@ class SoundOutput {
 		
 		if let aBuf = getBuffer() {
 			var buf: SoundBuffer = aBuf
-			buf.samples[buf.header.length++] = sample
+			buf.samples[buf.header.length] = sample
+			buf.header.length += 1
 		}
 	}
 	

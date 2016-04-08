@@ -38,7 +38,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 	override func viewDidLoad() {
 		NSNotificationCenter.defaultCenter().addObserver(
 			self,
-			selector: "displaySelectedMemoryBank",
+			selector: #selector(DebugMemoryViewController.displaySelectedMemoryBank),
 			name: kMemoryDebugUpdateDisplay,
 			object: nil
 		)
@@ -146,7 +146,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 				// do nothing
 				break
 			}
-			ptr++
+			ptr += 1
 		}
 	}
 

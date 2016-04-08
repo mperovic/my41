@@ -742,8 +742,18 @@ class CalculatorView: NSView {
 		rect.origin.y = 0.0
 		self.setNeedsDisplayInRect(rect)
 		
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayOff", name: "displayOff", object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "displayToggle", name: "displayToggle", object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(
+			self,
+			selector: "displayOff",
+			name: "displayOff",
+			object: nil
+		)
+		NSNotificationCenter.defaultCenter().addObserver(
+			self,
+			selector: "displayToggle",
+			name: "displayToggle",
+			object: nil
+		)
 	}
 	
 	override var acceptsFirstResponder: Bool { return true }
