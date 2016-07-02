@@ -70,13 +70,13 @@ let HIGH_SAMPLE: UInt8				= UInt8(0x80 + AMPLITUDE)
 var gDroppedSampleCount: Int = 0
 
 enum SoundMode {
-	case None, Speaker, Wawe
+	case none, speaker, wawe
 }
 
 class SoundOutput {
 	typealias SoundSample = UInt8
 	
-	var soundMode = SoundMode.None
+	var soundMode = SoundMode.none
 
 	struct SndCommand {
 		var cmd: SoundCmds			= .nullCmd
@@ -113,7 +113,7 @@ class SoundOutput {
 	//	var next: SoundBuffer? = nil
 		var inUse: Bool = false
 		var header: SoundHeader = SoundHeader()
-		var samples: [SoundSample] = [SoundSample](count: SAMPLES_PER_BUFFER, repeatedValue: 0)
+		var samples: [SoundSample] = [SoundSample](repeating: 0, count: SAMPLES_PER_BUFFER)
 	}
 	
 	var gSndChannel: SndChannel?
@@ -145,7 +145,7 @@ class SoundOutput {
 		return numFreeBuffers * SAMPLES_PER_BUFFER
 	}
 	
-	func incBufferPtr(inout ptr: Int) {
+	func incBufferPtr(_ ptr: inout Int) {
 		if ptr == TOTAL_BUFFERS {
 			ptr = 0
 		}
@@ -249,7 +249,7 @@ class SoundOutput {
 		return buf!
 	}
 	
-	func soundOutputForWordTime(state: Int) {
+	func soundOutputForWordTime(_ state: Int) {
 		let sample = state != 0 ? HIGH_SAMPLE : LOW_SAMPLE
 		if !gBufferingSound {
 			if sample == gLastSample {
@@ -268,7 +268,7 @@ class SoundOutput {
 		}
 	}
 	
-	func initBuffer(inout buf: SoundBuffer) {
+	func initBuffer(_ buf: inout SoundBuffer) {
 		buf.header.sampleRate = SAMPLE_RATE_FIXED
 		buf.header.samplePtr = buf.samples
 		buf.header.length = 0

@@ -25,7 +25,7 @@ class iOSKeyboard : NSObject {
 		super.init()
 	}
 	
-	func keyWithCode(code: Int, pressed: Bool) {
+	func keyWithCode(_ code: Int, pressed: Bool) {
 		cpu.keyWithCode(code, pressed: pressed)
 	}
 }
@@ -38,28 +38,28 @@ class KeyGroup: UIView {
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
-		let url = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("keyPressSound", ofType: "wav")!)
+		let url = URL.init(fileURLWithPath: Bundle.main().pathForResource("keyPressSound", ofType: "wav")!)
 		AudioServicesCreateSystemSoundID(url, &self.mySound)
 	}
 
-	override func drawRect(rect: CGRect) {
+	override func draw(_ rect: CGRect) {
 		let context = UIGraphicsGetCurrentContext()
 		
-		CGContextSaveGState(context)
-		CGContextSetFillColorWithColor(context, UIColor.clearColor().CGColor)
-		CGContextDrawPath(context, CGPathDrawingMode.Fill)
+		context?.saveGState()
+		context?.setFillColor(UIColor.clear().cgColor)
+		context?.drawPath(using: CGPathDrawingMode.fill)
 		
-		CGContextRestoreGState(context)
+		context?.restoreGState()
 		
-		super.drawRect(rect)
+		super.draw(rect)
 	}
 	
-	func key(key: Key, pressed: Bool) {
+	func key(_ key: Key, pressed: Bool) {
 		let code: Int = key.keyCode! as Int
 		keyboard.keyWithCode(code, pressed: pressed)
 		
 		if pressed && SOUND {
-			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {
+			DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosUtility).async {
 				AudioServicesPlaySystemSound(self.mySound)
 				return
 			}

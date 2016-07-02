@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-func displayAlert(message: String) {
+func displayAlert(_ message: String) {
 //	var alert:NSAlert = NSAlert()
 //	alert.messageText = message
 //	alert.runModal()

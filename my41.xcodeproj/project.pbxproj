@@ -1166,10 +1166,12 @@
 					DCE75C001A61B4FE002B2D7C = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = LS2ZZ4TR54;
+						LastSwiftMigration = 0800;
 					};
 					DCE75C141A61B4FE002B2D7C = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = LS2ZZ4TR54;
+						LastSwiftMigration = 0800;
 						TestTargetID = DCE75C001A61B4FE002B2D7C;
 					};
 				};
@@ -1823,6 +1825,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5161449a-a63a-4769-b861-5c21e5ac1e4e";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1841,6 +1844,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0b755fc1-5093-4110-ae1b-b5e437218709";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1867,6 +1871,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/my41cx-ios.app/my41cx-ios";
 			};
 			name = Debug;
@@ -1888,6 +1893,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/my41cx-ios.app/my41cx-ios";
 				VALIDATE_PRODUCT = YES;
 			};

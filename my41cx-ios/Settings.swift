@@ -21,15 +21,15 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	
 	var yRatio: CGFloat = 1.0
 
-	override func viewWillAppear(animated: Bool) {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		calculator.selectedSegmentIndex = defaults.integerForKey(HPCalculatorType) - 1
+	override func viewWillAppear(_ animated: Bool) {
+		let defaults = UserDefaults.standard()
+		calculator.selectedSegmentIndex = defaults.integer(forKey: HPCalculatorType) - 1
 
-		sound.on = SOUND
+		sound.isOn = SOUND
 		self.yRatio = self.view.bounds.size.height / 800.0
 	}
 	
-	@IBAction func clearMemory(sender: AnyObject) {
+	@IBAction func clearMemory(_ sender: AnyObject) {
 		let action = UIAlertView(
 			title: "Reset Calculator",
 			message: "This operation will clear all programs and memory registers",
@@ -40,32 +40,32 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		action.show()
 	}
 	
-	@IBAction func applyChanges(sender: AnyObject) {
+	@IBAction func applyChanges(_ sender: AnyObject) {
 		var needsRestart = false
 		
-		let defaults = NSUserDefaults.standardUserDefaults()
+		let defaults = UserDefaults.standard()
 		
 		// Sound settings
-		if sound.on {
+		if sound.isOn {
 			SOUND = true
 		} else {
 			SOUND = false
 		}
-		defaults.setBool(SOUND, forKey: "sound")
+		defaults.set(SOUND, forKey: "sound")
 		
 		// Calculator timer
-		if syncClock.on {
+		if syncClock.isOn {
 			SYNCHRONYZE = true
 		} else {
 			SYNCHRONYZE = false
 		}
-		defaults.setBool(SYNCHRONYZE, forKey: "synchronyzeTime")
+		defaults.set(SYNCHRONYZE, forKey: "synchronyzeTime")
 
 		// Calculator type
-		let calculatorType = defaults.integerForKey(HPCalculatorType)
+		let calculatorType = defaults.integer(forKey: HPCalculatorType)
 		let currentCalculatorType = calculator.selectedSegmentIndex + 1
 		if calculatorType != currentCalculatorType {
-			defaults.setInteger(currentCalculatorType, forKey: HPCalculatorType)
+			defaults.set(currentCalculatorType, forKey: HPCalculatorType)
 			needsRestart = true
 		}
 		
@@ -73,98 +73,98 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		if let fPath = self.expansionModule1.filePath {
 			// We have something in Port1
 			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.stringForKey(HPPort1) {
+			if let dModuleName = defaults.string(forKey: HPPort1) {
 				// And we had something in Port1 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(moduleName, forKey: HPPort1)
+					defaults.set(moduleName, forKey: HPPort1)
 					needsRestart = true
 				}
 			} else {
 				// Port1 was empty
-				defaults.setObject(moduleName, forKey: HPPort1)
+				defaults.set(moduleName, forKey: HPPort1)
 				needsRestart = true
 			}
 		} else {
 			// Port1 is empty now
-			if let _ = defaults.stringForKey(HPPort1) {
+			if let _ = defaults.string(forKey: HPPort1) {
 				// But we had something in Port1
-				defaults.removeObjectForKey(HPPort1)
+				defaults.removeObject(forKey: HPPort1)
 			}
 		}
 
 		if let fPath = self.expansionModule2.filePath {
 			// We have something in Port2
 			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.stringForKey(HPPort2) {
+			if let dModuleName = defaults.string(forKey: HPPort2) {
 				// And we had something in Port2 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(moduleName, forKey: HPPort2)
+					defaults.set(moduleName, forKey: HPPort2)
 					needsRestart = true
 				}
 			} else {
 				// Port2 was empty
-				defaults.setObject(moduleName, forKey: HPPort2)
+				defaults.set(moduleName, forKey: HPPort2)
 				needsRestart = true
 			}
 		} else {
 			// Port2 is empty now
-			if let _ = defaults.stringForKey(HPPort2) {
+			if let _ = defaults.string(forKey: HPPort2) {
 				// But we had something in Port2
-				defaults.removeObjectForKey(HPPort2)
+				defaults.removeObject(forKey: HPPort2)
 			}
 		}
 
 		if let fPath = self.expansionModule3.filePath {
 			// We have something in Port3
 			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.stringForKey(HPPort3) {
+			if let dModuleName = defaults.string(forKey: HPPort3) {
 				// And we had something in Port3 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(moduleName, forKey: HPPort3)
+					defaults.set(moduleName, forKey: HPPort3)
 					needsRestart = true
 				}
 			} else {
 				// Port3 was empty
-				defaults.setObject(moduleName, forKey: HPPort3)
+				defaults.set(moduleName, forKey: HPPort3)
 				needsRestart = true
 			}
 		} else {
 			// Port3 is empty now
-			if let _ = defaults.stringForKey(HPPort3) {
+			if let _ = defaults.string(forKey: HPPort3) {
 				// But we had something in Port3
-				defaults.removeObjectForKey(HPPort3)
+				defaults.removeObject(forKey: HPPort3)
 			}
 		}
 
 		if let fPath = self.expansionModule4.filePath {
 			// We have something in Port4
 			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.stringForKey(HPPort4) {
+			if let dModuleName = defaults.string(forKey: HPPort4) {
 				// And we had something in Port4 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.setObject(moduleName, forKey: HPPort4)
+					defaults.set(moduleName, forKey: HPPort4)
 					needsRestart = true
 				}
 			} else {
 				// Port4 was empty
-				defaults.setObject(moduleName, forKey: HPPort4)
+				defaults.set(moduleName, forKey: HPPort4)
 				needsRestart = true
 			}
 		} else {
 			// Port4 is empty now
-			if let _ = defaults.stringForKey(HPPort4) {
+			if let _ = defaults.string(forKey: HPPort4) {
 				// But we had something in Port4
-				defaults.removeObjectForKey(HPPort4)
+				defaults.removeObject(forKey: HPPort4)
 			}
 		}
 		defaults.synchronize()
 
-		dismissViewControllerAnimated(
-			true,
+		dismiss(
+			animated: true,
 			completion: nil)
 		
 		if needsRestart {
@@ -173,11 +173,11 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	}
 	
 	//MARK: - UIAlertViewDelegate
-	func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+	func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
 		if buttonIndex == 1 {
 			CalculatorController.sharedInstance.resetCalculator(false)
-			dismissViewControllerAnimated(
-				true,
+			dismiss(
+				animated: true,
 				completion: nil)
 		}
 	}
@@ -201,26 +201,26 @@ class MODsView: UIView, UIAlertViewDelegate {
 	override func awakeFromNib() {
 		allModFiles = modFilesInBundle()
 
-		let defaults = NSUserDefaults.standardUserDefaults()
+		let defaults = UserDefaults.standard()
 		switch port {
 		case 1:
-			if let module1 = defaults.stringForKey(HPPort1) {
-				filePath = NSBundle.mainBundle().resourcePath! + "/" + module1
+			if let module1 = defaults.string(forKey: HPPort1) {
+				filePath = Bundle.main().resourcePath! + "/" + module1
 			}
 			
 		case 2:
-			if let module2 = defaults.stringForKey(HPPort2) {
-				filePath = NSBundle.mainBundle().resourcePath! + "/" + module2
+			if let module2 = defaults.string(forKey: HPPort2) {
+				filePath = Bundle.main().resourcePath! + "/" + module2
 			}
 			
 		case 3:
-			if let module3 = defaults.stringForKey(HPPort3) {
-				filePath = NSBundle.mainBundle().resourcePath! + "/" + module3
+			if let module3 = defaults.string(forKey: HPPort3) {
+				filePath = Bundle.main().resourcePath! + "/" + module3
 			}
 			
 		case 4:
-			if let module4 = defaults.stringForKey(HPPort4) {
-				filePath = NSBundle.mainBundle().resourcePath! + "/" + module4
+			if let module4 = defaults.string(forKey: HPPort4) {
+				filePath = Bundle.main().resourcePath! + "/" + module4
 			}
 			
 		default:
@@ -234,16 +234,16 @@ class MODsView: UIView, UIAlertViewDelegate {
 
 		self.layer.cornerRadius = 5.0
 		self.button.frame = self.bounds
-		self.button.backgroundColor = UIColor.clearColor()
+		self.button.backgroundColor = UIColor.clear()
 		self.button.addTarget(
 			self,
 			action: #selector(MODsView.buttonAction(_:)),
-			forControlEvents: UIControlEvents.TouchUpInside
+			for: UIControlEvents.touchUpInside
 		)
 		self.addSubview(self.button)
 	}
 	
-	func buttonAction(sender: AnyObject) {
+	func buttonAction(_ sender: AnyObject) {
 		if self.filePath != nil {
 			let action = UIAlertView(
 				title: "Port \(port)",
@@ -266,24 +266,24 @@ class MODsView: UIView, UIAlertViewDelegate {
 			cancelButtonTitle: "Cancel"
 		)
 		self.reloadModFiles()
-		for (_, element) in modFiles.enumerate() {
-			action.addButtonWithTitle((element as NSString).lastPathComponent)
+		for (_, element) in modFiles.enumerated() {
+			action.addButton(withTitle: (element as NSString).lastPathComponent)
 		}
 		action.show()
 	}
 
-	override func drawRect(rect: CGRect) {
+	override func draw(_ rect: CGRect) {
 		let backColor = UIColor(
 			red: 0.1569,
 			green: 0.6157,
 			blue: 0.8902,
 			alpha: 0.95
 		)
-		let rect = CGRectMake(
-			self.bounds.origin.x + 3,
-			self.bounds.origin.y + 3,
-			self.bounds.size.width - 6,
-			self.bounds.size.height - 6
+		let rect = CGRect(
+			x: self.bounds.origin.x + 3,
+			y: self.bounds.origin.y + 3,
+			width: self.bounds.size.width - 6,
+			height: self.bounds.size.height - 6
 		)
 		
 		let path = UIBezierPath(
@@ -295,9 +295,9 @@ class MODsView: UIView, UIAlertViewDelegate {
 		backColor.setFill()
 		path.fill()
 		
-		let font = UIFont.systemFontOfSize(15.0 * settingsViewController.yRatio)
-		let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-		textStyle.alignment = NSTextAlignment.Center
+		let font = UIFont.systemFont(ofSize: 15.0 * settingsViewController.yRatio)
+		let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+		textStyle.alignment = NSTextAlignment.center
 		let attributes = [
 			NSFontAttributeName : font,
 			NSParagraphStyleAttributeName: textStyle
@@ -306,8 +306,8 @@ class MODsView: UIView, UIAlertViewDelegate {
 			let mod = MOD()
 			do {
 				try mod.readModFromFile(fPath)
-				mod.moduleHeader.title.drawInRect(
-					CGRectMake(10.0, 10.0, self.bounds.size.width - 20.0, self.bounds.size.height - 20.0),
+				mod.moduleHeader.title.draw(
+					in: CGRect(x: 10.0, y: 10.0, width: self.bounds.size.width - 20.0, height: self.bounds.size.height - 20.0),
 					withAttributes: attributes
 				)
 			} catch {
@@ -315,8 +315,8 @@ class MODsView: UIView, UIAlertViewDelegate {
 			}
 		} else {
 			let title = "Empty module"
-			title.drawInRect(
-				CGRectMake(10.0, 10.0, self.bounds.size.width - 20.0, self.bounds.size.height - 20.0),
+			title.draw(
+				in: CGRect(x: 10.0, y: 10.0, width: self.bounds.size.width - 20.0, height: self.bounds.size.height - 20.0),
 				withAttributes: attributes
 			)
 
@@ -324,7 +324,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 	}
 	
 	//MARK: - UIAlertViewDelegate Methods
-	func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+	func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
 		if buttonIndex != 0 {
 			// Selected something
 			if filePath == nil {
@@ -363,7 +363,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 	
 	func modFilesInBundle() -> [String] {
 //		let resourceURL = NSBundle.mainBundle().resourceURL
-		let modFiles = NSBundle.mainBundle().pathsForResourcesOfType("mod", inDirectory: nil)
+		let modFiles = Bundle.main().pathsForResources(ofType: "mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
 			if (modFile as NSString).lastPathComponent != "nut-c.mod" && (modFile as NSString).lastPathComponent != "nut-cv.mod" && (modFile as NSString).lastPathComponent != "nut-cx.mod" {
@@ -375,34 +375,34 @@ class MODsView: UIView, UIAlertViewDelegate {
 	}
 	
 	func removeLoadedModules() {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		if (defaults.stringForKey(HPPort1) != nil) {
+		let defaults = UserDefaults.standard()
+		if (defaults.string(forKey: HPPort1) != nil) {
 			if let path = settingsViewController.expansionModule1.filePath {
 				removeModFile(path)
 			}
 		}
-		if (defaults.stringForKey(HPPort2) != nil) {
+		if (defaults.string(forKey: HPPort2) != nil) {
 			if let path = settingsViewController.expansionModule2.filePath {
 				removeModFile(path)
 			}
 		}
-		if (defaults.stringForKey(HPPort3) != nil) {
+		if (defaults.string(forKey: HPPort3) != nil) {
 			if let path = settingsViewController.expansionModule3.filePath {
 				removeModFile(path)
 			}
 		}
-		if (defaults.stringForKey(HPPort4) != nil) {
+		if (defaults.string(forKey: HPPort4) != nil) {
 			if let path = settingsViewController.expansionModule4.filePath {
 				removeModFile(path)
 			}
 		}
 	}
 	
-	func removeModFile(filename: String) {
+	func removeModFile(_ filename: String) {
 		var index = 0
 		for aFileName in modFiles {
 			if filename == aFileName {
-				modFiles.removeAtIndex(index)
+				modFiles.remove(at: index)
 				
 				break
 			}
@@ -416,18 +416,18 @@ class MODDetailsView: UIView {
 	var category: String?
 	var hardware: String?
 	
-	override func drawRect(rect: CGRect) {
+	override func draw(_ rect: CGRect) {
 		let backColor = UIColor(
 			red: 0.99,
 			green: 0.99,
 			blue: 0.99,
 			alpha: 0.95
 		)
-		let rect = CGRectMake(
-			self.bounds.origin.x + 3.0,
-			self.bounds.origin.y + 3.0,
-			self.bounds.size.width - 6.0,
-			self.bounds.size.height - 6.0
+		let rect = CGRect(
+			x: self.bounds.origin.x + 3.0,
+			y: self.bounds.origin.y + 3.0,
+			width: self.bounds.size.width - 6.0,
+			height: self.bounds.size.height - 6.0
 		)
 		let path = UIBezierPath(
 			roundedRect: rect,

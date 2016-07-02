@@ -13,30 +13,30 @@ let MOD_FORMAT = "MOD1"
 
 /* Module type codes */
 enum Category: byte {
-	case Undef					= 0		// not categorized
-	case OS						= 1		// base Operating System for C,CV,CX
-	case HPApplicationPAC		= 2		// HP Application PACs
-	case HPILPeripheral			= 3		// any HP-IL related modules and devices
-	case StandardPeripheral		= 4		// standard Peripherals: Wand, Printer, Card Reader, XFuns/Mem, Service, Time, IR Printer
-	case CustomPeripheral		= 5		// custom Peripherals: AECROM, CCD, HEPAX, PPC, ZENROM, etc
-	case Beta					= 6		// BETA releases not fully debugged and finished
-	case Experimental			= 7		// test programs not meant for normal usage
+	case `undef`					= 0		// not categorized
+	case os						= 1		// base Operating System for C,CV,CX
+	case hpApplicationPAC		= 2		// HP Application PACs
+	case hpilPeripheral			= 3		// any HP-IL related modules and devices
+	case standardPeripheral		= 4		// standard Peripherals: Wand, Printer, Card Reader, XFuns/Mem, Service, Time, IR Printer
+	case customPeripheral		= 5		// custom Peripherals: AECROM, CCD, HEPAX, PPC, ZENROM, etc
+	case beta					= 6		// BETA releases not fully debugged and finished
+	case experimental			= 7		// test programs not meant for normal usage
 }
 let CategoryMax: byte			= 7		// maximum CATEGORY_ define value
 
 /* Hardware codes */
 enum Hardware: byte {
-	case None					= 0		// no additional hardware specified
-	case Printer				= 1		// 82143A Printer
-	case CardReader				= 2		// 82104A Card Reader
-	case Timer					= 3		// 82182A Time Module or HP-41CX built in timer
-	case WAND					= 4		// 82153A Barcode Wand
-	case HPIL					= 5		// 82160A HP-IL Module
-	case Infrared				= 6		// 82242A Infrared Printer Module
-	case HEPAX					= 7		// HEPAX Module - has special hardware features (write protect, relocation)
-	case WWRAMBox				= 8		// W&W RAMBOX - has special hardware features (RAM block swap instructions)
-	case MLDL2000				= 9		// MLDL2000
-	case CLONIX					= 10	// CLONIX-41 Module
+	case none					= 0		// no additional hardware specified
+	case printer				= 1		// 82143A Printer
+	case cardReader				= 2		// 82104A Card Reader
+	case timer					= 3		// 82182A Time Module or HP-41CX built in timer
+	case wand					= 4		// 82153A Barcode Wand
+	case hpil					= 5		// 82160A HP-IL Module
+	case infrared				= 6		// 82242A Infrared Printer Module
+	case hepax					= 7		// HEPAX Module - has special hardware features (write protect, relocation)
+	case wwramBox				= 8		// W&W RAMBOX - has special hardware features (RAM block swap instructions)
+	case mldl2000				= 9		// MLDL2000
+	case clonix					= 10	// CLONIX-41 Module
 }
 let HardwareMax: byte			= 10	// maximum HARDWARE_ define value
 
@@ -45,12 +45,12 @@ let HardwareMax: byte			= 10	// maximum HARDWARE_ define value
    ODD/EVEN, UPPER/LOWER can only place ROMS in 16K blocks
 */
 enum Position: byte {
-	case PositionAny			= 0x1f	// position in any port page (8-F)
-	case PositionLower			= 0x2f	// position in lower port page relative to any upper image(s) (8-F)
-	case PositionUpper			= 0x3f	// position in upper port page
-	case PositionEven			= 0x4f	// position in any even port page (8,A,C,E)
-	case PositionOdd			= 0x5f	// position in any odd port page (9,B,D,F)
-	case PositionOrdered		= 0x6f	// position sequentially in MOD file order, one image per page regardless of bank
+	case positionAny			= 0x1f	// position in any port page (8-F)
+	case positionLower			= 0x2f	// position in lower port page relative to any upper image(s) (8-F)
+	case positionUpper			= 0x3f	// position in upper port page
+	case positionEven			= 0x4f	// position in any even port page (8,A,C,E)
+	case positionOdd			= 0x5f	// position in any odd port page (9,B,D,F)
+	case positionOrdered		= 0x6f	// position sequentially in MOD file order, one image per page regardless of bank
 }
 let PositionMin: byte			= 0x1f	// minimum POSITION_ define value
 let PositionMax: byte			= 0x6f	// maximum POSITION_ define value
@@ -72,8 +72,8 @@ struct ModuleFilePage {
 	var pageCustom: [byte]		// for special hardware attributes
 	
 	init() {
-		name = [CChar](count: 20, repeatedValue: 0)
-		ID = [CChar](count: 9, repeatedValue: 0)
+		name = [CChar](repeating: 0, count: 20)
+		ID = [CChar](repeating: 0, count: 9)
 		page = 0
 		pageGroup = 0
 		bank = 0
@@ -81,8 +81,8 @@ struct ModuleFilePage {
 		RAM = 0
 		writeProtect = 0
 		FAT = 0
-		image = [byte](count: 5120, repeatedValue: 0)
-		pageCustom = [byte](count: 32, repeatedValue: 0)
+		image = [byte](repeating: 0, count: 5120)
+		pageCustom = [byte](repeating: 0, count: 32)
 	}
 }
 
@@ -105,22 +105,22 @@ struct ModuleFileHeader {
 	var headerCustom: [byte]		// for special hardware attributes
 	
 	init () {
-		fileFormat = [CChar](count: 5, repeatedValue: 0)
-		title = [CChar](count: 50, repeatedValue: 0)
-		version = [CChar](count: 10, repeatedValue: 0)
-		partNumber = [CChar](count: 20, repeatedValue: 0)
-		author = [CChar](count: 50, repeatedValue: 0)
-		copyright = [CChar](count: 100, repeatedValue: 0)
-		license = [CChar](count: 200, repeatedValue: 0)
-		comments = [CChar](count: 255, repeatedValue: 0)
-		category = .Undef
-		hardware = .None
+		fileFormat = [CChar](repeating: 0, count: 5)
+		title = [CChar](repeating: 0, count: 50)
+		version = [CChar](repeating: 0, count: 10)
+		partNumber = [CChar](repeating: 0, count: 20)
+		author = [CChar](repeating: 0, count: 50)
+		copyright = [CChar](repeating: 0, count: 100)
+		license = [CChar](repeating: 0, count: 200)
+		comments = [CChar](repeating: 0, count: 255)
+		category = .undef
+		hardware = .none
 		memModules = 0
 		XMemModules = 0
 		original = 0
 		appAutoUpdate = 0
 		numPages = 0
-		headerCustom = [byte](count: 32, repeatedValue: 0)
+		headerCustom = [byte](repeating: 0, count: 32)
 	}
 }
 
@@ -153,8 +153,8 @@ class ModuleHeader {
 		copyright = ""
 		license = ""
 		comments = ""
-		category = .Undef
-		hardware = .None
+		category = .undef
+		hardware = .none
 		memModules = 0
 		XMemModules = 0
 		original = 0
@@ -202,11 +202,11 @@ final class ModulePage {
 		FAT = 0
 		HEPAX = 0
 		WWRAMBOX = 0
-		image = [byte](count: 4096, repeatedValue: 0)
+		image = [byte](repeating: 0, count: 4096)
 	}
 }
 
-enum CheckPageError: ErrorType {
+enum CheckPageError: ErrorProtocol {
 	case pageOutOfRange
 	case pageGroupOutOfRange
 	case bankOutOfRange
@@ -218,7 +218,7 @@ enum CheckPageError: ErrorType {
 }
 
 final class MOD {
-	var data: NSData?
+	var data: Data?
 	var shortName: String?
 	var fileSize = 0
 	var moduleHeader = ModuleHeader()
@@ -230,7 +230,7 @@ final class MOD {
 	
 	func is41C() -> Bool {
 		if let sName = self.shortName {
-			if moduleHeader.category == .OS && sName.rangeOfString("nut-c.mod") != nil {
+			if moduleHeader.category == .os && sName.range(of: "nut-c.mod") != nil {
 				return true
 			}
 		}
@@ -240,7 +240,7 @@ final class MOD {
 	
 	func is41CV() -> Bool {
 		if let sName = self.shortName {
-			if moduleHeader.category == .OS && sName.rangeOfString("nut-cv.mod") != nil {
+			if moduleHeader.category == .os && sName.range(of: "nut-cv.mod") != nil {
 				return true
 			}
 		}
@@ -250,7 +250,7 @@ final class MOD {
 	
 	func is41CX() -> Bool {
 		if let sName = self.shortName {
-			if moduleHeader.category == .OS && sName.rangeOfString("nut-cx.mod") != nil {
+			if moduleHeader.category == .os && sName.range(of: "nut-cx.mod") != nil {
 				return true
 			}
 		}
@@ -259,7 +259,7 @@ final class MOD {
 	}
 	
 	// Check Page
-	func checkPage(page: ModulePage) throws {
+	func checkPage(_ page: ModulePage) throws {
 		if page.page > 0x0f && page.page < PositionMin {
 			throw CheckPageError.pageOutOfRange
 		}
@@ -285,34 +285,98 @@ final class MOD {
 		}
 		
 		// group pages cannot use non-grouped position codes
-		if page.pageGroup == 1 && page.page <= Position.PositionAny.rawValue {
+		if page.pageGroup == 1 && page.page <= Position.positionAny.rawValue {
 			throw CheckPageError.pageGroupOutOfRange
 		}
 		
 		// non-grouped pages cannot use grouped position codes
-		if page.pageGroup == 0 && page.page > Position.PositionAny.rawValue {
+		if page.pageGroup == 0 && page.page > Position.positionAny.rawValue {
 			throw CheckPageError.nonGroupedPagesError
 		}
 	}
 	
 	func populateModuleHeader() {
 		var header = ModuleFileHeader()
-		data!.getBytes(&header.fileFormat, range: NSMakeRange(0, 5))
-		data!.getBytes(&header.title, range: NSMakeRange(5, 50))
-		data!.getBytes(&header.version, range: NSMakeRange(55, 10))
-		data!.getBytes(&header.partNumber, range: NSMakeRange(65, 20))
-		data!.getBytes(&header.author, range: NSMakeRange(85, 50))
-		data!.getBytes(&header.copyright, range: NSMakeRange(135, 100))
-		data!.getBytes(&header.license, range: NSMakeRange(235, 200))
-		data!.getBytes(&header.comments, range: NSMakeRange(435, 255))
-		data!.getBytes(&header.category, range: NSMakeRange(690, 1))
-		data!.getBytes(&header.hardware, range: NSMakeRange(691, 1))
-		data!.getBytes(&header.memModules, range: NSMakeRange(692, 1))
-		data!.getBytes(&header.XMemModules, range: NSMakeRange(693, 1))
-		data!.getBytes(&header.original, range: NSMakeRange(694, 1))
-		data!.getBytes(&header.appAutoUpdate, range: NSMakeRange(695, 1))
-		data!.getBytes(&header.numPages, range: NSMakeRange(696, 1))
-		data!.getBytes(&header.headerCustom, range: NSMakeRange(697, 32))
+
+		// header.fileFormat
+		let fileFormat = UnsafeMutableBufferPointer(start: &header.fileFormat, count: 5)
+		let _ = data?.copyBytes(to: fileFormat, from: 0..<5)
+//		data!.getBytes(&header.fileFormat, range: NSMakeRange(0, 5))
+		
+		// title
+		let title = UnsafeMutableBufferPointer(start: &header.title, count: 50)
+		let _ = data?.copyBytes(to: title, from: 5..<55)
+//		data!.getBytes(&header.title, range: NSMakeRange(5, 50))
+		
+		// version
+		let version = UnsafeMutableBufferPointer(start: &header.version, count: 10)
+		let _ = data?.copyBytes(to: version, from: 55..<65)
+//		data!.getBytes(&header.version, range: NSMakeRange(55, 10))
+		
+		// partNumber
+		let partNumber = UnsafeMutableBufferPointer(start: &header.partNumber, count: 20)
+		let _ = data?.copyBytes(to: partNumber, from: 65..<85)
+//		data!.getBytes(&header.partNumber, range: NSMakeRange(65, 20))
+		
+		// author
+		let author = UnsafeMutableBufferPointer(start: &header.author, count: 50)
+		let _ = data?.copyBytes(to: author, from: 85..<135)
+//		data!.getBytes(&header.author, range: NSMakeRange(85, 50))
+		
+		// copyright
+		let copyright = UnsafeMutableBufferPointer(start: &header.copyright, count: 100)
+		let _ = data?.copyBytes(to: copyright, from: 135..<235)
+//		data!.getBytes(&header.copyright, range: NSMakeRange(135, 100))
+		
+		// license
+		let license = UnsafeMutableBufferPointer(start: &header.license, count: 200)
+		let _ = data?.copyBytes(to: license, from: 235..<435)
+//		data!.getBytes(&header.license, range: NSMakeRange(235, 200))
+		
+		// comments
+		let comments = UnsafeMutableBufferPointer(start: &header.comments, count: 255)
+		let _ = data?.copyBytes(to: comments, from: 435..<690)
+//		data!.getBytes(&header.comments, range: NSMakeRange(435, 255))
+
+		// category
+		let category = UnsafeMutableBufferPointer(start: &header.category, count: 1)
+		let _ = data?.copyBytes(to: category, from: 690..<691)
+//		data!.getBytes(&header.category, range: NSMakeRange(690, 1))
+
+		// hardware
+		let hardware = UnsafeMutableBufferPointer(start: &header.hardware, count: 1)
+		let _ = data?.copyBytes(to: hardware, from: 691..<692)
+//		data!.getBytes(&header.hardware, range: NSMakeRange(691, 1))
+
+		// memModules
+		let memModules = UnsafeMutableBufferPointer(start: &header.memModules, count: 1)
+		let _ = data?.copyBytes(to: memModules, from: 692..<693)
+//		data!.getBytes(&header.memModules, range: NSMakeRange(692, 1))
+
+		// XMemModules
+		let XMemModules = UnsafeMutableBufferPointer(start: &header.XMemModules, count: 1)
+		let _ = data?.copyBytes(to: XMemModules, from: 693..<694)
+//		data!.getBytes(&header.XMemModules, range: NSMakeRange(693, 1))
+
+		// original
+		let original = UnsafeMutableBufferPointer(start: &header.original, count: 1)
+		let _ = data?.copyBytes(to: original, from: 694..<695)
+//		data!.getBytes(&header.original, range: NSMakeRange(694, 1))
+
+		// appAutoUpdate
+		let appAutoUpdate = UnsafeMutableBufferPointer(start: &header.appAutoUpdate, count: 1)
+		let _ = data?.copyBytes(to: appAutoUpdate, from: 695..<696)
+//		data!.getBytes(&header.appAutoUpdate, range: NSMakeRange(695, 1))
+
+		// numPages
+		let numPages = UnsafeMutableBufferPointer(start: &header.numPages, count: 1)
+		let _ = data?.copyBytes(to: numPages, from: 696..<697)
+//		data!.getBytes(&header.numPages, range: NSMakeRange(696, 1))
+
+		// headerCustom
+		let headerCustom = UnsafeMutableBufferPointer(start: &header.headerCustom, count: 32)
+		let _ = data?.copyBytes(to: headerCustom, from: 697..<729)
+//		data!.getBytes(&header.headerCustom, range: NSMakeRange(697, 32))
 		
 		moduleHeader.fileFormat = convertCCharToString(header.fileFormat)
 		moduleHeader.title = convertCCharToString(header.title)
@@ -329,7 +393,7 @@ final class MOD {
 		moduleHeader.numPages = header.numPages
 	}
 	
-	enum modHeaderError: ErrorType {
+	enum modHeaderError: ErrorProtocol {
 		case wrongFileSize
 		case noModExtension
 		case tooManyMEMModules
@@ -377,21 +441,75 @@ final class MOD {
 		}
 	}
 	
-	func populateModulePage(pageNo: Int) {
-		let startPosition: Int = HeaderSize + (PageSize * pageNo)
+	func populateModulePage(_ pageNo: Int) {
+		var startPosition: Int = HeaderSize + (PageSize * pageNo)
 		var page = ModuleFilePage()
 		
-		data!.getBytes(&page.name, range: NSMakeRange(startPosition, 20))
-		data!.getBytes(&page.ID, range: NSMakeRange(startPosition+20, 9))
-		data!.getBytes(&page.page, range: NSMakeRange(startPosition+29, 1))
-		data!.getBytes(&page.pageGroup, range: NSMakeRange(startPosition+30, 1))
-		data!.getBytes(&page.bank, range: NSMakeRange(startPosition+31, 1))
-		data!.getBytes(&page.bankGroup, range: NSMakeRange(startPosition+32, 1))
-		data!.getBytes(&page.RAM, range: NSMakeRange(startPosition+33, 1))
-		data!.getBytes(&page.writeProtect, range: NSMakeRange(startPosition+34, 1))
-		data!.getBytes(&page.FAT, range: NSMakeRange(startPosition+35, 1))
-		data!.getBytes(&page.image, range: NSMakeRange(startPosition+36, 5120))
-		data!.getBytes(&page.pageCustom, range: NSMakeRange(startPosition+5156, 32))
+		// name
+		let name = UnsafeMutableBufferPointer(start: &page.name, count: 20)
+		let _ = data?.copyBytes(to: name, from: startPosition..<startPosition+20)
+		startPosition += 20
+//		data!.getBytes(&page.name, range: NSMakeRange(startPosition, 20))
+
+		// ID
+		let ID = UnsafeMutableBufferPointer(start: &page.ID, count: 9)
+		let _ = data?.copyBytes(to: ID, from: startPosition..<startPosition+9)
+		startPosition += 9
+//		data!.getBytes(&page.ID, range: NSMakeRange(startPosition+20, 9))
+
+		// page
+		let ppage = UnsafeMutableBufferPointer(start: &page.page, count: 1)
+		let _ = data?.copyBytes(to: ppage, from: startPosition..<startPosition+1)
+		startPosition += 1
+//		data!.getBytes(&page.page, range: NSMakeRange(startPosition+29, 1))
+
+		// pageGroup
+		let pageGroup = UnsafeMutableBufferPointer(start: &page.pageGroup, count: 1)
+		let _ = data?.copyBytes(to: pageGroup, from: startPosition..<startPosition+1)
+		startPosition += 1
+//		data!.getBytes(&page.pageGroup, range: NSMakeRange(startPosition+30, 1))
+
+		// bank
+		let bank = UnsafeMutableBufferPointer(start: &page.bank, count: 1)
+		let _ = data?.copyBytes(to: bank, from: startPosition..<startPosition+1)
+		startPosition += 1
+//		data!.getBytes(&page.bank, range: NSMakeRange(startPosition+31, 1))
+
+		// bankGroup
+		let bankGroup = UnsafeMutableBufferPointer(start: &page.bankGroup, count: 1)
+		let _ = data?.copyBytes(to: bankGroup, from: startPosition..<startPosition+1)
+		startPosition += 1
+//		data!.getBytes(&page.bankGroup, range: NSMakeRange(startPosition+32, 1))
+
+		// RAM
+		let RAM = UnsafeMutableBufferPointer(start: &page.RAM, count: 1)
+		let _ = data?.copyBytes(to: RAM, from: startPosition..<startPosition+1)
+		startPosition += 1
+//		data!.getBytes(&page.RAM, range: NSMakeRange(startPosition+33, 1))
+
+		// writeProtect
+		let writeProtect = UnsafeMutableBufferPointer(start: &page.writeProtect, count: 1)
+		let _ = data?.copyBytes(to: writeProtect, from: startPosition..<startPosition+1)
+		startPosition += 1
+//		data!.getBytes(&page.writeProtect, range: NSMakeRange(startPosition+34, 1))
+
+		// FAT
+		let FAT = UnsafeMutableBufferPointer(start: &page.FAT, count: 1)
+		let _ = data?.copyBytes(to: FAT, from: startPosition..<startPosition+1)
+		startPosition += 1
+//		data!.getBytes(&page.FAT, range: NSMakeRange(startPosition+35, 1))
+
+		// image
+		let image = UnsafeMutableBufferPointer(start: &page.image, count: 5120)
+		let _ = data?.copyBytes(to: image, from: startPosition..<startPosition+5120)
+		startPosition += 5120
+//		data!.getBytes(&page.image, range: NSMakeRange(startPosition+36, 5120))
+
+		// pageCustom
+		let pageCustom = UnsafeMutableBufferPointer(start: &page.pageCustom, count: 32)
+		let _ = data?.copyBytes(to: pageCustom, from: startPosition..<startPosition+32)
+		startPosition += 32
+//		data!.getBytes(&page.pageCustom, range: NSMakeRange(startPosition+5156, 32))
 
 		let modulePage = ModulePage()
 		modulePage.moduleHeader = self.moduleHeader
@@ -409,19 +527,19 @@ final class MOD {
 		modulePages.append(modulePage)
 	}
 	
-	enum readModFileError: ErrorType {
+	enum readModFileError: ErrorProtocol {
 		case errorLoadingFile
 	}
 	
-	func readModFromFile(filename: String) throws {
+	func readModFromFile(_ filename: String) throws {
 		// Read the file
-		let fileManager = NSFileManager.defaultManager()
-		if fileManager.fileExistsAtPath(filename) {
+		let fileManager = FileManager.default()
+		if fileManager.fileExists(atPath: filename) {
 			do {
-				let fileAttributes: NSDictionary = try fileManager.attributesOfItemAtPath(filename)
-				self.fileSize = fileAttributes[NSFileSize]! as! Int
-				self.data = try NSData(contentsOfFile: filename, options: .DataReadingMappedIfSafe)
-				self.shortName = (filename as NSString).lastPathComponent.lowercaseString
+				let fileAttributes: NSDictionary = try fileManager.attributesOfItem(atPath: filename)
+				self.fileSize = fileAttributes[FileAttributeKey.size]! as! Int
+				self.data = try Data(contentsOf: URL(fileURLWithPath: filename), options: .dataReadingMappedIfSafe)
+				self.shortName = (filename as NSString).lastPathComponent.lowercased()
 				moduleHeader.fullFileName = filename
 				
 				populateModuleHeader()
@@ -451,21 +569,21 @@ final class MOD {
 		}
 		
 		switch moduleHeader.category {
-		case .Undef:
+		case .undef:
 			return "Undefined"
-		case .OS:
+		case .os:
 			return "Operating system"
-		case .HPApplicationPAC:
+		case .hpApplicationPAC:
 			return "HP Application PACs"
-		case .HPILPeripheral:
+		case .hpilPeripheral:
 			return "HP-IL related modules and devices"
-		case .StandardPeripheral:
+		case .standardPeripheral:
 			return "Standard Peripherals"
-		case .CustomPeripheral:
+		case .customPeripheral:
 			return "Custom Peripherals"
-		case .Beta:
+		case .beta:
 			return "BETA releases"
-		case .Experimental:
+		case .experimental:
 			return "Test programs"
 		}
 	}
@@ -476,31 +594,31 @@ final class MOD {
 		}
 		
 		switch moduleHeader.hardware {
-		case .None:
+		case .none:
 			return "no additional hardware specified"
-		case .Printer:
+		case .printer:
 			return "82143A Printer"
-		case .CardReader:
+		case .cardReader:
 			return "82104A Card Reader"
-		case .Timer:
+		case .timer:
 			if is41CX() {
 				return "HP-41CX built in timer"
 			} else {
 				return "82182A Time Module"
 			}
-		case .WAND:
+		case .wand:
 			return "82153A Barcode Wand"
-		case .HPIL:
+		case .hpil:
 			return "82160A HP-IL Module"
-		case .Infrared:
+		case .infrared:
 			return "82242A Infrared Printer Module"
-		case .HEPAX:
+		case .hepax:
 			return "HEPAX Module"
-		case .WWRAMBox:
+		case .wwramBox:
 			return "W&W RAMBOX"
-		case .MLDL2000:
+		case .mldl2000:
 			return "MLDL2000"
-		case .CLONIX:
+		case .clonix:
 			return "CLONIX-41 Module"
 		}
 	}
@@ -533,7 +651,7 @@ final class MOD {
 		print(">>>>>     END HEADER     <<<<<")
 	}
 	
-	func pageDescription(pageNo: UInt8) {
+	func pageDescription(_ pageNo: UInt8) {
 		let page = modulePages[Int(pageNo)]
 		print(">>>>>     PAGE: \(pageNo)     <<<<<")
 		print("name: \(page.name)")
@@ -548,6 +666,6 @@ final class MOD {
 	}
 }
 
-func convertCCharToString(cstring: [CChar]) -> String {
-	return NSString(bytes: cstring, length: Int(cstring.count), encoding: NSASCIIStringEncoding) as String!
+func convertCCharToString(_ cstring: [CChar]) -> String {
+	return NSString(bytes: cstring, length: Int(cstring.count), encoding: String.Encoding.ascii.rawValue) as String!
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-func op_GSUBNC(addr: Int) -> Bit													// GSUBNC
+func op_GSUBNC(_ addr: Int) -> Bit													// GSUBNC
 {
 	/*
 	GSUBNC
@@ -54,7 +54,7 @@ func op_GSUBNC(addr: Int) -> Bit													// GSUBNC
 	return 0
 }
 
-func op_GSUBC(addr: Int) -> Bit														// GSUBC
+func op_GSUBC(_ addr: Int) -> Bit														// GSUBC
 {
 	/*
 	GSUBC
@@ -100,7 +100,7 @@ func op_GSUBC(addr: Int) -> Bit														// GSUBC
 	return 0
 }
 
-func op_GOLNC(addr: Int) -> Bit														 // GOLNC
+func op_GOLNC(_ addr: Int) -> Bit														 // GOLNC
 {
 	/*
 	GOLNC
@@ -134,7 +134,7 @@ func op_GOLNC(addr: Int) -> Bit														 // GOLNC
 	return 0
 }
 
-func op_GOLC(addr: Int) -> Bit														 // GOLC
+func op_GOLC(_ addr: Int) -> Bit														 // GOLC
 {
 	/*
 	GOLC
@@ -169,7 +169,7 @@ func op_GOLC(addr: Int) -> Bit														 // GOLC
 }
 
 
-func longJumpTo(addr: Int, withReturn push: Bool) {
+func longJumpTo(_ addr: Int, withReturn push: Bool) {
 	let page = (addr & 0xf000) >> 12
 	let activePage = bus.activeBank[page]
 	if let rom = bus.romChips[page][activePage - 1] {

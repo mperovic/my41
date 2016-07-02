@@ -9,9 +9,9 @@
 import Foundation
 
 enum CalculatorType: Int {
-	case HP41C  = 1
-	case HP41CV = 2
-	case HP41CX = 3
+	case hp41C  = 1
+	case hp41CV = 2
+	case hp41CX = 3
 }
 
 let MAX_RAM_SIZE		= 0x400
@@ -34,7 +34,7 @@ class Calculator: NSObject {
 	var calculatorMod = MOD()
 	var portMod: [MOD?] = [nil, nil, nil, nil]
 	var calculatorType: CalculatorType?
-	var executionTimer: NSTimer?
+	var executionTimer: Foundation.Timer?
 	var timerModule: Timer?
 	var display: Display?
 	
@@ -50,7 +50,7 @@ class Calculator: NSObject {
 		resetCalculator(true)
 	}
 	
-	func resetCalculator(restoringMemory: Bool) {
+	func resetCalculator(_ restoringMemory: Bool) {
 		// Show progress indicator & status label
 		
 		bus.memModules = 0
@@ -126,9 +126,9 @@ class Calculator: NSObject {
 	}
 	
 	func startExecutionTimer() {
-		cpu.setPowerMode(.PowerOn)
-		executionTimer = NSTimer.scheduledTimerWithTimeInterval(
-			timeSliceInterval,
+		cpu.setPowerMode(.powerOn)
+		executionTimer = Foundation.Timer.scheduledTimer(
+			timeInterval: timeSliceInterval,
 			target: self,
 			selector: #selector(Calculator.timeSlice(_:)),
 			userInfo: nil,
@@ -138,27 +138,27 @@ class Calculator: NSObject {
 	
 	func saveMemory() {
 		let data = getMemoryContents()
-		let defaults = NSUserDefaults.standardUserDefaults()
-		defaults.setObject(data, forKey: "memory")
+		let defaults = UserDefaults.standard()
+		defaults.set(data, forKey: "memory")
 		defaults.synchronize()
 	}
 	
 	func restoreMemory() {
-		let data: NSData? = NSUserDefaults.standardUserDefaults().objectForKey("memory") as? NSData
+		let data: Data? = UserDefaults.standard().object(forKey: "memory") as? Data
 		if let aData = data {
 			self.setMemoryContents(aData)
 		}
 	}
 	
-	func setMemoryContents(data: NSData) {
+	func setMemoryContents(_ data: Data) {
 		// the number of elements:
-		let count = data.length / sizeof(UInt8)
+		let count = data.count / sizeof(UInt8)
 		
 		// create array of appropriate length:
-		var memoryArray = [UInt8](count: count, repeatedValue: 0)
+		var memoryArray = [UInt8](repeating: 0, count: count)
 		
 		// copy bytes into array
-		data.getBytes(&memoryArray, length:count)
+		(data as NSData).getBytes(&memoryArray, length:count)
 		
 		var ptr = 0
 		for addr in 0..<MAX_RAM_SIZE {
@@ -174,10 +174,10 @@ class Calculator: NSObject {
 		}
 	}
 	
-	func getMemoryContents() -> NSData {
+	func getMemoryContents() -> Data {
 		let data: NSMutableData = NSMutableData()
 		let count = 14 * MAX_RAM_SIZE
-		var memoryArray = [UInt8](count: count, repeatedValue: 0)
+		var memoryArray = [UInt8](repeating: 0, count: count)
 		var ptr = 0
 		for addr in 0..<MAX_RAM_SIZE {
 			var tmpReg = emptyDigit14
@@ -194,57 +194,57 @@ class Calculator: NSObject {
 				}
 			}
 		}
-		data.appendBytes(memoryArray, length: count)
+		data.append(memoryArray, length: count)
 		
-		return data
+		return data as Data
 	}
 	
 	func readCalculatorDescriptionFromDefaults() {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		let cType = defaults.integerForKey(HPCalculatorType)
+		let defaults = UserDefaults.standard()
+		let cType = defaults.integer(forKey: HPCalculatorType)
 		readROMModule(cType)
 		
 		// Now we fill each port
 		do {
-			if defaults.stringForKey(HPPort1) != nil {
+			if defaults.string(forKey: HPPort1) != nil {
 				portMod[0] = MOD()
-				try portMod[0]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!)
+				try portMod[0]?.readModFromFile(Bundle.main().resourcePath! + "/" + defaults.string(forKey: HPPort1)!)
 			}
-			if defaults.stringForKey(HPPort2) != nil {
+			if defaults.string(forKey: HPPort2) != nil {
 				portMod[1] = MOD()
-				try portMod[1]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!)
+				try portMod[1]?.readModFromFile(Bundle.main().resourcePath! + "/" + defaults.string(forKey: HPPort2)!)
 			}
-			if defaults.stringForKey(HPPort3) != nil {
+			if defaults.string(forKey: HPPort3) != nil {
 				portMod[2] = MOD()
-				try portMod[2]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!)
+				try portMod[2]?.readModFromFile(Bundle.main().resourcePath! + "/" + defaults.string(forKey: HPPort3)!)
 			}
-			if defaults.stringForKey(HPPort4) != nil {
+			if defaults.string(forKey: HPPort4) != nil {
 				portMod[3] = MOD()
-				try portMod[3]?.readModFromFile(NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!)
+				try portMod[3]?.readModFromFile(Bundle.main().resourcePath! + "/" + defaults.string(forKey: HPPort4)!)
 			}
 		} catch _ {
 			
 		}
 	}
 	
-	func readROMModule(cType: Int) {
+	func readROMModule(_ cType: Int) {
 		var filename: String
 		switch cType {
 		case 1:
-			calculatorType = .HP41C
-			filename = NSBundle.mainBundle().resourcePath! + "/" + "nut-c.mod"
+			calculatorType = .hp41C
+			filename = Bundle.main().resourcePath! + "/" + "nut-c.mod"
 		case 2:
-			calculatorType = .HP41CV
-			filename = NSBundle.mainBundle().resourcePath! + "/" + "nut-cv.mod"
+			calculatorType = .hp41CV
+			filename = Bundle.main().resourcePath! + "/" + "nut-cv.mod"
 		case 3:
-			calculatorType = .HP41CX
-			filename = NSBundle.mainBundle().resourcePath! + "/" + "nut-cx.mod"
+			calculatorType = .hp41CX
+			filename = Bundle.main().resourcePath! + "/" + "nut-cx.mod"
 		default:
 			// Make sure I have a default for next time
-			calculatorType = .HP41CX
-			let defaults = NSUserDefaults.standardUserDefaults()
-			defaults.setInteger(CalculatorType.HP41CX.rawValue, forKey: HPCalculatorType)
-			filename = NSBundle.mainBundle().resourcePath! + "/" + "nut-cx.mod"
+			calculatorType = .hp41CX
+			let defaults = UserDefaults.standard()
+			defaults.set(CalculatorType.hp41CX.rawValue, forKey: HPCalculatorType)
+			filename = Bundle.main().resourcePath! + "/" + "nut-cx.mod"
 		}
 		
 		do {
@@ -254,13 +254,13 @@ class Calculator: NSObject {
 		}
 	}
 	
-	func digits14FromArray(array: [Digit], position: Int, inout to: Digits14) {
+	func digits14FromArray(_ array: [Digit], position: Int, to: inout Digits14) {
 		for idx in 0...13 {
 			to[idx] = array[position + idx]
 		}
 	}
 	
-	func timeSlice(timer: NSTimer)
+	func timeSlice(_ timer: Foundation.Timer)
 	{
 		cpu.timeSlice(timer)
 		display?.timeSlice(timer)

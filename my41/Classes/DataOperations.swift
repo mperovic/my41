@@ -12,14 +12,14 @@ let kCPUDebugUpdateDisplay = "com.my41cx.debuger.cpudebugupdatedisplay"
 let kMemoryDebugUpdateDisplay = "com.my41cx.debuger.memorydebugupdatedisplay"
 
 enum ArithOp {
-	case ADD
-	case SUB
+	case add
+	case sub
 }
 
 func copyDigits(
-	src: Digits14,
+	_ src: Digits14,
 	sourceStartAt: Int,
-	inout destination: Digits14,
+	destination: inout Digits14,
 	destinationStartAt: Int,
 	count cnt: Int)
 {
@@ -29,7 +29,7 @@ func copyDigits(
 }
 
 func fillDigits(
-	inout src: Digits14,
+	_ src: inout Digits14,
 	value v: Digit,
 	start: Int,
 	count: Int)
@@ -39,16 +39,16 @@ func fillDigits(
 	}
 }
 
-func clearDigits(inout destination destination: [Digit])
+func clearDigits(destination: inout [Digit])
 {
-	for idx in Array((0...13).reverse()) {
+	for idx in Array((0...13).reversed()) {
 		destination[idx] = Digit(0)
 	}
 }
 
 func digitsToBitsWrap(
-	digits digits: Digits14,
-	inout bits: Bits8,
+	digits: Digits14,
+	bits: inout Bits8,
 	start: Digit,
 	count: Int)
 {
@@ -68,8 +68,8 @@ func digitsToBitsWrap(
 }
 
 func bitsToDigitsWrap(
-	bits bits: Bits8,
-	inout digits: Digits14,
+	bits: Bits8,
+	digits: inout Digits14,
 	start: Digit,
 	count: Int)
 {
@@ -87,8 +87,8 @@ func bitsToDigitsWrap(
 }
 
 func exchangeDigits(
-	inout X X: Digits14,
-	inout Y: Digits14,
+	X: inout Digits14,
+	Y: inout Digits14,
 	startPos start: Int,
 	count: Int)
 {
@@ -101,7 +101,7 @@ func exchangeDigits(
 }
 
 func digitsToBits(
-	digits digits: [Digit],
+	digits: [Digit],
 	nbits: Int) -> UInt16
 {
 	var result: UInt16 = 0
@@ -119,7 +119,7 @@ func digitsToBits(
 
 func bitsToDigits(
 	bits b: Int,
-	inout destination digits: Digits14,
+	destination digits: inout Digits14,
 	start s: Int,
 	count: Int)
 {
@@ -134,7 +134,7 @@ func bitsToDigits(
 }
 
 func orDigits(
-	X X: [Digit],
+	X: [Digit],
 	Y: [Digit],
 	start: Int,
 	count: Int) -> [Digit]
@@ -147,7 +147,7 @@ func orDigits(
 }
 
 func andDigits(
-	X X: [Digit],
+	X: [Digit],
 	Y: [Digit],
 	start: Int,
 	count: Int) -> [Digit]
@@ -160,7 +160,7 @@ func andDigits(
 }
 
 func shiftDigitsLeft(
-	X X: [Digit],
+	X: [Digit],
 	start: Int,
 	count: Int
 	) -> [Digit]
@@ -178,7 +178,7 @@ func shiftDigitsLeft(
 }
 
 func shiftDigitsRight(
-	X X: [Digit],
+	X: [Digit],
 	start: Int,
 	count: Int
 	) -> [Digit]
@@ -203,21 +203,21 @@ func addOrSubtractDigits(
 	arithMode mode: ArithMode,
 	firstNum: [Digit],
 	secondNum: [Digit],
-	inout destination: [Digit],
+	destination: inout [Digit],
 	from: Int,
 	count: Int,
-	inout carry: Bit,
-	inout zero: Bit)
+	carry: inout Bit,
+	zero: inout Bit)
 {
 	var d: Int = 0
 	var c = Int(carry)
 	var z: Bit = 1
 	
 	for idx in from..<from+count {
-		if op == .ADD {
+		if op == .add {
 			d = Int(firstNum[idx]) + Int(secondNum[idx]) + Int(c)
 		} else {
-			if mode == .DEC_MODE {
+			if mode == .dec_MODE {
 				d = Int(firstNum[idx]) + 0x9 - Int(secondNum[idx]) + Int(c)
 			} else {
 				d = Int(firstNum[idx]) + 0xF - Int(secondNum[idx]) + Int(c)
@@ -228,7 +228,7 @@ func addOrSubtractDigits(
 				}
 			}
 		}
-		if mode == ArithMode.DEC_MODE && d > 9 {
+		if mode == ArithMode.dec_MODE && d > 9 {
 			d += 6
 		}
 		c = d >> 4
@@ -243,7 +243,7 @@ func addOrSubtractDigits(
 	zero = z
 }
 
-func adder(nib1 nib1: Digit, nib2: Digit) -> Digit
+func adder(nib1: Digit, nib2: Digit) -> Digit
 {
 	var result = nib1 + nib2 + Digit(cpu.reg.carry)
 	if result >= cpu.reg.mode.rawValue {
@@ -258,7 +258,7 @@ func adder(nib1 nib1: Digit, nib2: Digit) -> Digit
 	return result
 }
 
-func subtractor(nib1 nib1: Digit, nib2: Digit) -> Digit
+func subtractor(nib1: Digit, nib2: Digit) -> Digit
 {
 	var result = Int(nib1) - Int(nib2) - Int(cpu.reg.carry)
 	if result < 0 {
@@ -274,7 +274,7 @@ func subtractor(nib1 nib1: Digit, nib2: Digit) -> Digit
 }
 
 func compareDigits(
-	source: Digits14,
+	_ source: Digits14,
 	withDigits destination: Digits14
 ) -> Bool
 {
@@ -287,7 +287,7 @@ func compareDigits(
 	return true
 }
 
-func decToHex(dec: Int) -> String
+func decToHex(_ dec: Int) -> String
 {
 	return NSString(format:"%2X", dec) as String
 }

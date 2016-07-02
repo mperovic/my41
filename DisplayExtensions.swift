@@ -12,7 +12,7 @@ import CoreGraphics
 typealias Digits12 = [Digit]
 typealias DisplaySegmentMap = UInt32
 
-let emptyDigit12:[Digit] = [Digit](count: 12, repeatedValue: 0)
+let emptyDigit12:[Digit] = [Digit](repeating: 0, count: 12)
 
 let annunciatorStrings: [String] = ["BAT  ", "USER  ", "G", "RAD  ", "SHIFT  ", "0", "1", "2", "3", "4  ", "PRGM  ", "ALPHA"]
 let CTULookupRsrcName = "display"
@@ -37,102 +37,102 @@ struct DisplayRegisters {
 
 extension Display {	
 	enum DisplayShiftDirection {
-		case Left
-		case Right
+		case left
+		case right
 	}
 	
 	enum DisplayTransitionSize {
-		case Short
-		case Long
+		case short
+		case long
 	}
 	
 	enum DisplayRegisterSet : Int {
-		case RA = 1
-		case RB = 2
-		case RC = 4
-		case RAB = 3
-		case RABC = 7
+		case ra = 1
+		case rb = 2
+		case rc = 4
+		case rab = 3
+		case rabc = 7
 	}
 	
 	//MARK: - Registers manipulation
 	
-	func readFromRegister(param: Bits4) {
+	func readFromRegister(_ param: Bits4) {
 		// Implement READ f or READ DATA instruction with display as selected peripheral.
 		switch param {
 		case 0x0:	//FLLDA
-			displayFetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RA, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .left, andSize: .long, withRegister: .ra, andData: &cpu.reg.C)
 		case 0x1:	// FLLDB
-			displayFetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RB, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .left, andSize: .long, withRegister: .rb, andData: &cpu.reg.C)
 		case 0x2:	// FLLDC
-			displayFetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RC, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .left, andSize: .long, withRegister: .rc, andData: &cpu.reg.C)
 		case 0x3:	// FLLDAB
-			displayFetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RAB, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .left, andSize: .long, withRegister: .rab, andData: &cpu.reg.C)
 		case 0x4:	// FLLABC
-			displayFetch(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .left, andSize: .long, withRegister: .rabc, andData: &cpu.reg.C)
 		case 0x5:	// READDEN
 			bitsToDigits(bits: Int(registers.E), destination: &cpu.reg.C, start: 0, count: 4)
 			return					// doesn't change display
 		case 0x6:	// FLSDC
-			displayFetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .left, andSize: .short, withRegister: .ra, andData: &cpu.reg.C)
 		case 0x7:	// FRSDA
-			displayFetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .right, andSize: .short, withRegister: .ra, andData: &cpu.reg.C)
 		case 0x8:	// FRSDB
-			displayFetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .right, andSize: .short, withRegister: .rb, andData: &cpu.reg.C)
 		case 0x9:	// FRSDC
-			displayFetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .right, andSize: .short, withRegister: .rc, andData: &cpu.reg.C)
 		case 0xA:	// FLSDA
-			displayFetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C) // Original: .RB
+			displayFetch(&registers, withDirection: .left, andSize: .short, withRegister: .ra, andData: &cpu.reg.C) // Original: .RB
 		case 0xB:	// FLSDB
-			displayFetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .left, andSize: .short, withRegister: .rb, andData: &cpu.reg.C)
 		case 0xC:	// FRSDAB
-			displayFetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .right, andSize: .short, withRegister: .rab, andData: &cpu.reg.C)
 		case 0xD:	// FLSDAB
-			displayFetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .left, andSize: .short, withRegister: .rab, andData: &cpu.reg.C)
 		case 0xE:	// FRSABC
-			displayFetch(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .right, andSize: .short, withRegister: .rabc, andData: &cpu.reg.C)
 		case 0xF:	// FLSABC
-			displayFetch(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
+			displayFetch(&registers, withDirection: .left, andSize: .short, withRegister: .rabc, andData: &cpu.reg.C)
 		default:
 			bus.abortInstruction("Unimplemented display operation")
 		}
 		scheduleUpdate()
 	}
 	
-	func writeToRegister(param: Bits4) {
+	func writeToRegister(_ param: Bits4) {
 		// Implement WRITE f instruction with display as selected peripheral.
 		switch param {
 		case 0x0:	// SRLDA
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RA, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .long, withRegister: .ra, andData: &cpu.reg.C)
 		case 0x1:	// SRLDB
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RB, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .long, withRegister: .rb, andData: &cpu.reg.C)
 		case 0x2:	// SRLDC
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RC, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .long, withRegister: .rc, andData: &cpu.reg.C)
 		case 0x3:	// SRLDAB
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RAB, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .long, withRegister: .rab, andData: &cpu.reg.C)
 		case 0x4:	// SRLABC
-			shift(&registers, withDirection: .Right, andSize: .Long, withRegister: .RABC, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .long, withRegister: .rabc, andData: &cpu.reg.C)
 		case 0x5:	// SLLDAB
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .left, andSize: .short, withRegister: .rab, andData: &cpu.reg.C)
 		case 0x6:	// SLLABC
-			shift(&registers, withDirection: .Left, andSize: .Long, withRegister: .RABC, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .left, andSize: .long, withRegister: .rabc, andData: &cpu.reg.C)
 		case 0x7:	// SRSDA
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .short, withRegister: .ra, andData: &cpu.reg.C)
 		case 0x8:	// SRSDB
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .short, withRegister: .rb, andData: &cpu.reg.C)
 		case 0x9:	// SRSDC
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RC, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .short, withRegister: .rc, andData: &cpu.reg.C)
 		case 0xA:	// SLSDA
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RA, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .left, andSize: .short, withRegister: .ra, andData: &cpu.reg.C)
 		case 0xB:	// SLSDB
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RB, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .left, andSize: .short, withRegister: .rb, andData: &cpu.reg.C)
 		case 0xC:	// SRSDAB
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .short, withRegister: .rab, andData: &cpu.reg.C)
 		case 0xD:	// SLSDAB
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RAB, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .left, andSize: .short, withRegister: .rab, andData: &cpu.reg.C)
 		case 0xE:	// SRSABC
-			shift(&registers, withDirection: .Right, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .right, andSize: .short, withRegister: .rabc, andData: &cpu.reg.C)
 		case 0xF:	// SLSABC
-			shift(&registers, withDirection: .Left, andSize: .Short, withRegister: .RABC, andData: &cpu.reg.C)
+			shift(&registers, withDirection: .left, andSize: .short, withRegister: .rabc, andData: &cpu.reg.C)
 		default:
 			bus.abortInstruction("Unimplemented display operation")
 		}
@@ -306,11 +306,11 @@ extension Display {
 	}
 	
 	func displayFetch(
-		inout registers: DisplayRegisters,
+		_ registers: inout DisplayRegisters,
 		withDirection direction:DisplayShiftDirection,
 		andSize size:DisplayTransitionSize,
 		withRegister regset:DisplayRegisterSet,
-		inout andData data: Digits14
+		andData data: inout Digits14
 		)
 	{
 		/*
@@ -321,28 +321,28 @@ extension Display {
 		*/
 		var cp = 0
 		while cp < 12 {
-			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
+			if (regset.rawValue & DisplayRegisterSet.ra.rawValue) != 0 {
 				fetchDigit(direction, from: &registers.A, to: &data[cp])
 				cp += 1
 			}
-			if (regset.rawValue & DisplayRegisterSet.RB.rawValue) != 0 {
+			if (regset.rawValue & DisplayRegisterSet.rb.rawValue) != 0 {
 				fetchDigit(direction, from: &registers.B, to: &data[cp])
 				cp += 1
 			}
-			if (regset.rawValue & DisplayRegisterSet.RC.rawValue) != 0 {
+			if (regset.rawValue & DisplayRegisterSet.rc.rawValue) != 0 {
 				fetchDigit(direction, from: &registers.C, to: &data[cp])
 				cp += 1
 			}
-			if size == .Short {
+			if size == .short {
 				break
 			}
 		}
 	}
 	
 	func fetchDigit(
-		direction: DisplayShiftDirection,
-		inout from register: Digits12,
-		inout to dst: Digit
+		_ direction: DisplayShiftDirection,
+		from register: inout Digits12,
+		to dst: inout Digit
 		) -> Digits12
 	{
 		/*
@@ -350,10 +350,10 @@ extension Display {
 		and rotate the register in the specified direction.
 		*/
 		switch direction {
-		case .Left:
+		case .left:
 			dst = register[11]
 			rotateRegisterLeft(&register)
-		case .Right:
+		case .right:
 			dst = register[0]
 			rotateRegisterRight(&register)
 		}
@@ -361,16 +361,16 @@ extension Display {
 		return register
 	}
 	
-	func rotateRegisterLeft(inout register: Digits12)
+	func rotateRegisterLeft(_ register: inout Digits12)
 	{
 		let temp = register[11]
-		for idx in Array((1...11).reverse()) {
+		for idx in Array((1...11).reversed()) {
 			register[idx] = register[idx - 1]
 		}
 		register[0] = temp
 	}
 	
-	func rotateDisplayRegisterLeft(inout register: Digits12, times: Int) {
+	func rotateDisplayRegisterLeft(_ register: inout Digits12, times: Int) {
 		if times > 0 {
 			for _ in 0..<times {
 				let temp = register[0]
@@ -382,7 +382,7 @@ extension Display {
 		}
 	}
 	
-	func rotateRegisterRight(inout register: Digits12) {
+	func rotateRegisterRight(_ register: inout Digits12) {
 		let temp = register[0]
 		for idx in 0...10 {
 			register[idx] = register[idx + 1]
@@ -390,12 +390,12 @@ extension Display {
 		register[11] = temp
 	}
 	
-	func rotateDisplayRegisterRight(inout register: Digits12, times: Int)
+	func rotateDisplayRegisterRight(_ register: inout Digits12, times: Int)
 	{
 		if times > 0 {
 			for _ in 0..<times {
 				let temp = register[11]
-				for idx in Array((1...11).reverse()) {
+				for idx in Array((1...11).reversed()) {
 					register[idx] = register[idx - 1]
 				}
 				register[0] = temp
@@ -407,11 +407,11 @@ extension Display {
 	//MARK: -
 	
 	func shift(
-		inout registers: DisplayRegisters,
+		_ registers: inout DisplayRegisters,
 		withDirection direction:DisplayShiftDirection,
 		andSize size:DisplayTransitionSize,
 		withRegister regset:DisplayRegisterSet,
-		inout andData data: Digits14
+		andData data: inout Digits14
 		)
 	{
 		/*
@@ -421,38 +421,38 @@ extension Display {
 		*/
 		var cp = 0
 		while cp < 12 {
-			if (regset.rawValue & DisplayRegisterSet.RA.rawValue) != 0 {
+			if (regset.rawValue & DisplayRegisterSet.ra.rawValue) != 0 {
 				shiftDigit(direction, from: &registers.A, withFilter: data[cp])
 				cp += 1
 			}
-			if (regset.rawValue & DisplayRegisterSet.RB.rawValue) != 0 {
+			if (regset.rawValue & DisplayRegisterSet.rb.rawValue) != 0 {
 				shiftDigit(direction, from: &registers.B, withFilter: data[cp])
 				cp += 1
 			}
-			if (regset.rawValue & DisplayRegisterSet.RC.rawValue) != 0 {
+			if (regset.rawValue & DisplayRegisterSet.rc.rawValue) != 0 {
 				shiftDigit(direction, from: &registers.C, withFilter: data[cp])
 				cp += 1
 			}
-			if size == .Short {
+			if size == .short {
 				break
 			}
 		}
 	}
 	
-	func shiftDigit(direction: DisplayShiftDirection, inout from register: Digits12, withFilter src: Digit)
+	func shiftDigit(_ direction: DisplayShiftDirection, from register: inout Digits12, withFilter src: Digit)
 	{
 		// Rotate the given digit into the specified register in the specified direction.
 		switch direction {
-		case .Left:
+		case .left:
 			rotateRegisterLeft(&register)
 			register[0] = src
-		case .Right:
+		case .right:
 			rotateRegisterRight(&register)
 			register[11] = src
 		}
 	}
 	
-	func segmentsForCell(i: Int) -> DisplaySegmentMap {
+	func segmentsForCell(_ i: Int) -> DisplaySegmentMap {
 		/*
 		Determine which segments should be on for cell i based on the contents of the display registers.
 		Note that cells are numbered from left to right, which is the opposite of the digit numbering in the display registers.
@@ -465,7 +465,7 @@ extension Display {
 		return displayFont[Int(charCode)] | punctSegmentTable[Int(punctCode)]
 	}
 	
-	func annunciatorOn(i: Int) -> Bool {
+	func annunciatorOn(_ i: Int) -> Bool {
 		/*
 		Determine whether annunciator number i should be on based on the contents of the E register.
 		Note that i is not the same as the bit number in E, because the annunciators are numbered from left to right.
@@ -510,7 +510,7 @@ extension Display {
 		let punct: String = " .:,;???"
 		
 		// loop through the display cells and translate their content:
-		for idx in Array((0...numDisplayCells-1).reverse()) {
+		for idx in Array((0...numDisplayCells-1).reversed()) {
 			// assemble the actual hardware character index from the register bits:
 			// charCode = C0 B1 B0  A3 A2 A1 A0
 			let charCode = ((r.C[idx] & 0x1) << 6) | ((r.B[idx] & 0x3) << 4) | (r.A[idx] & 0xf)
@@ -540,11 +540,11 @@ extension Display {
 		return text
 	}
 	
-	func timeSlice(timer: NSTimer) {
+	func timeSlice(_ timer: Foundation.Timer) {
 		if (updateCountdown > 0) {
 			updateCountdown -= 1
 			if (updateCountdown == 0) {
-				setNeedsDisplayInRect(self.bounds)
+				setNeedsDisplay(self.bounds)
 			}
 		}
 	}
@@ -558,16 +558,15 @@ extension Display {
 		}
 	}
 	
-	func halfnutRead()
-	{
+	func halfnutRead() {
 		if cpu.opcode.row() == 5 {
 			cpu.reg.C[0] = contrast
 		}
 	}
 	
-	func digits12ToString(register: Digits12) -> String {
+	func digits12ToString(_ register: Digits12) -> String {
 		var result = String()
-		for idx in Array((0...11).reverse()) {
+		for idx in Array((0...11).reversed()) {
 			result += NSString(format:"%1X", register[idx]) as String
 		}
 		
@@ -577,21 +576,24 @@ extension Display {
 	
 	//MARK: - Font support
 	
-	func loadFont(resourceName: String) -> DisplayFont {
-		var font: DisplayFont = DisplayFont(count:128, repeatedValue: 0)
-		let filename = NSBundle.mainBundle().pathForResource(resourceName, ofType: "hpfont")
-		var data: NSData?
+	func loadFont(_ resourceName: String) -> DisplayFont {
+		var font: DisplayFont = DisplayFont(repeating: 0, count: 128)
+		let filename = Bundle.main().pathForResource(resourceName, ofType: "hpfont")
+		var data: Data?
 		do {
-			data = try NSData(contentsOfFile: filename!, options: .DataReadingMappedIfSafe)
+			data = try Data(contentsOf: URL(fileURLWithPath: filename!), options: .dataReadingMappedIfSafe)
 		} catch _ {
 			data = nil
 		}
-		var range = NSRange(location: 0, length: 4)
+//		var range = NSRange(location: 0, length: 4)
+		var location = 0
 		for idx in 0..<127 {
 			var tmp: UInt32 = 0
 			var tmp2: UInt32 = 0
-			data?.getBytes(&tmp, range: range)
-			range.location += 4
+			let buffer = UnsafeMutableBufferPointer(start: &tmp, count: 4)
+			let _ = data?.copyBytes(to: buffer, from: location..<location+4)
+//			data?.getBytes(&tmp, range: range)
+			location += 4
 			tmp2 = UInt32(bigEndian: tmp)
 			
 			font[idx] = tmp2
@@ -603,11 +605,11 @@ extension Display {
 	
 	//MARK: - Peripheral Protocol Method
 	
-	func pluggedIntoBus(theBus: Bus?) {
+	func pluggedIntoBus(_ theBus: Bus?) {
 //		self.aBus = theBus
 	}
 	
-	func writeDataFrom(data: Digits14)
+	func writeDataFrom(_ data: Digits14)
 	{
 		// Implement WRITE DATA instruction with display as selected peripheral.
 		registers.E = digitsToBits(digits: data, nbits: 12)

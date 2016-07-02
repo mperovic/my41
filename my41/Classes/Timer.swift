@@ -32,8 +32,8 @@
 import Foundation
 
 enum TimerType : Int {
-	case TimerB = 0
-	case TimerA = 1
+	case timerB = 0
+	case timerA = 1
 }
 
 struct TimerRegisters {
@@ -46,7 +46,8 @@ struct TimerRegisters {
 }
 
 class Timer : Peripheral {
-	var timerSelected: TimerType = .TimerA
+	private static var __once: () = {  Static.sharedInstance = Timer() }()
+	var timerSelected: TimerType = .timerA
 	var clock: [UInt64] = [0, 0]
 	var alarm: [UInt64] = [0, 0]
 	var intTimer: UInt64 = 0
@@ -56,12 +57,12 @@ class Timer : Peripheral {
 	var registers: TimerRegisters = TimerRegisters()
 	
 	struct Static {
-		static var token : dispatch_once_t = 0
+		static var token : Int = 0
 		static var sharedInstance : Timer?
 	}
 	
 	class var sharedInstance: Timer {
-	dispatch_once(&Static.token) {  Static.sharedInstance = Timer() }
+	_ = Timer.__once
 		return Static.sharedInstance!
 	}
 	
@@ -73,7 +74,7 @@ class Timer : Peripheral {
 		
 		resetTimer()
 
-		SYNCHRONYZE =  NSUserDefaults.standardUserDefaults().boolForKey("synchronyzeTime")
+		SYNCHRONYZE =  UserDefaults.standard().bool(forKey: "synchronyzeTime")
 
 		if SYNCHRONYZE {
 			synchronyzeWithComputer()
@@ -89,7 +90,7 @@ class Timer : Peripheral {
 	}
 	
 	func resetTimer() {
-		timerSelected = .TimerA
+		timerSelected = .timerA
 		registers.CLK[1] = emptyDigit14
 		registers.CLK[0] = emptyDigit14
 		registers.ALM[1] = emptyDigit14
@@ -102,10 +103,10 @@ class Timer : Peripheral {
 		registers.TMR_S = emptyDigit14
 		
 		// Clear internal simulation variable
-		clock[TimerType.TimerA.rawValue] = 0
-		clock[TimerType.TimerB.rawValue] = 0
-		alarm[TimerType.TimerA.rawValue] = 0
-		alarm[TimerType.TimerB.rawValue] = 0
+		clock[TimerType.timerA.rawValue] = 0
+		clock[TimerType.timerB.rawValue] = 0
+		alarm[TimerType.timerA.rawValue] = 0
+		alarm[TimerType.timerB.rawValue] = 0
 		intTimer = 0
 		intTimerEnd = 0
 		
@@ -116,7 +117,7 @@ class Timer : Peripheral {
 	}
 	
 	// Converts UINT64 to Reg14 (BCD)
-	func convertToReg14(source: UInt64, inout dst: Digits14) {
+	func convertToReg14(_ source: UInt64, dst: inout Digits14) {
 		var src = source
 		for idx in 0...13 {
 			dst[idx] = (Digit)(src % 10)
@@ -125,9 +126,9 @@ class Timer : Peripheral {
 	}
 	
 	// Converts Reg14 (BCD) to UINT64
-	func convertToUint64(inout dest: UInt64, withRegister reg: Digits14) {
+	func convertToUint64(_ dest: inout UInt64, withRegister reg: Digits14) {
 		var temp: UInt64 = 0
-		for idx in Array((0...13).reverse()) {
+		for idx in Array((0...13).reversed()) {
 			temp *= 10
 			temp += UInt64(reg[idx]) % 10
 		}
@@ -136,22 +137,22 @@ class Timer : Peripheral {
 	}
 	
 	func setToCurrentTime() {
-		let daylightSavingTimeOffset: Int = NSTimeZone.localTimeZone().daylightSavingTime ? 3600 : 0
-		let dateComponents: NSDateComponents = NSDateComponents()
+		let daylightSavingTimeOffset: Int = TimeZone.local().isDaylightSavingTime ? 3600 : 0
+		var dateComponents: DateComponents = DateComponents()
 		dateComponents.day = 1
 		dateComponents.month = 1
 		dateComponents.year = 1900
-		let referenceDate: NSDate = NSCalendar.currentCalendar().dateFromComponents(dateComponents)!
-		let interval: NSTimeInterval = -1 * referenceDate.timeIntervalSinceNow + NSTimeInterval(daylightSavingTimeOffset)
-		clock[TimerType.TimerA.rawValue] = UInt64(interval) * 100
+		let referenceDate: Date = Calendar.current().date(from: dateComponents)!
+		let interval: TimeInterval = -1 * referenceDate.timeIntervalSinceNow + TimeInterval(daylightSavingTimeOffset)
+		clock[TimerType.timerA.rawValue] = UInt64(interval) * 100
 	}
 	
 	// MARK: Peripheral Delegate Methods
-	func pluggedIntoBus(theBus: Bus?) {
+	func pluggedIntoBus(_ theBus: Bus?) {
 		self.aBus = theBus
 	}
 	
-	func readFromRegister(param: Bits4) {
+	func readFromRegister(_ param: Bits4) {
 		switch param {
 		case 0x0:		// RTIME
 			convertToReg14(
@@ -218,11 +219,11 @@ class Timer : Peripheral {
 		}
 	}
 	
-	func writeDataFrom(data: Digits14) {
+	func writeDataFrom(_ data: Digits14) {
 		//TODO: Implement this method
 	}
 	
-	func writeToRegister(register: Bits4) {
+	func writeToRegister(_ register: Bits4) {
 		switch register {
 		case 0x0:
 			// WTIME
@@ -264,7 +265,7 @@ class Timer : Peripheral {
 			)
 		case 0x3:
 			// WSTS
-			if timerSelected == .TimerA {
+			if timerSelected == .timerA {
 				registers.TMR_S[0] &= cpu.reg.C[0]
 				registers.TMR_S[1] &= (0x0C | (cpu.reg.C[1] & 0x03))
 				if registers.TMR_S[0] == 0 || (registers.TMR_S[1] & 0x03) == 0 {
@@ -305,92 +306,92 @@ class Timer : Peripheral {
 			registers.TMR_S[2] &= 0x0B			// clear bit 10
 		case 0x8:
 			// WKUPOFF - clear test mode
-			if timerSelected == .TimerA {
+			if timerSelected == .timerA {
 				registers.TMR_S[2] &= 0x07		// clear bit 11 - Test A mode
 			} else {
 				registers.TMR_S[3] &= 0x0E		// clear bit 12 - Test B mode
 			}
 		case 0x9:
 			// WKUPON - set test mode
-			if timerSelected == .TimerA {
+			if timerSelected == .timerA {
 				registers.TMR_S[2] |= 0x08		// set bit 11
 			} else {
 				registers.TMR_S[3] |= 0x01		// set bit 12
 			}
 		case 0xA:
 			// ALMOFF
-			if timerSelected == .TimerA {
+			if timerSelected == .timerA {
 				registers.TMR_S[2] &= 0x0E		// clear bit 8
 			} else {
 				registers.TMR_S[2] &= 0x0D		// clear bit 9
 			}
 		case 0xB:
 			// ALMON
-			if timerSelected == .TimerA {
+			if timerSelected == .timerA {
 				registers.TMR_S[2] |= 0x01		// set bit 8
 			} else {
 				registers.TMR_S[2] |= 0x02		// set bit 9
 			}
 		case 0xC:
 			// STOPC
-			if timerSelected == .TimerA {		// should never stop Clock A or time will get messed up!
+			if timerSelected == .timerA {		// should never stop Clock A or time will get messed up!
 				registers.TMR_S[1] &= 0x0B		// clear bit 6 - Clock A incrementer
 			} else {
 				registers.TMR_S[1] &= 0x07		// clear bit 7 - Clock B incrementer
 			}
 		case 0xD:
 			// STARTC
-			if timerSelected == .TimerA {
+			if timerSelected == .timerA {
 				registers.TMR_S[1] |= 0x04		// set bit 6
 			} else {
 				registers.TMR_S[1] |= 0x08		// set bit 7
 			}
 		case 0xE:
 			// TIMER=B
-			timerSelected = .TimerB
+			timerSelected = .timerB
 		case 0xF:
 			// TIMER=A
-			timerSelected = .TimerA
+			timerSelected = .timerA
 		default:
 			break
 		}
 	}
 	
-	func timeSlice(timer: NSTimer) {
+	func timeSlice(_ timer: Foundation.Timer) {
 		var fAlert: Int
 		if (registers.TMR_S[1] & 0x04) != 0 {		// bit 6 - Clock A enabled
-			clock[TimerType.TimerA.rawValue] += 1
-			if clock[TimerType.TimerA.rawValue] > 99999999999999 || clock[TimerType.TimerA.rawValue]  == 0 {
-				clock[TimerType.TimerA.rawValue] = 0
+			clock[TimerType.timerA.rawValue] += 1
+			if clock[TimerType.timerA.rawValue] > 99999999999999 || clock[TimerType.timerA.rawValue]  == 0 {
+				clock[TimerType.timerA.rawValue] = 0
 				registers.TMR_S[0] |= 0x02			// set bit 1 - overflow in clock A
 				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
 				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
-				cpu.setPowerMode(.PowerOn)
+				cpu.setPowerMode(.powerOn)
 			}
-			if ((UInt64(registers.TMR_S[2]) & 0x01) != 0 && (clock[TimerType.TimerA.rawValue] == UInt64(alarm[TimerType.TimerA.rawValue]))) {
+			if ((UInt64(registers.TMR_S[2]) & 0x01) != 0 && (clock[TimerType.timerA.rawValue] == UInt64(alarm[TimerType.timerA.rawValue]))) {
 				// if bit 8 set - enable ClockA & AlarmA comparator
 				registers.TMR_S[0] |= 0x01			// set bit 0 - valid compare
 				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
 				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
-				cpu.setPowerMode(.PowerOn)
+				cpu.setPowerMode(.powerOn)
 				fAlert = 1
 			}
 		}
 		if (registers.TMR_S[1] & 0x08) != 0 {		// bit 7 - Clock B enabled
-			clock[TimerType.TimerB.rawValue] += 1
-			if clock[TimerType.TimerB.rawValue] > 99999999999999 || clock[TimerType.TimerB.rawValue]  == 0 {
-				clock[TimerType.TimerB.rawValue] = 0
+			clock[TimerType.timerB.rawValue] += 1
+			if clock[TimerType.timerB.rawValue] > 99999999999999 || clock[TimerType.timerB.rawValue]  == 0 {
+				clock[TimerType.timerB.rawValue] = 0
 				registers.TMR_S[0] |= 0x08			// set bit 3 - overflow in clock B
 				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
 				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
-				cpu.setPowerMode(.PowerOn)
+				cpu.setPowerMode(.powerOn)
 			}
-			if ((UInt64(registers.TMR_S[2]) & 0x02) != 0 && (clock[TimerType.TimerB.rawValue] == UInt64(alarm[TimerType.TimerB.rawValue]))) {
+			if ((UInt64(registers.TMR_S[2]) & 0x02) != 0 && (clock[TimerType.timerB.rawValue] == UInt64(alarm[TimerType.timerB.rawValue]))) {
 				// if bit 9 set - enable ClockB & AlarmB comparator
 				registers.TMR_S[0] |= 0x04			// set bit 2 - valid compare
 				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
 				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
-				cpu.setPowerMode(.PowerOn)
+				cpu.setPowerMode(.powerOn)
 				fAlert = 1
 			}
 		}
@@ -404,7 +405,7 @@ class Timer : Peripheral {
 				registers.TMR_S[1] |= 0x01			// set bit 4 - DTZIT - Decrement Through Zero Interval timer
 				cpu.reg.FI |= 0x2000				// set flag 13 - general service request flag
 				cpu.reg.FI |= 0x1000				// set flag 12 - timer request
-				cpu.setPowerMode(.PowerOn)
+				cpu.setPowerMode(.powerOn)
 			}
 		}
 		
