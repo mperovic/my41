@@ -57,7 +57,7 @@ final class RomChip {
 	func loadFromFile(_ path: String) {
 		let data: Data?
 		do {
-			data = try Data(contentsOf: URL(fileURLWithPath: path), options: .dataReadingMappedIfSafe)
+			data = try Data(contentsOf: URL(fileURLWithPath: path), options: [.mappedIfSafe])
 			
 //			var range = NSRange(location: 0, length: 2)
 			var location = 0

@@ -121,7 +121,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let defaults = UserDefaults.standard()
+		let defaults = UserDefaults.standard
 		if defaults.bool(forKey: "firstRun") == false {
 			defaults.set(true, forKey: "firstRun")
 			defaults.set(false, forKey: "sound")
@@ -763,16 +763,16 @@ class CalculatorView: UIView {
 		rect.origin.y = 0.0
 		self.setNeedsDisplay(rect)
 		
-		NotificationCenter.default().addObserver(
+		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(CalculatorView.displayOff),
-			name: "displayOff",
+			name: "displayOff" as NSNotification.Name,
 			object: nil
 		)
-		NotificationCenter.default().addObserver(
+		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(CalculatorView.displayToggle),
-			name: "displayToggle",
+			name: "displayToggle" as NSNotification.Name,
 			object: nil
 		)
 	}

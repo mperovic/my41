@@ -68,7 +68,7 @@ class Display: UIView, Peripheral {
 		// 0x50..0x5f: some greek characters + "hangman"
 		// 0x60..0x7f: a-z lowercase characters
 		do {
-			let filename: String = Bundle.main().pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
+			let filename: String = Bundle.main.pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
 			let CTULookup = try NSMutableString(contentsOfFile: filename, encoding: String.Encoding.unicode.rawValue) as String
 			CTULookupLength = CTULookup.characters.count
 		} catch _ {

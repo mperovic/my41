@@ -520,7 +520,13 @@ final class Bus {
 	func writeRamAddress(_ address: Bits12, from data: Digits14) throws {
 		// Write to specified location of specified chip. If chip or location is nonexistent, do nothing and return false.
 		if RAMExists(Int(address)) {
-			copyDigits(data, sourceStartAt: 0, destination: &ram[Int(address)], destinationStartAt: 0, count: 14)
+			copyDigits(
+				data,
+				sourceStartAt: 0,
+				destination: &ram[Int(address)],
+				destinationStartAt: 0,
+				count: 14
+			)
 		} else {
 			throw RamError.invalidAddress
 		}

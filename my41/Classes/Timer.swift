@@ -74,7 +74,7 @@ class Timer : Peripheral {
 		
 		resetTimer()
 
-		SYNCHRONYZE =  UserDefaults.standard().bool(forKey: "synchronyzeTime")
+		SYNCHRONYZE =  UserDefaults.standard.bool(forKey: "synchronyzeTime")
 
 		if SYNCHRONYZE {
 			synchronyzeWithComputer()
@@ -137,12 +137,12 @@ class Timer : Peripheral {
 	}
 	
 	func setToCurrentTime() {
-		let daylightSavingTimeOffset: Int = TimeZone.local().isDaylightSavingTime ? 3600 : 0
+		let daylightSavingTimeOffset: Int = TimeZone.local.isDaylightSavingTime ? 3600 : 0
 		var dateComponents: DateComponents = DateComponents()
 		dateComponents.day = 1
 		dateComponents.month = 1
 		dateComponents.year = 1900
-		let referenceDate: Date = Calendar.current().date(from: dateComponents)!
+		let referenceDate: Date = Calendar.current.date(from: dateComponents)!
 		let interval: TimeInterval = -1 * referenceDate.timeIntervalSinceNow + TimeInterval(daylightSavingTimeOffset)
 		clock[TimerType.timerA.rawValue] = UInt64(interval) * 100
 	}

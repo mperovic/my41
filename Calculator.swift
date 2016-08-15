@@ -138,13 +138,13 @@ class Calculator: NSObject {
 	
 	func saveMemory() {
 		let data = getMemoryContents()
-		let defaults = UserDefaults.standard()
+		let defaults = UserDefaults.standard
 		defaults.set(data, forKey: "memory")
 		defaults.synchronize()
 	}
 	
 	func restoreMemory() {
-		let data: Data? = UserDefaults.standard().object(forKey: "memory") as? Data
+		let data: Data? = UserDefaults.standard.object(forKey: "memory") as? Data
 		if let aData = data {
 			self.setMemoryContents(aData)
 		}
@@ -152,7 +152,7 @@ class Calculator: NSObject {
 	
 	func setMemoryContents(_ data: Data) {
 		// the number of elements:
-		let count = data.count / sizeof(UInt8)
+		let count = data.count / sizeof(UInt8.self)
 		
 		// create array of appropriate length:
 		var memoryArray = [UInt8](repeating: 0, count: count)
@@ -200,7 +200,7 @@ class Calculator: NSObject {
 	}
 	
 	func readCalculatorDescriptionFromDefaults() {
-		let defaults = UserDefaults.standard()
+		let defaults = UserDefaults.standard
 		let cType = defaults.integer(forKey: HPCalculatorType)
 		readROMModule(cType)
 		
@@ -208,19 +208,19 @@ class Calculator: NSObject {
 		do {
 			if defaults.string(forKey: HPPort1) != nil {
 				portMod[0] = MOD()
-				try portMod[0]?.readModFromFile(Bundle.main().resourcePath! + "/" + defaults.string(forKey: HPPort1)!)
+				try portMod[0]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort1)!)
 			}
 			if defaults.string(forKey: HPPort2) != nil {
 				portMod[1] = MOD()
-				try portMod[1]?.readModFromFile(Bundle.main().resourcePath! + "/" + defaults.string(forKey: HPPort2)!)
+				try portMod[1]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort2)!)
 			}
 			if defaults.string(forKey: HPPort3) != nil {
 				portMod[2] = MOD()
-				try portMod[2]?.readModFromFile(Bundle.main().resourcePath! + "/" + defaults.string(forKey: HPPort3)!)
+				try portMod[2]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort3)!)
 			}
 			if defaults.string(forKey: HPPort4) != nil {
 				portMod[3] = MOD()
-				try portMod[3]?.readModFromFile(Bundle.main().resourcePath! + "/" + defaults.string(forKey: HPPort4)!)
+				try portMod[3]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort4)!)
 			}
 		} catch _ {
 			
@@ -232,19 +232,19 @@ class Calculator: NSObject {
 		switch cType {
 		case 1:
 			calculatorType = .hp41C
-			filename = Bundle.main().resourcePath! + "/" + "nut-c.mod"
+			filename = Bundle.main.resourcePath! + "/" + "nut-c.mod"
 		case 2:
 			calculatorType = .hp41CV
-			filename = Bundle.main().resourcePath! + "/" + "nut-cv.mod"
+			filename = Bundle.main.resourcePath! + "/" + "nut-cv.mod"
 		case 3:
 			calculatorType = .hp41CX
-			filename = Bundle.main().resourcePath! + "/" + "nut-cx.mod"
+			filename = Bundle.main.resourcePath! + "/" + "nut-cx.mod"
 		default:
 			// Make sure I have a default for next time
 			calculatorType = .hp41CX
-			let defaults = UserDefaults.standard()
+			let defaults = UserDefaults.standard
 			defaults.set(CalculatorType.hp41CX.rawValue, forKey: HPCalculatorType)
-			filename = Bundle.main().resourcePath! + "/" + "nut-cx.mod"
+			filename = Bundle.main.resourcePath! + "/" + "nut-cx.mod"
 		}
 		
 		do {

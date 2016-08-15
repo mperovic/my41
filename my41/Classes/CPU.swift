@@ -263,7 +263,7 @@ final class CPU {
 	}
 		
 	init() {
-		let defaults = UserDefaults.standard()
+		let defaults = UserDefaults.standard
 		TRACE = defaults.integer(forKey: "traceActive")
 	}
 
@@ -305,15 +305,15 @@ final class CPU {
 				soundOutput.flushAndSuspendSoundOutput()
 				self.lineNo = 0
 			}
-			NotificationCenter.default().post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
-			NotificationCenter.default().post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 		}
 	}
 	
 	func step() {
 		executeNextInstruction()
-		NotificationCenter.default().post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
-		NotificationCenter.default().post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 	}
 	
 	func reset() {
@@ -346,8 +346,8 @@ final class CPU {
 		} else {
 			reg.keyDown = 0
 		}
-		NotificationCenter.default().post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
-		NotificationCenter.default().post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 	}
 	
 	func abortInstruction(_ message: String) {
@@ -362,8 +362,8 @@ final class CPU {
 	func setRunning(_ state: Bool) {
 		if runFlag != state {
 			runFlag = state
-			NotificationCenter.default().post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
-			NotificationCenter.default().post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 		}
 		simulationTime = Date.timeIntervalSinceReferenceDate
 	}
@@ -380,8 +380,8 @@ final class CPU {
 				while self.running() && cycleLimit > 2 && simulationTime < currentTime {
 					executeNextInstruction()
 				}
-				NotificationCenter.default().post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
-				NotificationCenter.default().post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
+				NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+				NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 			}
 		} else {
 			simulationTime = currentTime

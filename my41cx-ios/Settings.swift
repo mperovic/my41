@@ -22,7 +22,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	var yRatio: CGFloat = 1.0
 
 	override func viewWillAppear(_ animated: Bool) {
-		let defaults = UserDefaults.standard()
+		let defaults = UserDefaults.standard
 		calculator.selectedSegmentIndex = defaults.integer(forKey: HPCalculatorType) - 1
 
 		sound.isOn = SOUND
@@ -43,7 +43,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	@IBAction func applyChanges(_ sender: AnyObject) {
 		var needsRestart = false
 		
-		let defaults = UserDefaults.standard()
+		let defaults = UserDefaults.standard
 		
 		// Sound settings
 		if sound.isOn {
@@ -201,26 +201,26 @@ class MODsView: UIView, UIAlertViewDelegate {
 	override func awakeFromNib() {
 		allModFiles = modFilesInBundle()
 
-		let defaults = UserDefaults.standard()
+		let defaults = UserDefaults.standard
 		switch port {
 		case 1:
 			if let module1 = defaults.string(forKey: HPPort1) {
-				filePath = Bundle.main().resourcePath! + "/" + module1
+				filePath = Bundle.main.resourcePath! + "/" + module1
 			}
 			
 		case 2:
 			if let module2 = defaults.string(forKey: HPPort2) {
-				filePath = Bundle.main().resourcePath! + "/" + module2
+				filePath = Bundle.main.resourcePath! + "/" + module2
 			}
 			
 		case 3:
 			if let module3 = defaults.string(forKey: HPPort3) {
-				filePath = Bundle.main().resourcePath! + "/" + module3
+				filePath = Bundle.main.resourcePath! + "/" + module3
 			}
 			
 		case 4:
 			if let module4 = defaults.string(forKey: HPPort4) {
-				filePath = Bundle.main().resourcePath! + "/" + module4
+				filePath = Bundle.main.resourcePath! + "/" + module4
 			}
 			
 		default:
@@ -363,7 +363,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 	
 	func modFilesInBundle() -> [String] {
 //		let resourceURL = NSBundle.mainBundle().resourceURL
-		let modFiles = Bundle.main().pathsForResources(ofType: "mod", inDirectory: nil)
+		let modFiles = Bundle.main.pathsForResources(ofType: "mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
 			if (modFile as NSString).lastPathComponent != "nut-c.mod" && (modFile as NSString).lastPathComponent != "nut-cv.mod" && (modFile as NSString).lastPathComponent != "nut-cx.mod" {
@@ -375,7 +375,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 	}
 	
 	func removeLoadedModules() {
-		let defaults = UserDefaults.standard()
+		let defaults = UserDefaults.standard
 		if (defaults.string(forKey: HPPort1) != nil) {
 			if let path = settingsViewController.expansionModule1.filePath {
 				removeModFile(path)

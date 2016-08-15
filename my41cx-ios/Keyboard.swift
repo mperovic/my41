@@ -38,7 +38,7 @@ class KeyGroup: UIView {
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
-		let url = URL.init(fileURLWithPath: Bundle.main().pathForResource("keyPressSound", ofType: "wav")!)
+		let url = URL.init(fileURLWithPath: Bundle.main.pathForResource("keyPressSound", ofType: "wav")!)
 		AudioServicesCreateSystemSoundID(url, &self.mySound)
 	}
 

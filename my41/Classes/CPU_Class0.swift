@@ -1475,7 +1475,7 @@ func op_DISOFF() -> Bit																// DISOFF
 	Note: This instruction is a NOP for the processor, but is interpreted by the (off-chip)
 		  LCD display controller, which turns off the display.
 	*/
-	NotificationCenter.default().post(name: Notification.Name(rawValue: "displayOff"), object: nil)
+	NotificationCenter.default.post(name: Notification.Name(rawValue: "displayOff"), object: nil)
 	
 	return 0
 }
@@ -1502,7 +1502,7 @@ func op_DISTOG() -> Bit																// DISTOG
 	Note: This instruction is a NOP for the processor, but is interpreted by the (off-chip)
 		  LCD display controller, which toggles the display.
 	*/
-	NotificationCenter.default().post(name: Notification.Name(rawValue: "displayToggle"), object: nil)
+	NotificationCenter.default.post(name: Notification.Name(rawValue: "displayToggle"), object: nil)
 	
 	return 0
 }
@@ -2601,9 +2601,27 @@ func op_RCR(_ param: Int) -> Bit															// RCR
 	*/
 	var temp = emptyDigit14
 	var tempC = cpu.reg.C
-	copyDigits(cpu.reg.C, sourceStartAt: 0, destination: &temp, destinationStartAt: 0, count: param)
-	copyDigits(cpu.reg.C, sourceStartAt: param, destination: &tempC, destinationStartAt: 0, count: 14-param)
-	copyDigits(temp, sourceStartAt: 0, destination: &tempC, destinationStartAt: 14-param, count: param)
+	copyDigits(
+		cpu.reg.C,
+		sourceStartAt: 0,
+		destination: &temp,
+		destinationStartAt: 0,
+		count: param
+	)
+	copyDigits(
+		cpu.reg.C,
+		sourceStartAt: param,
+		destination: &tempC,
+		destinationStartAt: 0,
+		count: 14-param
+	)
+	copyDigits(
+		temp,
+		sourceStartAt: 0,
+		destination: &tempC,
+		destinationStartAt: 14-param,
+		count: param
+	)
 	cpu.reg.C = tempC
 
 	return 0

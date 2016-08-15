@@ -533,12 +533,12 @@ final class MOD {
 	
 	func readModFromFile(_ filename: String) throws {
 		// Read the file
-		let fileManager = FileManager.default()
+		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: filename) {
 			do {
 				let fileAttributes: NSDictionary = try fileManager.attributesOfItem(atPath: filename)
 				self.fileSize = fileAttributes[FileAttributeKey.size]! as! Int
-				self.data = try Data(contentsOf: URL(fileURLWithPath: filename), options: .dataReadingMappedIfSafe)
+				self.data = try Data(contentsOf: URL(fileURLWithPath: filename), options: [.mappedIfSafe])
 				self.shortName = (filename as NSString).lastPathComponent.lowercased()
 				moduleHeader.fullFileName = filename
 				

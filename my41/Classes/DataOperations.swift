@@ -41,9 +41,10 @@ func fillDigits(
 
 func clearDigits(destination: inout [Digit])
 {
-	for idx in Array((0...13).reversed()) {
-		destination[idx] = Digit(0)
-	}
+	destination = destination.map { _ in Digit(0) }
+//	for idx in Array((0...13).reversed()) {
+//		destination[idx] = Digit(0)
+//	}
 }
 
 func digitsToBitsWrap(
