@@ -138,7 +138,7 @@ func op_ENROM() -> Bit																// ENROMx
 	return 0
 }
 
-func enableBank(bankSet: Bits4) {
+func enableBank(_ bankSet: Bits4) {
 	if cpu.currentRomChip == nil || cpu.currentRomChip?.actualBankGroup == 0 {
 		return
 	}
@@ -160,7 +160,7 @@ func enableBank(bankSet: Bits4) {
 
 // MARK: - Subclass 1
 
-func op_SDeq0(param: Int) -> Bit													  // SD=0
+func op_SDeq0(_ param: Int) -> Bit													  // SD=0
 {
 	/*
 	ST=0
@@ -220,7 +220,7 @@ func op_CLRST() -> Bit																 // CLRST
 
 // MARK: - Subclass 2
 
-func op_STeq1(param: Int) -> Bit													  // SD=1
+func op_STeq1(_ param: Int) -> Bit													  // SD=1
 {
 	/*
 	ST=1
@@ -289,7 +289,7 @@ func op_RSTKB() -> Bit																 // RSTKB
 
 // MARK: - Subclass 3
 
-func op_ifSTeq1(param: Int) -> Bit													 // ?SD=1
+func op_ifSTeq1(_ param: Int) -> Bit													 // ?SD=1
 {
 	/*
 	ST=1?
@@ -344,7 +344,7 @@ func op_CHKBK() -> Bit																 // CHKKB
 
 // MARK: - Subclass 4
 
-func op_LC(param: Int) -> Bit															// LC
+func op_LC(_ param: Int) -> Bit															// LC
 {
 	/*
 	LC
@@ -395,7 +395,7 @@ func op_LC(param: Int) -> Bit															// LC
 
 // MARK: - Subclass 5
 
-func op_ifPTeqD(param: Int) -> Bit								// ?PT=D
+func op_ifPTeqD(_ param: Int) -> Bit								// ?PT=D
 {
 	/*
 	?PT=
@@ -966,7 +966,7 @@ func op_FEXSB() -> Bit																 // FEXSB
 //	let temp = cpu.reg.ST
 //	cpu.reg.ST = cpu.reg.T
 //	cpu.reg.T = temp
-	if cpu.soundOutput.soundMode == .Speaker {
+	if cpu.soundOutput.soundMode == .speaker {
 //		Speaker(F_REG, 1)
 	}
 	
@@ -1108,7 +1108,7 @@ func op_INCPT() -> Bit																 // INCPT
 	return 0
 }
 
-func op_PTeqD(param: Int) -> Bit													  // PT=D
+func op_PTeqD(_ param: Int) -> Bit													  // PT=D
 {
 	/*
 	PT=
@@ -1197,17 +1197,17 @@ func op_POWOFF() -> Bit																// POWOFF
 	if regN[11] == 11 && regN[12] == 0 && regN[13] == 3 {
 		// Check if exiting ED mode
 		cpu.powerOffFlag = false
-		cpu.setPowerMode(.LightSleep)
+		cpu.setPowerMode(.lightSleep)
 		
 		return 0
 	} else {
 		if cpu.powerOffFlag {
-			cpu.setPowerMode(.DeepSleep)
+			cpu.setPowerMode(.deepSleep)
 			cpu.powerOffFlag = false
 			
 			return 1
 		} else {
-			cpu.setPowerMode(.LightSleep)
+			cpu.setPowerMode(.lightSleep)
 			
 			return 0
 		}
@@ -1423,7 +1423,7 @@ func op_SETHEX() -> Bit																// SETHEX
 	SETHEX									1001_1000_00							1
 	=========================================================================================
 	*/
-	cpu.reg.mode = .HEX_MODE
+	cpu.reg.mode = .hex_mode
 	
 	return 0
 }
@@ -1448,7 +1448,7 @@ func op_SETDEC() -> Bit																// SETDEC
 	SETDEC									1010_1000_00							1
 	=========================================================================================
 	*/
-	cpu.reg.mode = .DEC_MODE
+	cpu.reg.mode = .dec_mode
 	
 	return 0
 }
@@ -1475,7 +1475,7 @@ func op_DISOFF() -> Bit																// DISOFF
 	Note: This instruction is a NOP for the processor, but is interpreted by the (off-chip)
 		  LCD display controller, which turns off the display.
 	*/
-	NSNotificationCenter.defaultCenter().postNotificationName("displayOff", object: nil)
+	NotificationCenter.default.post(name: Notification.Name(rawValue: "displayOff"), object: nil)
 	
 	return 0
 }
@@ -1502,7 +1502,7 @@ func op_DISTOG() -> Bit																// DISTOG
 	Note: This instruction is a NOP for the processor, but is interpreted by the (off-chip)
 		  LCD display controller, which toggles the display.
 	*/
-	NSNotificationCenter.defaultCenter().postNotificationName("displayToggle", object: nil)
+	NotificationCenter.default.post(name: Notification.Name(rawValue: "displayToggle"), object: nil)
 	
 	return 0
 }
@@ -1605,7 +1605,7 @@ func op_RTN() -> Bit																  // RTN
 
 // MARK: - Subclass 9
 
-func op_SELPF(param: Int) -> Bit												 // SELPF
+func op_SELPF(_ param: Int) -> Bit												 // SELPF
 {
 	/*
 	SELPF
@@ -1655,7 +1655,7 @@ func op_SELPF(param: Int) -> Bit												 // SELPF
 
 // MARK: - Subclass A
 
-func op_REGNeqC(param: Int) -> Bit													// REGN=C
+func op_REGNeqC(_ param: Int) -> Bit													// REGN=C
 {
 	/*
 	REGN=C
@@ -1731,7 +1731,7 @@ func op_REGNeqC(param: Int) -> Bit													// REGN=C
 
 // MARK: - Subclass B
 
-func op_FDeq1(param: Int) -> Bit														// ?Fd=1
+func op_FDeq1(_ param: Int) -> Bit														// ?Fd=1
 {
 	/*
 	?Fd=1
@@ -2362,7 +2362,7 @@ func op_PFADeqC() -> Bit															// PFAD=C
 
 // MARK: - Subclass E
 
-func op_CeqDATA(param: Int) -> Bit													// C=DATA
+func op_CeqDATA(_ param: Int) -> Bit													// C=DATA
 {
 	/*
 	C=DATA
@@ -2408,7 +2408,7 @@ func op_CeqDATA(param: Int) -> Bit													// C=DATA
 	return 0
 }
 
-func op_CeqREGN(param: Int) -> Bit												// C=REGN
+func op_CeqREGN(_ param: Int) -> Bit												// C=REGN
 {
 	/*
 	C=REGN
@@ -2577,7 +2577,7 @@ func op_WCMD() -> Bit																// WCMD
 	return 0
 }
 
-func op_RCR(param: Int) -> Bit															// RCR
+func op_RCR(_ param: Int) -> Bit															// RCR
 {
 	/*
 	RCR
@@ -2601,9 +2601,27 @@ func op_RCR(param: Int) -> Bit															// RCR
 	*/
 	var temp = emptyDigit14
 	var tempC = cpu.reg.C
-	copyDigits(cpu.reg.C, sourceStartAt: 0, destination: &temp, destinationStartAt: 0, count: param)
-	copyDigits(cpu.reg.C, sourceStartAt: param, destination: &tempC, destinationStartAt: 0, count: 14-param)
-	copyDigits(temp, sourceStartAt: 0, destination: &tempC, destinationStartAt: 14-param, count: param)
+	copyDigits(
+		cpu.reg.C,
+		sourceStartAt: 0,
+		destination: &temp,
+		destinationStartAt: 0,
+		count: param
+	)
+	copyDigits(
+		cpu.reg.C,
+		sourceStartAt: param,
+		destination: &tempC,
+		destinationStartAt: 0,
+		count: 14-param
+	)
+	copyDigits(
+		temp,
+		sourceStartAt: 0,
+		destination: &tempC,
+		destinationStartAt: 14-param,
+		count: param
+	)
 	cpu.reg.C = tempC
 
 	return 0

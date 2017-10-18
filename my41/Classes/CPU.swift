@@ -26,7 +26,7 @@ var TRACE = 0
 var SYNCHRONYZE = false
 var SOUND = false
 
-let emptyDigit14:[Digit] = [Digit](count: 14, repeatedValue: 0)
+let emptyDigit14:[Digit] = [Digit](repeating: 0, count: 14)
 
 let timeSliceInterval	= 0.01
 
@@ -58,7 +58,7 @@ struct CPURegisters {
 	var FI: Bits14			= 0
 	var KY: Bits8			= 0
 	var XST: Bits6			= 0
-	var stack: [Bits16]		= [Bits16](count: 4, repeatedValue: 0)
+	var stack: [Bits16]		= [Bits16](repeating: 0, count: 4)
 	var R: Bit				= 0 {										// Active pointer
 		didSet {
 			if R > 1 {
@@ -67,7 +67,7 @@ struct CPURegisters {
 		}
 	}
 	var carry: Bit			= 0
-	var mode: ArithMode		= .DEC_MODE									// DEC_MODE or HEX_MODE
+	var mode: ArithMode		= .dec_mode									// DEC_MODE or HEX_MODE
 	var ramAddress: Bits12	= 0											// Selected ram address
 	var peripheral: Bits8	= 0											// Selected peripheral
 	var keyDown: Bit		= 0											// Set if a key is being held down
@@ -125,17 +125,17 @@ struct CPURegisters {
 		}
 	}
 	
-	func displayOrderedDigits(digits: [Digit]) -> String
+	func displayOrderedDigits(_ digits: [Digit]) -> String
 	{
 		var result = ""
-		for idx in Array((0...digits.count-1).reverse()) {
+		for idx in Array((0...digits.count-1).reversed()) {
 			result = result + (NSString(format: "%1X", digits[idx]) as String)
 		}
 		
 		return result
 	}
 	
-	func pad(string : String, toSize: Int) -> String {
+	func pad(_ string : String, toSize: Int) -> String {
 		var padded = string
 		for _ in 0..<toSize - string.characters.count {
 			padded = "0" + padded
@@ -182,14 +182,14 @@ struct OpCode {
 }
 
 enum PowerMode: Bits2 {
-	case DeepSleep = 0
-	case LightSleep = 1
-	case PowerOn = 2
+	case deepSleep = 0
+	case lightSleep = 1
+	case powerOn = 2
 }
 
 enum ArithMode: Digit {
-	case DEC_MODE = 0xa
-	case HEX_MODE = 0x10
+	case dec_mode = 0xa
+	case hex_mode = 0x10
 }
 
 let maxSimulationTimeLag = 0.2
@@ -229,10 +229,10 @@ final class CPU {
 	let DEFAULT_PROC_CYCLES		= 578
 
 	var runFlag = false
-	var simulationTime: NSTimeInterval?
+	var simulationTime: TimeInterval?
 	var reg = CPURegisters()
 	var keyReleaseDelay = 0
-	var powerMode: PowerMode = .DeepSleep
+	var powerMode: PowerMode = .deepSleep
 	var soundOutput = SoundOutput()
 	var cycleLimit = 0
 	var currentTyte = 0
@@ -263,8 +263,8 @@ final class CPU {
 	}
 		
 	init() {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		TRACE = defaults.integerForKey("traceActive")
+		let defaults = UserDefaults.standard
+		TRACE = defaults.integer(forKey: "traceActive")
 	}
 
 	func clearRegisters() {
@@ -282,38 +282,38 @@ final class CPU {
 		reg.FI = 0
 		reg.KY = 0
 		reg.XST = 0
-		reg.stack = [Bits16](count: 4, repeatedValue: 0)
+		reg.stack = [Bits16](repeating: 0, count: 4)
 		reg.R = 0
 		reg.carry = 0
-		reg.mode = .DEC_MODE
+		reg.mode = .dec_mode
 		reg.ramAddress = 0
 		reg.peripheral = 0
 		reg.keyDown = 0
 	}
 	
-	func setPowerMode(mode: PowerMode) {
+	func setPowerMode(_ mode: PowerMode) {
 		if powerMode != mode {
-			if mode == .PowerOn && self.powerMode == .DeepSleep {
+			if mode == .powerOn && self.powerMode == .deepSleep {
 				reg.carry = 1
 			}
-			if mode == .PowerOn && self.powerMode == .LightSleep {
+			if mode == .powerOn && self.powerMode == .lightSleep {
 				reg.carry = 0
 			}
 			
 			powerMode = mode
-			if mode != .PowerOn {
+			if mode != .powerOn {
 				soundOutput.flushAndSuspendSoundOutput()
 				self.lineNo = 0
 			}
-			NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
-			NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 		}
 	}
 	
 	func step() {
 		executeNextInstruction()
-		NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
-		NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 	}
 	
 	func reset() {
@@ -326,50 +326,50 @@ final class CPU {
 		*/
 		reg.KY = onKeyCode
 		keyReleaseDelay = 1
-		setPowerMode(.DeepSleep)
-		setPowerMode(.PowerOn)
+		setPowerMode(.deepSleep)
+		setPowerMode(.powerOn)
 	}
 
-	func keyWithCode(code: Int, pressed: Bool) {
+	func keyWithCode(_ code: Int, pressed: Bool) {
 		if pressed {
 			let row = code >> 4
 			let col = code & 0x0f
 			reg.KY = Bits8(row | keyColTable[col])
 			reg.keyDown = 1
 			
-			if reg.KY == onKeyCode && powerMode != .DeepSleep {
+			if reg.KY == onKeyCode && powerMode != .deepSleep {
 				powerOffFlag = true				// will enter deep sleep on next power off
 			}
-			if powerMode == .LightSleep || reg.KY == onKeyCode {
-				setPowerMode(.PowerOn)
+			if powerMode == .lightSleep || reg.KY == onKeyCode {
+				setPowerMode(.powerOn)
 			}
 		} else {
 			reg.keyDown = 0
 		}
-		NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
-		NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 	}
 	
-	func abortInstruction(message: String) {
+	func abortInstruction(_ message: String) {
 		reg.PC = savedPC
 		setRunning(false)
 	}
 	
 	func running() -> Bool {
-		return (powerMode == .PowerOn) && runFlag
+		return (powerMode == .powerOn) && runFlag
 	}
 	
-	func setRunning(state: Bool) {
+	func setRunning(_ state: Bool) {
 		if runFlag != state {
 			runFlag = state
-			NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
-			NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 		}
-		simulationTime = NSDate.timeIntervalSinceReferenceDate()
+		simulationTime = Date.timeIntervalSinceReferenceDate
 	}
 	
-	func timeSlice(timer: NSTimer) {
-		let currentTime = NSDate.timeIntervalSinceReferenceDate()
+	func timeSlice(_ timer: Foundation.Timer) {
+		let currentTime = Date.timeIntervalSinceReferenceDate
 		if running() {
 			let sTime = simulationTime!
 			if sTime != 0 {
@@ -377,11 +377,11 @@ final class CPU {
 					simulationTime = currentTime - maxSimulationTimeLag
 				}
 				cycleLimit = soundOutput.soundAvailableBufferSpace()
-				while self.running() && cycleLimit > 2 && simulationTime < currentTime {
+				while self.running() && cycleLimit > 2 && simulationTime! < currentTime {
 					executeNextInstruction()
 				}
-				NSNotificationCenter.defaultCenter().postNotificationName(kCPUDebugUpdateDisplay, object: nil)
-				NSNotificationCenter.defaultCenter().postNotificationName(kMemoryDebugUpdateDisplay, object: nil)
+				NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
+				NotificationCenter.default.post(name: Notification.Name(rawValue: kMemoryDebugUpdateDisplay), object: nil)
 			}
 		} else {
 			simulationTime = currentTime
@@ -399,7 +399,7 @@ final class CPU {
 		return result
 	}
 	
-	func pushReturnStack(word: Bits16) {
+	func pushReturnStack(_ word: Bits16) {
 		reg.stack[3] = reg.stack[2]
 		reg.stack[2] = reg.stack[1]
 		reg.stack[1] = reg.stack[0]
@@ -450,7 +450,7 @@ final class CPU {
 		}
 	}
 	
-	func setR(newR: Bits4) {
+	func setR(_ newR: Bits4) {
 		if reg.R == 0 {
 			reg.P = newR
 		} else {
@@ -499,7 +499,7 @@ final class CPU {
 		}
 	}
 
-	func unimplementedInstruction(instr: Int) {
+	func unimplementedInstruction(_ instr: Int) {
 		abortInstruction("Unimplemented instruction: \(instr)")
 	}
 
@@ -988,17 +988,17 @@ final class CPU {
 	
 	// MARK: -
 	
-	func digitsToString(register: [Digit]) -> String {
+	func digitsToString(_ register: [Digit]) -> String {
 		var result = String()
 		let limit = register.count - 1
-		for idx in Array((0...limit).reverse()) {
+		for idx in Array((0...limit).reversed()) {
 			result += NSString(format:"%1X", register[idx]) as String
 		}
 		
 		return result
 	}
 	
-	func bits4ToString(register: Bits4) -> String {
+	func bits4ToString(_ register: Bits4) -> String {
 		return NSString(format:"%1X", register) as String
 	}
 	
@@ -1006,7 +1006,7 @@ final class CPU {
 	
 	// MARK: - CPU Invalid Instruction
 	
-	func op_INVALID(parameter: String) -> Bit
+	func op_INVALID(_ parameter: String) -> Bit
 	{
 		if TRACE != 0 {
 			print("Invalid: " + parameter)

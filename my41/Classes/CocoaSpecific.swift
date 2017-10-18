@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-func displayAlert(message: String) {
+func displayAlert(_ message: String) {
 	let alert:NSAlert = NSAlert()
 	alert.messageText = message
 	alert.runModal()

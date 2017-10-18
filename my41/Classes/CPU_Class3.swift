@@ -8,7 +8,7 @@
 
 import Foundation
 
-func op_GONC(offset offset: Int) -> Bit													  // GONC
+func op_GONC(offset: Int) -> Bit													  // GONC
 {
 	/*
 	GONC
@@ -38,7 +38,7 @@ func op_GONC(offset offset: Int) -> Bit													  // GONC
 	return 0
 }
 
-func op_GOC(offset offset: Int) -> Bit													   // GOC
+func op_GOC(offset: Int) -> Bit													   // GOC
 {
 	/*
 	GNC

@@ -9,10 +9,10 @@
 import Foundation
 
 protocol Peripheral {
-	func pluggedIntoBus(bus: Bus?)
-	func readFromRegister(param: Bits4)
-	func writeToRegister(param: Bits4)
-	func writeDataFrom(data: Digits14)
+	func pluggedIntoBus(_ bus: Bus?)
+	func readFromRegister(_ param: Bits4)
+	func writeToRegister(_ param: Bits4)
+	func writeDataFrom(_ data: Digits14)
 }
 
 struct RomDesc {
@@ -180,15 +180,15 @@ var builtinRamTable: [RamDesc] = [
 	//0x03f nonexistent
 ]
 
-enum RamError: ErrorType {
+enum RamError: Error {
 	case invalidAddress
 }
 
-enum RomError: ErrorType {
+enum RomError: Error {
 	case invalidAddress
 }
 
-enum MODError: ErrorType {
+enum MODError: Error {
 	case freeSpace
 }
 
@@ -204,7 +204,7 @@ final class Bus {
 	var xFunction: Bool?
 //	var ramValid: [Bool]
 	var ram: [Digits14]
-	var peripherals: [Peripheral?] = [Peripheral?](count: 0x100, repeatedValue:nil)
+	var peripherals: [Peripheral?] = [Peripheral?](repeating: nil, count: 0x100)
 	
 	// Peripherals
 	var display: Display?
@@ -217,7 +217,7 @@ final class Bus {
 	// ROM variables
 	var romChips = Array<Array<RomChip?>>()
 	var nextActualBankGroup: byte = 1										// counter for loading actual bank groups
-	var activeBank: [Int] = [Int](count: 0x10, repeatedValue: 1)
+	var activeBank: [Int] = [Int](repeating: 1, count: 0x10)
 	
 	class var sharedInstance : Bus {
 		struct Singleton {
@@ -230,16 +230,16 @@ final class Bus {
 	init () {
 		// 16 pages of 4 banks
 		for page in 0...0xf {
-			romChips.append(Array(count:4, repeatedValue:RomChip()))
+			romChips.append(Array(repeating: RomChip(), count: 4))
 			for bank in 1...4 {
 				romChips[page][bank - 1] = nil
 			}
 		}
 //		ramValid = [Bool](count:0x400, repeatedValue:false)
-		ram = [Digits14](count:0x400, repeatedValue:emptyDigit14)
+		ram = [Digits14](repeating: emptyDigit14, count: 0x400)
 	}
 	
-	func installMod(mod: MOD) throws {
+	func installMod(_ mod: MOD) throws {
 		/*
 			these are arrays indexed on the page group number (1-8) (unique only within each mod file)
 			dual use: values are either a count stored as a negative number or a (positive) page number 1-f
@@ -290,15 +290,15 @@ final class Bus {
 					}
 					
 					// save the count of pages with each attribute as a negative number
-					if modulePage.page == Position.PositionLower.rawValue {
+					if modulePage.page == Position.positionLower.rawValue {
 						lowerGroup[Int(modulePage.pageGroup) - 1] -= 1
-					} else if modulePage.page == Position.PositionUpper.rawValue {
+					} else if modulePage.page == Position.positionUpper.rawValue {
 						upperGroup[Int(modulePage.pageGroup) - 1] -= 1
-					} else if modulePage.page == Position.PositionOdd.rawValue {
+					} else if modulePage.page == Position.positionOdd.rawValue {
 						oddGroup[Int(modulePage.pageGroup) - 1] -= 1
-					} else if modulePage.page == Position.PositionEven.rawValue {
+					} else if modulePage.page == Position.positionEven.rawValue {
 						evenGroup[Int(modulePage.pageGroup) - 1] -= 1
-					} else if modulePage.page == Position.PositionOrdered.rawValue {
+					} else if modulePage.page == Position.positionOrdered.rawValue {
 						orderedGroup[Int(modulePage.pageGroup) - 1] -= 1
 					}
 					
@@ -310,27 +310,27 @@ final class Bus {
 					}
 					
 					// a matching page has already been loaded
-					if modulePage.page == Position.PositionLower.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					if modulePage.page == Position.positionLower.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is the lower page and the upper page has already been loaded
 						page = byte(upperGroup[Int(modulePage.pageGroup - 1)] - 1)
-					} else if modulePage.page == Position.PositionLower.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.positionLower.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is another lower page
 						page = byte(lowerGroup[Int(modulePage.pageGroup - 1)])
-					} else if modulePage.page == Position.PositionUpper.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.positionUpper.rawValue && lowerGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is the upper page and the lower page has already been loaded
 						page = byte(lowerGroup[Int(modulePage.pageGroup - 1)] + 1)
-					} else if modulePage.page == Position.PositionUpper.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.positionUpper.rawValue && upperGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						// this is another upper page
 						page = byte(upperGroup[Int(modulePage.pageGroup - 1)])
-					} else if modulePage.page == Position.PositionOdd.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.positionOdd.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(evenGroup[Int(modulePage.pageGroup - 1)] + 1)
-					} else if modulePage.page == Position.PositionOdd.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.positionOdd.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(oddGroup[Int(modulePage.pageGroup) - 1])
-					} else if modulePage.page == Position.PositionEven.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.positionEven.rawValue && oddGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(oddGroup[Int(modulePage.pageGroup) - 1] - 1)
-					} else if modulePage.page == Position.PositionEven.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.positionEven.rawValue && evenGroup[Int(modulePage.pageGroup) - 1] > 0 {
 						page = byte(evenGroup[Int(modulePage.pageGroup) - 1])
-					} else if modulePage.page == Position.PositionOrdered.rawValue && orderedGroup[Int(modulePage.pageGroup) - 1] > 0 {
+					} else if modulePage.page == Position.positionOrdered.rawValue && orderedGroup[Int(modulePage.pageGroup) - 1] > 0 {
 //						page = byte(++orderedGroup[Int(modulePage.pageGroup) - 1])
 						page = byte(1 + orderedGroup[Int(modulePage.pageGroup) - 1])
 					} else {
@@ -398,17 +398,17 @@ final class Bus {
 						}
 						
 						// save the position that was found in the appropriate array
-						if modulePage.page == Position.PositionLower.rawValue {
+						if modulePage.page == Position.positionLower.rawValue {
 							lowerGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
-						} else if modulePage.page == Position.PositionUpper.rawValue {
+						} else if modulePage.page == Position.positionUpper.rawValue {
 							// found two positions - take the upper one
 							page += 1
 							upperGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
-						} else if modulePage.page == Position.PositionEven.rawValue {
+						} else if modulePage.page == Position.positionEven.rawValue {
 							evenGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
-						} else if modulePage.page == Position.PositionOdd.rawValue {
+						} else if modulePage.page == Position.positionOdd.rawValue {
 							oddGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
-						} else if modulePage.page == Position.PositionOrdered.rawValue {
+						} else if modulePage.page == Position.positionOrdered.rawValue {
 							orderedGroup[Int(modulePage.pageGroup) - 1] = Int8(page)
 						}
 					}
@@ -420,7 +420,7 @@ final class Bus {
 						break
 					}
 					
-					if modulePage.page == Position.PositionAny.rawValue {
+					if modulePage.page == Position.positionAny.rawValue {
 						// a single page that can be loaded anywhere 8-F
 						page = 8
 						while (page <= 0xf && romChips[Int(page)][Int(modulePage.bank) - 1] != nil) {
@@ -437,10 +437,10 @@ final class Bus {
 				}
 				
 				if load {
-					if mod.moduleHeader.hardware == Hardware.HEPAX {
+					if mod.moduleHeader.hardware == Hardware.hepax {
 						modulePage.HEPAX = 1
 					}
-					if mod.moduleHeader.hardware == Hardware.WWRAMBox {
+					if mod.moduleHeader.hardware == Hardware.wwramBox {
 						modulePage.WWRAMBOX = 1
 					}
 					if modulePage.bankGroup != 0 {
@@ -490,7 +490,7 @@ final class Bus {
 		nextActualBankGroup += 1
 	}
 	
-	func installRomChip(chip: RomChip, inSlot slot: byte, andBank bank: byte) {
+	func installRomChip(_ chip: RomChip, inSlot slot: byte, andBank bank: byte) {
 		romChips[Int(slot)][Int(bank)] = chip
 	}
 	
@@ -498,7 +498,7 @@ final class Bus {
 //		ramValid[Int(address)] = true
 //	}
 	
-	func readRamAddress(address: Bits12, inout into data: Digits14) throws {
+	func readRamAddress(_ address: Bits12, into data: inout Digits14) throws {
 		/*
 			Read specified location of specified chip.
 			If chip or location is nonexistent, set data to 0 and return false.
@@ -517,10 +517,16 @@ final class Bus {
 		}
 	}
 	
-	func writeRamAddress(address: Bits12, from data: Digits14) throws {
+	func writeRamAddress(_ address: Bits12, from data: Digits14) throws {
 		// Write to specified location of specified chip. If chip or location is nonexistent, do nothing and return false.
 		if RAMExists(Int(address)) {
-			copyDigits(data, sourceStartAt: 0, destination: &ram[Int(address)], destinationStartAt: 0, count: 14)
+			copyDigits(
+				data,
+				sourceStartAt: 0,
+				destination: &ram[Int(address)],
+				destinationStartAt: 0,
+				count: 14
+			)
 		} else {
 			throw RamError.invalidAddress
 		}
@@ -535,7 +541,7 @@ final class Bus {
 		}
 	}
 	
-	func readRomAddress(addr: Int) throws -> Int {
+	func readRomAddress(_ addr: Int) throws -> Int {
 		// Read ROM location at the given address and return true.
 		// If there is no ROM at that address, sets data to 0 and returns
 		let address = addr & 0xffff
@@ -549,30 +555,30 @@ final class Bus {
 		}
 	}
 
-	func romChipInSlot(slot: Bits4, bank: Bits4) -> RomChip? {
+	func romChipInSlot(_ slot: Bits4, bank: Bits4) -> RomChip? {
 		return romChips[Int(slot)][Int(bank) - 1]
 	}
 
-	func romChipInSlot(slot: Bits4) -> RomChip? {
+	func romChipInSlot(_ slot: Bits4) -> RomChip? {
 		let bank = activeBank[Int(slot)]
 		
 		return romChips[Int(slot)][Int(bank) - 1]
 	}
 	
-	func activeBankAtAddr(addr: Bits16) -> Bits4 {
+	func activeBankAtAddr(_ addr: Bits16) -> Bits4 {
 		let slot = addr >> 12
 		return Bits4(activeBank[Int(slot)])
 	}
 	
-	func activeBankInSlot(slot: Bits4) -> Int {
+	func activeBankInSlot(_ slot: Bits4) -> Int {
 		return activeBank[Int(slot)]
 	}
 	
-	func setActiveBankInSlot(slot: Bits4, bank: Int) {
+	func setActiveBankInSlot(_ slot: Bits4, bank: Int) {
 		activeBank[Int(slot)] = bank
 	}
 	
-	func writeToRegister(register: Bits4, ofPeripheral slot: Bits8) {
+	func writeToRegister(_ register: Bits4, ofPeripheral slot: Bits8) {
 		if let peripheral = peripherals[Int(slot)] {
 			peripheral.writeToRegister(register)
 		}
@@ -589,7 +595,7 @@ final class Bus {
 		}
 	}
 	
-	func installPeripheral(peripheral: Peripheral, inSlot slot: Bits8) {
+	func installPeripheral(_ peripheral: Peripheral, inSlot slot: Bits8) {
 		if let oldPeripheral = peripherals[Int(slot)] {
 			oldPeripheral.pluggedIntoBus(nil)
 		}
@@ -597,11 +603,11 @@ final class Bus {
 		peripheral.pluggedIntoBus(self)
 	}
 	
-	func abortInstruction(message: String) {
+	func abortInstruction(_ message: String) {
 		cpu.abortInstruction(message)
 	}
 	
-	func checkAddress(address: Bits12, calculatorModHeader: ModuleFileHeader) -> Bool {
+	func checkAddress(_ address: Bits12, calculatorModHeader: ModuleFileHeader) -> Bool {
 		if address >= 0x000 && address <= 0x00f	{			// status registers
 			return true
 		}
@@ -640,7 +646,7 @@ final class Bus {
 		return false
 	}
 	
-	func RAMExists(address: Int) -> Bool
+	func RAMExists(_ address: Int) -> Bool
 	{
 		if address >= 0x000 && address <= 0x00f	{			// status registers
 			return true

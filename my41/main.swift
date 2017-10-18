@@ -6,6 +6,6 @@
 //  Copyright (c) 2014 iPera. All rights reserved.
 //
 
-import Cocoa
+import AppKit
 
-NSApplicationMain(Process.argc, Process.unsafeArgv)
+NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)

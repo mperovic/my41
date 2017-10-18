@@ -25,11 +25,11 @@ class PreferencesMenuViewController: NSViewController {
 			calculatorView?.removeFromSuperview()
 		}
 		calculatorView = SelectedPreferencesView(
-			frame: CGRectMake(
-				0.0,
-				self.menuView.frame.height - 38.0,
-				184.0,
-				24.0
+			frame: CGRect(
+				x: 0.0,
+				y: self.menuView.frame.height - 38.0,
+				width: 184.0,
+				height: 24.0
 			)
 		)
 		calculatorView?.text = "Calculator"
@@ -40,11 +40,11 @@ class PreferencesMenuViewController: NSViewController {
 			modsView?.removeFromSuperview()
 		}
 		modsView = SelectedPreferencesView(
-			frame: CGRectMake(
-				0.0,
-				self.menuView.frame.height - 65.0,
-				184.0,
-				24.0
+			frame: CGRect(
+				x: 0.0,
+				y: self.menuView.frame.height - 65.0,
+				width: 184.0,
+				height: 24.0
 			)
 		)
 		modsView?.text = "MODs"
@@ -57,8 +57,8 @@ class PreferencesMenuViewController: NSViewController {
 	@IBAction func selectCalculatorAction(sender: AnyObject) {
 		calculatorView?.selected = true
 		modsView?.selected = false
-		calculatorView!.setNeedsDisplayInRect(calculatorView!.bounds)
-		modsView!.setNeedsDisplayInRect(modsView!.bounds)
+		calculatorView!.setNeedsDisplay(calculatorView!.bounds)
+		modsView!.setNeedsDisplay(modsView!.bounds)
 		
 		preferencesContainerViewController?.loadPreferencesCalculatorViewController()
 	}
@@ -66,8 +66,8 @@ class PreferencesMenuViewController: NSViewController {
 	@IBAction func selectModAction(sender: AnyObject) {
 		calculatorView?.selected = false
 		modsView?.selected = true
-		calculatorView!.setNeedsDisplayInRect(calculatorView!.bounds)
-		modsView!.setNeedsDisplayInRect(modsView!.bounds)
+		calculatorView!.setNeedsDisplay(calculatorView!.bounds)
+		modsView!.setNeedsDisplay(modsView!.bounds)
 		
 		preferencesContainerViewController?.loadPreferencesModsViewController()
 	}
@@ -76,7 +76,7 @@ class PreferencesMenuViewController: NSViewController {
 class PreferencesMenuView: NSView {
 	override func awakeFromNib() {
 		let viewLayer: CALayer = CALayer()
-		viewLayer.backgroundColor = CGColorCreateGenericRGB(0.9843, 0.9804, 0.9725, 1.0)
+		viewLayer.backgroundColor = CGColor(red: 0.9843, green: 0.9804, blue: 0.9725, alpha: 1.0)
 		self.wantsLayer = true
 		self.layer = viewLayer
 	}
@@ -87,7 +87,7 @@ class PreferencesMenuView: NSView {
 class PreferencesMenuLabelView: NSView {
 	override func awakeFromNib() {
 		let viewLayer: CALayer = CALayer()
-		viewLayer.backgroundColor = CGColorCreateGenericRGB(0.8843, 0.8804, 0.8725, 1.0)
+		viewLayer.backgroundColor = CGColor(red: 0.8843, green: 0.8804, blue: 0.8725, alpha: 1.0)
 		self.wantsLayer = true
 		self.layer = viewLayer
 	}
@@ -97,7 +97,7 @@ class SelectedPreferencesView: NSView {
 	var text: NSString?
 	var selected: Bool?
 	
-	override func drawRect(dirtyRect: NSRect) {
+	override func draw(_ dirtyRect: NSRect) {
 		//// Color Declarations
 		let backColor = NSColor(calibratedRed: 0.1569, green: 0.6157, blue: 0.8902, alpha: 0.95)
 		let textColor = NSColor(calibratedRed: 1.0, green: 1.0, blue: 1.0, alpha: 1)
@@ -105,8 +105,8 @@ class SelectedPreferencesView: NSView {
 		let font = NSFont(name: "Helvetica Bold", size: 14.0)
 		
 		let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
-		let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-		textStyle.alignment = .Left
+		let textStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+		textStyle.alignment = .left
 		
 		if selected! {
 			//// Rectangle Drawing
@@ -114,21 +114,21 @@ class SelectedPreferencesView: NSView {
 			let rectangleRect = NSMakeRect(0, 0, 184, 24)
 			let rectangleInnerRect = NSInsetRect(rectangleRect, rectangleCornerRadius, rectangleCornerRadius)
 			let rectanglePath = NSBezierPath()
-			rectanglePath.moveToPoint(NSMakePoint(NSMinX(rectangleRect), NSMinY(rectangleRect)))
-			rectanglePath.appendBezierPathWithArcWithCenter(
-				NSMakePoint(NSMaxX(rectangleInnerRect), NSMinY(rectangleInnerRect)),
+			rectanglePath.move(to: NSMakePoint(NSMinX(rectangleRect), NSMinY(rectangleRect)))
+			rectanglePath.appendArc(
+				withCenter: NSMakePoint(NSMaxX(rectangleInnerRect), NSMinY(rectangleInnerRect)),
 				radius: rectangleCornerRadius,
 				startAngle: 270,
 				endAngle: 360
 			)
-			rectanglePath.appendBezierPathWithArcWithCenter(
-				NSMakePoint(NSMaxX(rectangleInnerRect), NSMaxY(rectangleInnerRect)),
+			rectanglePath.appendArc(
+				withCenter: NSMakePoint(NSMaxX(rectangleInnerRect), NSMaxY(rectangleInnerRect)),
 				radius: rectangleCornerRadius,
 				startAngle: 0,
 				endAngle: 90
 			)
-			rectanglePath.lineToPoint(NSMakePoint(NSMinX(rectangleRect), NSMaxY(rectangleRect)))
-			rectanglePath.closePath()
+			rectanglePath.line(to: NSMakePoint(NSMinX(rectangleRect), NSMaxY(rectangleRect)))
+			rectanglePath.close()
 			backColor.setFill()
 			rectanglePath.fill()
 			
@@ -139,7 +139,7 @@ class SelectedPreferencesView: NSView {
 					NSParagraphStyleAttributeName: textStyle
 				]
 				
-				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
+				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
 			}
 		} else {
 			if let actualFont = font {
@@ -149,7 +149,7 @@ class SelectedPreferencesView: NSView {
 					NSParagraphStyleAttributeName: textStyle
 				]
 				
-				text?.drawInRect(NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
+				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes)
 			}
 		}
 	}

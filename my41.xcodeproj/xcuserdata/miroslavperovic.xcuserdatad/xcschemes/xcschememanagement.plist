@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>my41.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>my41CV - DEBUG.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>my41CV.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>my41cx - DEBUG.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>my41cx-ios AdHoc.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>my41cx-ios.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>my41cx.ios.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>my41cx.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>DC45284C19897DA500C40B6C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC45286019897DA600C40B6C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC72BCF71A5EA50900869472</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC72BD0F1A5EA50900869472</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC99DC511A5EADF500785EDF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC99DC651A5EADF500785EDF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DCE75C001A61B4FE002B2D7C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DCE75C141A61B4FE002B2D7C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

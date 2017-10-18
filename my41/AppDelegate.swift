@@ -15,16 +15,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		// Insert code here to initialize your application
-		let defaults = NSUserDefaults.standardUserDefaults()
-		if let _ = defaults.objectForKey("memory") as? NSData {
-			CalculatorApplication.sharedApplication().activateIgnoringOtherApps(false)
+		let defaults = UserDefaults.standard
+		if let _ = defaults.object(forKey: "memory") as? NSData {
+			CalculatorApplication.shared().activate(ignoringOtherApps: false)
 		} else {
-			CalculatorApplication.sharedApplication().activateIgnoringOtherApps(true)
+			CalculatorApplication.shared().activate(ignoringOtherApps: true)
 		}
 		if let aWindow = self.window {
 			aWindow.becomeFirstResponder()
-			aWindow.becomeKeyWindow()
-			aWindow.becomeMainWindow()
+			aWindow.becomeKey()
+			aWindow.becomeMain()
 		}
 	}
 
@@ -35,8 +35,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	@IBAction func masterClear(sender: AnyObject) {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		defaults.removeObjectForKey("memory")
+		let defaults = UserDefaults.standard
+		defaults.removeObject(forKey: "memory")
 		defaults.synchronize()
 		CalculatorController.sharedInstance.resetCalculator(false)
 	}
