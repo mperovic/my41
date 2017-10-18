@@ -42,7 +42,7 @@ class Display: UIView, Peripheral {
 	}
 	
 	override func awakeFromNib() {
-		self.backgroundColor = UIColor.clear()
+		self.backgroundColor = .clear
 		calculatorController.display = self
 		self.displayFont = self.loadFont("hpfont")
 		self.segmentPaths = DisplaySegmentPaths()
@@ -68,7 +68,7 @@ class Display: UIView, Peripheral {
 		// 0x50..0x5f: some greek characters + "hangman"
 		// 0x60..0x7f: a-z lowercase characters
 		do {
-			let filename: String = Bundle.main.pathForResource(CTULookupRsrcName, ofType: CTULookupRsrcType)!
+			let filename: String = Bundle.main.path(forResource: CTULookupRsrcName, ofType: CTULookupRsrcType)!
 			let CTULookup = try NSMutableString(contentsOfFile: filename, encoding: String.Encoding.unicode.rawValue) as String
 			CTULookupLength = CTULookup.characters.count
 		} catch _ {
@@ -98,7 +98,7 @@ class Display: UIView, Peripheral {
 							context?.addPath(path.cgPath)
 						}
 					}
-					context?.translate(x: cellWidth(), y: 0.0)
+					context?.translateBy(x: cellWidth(), y: 0.0)
 				}
 				context?.drawPath(using: CGPathDrawingMode.fill)
 				context?.restoreGState()
@@ -121,10 +121,10 @@ class Display: UIView, Peripheral {
 					let point = annunciatorPositions[idx]
 					let context = UIGraphicsGetCurrentContext()
 					context?.saveGState()
-					context?.scale(x: 1.0 / annunciatorFontScale,
+					context?.scaleBy(x: 1.0 / annunciatorFontScale,
 						y: 1.0 / annunciatorFontScale
 					)
-					context?.translate(x: point.x, y: point.y)
+					context?.translateBy(x: point.x, y: point.y)
 					let nsString = annunciatorStrings[idx] as NSString
 					nsString.draw(
 						at: CGPoint(x: 0.0, y: 0.0),

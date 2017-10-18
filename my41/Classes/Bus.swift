@@ -180,15 +180,15 @@ var builtinRamTable: [RamDesc] = [
 	//0x03f nonexistent
 ]
 
-enum RamError: ErrorProtocol {
+enum RamError: Error {
 	case invalidAddress
 }
 
-enum RomError: ErrorProtocol {
+enum RomError: Error {
 	case invalidAddress
 }
 
-enum MODError: ErrorProtocol {
+enum MODError: Error {
 	case freeSpace
 }
 

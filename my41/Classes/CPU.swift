@@ -67,7 +67,7 @@ struct CPURegisters {
 		}
 	}
 	var carry: Bit			= 0
-	var mode: ArithMode		= .dec_MODE									// DEC_MODE or HEX_MODE
+	var mode: ArithMode		= .dec_mode									// DEC_MODE or HEX_MODE
 	var ramAddress: Bits12	= 0											// Selected ram address
 	var peripheral: Bits8	= 0											// Selected peripheral
 	var keyDown: Bit		= 0											// Set if a key is being held down
@@ -188,8 +188,8 @@ enum PowerMode: Bits2 {
 }
 
 enum ArithMode: Digit {
-	case dec_MODE = 0xa
-	case hex_MODE = 0x10
+	case dec_mode = 0xa
+	case hex_mode = 0x10
 }
 
 let maxSimulationTimeLag = 0.2
@@ -285,7 +285,7 @@ final class CPU {
 		reg.stack = [Bits16](repeating: 0, count: 4)
 		reg.R = 0
 		reg.carry = 0
-		reg.mode = .dec_MODE
+		reg.mode = .dec_mode
 		reg.ramAddress = 0
 		reg.peripheral = 0
 		reg.keyDown = 0
@@ -377,7 +377,7 @@ final class CPU {
 					simulationTime = currentTime - maxSimulationTimeLag
 				}
 				cycleLimit = soundOutput.soundAvailableBufferSpace()
-				while self.running() && cycleLimit > 2 && simulationTime < currentTime {
+				while self.running() && cycleLimit > 2 && simulationTime! < currentTime {
 					executeNextInstruction()
 				}
 				NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)

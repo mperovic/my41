@@ -36,10 +36,10 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 	}
 	
 	override func viewDidLoad() {
-		NSNotificationCenter.defaultCenter().addObserver(
+		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(DebugMemoryViewController.displaySelectedMemoryBank),
-			name: kMemoryDebugUpdateDisplay,
+			name: NSNotification.Name(rawValue: kMemoryDebugUpdateDisplay),
 			object: nil
 		)
 
@@ -47,12 +47,12 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 	
 	override func viewDidAppear() {
 		let indexSet = NSIndexSet(index: 0)
-		tableView.selectRowIndexes(indexSet, byExtendingSelection: false)
+		tableView.selectRowIndexes(indexSet as IndexSet, byExtendingSelection: false)
 		tableView.scrollRowToVisible(0)
 	}
 	
 	func displaySelectedMemoryBank() {
-		displayCurrentRAM(bankSelected << 4)
+		displayCurrentRAM(address: bankSelected << 4)
 	}
 	
 	func displayCurrentRAM(address: Int) {
@@ -111,37 +111,37 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 			}
 			switch ptr {
 			case 0x0:
-				memory0.hidden = hidden
+				memory0.isHidden = hidden
 			case 0x1:
-				memory1.hidden = hidden
+				memory1.isHidden = hidden
 			case 0x2:
-				memory2.hidden = hidden
+				memory2.isHidden = hidden
 			case 0x3:
-				memory3.hidden = hidden
+				memory3.isHidden = hidden
 			case 0x4:
-				memory4.hidden = hidden
+				memory4.isHidden = hidden
 			case 0x5:
-				memory5.hidden = hidden
+				memory5.isHidden = hidden
 			case 0x6:
-				memory6.hidden = hidden
+				memory6.isHidden = hidden
 			case 0x7:
-				memory7.hidden = hidden
+				memory7.isHidden = hidden
 			case 0x8:
-				memory8.hidden = hidden
+				memory8.isHidden = hidden
 			case 0x9:
-				memory9.hidden = hidden
+				memory9.isHidden = hidden
 			case 0xA:
-				memoryA.hidden = hidden
+				memoryA.isHidden = hidden
 			case 0xB:
-				memoryB.hidden = hidden
+				memoryB.isHidden = hidden
 			case 0xC:
-				memoryC.hidden = hidden
+				memoryC.isHidden = hidden
 			case 0xD:
-				memoryD.hidden = hidden
+				memoryD.isHidden = hidden
 			case 0xE:
-				memoryE.hidden = hidden
+				memoryE.isHidden = hidden
 			case 0xF:
-				memoryF.hidden = hidden
+				memoryF.isHidden = hidden
 			default:
 				// do nothing
 				break
@@ -160,7 +160,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		
 		if tableColumn?.identifier == "avail" {
 //			if bus.RAMExists(row << 4) {
-				value = NSNumber(integer: NSOnState)
+			value = NSNumber(value: NSOnState)
 //			} else {
 //				value = NSNumber(integer: NSOffState)
 //			}

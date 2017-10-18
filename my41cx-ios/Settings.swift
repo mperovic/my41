@@ -234,7 +234,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 
 		self.layer.cornerRadius = 5.0
 		self.button.frame = self.bounds
-		self.button.backgroundColor = UIColor.clear()
+		self.button.backgroundColor = UIColor.clear
 		self.button.addTarget(
 			self,
 			action: #selector(MODsView.buttonAction(_:)),
@@ -296,7 +296,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 		path.fill()
 		
 		let font = UIFont.systemFont(ofSize: 15.0 * settingsViewController.yRatio)
-		let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+		let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = NSTextAlignment.center
 		let attributes = [
 			NSFontAttributeName : font,
@@ -362,15 +362,14 @@ class MODsView: UIView, UIAlertViewDelegate {
 	}
 	
 	func modFilesInBundle() -> [String] {
-//		let resourceURL = NSBundle.mainBundle().resourceURL
-		let modFiles = Bundle.main.pathsForResources(ofType: "mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
+		let modFiles = Bundle.main.paths(forResourcesOfType: "mod", inDirectory: nil)
 		for modFile in modFiles {
 			if (modFile as NSString).lastPathComponent != "nut-c.mod" && (modFile as NSString).lastPathComponent != "nut-cv.mod" && (modFile as NSString).lastPathComponent != "nut-cx.mod" {
 				realModFiles.append(modFile)
 			}
 		}
-		
+
 		return realModFiles
 	}
 	

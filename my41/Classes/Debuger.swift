@@ -26,10 +26,10 @@ class DebugSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[0].viewController.view,
-				attribute: NSLayoutAttribute.Width,
-				relatedBy: NSLayoutRelation.Equal,
+				attribute: NSLayoutAttribute.width,
+				relatedBy: NSLayoutRelation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.NotAnAttribute,
+				attribute: NSLayoutAttribute.notAnAttribute,
 				multiplier: 0,
 				constant: 194
 			)
@@ -37,10 +37,10 @@ class DebugSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[0].viewController.view,
-				attribute: NSLayoutAttribute.Height,
-				relatedBy: NSLayoutRelation.Equal,
+				attribute: NSLayoutAttribute.height,
+				relatedBy: NSLayoutRelation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.NotAnAttribute,
+				attribute: NSLayoutAttribute.notAnAttribute,
 				multiplier: 0,
 				constant: 379
 			)
@@ -48,10 +48,10 @@ class DebugSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[1].viewController.view,
-				attribute: NSLayoutAttribute.Width,
-				relatedBy: NSLayoutRelation.Equal,
+				attribute: NSLayoutAttribute.width,
+				relatedBy: NSLayoutRelation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.NotAnAttribute,
+				attribute: NSLayoutAttribute.notAnAttribute,
 				multiplier: 0,
 				constant: 710
 			)
@@ -59,10 +59,10 @@ class DebugSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[1].viewController.view,
-				attribute: NSLayoutAttribute.Height,
-				relatedBy: NSLayoutRelation.Equal,
+				attribute: NSLayoutAttribute.height,
+				relatedBy: NSLayoutRelation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.NotAnAttribute,
+				attribute: NSLayoutAttribute.notAnAttribute,
 				multiplier: 0,
 				constant: 379
 			)
@@ -73,8 +73,8 @@ class DebugSplitViewController: NSSplitViewController {
 class DebugContainerViewController: NSViewController {
 	var debugCPUViewController: DebugCPUViewController?
 	var debugMemoryViewController: DebugMemoryViewController?
-	
-	override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+
+	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 		let segid = segue.identifier ?? "(none)"
 		
 		if segid == "showCPUView" {
@@ -89,8 +89,8 @@ class DebugContainerViewController: NSViewController {
 	
 	override func viewDidLoad() {
 		loadCPUViewController()
-		let defaults = NSUserDefaults.standardUserDefaults()
-		TRACE = defaults.integerForKey("traceActive")
+		let defaults = UserDefaults.standard
+		TRACE = defaults.integer(forKey: "traceActive")
 		if TRACE == 0 {
 			debugCPUViewController?.traceSwitch.state = NSOffState
 		} else {
@@ -99,11 +99,11 @@ class DebugContainerViewController: NSViewController {
 	}
 	
 	func loadCPUViewController() {
-		self.performSegueWithIdentifier("showCPUView", sender: self)
+		self.performSegue(withIdentifier: "showCPUView", sender: self)
 	}
 	
 	func loadMemoryViewController() {
-		self.performSegueWithIdentifier("showMemoryView", sender: self)
+		self.performSegue(withIdentifier: "showMemoryView", sender: self)
 	}
 }
 
@@ -117,7 +117,7 @@ class DebugerSegue: NSStoryboardSegue {
 		
 		if source.view.subviews.count > 0 {
 			let aView: AnyObject = source.view.subviews[0]
-			if aView.isKindOfClass(NSView) {
+			if aView is NSView {
 				aView.removeFromSuperview()
 			}
 		}
@@ -125,16 +125,16 @@ class DebugerSegue: NSStoryboardSegue {
 		let dView = destination.view
 		source.view.addSubview(dView)
 		source.view.addConstraints(
-			NSLayoutConstraint.constraintsWithVisualFormat(
-				"H:|[dView]|",
+			NSLayoutConstraint.constraints(
+				withVisualFormat: "H:|[dView]|",
 				options: [],
 				metrics: nil,
 				views: ["dView": dView]
 			)
 		)
 		source.view.addConstraints(
-			NSLayoutConstraint.constraintsWithVisualFormat(
-				"V:|[dView]|",
+			NSLayoutConstraint.constraints(
+				withVisualFormat: "V:|[dView]|",
 				options: [],
 				metrics: nil,
 				views: ["dView": dView]

@@ -43,30 +43,30 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		
 		expansionModule1.port = 1
 		if let newMod = preferencesContainerViewController?.newMod1 {
-			expansionModule1.filePath = NSBundle.mainBundle().resourcePath! + "/" + newMod
-			removeModule1.enabled = true
+			expansionModule1.filePath = Bundle.main.resourcePath! + "/" + newMod
+			removeModule1.isEnabled = true
 		}
 		expansionModule2.port = 2
 		if let newMod = preferencesContainerViewController?.newMod2 {
-			expansionModule2.filePath = NSBundle.mainBundle().resourcePath! + "/" + newMod
-			removeModule2.enabled = true
+			expansionModule2.filePath = Bundle.main.resourcePath! + "/" + newMod
+			removeModule2.isEnabled = true
 		}
 		expansionModule3.port = 3
 		if let newMod = preferencesContainerViewController?.newMod3 {
-			expansionModule3.filePath = NSBundle.mainBundle().resourcePath! + "/" + newMod
-			removeModule3.enabled = true
+			expansionModule3.filePath = Bundle.main.resourcePath! + "/" + newMod
+			removeModule3.isEnabled = true
 		}
 		expansionModule4.port = 4
 		if let newMod = preferencesContainerViewController?.newMod4 {
-			expansionModule4.filePath = NSBundle.mainBundle().resourcePath! + "/" + newMod
-			removeModule4.enabled = true
+			expansionModule4.filePath = Bundle.main.resourcePath! + "/" + newMod
+			removeModule4.isEnabled = true
 		}
 		
 		reloadModFiles()
 		if modFiles.count > 0 {
 			tableView.reloadData()
-			tableView.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
-			selectedRow(0)
+			tableView.selectRowIndexes(NSIndexSet(index: 0) as IndexSet, byExtendingSelection: false)
+			selectedRow(row: 0)
 		}
 	}
 	
@@ -74,7 +74,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		var index = 0
 		for aFileName in modFiles {
 			if filename == aFileName {
-				modFiles.removeAtIndex(index)
+				modFiles.remove(at: index)
 				
 				break
 			}
@@ -90,18 +90,18 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	}
 	
 	func removeLoadedModules() {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		if (defaults.stringForKey(HPPort1) != nil) {
-			removeModFile(expansionModule1.filePath!)
+		let defaults = UserDefaults.standard
+		if (defaults.string(forKey: HPPort1) != nil) {
+			removeModFile(filename: expansionModule1.filePath!)
 		}
-		if (defaults.stringForKey(HPPort2) != nil) {
-			removeModFile(expansionModule2.filePath!)
+		if (defaults.string(forKey: HPPort2) != nil) {
+			removeModFile(filename: expansionModule2.filePath!)
 		}
-		if (defaults.stringForKey(HPPort3) != nil) {
-			removeModFile(expansionModule3.filePath!)
+		if (defaults.string(forKey: HPPort3) != nil) {
+			removeModFile(filename: expansionModule3.filePath!)
 		}
-		if (defaults.stringForKey(HPPort4) != nil) {
-			removeModFile(expansionModule4.filePath!)
+		if (defaults.string(forKey: HPPort4) != nil) {
+			removeModFile(filename: expansionModule4.filePath!)
 		}
 	}
 	
@@ -140,7 +140,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	// MARK: -
 	func modFilesInBundle() -> [String] {
 //		let resourceURL = NSBundle.mainBundle().resourceURL
-		let modFiles = NSBundle.mainBundle().pathsForResourcesOfType("mod", inDirectory: nil)
+		let modFiles = Bundle.main.paths(forResourcesOfType: "mod", inDirectory: nil)
 		var realModFiles: [String] = [String]()
 		for modFile in modFiles {
 			let filePath = modFile 
@@ -155,41 +155,41 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	
 	//MARK: - Actions
 	@IBAction func removeModule1Action(sender: AnyObject) {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		defaults.removeObjectForKey(HPPort1)
-		removeModule1.enabled = false
+		let defaults = UserDefaults.standard
+		defaults.removeObject(forKey: HPPort1)
+		removeModule1.isEnabled = false
 		expansionModule1.filePath = nil
-		expansionModule1.setNeedsDisplayInRect(expansionModule1.bounds)
+		expansionModule1.setNeedsDisplay(expansionModule1.bounds)
 		
 		reloadModFiles()
 	}
 	
 	@IBAction func removeModule2Action(sender: AnyObject) {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		defaults.removeObjectForKey(HPPort2)
-		removeModule2.enabled = false
+		let defaults = UserDefaults.standard
+		defaults.removeObject(forKey: HPPort2)
+		removeModule2.isEnabled = false
 		expansionModule2.filePath = nil
-		expansionModule2.setNeedsDisplayInRect(expansionModule2.bounds)
+		expansionModule2.setNeedsDisplay(expansionModule2.bounds)
 		
 		reloadModFiles()
 	}
 	
 	@IBAction func removeModule3Action(sender: AnyObject) {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		defaults.removeObjectForKey(HPPort3)
-		removeModule3.enabled = false
+		let defaults = UserDefaults.standard
+		defaults.removeObject(forKey: HPPort3)
+		removeModule3.isEnabled = false
 		expansionModule3.filePath = nil
-		expansionModule3.setNeedsDisplayInRect(expansionModule3.bounds)
+		expansionModule3.setNeedsDisplay(expansionModule3.bounds)
 		
 		reloadModFiles()
 	}
 	
 	@IBAction func removeModule4Action(sender: AnyObject) {
-		let defaults = NSUserDefaults.standardUserDefaults()
-		defaults.removeObjectForKey(HPPort4)
-		removeModule4.enabled = false
+		let defaults = UserDefaults.standard
+		defaults.removeObject(forKey: HPPort4)
+		removeModule4.isEnabled = false
 		expansionModule4.filePath = nil
-		expansionModule4.setNeedsDisplayInRect(expansionModule4.bounds)
+		expansionModule4.setNeedsDisplay(expansionModule4.bounds)
 		
 		reloadModFiles()
 	}
@@ -209,7 +209,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		
 		var cellView: NSTableCellView?
 		if let tColumn = tableColumn {
-			let cView = tableView.makeViewWithIdentifier(tColumn.identifier, owner: self) as! NSTableCellView
+			let cView = tableView.make(withIdentifier: tColumn.identifier, owner: self) as! NSTableCellView
 			cView.textField?.stringValue = (filePath as NSString).lastPathComponent
 			cellView = cView
 		}
@@ -218,7 +218,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	}
 	
 	func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-		selectedRow(row)
+		selectedRow(row: row)
 		
 		return true
 	}
@@ -243,7 +243,7 @@ class ModDetailsView: NSView {
 	var category: String?
 	var hardware: String?
 	
-	override func drawRect(dirtyRect: NSRect) {
+	override func draw(_ dirtyRect: NSRect) {
 		let backColor = NSColor(calibratedRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.95)
 		let rect = NSMakeRect(self.bounds.origin.x + 3, self.bounds.origin.y + 3, self.bounds.size.width - 6, self.bounds.size.height - 6)
 		
@@ -267,19 +267,19 @@ class ExpansionView: NSView {
 	convenience init(port: Int) {
 		self.init()
 		
-		let defaults = NSUserDefaults.standardUserDefaults()
+		let defaults = UserDefaults.standard
 		switch port {
 		case 1:
-			filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort1)!
+			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort1)!
 			
 		case 2:
-			filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort2)!
+			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort2)!
 			
 		case 3:
-			filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort3)!
+			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort3)!
 			
 		case 4:
-			filePath = NSBundle.mainBundle().resourcePath! + "/" + defaults.stringForKey(HPPort4)!
+			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort4)!
 			
 		default:
 			break
@@ -301,10 +301,10 @@ class ExpansionView: NSView {
 			"NSStringPboardType"
 		]
 		
-		registerForDraggedTypes(theArray)
+		register(forDraggedTypes: theArray)
 	}
 	
-	override func drawRect(dirtyRect: NSRect) {
+	override func draw(_ dirtyRect: NSRect) {
 		let backColor = NSColor(calibratedRed: 0.1569, green: 0.6157, blue: 0.8902, alpha: 0.95)
 		let rect = NSMakeRect(
 			self.bounds.origin.x + 3,
@@ -320,9 +320,9 @@ class ExpansionView: NSView {
 		path.fill()
 		
 		if let fPath = filePath {
-			let font = NSFont.systemFontOfSize(11.0)
-			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-			textStyle.alignment = .Center
+			let font = NSFont.systemFont(ofSize: 11.0)
+			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+			textStyle.alignment = .center
 			let attributes = [
 				NSFontAttributeName : font,
 				NSParagraphStyleAttributeName: textStyle
@@ -331,7 +331,7 @@ class ExpansionView: NSView {
 			let mod = MOD()
 			do {
 				try mod.readModFromFile(fPath as String)
-				mod.moduleHeader.title.drawInRect(NSMakeRect(20.0, 40.0, 100.0, 58.0), withAttributes: attributes)
+				mod.moduleHeader.title.draw(in: NSMakeRect(20.0, 40.0, 100.0, 58.0), withAttributes: attributes)
 			} catch _ {
 				
 			}
@@ -340,27 +340,27 @@ class ExpansionView: NSView {
 	
 	
 	//MARK: - Drag & Drop
-	override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
-		if NSDragOperation.Generic.intersect(sender.draggingSourceOperationMask()) == NSDragOperation.Generic {
-			return NSDragOperation.Generic
+	override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+		if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask()) == NSDragOperation.generic {
+			return NSDragOperation.generic
 		} else {
-			return NSDragOperation.None
+			return NSDragOperation()
 		}
 	}
 	
-	override func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
-		if NSDragOperation.Generic.intersect(sender.draggingSourceOperationMask()) == NSDragOperation.Generic {
-			return NSDragOperation.Generic
+	override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+		if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask()) == NSDragOperation.generic {
+			return NSDragOperation.generic
 		} else {
-			return NSDragOperation.None
+			return NSDragOperation()
 		}
 	}
 	
-	override func prepareForDragOperation(sender: NSDraggingInfo) -> Bool {
+	override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
 		return true
 	}
 	
-	override func performDragOperation(sender: NSDraggingInfo) -> Bool {
+	override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
 		if filePath != nil {
 			return false
 		}
@@ -369,29 +369,29 @@ class ExpansionView: NSView {
 		let theArray = [
 			"NSStringPboardType"
 		]
-		let desiredType = paste.availableTypeFromArray(theArray)
-		if let data = paste.dataForType(desiredType!) {
-			if let fPath = NSString(data: data, encoding: NSUTF8StringEncoding) {
+		let desiredType = paste.availableType(from: theArray)
+		if let data = paste.data(forType: desiredType!) {
+			if let fPath = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
 				filePath = fPath as String
-				preferencesModsViewController.removeModFile(fPath as String)
+				preferencesModsViewController.removeModFile(filename: fPath as String)
 				preferencesModsViewController.tableView.reloadData()
 				
 				switch port {
 				case 1:
-					preferencesModsViewController.removeModule1.enabled = true
+					preferencesModsViewController.removeModule1.isEnabled = true
 					preferencesModsViewController.preferencesContainerViewController?.newMod1 = fPath.lastPathComponent
-					preferencesModsViewController.expansionModule1.setNeedsDisplayInRect(preferencesModsViewController.expansionModule1.bounds)
+					preferencesModsViewController.expansionModule1.setNeedsDisplay(preferencesModsViewController.expansionModule1.bounds)
 					
 				case 2:
-					preferencesModsViewController.removeModule2.enabled = true
+					preferencesModsViewController.removeModule2.isEnabled = true
 					preferencesModsViewController.preferencesContainerViewController?.newMod2 = fPath.lastPathComponent
 					
 				case 3:
-					preferencesModsViewController.removeModule3.enabled = true
+					preferencesModsViewController.removeModule3.isEnabled = true
 					preferencesModsViewController.preferencesContainerViewController?.newMod3 = fPath.lastPathComponent
 					
 				case 4:
-					preferencesModsViewController.removeModule4.enabled = true
+					preferencesModsViewController.removeModule4.isEnabled = true
 					preferencesModsViewController.preferencesContainerViewController?.newMod4 = fPath.lastPathComponent
 					
 				default:
@@ -403,7 +403,7 @@ class ExpansionView: NSView {
 		return true
 	}
 	
-	override func concludeDragOperation(sender: NSDraggingInfo?) {
-		self.setNeedsDisplayInRect(self.bounds)
+	override func concludeDragOperation(_ sender: NSDraggingInfo?) {
+		self.setNeedsDisplay(self.bounds)
 	}
 }

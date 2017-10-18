@@ -14,27 +14,27 @@ class Key: NSButton {
 	var keyCode: NSNumber?
 	var pressed: Bool = false
 	
-	override func acceptsFirstMouse(theEvent: NSEvent?) -> Bool {
+	override func acceptsFirstMouse(for theEvent: NSEvent?) -> Bool {
 		return true
 	}
 	
-	override func mouseDown(theEvent: NSEvent) {
-		if theEvent.modifierFlags.intersect(.ControlKeyMask) == [] {
+	override func mouseDown(with theEvent: NSEvent) {
+		if theEvent.modifierFlags.intersection(.control) == [] {
 			downKey()
 		}
 		highlight(true)
 		
-		let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+		let appDelegate = NSApplication.shared().delegate as! AppDelegate
 		appDelegate.buttonPressed = true
 	}
 	
-	override func mouseUp(theEvent: NSEvent) {
-		if theEvent.modifierFlags.intersect(.ControlKeyMask) == [] {
+	override func mouseUp(with theEvent: NSEvent) {
+		if theEvent.modifierFlags.intersection(.control) == [] {
 			upKey()
 		}
 		highlight(false)
 		
-		let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+		let appDelegate = NSApplication.shared().delegate as! AppDelegate
 		appDelegate.buttonPressed = false
 	}
 	
@@ -50,7 +50,7 @@ class Key: NSButton {
 	
 	func notifyKeyGroup() {
 		if keygroup != nil {
-			keygroup.key(self, pressed: pressed)
+			keygroup.key(key: self, pressed: pressed)
 		}
 	}
 }
@@ -61,12 +61,12 @@ class ButtonCell: NSButtonCell {
 	var shiftButton: String?
 	var switchButton: String?
 	
-	required init?(coder: NSCoder) {
+	required init(coder: NSCoder) {
 		super.init(coder: coder)
 	}
 	
-	override func drawBezelWithFrame(frame: NSRect, inView controlView: NSView) {
-		let ctx = NSGraphicsContext.currentContext()!
+	override func drawBezel(withFrame frame: NSRect, in controlView: NSView) {
+		let ctx = NSGraphicsContext.current()!
 		ctx.saveGraphicsState()
 		
 		let roundedRadius: CGFloat = 3.0
@@ -81,7 +81,7 @@ class ButtonCell: NSButtonCell {
 			(NSColor(deviceWhite: 0.20, alpha: 1.0), 0.0),
 			(NSColor(deviceWhite: 0.21, alpha: 1.0), 1.0)
 		)
-		outerGradient?.drawInRect(outerClip.bounds, angle: 90.0)
+		outerGradient?.draw(in: outerClip.bounds, angle: 90.0)
 		ctx.restoreGraphicsState()
 		
 		// Background gradient
@@ -119,7 +119,7 @@ class ButtonCell: NSButtonCell {
 				)
 			}
 		}
-		backgroundGradient?.drawInRect(backgroundPath.bounds, angle: 270.0)
+		backgroundGradient?.draw(in: backgroundPath.bounds, angle: 270.0)
 		ctx.restoreGraphicsState()
 		
 		// Dark stroke
@@ -139,13 +139,13 @@ class ButtonCell: NSButtonCell {
 //		ctx.restoreGraphicsState()
 		
 		// Draw darker overlay if button is pressed
-		if highlighted {
+		if isHighlighted {
 			ctx.saveGraphicsState()
 			NSBezierPath(roundedRect: NSInsetRect(frame, 2.0, 2.0),
 				xRadius: roundedRadius,
 				yRadius: roundedRadius).setClip()
 			NSColor(calibratedWhite: 0.0, alpha: 0.35).setFill()
-			NSRectFillUsingOperation(frame, .CompositeSourceOver)
+			NSRectFillUsingOperation(frame, .sourceOver)
 			ctx.restoreGraphicsState()
 		}
 		
@@ -167,8 +167,8 @@ class ButtonCell: NSButtonCell {
 			} else {
 				lowerTextRect = NSMakeRect(1.0, 17.0, 36.0, 12.0)
 			}
-			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-			textStyle.alignment = .Center
+			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+			textStyle.alignment = .center
 			
 			var font: NSFont
 			if (lowerText!).characters.count > 1 {
@@ -181,12 +181,12 @@ class ButtonCell: NSButtonCell {
 				NSForegroundColorAttributeName: NSColor(calibratedRed: 0.341, green: 0.643, blue: 0.78, alpha: 1.0),
 				NSParagraphStyleAttributeName: textStyle
 			]
-			lowerText?.drawInRect(NSOffsetRect(lowerTextRect, 0, -1), withAttributes: lowerTextFontAttributes)
+			lowerText?.draw(in: NSOffsetRect(lowerTextRect, 0, -1), withAttributes: lowerTextFontAttributes)
 		}
 		
 		if upperText != nil {
 			let paragrapStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
-			paragrapStyle.alignment = .Center
+			paragrapStyle.alignment = .center
 			upperText!.addAttribute(NSParagraphStyleAttributeName, value: paragrapStyle, range: NSMakeRange(0, upperText!.length))
 			
 			
@@ -212,7 +212,7 @@ class ButtonCell: NSButtonCell {
 			} else {
 				upperTextRect = NSMakeRect(1.0, 3.0, 40.0, 15.0)
 			}
-			upperText!.drawInRect(NSOffsetRect(upperTextRect, 0, -1))
+			upperText!.draw(in: NSOffsetRect(upperTextRect, 0, -1))
 		}
 	}
 }

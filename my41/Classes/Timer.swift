@@ -137,7 +137,7 @@ class Timer : Peripheral {
 	}
 	
 	func setToCurrentTime() {
-		let daylightSavingTimeOffset: Int = TimeZone.local.isDaylightSavingTime ? 3600 : 0
+		let daylightSavingTimeOffset: Int = TimeZone.current.isDaylightSavingTime() ? 3600 : 0
 		var dateComponents: DateComponents = DateComponents()
 		dateComponents.day = 1
 		dateComponents.month = 1

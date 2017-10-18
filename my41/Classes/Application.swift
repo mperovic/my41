@@ -10,8 +10,8 @@ import Foundation
 import Cocoa
 
 final class CalculatorApplication: NSApplication {
-	override func sendEvent(theEvent: NSEvent) {
-		if theEvent.type == NSEventType.KeyUp && (theEvent.modifierFlags.intersect(.CommandKeyMask)).rawValue != 0 {
+	override func sendEvent(_ theEvent: NSEvent) {
+		if theEvent.type == NSEventType.keyUp && (theEvent.modifierFlags.intersection(.command)).rawValue != 0 {
 			self.keyWindow?.sendEvent(theEvent)
 		} else {
 			super.sendEvent(theEvent)

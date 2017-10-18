@@ -578,7 +578,7 @@ extension Display {
 	
 	func loadFont(_ resourceName: String) -> DisplayFont {
 		var font: DisplayFont = DisplayFont(repeating: 0, count: 128)
-		let filename = Bundle.main.pathForResource(resourceName, ofType: "hpfont")
+		let filename = Bundle.main.path(forResource: resourceName, ofType: "hpfont")
 		var data: Data?
 		do {
 			data = try Data(contentsOf: URL(fileURLWithPath: filename!), options: [.mappedIfSafe])

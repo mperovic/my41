@@ -152,7 +152,7 @@ class Calculator: NSObject {
 	
 	func setMemoryContents(_ data: Data) {
 		// the number of elements:
-		let count = data.count / sizeof(UInt8.self)
+		let count = data.count / MemoryLayout<UInt8>.size
 		
 		// create array of appropriate length:
 		var memoryArray = [UInt8](repeating: 0, count: count)

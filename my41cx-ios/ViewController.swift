@@ -100,7 +100,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 //		self.view.layer.cornerRadius = 6.0
 		self.view.backgroundColor = UIColor(red: 0.221, green: 0.221, blue: 0.221, alpha: 1.0)
 		
-		displayBackgroundView.backgroundColor = UIColor.lightGray()
+		displayBackgroundView.backgroundColor = UIColor.lightGray
 		displayBackgroundView.layer.cornerRadius = 3.0
 	}
 	
@@ -143,7 +143,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// ON
 		if let actualFont = upperButtonsFont {
-			let onString = mutableAttributedStringFromString("ON", color: UIColor.white())
+			let onString = mutableAttributedStringFromString("ON", color: .white)
 			let onAttributes = [
 				NSFontAttributeName : actualFont,
 			]
@@ -152,7 +152,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 
 		// USER
-		let userString = mutableAttributedStringFromString("USER", color: UIColor.white())
+		let userString = mutableAttributedStringFromString("USER", color: .white)
 		if let actualFont = upperButtonsFont {
 			let userAttributes = [
 				NSFontAttributeName : actualFont,
@@ -162,7 +162,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// PRGM
-		let prgmString = mutableAttributedStringFromString("PRGM", color: UIColor.white())
+		let prgmString = mutableAttributedStringFromString("PRGM", color: .white)
 		if let actualFont = upperButtonsFont {
 			let prgmAttributes = [
 				NSFontAttributeName : actualFont,
@@ -172,7 +172,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// ALPHA
-		let alphaString = mutableAttributedStringFromString("ALPHA", color: UIColor.white())
+		let alphaString = mutableAttributedStringFromString("ALPHA", color: .white)
 		if let actualFont = upperButtonsFont {
 			let alphaAttributes = [
 				NSFontAttributeName : actualFont,
@@ -188,13 +188,13 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			let sigmaMinusAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
-			]
+				] as [String : Any]
 			sigmaMinusString.addAttributes(sigmaMinusAttributes, range: NSMakeRange(1, 1))
 			labelSigmaMinus.attributedText = sigmaMinusString
 		}
 		
 		// Button Σ+
-		let sigmaPlusString = mutableAttributedStringFromString("Σ+", color: UIColor.white())
+		let sigmaPlusString = mutableAttributedStringFromString("Σ+", color: .white)
 		let sigmaPlusAttributes = [
 			NSBaselineOffsetAttributeName: 1
 		]
@@ -208,14 +208,14 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			let yxAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
-			]
+				] as [String : Any]
 			yxString.addAttributes(yxAttributes, range: NSMakeRange(1, 1))
 			labelYX.attributedText = yxString
 		}
 		
 		// Button 1/x
 		if let actualFont = TimesNewRoman10Font {
-			let oneXString = mutableAttributedStringFromString("1/x", color: UIColor.white())
+			let oneXString = mutableAttributedStringFromString("1/x", color: .white)
 			let oneXAttributes = [
 				NSFontAttributeName : actualFont,
 			]
@@ -236,7 +236,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button √x
 		if let actualFont = TimesNewRoman10Font {
-			let rootXString = mutableAttributedStringFromString("√x", color: UIColor.white())
+			let rootXString = mutableAttributedStringFromString("√x", color: .white)
 			let rootXAttributes2 = [
 				NSFontAttributeName : actualFont,
 			]
@@ -249,13 +249,13 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 				let tenXAttributes = [
 					NSFontAttributeName : actualFont,
 					NSBaselineOffsetAttributeName: 4
-				]
+					] as [String : Any]
 				tenXString.addAttributes(tenXAttributes, range: NSMakeRange(2, 1))
 				labelTenX.attributedText = tenXString
 			}
 			
 			// Button LOG
-			buttonLog.upperText = mutableAttributedStringFromString("LOG", color: UIColor.white())
+			buttonLog.upperText = mutableAttributedStringFromString("LOG", color: .white)
 		}
 		
 		// Label e^x
@@ -265,7 +265,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			let eXAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
-			]
+				] as [String : Any]
 			
 			if let actualFont2 = Helvetica12Font {
 				eXString.addAttributes(eXAttributes, range: NSMakeRange(1, 1))
@@ -278,7 +278,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Button LN
-		buttonLn.upperText = mutableAttributedStringFromString("LN", color: UIColor.white())
+		buttonLn.upperText = mutableAttributedStringFromString("LN", color: .white)
 		
 		// Label CLΣ
 		labelCLSigma.attributedText = mutableAttributedStringFromString("CLΣ", color: nil)
@@ -286,11 +286,11 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		// Button x≷y
 		let TimesNewRoman14Font = UIFont(name: "Times New Roman", size: 16.0 * yRatio)
 		if let actualFont = TimesNewRoman14Font {
-			let XexYString = mutableAttributedStringFromString("x≷y", color: UIColor.white())
+			let XexYString = mutableAttributedStringFromString("x≷y", color: .white)
 			let XexYAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
-			]
+				] as [String : Any]
 			XexYString.addAttributes(XexYAttributes, range: NSMakeRange(0, 3))
 			buttonXexY.upperText = XexYString
 		}
@@ -299,7 +299,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelPercent.attributedText = mutableAttributedStringFromString("%", color: nil)
 		
 		// Button R↓
-		buttonRArrrow.upperText = mutableAttributedStringFromString("R↓", color: UIColor.white())
+		buttonRArrrow.upperText = mutableAttributedStringFromString("R↓", color: .white)
 		
 		// Label SIN-1
 		let TimesNewRoman09Font = UIFont(name: "Times New Roman", size: 11.0 * yRatio)
@@ -308,13 +308,13 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			let sinAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
-			]
+				] as [String : Any]
 			sin1String.addAttributes(sinAttributes, range: NSMakeRange(3, 2))
 			labelSin.attributedText = sin1String
 		}
 		
 		// Button SIN
-		buttonSin.upperText = mutableAttributedStringFromString("SIN", color: UIColor.white())
+		buttonSin.upperText = mutableAttributedStringFromString("SIN", color: .white)
 		
 		// Label COS-1
 		if let actualFont = TimesNewRoman09Font {
@@ -322,13 +322,13 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			let cosAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
-			]
+				] as [String : Any]
 			cos1String.addAttributes(cosAttributes, range: NSMakeRange(3, 2))
 			labelCos.attributedText = cos1String
 		}
 		
 		// Button COS
-		buttonCos.upperText = mutableAttributedStringFromString("COS", color: UIColor.white())
+		buttonCos.upperText = mutableAttributedStringFromString("COS", color: .white)
 		
 		// Label TAN-1
 		if let actualFont = TimesNewRoman09Font {
@@ -336,55 +336,55 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			let tanAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 4
-			]
+				] as [String : Any]
 			tan1String.addAttributes(tanAttributes, range: NSMakeRange(3, 2))
 			labelTan.attributedText = tan1String
 		}
 		
 		// Button TAN
-		buttonTan.upperText = mutableAttributedStringFromString("TAN", color: UIColor.white())
+		buttonTan.upperText = mutableAttributedStringFromString("TAN", color: .white)
 		
 		// Label ASN
 		labelASN.attributedText = mutableAttributedStringFromString("ASN", color: nil)
 		
 		// Button XEQ
-		buttonXEQ.upperText = mutableAttributedStringFromString("XEQ", color: UIColor.white())
+		buttonXEQ.upperText = mutableAttributedStringFromString("XEQ", color: .white)
 		
 		// Label LBL
 		labelLBL.attributedText = mutableAttributedStringFromString("LBL", color: nil)
 		
 		// Button STO
-		buttonSTO.upperText = mutableAttributedStringFromString("STO", color: UIColor.white())
+		buttonSTO.upperText = mutableAttributedStringFromString("STO", color: .white)
 		
 		// Label GTO
 		labelGTO.attributedText = mutableAttributedStringFromString("GTO", color: nil)
 		
 		// Button RCL
-		buttonRCL.upperText = mutableAttributedStringFromString("RCL", color: UIColor.white())
+		buttonRCL.upperText = mutableAttributedStringFromString("RCL", color: .white)
 		
 		// Label BST
 		labelBST.attributedText = mutableAttributedStringFromString("BST", color: nil)
 		
 		// Button SST
-		buttonSST.upperText = mutableAttributedStringFromString("SST", color: UIColor.white())
+		buttonSST.upperText = mutableAttributedStringFromString("SST", color: .white)
 		
 		// Label CATALOG
 		labelCATALOG.attributedText = mutableAttributedStringFromString("CATALOG", color: nil)
 		
 		// Button ENTER
-		buttonENTER.upperText = mutableAttributedStringFromString("ENTER ↑", color: UIColor.white())
+		buttonENTER.upperText = mutableAttributedStringFromString("ENTER ↑", color: .white)
 		
 		// Label ISG
 		labelISG.attributedText = mutableAttributedStringFromString("ISG", color: nil)
 		
 		// Button CHS
-		buttonCHS.upperText = mutableAttributedStringFromString("CHS", color: UIColor.white())
+		buttonCHS.upperText = mutableAttributedStringFromString("CHS", color: .white)
 		
 		// Label RTN
 		labelRTN.attributedText = mutableAttributedStringFromString("RTN", color: nil)
 		
 		// Button EEX
-		buttonEEX.upperText = mutableAttributedStringFromString("EEX", color: UIColor.white())
+		buttonEEX.upperText = mutableAttributedStringFromString("EEX", color: .white)
 		
 		// Label CL X/A
 		let TimesNewRoman11Font = UIFont(name: "Times New Roman", size: 13.0 * yRatio)
@@ -400,7 +400,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		// Button Back
 		let Helvetica11Font = UIFont(name: "Helvetica", size: 13.0 * yRatio)
 		if let actualFont = Helvetica11Font {
-			let backString = mutableAttributedStringFromString("←", color: UIColor.white())
+			let backString = mutableAttributedStringFromString("←", color: .white)
 			let backAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -421,11 +421,11 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		// Button Minus
 		let Helvetica09Font = UIFont(name: "Helvetica", size: 11.0 * yRatio)
 		if let actualFont = Helvetica09Font {
-			let minusString = mutableAttributedStringFromString("━", color: UIColor.white())
+			let minusString = mutableAttributedStringFromString("━", color: .white)
 			let minusAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: -1
-			]
+				] as [String : Any]
 			minusString.addAttributes(minusAttributes, range: NSMakeRange(0, 1))
 			buttonMinus.upperText = minusString
 		}
@@ -435,7 +435,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 7
 		if let actualFont = Helvetica13Font {
-			let sevenString = mutableAttributedStringFromString("7", color: UIColor.white())
+			let sevenString = mutableAttributedStringFromString("7", color: .white)
 			let sevenAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -448,7 +448,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 8
 		if let actualFont = Helvetica13Font {
-			let eightString = mutableAttributedStringFromString("8", color: UIColor.white())
+			let eightString = mutableAttributedStringFromString("8", color: .white)
 			let eightAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -461,7 +461,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 9
 		if let actualFont = Helvetica13Font {
-			let nineString = mutableAttributedStringFromString("9", color: UIColor.white())
+			let nineString = mutableAttributedStringFromString("9", color: .white)
 			let nineAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -482,7 +482,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button Plus
 		if let actualFont = Helvetica09Font {
-			let plusString = mutableAttributedStringFromString("╋", color: UIColor.white())
+			let plusString = mutableAttributedStringFromString("╋", color: .white)
 			let plusAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -495,7 +495,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 4
 		if let actualFont = Helvetica13Font {
-			let fourString = mutableAttributedStringFromString("4", color: UIColor.white())
+			let fourString = mutableAttributedStringFromString("4", color: .white)
 			let fourAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -508,7 +508,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 5
 		if let actualFont = Helvetica13Font {
-			let fiveString = mutableAttributedStringFromString("5", color: UIColor.white())
+			let fiveString = mutableAttributedStringFromString("5", color: .white)
 			let fiveAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -521,7 +521,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 6
 		if let actualFont = Helvetica13Font {
-			let sixString = mutableAttributedStringFromString("6", color: UIColor.white())
+			let sixString = mutableAttributedStringFromString("6", color: .white)
 			let sixAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -535,7 +535,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			let xgreaterthanyAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: -1
-			]
+				] as [String : Any]
 			xgreaterthanyString.addAttributes(xgreaterthanyAttributes, range: NSMakeRange(0, 3))
 			labelXGreaterThanY.attributedText = xgreaterthanyString
 		}
@@ -543,11 +543,11 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		// Button Multiply
 		let Helvetica15Font = UIFont(name: "Helvetica", size: 17.0 * yRatio)
 		if let actualFont = Helvetica15Font {
-			let multiplyString = mutableAttributedStringFromString("×", color: UIColor.white())
+			let multiplyString = mutableAttributedStringFromString("×", color: .white)
 			let multiplyAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
-			]
+				] as [String : Any]
 			multiplyString.addAttributes(multiplyAttributes, range: NSMakeRange(0, 1))
 			buttonMultiply.upperText = multiplyString
 		}
@@ -557,7 +557,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 1
 		if let actualFont = Helvetica13Font {
-			let oneString = mutableAttributedStringFromString("1", color: UIColor.white())
+			let oneString = mutableAttributedStringFromString("1", color: .white)
 			let oneAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -570,7 +570,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 2
 		if let actualFont = Helvetica13Font {
-			let twoString = mutableAttributedStringFromString("2", color: UIColor.white())
+			let twoString = mutableAttributedStringFromString("2", color: .white)
 			let twoAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -583,7 +583,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 3
 		if let actualFont = Helvetica13Font {
-			let thtreeString = mutableAttributedStringFromString("3", color: UIColor.white())
+			let thtreeString = mutableAttributedStringFromString("3", color: .white)
 			let thtreeAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -597,18 +597,18 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			let xeq0Attributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: -1
-			]
+				] as [String : Any]
 			xeq0String.addAttributes(xeq0Attributes, range: NSMakeRange(0, 5))
 			labelXEQ0.attributedText = xeq0String
 		}
 		
 		// Button Divide
 		if let actualFont = Helvetica15Font {
-			let divideString = mutableAttributedStringFromString("÷", color: UIColor.white())
+			let divideString = mutableAttributedStringFromString("÷", color: .white)
 			let divideAttributes = [
 				NSFontAttributeName : actualFont,
 				NSBaselineOffsetAttributeName: 1
-			]
+				] as [String : Any]
 			divideString.addAttributes(divideAttributes, range: NSMakeRange(0, 1))
 			buttonDivide.upperText = divideString
 		}
@@ -626,7 +626,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button 0
 		if let actualFont = Helvetica13Font {
-			let zeroString = mutableAttributedStringFromString("0", color: UIColor.white())
+			let zeroString = mutableAttributedStringFromString("0", color: .white)
 			let zeroAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -646,7 +646,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button •
 		if let actualFont = Helvetica13Font {
-			let pointString = mutableAttributedStringFromString("•", color: UIColor.white())
+			let pointString = mutableAttributedStringFromString("•", color: .white)
 			let pointAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -659,7 +659,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		
 		// Button R/S
 		if let actualFont = Helvetica12Font {
-			let rsString = mutableAttributedStringFromString("R/S", color: UIColor.white())
+			let rsString = mutableAttributedStringFromString("R/S", color: .white)
 			let rsAttributes = [
 				NSFontAttributeName : actualFont
 			]
@@ -672,9 +672,9 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
-	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return UIStatusBarStyle.lightContent
+
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .lightContent
 	}
 	
 	func mutableAttributedStringFromString(_ aString: String, color: UIColor?) -> NSMutableAttributedString {
@@ -766,13 +766,13 @@ class CalculatorView: UIView {
 		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(CalculatorView.displayOff),
-			name: "displayOff" as NSNotification.Name,
+			name: NSNotification.Name(rawValue: "displayOff"),
 			object: nil
 		)
 		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(CalculatorView.displayToggle),
-			name: "displayToggle" as NSNotification.Name,
+			name: NSNotification.Name(rawValue: "displayToggle"),
 			object: nil
 		)
 	}

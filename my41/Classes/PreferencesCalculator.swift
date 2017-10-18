@@ -19,23 +19,23 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	var preferencesContainerViewController: PreferencesContainerViewController?
 
 	override func viewDidLoad() {
-		let defaults = NSUserDefaults.standardUserDefaults()
+		let defaults = UserDefaults.standard
 		
-		let cType = defaults.integerForKey(HPCalculatorType)
+		let cType = defaults.integer(forKey: HPCalculatorType)
 		
 		switch cType {
 		case 1:
-			calculatorType = .HP41C
+			calculatorType = .hp41C
 		case 2:
-			calculatorType = .HP41CV
+			calculatorType = .hp41CV
 		case 3:
-			calculatorType = .HP41CX
+			calculatorType = .hp41CX
 		default:
 			// Make sure I have a default for next time
-			calculatorType = .HP41CX
-			defaults.setInteger(CalculatorType.HP41CX.rawValue, forKey: HPCalculatorType)
+			calculatorType = .hp41CX
+			defaults.set(CalculatorType.hp41CX.rawValue, forKey: HPCalculatorType)
 		}
-		calculatorSelector.selectItemAtIndex(cType - 1)
+		calculatorSelector.selectItem(at: cType - 1)
 	}
 	
 	
@@ -54,8 +54,8 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 			} else {
 				SYNCHRONYZE = false
 			}
-			let defaults = NSUserDefaults.standardUserDefaults()
-			defaults.setBool(SYNCHRONYZE, forKey: "synchronyzeTime")
+			let defaults = UserDefaults.standard
+			defaults.set(SYNCHRONYZE, forKey: "synchronyzeTime")
 			defaults.synchronize()
 		}
 	}
@@ -66,21 +66,21 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	{
 		if notification.object as! NSObject == calculatorSelector {
 			let selected = calculatorSelector.indexOfSelectedItem + 1
-			let defaults = NSUserDefaults.standardUserDefaults()
-			let cType = defaults.integerForKey(HPCalculatorType)
+			let defaults = UserDefaults.standard
+			let cType = defaults.integer(forKey: HPCalculatorType)
 			
 			if selected != cType {
 //				comments.stringValue = "Please be aware that changing the calculator type may result in some memory loss"
 				switch selected {
 				case 1:
-					calculatorType = .HP41C
+					calculatorType = .hp41C
 				case 2:
-					calculatorType = .HP41CV
+					calculatorType = .hp41CV
 				case 3:
-					calculatorType = .HP41CX
+					calculatorType = .hp41CX
 				default:
 					// Make sure I have a default for next time
-					calculatorType = .HP41CX
+					calculatorType = .hp41CX
 				}
 			}
 		}

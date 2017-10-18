@@ -34,16 +34,16 @@ class KeyGroup : NSView {
 	
 	var audioPlayer:AVAudioPlayer? = nil
 	
-	override func drawRect(dirtyRect: NSRect) {
-		NSColor.clearColor().setFill()
+	override func draw(_ dirtyRect: NSRect) {
+		NSColor.clear.setFill()
 		NSRectFill(dirtyRect)
 		
-		super.drawRect(dirtyRect)
+		super.draw(dirtyRect)
 	}
 	
 	func key(key: Key, pressed: Bool) {
 		let code: Int = key.keyCode! as Int
-		keyboard.keyWithCode(code, pressed: pressed)
+		keyboard.keyWithCode(code: code, pressed: pressed)
 		
 //		if pressed {
 //			playSound()
@@ -52,17 +52,17 @@ class KeyGroup : NSView {
 	
 	override var acceptsFirstResponder: Bool { return true }
 	
-	override func keyDown(theEvent: NSEvent) {
+	override func keyDown(with theEvent: NSEvent) {
 	}
 	
-	override func keyUp(theEvent: NSEvent) {
+	override func keyUp(with theEvent: NSEvent) {
 	}
 	
 	func playSound() {
-		let url = NSURL.fileURLWithPath(NSBundle.mainBundle().pathForResource("keyPressSound", ofType: "wav")!)
+		let url = NSURL.fileURL(withPath: Bundle.main.path(forResource: "keyPressSound", ofType: "wav")!)
 		
 		do {
-			self.audioPlayer = try AVAudioPlayer(contentsOfURL: url)
+			self.audioPlayer = try AVAudioPlayer(contentsOf: url)
 		} catch _ as NSError {
 			self.audioPlayer = nil
 		}

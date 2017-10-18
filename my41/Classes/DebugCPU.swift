@@ -51,21 +51,21 @@ class DebugCPUViewController: NSViewController {
 		self.cpuRegistersView.wantsLayer = true
 		self.cpuRegistersView.layer?.masksToBounds = true
 		self.cpuRegistersView.layer?.borderWidth = 2.0
-		self.cpuRegistersView.layer?.borderColor = CGColorCreateGenericGray(0.75, 1.0)
+		self.cpuRegistersView.layer?.borderColor = CGColor(gray: 0.75, alpha: 1.0)
 		self.cpuRegistersView.layer?.cornerRadius = 6.0
 		
 		self.displayRegistersView.wantsLayer = true
 		self.displayRegistersView.layer?.masksToBounds = true
 		self.displayRegistersView.layer?.borderWidth = 2.0
-		self.displayRegistersView.layer?.borderColor = CGColorCreateGenericGray(0.75, 1.0)
+		self.displayRegistersView.layer?.borderColor = CGColor(gray: 0.75, alpha: 1.0)
 		self.displayRegistersView.layer?.cornerRadius = 6.0
 		
 		cpu.debugCPUViewController = self
 		
-		NSNotificationCenter.defaultCenter().addObserver(
+		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(DebugCPUViewController.updateDisplay),
-			name: kCPUDebugUpdateDisplay,
+			name: NSNotification.Name(rawValue: kCPUDebugUpdateDisplay),
 			object: nil
 		)
 		
@@ -89,20 +89,20 @@ class DebugCPUViewController: NSViewController {
 		cpuRegisterG.stringValue = cpu.digitsToString(cpu.reg.G)
 		cpuRegisterT.stringValue = NSString(format:"%02X", cpu.reg.T) as String
 		let strXST = String(cpu.reg.XST, radix:2)
-		cpuRegisterXST.stringValue = pad(strXST, toSize: 6)
+		cpuRegisterXST.stringValue = pad(string: strXST, toSize: 6)
 		let strST = String(cpu.reg.ST, radix:2)
-		cpuRegisterST.stringValue = pad(strST, toSize: 8)
+		cpuRegisterST.stringValue = pad(string: strST, toSize: 8)
 		if cpu.reg.R == 0 {
 			cpuRegisterR.stringValue = "P"
 		} else {
 			cpuRegisterR.stringValue = "Q"
 		}
 		switch cpu.powerMode {
-		case .DeepSleep:
+		case .deepSleep:
 			cpuPowerMode.stringValue = "D"
-		case .LightSleep:
+		case .lightSleep:
 			cpuPowerMode.stringValue = "L"
-		case .PowerOn:
+		case .powerOn:
 			cpuPowerMode.stringValue = "P"
 		}
 		if cpu.reg.carry == 0 {
@@ -111,9 +111,9 @@ class DebugCPUViewController: NSViewController {
 			cpuRegisterCarry.stringValue = "F"
 		}
 		switch cpu.reg.mode {
-		case .DEC_MODE:
+		case .dec_mode:
 			cpuMode.stringValue = "D"
-		case .HEX_MODE:
+		case .hex_mode:
 			cpuMode.stringValue = "H"
 		}
 		cpuStack1.stringValue = NSString(format:"%04X", cpu.reg.stack[0]) as String
@@ -143,7 +143,7 @@ class DebugCPUViewController: NSViewController {
 		}
 	}
 
-	override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 		let segid = segue.identifier ?? "(none)"
 		if TRACE != 0 {
 			print("\(#function) hit, segue ID = \(segid)")
@@ -158,8 +158,8 @@ class DebugCPUViewController: NSViewController {
 			} else {
 				TRACE = 0
 			}
-			let defaults = NSUserDefaults.standardUserDefaults()
-			defaults.setInteger(TRACE, forKey: "traceActive")
+			let defaults = UserDefaults.standard
+			defaults.set(TRACE, forKey: "traceActive")
 			defaults.synchronize()
 		}
 	}

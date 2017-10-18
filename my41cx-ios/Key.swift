@@ -20,14 +20,14 @@ class Key: UIButton {
 	var pressed: Bool = false
 
 	let roundedRadius: CGFloat = 3.0
-	let appDelegate = UIApplication.shared().delegate as! AppDelegate
+	let appDelegate = UIApplication.shared.delegate as! AppDelegate
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 
 		self.layer.cornerRadius = roundedRadius
 		self.layer.borderWidth = 1.0
-		self.layer.borderColor = UIColor.black().cgColor
+		self.layer.borderColor = UIColor.black.cgColor
 		self.layer.masksToBounds = true
 		
 		self.setNeedsDisplay()
@@ -38,7 +38,7 @@ class Key: UIButton {
 		
 		self.layer.cornerRadius = roundedRadius
 		self.layer.borderWidth = 1.0
-		self.layer.borderColor = UIColor.black().cgColor
+		self.layer.borderColor = UIColor.black.cgColor
 		self.layer.masksToBounds = true
 		
 		self.setNeedsDisplay()
@@ -115,7 +115,7 @@ class Key: UIButton {
 			]
 		}
 		if self.layer.sublayers != nil {
-			if self.layer.sublayers?.count > 0 {
+			if let sublayers = self.layer.sublayers?.count, sublayers > 0 {
 				self.layer.sublayers?.remove(at: 0)
 			}
 		}
@@ -133,8 +133,9 @@ class Key: UIButton {
 			let lowerTextLayer = CATextLayer()
 			lowerTextLayer.frame = CGRect(x: 1.0, y: (rect.height / 2.0), width: rect.width - 2.0, height: rect.height / 2.0)
 			lowerTextLayer.alignmentMode = kCAAlignmentCenter
-			
-			lowerTextLayer.font = "Helvetica"
+
+			let fontName: CFString = "Helvetica" as CFString
+			lowerTextLayer.font = fontName
 			if lowerText!.characters.count > 1 {
 				lowerTextLayer.fontSize = 13.0 * yRatio
 			} else {

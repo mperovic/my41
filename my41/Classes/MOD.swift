@@ -206,7 +206,7 @@ final class ModulePage {
 	}
 }
 
-enum CheckPageError: ErrorProtocol {
+enum CheckPageError: Error {
 	case pageOutOfRange
 	case pageGroupOutOfRange
 	case bankOutOfRange
@@ -393,7 +393,7 @@ final class MOD {
 		moduleHeader.numPages = header.numPages
 	}
 	
-	enum modHeaderError: ErrorProtocol {
+	enum modHeaderError: Error {
 		case wrongFileSize
 		case noModExtension
 		case tooManyMEMModules
@@ -527,7 +527,7 @@ final class MOD {
 		modulePages.append(modulePage)
 	}
 	
-	enum readModFileError: ErrorProtocol {
+	enum readModFileError: Error {
 		case errorLoadingFile
 	}
 	
@@ -536,7 +536,7 @@ final class MOD {
 		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: filename) {
 			do {
-				let fileAttributes: NSDictionary = try fileManager.attributesOfItem(atPath: filename)
+				let fileAttributes: NSDictionary = try fileManager.attributesOfItem(atPath: filename) as NSDictionary
 				self.fileSize = fileAttributes[FileAttributeKey.size]! as! Int
 				self.data = try Data(contentsOf: URL(fileURLWithPath: filename), options: [.mappedIfSafe])
 				self.shortName = (filename as NSString).lastPathComponent.lowercased()

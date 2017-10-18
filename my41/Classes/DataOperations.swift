@@ -218,7 +218,7 @@ func addOrSubtractDigits(
 		if op == .add {
 			d = Int(firstNum[idx]) + Int(secondNum[idx]) + Int(c)
 		} else {
-			if mode == .dec_MODE {
+			if mode == .dec_mode {
 				d = Int(firstNum[idx]) + 0x9 - Int(secondNum[idx]) + Int(c)
 			} else {
 				d = Int(firstNum[idx]) + 0xF - Int(secondNum[idx]) + Int(c)
@@ -229,7 +229,7 @@ func addOrSubtractDigits(
 				}
 			}
 		}
-		if mode == ArithMode.dec_MODE && d > 9 {
+		if mode == ArithMode.dec_mode && d > 9 {
 			d += 6
 		}
 		c = d >> 4

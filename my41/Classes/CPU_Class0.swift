@@ -1423,7 +1423,7 @@ func op_SETHEX() -> Bit																// SETHEX
 	SETHEX									1001_1000_00							1
 	=========================================================================================
 	*/
-	cpu.reg.mode = .hex_MODE
+	cpu.reg.mode = .hex_mode
 	
 	return 0
 }
@@ -1448,7 +1448,7 @@ func op_SETDEC() -> Bit																// SETDEC
 	SETDEC									1010_1000_00							1
 	=========================================================================================
 	*/
-	cpu.reg.mode = .dec_MODE
+	cpu.reg.mode = .dec_mode
 	
 	return 0
 }

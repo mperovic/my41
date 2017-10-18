@@ -38,15 +38,15 @@ class KeyGroup: UIView {
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
-		let url = URL.init(fileURLWithPath: Bundle.main.pathForResource("keyPressSound", ofType: "wav")!)
-		AudioServicesCreateSystemSoundID(url, &self.mySound)
+		let url = URL.init(fileURLWithPath: Bundle.main.path(forResource: "keyPressSound", ofType: "wav")!)
+		AudioServicesCreateSystemSoundID(url as CFURL, &self.mySound)
 	}
 
 	override func draw(_ rect: CGRect) {
 		let context = UIGraphicsGetCurrentContext()
 		
 		context?.saveGState()
-		context?.setFillColor(UIColor.clear().cgColor)
+		context?.setFillColor(UIColor.clear.cgColor)
 		context?.drawPath(using: CGPathDrawingMode.fill)
 		
 		context?.restoreGState()
@@ -59,9 +59,8 @@ class KeyGroup: UIView {
 		keyboard.keyWithCode(code, pressed: pressed)
 		
 		if pressed && SOUND {
-			DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosUtility).async {
+			DispatchQueue.global(qos: .utility).async {
 				AudioServicesPlaySystemSound(self.mySound)
-				return
 			}
 		}
 	}

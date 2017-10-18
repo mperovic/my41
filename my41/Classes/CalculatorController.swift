@@ -22,8 +22,8 @@ class CalculatorController : Calculator {
 	override init() {		
 		super.init()
 		
-		NSNotificationCenter.defaultCenter().addObserverForName(
-			NSApplicationWillBecomeActiveNotification,
+		NotificationCenter.default.addObserver(
+			forName: NSNotification.Name.NSApplicationWillBecomeActive,
 			object: nil,
 			queue: nil) { active in
 				if let tModule = self.timerModule {
