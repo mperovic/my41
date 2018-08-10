@@ -245,7 +245,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 		self.button.addTarget(
 			self,
 			action: #selector(MODsView.buttonAction(_:)),
-			for: UIControlEvents.touchUpInside
+			for: UIControl.Event.touchUpInside
 		)
 		self.addSubview(self.button)
 	}
@@ -335,8 +335,8 @@ class MODsView: UIView, UIAlertViewDelegate {
 		let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = NSTextAlignment.center
 		let attributes = [
-			NSFontAttributeName : font,
-			NSParagraphStyleAttributeName: textStyle
+			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font,
+			convertFromNSAttributedStringKey(NSAttributedString.Key.paragraphStyle): textStyle
 		]
 		if let fPath = filePath {
 			let mod = MOD()
@@ -344,7 +344,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 				try mod.readModFromFile(fPath)
 				mod.moduleHeader.title.draw(
 					in: CGRect(x: 10.0, y: 10.0, width: self.bounds.size.width - 20.0, height: self.bounds.size.height - 20.0),
-					withAttributes: attributes
+					withAttributes: convertToOptionalNSAttributedStringKeyDictionary(attributes)
 				)
 			} catch {
 				
@@ -353,7 +353,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 			let title = "Empty module"
 			title.draw(
 				in: CGRect(x: 10.0, y: 10.0, width: self.bounds.size.width - 20.0, height: self.bounds.size.height - 20.0),
-				withAttributes: attributes
+				withAttributes: convertToOptionalNSAttributedStringKeyDictionary(attributes)
 			)
 
 		}
@@ -441,4 +441,15 @@ class MODDetailsView: UIView {
 		backColor.setFill()
 		path.fill()
 	}
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

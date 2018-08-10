@@ -11,12 +11,12 @@ import UIKit
 class Key: UIButton {
 	@IBOutlet weak var keygroup: KeyGroup!
 
-	var lowerText: String?
-	var upperText: NSMutableAttributedString?
-	var shiftButton: String?
+	@objc var lowerText: String?
+	@objc var upperText: NSMutableAttributedString?
+	@objc var shiftButton: String?
 	var switchButton: String?
 
-	var keyCode: NSNumber?
+	@objc var keyCode: NSNumber?
 	var pressed: Bool = false
 
 	let roundedRadius: CGFloat = 3.0
@@ -124,41 +124,41 @@ class Key: UIButton {
 		// Draw darker overlay if button is pressed
 		if isHighlighted {
 			UIColor(white: 0.0, alpha: 0.35).setFill()
-			let darkOverlay = UIBezierPath(roundedRect: UIEdgeInsetsInsetRect(rect, UIEdgeInsetsMake(2.0, 2.0, 2.0, 2.0)), cornerRadius: roundedRadius)
+			let darkOverlay = UIBezierPath(roundedRect: rect.inset(by: UIEdgeInsets.init(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)), cornerRadius: roundedRadius)
 			darkOverlay.fill()
 		}
 		
 		// Text Drawing
-		if lowerText != nil {
+		if let lower = lowerText {
 			let lowerTextLayer = CATextLayer()
 			lowerTextLayer.frame = CGRect(x: 1.0, y: (rect.height / 2.0), width: rect.width - 2.0, height: rect.height / 2.0)
-			lowerTextLayer.alignmentMode = kCAAlignmentCenter
+			lowerTextLayer.alignmentMode = CATextLayerAlignmentMode.center
 
 			let fontName: CFString = "Helvetica" as CFString
 			lowerTextLayer.font = fontName
-			if lowerText!.count > 1 {
+			if lower.count > 1 {
 				lowerTextLayer.fontSize = 13.0 * yRatio
 			} else {
 				lowerTextLayer.fontSize = 15.0 * yRatio
 			}
 			lowerTextLayer.foregroundColor = UIColor(red: 0.341, green: 0.643, blue: 0.78, alpha: 1.0).cgColor
-			lowerTextLayer.string = lowerText!
+			lowerTextLayer.string = lower
 			self.layer.addSublayer(lowerTextLayer)
 		}
 		
-		if upperText != nil {
+		if let upper = upperText {
 			let upperTextLayer = CATextLayer()
-			upperTextLayer.alignmentMode = kCAAlignmentCenter
-			if upperText?.string == "ON" || upperText?.string == "USER" || upperText?.string == "PRGM" || upperText?.string == "ALPHA" {
+			upperTextLayer.alignmentMode = CATextLayerAlignmentMode.center
+			if upper.string == "ON" || upperText?.string == "USER" || upperText?.string == "PRGM" || upperText?.string == "ALPHA" {
 				upperTextLayer.frame = CGRect(x: 1.0, y: 2.0, width: rect.width - 2.0, height: rect.height - 4.0)
-			} else if upperText?.string == "╋" || upperText?.string == "━" {
+			} else if upper.string == "╋" || upperText?.string == "━" {
 				upperTextLayer.frame = CGRect(x: 1.0, y: 2.0, width: rect.width - 2.0, height: (rect.height / 2.0) - 2.0)
-			} else if upperText?.string == "÷" || upperText?.string == "×" {
+			} else if upper.string == "÷" || upperText?.string == "×" {
 				upperTextLayer.frame = CGRect(x: 1.0, y: 0.0, width: rect.width - 2.0, height: (rect.height / 2.0))
 			} else {
 				upperTextLayer.frame = CGRect(x: 1.0, y: 1.0, width: rect.width - 2.0, height: (rect.height / 2.0))
 			}
-			upperTextLayer.string = upperText!
+			upperTextLayer.string = upper
 			self.layer.addSublayer(upperTextLayer)
 		}
 		context?.restoreGState()

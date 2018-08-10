@@ -56,9 +56,9 @@ class Key: NSButton {
 }
 
 class ButtonCell: NSButtonCell {
-	var lowerText: String?
-	var upperText: NSMutableAttributedString?
-	var shiftButton: String?
+	@objc var lowerText: String?
+	@objc var upperText: NSMutableAttributedString?
+	@objc var shiftButton: String?
 	var switchButton: String?
 	
 	required init(coder: NSCoder) {

@@ -21,6 +21,6 @@ extension String {
 //		let start = advance(startIndex, integerRange.startIndex)
 //		let end = advance(startIndex, integerRange.endIndex)
 		let range = start..<end
-		return self[range]
+		return String(self[range])
 	}
 }

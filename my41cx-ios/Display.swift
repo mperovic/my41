@@ -106,7 +106,7 @@ class Display: UIView, Peripheral {
 			}
 
 			let attrs = [
-				NSFontAttributeName: annunciatorFont!
+				convertFromNSAttributedStringKey(NSAttributedString.Key.font): annunciatorFont!
 			]
 			calculatorController.prgmMode = false
 			calculatorController.alphaMode = false
@@ -129,7 +129,7 @@ class Display: UIView, Peripheral {
 					let nsString = annunciatorStrings[idx] as NSString
 					nsString.draw(
 						at: CGPoint(x: 0.0, y: 0.0),
-						withAttributes: attrs
+						withAttributes: convertToOptionalNSAttributedStringKeyDictionary(attrs)
 					)
 					context?.restoreGState()
 				}
@@ -385,11 +385,11 @@ class Display: UIView, Peripheral {
 		var h: CGFloat = 0.0
 		var totalWidth: CGFloat = 0.0
 		let attrs = [
-			NSFontAttributeName: annunciatorFont!
+			convertFromNSAttributedStringKey(NSAttributedString.Key.font): annunciatorFont!
 		]
 		for idx in 0..<numAnnunciators {
 			let nsString: NSString = annunciatorStrings[idx] as NSString
-			let width = nsString.size(attributes: attrs).width
+			let width = nsString.size(withAttributes: convertToOptionalNSAttributedStringKeyDictionary(attrs)).width
 			annunciatorWidths[idx] = width
 			totalWidth += width
 		}
@@ -406,4 +406,15 @@ class Display: UIView, Peripheral {
 		
 		return positions
 	}
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

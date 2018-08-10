@@ -776,11 +776,11 @@ class CalculatorView: NSView {
 		}
 	}
 	
-	func displayOff() {
+	@objc func displayOff() {
 		lcdDisplay.displayOff()
 	}
 	
-	func displayToggle() {
+	@objc func displayToggle() {
 		lcdDisplay.displayToggle()
 	}
 	
