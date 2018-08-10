@@ -175,7 +175,7 @@ class Calculator: NSObject {
 	}
 	
 	func getMemoryContents() -> Data {
-		let data: NSMutableData = NSMutableData()
+		var data = Data()
 		let count = 14 * MAX_RAM_SIZE
 		var memoryArray = [UInt8](repeating: 0, count: count)
 		var ptr = 0
@@ -194,9 +194,9 @@ class Calculator: NSObject {
 				}
 			}
 		}
-		data.append(memoryArray, length: count)
+		data.append(memoryArray, count: count)
 		
-		return data as Data
+		return data
 	}
 	
 	func readCalculatorDescriptionFromDefaults() {

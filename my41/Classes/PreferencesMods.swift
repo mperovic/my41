@@ -204,7 +204,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		return modFiles.count
 	}
 	
-	func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		let filePath = modFiles[row]
 		
 		var cellView: NSTableCellView?
@@ -217,13 +217,13 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		return cellView
 	}
 	
-	func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
 		selectedRow(row: row)
 		
 		return true
 	}
-	
-	func tableView(tableView: NSTableView, writeRowsWithIndexes rowIndexes: NSIndexSet, toPasteboard pboard: NSPasteboard) -> Bool {
+
+	func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
 		if rowIndexes.count > 1 {
 			return false
 		} else {

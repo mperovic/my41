@@ -667,5 +667,5 @@ final class MOD {
 }
 
 func convertCCharToString(_ cstring: [CChar]) -> String {
-	return NSString(bytes: cstring, length: Int(cstring.count), encoding: String.Encoding.ascii.rawValue) as String!
+	return NSString(bytes: cstring, length: Int(cstring.count), encoding: String.Encoding.ascii.rawValue)! as String
 }

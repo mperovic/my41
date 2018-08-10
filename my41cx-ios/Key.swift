@@ -136,7 +136,7 @@ class Key: UIButton {
 
 			let fontName: CFString = "Helvetica" as CFString
 			lowerTextLayer.font = fontName
-			if lowerText!.characters.count > 1 {
+			if lowerText!.count > 1 {
 				lowerTextLayer.fontSize = 13.0 * yRatio
 			} else {
 				lowerTextLayer.fontSize = 15.0 * yRatio

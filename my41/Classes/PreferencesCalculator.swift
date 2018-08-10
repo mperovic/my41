@@ -48,7 +48,7 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	
 	@IBAction func synchronize(sender: AnyObject)
 	{
-		if sender as! NSObject == synchronyzeButton {
+		if sender as? NSObject == synchronyzeButton {
 			if synchronyzeButton.state == NSOnState {
 				SYNCHRONYZE = true
 			} else {
@@ -62,9 +62,9 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 
 	
 	// MARK: - NSComboBoxDelegate Methods
-	func comboBoxSelectionDidChange(notification: NSNotification)
+	func comboBoxSelectionDidChange(_ notification: Notification)
 	{
-		if notification.object as! NSObject == calculatorSelector {
+		if notification.object as? NSObject == calculatorSelector {
 			let selected = calculatorSelector.indexOfSelectedItem + 1
 			let defaults = UserDefaults.standard
 			let cType = defaults.integer(forKey: HPCalculatorType)

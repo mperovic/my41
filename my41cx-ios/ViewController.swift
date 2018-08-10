@@ -91,7 +91,6 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 	@IBOutlet weak var my41CX: UIButton!
 	
 	var yRatio: CGFloat = 1.0
-	var popoverController: UIPopoverController? = nil
 
 	override func viewWillAppear(_ animated: Bool) {
 		let aView = self.view as! CalculatorView

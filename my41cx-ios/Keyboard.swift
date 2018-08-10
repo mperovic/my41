@@ -25,7 +25,7 @@ class iOSKeyboard : NSObject {
 		super.init()
 	}
 	
-	func keyWithCode(_ code: Int, pressed: Bool) {
+	func keyWithCode(_ code: Bits8, pressed: Bool) {
 		cpu.keyWithCode(code, pressed: pressed)
 	}
 }
@@ -55,8 +55,7 @@ class KeyGroup: UIView {
 	}
 	
 	func key(_ key: Key, pressed: Bool) {
-		let code: Int = key.keyCode! as Int
-		keyboard.keyWithCode(code, pressed: pressed)
+		keyboard.keyWithCode(Bits8(key.keyCode!), pressed: pressed)
 		
 		if pressed && SOUND {
 			DispatchQueue.global(qos: .utility).async {

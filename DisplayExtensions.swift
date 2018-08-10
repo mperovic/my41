@@ -314,10 +314,10 @@ extension Display {
 		)
 	{
 		/*
-		Fetch digits from the specified registers, rotating them in the specified direction,
-		and assemble them into the specified destination.
-		For size == LONG, fetches a total of 12 digits into the destination;
-		for size == SHORT, fetches one digit from each specified register.
+			Fetch digits from the specified registers, rotating them in the specified direction,
+			and assemble them into the specified destination.
+			For size == LONG, fetches a total of 12 digits into the destination;
+			for size == SHORT, fetches one digit from each specified register.
 		*/
 		var cp = 0
 		while cp < 12 {
@@ -338,7 +338,8 @@ extension Display {
 			}
 		}
 	}
-	
+
+	@discardableResult
 	func fetchDigit(
 		_ direction: DisplayShiftDirection,
 		from register: inout Digits12,
@@ -346,8 +347,8 @@ extension Display {
 		) -> Digits12
 	{
 		/*
-		Fetch a digit from the appropriate end of the given register into the specified destination,
-		and rotate the register in the specified direction.
+			Fetch a digit from the appropriate end of the given register into the specified destination,
+			and rotate the register in the specified direction.
 		*/
 		switch direction {
 		case .left:

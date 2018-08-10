@@ -137,7 +137,7 @@ struct CPURegisters {
 	
 	func pad(_ string : String, toSize: Int) -> String {
 		var padded = string
-		for _ in 0..<toSize - string.characters.count {
+		for _ in 0..<toSize - string.count {
 			padded = "0" + padded
 		}
 		return padded
@@ -249,7 +249,7 @@ final class CPU {
 	
 	let onKeyCode: Bits8 = 0x18
 	
-	let keyColTable: [Int] = [0x10, 0x30, 0x70, 0x80, 0xC0]
+	let keyColTable: [Bits8] = [0x10, 0x30, 0x70, 0x80, 0xC0]
 	
 	var currentRomChip: RomChip?
 	var currentPage: Int = 0
@@ -330,11 +330,11 @@ final class CPU {
 		setPowerMode(.powerOn)
 	}
 
-	func keyWithCode(_ code: Int, pressed: Bool) {
+	func keyWithCode(_ code: Bits8, pressed: Bool) {
 		if pressed {
-			let row = code >> 4
-			let col = code & 0x0f
-			reg.KY = Bits8(row | keyColTable[col])
+			let row: Bits8 = code >> 4
+			let col = Int(code) & 0x0f
+			reg.KY = row | keyColTable[col]
 			reg.keyDown = 1
 			
 			if reg.KY == onKeyCode && powerMode != .deepSleep {
@@ -388,7 +388,8 @@ final class CPU {
 		}
 		soundOutput.soundTimeslice()
 	}
-	
+
+	@discardableResult
 	func popReturnStack() -> Bits16 {
 		let result = reg.stack[0]
 		reg.stack[0] = reg.stack[1]
@@ -1005,7 +1006,7 @@ final class CPU {
 	
 	
 	// MARK: - CPU Invalid Instruction
-	
+	@discardableResult
 	func op_INVALID(_ parameter: String) -> Bit
 	{
 		if TRACE != 0 {

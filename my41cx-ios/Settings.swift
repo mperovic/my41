@@ -14,10 +14,10 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	@IBOutlet weak var syncClock: UISwitch!
 	@IBOutlet weak var calculator: UISegmentedControl!
 	
-	@IBOutlet weak var expansionModule1: MODsView!
-	@IBOutlet weak var expansionModule2: MODsView!
-	@IBOutlet weak var expansionModule3: MODsView!
-	@IBOutlet weak var expansionModule4: MODsView!
+	@IBOutlet weak var expansionModule1: MODsView?
+	@IBOutlet weak var expansionModule2: MODsView?
+	@IBOutlet weak var expansionModule3: MODsView?
+	@IBOutlet weak var expansionModule4: MODsView?
 	
 	var yRatio: CGFloat = 1.0
 
@@ -30,14 +30,21 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	}
 	
 	@IBAction func clearMemory(_ sender: AnyObject) {
-		let action = UIAlertView(
+		let alertController = UIAlertController(
 			title: "Reset Calculator",
 			message: "This operation will clear all programs and memory registers",
-			delegate: self,
-			cancelButtonTitle: "Cancel",
-			otherButtonTitles: "Continue"
+			preferredStyle: .alert
 		)
-		action.show()
+
+		let destructiveAction = UIAlertAction(title: "Continue", style: .destructive) { (result : UIAlertAction) -> Void in
+			CalculatorController.sharedInstance.resetCalculator(false)
+		}
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
+			print("Cancel clear memory")
+		}
+		alertController.addAction(cancelAction)
+		alertController.addAction(destructiveAction)
+		self.present(alertController, animated: true, completion: nil)
 	}
 	
 	@IBAction func applyChanges(_ sender: AnyObject) {
@@ -70,7 +77,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		}
 		
 		// Modules
-		if let fPath = self.expansionModule1.filePath {
+		if let fPath = self.expansionModule1?.filePath {
 			// We have something in Port1
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort1) {
@@ -93,7 +100,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 			}
 		}
 
-		if let fPath = self.expansionModule2.filePath {
+		if let fPath = self.expansionModule2?.filePath {
 			// We have something in Port2
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort2) {
@@ -116,7 +123,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 			}
 		}
 
-		if let fPath = self.expansionModule3.filePath {
+		if let fPath = self.expansionModule3?.filePath {
 			// We have something in Port3
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort3) {
@@ -139,7 +146,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 			}
 		}
 
-		if let fPath = self.expansionModule4.filePath {
+		if let fPath = self.expansionModule4?.filePath {
 			// We have something in Port4
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort4) {
@@ -173,14 +180,14 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	}
 	
 	//MARK: - UIAlertViewDelegate
-	func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-		if buttonIndex == 1 {
-			CalculatorController.sharedInstance.resetCalculator(false)
-			dismiss(
-				animated: true,
-				completion: nil)
-		}
-	}
+//	func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+//		if buttonIndex == 1 {
+//			CalculatorController.sharedInstance.resetCalculator(false)
+//			dismiss(
+//				animated: true,
+//				completion: nil)
+//		}
+//	}
 }
 
 class MODsView: UIView, UIAlertViewDelegate {
@@ -192,11 +199,11 @@ class MODsView: UIView, UIAlertViewDelegate {
 	var port: Int = 0
 	var button: UIButton
 
-	var modFiles: [String] = [String]()
-	var allModFiles: [String] = [String]()
+	var modFiles = [String]()
+	var allModFiles = [String]()
 	var modFileHeaders: [String: ModuleHeader]?
 
-	@IBOutlet weak var settingsViewController: SettingsViewController!
+	@IBOutlet weak var settingsViewController: SettingsViewController?
 	
 	override func awakeFromNib() {
 		allModFiles = modFilesInBundle()
@@ -245,31 +252,60 @@ class MODsView: UIView, UIAlertViewDelegate {
 	
 	func buttonAction(_ sender: AnyObject) {
 		if self.filePath != nil {
-			let action = UIAlertView(
-				title: "Port \(port)",
+			let alertController = UIAlertController(
+				title: "Reset Calculator",
 				message: "What do you want to do with module",
-				delegate: self,
-				cancelButtonTitle: "Cancel",
-				otherButtonTitles: "Empty port", "Replace module"
+				preferredStyle: .alert
 			)
-			action.show()
+
+			let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
+				if let oldFilePath = self.oldFilePath {
+					self.filePath = oldFilePath
+					self.oldFilePath = nil
+				}
+			}
+			let emptyAction = UIAlertAction(title: "Empty port", style: .default) { (result : UIAlertAction) -> Void in
+				self.filePath = nil
+				self.setNeedsDisplay()
+			}
+			let replaceAction = UIAlertAction(title: "Replace module", style: .default) { (result : UIAlertAction) -> Void in
+				self.oldFilePath = self.filePath
+				self.filePath = nil
+				self.selectModule()
+			}
+			alertController.addAction(cancelAction)
+			alertController.addAction(emptyAction)
+			alertController.addAction(replaceAction)
+			settingsViewController?.present(alertController, animated: true, completion: nil)
 		} else {
 			self.selectModule()
 		}
 	}
 	
 	func selectModule() {
-		let action = UIAlertView(
+		let alertController = UIAlertController(
 			title: "Port \(port)",
 			message: "Choose module",
-			delegate: self,
-			cancelButtonTitle: "Cancel"
+			preferredStyle: .alert
 		)
+
 		self.reloadModFiles()
 		for (_, element) in modFiles.enumerated() {
-			action.addButton(withTitle: (element as NSString).lastPathComponent)
+			let modAction = UIAlertAction(title: (element as NSString).lastPathComponent, style: .default) { (result : UIAlertAction) -> Void in
+				self.filePath = element
+				self.oldFilePath = nil
+				self.setNeedsDisplay()
+			}
+			alertController.addAction(modAction)
 		}
-		action.show()
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
+			if let oldFilePath = self.oldFilePath {
+				self.filePath = oldFilePath
+				self.oldFilePath = nil
+			}
+		}
+		alertController.addAction(cancelAction)
+		settingsViewController?.present(alertController, animated: true, completion: nil)
 	}
 
 	override func draw(_ rect: CGRect) {
@@ -295,7 +331,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 		backColor.setFill()
 		path.fill()
 		
-		let font = UIFont.systemFont(ofSize: 15.0 * settingsViewController.yRatio)
+		let font = UIFont.systemFont(ofSize: 15.0 * (settingsViewController?.yRatio)!)
 		let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = NSTextAlignment.center
 		let attributes = [
@@ -323,37 +359,6 @@ class MODsView: UIView, UIAlertViewDelegate {
 		}
 	}
 	
-	//MARK: - UIAlertViewDelegate Methods
-	func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-		if buttonIndex != 0 {
-			// Selected something
-			if filePath == nil {
-				// Adding new module
-				filePath = modFiles[buttonIndex - 1]
-				oldFilePath = nil
-				self.setNeedsDisplay()
-			} else {
-				// We already have selected module
-				if buttonIndex == 1 {
-					// Empty module
-					filePath = nil
-					self.setNeedsDisplay()
-				} else {
-					// Change existing module
-					oldFilePath = filePath
-					filePath = nil
-					self.selectModule()
-				}
-			}
-		} else {
-			// Cancel
-			if oldFilePath != nil {
-				filePath = oldFilePath
-				oldFilePath = nil
-			}
-		}
-	}
-	
 	//MARK: - Private methods
 	
 	func reloadModFiles() {
@@ -376,22 +381,22 @@ class MODsView: UIView, UIAlertViewDelegate {
 	func removeLoadedModules() {
 		let defaults = UserDefaults.standard
 		if (defaults.string(forKey: HPPort1) != nil) {
-			if let path = settingsViewController.expansionModule1.filePath {
+			if let path = settingsViewController?.expansionModule1?.filePath {
 				removeModFile(path)
 			}
 		}
 		if (defaults.string(forKey: HPPort2) != nil) {
-			if let path = settingsViewController.expansionModule2.filePath {
+			if let path = settingsViewController?.expansionModule2?.filePath {
 				removeModFile(path)
 			}
 		}
 		if (defaults.string(forKey: HPPort3) != nil) {
-			if let path = settingsViewController.expansionModule3.filePath {
+			if let path = settingsViewController?.expansionModule3?.filePath {
 				removeModFile(path)
 			}
 		}
 		if (defaults.string(forKey: HPPort4) != nil) {
-			if let path = settingsViewController.expansionModule4.filePath {
+			if let path = settingsViewController?.expansionModule4?.filePath {
 				removeModFile(path)
 			}
 		}

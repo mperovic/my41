@@ -28,16 +28,17 @@ class Display: UIView, Peripheral {
 	let annunciatorFontSize: CGFloat = 10.0
 	let annunciatorBottomMargin: CGFloat = 0.0
 	var annunciatorPositions: [CGPoint] = [CGPoint](repeating: CGPoint(x: 0.0, y: 0.0), count: 12)
-	
+
+	private var _contrast = Digit()
 	var contrast: Digit {
 		set {
-			self.contrast = newValue & 0xf
+			_contrast = newValue & 0xf
 			
 			scheduleUpdate()
 		}
 		
 		get {
-			return self.contrast
+			return _contrast
 		}
 	}
 	
@@ -70,7 +71,7 @@ class Display: UIView, Peripheral {
 		do {
 			let filename: String = Bundle.main.path(forResource: CTULookupRsrcName, ofType: CTULookupRsrcType)!
 			let CTULookup = try NSMutableString(contentsOfFile: filename, encoding: String.Encoding.unicode.rawValue) as String
-			CTULookupLength = CTULookup.characters.count
+			CTULookupLength = CTULookup.count
 		} catch _ {
 			
 		}

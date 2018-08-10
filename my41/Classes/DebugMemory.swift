@@ -155,7 +155,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		return 0x40		// Number of RAM banks
 	}
 	
-	func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
 		var value: AnyObject?
 		
 		if tableColumn?.identifier == "avail" {
@@ -181,11 +181,11 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		return value
 	}
 	
-	func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
 		return true
 	}
 	
-	func tableViewSelectionDidChange(notification: NSNotification) {
+	func tableViewSelectionDidChange(_ notification: Notification) {
 		let tv = notification.object as! NSTableView
 		bankSelected = tv.selectedRow
 		displaySelectedMemoryBank()
