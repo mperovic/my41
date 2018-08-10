@@ -250,7 +250,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 		self.addSubview(self.button)
 	}
 	
-	func buttonAction(_ sender: AnyObject) {
+	@objc func buttonAction(_ sender: AnyObject) {
 		if self.filePath != nil {
 			let alertController = UIAlertController(
 				title: "Reset Calculator",
