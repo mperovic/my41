@@ -498,21 +498,14 @@ final class Bus {
 //		ramValid[Int(address)] = true
 //	}
 	
-	func readRamAddress(_ address: Bits12, into data: inout Digits14) throws {
+	func readRamAddress(_ address: Bits12) throws -> Digits14 {
 		/*
 			Read specified location of specified chip.
 			If chip or location is nonexistent, set data to 0 and return false.
 		*/
 		if RAMExists(Int(address)) {
-			copyDigits(
-				ram[Int(address)],
-				sourceStartAt: 0,
-				destination: &data,
-				destinationStartAt: 0,
-				count: 14
-			)
+			return ram[Int(address)]
 		} else {
-			clearDigits(destination: &data)
 			throw RamError.invalidAddress
 		}
 	}
@@ -520,13 +513,7 @@ final class Bus {
 	func writeRamAddress(_ address: Bits12, from data: Digits14) throws {
 		// Write to specified location of specified chip. If chip or location is nonexistent, do nothing and return false.
 		if RAMExists(Int(address)) {
-			copyDigits(
-				data,
-				sourceStartAt: 0,
-				destination: &ram[Int(address)],
-				destinationStartAt: 0,
-				count: 14
-			)
+			ram[Int(address)] = data
 		} else {
 			throw RamError.invalidAddress
 		}

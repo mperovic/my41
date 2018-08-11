@@ -62,7 +62,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 			if bus.RAMExists(address) {
 				var tmpReg = emptyDigit14
 				do {
-					try bus.readRamAddress(Bits12(addr), into: &tmpReg)
+					tmpReg = try bus.readRamAddress(Bits12(addr))
 					
 					switch ptr {
 					case 0x0:

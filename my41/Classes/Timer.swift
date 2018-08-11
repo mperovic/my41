@@ -159,42 +159,18 @@ class Timer : Peripheral {
 				clock[timerSelected.rawValue],
 				dst: &registers.CLK[timerSelected.rawValue]
 			)
-			copyDigits(
-				registers.CLK[timerSelected.rawValue],
-				sourceStartAt: 0,
-				destination: &cpu.reg.C,
-				destinationStartAt: 0,
-				count: 14
-			)
+			cpu.reg.C = registers.CLK[timerSelected.rawValue]
 		case 0x1:		// RTIMEST
 			convertToReg14(
 				clock[timerSelected.rawValue],
 				dst: &registers.CLK[timerSelected.rawValue]
 			)
-			copyDigits(
-				registers.CLK[timerSelected.rawValue],
-				sourceStartAt: 0,
-				destination: &cpu.reg.C,
-				destinationStartAt: 0,
-				count: 14
-			)
+			cpu.reg.C = registers.CLK[timerSelected.rawValue]
 		case 0x2:		// RALM
-			copyDigits(
-				registers.ALM[timerSelected.rawValue],
-				sourceStartAt: 0,
-				destination: &cpu.reg.C,
-				destinationStartAt: 0,
-				count: 14
-			)
+			cpu.reg.C = registers.ALM[timerSelected.rawValue]
 		case 0x3:		// RSTS
 			if timerSelected.rawValue != 0 {
-				copyDigits(
-					registers.TMR_S,
-					sourceStartAt: 0,
-					destination: &cpu.reg.C,
-					destinationStartAt: 0,
-					count: 14
-				)
+				cpu.reg.C = registers.TMR_S
 			} else {
 				cpu.reg.C = emptyDigit14
 				for idx in 0..<4 {
@@ -202,13 +178,7 @@ class Timer : Peripheral {
 				}
 			}
 		case 0x4:		// RSCR
-			copyDigits(
-				registers.SCR[timerSelected.rawValue],
-				sourceStartAt: 0,
-				destination: &cpu.reg.C,
-				destinationStartAt: 0,
-				count: 14
-			)
+			cpu.reg.C = registers.SCR[timerSelected.rawValue]
 		case 0x5:		// RINT
 			cpu.reg.C = emptyDigit14
 			for idx in 0..<5 {
@@ -227,38 +197,21 @@ class Timer : Peripheral {
 		switch register {
 		case 0x0:
 			// WTIME
-			copyDigits(
-				cpu.reg.C,
-				sourceStartAt: 0,
-				destination: &registers.CLK[timerSelected.rawValue],
-				destinationStartAt: 0,
-				count: 14
-			)
+			registers.CLK[timerSelected.rawValue] = cpu.reg.C
 			convertToUint64(
 				&clock[timerSelected.rawValue],
 				withRegister:registers.CLK[timerSelected.rawValue]
 			)
 		case 0x1:
 			// WTIME-
-			copyDigits(
-				cpu.reg.C,
-				sourceStartAt: 0,
-				destination: &registers.CLK[timerSelected.rawValue],
-				destinationStartAt: 0,
-				count: 14
-			)
+			registers.CLK[timerSelected.rawValue] = cpu.reg.C
 			convertToUint64(
 				&clock[timerSelected.rawValue],
 				withRegister:registers.CLK[timerSelected.rawValue]
 			)
 		case 0x2:
 			// WALM
-			copyDigits(
-				cpu.reg.C,
-				sourceStartAt: 0,
-				destination: &registers.ALM[timerSelected.rawValue],
-				destinationStartAt: 0,
-				count: 14)
+			registers.ALM[timerSelected.rawValue] = cpu.reg.C
 			convertToUint64(
 				&alarm[timerSelected.rawValue],
 				withRegister:registers.ALM[timerSelected.rawValue]
@@ -280,21 +233,10 @@ class Timer : Peripheral {
 			}
 		case 0x4:
 			// WSCR
-			copyDigits(
-				cpu.reg.C,
-				sourceStartAt: 0,
-				destination: &registers.SCR[timerSelected.rawValue],
-				destinationStartAt: 0,
-				count: 14)
+			registers.SCR[timerSelected.rawValue] = cpu.reg.C
 		case 0x5:
 			// WINTST - set and start interval time
-			copyDigits(
-				cpu.reg.C,
-				sourceStartAt: 0,
-				destination: &registers.INT[0],
-				destinationStartAt: 0,
-				count: 5
-			)
+			registers.INT[0] = cpu.reg.C
 			convertToUint64(
 				&intTimerEnd,
 				withRegister:registers.INT[0]

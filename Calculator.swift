@@ -173,25 +173,18 @@ class Calculator {
 	
 	func getMemoryContents() -> Data {
 		var data = Data()
-		let count = 14 * MAX_RAM_SIZE
-		var memoryArray = [UInt8](repeating: 0, count: count)
-		var ptr = 0
+		var memoryArray = [UInt8]()
 		for addr in 0..<MAX_RAM_SIZE {
-			var tmpReg = emptyDigit14
 			do {
-				try bus.readRamAddress(Bits12(addr), into: &tmpReg)
-				
-				for idx in 0...13 {
-					memoryArray[ptr+idx] = tmpReg[idx]
-				}
-				ptr += 14
+				let tmpReg = try bus.readRamAddress(Bits12(addr))
+				memoryArray.append(contentsOf: tmpReg)
 			} catch {
 				if TRACE != 0 {
 					print("error RAM address: \(addr)")
 				}
 			}
 		}
-		data.append(memoryArray, count: count)
+		data.append(memoryArray, count: 14 * MAX_RAM_SIZE)
 		
 		return data
 	}

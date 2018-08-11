@@ -792,15 +792,8 @@ func op_MeqC() -> Bit																   // M=C
 	M=C										0101_0110_00							1
 	=========================================================================================
 	*/
-//	cpu.reg.M = cpu.reg.C
-	copyDigits(
-		cpu.reg.C,
-		sourceStartAt: 0,
-		destination: &cpu.reg.M,
-		destinationStartAt: 0,
-		count: 14
-	)
-	
+	cpu.reg.M = cpu.reg.C
+
 	return 0
 }
 
@@ -824,15 +817,8 @@ func op_CeqM() -> Bit																   // C=M
 	C=M										0110_0110_00							1
 	=========================================================================================
 	*/
-//	cpu.reg.C = cpu.reg.M
-	copyDigits(
-		cpu.reg.M,
-		sourceStartAt: 0,
-		destination: &cpu.reg.C,
-		destinationStartAt: 0,
-		count: 14
-	)
-	
+	cpu.reg.C = cpu.reg.M
+
 	return 0
 }
 
@@ -1837,14 +1823,8 @@ func op_NeqC() -> Bit																   // N=C
 	N=C										0001_1100_00							1
 	=========================================================================================
 	*/
-	copyDigits(
-		cpu.reg.C,
-		sourceStartAt: 0,
-		destination: &cpu.reg.N,
-		destinationStartAt: 0,
-		count: 14
-	)
-	
+	cpu.reg.N = cpu.reg.C
+
 	return 0
 }
 
@@ -1868,14 +1848,8 @@ func op_CeqN() -> Bit																   // C=N
 	C=N										0010_1100_00							1
 	=========================================================================================
 	*/
-	copyDigits(
-		cpu.reg.N,
-		sourceStartAt: 0,
-		destination: &cpu.reg.C,
-		destinationStartAt: 0,
-		count: 14
-	)
-	
+	cpu.reg.C = cpu.reg.N
+
 	return 0
 }
 
@@ -2392,7 +2366,7 @@ func op_CeqDATA(_ param: Int) -> Bit													// C=DATA
 	*/
 	if (cpu.reg.peripheral == 0 || (cpu.reg.ramAddress <= 0x000F) || (cpu.reg.ramAddress >= 0x0020)) {
 		do {
-			try bus.readRamAddress(cpu.reg.ramAddress, into: &cpu.reg.C)
+			cpu.reg.C = try bus.readRamAddress(cpu.reg.ramAddress)
 		} catch {
 			if TRACE != 0 {
 				print("error RAM address: \(cpu.reg.ramAddress)")
@@ -2443,7 +2417,7 @@ func op_CeqREGN(_ param: Int) -> Bit												// C=REGN
 	if (cpu.reg.peripheral == 0 || (cpu.reg.ramAddress <= 0x000F) || (cpu.reg.ramAddress >= 0x0020)) {
 		cpu.reg.ramAddress = Bits12(cpu.reg.ramAddress & 0x03F0) | Bits12(param)
 		do {
-			try bus.readRamAddress(cpu.reg.ramAddress, into: &cpu.reg.C)
+			cpu.reg.C = try bus.readRamAddress(cpu.reg.ramAddress)
 		} catch {
 			if TRACE != 0 {
 				print("error RAM address: \(cpu.reg.ramAddress)")
