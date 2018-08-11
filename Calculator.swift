@@ -60,15 +60,16 @@ class Calculator {
 		self.installBuiltinRoms()
 		
 		self.installExternalModules()
-		
+
+		cpu.reset()
+		cpu.setRunning(true)
+
 		if restoringMemory {
 			restoreMemory()
 		} else {
 			emptyRAM()
 		}
-		
-		cpu.reset()
-		cpu.setRunning(true)
+
 		self.startExecutionTimer()
 	}
 	
@@ -141,9 +142,8 @@ class Calculator {
 	}
 	
 	func restoreMemory() {
-		let data: Data? = UserDefaults.standard.object(forKey: "memory") as? Data
-		if let aData = data {
-			self.setMemoryContents(aData)
+		if let data = UserDefaults.standard.object(forKey: "memory") as? Data {
+			self.setMemoryContents(data)
 		}
 	}
 	
