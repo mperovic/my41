@@ -468,8 +468,8 @@ extension Display {
 	
 	func annunciatorOn(_ i: Int) -> Bool {
 		/*
-		Determine whether annunciator number i should be on based on the contents of the E register.
-		Note that i is not the same as the bit number in E, because the annunciators are numbered from left to right.
+			Determine whether annunciator number i should be on based on the contents of the E register.
+			Note that i is not the same as the bit number in E, because the annunciators are numbered from left to right.
 		*/
 		let j: Bits12 = 11 - Bits12(i)
 		

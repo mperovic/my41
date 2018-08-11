@@ -111,8 +111,7 @@ class Calculator {
 		}
 	}
 	
-	func emptyRAM()
-	{
+	func emptyRAM() {
 		let tmpReg = emptyDigit14
 		for addr in 0..<MAX_RAM_SIZE {
 			do {

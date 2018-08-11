@@ -228,8 +228,8 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 			return false
 		} else {
 //			let title = modDetailsView.modDetails?.title
-			let row = rowIndexes.firstIndex
-			let filePath = modFiles[row]
+			let row = rowIndexes.first
+			let filePath = modFiles[row!]
 			pboard.setString(filePath, forType: NSPasteboardTypeString)
 			
 			return true

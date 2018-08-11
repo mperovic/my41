@@ -698,17 +698,17 @@ final class ViewController: NSViewController {
 	override var acceptsFirstResponder: Bool { return true }
 
 	@IBAction func keyPressed(sender: AnyObject) {
-		let key = sender as Key
-		let keyCode = key.keyCode
-		if TRACE != 0 {
-			print(keyCode)
+		if let key = sender as? Key, let keyCode = key.keyCode as? Bits8 {
+			if TRACE != 0 {
+				print(keyCode)
+			}
+
+			cpu.keyWithCode(keyCode, pressed: true)
+			if TRACE != 0 {
+				print(keyCode)
+			}
+			cpu.keyWithCode(keyCode, pressed: false)
 		}
-		
-		cpu.keyWithCode(keyCode, pressed: true)
-		if TRACE != 0 {
-			print(keyCode)
-		}
-		cpu.keyWithCode(keyCode, pressed: false)
 	}
 }
 

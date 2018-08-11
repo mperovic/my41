@@ -24,7 +24,7 @@ class Keyboard : NSObject {
 		super.init()
 	}
 	
-	func keyWithCode(code: Int, pressed: Bool) {
+	func keyWithCode(code: Bits8, pressed: Bool) {
 		cpu.keyWithCode(code, pressed: pressed)
 	}
 }
@@ -42,9 +42,10 @@ class KeyGroup : NSView {
 	}
 	
 	func key(key: Key, pressed: Bool) {
-		let code: Int = key.keyCode! as Int
-		keyboard.keyWithCode(code: code, pressed: pressed)
-		
+		if let code = key.keyCode as? Bits8 {
+			keyboard.keyWithCode(code: code, pressed: pressed)
+		}
+
 //		if pressed {
 //			playSound()
 //		}
