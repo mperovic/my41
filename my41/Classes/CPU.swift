@@ -332,8 +332,8 @@ final class CPU {
 
 	func keyWithCode(_ code: Bits8, pressed: Bool) {
 		if pressed {
-			let row: Bits8 = code >> 4
-			let col = Int(code) & 0x0f
+			let row = code >> 4
+			let col = Int(code & 0x0f)
 			reg.KY = row | keyColTable[col]
 			reg.keyDown = 1
 			
