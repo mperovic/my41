@@ -61,10 +61,7 @@ class Timer : Peripheral {
 		static var sharedInstance : Timer?
 	}
 	
-	class var sharedInstance: Timer {
-	_ = Timer.__once
-		return Static.sharedInstance!
-	}
+	static let sharedInstance = Timer()
 	
 	init() {
 		assert(Static.sharedInstance == nil, "Singleton already initialized!")

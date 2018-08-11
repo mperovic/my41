@@ -10,14 +10,7 @@ import Foundation
 import Cocoa
 
 class CalculatorController : Calculator {
-	
-	class var sharedInstance: CalculatorController {
-		struct Singleton {
-			static let instance = CalculatorController()
-		}
-		
-		return Singleton.instance
-	}
+	static let sharedInstance = CalculatorController()
 
 	override init() {		
 		super.init()

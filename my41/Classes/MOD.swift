@@ -125,7 +125,7 @@ struct ModuleFileHeader {
 }
 
 // Module Memory Structures - see MOD file structures for field descriptions
-class ModuleHeader {
+final class ModuleHeader {
 	var fullFileName: String
 	var fileFormat: String
 	var title: String

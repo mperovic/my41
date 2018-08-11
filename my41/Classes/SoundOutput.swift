@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SoundCmds: Int {
+enum SoundCmds: Int, Codable {
 	case nullCmd                       = 0
 	case quietCmd                      = 3
 	case flushCmd                      = 4
@@ -73,32 +73,30 @@ enum SoundMode {
 	case none, speaker, wawe
 }
 
-class SoundOutput {
+final class SoundOutput: Codable {
 	typealias SoundSample = UInt8
-	
-	var soundMode = SoundMode.none
 
-	struct SndCommand {
+	struct SndCommand: Codable {
 		var cmd: SoundCmds			= .nullCmd
 		var param1: Int16			= 0
 		var param2: SoundHeader?	= nil
 	}
 	
-	struct SndChannel {
+	struct SndChannel: Codable {
 //		var nextChan:  SndChannel<T>
-		var firstMod: [String]				/* reserved for the Sound Manager */
+		var firstMod 					= [String]()	/* reserved for the Sound Manager */
 //			SndCallBackUPP      callBack
-		var userInfo: Int32
-		var wait: Int32						/* The following is for internal Sound Manager use only.*/
-		var cmdInProgress: SndCommand
-		var flags: Int16
-		var qLength: Int16
-		var qHead: Int16
-		var qTail: Int16
-		var queue: [SndCommand]?
+		var userInfo: Int32				= 0
+		var wait: Int32					= 0				/* The following is for internal Sound Manager use only.*/
+		var cmdInProgress				= SndCommand()
+		var flags: Int16				= 0
+		var qLength: Int16				= 0
+		var qHead: Int16				= 0
+		var qTail: Int16				= 0
+		var queue						= [SndCommand]()
 	}
 	
-	struct SoundHeader {
+	struct SoundHeader: Codable {
 		var samplePtr: [SoundSample]?	= nil				/*if NIL then samples are in sampleArea*/
 		var length: Int					= 0					/*length of sound in bytes*/
 		var sampleRate: UInt64			= 0					/*sample rate for this sound*/
@@ -109,22 +107,36 @@ class SoundOutput {
 		var sampleArea: UInt8			= 0					/*space for when samples follow directly*/
 	}
 	
-	struct SoundBuffer {
+	struct SoundBuffer: Codable {
 	//	var next: SoundBuffer? = nil
 		var inUse: Bool = false
 		var header: SoundHeader = SoundHeader()
 		var samples: [SoundSample] = [SoundSample](repeating: 0, count: SAMPLES_PER_BUFFER)
 	}
-	
+
+	var soundMode = SoundMode.none
+
 	var gSndChannel: SndChannel?
-	var gBuffers: [SoundBuffer] = [SoundBuffer]()
+	var gBuffers = [SoundBuffer]()
 	var gBufferSendPtr: Int = 0
 	var gBufferAllocPtr: Int = 0
 	var gNumPendingBuffers: Int = 0
 	var gCurrentBuffer: SoundBuffer?
 	var gBufferingSound: Bool = false
 	var gConstantSampleCount: Int = 0
-	var gLastSample: SoundSample = SoundSample(LOW_SAMPLE)
+	var gLastSample = SoundSample(LOW_SAMPLE)
+
+	enum CodingKeys: String, CodingKey {
+		case gSndChannel
+		case gBuffers
+		case gBufferSendPtr
+		case gBufferAllocPtr
+		case gNumPendingBuffers
+		case gCurrentBuffer
+		case gBufferingSound
+		case gConstantSampleCount
+		case gLastSample
+	}
 
 	init() {
 //		var idx: Int
@@ -132,6 +144,32 @@ class SoundOutput {
 		for _ in 0..<TOTAL_BUFFERS {
 			gBuffers.append(SoundBuffer())
 		}
+	}
+
+	required init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: CodingKeys.self)
+		gSndChannel = try values.decode(SndChannel.self, forKey: .gSndChannel)
+		gBuffers = try values.decode([SoundBuffer].self, forKey: .gBuffers)
+		gBufferSendPtr = try values.decode(Int.self, forKey: .gBufferSendPtr)
+		gBufferAllocPtr = try values.decode(Int.self, forKey: .gBufferAllocPtr)
+		gNumPendingBuffers = try values.decode(Int.self, forKey: .gNumPendingBuffers)
+		gCurrentBuffer = try values.decode(SoundBuffer.self, forKey: .gCurrentBuffer)
+		gBufferingSound = try values.decode(Bool.self, forKey: .gBufferingSound)
+		gConstantSampleCount = try values.decode(Int.self, forKey: .gConstantSampleCount)
+		gLastSample = try values.decode(SoundSample.self, forKey: .gLastSample)
+	}
+
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(gSndChannel, forKey: .gSndChannel)
+		try container.encode(gBuffers, forKey: .gBuffers)
+		try container.encode(gBufferSendPtr, forKey: .gBufferSendPtr)
+		try container.encode(gBufferAllocPtr, forKey: .gBufferAllocPtr)
+		try container.encode(gNumPendingBuffers, forKey: .gNumPendingBuffers)
+		try container.encode(gCurrentBuffer, forKey: .gCurrentBuffer)
+		try container.encode(gBufferingSound, forKey: .gBufferingSound)
+		try container.encode(gConstantSampleCount, forKey: .gConstantSampleCount)
+		try container.encode(gLastSample, forKey: .gLastSample)
 	}
 
 	func soundAvailableBufferSpace() -> Int {

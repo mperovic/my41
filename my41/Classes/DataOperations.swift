@@ -244,8 +244,7 @@ func addOrSubtractDigits(
 	zero = z
 }
 
-func adder(nib1: Digit, nib2: Digit) -> Digit
-{
+func adder(nib1: Digit, nib2: Digit) -> Digit {
 	var result = nib1 + nib2 + Digit(cpu.reg.carry)
 	if result >= cpu.reg.mode.rawValue {
 		result -= cpu.reg.mode.rawValue
@@ -259,8 +258,7 @@ func adder(nib1: Digit, nib2: Digit) -> Digit
 	return result
 }
 
-func subtractor(nib1: Digit, nib2: Digit) -> Digit
-{
+func subtractor(nib1: Digit, nib2: Digit) -> Digit {
 	var result = Int(nib1) - Int(nib2) - Int(cpu.reg.carry)
 	if result < 0 {
 		result += Int(cpu.reg.mode.rawValue)
@@ -274,11 +272,7 @@ func subtractor(nib1: Digit, nib2: Digit) -> Digit
 	return Digit(result)
 }
 
-func compareDigits(
-	_ source: Digits14,
-	withDigits destination: Digits14
-) -> Bool
-{
+func compareDigits(_ source: Digits14, withDigits destination: Digits14) -> Bool {
 	for idx in 0...13 {
 		if source[idx] != destination[idx] {
 			return false
@@ -288,7 +282,6 @@ func compareDigits(
 	return true
 }
 
-func decToHex(_ dec: Int) -> String
-{
+func decToHex(_ dec: Int) -> String {
 	return NSString(format:"%2X", dec) as String
 }

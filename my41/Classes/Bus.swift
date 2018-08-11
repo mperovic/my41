@@ -219,13 +219,7 @@ final class Bus {
 	var nextActualBankGroup: byte = 1										// counter for loading actual bank groups
 	var activeBank: [Int] = [Int](repeating: 1, count: 0x10)
 	
-	class var sharedInstance : Bus {
-		struct Singleton {
-			static let instance = Bus()
-		}
-		
-		return Singleton.instance
-	}
+	static let sharedInstance = Bus()
 
 	init () {
 		// 16 pages of 4 banks

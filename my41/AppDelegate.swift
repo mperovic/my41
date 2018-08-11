@@ -29,16 +29,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationWillResignActive(_ notification: Notification) {
-		CalculatorController.sharedInstance.saveMemory()
+
 	}
 
 	func applicationWillBecomeActive(_ notification: Notification) {
-		CalculatorController.sharedInstance.restoreMemory()
+		CalculatorController.sharedInstance.resetCalculator(restoringMemory: true)
 	}
 	
 	func applicationWillTerminate(aNotification: NSNotification) {
 		// Insert code here to tear down your application
 		CalculatorController.sharedInstance.saveMemory()
+		CalculatorController.sharedInstance.saveCPU()
 	}
 
 	@IBAction func masterClear(sender: AnyObject) {

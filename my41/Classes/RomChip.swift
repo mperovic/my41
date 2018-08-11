@@ -22,15 +22,18 @@ final class RomChip {
 		writable = isWritable
 		actualBankGroup = 1
 	}
+
 	convenience init(fromBIN bin: [byte], actualBankGroup bankGroup: byte) {
 		self.init(isWritable: false)
 		binToWords(bin)
 		self.actualBankGroup = bankGroup
 	}
+
 	convenience init(fromFile path: String) {
 		self.init(isWritable: false)
 		loadFromFile(path)
 	}
+	
 	convenience init() {
 		self.init(isWritable: false)
 	}

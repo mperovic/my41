@@ -44,32 +44,28 @@ class Calculator {
 	init() {
 		timerModule = Timer()
 		calculatorMod = MOD()
-
-		resetCalculator(true)
 	}
 	
-	func resetCalculator(_ restoringMemory: Bool) {
-		// Show progress indicator & status label
-		
+	func resetCalculator(restoringMemory: Bool) {
 		bus.memModules = 0
 		bus.XMemModules = 0
 		cpu.setRunning(false)
-		
+		cpu.reset()
+
 		bus.removeAllRomChips()
 		
 		self.installBuiltinRoms()
 		
 		self.installExternalModules()
 
-		cpu.reset()
-		cpu.setRunning(true)
-
 		if restoringMemory {
+			restoreCPU()
 			restoreMemory()
 		} else {
 			emptyRAM()
 		}
 
+		cpu.setRunning(true)
 		self.startExecutionTimer()
 	}
 	
@@ -135,15 +131,84 @@ class Calculator {
 	}
 	
 	func saveMemory() {
-		let data = getMemoryContents()
 		let defaults = UserDefaults.standard
+
+		let data = getMemoryContents()
 		defaults.set(data, forKey: "memory")
 		defaults.synchronize()
 	}
-	
+
+	func saveCPU() {
+		do {
+			let defaults = UserDefaults.standard
+
+			let cpu = try JSONEncoder().encode(CPU.sharedInstance)
+			defaults.set(cpu, forKey: "cpu")
+
+			let reg = try JSONEncoder().encode(CPU.sharedInstance.reg)
+			defaults.set(reg, forKey: "reg")
+			defaults.synchronize()
+		} catch {
+			print(error)
+		}
+	}
+
 	func restoreMemory() {
 		if let data = UserDefaults.standard.object(forKey: "memory") as? Data {
 			self.setMemoryContents(data)
+		}
+	}
+
+	func restoreCPU() {
+		if let archivedCPU = UserDefaults.standard.object(forKey: "cpu") as? Data {
+			restoreCPU(archivedCPU)
+		}
+		if let archivedCPURegisters = UserDefaults.standard.object(forKey: "reg") as? Data {
+			restoreCPURegisters(archivedCPURegisters)
+		}
+	}
+
+	private func restoreCPU(_ data: Data) {
+		let decoder = JSONDecoder()
+		do {
+			let decoded = try decoder.decode(CPU.self, from: data)
+			cpu.currentTyte = decoded.currentTyte
+			cpu.savedPC = decoded.savedPC
+			cpu.lastOpCode = decoded.lastOpCode
+			cpu.powerOffFlag = decoded.powerOffFlag
+			cpu.opcode = decoded.opcode
+			cpu.prevPT = decoded.prevPT
+		} catch {
+			print(error)
+		}
+	}
+
+	private func restoreCPURegisters(_ data: Data) {
+		let decoder = JSONDecoder()
+		do {
+			let decoded = try decoder.decode(CPURegisters.self, from: data)
+			cpu.reg.A = decoded.A
+			cpu.reg.B = decoded.B
+			cpu.reg.C = decoded.C
+			cpu.reg.M = decoded.M
+			cpu.reg.N = decoded.N
+			cpu.reg.P = decoded.P
+			cpu.reg.Q = decoded.Q
+			cpu.reg.PC = decoded.PC
+			cpu.reg.G = decoded.G
+			cpu.reg.ST = decoded.ST
+			cpu.reg.T = decoded.T
+			cpu.reg.FI = decoded.FI
+//			cpu.reg.KY = decoded.KY
+			cpu.reg.XST = decoded.XST
+			cpu.reg.stack = decoded.stack
+			cpu.reg.R = decoded.R
+//			cpu.reg.carry = decoded.carry
+			cpu.reg.mode = decoded.mode
+			cpu.reg.ramAddress = decoded.ramAddress
+			cpu.reg.peripheral = decoded.peripheral
+		} catch {
+			print(error)
 		}
 	}
 	
@@ -235,6 +300,7 @@ class Calculator {
 			let defaults = UserDefaults.standard
 			defaults.set(CalculatorType.hp41CX.rawValue, forKey: HPCalculatorType)
 			filename = Bundle.main.resourcePath! + "/" + "nut-cx.mod"
+			defaults.synchronize()
 		}
 		
 		do {

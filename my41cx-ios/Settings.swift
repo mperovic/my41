@@ -37,7 +37,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		)
 
 		let destructiveAction = UIAlertAction(title: "Continue", style: .destructive) { (result : UIAlertAction) -> Void in
-			CalculatorController.sharedInstance.resetCalculator(false)
+			CalculatorController.sharedInstance.resetCalculator(restoringMemory: false)
 		}
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
 			print("Cancel clear memory")
@@ -175,19 +175,9 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 			completion: nil)
 		
 		if needsRestart {
-			CalculatorController.sharedInstance.resetCalculator(true)
+			CalculatorController.sharedInstance.resetCalculator(restoringMemory: true)
 		}
 	}
-	
-	//MARK: - UIAlertViewDelegate
-//	func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-//		if buttonIndex == 1 {
-//			CalculatorController.sharedInstance.resetCalculator(false)
-//			dismiss(
-//				animated: true,
-//				completion: nil)
-//		}
-//	}
 }
 
 class MODsView: UIView, UIAlertViewDelegate {

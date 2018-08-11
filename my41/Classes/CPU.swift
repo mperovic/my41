@@ -30,7 +30,7 @@ let emptyDigit14:[Digit] = [Digit](repeating: 0, count: 14)
 
 let timeSliceInterval	= 0.01
 
-struct CPURegisters {
+final class CPURegisters: Codable {
 	var A = emptyDigit14
 	var B = emptyDigit14
 	var C = emptyDigit14
@@ -38,8 +38,7 @@ struct CPURegisters {
 	var N = emptyDigit14
 	var P: Bits4			= 0
 	var Q: Bits4			= 0
-	var PC: Bits16			= 0
-		{
+	var PC: Bits16			= 0 {
 		willSet(newValue) {
 			let page = Int((newValue & 0xf000) >> 12)
 			let activeBank = bus.activeBank[page]
@@ -72,7 +71,82 @@ struct CPURegisters {
 	var peripheral: Bits8	= 0											// Selected peripheral
 	var keyDown: Bit		= 0											// Set if a key is being held down
 	
-	var dis: Disassembly = Disassembly()
+	let dis: Disassembly = Disassembly()
+
+	enum CodingKeys: String, CodingKey {
+		case A
+		case B
+		case C
+		case M
+		case N
+		case P
+		case Q
+		case PC
+		case G
+		case ST
+		case T
+		case FI
+		case KY
+		case XST
+		case stack
+		case R
+		case carry
+		case mode
+		case ramAddress
+		case peripheral
+	}
+
+	init() {
+		//
+	}
+
+	init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: CodingKeys.self)
+		A = try values.decode(Digits14.self, forKey: .A)
+		B = try values.decode(Digits14.self, forKey: .B)
+		C = try values.decode(Digits14.self, forKey: .C)
+		M = try values.decode(Digits14.self, forKey: .M)
+		N = try values.decode(Digits14.self, forKey: .N)
+		P = try values.decode(Bits4.self, forKey: .P)
+		Q = try values.decode(Bits4.self, forKey: .Q)
+		PC = try values.decode(Bits16.self, forKey: .PC)
+		G = try values.decode([Digit].self, forKey: .G)
+		ST = try values.decode(Bits8.self, forKey: .ST)
+		T = try values.decode(Bits8.self, forKey: .T)
+		FI = try values.decode(Bits14.self, forKey: .FI)
+		KY = try values.decode(Bits8.self, forKey: .KY)
+		XST = try values.decode(Bits6.self, forKey: .XST)
+		stack = try values.decode([Bits16].self, forKey: .stack)
+		R = try values.decode(Bit.self, forKey: .R)
+		carry = try values.decode(Bit.self, forKey: .carry)
+		mode = try values.decode(ArithMode.self, forKey: .mode)
+		ramAddress = try values.decode(Bits12.self, forKey: .ramAddress)
+		peripheral = try values.decode(Bits8.self, forKey: .peripheral)
+	}
+
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(A, forKey: .A)
+		try container.encode(B, forKey: .B)
+		try container.encode(C, forKey: .C)
+		try container.encode(M, forKey: .M)
+		try container.encode(N, forKey: .N)
+		try container.encode(P, forKey: .P)
+		try container.encode(Q, forKey: .Q)
+		try container.encode(PC, forKey: .PC)
+		try container.encode(G, forKey: .G)
+		try container.encode(ST, forKey: .ST)
+		try container.encode(T, forKey: .T)
+		try container.encode(FI, forKey: .FI)
+		try container.encode(KY, forKey: .KY)
+		try container.encode(XST, forKey: .XST)
+		try container.encode(stack, forKey: .stack)
+		try container.encode(R, forKey: .R)
+		try container.encode(carry, forKey: .carry)
+		try container.encode(mode, forKey: .mode)
+		try container.encode(ramAddress, forKey: .ramAddress)
+		try container.encode(peripheral, forKey: .peripheral)
+	}
 
 	func description() {
 		let stack0 = NSString(format:"%04X", stack[0]) as String
@@ -153,7 +227,7 @@ struct CPURegisters {
 	s  = set
 	C  = tef
 */
-struct OpCode {
+struct OpCode: Codable {
 	var opcode: Int
 	
 	init (opcode code: Int) {
@@ -181,13 +255,13 @@ struct OpCode {
 	}
 }
 
-enum PowerMode: Bits2 {
+enum PowerMode: Bits2, Codable {
 	case deepSleep = 0
 	case lightSleep = 1
 	case powerOn = 2
 }
 
-enum ArithMode: Digit {
+enum ArithMode: Digit, Codable {
 	case dec_mode = 0xa
 	case hex_mode = 0x10
 }
@@ -217,7 +291,9 @@ let fTable: [Int] = [
 
 var zeroes: Digits14 = emptyDigit14
 
-final class CPU {
+final class CPU: Codable {
+	static let sharedInstance = CPU()
+
 	// Processor performance characteristics
 	// ProcCycles / ProcInterval=5.8 for a real machine: 578 cycles / 100 ms per interval
 	// 5780 inst/sec = 1E6 / 173 ms for a halfnut HP-41CX instruction (older models run at 158 ms)
@@ -227,6 +303,10 @@ final class CPU {
 	let MIN_PROC_INTERVAL		=  10
 	// number of processor cycles to run each time:
 	let DEFAULT_PROC_CYCLES		= 578
+
+	let onKeyCode: Bits8 = 0x18
+
+	let keyColTable: [Bits8] = [0x10, 0x30, 0x70, 0x80, 0xC0]
 
 	var runFlag = false
 	var simulationTime: TimeInterval?
@@ -246,25 +326,51 @@ final class CPU {
 	
 	var opcode = OpCode(opcode: 0)
 	var prevPT: Bits4 = 0
-	
-	let onKeyCode: Bits8 = 0x18
-	
-	let keyColTable: [Bits8] = [0x10, 0x30, 0x70, 0x80, 0xC0]
-	
+
 	var currentRomChip: RomChip?
 	var currentPage: Int = 0
 	
-	class var sharedInstance: CPU {
-		struct Singleton {
-			static let instance = CPU()
-		}
-		
-		return Singleton.instance
+	enum CodingKeys: String, CodingKey {
+		case powerMode
+		case cycleLimit
+		case currentTyte
+		case savedPC
+		case lastOpCode
+		case powerOffFlag
+		case opcode
+		case prevPT
+		case currentPage
 	}
 		
 	init() {
 		let defaults = UserDefaults.standard
 		TRACE = defaults.integer(forKey: "traceActive")
+	}
+
+	init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: CodingKeys.self)
+		powerMode = try values.decode(PowerMode.self, forKey: .powerMode)
+		cycleLimit = try values.decode(Int.self, forKey: .cycleLimit)
+		currentTyte = try values.decode(Int.self, forKey: .currentTyte)
+		savedPC = try values.decode(Bits16.self, forKey: .savedPC)
+		lastOpCode = try values.decode(OpCode.self, forKey: .lastOpCode)
+		powerOffFlag = try values.decode(Bool.self, forKey: .powerOffFlag)
+		opcode = try values.decode(OpCode.self, forKey: .opcode)
+		prevPT = try values.decode(Bits4.self, forKey: .prevPT)
+		currentPage = try values.decode(Int.self, forKey: .currentPage)
+	}
+
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(powerMode, forKey: .powerMode)
+		try container.encode(cycleLimit, forKey: .cycleLimit)
+		try container.encode(currentTyte, forKey: .currentTyte)
+		try container.encode(savedPC, forKey: .savedPC)
+		try container.encode(lastOpCode, forKey: .lastOpCode)
+		try container.encode(powerOffFlag, forKey: .powerOffFlag)
+		try container.encode(opcode, forKey: .opcode)
+		try container.encode(prevPT, forKey: .prevPT)
+		try container.encode(currentPage, forKey: .currentPage)
 	}
 
 	func clearRegisters() {
@@ -532,8 +638,7 @@ final class CPU {
 		}
 	}
 	
-	func executeClass0Line0()
-	{
+	func executeClass0Line0() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line0(self.opcode))
 		}
@@ -549,8 +654,7 @@ final class CPU {
 		}
 	}
 	
-	func executeClass0Line1()
-	{
+	func executeClass0Line1() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line1(self.opcode))
 		}
@@ -564,8 +668,7 @@ final class CPU {
 		}
 	}
 	
-	func executeClass0Line2()
-	{
+	func executeClass0Line2() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line2(self.opcode))
 		}
@@ -579,8 +682,7 @@ final class CPU {
 		}
 	}
 	
-	func executeClass0Line3()
-	{
+	func executeClass0Line3() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line3(self.opcode))
 		}
@@ -594,16 +696,14 @@ final class CPU {
 		}
 	}
 	
-	func executeClass0Line4()
-	{
+	func executeClass0Line4() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line4(self.opcode))
 		}
 		reg.carry = op_LC(self.opcode.row())
 	}
 
-	func executeClass0Line5()
-	{
+	func executeClass0Line5() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line5(self.opcode))
 		}
@@ -617,8 +717,7 @@ final class CPU {
 		}
 	}
 
-	func executeClass0Line6()
-	{
+	func executeClass0Line6() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line6(self.opcode))
 		}
@@ -1002,13 +1101,12 @@ final class CPU {
 	func bits4ToString(_ register: Bits4) -> String {
 		return NSString(format:"%1X", register) as String
 	}
-	
+
 	
 	
 	// MARK: - CPU Invalid Instruction
 	@discardableResult
-	func op_INVALID(_ parameter: String) -> Bit
-	{
+	func op_INVALID(_ parameter: String) -> Bit {
 		if TRACE != 0 {
 			print("Invalid: " + parameter)
 		}
