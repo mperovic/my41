@@ -37,12 +37,12 @@ enum TimerType : Int {
 }
 
 struct TimerRegisters {
-	var CLK: [Digits14] = [emptyDigit14, emptyDigit14]
-	var ALM: [Digits14] = [emptyDigit14, emptyDigit14]
-	var SCR: [Digits14] = [emptyDigit14, emptyDigit14]
-	var INT: [Digits14] = [emptyDigit14, emptyDigit14]
-	var ACC_F: Digits14 = emptyDigit14
-	var TMR_S: Digits14 = emptyDigit14
+	var CLK: [Digits14] = [Digits14(), Digits14()]
+	var ALM: [Digits14] = [Digits14(), Digits14()]
+	var SCR: [Digits14] = [Digits14(), Digits14()]
+	var INT: [Digits14] = [Digits14(), Digits14()]
+	var ACC_F: Digits14 = Digits14()
+	var TMR_S: Digits14 = Digits14()
 }
 
 class Timer : Peripheral {
@@ -88,16 +88,16 @@ class Timer : Peripheral {
 	
 	func resetTimer() {
 		timerSelected = .timerA
-		registers.CLK[1] = emptyDigit14
-		registers.CLK[0] = emptyDigit14
-		registers.ALM[1] = emptyDigit14
-		registers.ALM[0] = emptyDigit14
-		registers.SCR[1] = emptyDigit14
-		registers.SCR[0] = emptyDigit14
-		registers.INT[1] = emptyDigit14
-		registers.INT[0] = emptyDigit14
-		registers.ACC_F = emptyDigit14
-		registers.TMR_S = emptyDigit14
+		registers.CLK[1] = Digits14()
+		registers.CLK[0] = Digits14()
+		registers.ALM[1] = Digits14()
+		registers.ALM[0] = Digits14()
+		registers.SCR[1] = Digits14()
+		registers.SCR[0] = Digits14()
+		registers.INT[1] = Digits14()
+		registers.INT[0] = Digits14()
+		registers.ACC_F = Digits14()
+		registers.TMR_S = Digits14()
 		
 		// Clear internal simulation variable
 		clock[TimerType.timerA.rawValue] = 0
@@ -169,7 +169,7 @@ class Timer : Peripheral {
 			if timerSelected.rawValue != 0 {
 				cpu.reg.C = registers.TMR_S
 			} else {
-				cpu.reg.C = emptyDigit14
+				cpu.reg.C = Digits14()
 				for idx in 0..<4 {
 					cpu.reg.C[idx+1] = registers.ACC_F[idx]
 				}
@@ -177,7 +177,7 @@ class Timer : Peripheral {
 		case 0x4:		// RSCR
 			cpu.reg.C = registers.SCR[timerSelected.rawValue]
 		case 0x5:		// RINT
-			cpu.reg.C = emptyDigit14
+			cpu.reg.C = Digits14()
 			for idx in 0..<5 {
 				cpu.reg.C[idx + 1] = registers.INT[0][idx]
 			}

@@ -9,7 +9,7 @@
 import Foundation
 
 typealias Digit = UInt8
-typealias Digits14 = [Digit]
+//typealias Digits14 = [Digit]
 typealias Bits16 = UInt16
 typealias Bits14 = UInt16
 typealias Bits12 = UInt16
@@ -22,20 +22,37 @@ typealias Bit = UInt8
 typealias byte = UInt8
 typealias word = UInt16
 
+struct Digits14: Codable {
+	var digits = [Digit](repeating: 0, count: 14)
+
+	subscript(_ position: Int) -> Digit {
+		get {
+			guard position < 14 else { fatalError("Out of range") }
+
+			return digits[position]
+		}
+		set {
+			guard position < 14 else { fatalError("Out of range") }
+
+			digits[position] = newValue
+		}
+	}
+}
+
 var TRACE = 0
 var SYNCHRONYZE = false
 var SOUND = false
 
-let emptyDigit14:[Digit] = [Digit](repeating: 0, count: 14)
+//let emptyDigit14:[Digit] = [Digit](repeating: 0, count: 14)
 
 let timeSliceInterval	= 0.01
 
 final class CPURegisters: Codable {
-	var A = emptyDigit14
-	var B = emptyDigit14
-	var C = emptyDigit14
-	var M = emptyDigit14
-	var N = emptyDigit14
+	var A = Digits14()
+	var B = Digits14()
+	var C = Digits14()
+	var M = Digits14()
+	var N = Digits14()
 	var P: Bits4			= 0
 	var Q: Bits4			= 0
 	var PC: Bits16			= 0 {
@@ -171,8 +188,8 @@ final class CPURegisters: Codable {
 		let strFI = String(self.FI, radix:2)
 		let FI = pad(strFI, toSize: 14)
 		if TRACE != 0 {
-			print("A=\(displayOrderedDigits(A)) B=\(displayOrderedDigits(B)) C=\(displayOrderedDigits(C)) Stack=\(stack0) \(stack1) \(stack2) \(stack3)")
-			print("M=\(displayOrderedDigits(M)) N=\(displayOrderedDigits(N)) Cr=\(carry)\(pointP)P=\(pP)\(pointQ)Q=\(pQ) G=\(displayOrderedDigits(G)) ST=\(bitsXST) \(bitsST)")
+			print("A=\(displayOrderedDigits(A.digits)) B=\(displayOrderedDigits(B.digits)) C=\(displayOrderedDigits(C.digits)) Stack=\(stack0) \(stack1) \(stack2) \(stack3)")
+			print("M=\(displayOrderedDigits(M.digits)) N=\(displayOrderedDigits(N.digits)) Cr=\(carry)\(pointP)P=\(pP)\(pointQ)Q=\(pQ) G=\(displayOrderedDigits(G)) ST=\(bitsXST) \(bitsST)")
 		}
 		if let timer = bus.timer {
 			let CLK_A = timer.registers.CLK[1]
@@ -189,8 +206,8 @@ final class CPURegisters: Codable {
 			let ACC_F = NSString(format:"%04X", ACC_Fb) as String
 			let aTimer = timer.timerSelected.rawValue == 0 ? "B" : "A"
 			if TRACE != 0 {
-				print("CLK_A=\(displayOrderedDigits(CLK_A)) ALM_A=\(displayOrderedDigits(ALM_A)) SCR_A=\(displayOrderedDigits(SCR_A))")
-				print("CLK_B=\(displayOrderedDigits(CLK_B)) ALM_B=\(displayOrderedDigits(ALM_B)) SCR_B=\(displayOrderedDigits(SCR_B))")
+				print("CLK_A=\(displayOrderedDigits(CLK_A.digits)) ALM_A=\(displayOrderedDigits(ALM_A.digits)) SCR_A=\(displayOrderedDigits(SCR_A.digits))")
+				print("CLK_B=\(displayOrderedDigits(CLK_B.digits)) ALM_B=\(displayOrderedDigits(ALM_B.digits)) SCR_B=\(displayOrderedDigits(SCR_B.digits))")
 				print("TMR_S=\(TMR_S) ACC_F=\(ACC_F) Timer=\(aTimer) FI:\(FI)")
 			}
 		}
@@ -289,7 +306,7 @@ let fTable: [Int] = [
 	/* F */ 0x0		// old 0xF
 ]
 
-var zeroes: Digits14 = emptyDigit14
+var zeroes: Digits14 = Digits14()
 
 final class CPU: Codable {
 	static let sharedInstance = CPU()
@@ -374,11 +391,11 @@ final class CPU: Codable {
 	}
 
 	func clearRegisters() {
-		reg.A = emptyDigit14
-		reg.B = emptyDigit14
-		reg.C = emptyDigit14
-		reg.M = emptyDigit14
-		reg.N = emptyDigit14
+		reg.A = Digits14()
+		reg.B = Digits14()
+		reg.C = Digits14()
+		reg.M = Digits14()
+		reg.N = Digits14()
 		reg.P = 0
 		reg.Q = 0
 		reg.PC = 0

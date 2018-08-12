@@ -9,7 +9,6 @@
 import Foundation
 import Cocoa
 
-
 class DebugCPUViewController: NSViewController {
 	@IBOutlet weak var cpuRegistersView: NSView!
 	@IBOutlet weak var cpuRegisterA: NSTextField!

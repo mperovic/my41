@@ -1320,9 +1320,9 @@ func op_CLRABC() -> Bit																// CLRABC
 	CLRABC									0110_1000_00							1
 	=========================================================================================
 	*/
-	cpu.reg.A = emptyDigit14
-	cpu.reg.B = emptyDigit14
-	cpu.reg.C = emptyDigit14
+	cpu.reg.A = Digits14()
+	cpu.reg.B = Digits14()
+	cpu.reg.C = Digits14()
 	
 	return 0
 }
@@ -1347,9 +1347,11 @@ func op_GOTOC() -> Bit																// GOTOC
 	GOTOC									0111_1000_00							1
 	=========================================================================================
 	*/
-	var digits: [Digit] = [Digit]()
+	var digits = Digits14()
+	var pos = 0
 	for idx in 3...6 {
-		digits.append(cpu.reg.C[idx])
+		digits[pos] = cpu.reg.C[idx]
+		pos += 1
 	}
 	cpu.reg.PC = digitsToBits(
 		digits: digits,
@@ -1385,7 +1387,7 @@ func op_CeqKEYS() -> Bit															// C=KEYS
 		start: 3,
 		count: 2
 	)
-	
+
 	return 0
 }
 
@@ -1927,7 +1929,7 @@ func op_LDI() -> Bit																  // LDI
 		start: 0,
 		count: 3
 	)
-	
+
 	return 0
 }
 
@@ -1955,9 +1957,11 @@ func op_STKeqC() -> Bit																// STK=C
 	=========================================================================================
 	*/
 //	var word: UInt16 = 0
-	var digits: [Digit] = [Digit]()
+	var digits = Digits14()
+	var pos = 0
 	for idx in 3...6 {
-		digits.append(cpu.reg.C[idx])
+		digits[pos] = cpu.reg.C[idx]
+		pos += 1
 	}
 	let word: UInt16 = digitsToBits(
 		digits: digits,
@@ -1999,7 +2003,7 @@ func op_CeqSTK() -> Bit																// C=STK
 		start: 3,
 		count: 4
 	)
-	
+
 	return 0
 }
 
@@ -2178,42 +2182,6 @@ func op_CXISA() -> Bit																// CXISA
 	cpu.reg.C[1] = Digit(((opcode & 0x00f0) >> 4))
 	cpu.reg.C[0] = Digit(opcode & 0x000f)
 	
-//	var addr: UInt16 = 0
-//	var digits: [Digit] = [Digit]()
-//	for idx in 3...6 {
-//		digits.append(cpu.reg.C[idx])
-//	}
-//	addr = digitsToBits(
-//		digits: digits,
-//		nbits: 16
-//	)
-//	if let rom = bus.romChips[page][bus.activeBank[page] - 1] {
-//		opcode = Int(rom.words[Int(addr)])
-//	} else {
-//		opcode = 0
-//	}
-//	cpu.reg.C[2] = Digit(((opcode & 0x0300) >> 8))
-//	cpu.reg.C[1] = Digit(((opcode & 0x00f0) >> 4))
-//	cpu.reg.C[0] = Digit(opcode & 0x000f)
-	
-//	switch bus.readRomAddress(Int(addr)) {
-//	case .Success(let result):
-//		bitsToDigits(
-//			bits: result.unbox  & 0x3FF,
-//			destination: &cpu.reg.C,
-//			start: 0,
-//			count: 3
-//		)
-//	case .Error(let error):
-//		println(error)
-//		bitsToDigits(
-//			bits: 0,
-//			destination: &cpu.reg.C,
-//			start: 0,
-//			count: 3
-//		)
-//	}
-	
 	return 0
 }
 
@@ -2320,9 +2288,9 @@ func op_PFADeqC() -> Bit															// PFAD=C
 								|  0xFE	 |        Wand        |
 								===============================
 	*/
-	var digits: [Digit] = [Digit]()
+	var digits = Digits14()
 	for idx in 0...1 {
-		digits.append(cpu.reg.C[idx])
+		digits[idx] = cpu.reg.C[idx]
 	}
 	let temp = digitsToBits(
 		digits: digits,
@@ -2573,7 +2541,7 @@ func op_RCR(_ param: Int) -> Bit															// RCR
 	RCR d									dddd_1111_00							1
 	=========================================================================================
 	*/
-	var temp = emptyDigit14
+	var temp = Digits14()
 	var tempC = cpu.reg.C
 	copyDigits(
 		cpu.reg.C,

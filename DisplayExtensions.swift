@@ -610,8 +610,7 @@ extension Display {
 //		self.aBus = theBus
 	}
 	
-	func writeDataFrom(_ data: Digits14)
-	{
+	func writeDataFrom(_ data: Digits14) {
 		// Implement WRITE DATA instruction with display as selected peripheral.
 		registers.E = digitsToBits(digits: data, nbits: 12)
 		scheduleUpdate()

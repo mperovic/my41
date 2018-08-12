@@ -1169,6 +1169,11 @@
 						DevelopmentTeam = LS2ZZ4TR54;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					DCE75C141A61B4FE002B2D7C = {
 						CreatedOnToolsVersion = 6.1.1;

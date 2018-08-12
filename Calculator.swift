@@ -44,6 +44,8 @@ class Calculator {
 	init() {
 		timerModule = Timer()
 		calculatorMod = MOD()
+
+		resetCalculator(restoringMemory: true)
 	}
 	
 	func resetCalculator(restoringMemory: Bool) {
@@ -57,12 +59,17 @@ class Calculator {
 		self.installBuiltinRoms()
 		
 		self.installExternalModules()
+		emptyRAM()
 
 		if restoringMemory {
 			restoreCPU()
 			restoreMemory()
 		} else {
-			emptyRAM()
+			let defaults = UserDefaults.standard
+			defaults.removeObject(forKey: "cpu")
+			defaults.removeObject(forKey: "reg")
+			defaults.removeObject(forKey: "memory")
+			defaults.synchronize()
 		}
 
 		cpu.setRunning(true)
@@ -109,14 +116,7 @@ class Calculator {
 	}
 	
 	func emptyRAM() {
-		let tmpReg = emptyDigit14
-		for addr in 0..<MAX_RAM_SIZE {
-			do {
-				try bus.writeRamAddress(Bits12(addr), from: tmpReg)
-			} catch _ {
-//				displayAlert("error writing ram at address: \(addr)")
-			}
-		}
+		bus.ram = [Digits14](repeating: Digits14(), count: MAX_RAM_SIZE)
 	}
 	
 	func startExecutionTimer() {
@@ -133,9 +133,13 @@ class Calculator {
 	func saveMemory() {
 		let defaults = UserDefaults.standard
 
-		let data = getMemoryContents()
-		defaults.set(data, forKey: "memory")
-		defaults.synchronize()
+		do {
+			let data = try JSONEncoder().encode(bus.ram)
+			defaults.set(data, forKey: "memory")
+			defaults.synchronize()
+		} catch {
+			print(error)
+		}
 	}
 
 	func saveCPU() {
@@ -155,103 +159,73 @@ class Calculator {
 
 	func restoreMemory() {
 		if let data = UserDefaults.standard.object(forKey: "memory") as? Data {
-			self.setMemoryContents(data)
+			let decoder = JSONDecoder()
+			do {
+				bus.ram = try decoder.decode([Digits14].self, from: data)
+			} catch {
+				print(error)
+			}
 		}
 	}
 
 	func restoreCPU() {
 		if let archivedCPU = UserDefaults.standard.object(forKey: "cpu") as? Data {
-			restoreCPU(archivedCPU)
+			let decoder = JSONDecoder()
+			do {
+				let decoded = try decoder.decode(CPU.self, from: archivedCPU)
+				cpu.currentTyte = decoded.currentTyte
+				cpu.savedPC = decoded.savedPC
+				cpu.lastOpCode = decoded.lastOpCode
+				cpu.powerOffFlag = decoded.powerOffFlag
+				cpu.opcode = decoded.opcode
+				cpu.prevPT = decoded.prevPT
+			} catch {
+				print(error)
+			}
 		}
 		if let archivedCPURegisters = UserDefaults.standard.object(forKey: "reg") as? Data {
-			restoreCPURegisters(archivedCPURegisters)
-		}
-	}
-
-	private func restoreCPU(_ data: Data) {
-		let decoder = JSONDecoder()
-		do {
-			let decoded = try decoder.decode(CPU.self, from: data)
-			cpu.currentTyte = decoded.currentTyte
-			cpu.savedPC = decoded.savedPC
-			cpu.lastOpCode = decoded.lastOpCode
-			cpu.powerOffFlag = decoded.powerOffFlag
-			cpu.opcode = decoded.opcode
-			cpu.prevPT = decoded.prevPT
-		} catch {
-			print(error)
-		}
-	}
-
-	private func restoreCPURegisters(_ data: Data) {
-		let decoder = JSONDecoder()
-		do {
-			let decoded = try decoder.decode(CPURegisters.self, from: data)
-			cpu.reg.A = decoded.A
-			cpu.reg.B = decoded.B
-			cpu.reg.C = decoded.C
-			cpu.reg.M = decoded.M
-			cpu.reg.N = decoded.N
-			cpu.reg.P = decoded.P
-			cpu.reg.Q = decoded.Q
-			cpu.reg.PC = decoded.PC
-			cpu.reg.G = decoded.G
-			cpu.reg.ST = decoded.ST
-			cpu.reg.T = decoded.T
-			cpu.reg.FI = decoded.FI
-//			cpu.reg.KY = decoded.KY
-			cpu.reg.XST = decoded.XST
-			cpu.reg.stack = decoded.stack
-			cpu.reg.R = decoded.R
-//			cpu.reg.carry = decoded.carry
-			cpu.reg.mode = decoded.mode
-			cpu.reg.ramAddress = decoded.ramAddress
-			cpu.reg.peripheral = decoded.peripheral
-		} catch {
-			print(error)
-		}
-	}
-	
-	func setMemoryContents(_ data: Data) {
-		// the number of elements:
-		let count = data.count / MemoryLayout<UInt8>.size
-		
-		// create array of appropriate length:
-		var memoryArray = [UInt8](repeating: 0, count: count)
-		
-		// copy bytes into array
-		(data as NSData).getBytes(&memoryArray, length:count)
-		
-		var ptr = 0
-		for addr in 0..<MAX_RAM_SIZE {
-			var tmpReg = emptyDigit14
-			digits14FromArray(memoryArray, position: ptr, to: &tmpReg)
+			let decoder = JSONDecoder()
 			do {
-				try bus.writeRamAddress(Bits12(addr), from: tmpReg)
-			} catch _ {
-//				displayAlert("error writing ram at address: \(addr)")
+				let decoded = try decoder.decode(CPURegisters.self, from: archivedCPURegisters)
+				cpu.reg.A = decoded.A
+				cpu.reg.B = decoded.B
+				cpu.reg.C = decoded.C
+				cpu.reg.M = decoded.M
+				cpu.reg.N = decoded.N
+				cpu.reg.P = decoded.P
+				cpu.reg.Q = decoded.Q
+				cpu.reg.PC = decoded.PC
+				cpu.reg.G = decoded.G
+				cpu.reg.ST = decoded.ST
+				cpu.reg.T = decoded.T
+				cpu.reg.FI = decoded.FI
+				cpu.reg.XST = decoded.XST
+				cpu.reg.stack = decoded.stack
+				cpu.reg.R = decoded.R
+				cpu.reg.mode = decoded.mode
+				cpu.reg.ramAddress = decoded.ramAddress
+				cpu.reg.peripheral = decoded.peripheral
+			} catch {
+				print(error)
 			}
-
-			ptr += 14
 		}
 	}
 	
-	func getMemoryContents() -> Data {
-		var data = Data()
-		var memoryArray = [UInt8]()
+	private func getMemoryContents() -> [Digits14] {
+		var memoryArray = [Digits14](repeating: Digits14(), count: MAX_RAM_SIZE)
 		for addr in 0..<MAX_RAM_SIZE {
 			do {
 				let tmpReg = try bus.readRamAddress(Bits12(addr))
-				memoryArray.append(contentsOf: tmpReg)
+				memoryArray[Int(addr)] = tmpReg
+				print("save from \(addr): \(tmpReg)")
 			} catch {
 				if TRACE != 0 {
 					print("error RAM address: \(addr)")
 				}
 			}
 		}
-		data.append(memoryArray, count: 14 * MAX_RAM_SIZE)
-		
-		return data
+
+		return memoryArray
 	}
 	
 	func readCalculatorDescriptionFromDefaults() {
@@ -310,10 +284,13 @@ class Calculator {
 		}
 	}
 	
-	func digits14FromArray(_ array: [Digit], position: Int, to: inout Digits14) {
+	private func digits14FromArray(_ array: [Digit], position: Int) -> Digits14 {
+		var to = Digits14()
 		for idx in 0...13 {
 			to[idx] = array[position + idx]
 		}
+
+		return to
 	}
 	
 	@objc func timeSlice(_ timer: Foundation.Timer)

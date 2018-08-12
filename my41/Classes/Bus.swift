@@ -202,8 +202,7 @@ final class Bus {
 	var quadMemory: Bool?
 	var xMemory: Bool?
 	var xFunction: Bool?
-//	var ramValid: [Bool]
-	var ram: [Digits14]
+	var ram = [Digits14](repeating: Digits14(), count: MAX_RAM_SIZE)
 	var peripherals: [Peripheral?] = [Peripheral?](repeating: nil, count: 0x100)
 	
 	// Peripherals
@@ -212,7 +211,6 @@ final class Bus {
 	
 	var memModules: byte = 0
 	var XMemModules: byte = 0
-
 	
 	// ROM variables
 	var romChips = Array<Array<RomChip?>>()
@@ -229,8 +227,7 @@ final class Bus {
 				romChips[page][bank - 1] = nil
 			}
 		}
-//		ramValid = [Bool](count:0x400, repeatedValue:false)
-		ram = [Digits14](repeating: emptyDigit14, count: 0x400)
+		ram = [Digits14](repeating: Digits14(), count: MAX_RAM_SIZE)
 	}
 	
 	func installMod(_ mod: MOD) throws {
@@ -487,11 +484,7 @@ final class Bus {
 	func installRomChip(_ chip: RomChip, inSlot slot: byte, andBank bank: byte) {
 		romChips[Int(slot)][Int(bank)] = chip
 	}
-	
-//	func installRamAtAddress(address: Bits12) {
-//		ramValid[Int(address)] = true
-//	}
-	
+
 	func readRamAddress(_ address: Bits12) throws -> Digits14 {
 		/*
 			Read specified location of specified chip.
@@ -627,8 +620,7 @@ final class Bus {
 		return false
 	}
 	
-	func RAMExists(_ address: Int) -> Bool
-	{
+	func RAMExists(_ address: Int) -> Bool {
 		if address >= 0x000 && address <= 0x00f	{			// status registers
 			return true
 		}
