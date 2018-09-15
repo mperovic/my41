@@ -9,7 +9,6 @@
 import Foundation
 
 typealias Digit = UInt8
-//typealias Digits14 = [Digit]
 typealias Bits16 = UInt16
 typealias Bits14 = UInt16
 typealias Bits12 = UInt16

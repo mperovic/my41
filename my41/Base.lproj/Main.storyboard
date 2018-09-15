@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.3.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -35,7 +35,7 @@ CA
 </string>
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
-                                                <action selector="masterClear:" target="Voe-Tx-rLC" id="2iE-V2-649"/>
+                                                <action selector="masterClearWithSender:" target="Voe-Tx-rLC" id="XPX-6s-WYw"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="znn-Sn-sAS"/>
@@ -1989,7 +1989,7 @@ CA
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="registersAction:" target="aUu-zm-pvu" id="XRK-CR-nPS"/>
+                                            <action selector="registersActionWithSender:" target="aUu-zm-pvu" id="bh7-TU-kYc"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gzh-Og-dTr">
@@ -1999,7 +1999,7 @@ CA
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="memoryAction:" target="aUu-zm-pvu" id="o5G-lh-SQx"/>
+                                            <action selector="memoryActionWithSender:" target="aUu-zm-pvu" id="ZWH-9N-gyQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2747,7 +2747,7 @@ CA
                                             <rect key="frame" x="0.0" y="0.0" width="228" height="315"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="avail" editable="NO" width="40" minWidth="40" maxWidth="1000" id="k4O-Hk-akg">
@@ -3176,10 +3176,10 @@ CA
             </objects>
             <point key="canvasLocation" x="1847" y="3188.5"/>
         </scene>
-        <!--Preferences Split View Controller-->
+        <!--Preferences-->
         <scene sceneID="iLx-Ou-a2x">
             <objects>
-                <splitViewController id="eM3-n7-T0Z" customClass="PreferencesSplitViewController" customModule="my41cx" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController title="Preferences" id="eM3-n7-T0Z" customClass="PreferencesSplitViewController" customModule="my41cx" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="JgK-xo-Fdx"/>
                         <splitViewItem id="HMb-V6-CXr"/>
@@ -3241,7 +3241,7 @@ CA
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="selectCalculatorAction:" target="c51-tD-LOr" id="7ZR-qC-o3J"/>
+                                            <action selector="selectCalculatorActionWithSender:" target="c51-tD-LOr" id="B6p-6u-0i8"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gC7-vW-Kqs">
@@ -3251,7 +3251,7 @@ CA
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="selectModAction:" target="c51-tD-LOr" id="H3V-ms-Kbo"/>
+                                            <action selector="selectModActionWithSender:" target="c51-tD-LOr" id="eq7-Eb-yuZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3417,7 +3417,7 @@ CA
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="545"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="modFile" width="195" minWidth="40" maxWidth="1000" id="tay-fS-1R3">
@@ -3487,7 +3487,7 @@ CA
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="removeModule1Action:" target="x80-zU-PA8" id="lBL-Hi-MXF"/>
+                                            <action selector="removeModule1ActionWithSender:" target="x80-zU-PA8" id="Ubi-lW-pko"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3512,7 +3512,7 @@ CA
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="removeModule2Action:" target="x80-zU-PA8" id="2xu-fy-RJC"/>
+                                            <action selector="removeModule2ActionWithSender:" target="x80-zU-PA8" id="Bzd-Vk-Ozd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3535,7 +3535,7 @@ CA
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="removeModule3Action:" target="x80-zU-PA8" id="Db1-sh-Ucr"/>
+                                            <action selector="removeModule3ActionWithSender:" target="x80-zU-PA8" id="qtt-T7-Lwj"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3558,7 +3558,7 @@ CA
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="removeModule4Action:" target="x80-zU-PA8" id="XIv-eS-Dwa"/>
+                                            <action selector="removeModule4ActionWithSender:" target="x80-zU-PA8" id="MRC-rk-RBt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3699,7 +3699,7 @@ CA
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="applyChanges:" target="x80-zU-PA8" id="qtB-gX-yWA"/>
+                                    <action selector="applyChangesWithSender:" target="x80-zU-PA8" id="kd0-aA-LKd"/>
                                 </connections>
                             </button>
                         </subviews>

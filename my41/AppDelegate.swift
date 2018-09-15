@@ -12,9 +12,8 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 	var window: CalculatorWindow?
 	var buttonPressed = false
-	
-	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		// Insert code here to initialize your application
+
+	func applicationDidFinishLaunching(_ notification: Notification) {
 		let defaults = UserDefaults.standard
 		if let _ = defaults.object(forKey: "memory") as? NSData {
 			CalculatorApplication.shared().activate(ignoringOtherApps: false)
@@ -29,15 +28,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationWillResignActive(_ notification: Notification) {
-
 	}
 
 	func applicationWillBecomeActive(_ notification: Notification) {
-		CalculatorController.sharedInstance.resetCalculator(restoringMemory: true)
 	}
-	
-	func applicationWillTerminate(aNotification: NSNotification) {
-		// Insert code here to tear down your application
+
+	func applicationWillTerminate(_ notification: Notification) {
 		CalculatorController.sharedInstance.saveMemory()
 		CalculatorController.sharedInstance.saveCPU()
 	}
@@ -46,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		let defaults = UserDefaults.standard
 		defaults.removeObject(forKey: "memory")
 		defaults.synchronize()
-		CalculatorController.sharedInstance.resetCalculator(false)
+		CalculatorController.sharedInstance.resetCalculator(restoringMemory: false)
 	}
 	
 	func application(_ app: NSApplication, willEncodeRestorableState coder: NSCoder) {
@@ -55,6 +51,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func application(_ app: NSApplication, didDecodeRestorableState coder: NSCoder) {
 		// Implement this functionality
+	}
+
+	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+		return true
 	}
 }
 

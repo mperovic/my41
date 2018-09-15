@@ -60,43 +60,43 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		for addr in address...(address + 0x0f) {
 			var hidden = false
 			if bus.RAMExists(address) {
-				var tmpReg = emptyDigit14
+				var tmpReg = Digits14()
 				do {
 					tmpReg = try bus.readRamAddress(Bits12(addr))
 					
 					switch ptr {
 					case 0x0:
-						memory0.stringValue = cpu.digitsToString(tmpReg)
+						memory0.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0x1:
-						memory1.stringValue = cpu.digitsToString(tmpReg)
+						memory1.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0x2:
-						memory2.stringValue = cpu.digitsToString(tmpReg)
+						memory2.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0x3:
-						memory3.stringValue = cpu.digitsToString(tmpReg)
+						memory3.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0x4:
-						memory4.stringValue = cpu.digitsToString(tmpReg)
+						memory4.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0x5:
-						memory5.stringValue = cpu.digitsToString(tmpReg)
+						memory5.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0x6:
-						memory6.stringValue = cpu.digitsToString(tmpReg)
+						memory6.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0x7:
-						memory7.stringValue = cpu.digitsToString(tmpReg)
+						memory7.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0x8:
-						memory8.stringValue = cpu.digitsToString(tmpReg)
+						memory8.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0x9:
-						memory9.stringValue = cpu.digitsToString(tmpReg)
+						memory9.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0xA:
-						memoryA.stringValue = cpu.digitsToString(tmpReg)
+						memoryA.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0xB:
-						memoryB.stringValue = cpu.digitsToString(tmpReg)
+						memoryB.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0xC:
-						memoryC.stringValue = cpu.digitsToString(tmpReg)
+						memoryC.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0xD:
-						memoryD.stringValue = cpu.digitsToString(tmpReg)
+						memoryD.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0xE:
-						memoryE.stringValue = cpu.digitsToString(tmpReg)
+						memoryE.stringValue = cpu.digitsToString(tmpReg.digits)
 					case 0xF:
-						memoryF.stringValue = cpu.digitsToString(tmpReg)
+						memoryF.stringValue = cpu.digitsToString(tmpReg.digits)
 					default:
 						// do nothing
 						break
