@@ -706,7 +706,7 @@ func op_CGEX() -> Bit																  // CGEX
 								G           <= C<ptr+:ptr>
 							join
 	*/
-	var tempG  = cpu.reg.G
+	let tempG  = cpu.reg.G
 	
 	let opcode01c = cpu.lastOpCode.opcode & 0x01c != 0
 	let opcode05c = cpu.lastOpCode.opcode & 0x05c != 0

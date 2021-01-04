@@ -416,9 +416,9 @@ extension Display {
 		)
 	{
 		/*
-		Distribute digits from the given source and rotate them into the specified registers.
-		For size == LONG, shifts a total of 12 digits from the source;
-		for size == SHORT, shifts one digit into each specified register.
+			Distribute digits from the given source and rotate them into the specified registers.
+			For size == LONG, shifts a total of 12 digits from the source;
+			for size == SHORT, shifts one digit into each specified register.
 		*/
 		var cp = 0
 		while cp < 12 {
@@ -455,8 +455,8 @@ extension Display {
 	
 	func segmentsForCell(_ i: Int) -> DisplaySegmentMap {
 		/*
-		Determine which segments should be on for cell i based on the contents of the display registers.
-		Note that cells are numbered from left to right, which is the opposite of the digit numbering in the display registers.
+			Determine which segments should be on for cell i based on the contents of the display registers.
+			Note that cells are numbered from left to right, which is the opposite of the digit numbering in the display registers.
 		*/
 		let j = 11 - i
 		let nineBitCode: Int = Int((Int(registers.C[j]) << 8) | (Int(registers.B[j]) << 4) | (Int(registers.A[j]))) & 0x1ff
