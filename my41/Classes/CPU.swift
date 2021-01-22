@@ -250,23 +250,19 @@ struct OpCode: Codable {
 		self.opcode = code
 	}
 	
-	func row() -> Int
-	{
+	func row() -> Int {
 		return (self.opcode & 0x03c0) >> 6
 	}
 	
-	func col() -> Int
-	{
+	func col() -> Int {
 		return ((self.opcode & 0x003c) >> 2) & 0xf
 	}
 	
-	func tef() -> Int
-	{
+	func tef() -> Int {
 		return (self.opcode & 0x1c) >> 2
 	}
 	
-	func set() -> Int
-	{
+	func set() -> Int {
 		return (self.opcode & 0x03)
 	}
 }

@@ -16,10 +16,10 @@ class iOSKeyboard : NSObject {
 	@IBOutlet weak var arithmeticGroup: KeyGroup!
 	@IBOutlet weak var numberGroup: KeyGroup!
 	
-	@IBOutlet weak var keyOn: Key!
-	@IBOutlet weak var keyUser: Key!
-	@IBOutlet weak var keyPrgm: Key!
-	@IBOutlet weak var keyAlpha: Key!
+	@IBOutlet weak var keyOn: CalculatorKey!
+	@IBOutlet weak var keyUser: CalculatorKey!
+	@IBOutlet weak var keyPrgm: CalculatorKey!
+	@IBOutlet weak var keyAlpha: CalculatorKey!
 
 	override init() {
 		super.init()
@@ -54,7 +54,7 @@ class KeyGroup: UIView {
 		super.draw(rect)
 	}
 	
-	func key(_ key: Key, pressed: Bool) {
+	func key(_ key: CalculatorKey, pressed: Bool) {
 		keyboard.keyWithCode(Bits8(truncating: key.keyCode!), pressed: pressed)
 		
 		if pressed && SOUND {

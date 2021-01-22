@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Key: UIButton {
+class CalculatorKey: UIButton {
 	@IBOutlet weak var keygroup: KeyGroup!
 
 	@objc var lowerText: String?
@@ -20,7 +20,7 @@ class Key: UIButton {
 	var pressed: Bool = false
 
 	let roundedRadius: CGFloat = 3.0
-	let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//	let appDelegate = UIApplication.shared.delegate as! AppDelegate
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)

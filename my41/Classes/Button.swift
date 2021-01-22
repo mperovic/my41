@@ -189,7 +189,6 @@ class ButtonCell: NSButtonCell {
 			paragrapStyle.alignment = .center
 			upperText!.addAttribute(NSParagraphStyleAttributeName, value: paragrapStyle, range: NSMakeRange(0, upperText!.length))
 			
-			
 			var upperTextRect: NSRect
 			if upperText?.string == "ENTER ↑" || upperText?.string == "N" {
 				upperTextRect = NSMakeRect(1.0, 3.0, 86.0, 15.0)

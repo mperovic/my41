@@ -13,80 +13,80 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 	
 	@IBOutlet weak var displayBackgroundView: UIView!
 	
-	@IBOutlet weak var buttonOn: Key!
-	@IBOutlet weak var buttonUSER: Key!
-	@IBOutlet weak var buttonPRGM: Key!
-	@IBOutlet weak var buttonALPHA: Key!
+	@IBOutlet weak var buttonOn: CalculatorKey!
+	@IBOutlet weak var buttonUSER: CalculatorKey!
+	@IBOutlet weak var buttonPRGM: CalculatorKey!
+	@IBOutlet weak var buttonALPHA: CalculatorKey!
 	
 	@IBOutlet weak var labelSigmaMinus: UILabel!
-	@IBOutlet weak var buttonSigmaPlus: Key!
+	@IBOutlet weak var buttonSigmaPlus: CalculatorKey!
 	@IBOutlet weak var labelYX: UILabel!
-	@IBOutlet weak var buttonOneX: Key!
+	@IBOutlet weak var buttonOneX: CalculatorKey!
 	@IBOutlet weak var labelXSquare: UILabel!
-	@IBOutlet weak var buttonSquareRoot: Key!
+	@IBOutlet weak var buttonSquareRoot: CalculatorKey!
 	@IBOutlet weak var labelTenX: UILabel!
-	@IBOutlet weak var buttonLog: Key!
+	@IBOutlet weak var buttonLog: CalculatorKey!
 	@IBOutlet weak var labelEX: UILabel!
-	@IBOutlet weak var buttonLn: Key!
+	@IBOutlet weak var buttonLn: CalculatorKey!
 	@IBOutlet weak var labelCLSigma: UILabel!
-	@IBOutlet weak var buttonXexY: Key!
+	@IBOutlet weak var buttonXexY: CalculatorKey!
 	@IBOutlet weak var labelPercent: UILabel!
-	@IBOutlet weak var buttonRArrrow: Key!
+	@IBOutlet weak var buttonRArrrow: CalculatorKey!
 	@IBOutlet weak var labelSin: UILabel!
-	@IBOutlet weak var buttonSin: Key!
+	@IBOutlet weak var buttonSin: CalculatorKey!
 	@IBOutlet weak var labelCos: UILabel!
-	@IBOutlet weak var buttonCos: Key!
+	@IBOutlet weak var buttonCos: CalculatorKey!
 	@IBOutlet weak var labelTan: UILabel!
-	@IBOutlet weak var buttonTan: Key!
-	@IBOutlet weak var buttonShift: Key!
+	@IBOutlet weak var buttonTan: CalculatorKey!
+	@IBOutlet weak var buttonShift: CalculatorKey!
 	@IBOutlet weak var labelASN: UILabel!
-	@IBOutlet weak var buttonXEQ: Key!
+	@IBOutlet weak var buttonXEQ: CalculatorKey!
 	@IBOutlet weak var labelLBL: UILabel!
-	@IBOutlet weak var buttonSTO: Key!
+	@IBOutlet weak var buttonSTO: CalculatorKey!
 	@IBOutlet weak var labelGTO: UILabel!
-	@IBOutlet weak var buttonRCL: Key!
+	@IBOutlet weak var buttonRCL: CalculatorKey!
 	@IBOutlet weak var labelBST: UILabel!
-	@IBOutlet weak var buttonSST: Key!
+	@IBOutlet weak var buttonSST: CalculatorKey!
 	@IBOutlet weak var labelCATALOG: UILabel!
-	@IBOutlet weak var buttonENTER: Key!
+	@IBOutlet weak var buttonENTER: CalculatorKey!
 	@IBOutlet weak var labelISG: UILabel!
-	@IBOutlet weak var buttonCHS: Key!
+	@IBOutlet weak var buttonCHS: CalculatorKey!
 	@IBOutlet weak var labelRTN: UILabel!
-	@IBOutlet weak var buttonEEX: Key!
+	@IBOutlet weak var buttonEEX: CalculatorKey!
 	@IBOutlet weak var labelCLXA: UILabel!
-	@IBOutlet weak var buttonBack: Key!
+	@IBOutlet weak var buttonBack: CalculatorKey!
 	@IBOutlet weak var labelXEQY: UILabel!
-	@IBOutlet weak var buttonMinus: Key!
+	@IBOutlet weak var buttonMinus: CalculatorKey!
 	@IBOutlet weak var labelSF: UILabel!
-	@IBOutlet weak var button7: Key!
+	@IBOutlet weak var button7: CalculatorKey!
 	@IBOutlet weak var labelCF: UILabel!
-	@IBOutlet weak var button8: Key!
+	@IBOutlet weak var button8: CalculatorKey!
 	@IBOutlet weak var labelFS: UILabel!
-	@IBOutlet weak var button9: Key!
+	@IBOutlet weak var button9: CalculatorKey!
 	@IBOutlet weak var labelXLessThanY: UILabel!
-	@IBOutlet weak var buttonPlus: Key!
+	@IBOutlet weak var buttonPlus: CalculatorKey!
 	@IBOutlet weak var labelBEEP: UILabel!
-	@IBOutlet weak var button4: Key!
+	@IBOutlet weak var button4: CalculatorKey!
 	@IBOutlet weak var labelPR: UILabel!
-	@IBOutlet weak var button5: Key!
+	@IBOutlet weak var button5: CalculatorKey!
 	@IBOutlet weak var labelRP: UILabel!
-	@IBOutlet weak var button6: Key!
+	@IBOutlet weak var button6: CalculatorKey!
 	@IBOutlet weak var labelXGreaterThanY: UILabel!
-	@IBOutlet weak var buttonMultiply: Key!
+	@IBOutlet weak var buttonMultiply: CalculatorKey!
 	@IBOutlet weak var labelFIX: UILabel!
-	@IBOutlet weak var button1: Key!
+	@IBOutlet weak var button1: CalculatorKey!
 	@IBOutlet weak var labelSCI: UILabel!
-	@IBOutlet weak var button2: Key!
+	@IBOutlet weak var button2: CalculatorKey!
 	@IBOutlet weak var labelENG: UILabel!
-	@IBOutlet weak var button3: Key!
+	@IBOutlet weak var button3: CalculatorKey!
 	@IBOutlet weak var labelXEQ0: UILabel!
-	@IBOutlet weak var buttonDivide: Key!
+	@IBOutlet weak var buttonDivide: CalculatorKey!
 	@IBOutlet weak var labelPI: UILabel!
-	@IBOutlet weak var button0: Key!
+	@IBOutlet weak var button0: CalculatorKey!
 	@IBOutlet weak var labelLASTX: UILabel!
-	@IBOutlet weak var buttonPoint: Key!
+	@IBOutlet weak var buttonPoint: CalculatorKey!
 	@IBOutlet weak var labelVIEW: UILabel!
-	@IBOutlet weak var buttonRS: Key!
+	@IBOutlet weak var buttonRS: CalculatorKey!
 	
 	@IBOutlet weak var my41CX: UIButton!
 	
@@ -181,8 +181,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Label Σ-
-		let Helvetica13Font = UIFont(name: "Helvetica", size: 15.0 * yRatio)
-		if let actualFont = Helvetica13Font {
+		let Helvetica15Font = UIFont(name: "Helvetica", size: 15.0 * yRatio)
+		if let actualFont = Helvetica15Font {
 			let sigmaMinusString = mutableAttributedStringFromString("Σ-", color: nil)
 			let sigmaMinusAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -201,8 +201,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		buttonSigmaPlus.upperText = sigmaPlusString
 		
 		// Label yx
-		let TimesNewRoman10Font = UIFont(name: "Times New Roman", size: 12.0 * yRatio)
-		if let actualFont = TimesNewRoman10Font {
+		let TimesNewRoman12Font = UIFont(name: "Times New Roman", size: 12.0 * yRatio)
+		if let actualFont = TimesNewRoman12Font {
 			let yxString = mutableAttributedStringFromString("yx", color: nil)
 			let yxAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -213,7 +213,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Button 1/x
-		if let actualFont = TimesNewRoman10Font {
+		if let actualFont = TimesNewRoman12Font {
 			let oneXString = mutableAttributedStringFromString("1/x", color: .white)
 			let oneXAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -223,8 +223,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Label x^2
-		let TimesNewRoman12Font = UIFont(name: "Times New Roman", size: 14.0 * yRatio)
-		if let actualFont = TimesNewRoman12Font {
+		let TimesNewRoman14Font = UIFont(name: "Times New Roman", size: 14.0 * yRatio)
+		if let actualFont = TimesNewRoman14Font {
 			let xSquareString = mutableAttributedStringFromString("x\u{00B2}", color: nil)
 			let xSquareAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -234,7 +234,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Button √x
-		if let actualFont = TimesNewRoman10Font {
+		if let actualFont = TimesNewRoman12Font {
 			let rootXString = mutableAttributedStringFromString("√x", color: .white)
 			let rootXAttributes2 = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -243,7 +243,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 			buttonSquareRoot.upperText = rootXString
 			
 			// Label 10^x
-			if let actualFont = TimesNewRoman10Font {
+			if let actualFont = TimesNewRoman12Font {
 				let tenXString = mutableAttributedStringFromString("10x", color: nil)
 				let tenXAttributes = [
 					convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -258,15 +258,15 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Label e^x
-		let Helvetica12Font = UIFont(name: "Helvetica", size: 14.0 * yRatio)
-		if let actualFont = TimesNewRoman10Font {
+		let Helvetica14Font = UIFont(name: "Helvetica", size: 14.0 * yRatio)
+		if let actualFont = TimesNewRoman12Font {
 			let eXString = mutableAttributedStringFromString("ex", color: nil)
 			let eXAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
 				convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
 				] as [String : Any]
 			
-			if let actualFont2 = Helvetica12Font {
+			if let actualFont2 = Helvetica14Font {
 				eXString.addAttributes(convertToNSAttributedStringKeyDictionary(eXAttributes), range: NSMakeRange(1, 1))
 				let eXAttributes2 = [
 					convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont2
@@ -283,8 +283,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelCLSigma.attributedText = mutableAttributedStringFromString("CLΣ", color: nil)
 		
 		// Button x≷y
-		let TimesNewRoman14Font = UIFont(name: "Times New Roman", size: 16.0 * yRatio)
-		if let actualFont = TimesNewRoman14Font {
+		let TimesNewRoman16Font = UIFont(name: "Times New Roman", size: 16.0 * yRatio)
+		if let actualFont = TimesNewRoman16Font {
 			let XexYString = mutableAttributedStringFromString("x≷y", color: .white)
 			let XexYAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -301,8 +301,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		buttonRArrrow.upperText = mutableAttributedStringFromString("R↓", color: .white)
 		
 		// Label SIN-1
-		let TimesNewRoman09Font = UIFont(name: "Times New Roman", size: 11.0 * yRatio)
-		if let actualFont = TimesNewRoman09Font {
+		let TimesNewRoman11Font = UIFont(name: "Times New Roman", size: 11.0 * yRatio)
+		if let actualFont = TimesNewRoman11Font {
 			let sin1String = mutableAttributedStringFromString("SIN-1", color: nil)
 			let sinAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -316,7 +316,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		buttonSin.upperText = mutableAttributedStringFromString("SIN", color: .white)
 		
 		// Label COS-1
-		if let actualFont = TimesNewRoman09Font {
+		if let actualFont = TimesNewRoman11Font {
 			let cos1String = mutableAttributedStringFromString("COS-1", color: nil)
 			let cosAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -330,7 +330,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		buttonCos.upperText = mutableAttributedStringFromString("COS", color: .white)
 		
 		// Label TAN-1
-		if let actualFont = TimesNewRoman09Font {
+		if let actualFont = TimesNewRoman11Font {
 			let tan1String = mutableAttributedStringFromString("TAN-1", color: nil)
 			let tanAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -386,8 +386,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		buttonEEX.upperText = mutableAttributedStringFromString("EEX", color: .white)
 		
 		// Label CL X/A
-		let TimesNewRoman11Font = UIFont(name: "Times New Roman", size: 13.0 * yRatio)
-		if let actualFont = TimesNewRoman11Font {
+		let TimesNewRoman13Font = UIFont(name: "Times New Roman", size: 13.0 * yRatio)
+		if let actualFont = TimesNewRoman13Font {
 			let clxaString = mutableAttributedStringFromString("CL X/A", color: nil)
 			let clxaAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -408,7 +408,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Label x=y ?
-		if let actualFont = TimesNewRoman14Font {
+		if let actualFont = TimesNewRoman16Font {
 			let xeqyString = mutableAttributedStringFromString("x=y ?", color: nil)
 			let xeqyAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -433,7 +433,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelSF.attributedText = mutableAttributedStringFromString("SF", color: nil)
 		
 		// Button 7
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica15Font {
 			let sevenString = mutableAttributedStringFromString("7", color: .white)
 			let sevenAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -446,7 +446,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelCF.attributedText = mutableAttributedStringFromString("CF", color: nil)
 		
 		// Button 8
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica15Font {
 			let eightString = mutableAttributedStringFromString("8", color: .white)
 			let eightAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -459,7 +459,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelFS.attributedText = mutableAttributedStringFromString("FS?", color: nil)
 		
 		// Button 9
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica15Font {
 			let nineString = mutableAttributedStringFromString("9", color: .white)
 			let nineAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -469,8 +469,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Label x≤y ?
-		let TimesNewRoman13Font = UIFont(name: "Times New Roman", size: 15.0 * yRatio)
-		if let actualFont = TimesNewRoman13Font {
+		let TimesNewRoman15Font = UIFont(name: "Times New Roman", size: 15.0 * yRatio)
+		if let actualFont = TimesNewRoman15Font {
 			let xlessthanyString = mutableAttributedStringFromString("x≤y ?", color: nil)
 			let xlessthanyAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -493,7 +493,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelBEEP.attributedText = mutableAttributedStringFromString("BEEP", color: nil)
 		
 		// Button 4
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica15Font {
 			let fourString = mutableAttributedStringFromString("4", color: .white)
 			let fourAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -506,7 +506,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelPR.attributedText = mutableAttributedStringFromString("P→R", color: nil)
 		
 		// Button 5
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica15Font {
 			let fiveString = mutableAttributedStringFromString("5", color: .white)
 			let fiveAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -519,7 +519,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelRP.attributedText = mutableAttributedStringFromString("R→P", color: nil)
 		
 		// Button 6
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica15Font {
 			let sixString = mutableAttributedStringFromString("6", color: .white)
 			let sixAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -529,7 +529,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Label x≥y ?
-		if let actualFont = TimesNewRoman13Font {
+		if let actualFont = TimesNewRoman15Font {
 			let xgreaterthanyString = mutableAttributedStringFromString("x>y ?", color: nil)
 			let xgreaterthanyAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -540,8 +540,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Button Multiply
-		let Helvetica15Font = UIFont(name: "Helvetica", size: 17.0 * yRatio)
-		if let actualFont = Helvetica15Font {
+		let Helvetica17Font = UIFont(name: "Helvetica", size: 17.0 * yRatio)
+		if let actualFont = Helvetica17Font {
 			let multiplyString = mutableAttributedStringFromString("×", color: .white)
 			let multiplyAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -555,7 +555,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelFIX.attributedText = mutableAttributedStringFromString("FIX", color: nil)
 		
 		// Button 1
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica17Font {
 			let oneString = mutableAttributedStringFromString("1", color: .white)
 			let oneAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -568,7 +568,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelSCI.attributedText = mutableAttributedStringFromString("SCI", color: nil)
 		
 		// Button 2
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica17Font {
 			let twoString = mutableAttributedStringFromString("2", color: .white)
 			let twoAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -581,7 +581,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelENG.attributedText = mutableAttributedStringFromString("ENG", color: nil)
 		
 		// Button 3
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica17Font {
 			let thtreeString = mutableAttributedStringFromString("3", color: .white)
 			let thtreeAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -591,7 +591,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Label x=0 ?
-		if let actualFont = TimesNewRoman13Font {
+		if let actualFont = TimesNewRoman15Font {
 			let xeq0String = mutableAttributedStringFromString("x=0 ?", color: nil)
 			let xeq0Attributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -602,7 +602,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Button Divide
-		if let actualFont = Helvetica15Font {
+		if let actualFont = Helvetica17Font {
 			let divideString = mutableAttributedStringFromString("÷", color: .white)
 			let divideAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont,
@@ -613,8 +613,8 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Label PI
-		let TimesNewRoman15Font = UIFont(name: "Times New Roman", size: 17.0 * yRatio)
-		if let actualFont = TimesNewRoman15Font {
+		let TimesNewRoman17Font = UIFont(name: "Times New Roman", size: 17.0 * yRatio)
+		if let actualFont = TimesNewRoman17Font {
 			let piString = mutableAttributedStringFromString("π", color: nil)
 			let piAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -624,7 +624,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Button 0
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica17Font {
 			let zeroString = mutableAttributedStringFromString("0", color: .white)
 			let zeroAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -634,7 +634,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Label LAST X
-		if let actualFont = TimesNewRoman13Font {
+		if let actualFont = TimesNewRoman15Font {
 			let lastxString = mutableAttributedStringFromString("LAST X", color: nil)
 			let lastxAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -644,7 +644,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		}
 		
 		// Button •
-		if let actualFont = Helvetica13Font {
+		if let actualFont = Helvetica17Font {
 			let pointString = mutableAttributedStringFromString("•", color: .white)
 			let pointAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -657,7 +657,7 @@ class iOSViewController: UIViewController, UIPopoverPresentationControllerDelega
 		labelVIEW.attributedText = mutableAttributedStringFromString("VIEW", color: nil)
 		
 		// Button R/S
-		if let actualFont = Helvetica12Font {
+		if let actualFont = Helvetica14Font {
 			let rsString = mutableAttributedStringFromString("R/S", color: .white)
 			let rsAttributes = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : actualFont
@@ -754,7 +754,7 @@ class CalculatorView: UIView {
 	@IBOutlet weak var lcdDisplay: Display!
 	
 	var viewController: iOSViewController?
-	var pressedKey: Key?
+	var pressedKey: CalculatorKey?
 	
 	override func awakeFromNib() {
 		var rect = self.bounds
