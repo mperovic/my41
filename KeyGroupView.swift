@@ -10,15 +10,14 @@ import SwiftUI
 
 struct KeyGroupView: View {
 	var keys: [CalcKey]
-	var height: CGFloat
 	var isModeGroup: Bool = false
 	var isEnterGroup = false
 	
-	let spacing: CGFloat = 10
+	let spacing: CGFloat = 20
 	
 	var body: some View {
 		GeometryReader { geometry in
-			let height = isModeGroup ? 20 : getButtonWidth(for: geometry.size.width) * 0.551282
+			let height = isModeGroup ? 20 : getButtonWidth(for: geometry.size.width) * 0.7813
 			
 			HStack(spacing: getSpacing(for: geometry.size.width)) {
 				KeyView(key: keys[0], width: isEnterGroup ? getEnterWidth(for: geometry.size.width) : getWidth(for: geometry.size.width), height: height)
@@ -63,7 +62,7 @@ struct KeyGroupView: View {
 		} else if keys.count == 4 && !isEnterGroup {
 			return (groupWidth - getButtonWidth(for: groupWidth) * 4) / CGFloat(3)
 		} else {
-			return 10
+			return spacing
 		}
 	}
 }
@@ -72,9 +71,9 @@ struct KeyGroupView_Previews: PreviewProvider {
 	static var keys = Keys()
 
     static var previews: some View {
-		KeyGroupView(keys: keys.modeKeys, height: 20, isModeGroup: true)
-		KeyGroupView(keys: keys.keys1, height: 50)
-		KeyGroupView(keys: keys.keys4, height: 50, isEnterGroup: true)
-		KeyGroupView(keys: keys.keys8, height: 50)
+		KeyGroupView(keys: keys.modeKeys, isModeGroup: true)
+		KeyGroupView(keys: keys.keys1)
+		KeyGroupView(keys: keys.keys4, isEnterGroup: true)
+		KeyGroupView(keys: keys.keys8)
     }
 }

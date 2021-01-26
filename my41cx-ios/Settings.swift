@@ -8,22 +8,27 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class SettingsViewController: UIViewController, UIAlertViewDelegate {
+	@EnvironmentObject var calculator: Calculator
+
 	@IBOutlet weak var sound: UISwitch!
 	@IBOutlet weak var syncClock: UISwitch!
-	@IBOutlet weak var calculator: UISegmentedControl!
+	@IBOutlet weak var calculatorSelector: UISegmentedControl!
 	
 	@IBOutlet weak var expansionModule1: MODsView?
 	@IBOutlet weak var expansionModule2: MODsView?
 	@IBOutlet weak var expansionModule3: MODsView?
 	@IBOutlet weak var expansionModule4: MODsView?
 	
+//	@ObservedObject private var calculator = Calculator.shared
+	
 	var yRatio: CGFloat = 1.0
 
 	override func viewWillAppear(_ animated: Bool) {
 		let defaults = UserDefaults.standard
-		calculator.selectedSegmentIndex = defaults.integer(forKey: HPCalculatorType) - 1
+		calculatorSelector.selectedSegmentIndex = defaults.integer(forKey: HPCalculatorType) - 1
 
 		sound.isOn = SOUND
 		self.yRatio = self.view.bounds.size.height / 800.0
@@ -37,7 +42,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 		)
 
 		let destructiveAction = UIAlertAction(title: "Continue", style: .destructive) { (result : UIAlertAction) -> Void in
-			CalculatorController.sharedInstance.resetCalculator(restoringMemory: false)
+			self.calculator.resetCalculator(restoringMemory: false)
 		}
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
 			print("Cancel clear memory")
@@ -70,7 +75,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 
 		// Calculator type
 		let calculatorType = defaults.integer(forKey: HPCalculatorType)
-		let currentCalculatorType = calculator.selectedSegmentIndex + 1
+		let currentCalculatorType = calculatorSelector.selectedSegmentIndex + 1
 		if calculatorType != currentCalculatorType {
 			defaults.set(currentCalculatorType, forKey: HPCalculatorType)
 			needsRestart = true
@@ -175,7 +180,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 			completion: nil)
 		
 		if needsRestart {
-			CalculatorController.sharedInstance.resetCalculator(restoringMemory: true)
+			calculator.resetCalculator(restoringMemory: true)
 		}
 	}
 }

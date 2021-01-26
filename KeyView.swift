@@ -55,6 +55,7 @@ struct KeyView: View {
 						AttributedText(key.upperText)
 						if let text = key.lowerText {
 							AttributedText(text)
+								.padding(.top, 5)
 						}
 					}
 					.frame(width: width, height: height)
@@ -85,13 +86,13 @@ struct KeyView_Previews: PreviewProvider {
 		}
 		GeometryReader { geometry in
 			let width = (geometry.size.width - 40) / 5
-			KeyView(key: keys.keys8[2], width: width, height: width * 0.551282)
-				.frame(width: width, height: width * 0.551282)
+			KeyView(key: keys.keys8[2], width: width, height: width * 0.7813)
+				.frame(width: width, height: width * 0.7813)
 		}
 		GeometryReader { geometry in
 			let width = (geometry.size.width - 40) / 5
-			KeyView(key: keys.keys3[0], width: width, height: width * 0.551282)
-				.frame(width: width, height: width * 0.551282)
+			KeyView(key: keys.keys3[0], width: width, height: width * 0.7813)
+				.frame(width: width, height: width * 0.7813)
 		}
 	}
 }

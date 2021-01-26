@@ -8,11 +8,14 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 typealias DisplayFont = [DisplaySegmentMap]
 typealias DisplaySegmentPaths = [UIBezierPath]
 
 class Display: UIView, Peripheral {
+	var calculator: Calculator?
+
 	let numDisplayCells = 12
 	let numAnnunciators = 12
 	let numDisplaySegments = 17
@@ -43,20 +46,20 @@ class Display: UIView, Peripheral {
 	}
 	
 	override func awakeFromNib() {
-		self.backgroundColor = .clear
-		calculatorController.display = self
-		self.displayFont = self.loadFont("hpfont")
-		self.segmentPaths = DisplaySegmentPaths()
-		self.on = true
-		self.updateCountdown = 2
+		backgroundColor = .clear
+		calculator?.display = self
+		displayFont = loadFont("hpfont")
+		segmentPaths = DisplaySegmentPaths()
+		on = true
+		updateCountdown = 2
 		bus.installPeripheral(self, inSlot: 0xFD)
 		bus.display = self
 		
-		for idx in 0..<self.numDisplayCells {
-			self.registers.A[idx] = 0xA
-			self.registers.B[idx] = 0x3
-			self.registers.C[idx] = 0x2
-			self.registers.E = 0xfff
+		for idx in 0..<numDisplayCells {
+			registers.A[idx] = 0xA
+			registers.B[idx] = 0x3
+			registers.C[idx] = 0x2
+			registers.E = 0xfff
 		}
 		
 		//-- initialize the display character to unicode lookup table:
@@ -81,11 +84,11 @@ class Display: UIView, Peripheral {
 		if self.segmentPaths.count == 0 {
 			self.annunciatorFont = UIFont(
 				name: "Menlo",
-				size:self.annunciatorFontScale * self.annunciatorFontSize
+				size: annunciatorFontScale * annunciatorFontSize
 			)
 			
-			self.segmentPaths = bezierPaths()
-			self.annunciatorPositions = self.calculateAnnunciatorPositions(self.annunciatorFont!, inRect: self.bounds)
+			segmentPaths = bezierPaths()
+			annunciatorPositions = calculateAnnunciatorPositions(annunciatorFont!, inRect: bounds)
 		}
 		if on {
 			if true {
@@ -108,15 +111,15 @@ class Display: UIView, Peripheral {
 			let attrs = [
 				convertFromNSAttributedStringKey(NSAttributedString.Key.font): annunciatorFont!
 			]
-			calculatorController.prgmMode = false
-			calculatorController.alphaMode = false
+			calculator?.prgmMode = false
+			calculator?.alphaMode = false
 			for idx in 0..<numAnnunciators {
 				if annunciatorOn(idx) {
 					if idx == 10 {
-						calculatorController.prgmMode = true
+						calculator?.prgmMode = true
 					}
 					if idx == 11 {
-						calculatorController.alphaMode = true
+						calculator?.alphaMode = true
 					}
 					
 					let point = annunciatorPositions[idx]

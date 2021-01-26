@@ -40,7 +40,6 @@
 		DC5626B1198B89FC0040453F /* RamChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5626B0198B89FC0040453F /* RamChip.swift */; };
 		DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E4BDC19F17E7B00BF831B /* Preferences.swift */; };
 		DC6728121A2769E800B4274F /* AlphaKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6728111A2769E800B4274F /* AlphaKeyboard.swift */; };
-		DC676D661A8F6C0A00D0C296 /* CalculatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC676D651A8F6C0A00D0C296 /* CalculatorController.swift */; };
 		DC676D681A8F6D7A00D0C296 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC676D671A8F6D7A00D0C296 /* Calculator.swift */; };
 		DC676D691A8F6DED00D0C296 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC676D671A8F6D7A00D0C296 /* Calculator.swift */; };
 		DC676D6B1A8F76F800D0C296 /* DisplayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC676D6A1A8F76F800D0C296 /* DisplayExtensions.swift */; };
@@ -52,6 +51,7 @@
 		DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC74922619CF1E600012B5C0 /* Debuger.swift */; };
 		DC75043919B2652200180161 /* hpfont.hpfont in Resources */ = {isa = PBXBuildFile; fileRef = DC75043819B2652200180161 /* hpfont.hpfont */; };
 		DC799D881A155CA2002FACBE /* my41.icns in Resources */ = {isa = PBXBuildFile; fileRef = DC799D871A155CA2002FACBE /* my41.icns */; };
+		DC7B1EEC25C0BEB6002389E5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B1EEB25C0BEB6002389E5 /* DisplayView.swift */; };
 		DC7B24A21A79141E0080F85A /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8863199D380C0027C925 /* Bus.swift */; };
 		DC7B24A31A79144C0080F85A /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD885B199D360B0027C925 /* CPU.swift */; };
 		DC7B24A41A79144C0080F85A /* CPU_Class0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A611A45EE2000BC2BD2 /* CPU_Class0.swift */; };
@@ -344,10 +344,7 @@
 		DCD054A925A483240040EF17 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054A725A483240040EF17 /* Color+Extensions.swift */; };
 		DCD054AF25A490CB0040EF17 /* KeyGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054AE25A490CB0040EF17 /* KeyGroupView.swift */; };
 		DCD054B025A490CB0040EF17 /* KeyGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054AE25A490CB0040EF17 /* KeyGroupView.swift */; };
-		DCD054C125A494370040EF17 /* My41View.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054C025A494370040EF17 /* My41View.swift */; };
 		DCD054C225A494370040EF17 /* My41View.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054C025A494370040EF17 /* My41View.swift */; };
-		DCD054C825A4B5600040EF17 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054C725A4B5600040EF17 /* DisplayView.swift */; };
-		DCD054C925A4B5600040EF17 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054C725A4B5600040EF17 /* DisplayView.swift */; };
 		DCD054CF25A4F0F40040EF17 /* Text+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054CE25A4F0F40040EF17 /* Text+Extensions.swift */; };
 		DCD054D025A4F0F40040EF17 /* Text+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054CE25A4F0F40040EF17 /* Text+Extensions.swift */; };
 		DCD054DE25A53C440040EF17 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054DD25A53C440040EF17 /* View+Extensions.swift */; };
@@ -440,6 +437,7 @@
 		DC74922619CF1E600012B5C0 /* Debuger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Debuger.swift; path = Classes/Debuger.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DC75043819B2652200180161 /* hpfont.hpfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = hpfont.hpfont; sourceTree = "<group>"; };
 		DC799D871A155CA2002FACBE /* my41.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = my41.icns; path = my41/my41.icns; sourceTree = "<group>"; };
+		DC7B1EEB25C0BEB6002389E5 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CalculatorWindow.swift; path = Classes/CalculatorWindow.swift; sourceTree = "<group>"; };
 		DC7B7E1019AFA4EE00C70269 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = my41/Classes/Timer.swift; sourceTree = "<group>"; };
 		DC8F31441ABCB54F0053A514 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -590,7 +588,6 @@
 		DCD054A725A483240040EF17 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		DCD054AE25A490CB0040EF17 /* KeyGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGroupView.swift; sourceTree = "<group>"; };
 		DCD054C025A494370040EF17 /* My41View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My41View.swift; sourceTree = "<group>"; };
-		DCD054C725A4B5600040EF17 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		DCD054CE25A4F0F40040EF17 /* Text+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extensions.swift"; sourceTree = "<group>"; };
 		DCD054DD25A53C440040EF17 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		DCD054E425A5C4C50040EF17 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
@@ -1000,7 +997,6 @@
 			children = (
 				DCD0549025A470600040EF17 /* KeyView.swift */,
 				DCD054AE25A490CB0040EF17 /* KeyGroupView.swift */,
-				DCD054C725A4B5600040EF17 /* DisplayView.swift */,
 				DCD054C025A494370040EF17 /* My41View.swift */,
 			);
 			name = Views;
@@ -1127,6 +1123,7 @@
 			isa = PBXGroup;
 			children = (
 				DCE75C261A61BCBD002B2D7C /* Display.swift */,
+				DC7B1EEB25C0BEB6002389E5 /* DisplayView.swift */,
 			);
 			name = Peripherals;
 			sourceTree = "<group>";
@@ -1619,7 +1616,6 @@
 				DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */,
 				DC447DE61A34AD8B008FAB28 /* Application.swift in Sources */,
 				DCD09B0B1A8628A700F8D785 /* CocoaSpecific.swift in Sources */,
-				DCD054C825A4B5600040EF17 /* DisplayView.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
 				DCFF74B01A1FE74A00C0DE9A /* DebugMemory.swift in Sources */,
 				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
@@ -1639,7 +1635,6 @@
 				DC6DB98B19BA5C1800E26ADD /* Keyboard.swift in Sources */,
 				DCA23A661A46D3BC00BC2BD2 /* CPU_Class2.swift in Sources */,
 				DCF52A21199C971A006BF825 /* String+Extensions.swift in Sources */,
-				DCD054C125A494370040EF17 /* My41View.swift in Sources */,
 				DCA23A681A47332B00BC2BD2 /* CPU_Class3.swift in Sources */,
 				DCEEC96C1A18CD40000ECA76 /* PreferencesMods.swift in Sources */,
 				DCD0549125A470600040EF17 /* KeyView.swift in Sources */,
@@ -1664,12 +1659,10 @@
 				DCD147F91A9381FA00AE256B /* String+Extensions.swift in Sources */,
 				DCD09B151A86320000F8D785 /* DebugMemory.swift in Sources */,
 				DCD054A925A483240040EF17 /* Color+Extensions.swift in Sources */,
-				DCD054C925A4B5600040EF17 /* DisplayView.swift in Sources */,
 				DCD054E625A5C4C50040EF17 /* Keys.swift in Sources */,
 				DCD09B101A862ABE00F8D785 /* RomChip.swift in Sources */,
 				DCD09B231A8660E300F8D785 /* Keyboard.swift in Sources */,
 				DCD054DF25A53C440040EF17 /* View+Extensions.swift in Sources */,
-				DC676D661A8F6C0A00D0C296 /* CalculatorController.swift in Sources */,
 				DCD054B025A490CB0040EF17 /* KeyGroupView.swift in Sources */,
 				DCD09B0F1A862A9100F8D785 /* DataOperations.swift in Sources */,
 				DCD09B0E1A862A5600F8D785 /* Timer.swift in Sources */,
@@ -1680,6 +1673,7 @@
 				DCD054C225A494370040EF17 /* My41View.swift in Sources */,
 				DCD09B071A86260000F8D785 /* Disassembly.swift in Sources */,
 				DC7B24A31A79144C0080F85A /* CPU.swift in Sources */,
+				DC7B1EEC25C0BEB6002389E5 /* DisplayView.swift in Sources */,
 				DC7B24A41A79144C0080F85A /* CPU_Class0.swift in Sources */,
 				DCBE4F6B25B8C69700E69886 /* My41cx_ios_App.swift in Sources */,
 				DC7B24A51A79144C0080F85A /* CPU_Class1.swift in Sources */,

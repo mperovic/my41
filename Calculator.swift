@@ -30,7 +30,7 @@ let HPConsoleForegroundColor = "ConsoleForegroundColor"
 let HPConsoleBackgroundColor = "ConsoleBackgroundColor"
 let HPResetCalculator = "ResetCalculator"
 
-class Calculator {
+class Calculator: ObservableObject {
 	var calculatorMod = MOD()
 	var portMod: [MOD?] = [nil, nil, nil, nil]
 	var calculatorType: CalculatorType?
@@ -293,8 +293,7 @@ class Calculator {
 		return to
 	}
 	
-	@objc func timeSlice(_ timer: Foundation.Timer)
-	{
+	@objc func timeSlice(_ timer: Foundation.Timer) {
 		cpu.timeSlice(timer)
 		display?.timeSlice(timer)
 		timerModule?.timeSlice(timer)

@@ -440,8 +440,7 @@ extension Display {
 		}
 	}
 	
-	func shiftDigit(_ direction: DisplayShiftDirection, from register: inout Digits12, withFilter src: Digit)
-	{
+	func shiftDigit(_ direction: DisplayShiftDirection, from register: inout Digits12, withFilter src: Digit) {
 		// Rotate the given digit into the specified register in the specified direction.
 		switch direction {
 		case .left:
