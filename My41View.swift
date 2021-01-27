@@ -54,6 +54,7 @@ struct My41View: View {
 				ZStack {
 					EmptyView()
 						.background(Color(white: 148/255))
+						.cornerRadius(3.0)
 
 					lcdDisplay
 						.environmentObject(calculator)
