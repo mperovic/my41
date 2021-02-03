@@ -71,7 +71,7 @@ class DebugCPUViewController: NSViewController {
 		updateDisplay()
 	}
 	
-	func updateDisplay() {
+	@objc func updateDisplay() {
 		populateCPURegisters()
 		populateDisplayRegisters()
 	}
@@ -149,10 +149,9 @@ class DebugCPUViewController: NSViewController {
 		}
 	}
 	
-	@IBAction func traceAction(sender: AnyObject)
-	{
+	@IBAction func traceAction(sender: AnyObject) {
 		if sender as! NSObject == traceSwitch {
-			if traceSwitch.state == NSOnState {
+			if traceSwitch.state == NSControl.StateValue.on {
 				TRACE = 1
 			} else {
 				TRACE = 0

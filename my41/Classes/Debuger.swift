@@ -26,10 +26,10 @@ class DebugSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[0].viewController.view,
-				attribute: NSLayoutAttribute.width,
-				relatedBy: NSLayoutRelation.equal,
+				attribute: NSLayoutConstraint.Attribute.width,
+				relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+				attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 194
 			)
@@ -37,10 +37,10 @@ class DebugSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[0].viewController.view,
-				attribute: NSLayoutAttribute.height,
-				relatedBy: NSLayoutRelation.equal,
+				attribute: NSLayoutConstraint.Attribute.height,
+				relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+				attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 379
 			)
@@ -48,10 +48,10 @@ class DebugSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[1].viewController.view,
-				attribute: NSLayoutAttribute.width,
-				relatedBy: NSLayoutRelation.equal,
+				attribute: NSLayoutConstraint.Attribute.width,
+				relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+				attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 710
 			)
@@ -59,10 +59,10 @@ class DebugSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[1].viewController.view,
-				attribute: NSLayoutAttribute.height,
-				relatedBy: NSLayoutRelation.equal,
+				attribute: NSLayoutConstraint.Attribute.height,
+				relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+				attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 379
 			)
@@ -92,9 +92,9 @@ class DebugContainerViewController: NSViewController {
 		let defaults = UserDefaults.standard
 		TRACE = defaults.integer(forKey: "traceActive")
 		if TRACE == 0 {
-			debugCPUViewController?.traceSwitch.state = NSOffState
+			debugCPUViewController?.traceSwitch.state = NSControl.StateValue.off
 		} else {
-			debugCPUViewController?.traceSwitch.state = NSOnState
+			debugCPUViewController?.traceSwitch.state = NSControl.StateValue.on
 		}
 	}
 	

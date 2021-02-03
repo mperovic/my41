@@ -51,7 +51,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		tableView.scrollRowToVisible(0)
 	}
 	
-	func displaySelectedMemoryBank() {
+	@objc func displaySelectedMemoryBank() {
 		displayCurrentRAM(address: bankSelected << 4)
 	}
 	
@@ -160,7 +160,7 @@ class DebugMemoryViewController: NSViewController, NSTableViewDataSource, NSTabl
 		
 		if tableColumn?.identifier == "avail" {
 //			if bus.RAMExists(row << 4) {
-			value = NSNumber(value: NSOnState)
+			value = NSNumber(value: NSControl.StateValue.on.rawValue)
 //			} else {
 //				value = NSNumber(integer: NSOffState)
 //			}

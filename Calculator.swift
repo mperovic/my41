@@ -17,10 +17,18 @@ enum CalculatorType: Int {
 let MAX_RAM_SIZE		= 0x400
 let epromAddress		= 0x4000
 
-let HPPort1 = "ModulePort1"
-let HPPort2 = "ModulePort2"
-let HPPort3 = "ModulePort3"
-let HPPort4 = "ModulePort4"
+enum HPPort: String, CaseIterable {
+	case port1 = "ModulePort1"
+	case port2 = "ModulePort2"
+	case port3 = "ModulePort3"
+	case port4 = "ModulePort4"
+	
+	func getFilePath() -> String? {
+		guard let module = UserDefaults.standard.string(forKey: self.rawValue) else { return nil }
+
+		return Bundle.main.resourcePath! + "/" + module
+	}
+}
 
 let HPCalculatorType = "CalculatorType"
 let HPPrinterAvailable = "PrinterAvailable"
@@ -235,21 +243,21 @@ class Calculator: ObservableObject {
 		
 		// Now we fill each port
 		do {
-			if defaults.string(forKey: HPPort1) != nil {
+			if defaults.string(forKey: HPPort.port1.rawValue) != nil {
 				portMod[0] = MOD()
-				try portMod[0]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort1)!)
+				try portMod[0]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port1.rawValue)!)
 			}
-			if defaults.string(forKey: HPPort2) != nil {
+			if defaults.string(forKey: HPPort.port2.rawValue) != nil {
 				portMod[1] = MOD()
-				try portMod[1]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort2)!)
+				try portMod[1]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port2.rawValue)!)
 			}
-			if defaults.string(forKey: HPPort3) != nil {
+			if defaults.string(forKey: HPPort.port3.rawValue) != nil {
 				portMod[2] = MOD()
-				try portMod[2]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort3)!)
+				try portMod[2]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port3.rawValue)!)
 			}
-			if defaults.string(forKey: HPPort4) != nil {
+			if defaults.string(forKey: HPPort.port4.rawValue) != nil {
 				portMod[3] = MOD()
-				try portMod[3]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort4)!)
+				try portMod[3]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port4.rawValue)!)
 			}
 		} catch _ {
 			

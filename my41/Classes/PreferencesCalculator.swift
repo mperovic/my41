@@ -49,7 +49,7 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	@IBAction func synchronize(sender: AnyObject)
 	{
 		if sender as? NSObject == synchronyzeButton {
-			if synchronyzeButton.state == NSOnState {
+			if synchronyzeButton.state == NSControl.StateValue.on {
 				SYNCHRONYZE = true
 			} else {
 				SYNCHRONYZE = false

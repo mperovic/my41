@@ -196,7 +196,6 @@ class MODsView: UIView, UIAlertViewDelegate {
 
 	var modFiles = [String]()
 	var allModFiles = [String]()
-	var modFileHeaders: [String: ModuleHeader]?
 
 	@IBOutlet weak var settingsViewController: SettingsViewController?
 	
@@ -246,7 +245,7 @@ class MODsView: UIView, UIAlertViewDelegate {
 	}
 	
 	@objc func buttonAction(_ sender: AnyObject) {
-		if self.filePath != nil {
+		if filePath != nil {
 			let alertController = UIAlertController(
 				title: "Reset Calculator",
 				message: "What do you want to do with module",
@@ -254,26 +253,26 @@ class MODsView: UIView, UIAlertViewDelegate {
 			)
 
 			let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
-				if let oldFilePath = self.oldFilePath {
-					self.filePath = oldFilePath
-					self.oldFilePath = nil
+				if let oldFilePath = oldFilePath {
+					filePath = oldFilePath
+					oldFilePath = nil
 				}
 			}
 			let emptyAction = UIAlertAction(title: "Empty port", style: .default) { (result : UIAlertAction) -> Void in
-				self.filePath = nil
-				self.setNeedsDisplay()
+				filePath = nil
+				setNeedsDisplay()
 			}
 			let replaceAction = UIAlertAction(title: "Replace module", style: .default) { (result : UIAlertAction) -> Void in
-				self.oldFilePath = self.filePath
-				self.filePath = nil
-				self.selectModule()
+				oldFilePath = filePath
+				filePath = nil
+				selectModule()
 			}
 			alertController.addAction(cancelAction)
 			alertController.addAction(emptyAction)
 			alertController.addAction(replaceAction)
 			settingsViewController?.present(alertController, animated: true, completion: nil)
 		} else {
-			self.selectModule()
+			selectModule()
 		}
 	}
 	

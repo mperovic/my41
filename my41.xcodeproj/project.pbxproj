@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		DC1C67E61ABECFB800993AEC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE75C0E1A61B4FE002B2D7C /* LaunchScreen.xib */; };
-		DC1C67E71ABECFCC00993AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE75C091A61B4FE002B2D7C /* Main.storyboard */; };
 		DC1C67ED1ABED63000993AEC /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC1C67EC1ABED63000993AEC /* Images-2.xcassets */; };
 		DC34A71F1A949CC900C90AB5 /* hpfont.hpfont in Resources */ = {isa = PBXBuildFile; fileRef = DC75043819B2652200180161 /* hpfont.hpfont */; };
 		DC447DE61A34AD8B008FAB28 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC447DE51A34AD8B008FAB28 /* Application.swift */; };
@@ -60,7 +59,12 @@
 		DC7B24A71A79144C0080F85A /* CPU_Class3.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA23A671A47332B00BC2BD2 /* CPU_Class3.swift */; };
 		DC7B7E0F19AF99AB00C70269 /* CalculatorWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */; };
 		DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7B7E1019AFA4EE00C70269 /* Timer.swift */; };
-		DC8F31451ABCB54F0053A514 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8F31441ABCB54F0053A514 /* Settings.swift */; };
+		DC86790A25C9ED9B00E9DCFB /* MODs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86790925C9ED9B00E9DCFB /* MODs.swift */; };
+		DC86790B25C9ED9B00E9DCFB /* MODs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86790925C9ED9B00E9DCFB /* MODs.swift */; };
+		DC86791125C9F50E00E9DCFB /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86791025C9F50E00E9DCFB /* Array+Extensions.swift */; };
+		DC86791225C9F50E00E9DCFB /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86791025C9F50E00E9DCFB /* Array+Extensions.swift */; };
+		DC86791925CB4A1900E9DCFB /* MODList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86791825CB4A1900E9DCFB /* MODList.swift */; };
+		DC86791A25CB4A1900E9DCFB /* MODList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC86791825CB4A1900E9DCFB /* MODList.swift */; };
 		DC9CB7E11ABABAF500363462 /* 41z.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB7591ABABAF400363462 /* 41z.mod */; };
 		DC9CB7E21ABABAF500363462 /* 83trinh.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75A1ABABAF400363462 /* 83trinh.mod */; };
 		DC9CB7E31ABABAF500363462 /* adv-app.mod in Resources */ = {isa = PBXBuildFile; fileRef = DC9CB75B1ABABAF400363462 /* adv-app.mod */; };
@@ -336,7 +340,12 @@
 		DCBE4F6B25B8C69700E69886 /* My41cx_ios_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE4F6A25B8C69700E69886 /* My41cx_ios_App.swift */; };
 		DCBE4F8625B8D03100E69886 /* AttributedText in Frameworks */ = {isa = PBXBuildFile; productRef = DCBE4F8525B8D03100E69886 /* AttributedText */; };
 		DCBE4F8D25B8D08A00E69886 /* AttributedText in Frameworks */ = {isa = PBXBuildFile; productRef = DCBE4F8C25B8D08A00E69886 /* AttributedText */; };
-		DCD0549125A470600040EF17 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD0549025A470600040EF17 /* KeyView.swift */; };
+		DCC7F32525C5F4B500E68C85 /* MODsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC7F32425C5F4B500E68C85 /* MODsView.swift */; };
+		DCC7F32625C5F4B500E68C85 /* MODsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC7F32425C5F4B500E68C85 /* MODsView.swift */; };
+		DCC9F3B525C3067F001F06B3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC9F3B425C3067F001F06B3 /* SettingsView.swift */; };
+		DCC9F3B625C3067F001F06B3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC9F3B425C3067F001F06B3 /* SettingsView.swift */; };
+		DCC9F3C425C313B5001F06B3 /* MODDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC9F3C325C313B5001F06B3 /* MODDetailsView.swift */; };
+		DCC9F3C525C313B5001F06B3 /* MODDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC9F3C325C313B5001F06B3 /* MODDetailsView.swift */; };
 		DCD0549225A470600040EF17 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD0549025A470600040EF17 /* KeyView.swift */; };
 		DCD0549825A4820A0040EF17 /* CommonAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCD0549725A4820A0040EF17 /* CommonAssets.xcassets */; };
 		DCD0549925A4820A0040EF17 /* CommonAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCD0549725A4820A0040EF17 /* CommonAssets.xcassets */; };
@@ -364,7 +373,6 @@
 		DCD09B261A8663D500F8D785 /* CalculatorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD09B241A8663D500F8D785 /* CalculatorKey.swift */; };
 		DCD147F91A9381FA00AE256B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF52A20199C971A006BF825 /* String+Extensions.swift */; };
 		DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD48908198AF42B00F3B898 /* CalculatorController.swift */; };
-		DCE75C081A61B4FE002B2D7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE75C071A61B4FE002B2D7C /* ViewController.swift */; };
 		DCE75C1C1A61B4FE002B2D7C /* my41cx_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE75C1B1A61B4FE002B2D7C /* my41cx_iosTests.swift */; };
 		DCE75C271A61BCBD002B2D7C /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE75C261A61BCBD002B2D7C /* Display.swift */; };
 		DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEA7DF119D6FA8B00E69234 /* Disassembly.swift */; };
@@ -440,6 +448,9 @@
 		DC7B1EEB25C0BEB6002389E5 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		DC7B7E0E19AF99AB00C70269 /* CalculatorWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CalculatorWindow.swift; path = Classes/CalculatorWindow.swift; sourceTree = "<group>"; };
 		DC7B7E1019AFA4EE00C70269 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = my41/Classes/Timer.swift; sourceTree = "<group>"; };
+		DC86790925C9ED9B00E9DCFB /* MODs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MODs.swift; sourceTree = "<group>"; };
+		DC86791025C9F50E00E9DCFB /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		DC86791825CB4A1900E9DCFB /* MODList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MODList.swift; sourceTree = "<group>"; };
 		DC8F31441ABCB54F0053A514 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		DC9CB7591ABABAF400363462 /* 41z.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = 41z.mod; path = MOD/41z.mod; sourceTree = "<group>"; };
 		DC9CB75A1ABABAF400363462 /* 83trinh.mod */ = {isa = PBXFileReference; lastKnownFileType = file; name = 83trinh.mod; path = MOD/83trinh.mod; sourceTree = "<group>"; };
@@ -583,6 +594,9 @@
 		DCAD8863199D380C0027C925 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bus.swift; path = my41/Classes/Bus.swift; sourceTree = "<group>"; };
 		DCAD8865199D38540027C925 /* SoundOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundOutput.swift; path = my41/Classes/SoundOutput.swift; sourceTree = "<group>"; };
 		DCBE4F6A25B8C69700E69886 /* My41cx_ios_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My41cx_ios_App.swift; sourceTree = "<group>"; };
+		DCC7F32425C5F4B500E68C85 /* MODsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MODsView.swift; sourceTree = "<group>"; };
+		DCC9F3B425C3067F001F06B3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		DCC9F3C325C313B5001F06B3 /* MODDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MODDetailsView.swift; sourceTree = "<group>"; };
 		DCD0549025A470600040EF17 /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		DCD0549725A4820A0040EF17 /* CommonAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CommonAssets.xcassets; sourceTree = "<group>"; };
 		DCD054A725A483240040EF17 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -992,12 +1006,33 @@
 			name = "Common code";
 			sourceTree = "<group>";
 		};
-		DCD0548325A468760040EF17 /* Views */ = {
+		DCC9F3AE25C3065E001F06B3 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
 				DCD0549025A470600040EF17 /* KeyView.swift */,
 				DCD054AE25A490CB0040EF17 /* KeyGroupView.swift */,
 				DCD054C025A494370040EF17 /* My41View.swift */,
+			);
+			name = Calculator;
+			sourceTree = "<group>";
+		};
+		DCC9F3B325C3066C001F06B3 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DCC9F3B425C3067F001F06B3 /* SettingsView.swift */,
+				DC86790925C9ED9B00E9DCFB /* MODs.swift */,
+				DCC7F32425C5F4B500E68C85 /* MODsView.swift */,
+				DC86791825CB4A1900E9DCFB /* MODList.swift */,
+				DCC9F3C325C313B5001F06B3 /* MODDetailsView.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		DCD0548325A468760040EF17 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DCC9F3B325C3066C001F06B3 /* Settings */,
+				DCC9F3AE25C3065E001F06B3 /* Calculator */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1009,6 +1044,7 @@
 				DCD054A725A483240040EF17 /* Color+Extensions.swift */,
 				DCD054CE25A4F0F40040EF17 /* Text+Extensions.swift */,
 				DCD054DD25A53C440040EF17 /* View+Extensions.swift */,
+				DC86791025C9F50E00E9DCFB /* Array+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1252,7 +1288,7 @@
 				};
 			};
 			buildConfigurationList = DC45284819897DA500C40B6C /* Build configuration list for PBXProject "my41" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1446,7 +1482,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC1C67E71ABECFCC00993AEC /* Main.storyboard in Resources */,
 				DC1C67E61ABECFB800993AEC /* LaunchScreen.xib in Resources */,
 				DC9CB8F81ABAC87900363462 /* keyPressSound.wav in Resources */,
 				DC9CB8691ABABB0F00363462 /* 41z.mod in Resources */,
@@ -1604,8 +1639,10 @@
 				DC676D6C1A8F7C3C00D0C296 /* DisplayExtensions.swift in Sources */,
 				DC676D691A8F6DED00D0C296 /* Calculator.swift in Sources */,
 				DCA23A621A45EE2000BC2BD2 /* CPU_Class0.swift in Sources */,
+				DC86791125C9F50E00E9DCFB /* Array+Extensions.swift in Sources */,
 				DCAD8860199D37CB0027C925 /* MOD.swift in Sources */,
 				DCD054CF25A4F0F40040EF17 /* Text+Extensions.swift in Sources */,
+				DCC9F3B525C3067F001F06B3 /* SettingsView.swift in Sources */,
 				DC4AEB2A1A25E31A00ABF0D8 /* KeyboardShortcuts.swift in Sources */,
 				DCEEC9681A18A270000ECA76 /* PreferencesMenu.swift in Sources */,
 				DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */,
@@ -1615,6 +1652,7 @@
 				DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */,
 				DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */,
 				DC447DE61A34AD8B008FAB28 /* Application.swift in Sources */,
+				DC86790A25C9ED9B00E9DCFB /* MODs.swift in Sources */,
 				DCD09B0B1A8628A700F8D785 /* CocoaSpecific.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
 				DCFF74B01A1FE74A00C0DE9A /* DebugMemory.swift in Sources */,
@@ -1637,9 +1675,11 @@
 				DCF52A21199C971A006BF825 /* String+Extensions.swift in Sources */,
 				DCA23A681A47332B00BC2BD2 /* CPU_Class3.swift in Sources */,
 				DCEEC96C1A18CD40000ECA76 /* PreferencesMods.swift in Sources */,
-				DCD0549125A470600040EF17 /* KeyView.swift in Sources */,
 				DC45285519897DA600C40B6C /* ViewController.swift in Sources */,
 				DC6728121A2769E800B4274F /* AlphaKeyboard.swift in Sources */,
+				DCC7F32525C5F4B500E68C85 /* MODsView.swift in Sources */,
+				DCC9F3C425C313B5001F06B3 /* MODDetailsView.swift in Sources */,
+				DC86791925CB4A1900E9DCFB /* MODList.swift in Sources */,
 				DC45285319897DA600C40B6C /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1668,25 +1708,29 @@
 				DCD09B0E1A862A5600F8D785 /* Timer.swift in Sources */,
 				DCD09B091A86281900F8D785 /* MOD.swift in Sources */,
 				DCD09B081A86261600F8D785 /* SoundOutput.swift in Sources */,
-				DC8F31451ABCB54F0053A514 /* Settings.swift in Sources */,
 				DCD054D025A4F0F40040EF17 /* Text+Extensions.swift in Sources */,
 				DCD054C225A494370040EF17 /* My41View.swift in Sources */,
+				DCC7F32625C5F4B500E68C85 /* MODsView.swift in Sources */,
 				DCD09B071A86260000F8D785 /* Disassembly.swift in Sources */,
+				DC86791A25CB4A1900E9DCFB /* MODList.swift in Sources */,
 				DC7B24A31A79144C0080F85A /* CPU.swift in Sources */,
+				DCC9F3C525C313B5001F06B3 /* MODDetailsView.swift in Sources */,
 				DC7B1EEC25C0BEB6002389E5 /* DisplayView.swift in Sources */,
 				DC7B24A41A79144C0080F85A /* CPU_Class0.swift in Sources */,
 				DCBE4F6B25B8C69700E69886 /* My41cx_ios_App.swift in Sources */,
 				DC7B24A51A79144C0080F85A /* CPU_Class1.swift in Sources */,
+				DCC9F3B625C3067F001F06B3 /* SettingsView.swift in Sources */,
 				DC7B24A61A79144C0080F85A /* CPU_Class2.swift in Sources */,
 				DC7B24A71A79144C0080F85A /* CPU_Class3.swift in Sources */,
 				DCD09B261A8663D500F8D785 /* CalculatorKey.swift in Sources */,
+				DC86790B25C9ED9B00E9DCFB /* MODs.swift in Sources */,
 				DC676D6B1A8F76F800D0C296 /* DisplayExtensions.swift in Sources */,
 				DCD0549225A470600040EF17 /* KeyView.swift in Sources */,
 				DC676D681A8F6D7A00D0C296 /* Calculator.swift in Sources */,
 				DCD09B131A86319E00F8D785 /* DebugCPU.swift in Sources */,
+				DC86791225C9F50E00E9DCFB /* Array+Extensions.swift in Sources */,
 				DCD09B0D1A8628E000F8D785 /* CocoaTouchSpecific.swift in Sources */,
 				DC7B24A21A79141E0080F85A /* Bus.swift in Sources */,
-				DCE75C081A61B4FE002B2D7C /* ViewController.swift in Sources */,
 				DCE75C271A61BCBD002B2D7C /* Display.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

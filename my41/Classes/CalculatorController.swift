@@ -16,7 +16,7 @@ class CalculatorController : Calculator {
 		super.init()
 		
 		NotificationCenter.default.addObserver(
-			forName: NSNotification.Name.NSApplicationWillBecomeActive,
+			forName: NSNotification.Name.NSApplication.willBecomeActiveNotification,
 			object: nil,
 			queue: nil) { active in
 				if let tModule = self.timerModule {

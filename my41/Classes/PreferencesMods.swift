@@ -91,16 +91,16 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	
 	func removeLoadedModules() {
 		let defaults = UserDefaults.standard
-		if (defaults.string(forKey: HPPort1) != nil) {
+		if (defaults.string(forKey: HPPort.port1.rawValue) != nil) {
 			removeModFile(filename: expansionModule1.filePath!)
 		}
-		if (defaults.string(forKey: HPPort2) != nil) {
+		if (defaults.string(forKey: HPPort.port2.rawValue) != nil) {
 			removeModFile(filename: expansionModule2.filePath!)
 		}
-		if (defaults.string(forKey: HPPort3) != nil) {
+		if (defaults.string(forKey: HPPort.port3.rawValue) != nil) {
 			removeModFile(filename: expansionModule3.filePath!)
 		}
-		if (defaults.string(forKey: HPPort4) != nil) {
+		if (defaults.string(forKey: HPPort.port4.rawValue) != nil) {
 			removeModFile(filename: expansionModule4.filePath!)
 		}
 	}
@@ -156,7 +156,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	//MARK: - Actions
 	@IBAction func removeModule1Action(sender: AnyObject) {
 		let defaults = UserDefaults.standard
-		defaults.removeObject(forKey: HPPort1)
+		defaults.removeObject(forKey: HPPort.port1.rawValue)
 		removeModule1.isEnabled = false
 		expansionModule1.filePath = nil
 		expansionModule1.setNeedsDisplay(expansionModule1.bounds)
@@ -166,7 +166,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	
 	@IBAction func removeModule2Action(sender: AnyObject) {
 		let defaults = UserDefaults.standard
-		defaults.removeObject(forKey: HPPort2)
+		defaults.removeObject(forKey: HPPort.port2.rawValue)
 		removeModule2.isEnabled = false
 		expansionModule2.filePath = nil
 		expansionModule2.setNeedsDisplay(expansionModule2.bounds)
@@ -176,7 +176,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	
 	@IBAction func removeModule3Action(sender: AnyObject) {
 		let defaults = UserDefaults.standard
-		defaults.removeObject(forKey: HPPort3)
+		defaults.removeObject(forKey: HPPort.port3.rawValue)
 		removeModule3.isEnabled = false
 		expansionModule3.filePath = nil
 		expansionModule3.setNeedsDisplay(expansionModule3.bounds)
@@ -186,7 +186,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 	
 	@IBAction func removeModule4Action(sender: AnyObject) {
 		let defaults = UserDefaults.standard
-		defaults.removeObject(forKey: HPPort4)
+		defaults.removeObject(forKey: HPPort.port4.rawValue)
 		removeModule4.isEnabled = false
 		expansionModule4.filePath = nil
 		expansionModule4.setNeedsDisplay(expansionModule4.bounds)
@@ -209,7 +209,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		
 		var cellView: NSTableCellView?
 		if let tColumn = tableColumn {
-			let cView = tableView.make(withIdentifier: tColumn.identifier, owner: self) as! NSTableCellView
+			let cView = tableView.makeView(withIdentifier: tColumn.identifier, owner: self) as! NSTableCellView
 			cView.textField?.stringValue = (filePath as NSString).lastPathComponent
 			cellView = cView
 		}
@@ -230,7 +230,7 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 //			let title = modDetailsView.modDetails?.title
 			let row = rowIndexes.first
 			let filePath = modFiles[row!]
-			pboard.setString(filePath, forType: NSPasteboardTypeString)
+			pboard.setString(filePath, forType: NSPasteboard.PasteboardType.string)
 			
 			return true
 		}
@@ -270,16 +270,16 @@ class ExpansionView: NSView {
 		let defaults = UserDefaults.standard
 		switch port {
 		case 1:
-			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort1)!
+			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port1.rawValue)!
 			
 		case 2:
-			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort2)!
+			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port2.rawValue)!
 			
 		case 3:
-			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort3)!
+			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port3.rawValue)!
 			
 		case 4:
-			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort4)!
+			filePath = Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port4.rawValue)!
 			
 		default:
 			break
@@ -321,11 +321,11 @@ class ExpansionView: NSView {
 		
 		if let fPath = filePath {
 			let font = NSFont.systemFont(ofSize: 11.0)
-			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 			textStyle.alignment = .center
 			let attributes = [
-				NSFontAttributeName : font,
-				NSParagraphStyleAttributeName: textStyle
+				NSAttributedString.Key.font : font,
+				NSAttributedString.Key.paragraphStyle: textStyle
 			]
 			
 			let mod = MOD()
@@ -341,7 +341,7 @@ class ExpansionView: NSView {
 	
 	//MARK: - Drag & Drop
 	override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-		if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask()) == NSDragOperation.generic {
+		if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask) == NSDragOperation.generic {
 			return NSDragOperation.generic
 		} else {
 			return NSDragOperation()
@@ -349,7 +349,7 @@ class ExpansionView: NSView {
 	}
 	
 	override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-		if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask()) == NSDragOperation.generic {
+		if NSDragOperation.generic.intersection(sender.draggingSourceOperationMask) == NSDragOperation.generic {
 			return NSDragOperation.generic
 		} else {
 			return NSDragOperation()
@@ -365,7 +365,7 @@ class ExpansionView: NSView {
 			return false
 		}
 
-		let paste = sender.draggingPasteboard()
+		let paste = sender.draggingPasteboard
 		let theArray = [
 			"NSStringPboardType"
 		]

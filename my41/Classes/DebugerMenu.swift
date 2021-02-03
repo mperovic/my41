@@ -67,7 +67,7 @@ class SelectedDebugView: NSView {
 		let font = NSFont(name: "Helvetica Bold", size: 14.0)
 		
 		let textRect: NSRect = NSMakeRect(5, 3, 125, 18)
-		let textStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+		let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = .left
 		
 		if selected! {
@@ -96,9 +96,9 @@ class SelectedDebugView: NSView {
 			
 			if let actualFont = font {
 				let textFontAttributes: NSDictionary = [
-					NSFontAttributeName: actualFont,
-					NSForegroundColorAttributeName: textColor,
-					NSParagraphStyleAttributeName: textStyle
+					NSAttributedString.Key.font: actualFont,
+					NSAttributedString.Key.foregroundColor: textColor,
+					NSAttributedString.Key.paragraphStyle: textStyle
 				]
 
 				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [String : AnyObject])
@@ -106,9 +106,9 @@ class SelectedDebugView: NSView {
 		} else {
 			if let actualFont = font {
 				let textFontAttributes: NSDictionary = [
-					NSFontAttributeName: actualFont,
-					NSForegroundColorAttributeName: backColor,
-					NSParagraphStyleAttributeName: textStyle
+					NSAttributedString.Key.font: actualFont,
+					NSAttributedString.Key.foregroundColor: backColor,
+					NSAttributedString.Key.paragraphStyle: textStyle
 				]
 				
 				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [String : AnyObject])
