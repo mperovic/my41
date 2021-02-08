@@ -30,7 +30,13 @@ enum HPPort: String, CaseIterable {
 	}
 }
 
-let HPCalculatorType = "CalculatorType"
+enum HPCalculator: String, CaseIterable {
+	case hp41c = "HP 41C"
+	case hp41cv = "HP 41CV"
+	case hp41cx = "HP 41CX"
+}
+
+let hpCalculatorType = "CalculatorType"
 let HPPrinterAvailable = "PrinterAvailable"
 let HPCardReaderAvailable = "CardReaderAvailable"
 let HPDisplayDebug = "DisplayDebug"
@@ -238,49 +244,41 @@ class Calculator: ObservableObject {
 	
 	func readCalculatorDescriptionFromDefaults() {
 		let defaults = UserDefaults.standard
-		let cType = defaults.integer(forKey: HPCalculatorType)
-		readROMModule(cType)
+		readROMModule(defaults.string(forKey: hpCalculatorType) ?? "")
 		
 		// Now we fill each port
-		do {
-			if defaults.string(forKey: HPPort.port1.rawValue) != nil {
-				portMod[0] = MOD()
-				try portMod[0]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port1.rawValue)!)
+		var portNo = 0
+		HPPort.allCases.forEach {
+			do {
+				portMod[portNo] = MOD()
+				if let modName = defaults.string(forKey: $0.rawValue) {
+					try portMod[portNo]?.readModFromFile(Bundle.main.resourcePath! + "/" + modName)
+				}
+				
+				portNo += 1
+			} catch _ {
+				
 			}
-			if defaults.string(forKey: HPPort.port2.rawValue) != nil {
-				portMod[1] = MOD()
-				try portMod[1]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port2.rawValue)!)
-			}
-			if defaults.string(forKey: HPPort.port3.rawValue) != nil {
-				portMod[2] = MOD()
-				try portMod[2]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port3.rawValue)!)
-			}
-			if defaults.string(forKey: HPPort.port4.rawValue) != nil {
-				portMod[3] = MOD()
-				try portMod[3]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort.port4.rawValue)!)
-			}
-		} catch _ {
-			
 		}
 	}
 	
-	func readROMModule(_ cType: Int) {
+	func readROMModule(_ cType: String) {
 		var filename: String
 		switch cType {
-		case 1:
+		case HPCalculator.hp41c.rawValue:
 			calculatorType = .hp41C
 			filename = Bundle.main.resourcePath! + "/" + "nut-c.mod"
-		case 2:
+		case HPCalculator.hp41cv.rawValue:
 			calculatorType = .hp41CV
 			filename = Bundle.main.resourcePath! + "/" + "nut-cv.mod"
-		case 3:
+		case HPCalculator.hp41cx.rawValue:
 			calculatorType = .hp41CX
 			filename = Bundle.main.resourcePath! + "/" + "nut-cx.mod"
 		default:
 			// Make sure I have a default for next time
 			calculatorType = .hp41CX
 			let defaults = UserDefaults.standard
-			defaults.set(CalculatorType.hp41CX.rawValue, forKey: HPCalculatorType)
+			defaults.set(CalculatorType.hp41CX.rawValue, forKey: hpCalculatorType)
 			filename = Bundle.main.resourcePath! + "/" + "nut-cx.mod"
 			defaults.synchronize()
 		}

@@ -30,6 +30,7 @@ struct MODsView: View {
 			})
 			.frame(width: geometry.size.width, height: geometry.size.height)
 			.cornerRadius(5.0)
+			.background(Color.gray)
 		}.actionSheet(isPresented: $showAlert, content: {
 			let emptyPortButton = ActionSheet.Button.default(Text("Empty port")) {
 				filePath = nil

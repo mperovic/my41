@@ -13,6 +13,8 @@ import AudioToolbox
 struct My41View: View {
 	@EnvironmentObject var keys: Keys
 	@EnvironmentObject var calculator: Calculator
+	
+	@State var showSettings = false
 
 	var mySound: SystemSoundID = 0
 	let url = URL.init(fileURLWithPath: Bundle.main.path(forResource: "keyPressSound", ofType: "wav")!)
@@ -44,11 +46,17 @@ struct My41View: View {
 				
 				HStack {
 					Spacer()
-					Text("my41CX")
-						.font(.custom("Helvetica", size: 22.0 * yRatio))
-						.fontWeight(.bold)
-						.padding(.trailing, 20)
-						.foregroundColor(.shiftColor)
+					Button(action: {
+						showSettings.toggle()
+					}) {
+						Text("my41CX")
+							.font(.custom("Helvetica", size: 22.0 * yRatio))
+							.fontWeight(.bold)
+							.padding(.trailing, 20)
+							.foregroundColor(.shiftColor)
+					}.sheet(isPresented: $showSettings) {
+						SettingsView(showSettings: $showSettings)
+					}
 				}
 				
 				ZStack {

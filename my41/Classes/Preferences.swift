@@ -67,10 +67,10 @@ class PreferencesContainerViewController: NSViewController {
 		var needsRestart = false
 		
 		let defaults = UserDefaults.standard
-		let cType = defaults.integer(forKey: HPCalculatorType)
+		let cType = defaults.string(forKey: hpCalculatorType)
 		let currentCalculatorType = preferencesCalculatorViewController?.calculatorType?.rawValue
 		if cType != currentCalculatorType {
-			defaults.set(currentCalculatorType!, forKey: HPCalculatorType)
+			defaults.set(currentCalculatorType!, forKey: hpCalculatorType)
 			needsRestart = true
 		}
 		

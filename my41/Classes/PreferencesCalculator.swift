@@ -21,7 +21,7 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	override func viewDidLoad() {
 		let defaults = UserDefaults.standard
 		
-		let cType = defaults.integer(forKey: HPCalculatorType)
+		let cType = defaults.string(forKey: hpCalculatorType)
 		
 		switch cType {
 		case 1:
@@ -33,7 +33,7 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 		default:
 			// Make sure I have a default for next time
 			calculatorType = .hp41CX
-			defaults.set(CalculatorType.hp41CX.rawValue, forKey: HPCalculatorType)
+			defaults.set(CalculatorType.hp41CX.rawValue, forKey: hpCalculatorType)
 		}
 		calculatorSelector.selectItem(at: cType - 1)
 	}
@@ -67,7 +67,7 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 		if notification.object as? NSObject == calculatorSelector {
 			let selected = calculatorSelector.indexOfSelectedItem + 1
 			let defaults = UserDefaults.standard
-			let cType = defaults.integer(forKey: HPCalculatorType)
+			let cType = defaults.string(forKey: hpCalculatorType)
 			
 			if selected != cType {
 //				comments.stringValue = "Please be aware that changing the calculator type may result in some memory loss"
