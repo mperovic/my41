@@ -38,10 +38,6 @@ struct Digits14: Codable {
 	}
 }
 
-var TRACE = 0
-var SYNCHRONYZE = false
-var SOUND = false
-
 //let emptyDigit14:[Digit] = [Digit](repeating: 0, count: 14)
 
 let timeSliceInterval	= 0.01

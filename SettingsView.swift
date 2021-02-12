@@ -8,6 +8,20 @@
 
 import SwiftUI
 
+struct MODsViewStyle: ViewModifier {
+	func body(content: Content) -> some View {
+		return content
+			.overlay(
+				RoundedRectangle(cornerRadius: 8)
+					.stroke(lineWidth: 2)
+					.foregroundColor(.blue)
+			)
+			.shadow(color: Color.gray.opacity(0.4),
+					radius: 3, x: 1, y: 2)
+			.padding(5)
+	}
+}
+
 struct SettingsView: View {
 	@EnvironmentObject var calculator: Calculator
 
@@ -15,15 +29,19 @@ struct SettingsView: View {
 	@State private var sound = true
 	@State private var syncTime = true
 	
-	@State var expansionModule1: MODsView?
-	@State var expansionModule2: MODsView?
-	@State var expansionModule3: MODsView?
-	@State var expansionModule4: MODsView?
+	@State var expansionModules = [
+		MODsView(port: .port1),
+		MODsView(port: .port2),
+		MODsView(port: .port3),
+		MODsView(port: .port4)
+	]
+	@State var selectedModule: MOD?
 	
 	@Binding var showSettings: Bool
 	@State var showAlert = false
+	@State var showList = false
 
-    var body: some View {
+	var body: some View {
 		GeometryReader { geometry in
 			VStack(alignment: .leading) {
 				HStack {
@@ -47,12 +65,54 @@ struct SettingsView: View {
 					.padding(.top, 20)
 				VStack {
 					HStack {
-						MODsView(port: .port1)
-						MODsView(port: .port2)
+						expansionModules[0]
+							.onPress {
+								selectedModule = expansionModules[0].module
+								showList = true
+							}
+							.sheet(isPresented: $showList) {
+								MODList(selectedModule: $selectedModule) {
+									showList = false
+								}
+							}
+							.modifier(MODsViewStyle())
+						expansionModules[1]
+							.onPress {
+								selectedModule = expansionModules[1].module
+								showList = true
+							}
+							.sheet(isPresented: $showList) {
+								MODList(selectedModule: $selectedModule) {
+									showList = false
+								}
+
+							}
+							.modifier(MODsViewStyle())
 					}
 					HStack {
-						MODsView(port: .port3)
-						MODsView(port: .port4)
+						expansionModules[2]
+							.onPress {
+								selectedModule = expansionModules[2].module
+								showList = true
+							}
+							.sheet(isPresented: $showList) {
+								MODList(selectedModule: $selectedModule) {
+									showList = false
+								}
+
+							}
+							.modifier(MODsViewStyle())
+						expansionModules[3]
+							.onPress {
+								selectedModule = expansionModules[3].module
+								showList = true
+							}
+							.sheet(isPresented: $showList) {
+								MODList(selectedModule: $selectedModule) {
+									showList = false
+								}
+							}
+							.modifier(MODsViewStyle())
 					}
 				}
 				.padding(.top, 10)
@@ -85,10 +145,10 @@ struct SettingsView: View {
 					Spacer()
 					
 					Button(action: {
-						
+						applyChanges()
 					}, label: {
 						Text("Apply")
-				})
+					})
 				}
 				
 			}
@@ -102,19 +162,19 @@ struct SettingsView: View {
 		let defaults = UserDefaults.standard
 		
 		// Sound settings
-//		if sound.isOn {
-//			SOUND = true
-//		} else {
-//			SOUND = false
-//		}
+		if sound {
+			SOUND = true
+		} else {
+			SOUND = false
+		}
 		defaults.set(SOUND, forKey: "sound")
 		
 		// Calculator timer
-//		if syncClock.isOn {
-//			SYNCHRONYZE = true
-//		} else {
-//			SYNCHRONYZE = false
-//		}
+		if syncTime {
+			SYNCHRONYZE = true
+		} else {
+			SYNCHRONYZE = false
+		}
 		defaults.set(SYNCHRONYZE, forKey: "synchronyzeTime")
 		
 		// Calculator type
@@ -125,7 +185,7 @@ struct SettingsView: View {
 		}
 		
 		// Modules
-		if let fPath = self.expansionModule1?.filePath {
+		if let fPath = self.expansionModules[0].filePath {
 			// We have something in Port1
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort.port1.rawValue) {
@@ -148,7 +208,7 @@ struct SettingsView: View {
 			}
 		}
 		
-		if let fPath = self.expansionModule2?.filePath {
+		if let fPath = self.expansionModules[1].filePath {
 			// We have something in Port2
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort.port2.rawValue) {
@@ -171,7 +231,7 @@ struct SettingsView: View {
 			}
 		}
 		
-		if let fPath = self.expansionModule3?.filePath {
+		if let fPath = self.expansionModules[2].filePath {
 			// We have something in Port3
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort.port3.rawValue) {
@@ -194,7 +254,7 @@ struct SettingsView: View {
 			}
 		}
 		
-		if let fPath = self.expansionModule4?.filePath {
+		if let fPath = self.expansionModules[3].filePath {
 			// We have something in Port4
 			let moduleName = (fPath as NSString).lastPathComponent
 			if let dModuleName = defaults.string(forKey: HPPort.port4.rawValue) {

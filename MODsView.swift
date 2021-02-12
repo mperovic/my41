@@ -16,43 +16,53 @@ struct MODsView: View {
 			filePath = port.getFilePath()
 		}
 	}
-	
-	@State var showAlert = false
-	@State var filePath: String?
-	@State var oldFilePath: String?
 
+	var filePath: String?
+	var onPress = {}
+
+	@State var module: MOD?
+
+	@ViewBuilder
 	var body: some View {
-		GeometryReader { geometry in
-			Button(action: {
-				showAlert = filePath != nil
-			}, label: {
-				Text("Button")
-			})
-			.frame(width: geometry.size.width, height: geometry.size.height)
-			.cornerRadius(5.0)
-			.background(Color.gray)
-		}.actionSheet(isPresented: $showAlert, content: {
-			let emptyPortButton = ActionSheet.Button.default(Text("Empty port")) {
-				filePath = nil
+		if module == nil {
+			GeometryReader { geometry in
+				Button(action: {
+					onPress()
+				}, label: {
+					Image(systemName: "pencil")
+						.font(.system(size: 32))
+				})
+				.frame(width: geometry.size.width, height: geometry.size.height)
+				.cornerRadius(5.0)
+				.background(Color.white)
 			}
-			let replaceModuleButton = ActionSheet.Button.default(Text("Replace module")) {
-				oldFilePath = filePath
-				filePath = nil
-				selectModule()
-			}
-			let cancelButton = ActionSheet.Button.cancel(Text("Cancel")) {
-				if let path = oldFilePath {
-					filePath = path
-					oldFilePath = nil
+		} else {
+			VStack {
+				MODDetailsView(module: module!)
+				HStack {
+					Button(action: {
+						
+					}, label: {
+						Image(systemName: "pencil")
+							.font(.system(size: 26))
+					})
+					.padding(.leading, 20)
+					Spacer()
+					Button(action: {
+						
+					}, label: {
+						Image(systemName: "trash")
+							.font(.system(size: 26))
+					})
+					.padding(.trailing, 20)
 				}
 			}
-			return ActionSheet(
-				title: Text("Reset Calculator"),
-				message: Text("What do you want to do with the module"),
-				buttons: [emptyPortButton, replaceModuleButton, cancelButton]
-			)
-		})
-    }
+		}
+	}
+	
+	func onPress(_ callback: @escaping () -> ()) -> some View {
+		MODsView(port: port, onPress: callback)
+	}
 	
 	private func selectModule() {
 //		let alertController = UIAlertController(
@@ -81,7 +91,9 @@ struct MODsView: View {
 }
 
 struct MODsView_Previews: PreviewProvider {
+	@State static var selectedModule = MODs.getModFiles().first!
     static var previews: some View {
 		MODsView(port: .port1)
+		MODsView(port: .port1, module: selectedModule)
     }
 }

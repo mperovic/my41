@@ -11,14 +11,14 @@ import SwiftUI
 struct MODDetailsView: View {
 	var module: MOD
 	
-    var body: some View {
+	var body: some View {
 		VStack(alignment: .leading) {
 			Text(module.moduleHeader.title)
 				.fontWeight(.bold)
 			Text("version: \(module.moduleHeader.version)")
 			Text("author: \(module.moduleHeader.author)")
 		}
-    }
+	}
 }
 
 struct MODDetailsView_Previews: PreviewProvider {

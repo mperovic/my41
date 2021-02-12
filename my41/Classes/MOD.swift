@@ -162,7 +162,7 @@ enum CheckPageError: Error {
 	case fatOutOfRange
 }
 
-final class MOD: Identifiable {
+final class MOD: Identifiable, Hashable {
 	var id = UUID()
 	var data: Data?
 	var shortName: String?
@@ -174,6 +174,14 @@ final class MOD: Identifiable {
 		data = nil
 	}
 	
+	static func == (lhs: MOD, rhs: MOD) -> Bool {
+		lhs.id == rhs.id
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
+	}
+
 	convenience init?(modName: String) throws {
 		self.init()
 		

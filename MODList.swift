@@ -11,15 +11,25 @@ import SwiftUI
 struct MODList: View {
 	var mods = MODs.getModFiles()
 	
+	@Binding var selectedModule: MOD?
+	var onDismiss: () -> ()
+
     var body: some View {
-		List(mods) { mod in
-			MODDetailsView(module: mod)
+		List {
+			ForEach(mods, id: \.self) { mod in
+				MODDetailsView(module: mod)
+					.onTapGesture {
+						selectedModule = mod
+					}
+					.listRowBackground(selectedModule == mod ? Color(UIColor.lightGray) : Color.clear)
+			}
 		}
-    }
+	}
 }
 
 struct MODList_Previews: PreviewProvider {
+	@State static var selectedModule = MODs.getModFiles().first
     static var previews: some View {
-        MODList()
+		MODList(selectedModule: $selectedModule, onDismiss: {})
     }
 }

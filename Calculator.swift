@@ -17,6 +17,10 @@ enum CalculatorType: Int {
 let MAX_RAM_SIZE		= 0x400
 let epromAddress		= 0x4000
 
+var TRACE = 0
+var SYNCHRONYZE = false
+var SOUND = false
+
 enum HPPort: String, CaseIterable {
 	case port1 = "ModulePort1"
 	case port2 = "ModulePort2"
