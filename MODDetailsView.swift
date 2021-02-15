@@ -10,13 +10,17 @@ import SwiftUI
 
 struct MODDetailsView: View {
 	var module: MOD
+	var short: Bool
 	
 	var body: some View {
 		VStack(alignment: .leading) {
 			Text(module.moduleHeader.title)
 				.fontWeight(.bold)
-			Text("version: \(module.moduleHeader.version)")
-			Text("author: \(module.moduleHeader.author)")
+				.lineLimit(nil)
+			if !short {
+				Text("version: \(module.moduleHeader.version)")
+				Text("author: \(module.moduleHeader.author)")
+			}
 		}
 	}
 }
@@ -24,6 +28,6 @@ struct MODDetailsView: View {
 struct MODDetailsView_Previews: PreviewProvider {
 	static var mod = MODs.getModFiles().last!
     static var previews: some View {
-		MODDetailsView(module: mod)
+		MODDetailsView(module: mod, short: false)
     }
 }

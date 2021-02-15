@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct MODsView: View {
-	var mods = MODs.getModFiles()
-	
 	var port: HPPort {
 		didSet {
 			filePath = port.getFilePath()
@@ -18,16 +16,17 @@ struct MODsView: View {
 	}
 
 	var filePath: String?
-	var onPress = {}
 
-	@State var module: MOD?
+	@ObservedObject var settingsState: SettingsState
 
-	@ViewBuilder
+	var onPress: (HPPort) -> () = {_ in }
+
+//	@ViewBuilder
 	var body: some View {
-		if module == nil {
-			GeometryReader { geometry in
+		GeometryReader { geometry in
+			if getModule() == nil {
 				Button(action: {
-					onPress()
+					onPress(port)
 				}, label: {
 					Image(systemName: "pencil")
 						.font(.system(size: 32))
@@ -35,33 +34,52 @@ struct MODsView: View {
 				.frame(width: geometry.size.width, height: geometry.size.height)
 				.cornerRadius(5.0)
 				.background(Color.white)
-			}
-		} else {
-			VStack {
-				MODDetailsView(module: module!)
-				HStack {
-					Button(action: {
-						
-					}, label: {
-						Image(systemName: "pencil")
-							.font(.system(size: 26))
-					})
-					.padding(.leading, 20)
+			} else {
+				VStack {
 					Spacer()
-					Button(action: {
-						
-					}, label: {
-						Image(systemName: "trash")
-							.font(.system(size: 26))
-					})
-					.padding(.trailing, 20)
+					MODDetailsView(module: getModule()!, short: true)
+					Spacer()
+					HStack {
+						Spacer()
+						Button(action: {
+							switch port {
+							case .port1:
+								settingsState.module1 = nil
+							case .port2:
+								settingsState.module2 = nil
+							case .port3:
+								settingsState.module3 = nil
+							case .port4:
+								settingsState.module4 = nil
+							}
+						}, label: {
+							Image(systemName: "trash")
+								.font(.system(size: 26))
+						})
+						.padding(.trailing, 10)
+						.padding(.bottom, 5)
+					}
 				}
+				.frame(width: geometry.size.width, height: geometry.size.height)
 			}
 		}
 	}
 	
-	func onPress(_ callback: @escaping () -> ()) -> some View {
-		MODsView(port: port, onPress: callback)
+	func onPress(_ callback: @escaping (HPPort) -> ()) -> some View {
+		MODsView(port: port, settingsState: settingsState, onPress: callback)
+	}
+	
+	func getModule() -> MOD? {
+		switch port {
+		case .port1:
+			return settingsState.module1
+		case .port2:
+			return settingsState.module2
+		case .port3:
+			return settingsState.module3
+		case .port4:
+			return settingsState.module4
+		}
 	}
 	
 	private func selectModule() {
@@ -93,7 +111,6 @@ struct MODsView: View {
 struct MODsView_Previews: PreviewProvider {
 	@State static var selectedModule = MODs.getModFiles().first!
     static var previews: some View {
-		MODsView(port: .port1)
-		MODsView(port: .port1, module: selectedModule)
+		MODsView(port: .port1, settingsState: SettingsState())
     }
 }

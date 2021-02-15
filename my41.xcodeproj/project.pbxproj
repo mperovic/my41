@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC0B3FB325D8784000D4DD3B /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B3FB225D8784000D4DD3B /* SettingsState.swift */; };
+		DC0B3FB425D8784000D4DD3B /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B3FB225D8784000D4DD3B /* SettingsState.swift */; };
 		DC1C67E61ABECFB800993AEC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE75C0E1A61B4FE002B2D7C /* LaunchScreen.xib */; };
 		DC1C67ED1ABED63000993AEC /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC1C67EC1ABED63000993AEC /* Images-2.xcassets */; };
 		DC34A71F1A949CC900C90AB5 /* hpfont.hpfont in Resources */ = {isa = PBXBuildFile; fileRef = DC75043819B2652200180161 /* hpfont.hpfont */; };
@@ -401,6 +403,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC0B3FB225D8784000D4DD3B /* SettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsState.swift; sourceTree = "<group>"; };
 		DC1C67EC1ABED63000993AEC /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		DC447DE41A349C54008FAB28 /* my41cx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = my41cx.entitlements; sourceTree = "<group>"; };
 		DC447DE51A34AD8B008FAB28 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = Classes/Application.swift; sourceTree = "<group>"; };
@@ -1019,11 +1022,12 @@
 		DCC9F3B325C3066C001F06B3 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				DCC9F3B425C3067F001F06B3 /* SettingsView.swift */,
 				DC86790925C9ED9B00E9DCFB /* MODs.swift */,
+				DCC9F3B425C3067F001F06B3 /* SettingsView.swift */,
 				DCC7F32425C5F4B500E68C85 /* MODsView.swift */,
 				DC86791825CB4A1900E9DCFB /* MODList.swift */,
 				DCC9F3C325C313B5001F06B3 /* MODDetailsView.swift */,
+				DC0B3FB225D8784000D4DD3B /* SettingsState.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1652,6 +1656,7 @@
 				DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */,
 				DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */,
 				DC447DE61A34AD8B008FAB28 /* Application.swift in Sources */,
+				DC0B3FB325D8784000D4DD3B /* SettingsState.swift in Sources */,
 				DC86790A25C9ED9B00E9DCFB /* MODs.swift in Sources */,
 				DCD09B0B1A8628A700F8D785 /* CocoaSpecific.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
@@ -1709,6 +1714,7 @@
 				DCD09B091A86281900F8D785 /* MOD.swift in Sources */,
 				DCD09B081A86261600F8D785 /* SoundOutput.swift in Sources */,
 				DCD054D025A4F0F40040EF17 /* Text+Extensions.swift in Sources */,
+				DC0B3FB425D8784000D4DD3B /* SettingsState.swift in Sources */,
 				DCD054C225A494370040EF17 /* My41View.swift in Sources */,
 				DCC7F32625C5F4B500E68C85 /* MODsView.swift in Sources */,
 				DCD09B071A86260000F8D785 /* Disassembly.swift in Sources */,

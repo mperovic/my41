@@ -9,27 +9,60 @@
 import SwiftUI
 
 struct MODList: View {
+	@ObservedObject var settingsState: SettingsState
+	
 	var mods = MODs.getModFiles()
 	
-	@Binding var selectedModule: MOD?
-	var onDismiss: () -> ()
+	@Binding var showList: Bool
+	
+	@State private var selectedModule: MOD?
+	var port: HPPort
 
     var body: some View {
-		List {
-			ForEach(mods, id: \.self) { mod in
-				MODDetailsView(module: mod)
-					.onTapGesture {
-						selectedModule = mod
+		VStack {
+			HStack {
+				Button(action: {
+					showList = false
+				}, label: {
+					Text("Cancel")
+				})
+				.padding([.top, .leading], 10)
+				Spacer()
+				Button(action: {
+					switch port {
+					case .port1:
+						settingsState.module1 = selectedModule
+					case .port2:
+						settingsState.module2 = selectedModule
+					case .port3:
+						settingsState.module3 = selectedModule
+					case .port4:
+						settingsState.module4 = selectedModule
 					}
-					.listRowBackground(selectedModule == mod ? Color(UIColor.lightGray) : Color.clear)
+					showList = false
+				}, label: {
+					Text("Apply")
+				})
+				.padding([.top, .trailing], 10)
+			}
+			
+			List {
+				ForEach(mods, id: \.self) { mod in
+					MODDetailsView(module: mod, short: false)
+						.onTapGesture {
+							selectedModule = mod
+						}
+						.listRowBackground(selectedModule == mod ? Color(UIColor.lightGray) : Color.clear)
+				}
 			}
 		}
 	}
 }
 
 struct MODList_Previews: PreviewProvider {
-	@State static var selectedModule = MODs.getModFiles().first
+	@State static var showList = true
+	
     static var previews: some View {
-		MODList(selectedModule: $selectedModule, onDismiss: {})
+		MODList(settingsState: SettingsState(), showList: $showList, port: .port3)
     }
 }

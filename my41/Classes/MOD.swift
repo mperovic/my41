@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 let MOD_FORMAT = "MOD1"
 
 /* Module type codes */
@@ -162,7 +161,7 @@ enum CheckPageError: Error {
 	case fatOutOfRange
 }
 
-final class MOD: Identifiable, Hashable {
+struct MOD: Identifiable, Hashable {
 	var id = UUID()
 	var data: Data?
 	var shortName: String?
@@ -182,7 +181,7 @@ final class MOD: Identifiable, Hashable {
 		hasher.combine(id)
 	}
 
-	convenience init?(modName: String) throws {
+	init?(modName: String) throws {
 		self.init()
 		
 		try self.readModFromFile(modName)
@@ -385,7 +384,7 @@ final class MOD: Identifiable, Hashable {
 		guard moduleHeader.hardware.rawValue <= hardwareMax else { throw modHeaderError.wrongHardwareValue }
 	}
 	
-	func populateModulePage(_ pageNo: Int) {
+	mutating func populateModulePage(_ pageNo: Int) {
 		var startPosition: Int = headerSize + (pageSize * pageNo)
 		var page = ModuleFilePage()
 		
@@ -475,7 +474,7 @@ final class MOD: Identifiable, Hashable {
 		case errorLoadingFile
 	}
 	
-	func readModFromFile(_ filename: String) throws {
+	mutating func readModFromFile(_ filename: String) throws {
 		// Read the file
 		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: filename) {

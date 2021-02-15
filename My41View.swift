@@ -56,6 +56,7 @@ struct My41View: View {
 							.foregroundColor(.shiftColor)
 					}.sheet(isPresented: $showSettings) {
 						SettingsView(showSettings: $showSettings)
+							.environmentObject(calculator)
 					}
 				}
 				

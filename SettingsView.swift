@@ -16,30 +16,29 @@ struct MODsViewStyle: ViewModifier {
 					.stroke(lineWidth: 2)
 					.foregroundColor(.blue)
 			)
-			.shadow(color: Color.gray.opacity(0.4),
-					radius: 3, x: 1, y: 2)
+			.shadow(
+				color: Color.gray.opacity(0.4),
+				radius: 3, x: 1, y: 2
+			)
 			.padding(5)
 	}
 }
 
 struct SettingsView: View {
 	@EnvironmentObject var calculator: Calculator
+	@ObservedObject var settingsState = SettingsState()
 
 	@State private var selectedCalculator = "HP 41C"
 	@State private var sound = true
 	@State private var syncTime = true
-	
-	@State var expansionModules = [
-		MODsView(port: .port1),
-		MODsView(port: .port2),
-		MODsView(port: .port3),
-		MODsView(port: .port4)
-	]
-	@State var selectedModule: MOD?
+	@State private var module: MOD?
 	
 	@Binding var showSettings: Bool
 	@State var showAlert = false
-	@State var showList = false
+	@State var showList1 = false
+	@State var showList2 = false
+	@State var showList3 = false
+	@State var showList4 = false
 
 	var body: some View {
 		GeometryReader { geometry in
@@ -65,59 +64,45 @@ struct SettingsView: View {
 					.padding(.top, 20)
 				VStack {
 					HStack {
-						expansionModules[0]
-							.onPress {
-								selectedModule = expansionModules[0].module
-								showList = true
+						MODsView(port: .port1, settingsState: settingsState)
+							.onPress {port in
+								showList1 = true
 							}
-							.sheet(isPresented: $showList) {
-								MODList(selectedModule: $selectedModule) {
-									showList = false
-								}
+							.sheet(isPresented: $showList1) {
+								MODList(settingsState: settingsState, showList: $showList1, port: .port1)
 							}
 							.modifier(MODsViewStyle())
-						expansionModules[1]
-							.onPress {
-								selectedModule = expansionModules[1].module
-								showList = true
+						MODsView(port: .port2, settingsState: settingsState)
+							.onPress {port in
+								showList2 = true
 							}
-							.sheet(isPresented: $showList) {
-								MODList(selectedModule: $selectedModule) {
-									showList = false
-								}
-
+							.sheet(isPresented: $showList2) {
+								MODList(settingsState: settingsState, showList: $showList2, port: .port2)
 							}
 							.modifier(MODsViewStyle())
 					}
 					HStack {
-						expansionModules[2]
-							.onPress {
-								selectedModule = expansionModules[2].module
-								showList = true
+						MODsView(port: .port3, settingsState: settingsState)
+							.onPress {port in
+								showList3 = true
 							}
-							.sheet(isPresented: $showList) {
-								MODList(selectedModule: $selectedModule) {
-									showList = false
-								}
-
+							.sheet(isPresented: $showList3) {
+								MODList(settingsState: settingsState, showList: $showList3, port: .port3)
 							}
 							.modifier(MODsViewStyle())
-						expansionModules[3]
-							.onPress {
-								selectedModule = expansionModules[3].module
-								showList = true
+						MODsView(port: .port4, settingsState: settingsState)
+							.onPress {port in
+								showList4 = true
 							}
-							.sheet(isPresented: $showList) {
-								MODList(selectedModule: $selectedModule) {
-									showList = false
-								}
+							.sheet(isPresented: $showList4) {
+								MODList(settingsState: settingsState, showList: $showList4, port: .port4)
 							}
 							.modifier(MODsViewStyle())
 					}
 				}
 				.padding(.top, 10)
 				.padding(.bottom, 15)
-				.frame(height: geometry.size.height * 0.355)
+				.frame(height: geometry.size.height * 0.455)
 				
 				HStack {
 					Spacer()
@@ -185,97 +170,97 @@ struct SettingsView: View {
 		}
 		
 		// Modules
-		if let fPath = self.expansionModules[0].filePath {
-			// We have something in Port1
-			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort.port1.rawValue) {
-				// And we had something in Port1 at the begining
-				if moduleName != dModuleName {
-					// This is different module
-					defaults.set(moduleName, forKey: HPPort.port1.rawValue)
-					needsRestart = true
-				}
-			} else {
-				// Port1 was empty
-				defaults.set(moduleName, forKey: HPPort.port1.rawValue)
-				needsRestart = true
-			}
-		} else {
-			// Port1 is empty now
-			if let _ = defaults.string(forKey: HPPort.port1.rawValue) {
-				// But we had something in Port1
-				defaults.removeObject(forKey: HPPort.port1.rawValue)
-			}
-		}
-		
-		if let fPath = self.expansionModules[1].filePath {
-			// We have something in Port2
-			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort.port2.rawValue) {
-				// And we had something in Port2 at the begining
-				if moduleName != dModuleName {
-					// This is different module
-					defaults.set(moduleName, forKey: HPPort.port2.rawValue)
-					needsRestart = true
-				}
-			} else {
-				// Port2 was empty
-				defaults.set(moduleName, forKey: HPPort.port2.rawValue)
-				needsRestart = true
-			}
-		} else {
-			// Port2 is empty now
-			if let _ = defaults.string(forKey: HPPort.port2.rawValue) {
-				// But we had something in Port2
-				defaults.removeObject(forKey: HPPort.port2.rawValue)
-			}
-		}
-		
-		if let fPath = self.expansionModules[2].filePath {
-			// We have something in Port3
-			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort.port3.rawValue) {
-				// And we had something in Port3 at the begining
-				if moduleName != dModuleName {
-					// This is different module
-					defaults.set(moduleName, forKey: HPPort.port3.rawValue)
-					needsRestart = true
-				}
-			} else {
-				// Port3 was empty
-				defaults.set(moduleName, forKey: HPPort.port3.rawValue)
-				needsRestart = true
-			}
-		} else {
-			// Port3 is empty now
-			if let _ = defaults.string(forKey: HPPort.port3.rawValue) {
-				// But we had something in Port3
-				defaults.removeObject(forKey: HPPort.port3.rawValue)
-			}
-		}
-		
-		if let fPath = self.expansionModules[3].filePath {
-			// We have something in Port4
-			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort.port4.rawValue) {
-				// And we had something in Port4 at the begining
-				if moduleName != dModuleName {
-					// This is different module
-					defaults.set(moduleName, forKey: HPPort.port4.rawValue)
-					needsRestart = true
-				}
-			} else {
-				// Port4 was empty
-				defaults.set(moduleName, forKey: HPPort.port4.rawValue)
-				needsRestart = true
-			}
-		} else {
-			// Port4 is empty now
-			if let _ = defaults.string(forKey: HPPort.port4.rawValue) {
-				// But we had something in Port4
-				defaults.removeObject(forKey: HPPort.port4.rawValue)
-			}
-		}
+//		if let fPath = self.expansionModules[0].filePath {
+//			// We have something in Port1
+//			let moduleName = (fPath as NSString).lastPathComponent
+//			if let dModuleName = defaults.string(forKey: HPPort.port1.rawValue) {
+//				// And we had something in Port1 at the begining
+//				if moduleName != dModuleName {
+//					// This is different module
+//					defaults.set(moduleName, forKey: HPPort.port1.rawValue)
+//					needsRestart = true
+//				}
+//			} else {
+//				// Port1 was empty
+//				defaults.set(moduleName, forKey: HPPort.port1.rawValue)
+//				needsRestart = true
+//			}
+//		} else {
+//			// Port1 is empty now
+//			if let _ = defaults.string(forKey: HPPort.port1.rawValue) {
+//				// But we had something in Port1
+//				defaults.removeObject(forKey: HPPort.port1.rawValue)
+//			}
+//		}
+//		
+//		if let fPath = self.expansionModules[1].filePath {
+//			// We have something in Port2
+//			let moduleName = (fPath as NSString).lastPathComponent
+//			if let dModuleName = defaults.string(forKey: HPPort.port2.rawValue) {
+//				// And we had something in Port2 at the begining
+//				if moduleName != dModuleName {
+//					// This is different module
+//					defaults.set(moduleName, forKey: HPPort.port2.rawValue)
+//					needsRestart = true
+//				}
+//			} else {
+//				// Port2 was empty
+//				defaults.set(moduleName, forKey: HPPort.port2.rawValue)
+//				needsRestart = true
+//			}
+//		} else {
+//			// Port2 is empty now
+//			if let _ = defaults.string(forKey: HPPort.port2.rawValue) {
+//				// But we had something in Port2
+//				defaults.removeObject(forKey: HPPort.port2.rawValue)
+//			}
+//		}
+//		
+//		if let fPath = self.expansionModules[2].filePath {
+//			// We have something in Port3
+//			let moduleName = (fPath as NSString).lastPathComponent
+//			if let dModuleName = defaults.string(forKey: HPPort.port3.rawValue) {
+//				// And we had something in Port3 at the begining
+//				if moduleName != dModuleName {
+//					// This is different module
+//					defaults.set(moduleName, forKey: HPPort.port3.rawValue)
+//					needsRestart = true
+//				}
+//			} else {
+//				// Port3 was empty
+//				defaults.set(moduleName, forKey: HPPort.port3.rawValue)
+//				needsRestart = true
+//			}
+//		} else {
+//			// Port3 is empty now
+//			if let _ = defaults.string(forKey: HPPort.port3.rawValue) {
+//				// But we had something in Port3
+//				defaults.removeObject(forKey: HPPort.port3.rawValue)
+//			}
+//		}
+//		
+//		if let fPath = self.expansionModules[3].filePath {
+//			// We have something in Port4
+//			let moduleName = (fPath as NSString).lastPathComponent
+//			if let dModuleName = defaults.string(forKey: HPPort.port4.rawValue) {
+//				// And we had something in Port4 at the begining
+//				if moduleName != dModuleName {
+//					// This is different module
+//					defaults.set(moduleName, forKey: HPPort.port4.rawValue)
+//					needsRestart = true
+//				}
+//			} else {
+//				// Port4 was empty
+//				defaults.set(moduleName, forKey: HPPort.port4.rawValue)
+//				needsRestart = true
+//			}
+//		} else {
+//			// Port4 is empty now
+//			if let _ = defaults.string(forKey: HPPort.port4.rawValue) {
+//				// But we had something in Port4
+//				defaults.removeObject(forKey: HPPort.port4.rawValue)
+//			}
+//		}
 		defaults.synchronize()
 		
 		showSettings = false
