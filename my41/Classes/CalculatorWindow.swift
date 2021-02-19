@@ -20,14 +20,18 @@ class CalculatorWindow : NSWindow {
 	//This point is used in dragging to mark the initial click location
 	var initialLocation: NSPoint?
 
-	override init(contentRect: NSRect, styleMask style: NSWindowStyleMask, backing backingStoreType: NSBackingStoreType, defer flag: Bool) {
+	override init(
+		contentRect: NSRect,
+		styleMask style: NSWindow.StyleMask,
+		backing backingStoreType: NSWindow.BackingStoreType,
+		defer flag: Bool) {
 		super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
 	}
 	
 	override var acceptsFirstResponder: Bool { return true }
 
 	override func awakeFromNib() {
-		let appDelegate =  CalculatorApplication.shared().delegate as! AppDelegate
+		let appDelegate =  CalculatorApplication.shared.delegate as! AppDelegate
 		appDelegate.window = self
 		
 		self.isExcludedFromWindowsMenu = false
@@ -53,7 +57,7 @@ class CalculatorWindow : NSWindow {
 	}
 	
 	override func mouseDragged(with theEvent: NSEvent) {
-		let appDelegate = NSApplication.shared().delegate as! AppDelegate
+		let appDelegate = NSApplication.shared.delegate as! AppDelegate
 		if appDelegate.buttonPressed {
 			return
 		}
@@ -188,7 +192,7 @@ class Display : NSView, Peripheral {
 			
 			self.lockFocus()
 			let attrs = [
-				NSFontAttributeName: annunciatorFont!
+				NSAttributedString.Key.font: annunciatorFont!
 			]
 			calculatorController.prgmMode = false
 			calculatorController.alphaMode = false
@@ -697,7 +701,7 @@ class Display : NSView, Peripheral {
 		var totalWidth: CGFloat = 0.0
 		
 		let attrs = [
-			NSFontAttributeName: annunciatorFont!
+			NSAttributedString.Key.font: annunciatorFont!
 		]
 		for idx in 0..<numAnnunciators {
 			let nsString: NSString = annunciatorStrings[idx] as NSString

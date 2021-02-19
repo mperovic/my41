@@ -38,10 +38,6 @@ struct Digits14: Codable {
 	}
 }
 
-var TRACE = 0
-var SYNCHRONYZE = false
-var SOUND = false
-
 //let emptyDigit14:[Digit] = [Digit](repeating: 0, count: 14)
 
 let timeSliceInterval	= 0.01
@@ -250,23 +246,19 @@ struct OpCode: Codable {
 		self.opcode = code
 	}
 	
-	func row() -> Int
-	{
+	func row() -> Int {
 		return (self.opcode & 0x03c0) >> 6
 	}
 	
-	func col() -> Int
-	{
+	func col() -> Int {
 		return ((self.opcode & 0x003c) >> 2) & 0xf
 	}
 	
-	func tef() -> Int
-	{
+	func tef() -> Int {
 		return (self.opcode & 0x1c) >> 2
 	}
 	
-	func set() -> Int
-	{
+	func set() -> Int {
 		return (self.opcode & 0x03)
 	}
 }

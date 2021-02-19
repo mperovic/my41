@@ -38,17 +38,17 @@ class PreferencesContainerViewController: NSViewController {
 	
 	override func viewDidLoad() {
 		let defaults = UserDefaults.standard
-		if (defaults.string(forKey: HPPort1) != nil) {
-			newMod1 = defaults.string(forKey: HPPort1)!
+		if (defaults.string(forKey: HPPort.port1.rawValue) != nil) {
+			newMod1 = defaults.string(forKey: HPPort.port1.rawValue)!
 		}
-		if (defaults.string(forKey: HPPort2) != nil) {
-			newMod2 = defaults.string(forKey: HPPort2)!
+		if (defaults.string(forKey: HPPort.port2.rawValue) != nil) {
+			newMod2 = defaults.string(forKey: HPPort.port2.rawValue)!
 		}
-		if (defaults.string(forKey: HPPort3) != nil) {
-			newMod3 = defaults.string(forKey: HPPort3)!
+		if (defaults.string(forKey: HPPort.port3.rawValue) != nil) {
+			newMod3 = defaults.string(forKey: HPPort.port3.rawValue)!
 		}
-		if (defaults.string(forKey: HPPort4) != nil) {
-			newMod4 = defaults.string(forKey: HPPort4)!
+		if (defaults.string(forKey: HPPort.port4.rawValue) != nil) {
+			newMod4 = defaults.string(forKey: HPPort.port4.rawValue)!
 		}
 
 		loadPreferencesCalculatorViewController()
@@ -67,102 +67,102 @@ class PreferencesContainerViewController: NSViewController {
 		var needsRestart = false
 		
 		let defaults = UserDefaults.standard
-		let cType = defaults.integer(forKey: HPCalculatorType)
+		let cType = defaults.string(forKey: hpCalculatorType)
 		let currentCalculatorType = preferencesCalculatorViewController?.calculatorType?.rawValue
 		if cType != currentCalculatorType {
-			defaults.set(currentCalculatorType!, forKey: HPCalculatorType)
+			defaults.set(currentCalculatorType!, forKey: hpCalculatorType)
 			needsRestart = true
 		}
 		
 		if let fPath = preferencesModsViewController?.expansionModule1.filePath {
 			// We have something in Port1
 			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort1) {
+			if let dModuleName = defaults.string(forKey: HPPort.port1.rawValue) {
 				// And we had something in Port1 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort1)
+					defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort.port1.rawValue)
 					needsRestart = true
 				}
 			} else {
 				// Port1 was empty
-				defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort1)
+				defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort.port1.rawValue)
 				needsRestart = true
 			}
 		} else {
 			// Port1 is empty now
-			if let _ = defaults.string(forKey: HPPort1) {
+			if let _ = defaults.string(forKey: HPPort.port1.rawValue) {
 				// But we had something in Port1
-				defaults.removeObject(forKey: HPPort1)
+				defaults.removeObject(forKey: HPPort.port1.rawValue)
 			}
 		}
 		
 		if let fPath = preferencesModsViewController?.expansionModule2.filePath {
 			// We have something in Port2
 			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort2) {
+			if let dModuleName = defaults.string(forKey: HPPort.port2.rawValue) {
 				// And we had something in Port2 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort2)
+					defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort.port2.rawValue)
 					needsRestart = true
 				}
 			} else {
 				// Port2 was empty
-				defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort2)
+				defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort.port2.rawValue)
 				needsRestart = true
 			}
 		} else {
 			// Port2 is empty now
-			if let _ = defaults.string(forKey: HPPort2) {
+			if let _ = defaults.string(forKey: HPPort.port2.rawValue) {
 				// But we had something in Port2
-				defaults.removeObject(forKey: HPPort2)
+				defaults.removeObject(forKey: HPPort.port2.rawValue)
 			}
 		}
 		
 		if let fPath = preferencesModsViewController?.expansionModule3.filePath {
 			// We have something in Port3
 			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort3) {
+			if let dModuleName = defaults.string(forKey: HPPort.port3.rawValue) {
 				// And we had something in Port3 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort3)
+					defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort.port3.rawValue)
 					needsRestart = true
 				}
 			} else {
 				// Port3 was empty
-				defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort3)
+				defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort.port3.rawValue)
 				needsRestart = true
 			}
 		} else {
 			// Port3 is empty now
-			if let _ = defaults.string(forKey: HPPort3) {
+			if let _ = defaults.string(forKey: HPPort.port3.rawValue) {
 				// But we had something in Port3
-				defaults.removeObject(forKey: HPPort3)
+				defaults.removeObject(forKey: HPPort.port3.rawValue)
 			}
 		}
 		
 		if let fPath = preferencesModsViewController?.expansionModule4.filePath {
 			// We have something in Port4
 			let moduleName = (fPath as NSString).lastPathComponent
-			if let dModuleName = defaults.string(forKey: HPPort4) {
+			if let dModuleName = defaults.string(forKey: HPPort.port4.rawValue) {
 				// And we had something in Port4 at the begining
 				if moduleName != dModuleName {
 					// This is different module
-					defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort4)
+					defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort.port4.rawValue)
 					needsRestart = true
 				}
 			} else {
 				// Port4 was empty
-				defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort4)
+				defaults.set((fPath as NSString).lastPathComponent, forKey: HPPort.port4.rawValue)
 				needsRestart = true
 			}
 		} else {
 			// Port4 is empty now
-			if let _ = defaults.string(forKey: HPPort4) {
+			if let _ = defaults.string(forKey: HPPort.port4.rawValue) {
 				// But we had something in Port4
-				defaults.removeObject(forKey: HPPort4)
+				defaults.removeObject(forKey: HPPort.port4.rawValue)
 			}
 		}
 		
@@ -223,10 +223,10 @@ class PreferencesSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[0].viewController.view,
-				attribute: NSLayoutAttribute.width,
-				relatedBy: NSLayoutRelation.equal,
+				attribute: NSLayoutConstraint.Attribute.width,
+				relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+				attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 194
 			)
@@ -234,10 +234,10 @@ class PreferencesSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[0].viewController.view,
-				attribute: NSLayoutAttribute.height,
-				relatedBy: NSLayoutRelation.equal,
+				attribute: NSLayoutConstraint.Attribute.height,
+				relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+				attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 587
 			)
@@ -245,10 +245,10 @@ class PreferencesSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[1].viewController.view,
-				attribute: NSLayoutAttribute.width,
-				relatedBy: NSLayoutRelation.equal,
+				attribute: NSLayoutConstraint.Attribute.width,
+				relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+				attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 528
 			)
@@ -256,10 +256,10 @@ class PreferencesSplitViewController: NSSplitViewController {
 		self.view.addConstraint(
 			NSLayoutConstraint(
 				item: self.splitViewItems[1].viewController.view,
-				attribute: NSLayoutAttribute.height,
-				relatedBy: NSLayoutRelation.equal,
+				attribute: NSLayoutConstraint.Attribute.height,
+				relatedBy: NSLayoutConstraint.Relation.equal,
 				toItem: nil,
-				attribute: NSLayoutAttribute.notAnAttribute,
+				attribute: NSLayoutConstraint.Attribute.notAnAttribute,
 				multiplier: 0,
 				constant: 587
 			)

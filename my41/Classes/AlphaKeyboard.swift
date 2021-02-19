@@ -334,13 +334,16 @@ final class AlphaKeyboardViewController: NSViewController {
 				if let aColor = color {
 					return NSMutableAttributedString(
 						string: aString,
-						attributes: [NSFontAttributeName : actualFont,
-							NSForegroundColorAttributeName: aColor
+						attributes: [
+							NSAttributedString.Key.font : actualFont,
+							NSAttributedString.Key.foregroundColor: aColor
 						]
 					)
 				} else {
-					return NSMutableAttributedString(string: aString,
-						attributes: [NSFontAttributeName : actualFont
+					return NSMutableAttributedString(
+						string: aString,
+						attributes: [
+							NSAttributedString.Key.font : actualFont
 						]
 					)
 				}

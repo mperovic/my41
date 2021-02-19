@@ -36,7 +36,7 @@ struct RamDesc {
 	var xFunction: Bool
 }
 
-let calculatorController = CalculatorController.sharedInstance
+//let calculatorController = CalculatorController.sharedInstance
 
 var builtinRomTable: [RomDesc] = [
 	RomDesc(name: "XNUT0",   slot: 0, bank: 0),
@@ -559,8 +559,9 @@ final class Bus {
 	}
 	
 	func writeDataToPeripheral(slot aSlot: Bits8, from data: Digits14) {
-		let peripheral: Peripheral = peripherals[Int(aSlot)]!
-		peripheral.writeDataFrom(data)
+		if let peripheral: Peripheral = peripherals[Int(aSlot)] {
+			peripheral.writeDataFrom(data)
+		}
 	}
 	
 	func readFromRegister(register reg: Bits4, ofPeripheral slot: Bits8) {

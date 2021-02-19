@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 let MOD_FORMAT = "MOD1"
 
 /* Module type codes */
@@ -22,7 +21,7 @@ enum Category: byte {
 	case beta					= 6		// BETA releases not fully debugged and finished
 	case experimental			= 7		// test programs not meant for normal usage
 }
-let CategoryMax: byte			= 7		// maximum CATEGORY_ define value
+let categoryMax: byte			= 7		// maximum CATEGORY_ define value
 
 /* Hardware codes */
 enum Hardware: byte {
@@ -38,7 +37,7 @@ enum Hardware: byte {
 	case mldl2000				= 9		// MLDL2000
 	case clonix					= 10	// CLONIX-41 Module
 }
-let HardwareMax: byte			= 10	// maximum HARDWARE_ define value
+let hardwareMax: byte			= 10	// maximum HARDWARE_ define value
 
 /* 
    relative position codes- do not mix these in a group except ODD/EVEN and UPPER/LOWER
@@ -52,11 +51,11 @@ enum Position: byte {
 	case positionOdd			= 0x5f	// position in any odd port page (9,B,D,F)
 	case positionOrdered		= 0x6f	// position sequentially in MOD file order, one image per page regardless of bank
 }
-let PositionMin: byte			= 0x1f	// minimum POSITION_ define value
-let PositionMax: byte			= 0x6f	// maximum POSITION_ define value
+let positionMin: byte			= 0x1f	// minimum POSITION_ define value
+let positionMax: byte			= 0x6f	// maximum POSITION_ define value
 
-let PageSize					= 5188	// Size of ModulePageFile Struct
-let HeaderSize					= 729	// Size of ModuleFileHeader Struct
+let pageSize					= 5188	// Size of ModulePageFile Struct
+let headerSize					= 729	// Size of ModuleFileHeader Struct
 
 struct ModuleFilePage {
 	var name: [CChar]			// normally the name of the original .ROM file, if any
@@ -87,80 +86,42 @@ struct ModuleFilePage {
 }
 
 struct ModuleFileHeader {
-	var fileFormat: [CChar]			// constant value defines file format and revision
-	var title: [CChar]				// the full module name (the short name is the name of the file itself)
-	var version: [CChar]			// module version, if any
-	var partNumber: [CChar]			// module part number
-	var author: [CChar]				// author, if any
-	var copyright: [CChar]			// copyright notice, if any
-	var license: [CChar]			// license terms, if any
-	var comments: [CChar]			// free form comments, if any
-	var category: Category			// module category, see codes below
-	var hardware: Hardware			// defines special hardware that module contains
-	var memModules: byte			// defines number of main memory modules (0-4)
-	var XMemModules: byte			// defines number of extended memory modules (0=none, 1=Xfuns/XMem, 2,3=one or two additional XMem modules)
-	var original: byte				// allows validation of original contents: 1=images and data are original, 0=this file has been updated by a user application (data in RAM written back to MOD file, etc)
-	var appAutoUpdate: byte			// tells any application to: 1=overwrite this file automatically when saving other data, 0=do not update
-	var numPages: byte				// the number of pages in this file (0-256, but normally between 1-6)
-	var headerCustom: [byte]		// for special hardware attributes
-	
-	init () {
-		fileFormat = [CChar](repeating: 0, count: 5)
-		title = [CChar](repeating: 0, count: 50)
-		version = [CChar](repeating: 0, count: 10)
-		partNumber = [CChar](repeating: 0, count: 20)
-		author = [CChar](repeating: 0, count: 50)
-		copyright = [CChar](repeating: 0, count: 100)
-		license = [CChar](repeating: 0, count: 200)
-		comments = [CChar](repeating: 0, count: 255)
-		category = .undef
-		hardware = .none
-		memModules = 0
-		XMemModules = 0
-		original = 0
-		appAutoUpdate = 0
-		numPages = 0
-		headerCustom = [byte](repeating: 0, count: 32)
-	}
+	var fileFormat = [CChar](repeating: 0, count: 5)		// constant value defines file format and revision
+	var title = [CChar](repeating: 0, count: 50)			// the full module name (the short name is the name of the file itself)
+	var version = [CChar](repeating: 0, count: 10)			// module version, if any
+	var partNumber = [CChar](repeating: 0, count: 20)		// module part number
+	var author = [CChar](repeating: 0, count: 50)			// author, if any
+	var copyright = [CChar](repeating: 0, count: 100)		// copyright notice, if any
+	var license = [CChar](repeating: 0, count: 200)			// license terms, if any
+	var comments = [CChar](repeating: 0, count: 255)		// free form comments, if any
+	var category = Category.undef							// module category, see codes below
+	var hardware = Hardware.none							// defines special hardware that module contains
+	var memModules = byte(0)								// defines number of main memory modules (0-4)
+	var XMemModules = byte(0)								// defines number of extended memory modules (0=none, 1=Xfuns/XMem, 2,3=one or two additional XMem modules)
+	var original = byte(0)									// allows validation of original contents: 1=images and data are original, 0=this file has been updated by a user application (data in RAM written back to MOD file, etc)
+	var appAutoUpdate = byte(0)								// tells any application to: 1=overwrite this file automatically when saving other data, 0=do not update
+	var numPages = byte(0)									// the number of pages in this file (0-256, but normally between 1-6)
+	var headerCustom = [byte](repeating: 0, count: 32)		// for special hardware attributes
 }
 
 // Module Memory Structures - see MOD file structures for field descriptions
 final class ModuleHeader {
-	var fullFileName: String
-	var fileFormat: String
-	var title: String
-	var version: String
-	var partNumber: String
-	var author: String
-	var copyright: String
-	var license: String
-	var comments: String
-	var category: Category
-	var hardware: Hardware
-	var memModules: byte
-	var XMemModules: byte
-	var original: byte
-	var appAutoUpdate: byte
-	var numPages: byte
-	
-	init() {
-		fullFileName = ""
-		fileFormat = ""
-		title = ""
-		version = ""
-		partNumber = ""
-		author = ""
-		copyright = ""
-		license = ""
-		comments = ""
-		category = .undef
-		hardware = .none
-		memModules = 0
-		XMemModules = 0
-		original = 0
-		appAutoUpdate = 0
-		numPages = 0
-	}
+	var fullFileName = ""
+	var fileFormat = ""
+	var title = ""
+	var version = ""
+	var partNumber = ""
+	var author = ""
+	var copyright = ""
+	var license = ""
+	var comments = ""
+	var category = Category.undef
+	var hardware = Hardware.none
+	var memModules = byte(0)
+	var XMemModules = byte(0)
+	var original = byte(0)
+	var appAutoUpdate = byte(0)
+	var numPages = byte(0)
 }
 
 class Box<T> {
@@ -173,37 +134,20 @@ class Box<T> {
 final class ModulePage {
 	var moduleHeader: ModuleHeader?		// pointer to module that this page is a part of, or NULL if none
 	var altPage: ModulePage?			// pointer to alternate page if any (HEPAX, W&W RAMBOX2 use)
-	var name: String
-	var ID: String
-	var page: byte						// file data - unchanged
-	var actualPage: byte				// running data- the actual location this page is loaded in
-	var pageGroup: byte					// file data - unchanged
-	var bank: byte
-	var bankGroup: byte					// file data - unchanged
-	var actualBankGroup: byte			// running data - BankGroup is unique to file only
-	var RAM: byte
-	var writeProtect: byte
-	var FAT: byte						// could be incorrectly set to false if a .ROM file loaded
-	var HEPAX: byte						// if a HEPAX page
-	var WWRAMBOX: byte					// if a W&W RAMBOX page
-	var image: [byte]
-	
-	init() {
-		name = ""
-		ID = ""
-		page = 0
-		actualPage = 0
-		pageGroup = 0
-		bank = 0
-		bankGroup = 0
-		actualBankGroup = 0
-		RAM = 0
-		writeProtect = 0
-		FAT = 0
-		HEPAX = 0
-		WWRAMBOX = 0
-		image = [byte](repeating: 0, count: 4096)
-	}
+	var name = ""
+	var ID = ""
+	var page = byte(0)					// file data - unchanged
+	var actualPage = byte(0)			// running data- the actual location this page is loaded in
+	var pageGroup = byte(0)				// file data - unchanged
+	var bank = byte(0)
+	var bankGroup = byte(0)				// file data - unchanged
+	var actualBankGroup = byte(0)		// running data - BankGroup is unique to file only
+	var RAM = byte(0)
+	var writeProtect = byte(0)
+	var FAT = byte(0)					// could be incorrectly set to false if a .ROM file loaded
+	var HEPAX = byte(0)					// if a HEPAX page
+	var WWRAMBOX = byte(0)				// if a W&W RAMBOX page
+	var image = [byte](repeating: 0, count: 4096)
 }
 
 enum CheckPageError: Error {
@@ -217,15 +161,32 @@ enum CheckPageError: Error {
 	case fatOutOfRange
 }
 
-final class MOD {
+struct MOD: Hashable {
 	var data: Data?
 	var shortName: String?
 	var fileSize = 0
 	var moduleHeader = ModuleHeader()
 	var modulePages = [ModulePage]()
+	
+	var memoryCheck: Bool
 
-	init () {
+	init (memoryCheck: Bool) {
 		data = nil
+		self.memoryCheck = memoryCheck
+	}
+	
+	static func == (lhs: MOD, rhs: MOD) -> Bool {
+		lhs.moduleHeader.title == rhs.moduleHeader.title
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(moduleHeader.title)
+	}
+
+	init?(modName: String, withMemoryCheck memoryCheck: Bool) throws {
+		self.init(memoryCheck: memoryCheck)
+
+		try self.readModFromFile(modName, withMemoryCheck: memoryCheck)
 	}
 	
 	func is41C() -> Bool {
@@ -260,10 +221,10 @@ final class MOD {
 	
 	// Check Page
 	func checkPage(_ page: ModulePage) throws {
-		if page.page > 0x0f && page.page < PositionMin {
+		if page.page > 0x0f && page.page < positionMin {
 			throw CheckPageError.pageOutOfRange
 		}
-		if page.page > PositionMax && page.pageGroup > 8 {
+		if page.page > positionMax && page.pageGroup > 8 {
 			throw CheckPageError.pageOutOfRange
 		}
 		
@@ -406,43 +367,27 @@ final class MOD {
 	
 	func validateModuleHeader() throws {
 		// check size
-		if fileSize != HeaderSize + Int(moduleHeader.numPages) * PageSize {
-			throw modHeaderError.wrongFileSize
-		}
+		guard fileSize == headerSize + Int(moduleHeader.numPages) * pageSize else { throw modHeaderError.wrongFileSize }
 		
-		if !moduleHeader.fileFormat.hasPrefix(MOD_FORMAT) {
-			throw modHeaderError.noModExtension
-		}
+		guard moduleHeader.fileFormat.hasPrefix(MOD_FORMAT) else { throw modHeaderError.noModExtension }
 		
 		let mem = bus.memModules + moduleHeader.memModules
-		if mem > 4 {
-			throw modHeaderError.tooManyMEMModules
-		}
+		guard mem <= 4 else { throw modHeaderError.tooManyMEMModules }
 		
 		let xmem = bus.XMemModules + moduleHeader.XMemModules
-		if xmem > 3 {
-			throw modHeaderError.tooManyXMEMModules
-		}
+		guard xmem <= 3 else { throw modHeaderError.tooManyXMEMModules }
 		
-		if moduleHeader.original > 1 {
-			throw modHeaderError.wrongOriginalValue
-		}
+		guard moduleHeader.original <= 1 else { throw modHeaderError.wrongOriginalValue }
 		
-		if moduleHeader.appAutoUpdate > 1 {
-			throw modHeaderError.wrongAppAutoUpdateValue
-		}
+		guard moduleHeader.appAutoUpdate <= 1 else { throw modHeaderError.wrongAppAutoUpdateValue }
 		
-		if moduleHeader.category.rawValue > CategoryMax {
-			throw modHeaderError.wrongCategoryValue
-		}
+		guard moduleHeader.category.rawValue <= categoryMax else { throw modHeaderError.wrongCategoryValue }
 		
-		if moduleHeader.hardware.rawValue > HardwareMax {
-			throw modHeaderError.wrongHardwareValue
-		}
+		guard moduleHeader.hardware.rawValue <= hardwareMax else { throw modHeaderError.wrongHardwareValue }
 	}
 	
-	func populateModulePage(_ pageNo: Int) {
-		var startPosition: Int = HeaderSize + (PageSize * pageNo)
+	mutating func populateModulePage(_ pageNo: Int) {
+		var startPosition: Int = headerSize + (pageSize * pageNo)
 		var page = ModuleFilePage()
 		
 		// name
@@ -531,7 +476,7 @@ final class MOD {
 		case errorLoadingFile
 	}
 	
-	func readModFromFile(_ filename: String) throws {
+	mutating func readModFromFile(_ filename: String, withMemoryCheck memoryCheck: Bool) throws {
 		// Read the file
 		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: filename) {
@@ -544,11 +489,12 @@ final class MOD {
 				
 				populateModuleHeader()
 				
-				try validateModuleHeader()
+				if memoryCheck {
+					try validateModuleHeader()
+				}
 				bus.memModules += moduleHeader.memModules
 				bus.XMemModules += moduleHeader.XMemModules
 				
-//				for var idx: UInt8 = 0; idx < moduleHeader.numPages; idx++ {
 				for idx: UInt8 in 0..<moduleHeader.numPages {
 					populateModulePage(Int(idx))
 				}
@@ -564,9 +510,7 @@ final class MOD {
 	}
 	
 	func categoryDescription() -> String? {
-		if self.data == nil {
-			return nil
-		}
+		guard self.data != nil else { return nil }
 		
 		switch moduleHeader.category {
 		case .undef:
@@ -589,9 +533,7 @@ final class MOD {
 	}
 	
 	func hardwareDescription() -> String? {
-		if self.data == nil {
-			return nil
-		}
+		guard self.data != nil else { return nil }
 		
 		switch moduleHeader.hardware {
 		case .none:
@@ -625,7 +567,6 @@ final class MOD {
 	
 	func description() {
 		headerDescription()
-//		for idx = 0; idx < moduleHeader.numPages; idx++ {
 		for idx: UInt8 in 0..<moduleHeader.numPages {
 			pageDescription(idx)
 		}

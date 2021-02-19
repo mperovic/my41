@@ -24,7 +24,7 @@ class Key: NSButton {
 		}
 		highlight(true)
 		
-		let appDelegate = NSApplication.shared().delegate as! AppDelegate
+		let appDelegate = NSApplication.shared.delegate as! AppDelegate
 		appDelegate.buttonPressed = true
 	}
 	
@@ -34,7 +34,7 @@ class Key: NSButton {
 		}
 		highlight(false)
 		
-		let appDelegate = NSApplication.shared().delegate as! AppDelegate
+		let appDelegate = NSApplication.shared.delegate as! AppDelegate
 		appDelegate.buttonPressed = false
 	}
 	
@@ -167,7 +167,7 @@ class ButtonCell: NSButtonCell {
 			} else {
 				lowerTextRect = NSMakeRect(1.0, 17.0, 36.0, 12.0)
 			}
-			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+			let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 			textStyle.alignment = .center
 			
 			var font: NSFont
@@ -177,9 +177,9 @@ class ButtonCell: NSButtonCell {
 				font = NSFont(name: "Helvetica", size: 11.0)!
 			}
 			let lowerTextFontAttributes: Dictionary = [
-				NSFontAttributeName: font,
-				NSForegroundColorAttributeName: NSColor(calibratedRed: 0.341, green: 0.643, blue: 0.78, alpha: 1.0),
-				NSParagraphStyleAttributeName: textStyle
+				NSAttributedString.Key.font: font,
+				NSAttributedString.Key.foregroundColor: NSColor(calibratedRed: 0.341, green: 0.643, blue: 0.78, alpha: 1.0),
+				NSAttributedString.Key.paragraphStyle: textStyle
 			]
 			lowerText?.draw(in: NSOffsetRect(lowerTextRect, 0, -1), withAttributes: lowerTextFontAttributes)
 		}
@@ -187,8 +187,7 @@ class ButtonCell: NSButtonCell {
 		if upperText != nil {
 			let paragrapStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
 			paragrapStyle.alignment = .center
-			upperText!.addAttribute(NSParagraphStyleAttributeName, value: paragrapStyle, range: NSMakeRange(0, upperText!.length))
-			
+			upperText!.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragrapStyle, range: NSMakeRange(0, upperText!.length))
 			
 			var upperTextRect: NSRect
 			if upperText?.string == "ENTER ↑" || upperText?.string == "N" {

@@ -8,21 +8,35 @@
 
 import Foundation
 
-enum CalculatorType: Int {
-	case hp41C  = 1
-	case hp41CV = 2
-	case hp41CX = 3
-}
-
 let MAX_RAM_SIZE		= 0x400
 let epromAddress		= 0x4000
 
-let HPPort1 = "ModulePort1"
-let HPPort2 = "ModulePort2"
-let HPPort3 = "ModulePort3"
-let HPPort4 = "ModulePort4"
+var TRACE = 0
+var SYNCHRONYZE = false
+var SOUND = false
 
-let HPCalculatorType = "CalculatorType"
+enum HPPort: String, CaseIterable {
+	case port1 = "ModulePort1"
+	case port2 = "ModulePort2"
+	case port3 = "ModulePort3"
+	case port4 = "ModulePort4"
+	
+	func getFilePath() -> String? {
+		guard let module = UserDefaults.standard.string(forKey: self.rawValue) else { return nil }
+
+		return Bundle.main.resourcePath! + "/" + module
+	}
+}
+
+enum HPCalculator: String, CaseIterable, Identifiable {
+	case hp41c = "HP 41C"
+	case hp41cv = "HP 41CV"
+	case hp41cx = "HP 41CX"
+
+	var id: String { rawValue }
+}
+
+let hpCalculatorType = "CalculatorType"
 let HPPrinterAvailable = "PrinterAvailable"
 let HPCardReaderAvailable = "CardReaderAvailable"
 let HPDisplayDebug = "DisplayDebug"
@@ -30,10 +44,10 @@ let HPConsoleForegroundColor = "ConsoleForegroundColor"
 let HPConsoleBackgroundColor = "ConsoleBackgroundColor"
 let HPResetCalculator = "ResetCalculator"
 
-class Calculator {
-	var calculatorMod = MOD()
+class Calculator: ObservableObject {
+	var calculatorMod = MOD(memoryCheck: false)
 	var portMod: [MOD?] = [nil, nil, nil, nil]
-	var calculatorType: CalculatorType?
+	var calculatorType: HPCalculator?
 	var executionTimer: Foundation.Timer?
 	var timerModule: Timer?
 	var display: Display?
@@ -43,7 +57,7 @@ class Calculator {
 
 	init() {
 		timerModule = Timer()
-		calculatorMod = MOD()
+		calculatorMod = MOD(memoryCheck: false)
 
 		resetCalculator(restoringMemory: true)
 	}
@@ -230,55 +244,47 @@ class Calculator {
 	
 	func readCalculatorDescriptionFromDefaults() {
 		let defaults = UserDefaults.standard
-		let cType = defaults.integer(forKey: HPCalculatorType)
-		readROMModule(cType)
+		readROMModule(defaults.string(forKey: hpCalculatorType) ?? "")
 		
 		// Now we fill each port
-		do {
-			if defaults.string(forKey: HPPort1) != nil {
-				portMod[0] = MOD()
-				try portMod[0]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort1)!)
+		var portNo = 0
+		HPPort.allCases.forEach {
+			do {
+				portMod[portNo] = MOD(memoryCheck: true)
+				if let modName = defaults.string(forKey: $0.rawValue) {
+					try portMod[portNo]?.readModFromFile(Bundle.main.resourcePath! + "/" + modName, withMemoryCheck: true)
+				}
+				
+				portNo += 1
+			} catch _ {
+				
 			}
-			if defaults.string(forKey: HPPort2) != nil {
-				portMod[1] = MOD()
-				try portMod[1]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort2)!)
-			}
-			if defaults.string(forKey: HPPort3) != nil {
-				portMod[2] = MOD()
-				try portMod[2]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort3)!)
-			}
-			if defaults.string(forKey: HPPort4) != nil {
-				portMod[3] = MOD()
-				try portMod[3]?.readModFromFile(Bundle.main.resourcePath! + "/" + defaults.string(forKey: HPPort4)!)
-			}
-		} catch _ {
-			
 		}
 	}
 	
-	func readROMModule(_ cType: Int) {
+	func readROMModule(_ cType: String) {
 		var filename: String
 		switch cType {
-		case 1:
-			calculatorType = .hp41C
+		case HPCalculator.hp41c.rawValue:
+			calculatorType = .hp41c
 			filename = Bundle.main.resourcePath! + "/" + "nut-c.mod"
-		case 2:
-			calculatorType = .hp41CV
+		case HPCalculator.hp41cv.rawValue:
+			calculatorType = .hp41cv
 			filename = Bundle.main.resourcePath! + "/" + "nut-cv.mod"
-		case 3:
-			calculatorType = .hp41CX
+		case HPCalculator.hp41cx.rawValue:
+			calculatorType = .hp41cx
 			filename = Bundle.main.resourcePath! + "/" + "nut-cx.mod"
 		default:
 			// Make sure I have a default for next time
-			calculatorType = .hp41CX
+			calculatorType = .hp41cx
 			let defaults = UserDefaults.standard
-			defaults.set(CalculatorType.hp41CX.rawValue, forKey: HPCalculatorType)
+			defaults.set(HPCalculator.hp41cx.rawValue, forKey: hpCalculatorType)
 			filename = Bundle.main.resourcePath! + "/" + "nut-cx.mod"
 			defaults.synchronize()
 		}
 		
 		do {
-			try calculatorMod.readModFromFile(filename)
+			try calculatorMod.readModFromFile(filename, withMemoryCheck: true)
 		} catch let error as NSError {
 			displayAlert(error.description)
 		}
@@ -293,8 +299,7 @@ class Calculator {
 		return to
 	}
 	
-	@objc func timeSlice(_ timer: Foundation.Timer)
-	{
+	@objc func timeSlice(_ timer: Foundation.Timer) {
 		cpu.timeSlice(timer)
 		display?.timeSlice(timer)
 		timerModule?.timeSlice(timer)
