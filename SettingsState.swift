@@ -47,7 +47,7 @@ final class SettingsState: ObservableObject {
 	private func getModuleForPort(_ port: HPPort) -> MOD? {
 		guard let name = getModuleName(port: port) else { return nil}
 		
-		return try? MOD(modName: name)
+		return try? MOD(modName: Bundle.main.resourcePath! + "/" + name, withMemoryCheck: false)
 	}
 	
 	func setModuleName(_ name: String, port: HPPort) {

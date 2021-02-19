@@ -161,30 +161,32 @@ enum CheckPageError: Error {
 	case fatOutOfRange
 }
 
-struct MOD: Identifiable, Hashable {
-	var id = UUID()
+struct MOD: Hashable {
 	var data: Data?
 	var shortName: String?
 	var fileSize = 0
 	var moduleHeader = ModuleHeader()
 	var modulePages = [ModulePage]()
+	
+	var memoryCheck: Bool
 
-	init () {
+	init (memoryCheck: Bool) {
 		data = nil
+		self.memoryCheck = memoryCheck
 	}
 	
 	static func == (lhs: MOD, rhs: MOD) -> Bool {
-		lhs.id == rhs.id
+		lhs.moduleHeader.title == rhs.moduleHeader.title
 	}
 	
 	func hash(into hasher: inout Hasher) {
-		hasher.combine(id)
+		hasher.combine(moduleHeader.title)
 	}
 
-	init?(modName: String) throws {
-		self.init()
-		
-		try self.readModFromFile(modName)
+	init?(modName: String, withMemoryCheck memoryCheck: Bool) throws {
+		self.init(memoryCheck: memoryCheck)
+
+		try self.readModFromFile(modName, withMemoryCheck: memoryCheck)
 	}
 	
 	func is41C() -> Bool {
@@ -474,7 +476,7 @@ struct MOD: Identifiable, Hashable {
 		case errorLoadingFile
 	}
 	
-	mutating func readModFromFile(_ filename: String) throws {
+	mutating func readModFromFile(_ filename: String, withMemoryCheck memoryCheck: Bool) throws {
 		// Read the file
 		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: filename) {
@@ -487,7 +489,9 @@ struct MOD: Identifiable, Hashable {
 				
 				populateModuleHeader()
 				
-				try validateModuleHeader()
+				if memoryCheck {
+					try validateModuleHeader()
+				}
 				bus.memModules += moduleHeader.memModules
 				bus.XMemModules += moduleHeader.XMemModules
 				

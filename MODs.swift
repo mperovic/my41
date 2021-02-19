@@ -35,13 +35,14 @@ struct MODs {
 		}
 	}
 	
-	static func getModFiles() -> [MOD] {
+	static func getModFiles() -> [String : MOD] {
 		let mods = MODs()
-		var modFiles = [MOD]()
+		var modFiles = [String : MOD]()
 		
 		mods.allMODFiles.forEach {
-			if let modFile = try? MOD(modName: $0) {
-				modFiles.append(modFile)
+			if let modFile = try? MOD(modName: $0, withMemoryCheck: false) {
+				let name = NSString(string: $0).lastPathComponent as String
+				modFiles[name] = modFile
 			}
 		}
 

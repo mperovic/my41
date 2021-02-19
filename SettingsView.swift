@@ -14,7 +14,7 @@ struct MODsViewStyle: ViewModifier {
 			.overlay(
 				RoundedRectangle(cornerRadius: 8)
 					.stroke(lineWidth: 2)
-					.foregroundColor(.blue)
+					.foregroundColor(.white)
 			)
 			.shadow(
 				color: Color.gray.opacity(0.4),
@@ -28,18 +28,20 @@ struct SettingsView: View {
 	@EnvironmentObject var calculator: Calculator
 	@ObservedObject var settingsState = SettingsState()
 
-	@State private var selectedCalculator = "HP 41C"
+	@State private var selectedCalculator = UserDefaults.standard.string(forKey: hpCalculatorType) ?? HPCalculator.hp41cx.rawValue
 	@State private var sound = true
 	@State private var syncTime = true
 	@State private var module: MOD?
 	
 	@Binding var showSettings: Bool
-	@State var showAlert = false
-	@State var showList1 = false
-	@State var showList2 = false
-	@State var showList3 = false
-	@State var showList4 = false
-
+	@State private var showAlert = false
+	@State private var showList1 = false
+	@State private var showList2 = false
+	@State private var showList3 = false
+	@State private var showList4 = false
+	
+	private let mods = MODs.getModFiles()
+	
 	var body: some View {
 		GeometryReader { geometry in
 			VStack(alignment: .leading) {
@@ -47,9 +49,9 @@ struct SettingsView: View {
 					Text("Calculator")
 					Spacer(minLength: 40)
 					Picker("Calculator", selection: $selectedCalculator) {
-						Text(HPCalculator.hp41c.rawValue).tag(HPCalculator.hp41c.rawValue)
-						Text(HPCalculator.hp41cv.rawValue).tag(HPCalculator.hp41cv.rawValue)
-						Text(HPCalculator.hp41cx.rawValue).tag(HPCalculator.hp41cx.rawValue)
+						ForEach(HPCalculator.allCases, id: \.self) {
+							Text($0.rawValue).tag($0.rawValue)
+						}
 					}
 					.pickerStyle(SegmentedPickerStyle())
 				}
@@ -111,12 +113,15 @@ struct SettingsView: View {
 					}) {
 						Text("Reset Calculator")
 					}
+					.foregroundColor(.white)
 					.alert(isPresented: $showAlert) {
 						Alert(
 							title: Text("Reset Calculator"),
 							message: Text("This operation will clear all programs and memory registers"),
 							primaryButton: .default(Text("Continue")) {
 								calculator.resetCalculator(restoringMemory: false)
+								
+								showSettings = false
 							},
 							secondaryButton: .cancel(Text("Cancel"))
 						)
@@ -133,7 +138,9 @@ struct SettingsView: View {
 						applyChanges()
 					}, label: {
 						Text("Apply")
+							.fontWeight(.semibold)
 					})
+					.foregroundColor(.white)
 				}
 				
 			}
@@ -170,104 +177,104 @@ struct SettingsView: View {
 		}
 		
 		// Modules
-//		if let fPath = self.expansionModules[0].filePath {
-//			// We have something in Port1
-//			let moduleName = (fPath as NSString).lastPathComponent
-//			if let dModuleName = defaults.string(forKey: HPPort.port1.rawValue) {
-//				// And we had something in Port1 at the begining
-//				if moduleName != dModuleName {
-//					// This is different module
-//					defaults.set(moduleName, forKey: HPPort.port1.rawValue)
-//					needsRestart = true
-//				}
-//			} else {
-//				// Port1 was empty
-//				defaults.set(moduleName, forKey: HPPort.port1.rawValue)
-//				needsRestart = true
-//			}
-//		} else {
-//			// Port1 is empty now
-//			if let _ = defaults.string(forKey: HPPort.port1.rawValue) {
-//				// But we had something in Port1
-//				defaults.removeObject(forKey: HPPort.port1.rawValue)
-//			}
-//		}
-//		
-//		if let fPath = self.expansionModules[1].filePath {
-//			// We have something in Port2
-//			let moduleName = (fPath as NSString).lastPathComponent
-//			if let dModuleName = defaults.string(forKey: HPPort.port2.rawValue) {
-//				// And we had something in Port2 at the begining
-//				if moduleName != dModuleName {
-//					// This is different module
-//					defaults.set(moduleName, forKey: HPPort.port2.rawValue)
-//					needsRestart = true
-//				}
-//			} else {
-//				// Port2 was empty
-//				defaults.set(moduleName, forKey: HPPort.port2.rawValue)
-//				needsRestart = true
-//			}
-//		} else {
-//			// Port2 is empty now
-//			if let _ = defaults.string(forKey: HPPort.port2.rawValue) {
-//				// But we had something in Port2
-//				defaults.removeObject(forKey: HPPort.port2.rawValue)
-//			}
-//		}
-//		
-//		if let fPath = self.expansionModules[2].filePath {
-//			// We have something in Port3
-//			let moduleName = (fPath as NSString).lastPathComponent
-//			if let dModuleName = defaults.string(forKey: HPPort.port3.rawValue) {
-//				// And we had something in Port3 at the begining
-//				if moduleName != dModuleName {
-//					// This is different module
-//					defaults.set(moduleName, forKey: HPPort.port3.rawValue)
-//					needsRestart = true
-//				}
-//			} else {
-//				// Port3 was empty
-//				defaults.set(moduleName, forKey: HPPort.port3.rawValue)
-//				needsRestart = true
-//			}
-//		} else {
-//			// Port3 is empty now
-//			if let _ = defaults.string(forKey: HPPort.port3.rawValue) {
-//				// But we had something in Port3
-//				defaults.removeObject(forKey: HPPort.port3.rawValue)
-//			}
-//		}
-//		
-//		if let fPath = self.expansionModules[3].filePath {
-//			// We have something in Port4
-//			let moduleName = (fPath as NSString).lastPathComponent
-//			if let dModuleName = defaults.string(forKey: HPPort.port4.rawValue) {
-//				// And we had something in Port4 at the begining
-//				if moduleName != dModuleName {
-//					// This is different module
-//					defaults.set(moduleName, forKey: HPPort.port4.rawValue)
-//					needsRestart = true
-//				}
-//			} else {
-//				// Port4 was empty
-//				defaults.set(moduleName, forKey: HPPort.port4.rawValue)
-//				needsRestart = true
-//			}
-//		} else {
-//			// Port4 is empty now
-//			if let _ = defaults.string(forKey: HPPort.port4.rawValue) {
-//				// But we had something in Port4
-//				defaults.removeObject(forKey: HPPort.port4.rawValue)
-//			}
-//		}
-		defaults.synchronize()
+		if let module1 = settingsState.module1 {
+			// We have something in Port1
+			let moduleName = mods.key(from: module1)
+			if let dModuleName = defaults.string(forKey: HPPort.port1.rawValue) {
+				// And we had something in Port1 at the begining
+				if moduleName != dModuleName {
+					// This is different module
+					defaults.set(moduleName, forKey: HPPort.port1.rawValue)
+					needsRestart = true
+				}
+			} else {
+				// Port1 was empty
+				defaults.set(moduleName, forKey: HPPort.port1.rawValue)
+				needsRestart = true
+			}
+		} else {
+			// Port1 is empty now
+			if let _ = defaults.string(forKey: HPPort.port1.rawValue) {
+				// But we had something in Port1
+				defaults.removeObject(forKey: HPPort.port1.rawValue)
+			}
+		}
 		
-		showSettings = false
+		if let module2 = settingsState.module2 {
+			// We have something in Port2
+			let moduleName = mods.key(from: module2)
+			if let dModuleName = defaults.string(forKey: HPPort.port2.rawValue) {
+				// And we had something in Port2 at the begining
+				if moduleName != dModuleName {
+					// This is different module
+					defaults.set(moduleName, forKey: HPPort.port2.rawValue)
+					needsRestart = true
+				}
+			} else {
+				// Port2 was empty
+				defaults.set(moduleName, forKey: HPPort.port2.rawValue)
+				needsRestart = true
+			}
+		} else {
+			// Port2 is empty now
+			if let _ = defaults.string(forKey: HPPort.port2.rawValue) {
+				// But we had something in Port2
+				defaults.removeObject(forKey: HPPort.port2.rawValue)
+			}
+		}
+		
+		if let module3 = settingsState.module3 {
+			// We have something in Port3
+			let moduleName = mods.key(from: module3)
+			if let dModuleName = defaults.string(forKey: HPPort.port3.rawValue) {
+				// And we had something in Port3 at the begining
+				if moduleName != dModuleName {
+					// This is different module
+					defaults.set(moduleName, forKey: HPPort.port3.rawValue)
+					needsRestart = true
+				}
+			} else {
+				// Port3 was empty
+				defaults.set(moduleName, forKey: HPPort.port3.rawValue)
+				needsRestart = true
+			}
+		} else {
+			// Port3 is empty now
+			if let _ = defaults.string(forKey: HPPort.port3.rawValue) {
+				// But we had something in Port3
+				defaults.removeObject(forKey: HPPort.port3.rawValue)
+			}
+		}
+		
+		if let module3 = settingsState.module3 {
+			// We have something in Port4
+			let moduleName = mods.key(from: module3)
+			if let dModuleName = defaults.string(forKey: HPPort.port4.rawValue) {
+				// And we had something in Port4 at the begining
+				if moduleName != dModuleName {
+					// This is different module
+					defaults.set(moduleName, forKey: HPPort.port4.rawValue)
+					needsRestart = true
+				}
+			} else {
+				// Port4 was empty
+				defaults.set(moduleName, forKey: HPPort.port4.rawValue)
+				needsRestart = true
+			}
+		} else {
+			// Port4 is empty now
+			if let _ = defaults.string(forKey: HPPort.port4.rawValue) {
+				// But we had something in Port4
+				defaults.removeObject(forKey: HPPort.port4.rawValue)
+			}
+		}
+		defaults.synchronize()
 		
 		if needsRestart {
 			calculator.resetCalculator(restoringMemory: true)
 		}
+		
+		showSettings = false
 	}
 }
 

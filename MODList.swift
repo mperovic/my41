@@ -11,7 +11,7 @@ import SwiftUI
 struct MODList: View {
 	@ObservedObject var settingsState: SettingsState
 	
-	var mods = MODs.getModFiles()
+	private let mods: [MOD] = Array(MODs.getModFiles().values)
 	
 	@Binding var showList: Bool
 	

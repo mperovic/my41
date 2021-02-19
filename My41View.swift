@@ -45,19 +45,24 @@ struct My41View: View {
 				Spacer()
 				
 				HStack {
-					Spacer()
 					Button(action: {
 						showSettings.toggle()
 					}) {
-						Text("my41CX")
-							.font(.custom("Helvetica", size: 22.0 * yRatio))
-							.fontWeight(.bold)
-							.padding(.trailing, 20)
+						Image(systemName: "slider.horizontal.3")
+							.font(.system(size: 20, weight: .bold))
+							.padding(.leading, 5)
 							.foregroundColor(.shiftColor)
 					}.sheet(isPresented: $showSettings) {
 						SettingsView(showSettings: $showSettings)
 							.environmentObject(calculator)
 					}
+					.padding(.leading, 3)
+					Spacer()
+					Text("my41CX")
+						.font(.custom("Helvetica", size: 22.0 * yRatio))
+						.fontWeight(.bold)
+						.padding(.trailing, 10)
+						.foregroundColor(.shiftColor)
 				}
 				
 				ZStack {
@@ -74,8 +79,8 @@ struct My41View: View {
 				.frame(width: width, height: 52)
 				
 				KeyGroupView(keys: keys.modeKeys, isModeGroup: true)
-					.frame(width: width, height: 30)
-					.padding(.bottom, 10)
+					.frame(width: width, height: 35)
+					.padding(.bottom, 8)
 
 				VStack {
 					Spacer()
@@ -100,7 +105,7 @@ struct My41View: View {
 				.overlay(
 					Rectangle()
 						.stroke(Color.shiftColor, lineWidth: 1.0)
-						.frame(width: width)
+						.frame(width: width, height: geometry.size.height - 135)
 				)
 				
 				Spacer()

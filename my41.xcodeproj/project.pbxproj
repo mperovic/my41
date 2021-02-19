@@ -340,8 +340,18 @@
 		DCAD8864199D380C0027C925 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8863199D380C0027C925 /* Bus.swift */; };
 		DCAD8866199D38540027C925 /* SoundOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAD8865199D38540027C925 /* SoundOutput.swift */; };
 		DCBE4F6B25B8C69700E69886 /* My41cx_ios_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE4F6A25B8C69700E69886 /* My41cx_ios_App.swift */; };
-		DCBE4F8625B8D03100E69886 /* AttributedText in Frameworks */ = {isa = PBXBuildFile; productRef = DCBE4F8525B8D03100E69886 /* AttributedText */; };
-		DCBE4F8D25B8D08A00E69886 /* AttributedText in Frameworks */ = {isa = PBXBuildFile; productRef = DCBE4F8C25B8D08A00E69886 /* AttributedText */; };
+		DCC76BDB25DDD8A500F38F43 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BDA25DDD8A500F38F43 /* Dictionary+Extensions.swift */; };
+		DCC76BDC25DDD8A500F38F43 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BDA25DDD8A500F38F43 /* Dictionary+Extensions.swift */; };
+		DCC76BE725DFF2C800F38F43 /* AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE225DFF2C800F38F43 /* AttributedText.swift */; };
+		DCC76BE825DFF2C800F38F43 /* AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE225DFF2C800F38F43 /* AttributedText.swift */; };
+		DCC76BE925DFF2C800F38F43 /* TextViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE325DFF2C800F38F43 /* TextViewStore.swift */; };
+		DCC76BEA25DFF2C800F38F43 /* TextViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE325DFF2C800F38F43 /* TextViewStore.swift */; };
+		DCC76BEB25DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE425DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift */; };
+		DCC76BEC25DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE425DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift */; };
+		DCC76BED25DFF2C800F38F43 /* TextViewWrapper+UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE525DFF2C800F38F43 /* TextViewWrapper+UITextView.swift */; };
+		DCC76BEE25DFF2C800F38F43 /* TextViewWrapper+UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE525DFF2C800F38F43 /* TextViewWrapper+UITextView.swift */; };
+		DCC76BEF25DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE625DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift */; };
+		DCC76BF025DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE625DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift */; };
 		DCC7F32525C5F4B500E68C85 /* MODsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC7F32425C5F4B500E68C85 /* MODsView.swift */; };
 		DCC7F32625C5F4B500E68C85 /* MODsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC7F32425C5F4B500E68C85 /* MODsView.swift */; };
 		DCC9F3B525C3067F001F06B3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC9F3B425C3067F001F06B3 /* SettingsView.swift */; };
@@ -597,6 +607,12 @@
 		DCAD8863199D380C0027C925 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bus.swift; path = my41/Classes/Bus.swift; sourceTree = "<group>"; };
 		DCAD8865199D38540027C925 /* SoundOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundOutput.swift; path = my41/Classes/SoundOutput.swift; sourceTree = "<group>"; };
 		DCBE4F6A25B8C69700E69886 /* My41cx_ios_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My41cx_ios_App.swift; sourceTree = "<group>"; };
+		DCC76BDA25DDD8A500F38F43 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		DCC76BE225DFF2C800F38F43 /* AttributedText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedText.swift; sourceTree = "<group>"; };
+		DCC76BE325DFF2C800F38F43 /* TextViewStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewStore.swift; sourceTree = "<group>"; };
+		DCC76BE425DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLineBreakMode+TruncationMode.swift"; sourceTree = "<group>"; };
+		DCC76BE525DFF2C800F38F43 /* TextViewWrapper+UITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextViewWrapper+UITextView.swift"; sourceTree = "<group>"; };
+		DCC76BE625DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextViewWrapper+NSTextView.swift"; sourceTree = "<group>"; };
 		DCC7F32425C5F4B500E68C85 /* MODsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MODsView.swift; sourceTree = "<group>"; };
 		DCC9F3B425C3067F001F06B3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DCC9F3C325C313B5001F06B3 /* MODDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MODDetailsView.swift; sourceTree = "<group>"; };
@@ -638,7 +654,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCBE4F8625B8D03100E69886 /* AttributedText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,7 +668,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCBE4F8D25B8D08A00E69886 /* AttributedText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,6 +833,7 @@
 		DC45284419897DA500C40B6C = {
 			isa = PBXGroup;
 			children = (
+				DCC76BE125DFF2C800F38F43 /* AttributedText */,
 				DC56268E198B75770040453F /* ROMs */,
 				DC2E476D19957F4C00BCACAF /* MODs */,
 				DCC3974F1A77DE0B000867BD /* Common code */,
@@ -1009,6 +1024,18 @@
 			name = "Common code";
 			sourceTree = "<group>";
 		};
+		DCC76BE125DFF2C800F38F43 /* AttributedText */ = {
+			isa = PBXGroup;
+			children = (
+				DCC76BE225DFF2C800F38F43 /* AttributedText.swift */,
+				DCC76BE325DFF2C800F38F43 /* TextViewStore.swift */,
+				DCC76BE425DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift */,
+				DCC76BE525DFF2C800F38F43 /* TextViewWrapper+UITextView.swift */,
+				DCC76BE625DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift */,
+			);
+			path = AttributedText;
+			sourceTree = "<group>";
+		};
 		DCC9F3AE25C3065E001F06B3 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1049,6 +1076,7 @@
 				DCD054CE25A4F0F40040EF17 /* Text+Extensions.swift */,
 				DCD054DD25A53C440040EF17 /* View+Extensions.swift */,
 				DC86791025C9F50E00E9DCFB /* Array+Extensions.swift */,
+				DCC76BDA25DDD8A500F38F43 /* Dictionary+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1185,7 +1213,6 @@
 			);
 			name = my41cx;
 			packageProductDependencies = (
-				DCBE4F8525B8D03100E69886 /* AttributedText */,
 			);
 			productName = my41;
 			productReference = DC45284D19897DA600C40B6C /* my41cx.app */;
@@ -1223,7 +1250,6 @@
 			);
 			name = "my41cx-ios";
 			packageProductDependencies = (
-				DCBE4F8C25B8D08A00E69886 /* AttributedText */,
 			);
 			productName = "my41cx-ios";
 			productReference = DCE75C011A61B4FE002B2D7C /* my41cx-ios.app */;
@@ -1301,7 +1327,6 @@
 			);
 			mainGroup = DC45284419897DA500C40B6C;
 			packageReferences = (
-				DCBE4F8425B8D03100E69886 /* XCRemoteSwiftPackageReference "AttributedText" */,
 			);
 			productRefGroup = DC45284E19897DA600C40B6C /* Products */;
 			projectDirPath = "";
@@ -1651,12 +1676,16 @@
 				DCEEC9681A18A270000ECA76 /* PreferencesMenu.swift in Sources */,
 				DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */,
 				DC4E040F1A17783E008D6DD5 /* DebugCPU.swift in Sources */,
+				DCC76BDB25DDD8A500F38F43 /* Dictionary+Extensions.swift in Sources */,
+				DCC76BE725DFF2C800F38F43 /* AttributedText.swift in Sources */,
 				DCEEC96A1A18BE39000ECA76 /* PreferencesCalculator.swift in Sources */,
 				DCD054DE25A53C440040EF17 /* View+Extensions.swift in Sources */,
 				DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */,
+				DCC76BE925DFF2C800F38F43 /* TextViewStore.swift in Sources */,
 				DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */,
 				DC447DE61A34AD8B008FAB28 /* Application.swift in Sources */,
 				DC0B3FB325D8784000D4DD3B /* SettingsState.swift in Sources */,
+				DCC76BEF25DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift in Sources */,
 				DC86790A25C9ED9B00E9DCFB /* MODs.swift in Sources */,
 				DCD09B0B1A8628A700F8D785 /* CocoaSpecific.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
@@ -1664,9 +1693,11 @@
 				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
 				DCD054A825A483240040EF17 /* Color+Extensions.swift in Sources */,
 				DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */,
+				DCC76BEB25DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift in Sources */,
 				DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */,
 				DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */,
 				DCD054AF25A490CB0040EF17 /* KeyGroupView.swift in Sources */,
+				DCC76BED25DFF2C800F38F43 /* TextViewWrapper+UITextView.swift in Sources */,
 				DCAD885E199D36150027C925 /* DataOperations.swift in Sources */,
 				DCA23A641A46373300BC2BD2 /* CPU_Class1.swift in Sources */,
 				DCAD8864199D380C0027C925 /* Bus.swift in Sources */,
@@ -1709,6 +1740,7 @@
 				DCD09B231A8660E300F8D785 /* Keyboard.swift in Sources */,
 				DCD054DF25A53C440040EF17 /* View+Extensions.swift in Sources */,
 				DCD054B025A490CB0040EF17 /* KeyGroupView.swift in Sources */,
+				DCC76BF025DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift in Sources */,
 				DCD09B0F1A862A9100F8D785 /* DataOperations.swift in Sources */,
 				DCD09B0E1A862A5600F8D785 /* Timer.swift in Sources */,
 				DCD09B091A86281900F8D785 /* MOD.swift in Sources */,
@@ -1720,6 +1752,7 @@
 				DCD09B071A86260000F8D785 /* Disassembly.swift in Sources */,
 				DC86791A25CB4A1900E9DCFB /* MODList.swift in Sources */,
 				DC7B24A31A79144C0080F85A /* CPU.swift in Sources */,
+				DCC76BEA25DFF2C800F38F43 /* TextViewStore.swift in Sources */,
 				DCC9F3C525C313B5001F06B3 /* MODDetailsView.swift in Sources */,
 				DC7B1EEC25C0BEB6002389E5 /* DisplayView.swift in Sources */,
 				DC7B24A41A79144C0080F85A /* CPU_Class0.swift in Sources */,
@@ -1728,15 +1761,19 @@
 				DCC9F3B625C3067F001F06B3 /* SettingsView.swift in Sources */,
 				DC7B24A61A79144C0080F85A /* CPU_Class2.swift in Sources */,
 				DC7B24A71A79144C0080F85A /* CPU_Class3.swift in Sources */,
+				DCC76BDC25DDD8A500F38F43 /* Dictionary+Extensions.swift in Sources */,
 				DCD09B261A8663D500F8D785 /* CalculatorKey.swift in Sources */,
 				DC86790B25C9ED9B00E9DCFB /* MODs.swift in Sources */,
 				DC676D6B1A8F76F800D0C296 /* DisplayExtensions.swift in Sources */,
+				DCC76BEC25DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift in Sources */,
 				DCD0549225A470600040EF17 /* KeyView.swift in Sources */,
 				DC676D681A8F6D7A00D0C296 /* Calculator.swift in Sources */,
 				DCD09B131A86319E00F8D785 /* DebugCPU.swift in Sources */,
 				DC86791225C9F50E00E9DCFB /* Array+Extensions.swift in Sources */,
 				DCD09B0D1A8628E000F8D785 /* CocoaTouchSpecific.swift in Sources */,
+				DCC76BE825DFF2C800F38F43 /* AttributedText.swift in Sources */,
 				DC7B24A21A79141E0080F85A /* Bus.swift in Sources */,
+				DCC76BEE25DFF2C800F38F43 /* TextViewWrapper+UITextView.swift in Sources */,
 				DCE75C271A61BCBD002B2D7C /* Display.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2014,7 +2051,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2000;
+				CURRENT_PROJECT_VERSION = 2001;
 				DEVELOPMENT_TEAM = LS2ZZ4TR54;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2047,7 +2084,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2000;
+				CURRENT_PROJECT_VERSION = 2001;
 				DEVELOPMENT_TEAM = LS2ZZ4TR54;
 				INFOPLIST_FILE = "my41cx-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2177,30 +2214,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		DCBE4F8425B8D03100E69886 /* XCRemoteSwiftPackageReference "AttributedText" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gonzalezreal/AttributedText";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.2;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		DCBE4F8525B8D03100E69886 /* AttributedText */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DCBE4F8425B8D03100E69886 /* XCRemoteSwiftPackageReference "AttributedText" */;
-			productName = AttributedText;
-		};
-		DCBE4F8C25B8D08A00E69886 /* AttributedText */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DCBE4F8425B8D03100E69886 /* XCRemoteSwiftPackageReference "AttributedText" */;
-			productName = AttributedText;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DC45284519897DA500C40B6C /* Project object */;
 }

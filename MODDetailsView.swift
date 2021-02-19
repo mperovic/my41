@@ -26,7 +26,7 @@ struct MODDetailsView: View {
 }
 
 struct MODDetailsView_Previews: PreviewProvider {
-	static var mod = MODs.getModFiles().last!
+	static var mod = MODs.getModFiles()[MODs.getModFiles().keys.first!]!
     static var previews: some View {
 		MODDetailsView(module: mod, short: false)
     }

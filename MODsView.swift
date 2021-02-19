@@ -32,12 +32,13 @@ struct MODsView: View {
 						.font(.system(size: 32))
 				})
 				.frame(width: geometry.size.width, height: geometry.size.height)
-				.cornerRadius(5.0)
-				.background(Color.white)
+				.clipShape(RoundedRectangle(cornerRadius: 5.0, style: .continuous))
+				.foregroundColor(.white)
 			} else {
 				VStack {
 					Spacer()
 					MODDetailsView(module: getModule()!, short: true)
+						.padding([.leading, .trailing], 5)
 					Spacer()
 					HStack {
 						Spacer()
@@ -55,6 +56,7 @@ struct MODsView: View {
 						}, label: {
 							Image(systemName: "trash")
 								.font(.system(size: 26))
+								.foregroundColor(.white)
 						})
 						.padding(.trailing, 10)
 						.padding(.bottom, 5)
@@ -81,35 +83,9 @@ struct MODsView: View {
 			return settingsState.module4
 		}
 	}
-	
-	private func selectModule() {
-//		let alertController = UIAlertController(
-//			title: "Port \(port)",
-//			message: "Choose module",
-//			preferredStyle: .alert
-//		)
-//
-//		reloadModFiles()
-//		for (_, element) in modFiles.enumerated() {
-//			let modAction = UIAlertAction(title: (element as NSString).lastPathComponent, style: .default) { (result : UIAlertAction) -> Void in
-//				self.filePath = element
-//				self.oldFilePath = nil
-//			}
-//			alertController.addAction(modAction)
-//		}
-//		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
-//			if let oldFilePath = self.oldFilePath {
-//				self.filePath = oldFilePath
-//				self.oldFilePath = nil
-//			}
-//		}
-//		alertController.addAction(cancelAction)
-//		settingsViewController?.present(alertController, animated: true, completion: nil)
-	}
 }
 
 struct MODsView_Previews: PreviewProvider {
-	@State static var selectedModule = MODs.getModFiles().first!
     static var previews: some View {
 		MODsView(port: .port1, settingsState: SettingsState())
     }
