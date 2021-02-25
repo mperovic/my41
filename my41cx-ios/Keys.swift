@@ -52,8 +52,8 @@ final class Keys: ObservableObject {
 	]
 	@Published var keys6: [CalcKey] = [
 		CalcKey(shiftText: xlessthany, upperText: plus, lowerText: getLowerAttributedString(from: "U"), keyCode: 80),
-		CalcKey(shiftText: beep, upperText: four, lowerText: getLowerAttributedString(from: "W"), keyCode: 81),
-		CalcKey(shiftText: ptor, upperText: five, lowerText: getLowerAttributedString(from: "V"), keyCode: 82),
+		CalcKey(shiftText: beep, upperText: four, lowerText: getLowerAttributedString(from: "V"), keyCode: 81),
+		CalcKey(shiftText: ptor, upperText: five, lowerText: getLowerAttributedString(from: "W"), keyCode: 82),
 		CalcKey(shiftText: rtop, upperText: six, lowerText: getLowerAttributedString(from: "X"), keyCode: 83)
 	]
 	@Published var keys7: [CalcKey] = [
