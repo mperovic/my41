@@ -211,8 +211,7 @@ final class CPURegisters: Codable {
 		}
 	}
 	
-	func displayOrderedDigits(_ digits: [Digit]) -> String
-	{
+	func displayOrderedDigits(_ digits: [Digit]) -> String {
 		var result = ""
 		for idx in Array((0...digits.count-1).reversed()) {
 			result = result + (NSString(format: "%1X", digits[idx]) as String)
@@ -351,8 +350,7 @@ final class CPU: Codable {
 	}
 		
 	init() {
-		let defaults = UserDefaults.standard
-		TRACE = defaults.integer(forKey: "traceActive")
+		TRACE = UserDefaults.standard.integer(forKey: "traceActive")
 	}
 
 	init(from decoder: Decoder) throws {
@@ -469,7 +467,7 @@ final class CPU: Codable {
 		setRunning(false)
 	}
 	
-	func running() -> Bool {
+	func isRunning() -> Bool {
 		return (powerMode == .powerOn) && runFlag
 	}
 	
@@ -484,14 +482,14 @@ final class CPU: Codable {
 	
 	func timeSlice(_ timer: Foundation.Timer) {
 		let currentTime = Date.timeIntervalSinceReferenceDate
-		if running() {
+		if isRunning() {
 			let sTime = simulationTime!
 			if sTime != 0 {
 				if currentTime - sTime > maxSimulationTimeLag {
 					simulationTime = currentTime - maxSimulationTimeLag
 				}
 				cycleLimit = soundOutput.soundAvailableBufferSpace()
-				while self.running() && cycleLimit > 2 && simulationTime! < currentTime {
+				while self.isRunning() && cycleLimit > 2 && simulationTime! < currentTime {
 					executeNextInstruction()
 				}
 				NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
