@@ -125,13 +125,13 @@ func op_ENROM() -> Bit																// ENROMx
 	timing. The HP documentation for the 12K ROM chip specifies that the bank changes at the
 	end of the current machine cycle.
 	*/
-	if cpu.opcode.row() == 0x4 {
+	if cpu.opcode.row == 0x4 {
 		enableBank(1)
-	} else if cpu.opcode.row() == 0x6 {
+	} else if cpu.opcode.row == 0x6 {
 		enableBank(2)
-	} else if cpu.opcode.row() == 0x5 {
+	} else if cpu.opcode.row == 0x5 {
 		enableBank(3)
-	} else if cpu.opcode.row() == 0x7 {
+	} else if cpu.opcode.row == 0x7 {
 		enableBank(4)
 	}
 	

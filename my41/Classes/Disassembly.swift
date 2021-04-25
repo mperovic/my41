@@ -1625,7 +1625,7 @@ final class Disassembly: Codable {
 			let pc = NSString(format:"%04X", cpu.savedPC) as String
 			let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 			let nextTyteStr = NSString(format: "%03X", result) as String
-			switch anOpCode.row() {
+			switch anOpCode.row {
 			case 0x0,	// NOP
 			0x1,	// WMLDL
 			0x4,	// ENBANK1
@@ -1634,9 +1634,9 @@ final class Disassembly: Codable {
 			0x7,	// ENBANK4
 			0x2,	// NOT USED
 			0x3:
-				return "\(pc)\t\(tyteStr)\(nextTyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(16 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\(nextTyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(16 + anOpCode.row))"
 			default:
-				let paramStr = NSString(format: "%X", anOpCode.row() - 8) as String
+				let paramStr = NSString(format: "%X", anOpCode.row - 8) as String
 				return "\(pc)\t\(tyteStr)\(nextTyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(121))\t\(paramStr)"
 			}
 		} catch {
@@ -1647,7 +1647,7 @@ final class Disassembly: Codable {
 	func disassemblyClass0Line1(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		switch anOpCode.row() {
+		switch anOpCode.row {
 		case 0x7:
 			// NOT USED
 			return "\(pc)\t\(tyteStr)"
@@ -1656,14 +1656,14 @@ final class Disassembly: Codable {
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(122))"
 		default:
 			// CF 0-13
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(1))\t\(fTable[anOpCode.row()])"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(1))\t\(fTable[anOpCode.row])"
 		}
 	}
 	
 	func disassemblyClass0Line2(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		switch anOpCode.row() {
+		switch anOpCode.row {
 		case 0x7:
 			// NOT USED
 			return "\(pc)\t\(tyteStr)"
@@ -1672,14 +1672,14 @@ final class Disassembly: Codable {
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(123))"
 		default:
 			// SF 0-13
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(2))\t\(fTable[anOpCode.row()])"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(2))\t\(fTable[anOpCode.row])"
 		}
 	}
 
 	func disassemblyClass0Line3(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		switch anOpCode.row() {
+		switch anOpCode.row {
 		case 0x7:
 			// NOT USED
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())"
@@ -1688,7 +1688,7 @@ final class Disassembly: Codable {
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(124))"
 		default:
 			// ?FS 0-13
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(3))\t\t\(fTable[anOpCode.row()])"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(3))\t\t\(fTable[anOpCode.row])"
 		}
 	}
 	
@@ -1697,9 +1697,9 @@ final class Disassembly: Codable {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		if names == OpcodeNames.hp {
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(4))\t\(anOpCode.row())"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(4))\t\(anOpCode.row)"
 		} else {
-			let paramStr = NSString(format: "%1X", anOpCode.row()) as String
+			let paramStr = NSString(format: "%1X", anOpCode.row) as String
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(4))\t\(paramStr)"
 		}
 	}
@@ -1707,7 +1707,7 @@ final class Disassembly: Codable {
 	func disassemblyClass0Line5(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		switch anOpCode.row() {
+		switch anOpCode.row {
 		case 0x7:
 			// NOT USED
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())"
@@ -1716,20 +1716,20 @@ final class Disassembly: Codable {
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(125))"
 		default:
 			// ?PT 0-15
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(5))\t\(fTable[Int(anOpCode.row())])"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(5))\t\(fTable[Int(anOpCode.row)])"
 		}
 	}
 
 	func disassemblyClass0Line6(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(24 + anOpCode.row()))"
+		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(24 + anOpCode.row))"
 	}
 	
 	func disassemblyClass0Line7(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		switch anOpCode.row() {
+		switch anOpCode.row {
 		case 0x7:
 			// LITERAL
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())"
@@ -1738,14 +1738,14 @@ final class Disassembly: Codable {
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(126))"
 		default:
 			// PT 0-15
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(7))\t\(fTable[Int(anOpCode.row())])"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(7))\t\(fTable[Int(anOpCode.row)])"
 		}
 	}
 	
 	func disassemblyClass0Line8(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(40 + anOpCode.row()))"
+		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(40 + anOpCode.row))"
 	}
 	
 	func disassemblyClass0Line9(_ anOpCode: OpCode) -> String {
@@ -1753,9 +1753,9 @@ final class Disassembly: Codable {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 		if names == OpcodeNames.hp {
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(9)) \t\(anOpCode.row())"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(9)) \t\(anOpCode.row)"
 		} else {
-			let paramStr = NSString(format: "%1X", anOpCode.row()) as String
+			let paramStr = NSString(format: "%1X", anOpCode.row) as String
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(9))\t\(paramStr)"
 		}
 	}
@@ -1763,7 +1763,7 @@ final class Disassembly: Codable {
 	func disassemblyClass0LineA(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		let paramStr = NSString(format: "%1X", anOpCode.row()) as String
+		let paramStr = NSString(format: "%1X", anOpCode.row) as String
 		switch cpu.reg.peripheral {
 		case 0x0:
 			// ram
@@ -1773,14 +1773,14 @@ final class Disassembly: Codable {
 			if cpu.reg.ramAddress > 0x39 || cpu.reg.ramAddress < 0x10 {
 				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(10))\t\(paramStr)"
 			} else {
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(134 + anOpCode.row()))\tmodif=\(anOpCode.row())"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(134 + anOpCode.row))\tmodif=\(anOpCode.row)"
 			}
 		case 0xfc:
 			// card reader
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(156 + anOpCode.row()))"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(156 + anOpCode.row))"
 		case 0xfd:
 			// main display
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(56 + anOpCode.row()))"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(56 + anOpCode.row))"
 		case 0xfe:
 			// wand
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\twand"
@@ -1795,45 +1795,45 @@ final class Disassembly: Codable {
 	func disassemblyClass0LineB(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(72 + anOpCode.row()))"
+		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(72 + anOpCode.row))"
 	}
 	
 	func disassemblyClass0LineC(_ anOpCode: OpCode) -> String {
 			let pc = NSString(format:"%04X", cpu.savedPC) as String
 			let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
 //			var paramStr = NSString(format: "%1X", fTable[Int(anOpCode.row())]) as String
-			switch anOpCode.row() {
+		switch anOpCode.row {
 			case 0x1:
 				// N=C
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			case 0x2:
 				// C=N
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			case 0x3:
 				// C<>N
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			case 0x4:
 				// LDI
 				do {
 					let result = try fetchNextROMAddress()
 					
 					let nextTyteStr = NSString(format: "%03X", result) as String
-					return "\(pc)\t\(tyteStr)\(nextTyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))\t\(nextTyteStr)"
+					return "\(pc)\t\(tyteStr)\(nextTyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))\t\(nextTyteStr)"
 				} catch {
 					return "ERROR: NO NEXT ROM LOCATION"
 				}
 			case 0x5:
 				// STK=C
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			case 0x6:
 				// C=STK
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			case 0x8:
 				// GTOKEY
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			case 0x9:
 				// RAMSLCT
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 //			case 0xA:
 //				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\tCLRDATA"
 			case 0xB:
@@ -1853,16 +1853,16 @@ final class Disassembly: Codable {
 				}
 			case 0xC:
 				// RDROM
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			case 0xD:
 				// C=CORA
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			case 0xE:
 				// C=CANDA
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			case 0xF:
 				// PERSLCT
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row()))"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(88 + anOpCode.row))"
 			default:
 				// NOT USED
 				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())"
@@ -1881,24 +1881,24 @@ final class Disassembly: Codable {
 		switch cpu.reg.peripheral {
 		case 0x0:
 			// ram
-			if anOpCode.row() == 0 {
+			if anOpCode.row == 0 {
 				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(127))"
 			} else {
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(14))\t\(anOpCode.row())"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(14))\t\(anOpCode.row)"
 			}
 		case 0xfb:
 			// timer
-			if anOpCode.row() > 5 {
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(14))\t\(anOpCode.row())"
+			if anOpCode.row > 5 {
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(14))\t\(anOpCode.row)"
 			} else {
-				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(150 + anOpCode.row()))\tmodif=\(anOpCode.row())"
+				return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(150 + anOpCode.row))\tmodif=\(anOpCode.row)"
 			}
 		case 0xfc:
 			// card reader
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\tcard_reader"
 		case 0xfd:
 			// main display
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(104 + anOpCode.row()))"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(104 + anOpCode.row))"
 		case 0xfe:
 			// wand
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\twand read"
@@ -1913,11 +1913,11 @@ final class Disassembly: Codable {
 	func disassemblyClass0LineF(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		switch anOpCode.row() {
+		switch anOpCode.row {
 		case 0x7, 0xF:
 			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())"
 		default:
-			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(15))\t\(fTable[anOpCode.row()])"
+			return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(15))\t\(fTable[anOpCode.row])"
 		}
 	}
 	
@@ -1932,7 +1932,7 @@ final class Disassembly: Codable {
 			let nextTyteStr = NSString(format: "%03X", nextType.opcode) as String
 			let addr = (nextType.opcode & 0x3fc) << 6 | (anOpCode.opcode & 0x3fc) >> 2
 			let addrStr = NSString(format: "%04X", addr) as String
-			switch nextType.set() {
+			switch nextType.set {
 			case 0x0:
 				// NCXQ
 				if let label = getLocForAddress(addr) {
@@ -1972,10 +1972,10 @@ final class Disassembly: Codable {
 	func disassemblyClass2(_ anOpCode: OpCode) -> String {
 		let pc = NSString(format:"%04X", cpu.savedPC) as String
 		let tyteStr = NSString(format: "%03X", anOpCode.opcode) as String
-		_ = bitRepresentation(value: anOpCode.tef(), lenght: 3)
+		_ = bitRepresentation(value: anOpCode.tef, lenght: 3)
 		let subclass = (anOpCode.opcode & 0x3e0) >> 5
 		
-		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(172 + subclass)) \t\(getTEFName(anOpCode.tef()))"
+		return "\(pc)\t\(tyteStr)\t\(getLabelForCurrentAddress())\t\(getOpcodeName(172 + subclass)) \t\(getTEFName(anOpCode.tef))"
 	}
 	
 	func disassemblyClass3(_ anOpCode: OpCode) -> String {
