@@ -132,7 +132,9 @@ class Calculator: ObservableObject {
 	func emptyRAM() {
 		bus.ram = [Digits14](repeating: Digits14(), count: MAX_RAM_SIZE)
 	}
-	
+
+	let timeSliceInterval	= 0.01
+
 	func startExecutionTimer() {
 		cpu.setPowerMode(.powerOn)
 		executionTimer = Foundation.Timer.scheduledTimer(
@@ -288,15 +290,6 @@ class Calculator: ObservableObject {
 		} catch let error as NSError {
 			displayAlert(error.description)
 		}
-	}
-	
-	private func digits14FromArray(_ array: [Digit], position: Int) -> Digits14 {
-		var to = Digits14()
-		for idx in 0...13 {
-			to[idx] = array[position + idx]
-		}
-
-		return to
 	}
 	
 	@objc func timeSlice(_ timer: Foundation.Timer) {

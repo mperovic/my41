@@ -109,23 +109,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "92D79BBC-BF0A-4B45-B252-EAB2D71D29BC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Calculator.swift"
-            timestampString = "558708870.725449"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "saveMemory()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "94109EDB-2413-4E21-A98B-8FE66A10ED1D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -231,8 +214,8 @@
             filePath = "Calculator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "timeSlice(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -247,10 +230,10 @@
             filePath = "my41/Classes/CPU.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
-            landmarkName = "CPU"
-            landmarkType = "3">
+            startingLineNumber = "482"
+            endingLineNumber = "482"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

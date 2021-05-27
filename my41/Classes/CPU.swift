@@ -38,10 +38,6 @@ struct Digits14: Codable {
 	}
 }
 
-//let emptyDigit14:[Digit] = [Digit](repeating: 0, count: 14)
-
-let timeSliceInterval	= 0.01
-
 final class CPURegisters: Codable {
 	var A = Digits14()
 	var B = Digits14()
@@ -234,7 +230,7 @@ final class CPURegisters: Codable {
 	10 bit opcodes composed of the following parts
 	rrrrcCCCss
 	r  = row
-	cc = col
+	cC = col
 	s  = set
 	C  = tef
 */
