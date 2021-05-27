@@ -38,10 +38,6 @@ struct Digits14: Codable {
 	}
 }
 
-//let emptyDigit14:[Digit] = [Digit](repeating: 0, count: 14)
-
-let timeSliceInterval	= 0.01
-
 final class CPURegisters: Codable {
 	var A = Digits14()
 	var B = Digits14()
@@ -211,8 +207,7 @@ final class CPURegisters: Codable {
 		}
 	}
 	
-	func displayOrderedDigits(_ digits: [Digit]) -> String
-	{
+	func displayOrderedDigits(_ digits: [Digit]) -> String {
 		var result = ""
 		for idx in Array((0...digits.count-1).reversed()) {
 			result = result + (NSString(format: "%1X", digits[idx]) as String)
@@ -246,19 +241,19 @@ struct OpCode: Codable {
 		self.opcode = code
 	}
 	
-	func row() -> Int {
-		return (self.opcode & 0x03c0) >> 6
+	var row: Int {
+		(self.opcode & 0x03c0) >> 6
 	}
 	
-	func col() -> Int {
-		return ((self.opcode & 0x003c) >> 2) & 0xf
+	var col: Int {
+		((self.opcode & 0x003c) >> 2) & 0xf
 	}
 	
-	func tef() -> Int {
-		return (self.opcode & 0x1c) >> 2
+	var tef: Int {
+		(self.opcode & 0x1c) >> 2
 	}
 	
-	func set() -> Int {
+	var set: Int {
 		return (self.opcode & 0x03)
 	}
 }
@@ -351,8 +346,7 @@ final class CPU: Codable {
 	}
 		
 	init() {
-		let defaults = UserDefaults.standard
-		TRACE = defaults.integer(forKey: "traceActive")
+		TRACE = UserDefaults.standard.integer(forKey: "traceActive")
 	}
 
 	init(from decoder: Decoder) throws {
@@ -469,7 +463,7 @@ final class CPU: Codable {
 		setRunning(false)
 	}
 	
-	func running() -> Bool {
+	func isRunning() -> Bool {
 		return (powerMode == .powerOn) && runFlag
 	}
 	
@@ -484,14 +478,13 @@ final class CPU: Codable {
 	
 	func timeSlice(_ timer: Foundation.Timer) {
 		let currentTime = Date.timeIntervalSinceReferenceDate
-		if running() {
-			let sTime = simulationTime!
-			if sTime != 0 {
+		if isRunning() {
+			if let sTime = simulationTime {
 				if currentTime - sTime > maxSimulationTimeLag {
 					simulationTime = currentTime - maxSimulationTimeLag
 				}
 				cycleLimit = soundOutput.soundAvailableBufferSpace()
-				while self.running() && cycleLimit > 2 && simulationTime! < currentTime {
+				while self.isRunning() && cycleLimit > 2 && simulationTime! < currentTime {
 					executeNextInstruction()
 				}
 				NotificationCenter.default.post(name: Notification.Name(rawValue: kCPUDebugUpdateDisplay), object: nil)
@@ -596,7 +589,7 @@ final class CPU: Codable {
 			if TRACE != 0 {
 				print("currentTyte: \(currentTyte)")
 			}
-			switch self.opcode.set() {
+			switch self.opcode.set {
 			case 0:	executeClass0()				// miscellaneous
 			case 1:	executeClass1()				// long jumps
 			case 2:	executeClass2()				// Arithmetic operations
@@ -620,12 +613,11 @@ final class CPU: Codable {
 
 	
 	// MARK: - Class 0
-	
 	func executeClass0() {
 		if TRACE != 0 {
-			print("executeClass0: opcode: \(self.opcode.col()) - param: \(self.opcode.row())")
+			print("executeClass0: opcode: \(self.opcode.col) - param: \(self.opcode.row)")
 		}
-		switch self.opcode.col() {
+		switch self.opcode.col {
 		case 0x0: executeClass0Line0()
 		case 0x1: executeClass0Line1()
 		case 0x2: executeClass0Line2()
@@ -642,7 +634,7 @@ final class CPU: Codable {
 		case 0xD: executeClass0LineD()
 		case 0xE: executeClass0LineE()
 		case 0xF: executeClass0LineF()
-		default: unimplementedInstruction(self.opcode.row())
+		default: unimplementedInstruction(self.opcode.row)
 		}
 	}
 	
@@ -650,7 +642,7 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line0(self.opcode))
 		}
-		switch self.opcode.row() {
+		switch self.opcode.row {
 		case 0x0:
 			reg.carry = op_NOP()
 		case 0x1:
@@ -658,7 +650,7 @@ final class CPU: Codable {
 		case 0x4, 0x5, 0x6, 0x7:
 			reg.carry = op_ENROM()
 		default:
-			reg.carry = op_INVALID("executeClass0Line0: \(self.opcode.row())")
+			reg.carry = op_INVALID("executeClass0Line0: \(self.opcode.row)")
 		}
 	}
 	
@@ -666,13 +658,13 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line1(self.opcode))
 		}
-		switch self.opcode.row() {
+		switch self.opcode.row {
 		case 0x7:
 			reg.carry = 0				// Not used
 		case 0xF:
 			reg.carry = op_CLRST()
 		default:
-			reg.carry = op_SDeq0(fTable[self.opcode.row()])
+			reg.carry = op_SDeq0(fTable[self.opcode.row])
 		}
 	}
 	
@@ -680,13 +672,13 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line2(self.opcode))
 		}
-		switch self.opcode.row() {
+		switch self.opcode.row {
 		case 0x7:
 			reg.carry = 0				// Not used
 		case 0xF:
 			reg.carry = op_RSTKB()
 		default:
-			reg.carry = op_STeq1(fTable[self.opcode.row()])
+			reg.carry = op_STeq1(fTable[self.opcode.row])
 		}
 	}
 	
@@ -694,13 +686,13 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line3(self.opcode))
 		}
-		switch self.opcode.row() {
+		switch self.opcode.row {
 		case 0x7:
 			reg.carry = 0				// Not used
 		case 0xF:
 			reg.carry = op_CHKBK()
 		default:
-			reg.carry = op_ifSTeq1(fTable[self.opcode.row()])
+			reg.carry = op_ifSTeq1(fTable[self.opcode.row])
 		}
 	}
 	
@@ -708,20 +700,20 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line4(self.opcode))
 		}
-		reg.carry = op_LC(self.opcode.row())
+		reg.carry = op_LC(self.opcode.row)
 	}
 
 	func executeClass0Line5() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line5(self.opcode))
 		}
-		switch self.opcode.row() {
+		switch self.opcode.row {
 		case 0x7:
 			reg.carry = 0				// Not used
 		case 0xF:
 			reg.carry = op_DECPT()
 		default:
-			reg.carry = op_ifPTeqD(fTable[self.opcode.row()])
+			reg.carry = op_ifPTeqD(fTable[self.opcode.row])
 		}
 	}
 
@@ -729,7 +721,7 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line6(self.opcode))
 		}
-		switch self.opcode.row() {
+		switch self.opcode.row {
 		case 0x1:
 			reg.carry = op_GeqC()
 		case 0x2:
@@ -755,7 +747,7 @@ final class CPU: Codable {
 		case 0xF:
 			reg.carry = op_CSTEX()
 		default:
-			reg.carry = op_INVALID("executeClass0Line6: \(self.opcode.row())")
+			reg.carry = op_INVALID("executeClass0Line6: \(self.opcode.row)")
 		}
 	}
 	
@@ -763,14 +755,14 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line7(self.opcode))
 		}
-		var _: Bits4 = regR()
-		switch self.opcode.row() {
+//		var _: Bits4 = regR()
+		switch self.opcode.row {
 		case 0x7:
 			reg.carry = 0				// Not used
 		case 0xF:
 			reg.carry = op_INCPT()
 		default:
-			reg.carry = op_PTeqD(fTable[self.opcode.row()])
+			reg.carry = op_PTeqD(fTable[self.opcode.row])
 		}
 	}
 	
@@ -778,7 +770,7 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line8(self.opcode))
 		}
-		switch self.opcode.row() {
+		switch self.opcode.row {
 		case 0x0:
 			reg.carry = op_SPOPND()
 		case 0x1:
@@ -812,7 +804,7 @@ final class CPU: Codable {
 		case 0xF:
 			reg.carry = op_RTN()
 		default:
-			reg.carry = op_INVALID("executeClass0Line8: \(self.opcode.row())")
+			reg.carry = op_INVALID("executeClass0Line8: \(self.opcode.row)")
 		}
 	}
 	
@@ -820,25 +812,25 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0Line9(self.opcode))
 		}
-		reg.carry = op_SELPF(self.opcode.row())
+		reg.carry = op_SELPF(self.opcode.row)
 	}
 	
 	func executeClass0LineA() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0LineA(self.opcode))
 		}
-		reg.carry = op_REGNeqC(self.opcode.row())
+		reg.carry = op_REGNeqC(self.opcode.row)
 	}
 	
 	func executeClass0LineB() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0LineB(self.opcode))
 		}
-		switch fTable[self.opcode.row()] {
+		switch fTable[self.opcode.row] {
 		case 0xE, 0xF:
-			reg.carry = op_INVALID("executeClass0LineB: \(fTable[self.opcode.row()])")
+			reg.carry = op_INVALID("executeClass0LineB: \(fTable[self.opcode.row])")
 		default:
-			reg.carry = op_FDeq1(fTable[self.opcode.row()])
+			reg.carry = op_FDeq1(fTable[self.opcode.row])
 		}
 	}
 	
@@ -846,7 +838,7 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0LineC(self.opcode))
 		}
-		switch self.opcode.row() {
+		switch self.opcode.row {
 		case 0x0:
 			reg.carry = op_ROMBLK()
 		case 0x1:
@@ -880,7 +872,7 @@ final class CPU: Codable {
 		case 0xF:
 			reg.carry = op_PFADeqC()
 		default:
-			reg.carry = op_INVALID("executeClass0LineC: \(self.opcode.row())")
+			reg.carry = op_INVALID("executeClass0LineC: \(self.opcode.row)")
 		}
 	}
 	
@@ -888,18 +880,18 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0LineD(self.opcode))
 		}
-		op_INVALID("executeClass0LineD: \(self.opcode.row())")
+		op_INVALID("executeClass0LineD: \(self.opcode.row)")
 	}
 	
 	func executeClass0LineE() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0LineE(self.opcode))
 		}
-		switch self.opcode.row() {
+		switch self.opcode.row {
 		case 0:
-			reg.carry = op_CeqDATA(self.opcode.row())
+			reg.carry = op_CeqDATA(self.opcode.row)
 		default:
-			reg.carry = op_CeqREGN(self.opcode.row())
+			reg.carry = op_CeqREGN(self.opcode.row)
 		}
 	}
 	
@@ -907,17 +899,16 @@ final class CPU: Codable {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass0LineF(self.opcode))
 		}
-		switch (self.opcode.row()) {
+		switch (self.opcode.row) {
 		case 0x7, 0xF:
-			reg.carry = op_INVALID("executeClass0LineF: \(self.opcode.row())")
+			reg.carry = op_INVALID("executeClass0LineF: \(self.opcode.row)")
 		default:
-			reg.carry = op_RCR(fTable[self.opcode.row()])
+			reg.carry = op_RCR(fTable[self.opcode.row])
 		}
 	}
 	
 	
 	// MARK: - Class 1
-
 	func executeClass1() {
 		var newTyte = OpCode(opcode: 0)
 		var addr: Int = 0
@@ -934,7 +925,7 @@ final class CPU: Codable {
 				print(Disassembly.sharedInstance.disassemblyClass1(self.opcode))
 			}
 		}
-		switch (newTyte.set()) {
+		switch (newTyte.set) {
 		case 0:
 			reg.carry = op_GSUBNC(addr)
 		case 1:
@@ -944,13 +935,12 @@ final class CPU: Codable {
 		case 3:
 			reg.carry = op_GOLC(addr)
 		default:
-			reg.carry = op_INVALID("executeClass1: \(newTyte.set())")
+			reg.carry = op_INVALID("executeClass1: \(newTyte.set)")
 		}
 	}
 	
 	
 	// MARK: - Class 2
-	
 	func executeClass2() {
 		let opcode = (self.opcode.opcode & 0x3e0) >> 5
 		let field = (self.opcode.opcode & 0x1c) >> 2
@@ -1067,7 +1057,6 @@ final class CPU: Codable {
 	
 	
 	// MARK: - Class 3
-	
 	func executeClass3() {
 		if TRACE != 0 {
 			print(Disassembly.sharedInstance.disassemblyClass3(self.opcode))
@@ -1095,7 +1084,6 @@ final class CPU: Codable {
 	
 	
 	// MARK: -
-	
 	func digitsToString(_ register: [Digit]) -> String {
 		var result = String()
 		let limit = register.count - 1
@@ -1109,8 +1097,6 @@ final class CPU: Codable {
 	func bits4ToString(_ register: Bits4) -> String {
 		return NSString(format:"%1X", register) as String
 	}
-
-	
 	
 	// MARK: - CPU Invalid Instruction
 	@discardableResult

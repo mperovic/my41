@@ -141,7 +141,7 @@ extension Display {
 	
 	func displayWrite()
 	{
-		switch cpu.opcode.row() {
+		switch cpu.opcode.row {
 		case 0x0:
 			// 028          SRLDA    WRA12L   SRLDA
 			registers.A[0] = cpu.reg.C[0]
@@ -553,13 +553,13 @@ extension Display {
 	func halfnutWrite()
 	{
 		// REG=C 5
-		if cpu.opcode.row() == 5 {
+		if cpu.opcode.row == 5 {
 			contrast = cpu.reg.C[0]
 		}
 	}
 	
 	func halfnutRead() {
-		if cpu.opcode.row() == 5 {
+		if cpu.opcode.row == 5 {
 			cpu.reg.C[0] = contrast
 		}
 	}
@@ -602,9 +602,7 @@ extension Display {
 		return font
 	}
 	
-	
 	//MARK: - Peripheral Protocol Method
-	
 	func pluggedIntoBus(_ theBus: Bus?) {
 //		self.aBus = theBus
 	}

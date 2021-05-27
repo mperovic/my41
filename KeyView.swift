@@ -46,6 +46,7 @@ struct KeyView: View {
 		.init(color: Color(white: 0.20), location: 0.98),
 		.init(color: Color(white: 0.17), location: 1.00)
 	])
+	let generator = UINotificationFeedbackGenerator()
 	
 	var body: some View {
 		GeometryReader { geometry in
@@ -55,7 +56,7 @@ struct KeyView: View {
 					.padding(.bottom, 5)
 				
 				Button(action: {
-
+					generator.notificationOccurred(.success)
 				}, label: {
 					VStack (alignment: .center, spacing: 0) {
 						AttributedText(key.upperText)
