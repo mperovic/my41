@@ -66,7 +66,7 @@ class ButtonCell: NSButtonCell {
 	}
 	
 	override func drawBezel(withFrame frame: NSRect, in controlView: NSView) {
-		let ctx = NSGraphicsContext.current()!
+		let ctx = NSGraphicsContext.current!
 		ctx.saveGraphicsState()
 		
 		let roundedRadius: CGFloat = 3.0
@@ -145,7 +145,8 @@ class ButtonCell: NSButtonCell {
 				xRadius: roundedRadius,
 				yRadius: roundedRadius).setClip()
 			NSColor(calibratedWhite: 0.0, alpha: 0.35).setFill()
-			NSRectFillUsingOperation(frame, .sourceOver)
+//			NSRectFillUsingOperation(frame, .sourceOver)
+			NSRect(origin: frame.origin, size: frame.size).fill()
 			ctx.restoreGraphicsState()
 		}
 		
@@ -171,7 +172,7 @@ class ButtonCell: NSButtonCell {
 			textStyle.alignment = .center
 			
 			var font: NSFont
-			if (lowerText!).characters.count > 1 {
+			if (lowerText!).count > 1 {
 				font = NSFont(name: "Helvetica", size: 9.0)!
 			} else {
 				font = NSFont(name: "Helvetica", size: 11.0)!

@@ -8,7 +8,11 @@
 
 import Foundation
 import SwiftUI
+#if os(iOS)
 import UIKit
+#elseif os(macOS)
+import Cocoa
+#endif
 
 final class Keys: ObservableObject {
 	@Published var modeKeys: [CalcKey] = [
@@ -69,358 +73,446 @@ final class Keys: ObservableObject {
 		CalcKey(shiftText: view, upperText: rs, lowerText: getLowerAttributedString(from: ""), keyCode: 115)
 	]
 
-	static private let yRatio = UIScreen.main.bounds.size.height / 800.0
-	
-	static func getHelvetica(_ size: CGFloat) -> UIFont {
-		return UIFont(name: "Helvetica", size: size * yRatio)!
+#if os(iOS)
+    static private let yRatio = UIScreen.main.bounds.size.height / 800.0
+#elseif os(macOS)
+    static private let yRatio = NSScreen.main?.frame.size.height ?? 800 / 800
+#endif
+
+	static func getHelvetica(_ size: CGFloat) -> Font {
+#if os(iOS)
+		return Font(UIFont(name: "Helvetica", size: size * yRatio)!)
+#elseif os(macOS)
+        return Font(NSFont(name: "Helvetica", size: size * yRatio)!)
+#endif
 	}
 
-	static func getTimesNewRoman(_ size: CGFloat) -> UIFont {
-		return UIFont(name: "Times New Roman", size: size * yRatio)!
+	static func getTimesNewRoman(_ size: CGFloat) -> Font {
+#if os(iOS)
+		return Font(UIFont(name: "Times New Roman", size: size * yRatio)!)
+#elseif os(macOS)
+        return Font(NSFont(name: "Times New Roman", size: size * yRatio)!)
+#endif
 	}
 	
-	static func getModeAttributedString(from text: String) -> NSAttributedString {
-		let onString = mutableAttributedStringFromString(text, color: .white)
-		let onAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getHelvetica(12.0),
-		]
-		onString.addAttributes(convertToNSAttributedStringKeyDictionary(onAttributes as [String : Any]), range: NSMakeRange(0, text.count))
+	static func getModeAttributedString(from text: String) -> AttributedString {
+		let onString = mutableAttributedStringFromString(text, color: .white, font: getHelvetica(12.0))
+//		let onAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getHelvetica(12.0),
+//		]
+//		onString.addAttributes(convertToNSAttributedStringKeyDictionary(onAttributes as [String : Any]), range: NSMakeRange(0, text.count))
 		
 		return onString
 	}
 	
-	static func getLowerAttributedString(from text: String) -> NSAttributedString {
-		let lowerText = mutableAttributedStringFromString(text, color: UIColor(Color.lowerColor), font: getHelvetica(text == "SPACE" ? 13.0 : 15.0))
+	static func getLowerAttributedString(from text: String) -> AttributedString {
+        var lowerText = mutableAttributedStringFromString(text, color: .lowerColor, font: getHelvetica(text == "SPACE" ? 13.0 : 15.0))
 		
 		if text.count == 1 {
-			let lowerTextAttributes = [
-				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getHelvetica(11.0 * yRatio),
-				convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 1
-			] as [String : Any]
-			lowerText.addAttributes(convertToNSAttributedStringKeyDictionary(lowerTextAttributes), range: NSMakeRange(0, text.count))
+            lowerText.font = getHelvetica(11.0 * yRatio)
+            lowerText.baselineOffset = 1.0
+//			let lowerTextAttributes = [
+//				convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getHelvetica(11.0 * yRatio),
+//				convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 1
+//			] as [String : Any]
+//			lowerText.addAttributes(convertToNSAttributedStringKeyDictionary(lowerTextAttributes), range: NSMakeRange(0, text.count))
 		}
 		
 		return lowerText
 	}
 	
-	static var sigmaMinus: NSAttributedString {
-		let sigmaMinusString = mutableAttributedStringFromString("Σ-", color: UIColor(Color.shiftColor))
-		let sigmaMinusAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getHelvetica(15.0),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 1
-		] as [String : Any]
-		sigmaMinusString.addAttributes(convertToNSAttributedStringKeyDictionary(sigmaMinusAttributes), range: NSMakeRange(1, 1))
+	static var sigmaMinus: AttributedString {
+		var sigmaMinusString = mutableAttributedStringFromString("Σ-", color: .shiftColor)
+        if let range = sigmaMinusString.range(of: "-") {
+            sigmaMinusString[range].font = getHelvetica(15.0)
+            sigmaMinusString[range].baselineOffset = 1.0
+        }
+//		let sigmaMinusAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getHelvetica(15.0),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 1
+//		] as [String : Any]
+//		sigmaMinusString.addAttributes(convertToNSAttributedStringKeyDictionary(sigmaMinusAttributes), range: NSMakeRange(1, 1))
 		
 		return sigmaMinusString
 	}
 	
-	static var sigmaPlus: NSAttributedString {
-		let sigmaPlusString = mutableAttributedStringFromString("Σ+", color: .white)
-		let sigmaPlusAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 1
-		]
-		sigmaPlusString.addAttributes(convertToNSAttributedStringKeyDictionary(sigmaPlusAttributes), range: NSMakeRange(1, 1))
+	static var sigmaPlus: AttributedString {
+		var sigmaPlusString = mutableAttributedStringFromString("Σ+", color: .white)
+        if let range = sigmaPlusString.range(of: "+") {
+            sigmaPlusString[range].baselineOffset = 1.0
+        }
+//		let sigmaPlusAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 1
+//		]
+//		sigmaPlusString.addAttributes(convertToNSAttributedStringKeyDictionary(sigmaPlusAttributes), range: NSMakeRange(1, 1))
 
 		return sigmaPlusString
 	}
 	
-	static var yx: NSAttributedString {
-		let yxString = mutableAttributedStringFromString("yx", color: UIColor(Color.shiftColor))
-		let yxAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
-		] as [String : Any]
-		yxString.addAttributes(convertToNSAttributedStringKeyDictionary(yxAttributes), range: NSMakeRange(1, 1))
+	static var yx: AttributedString {
+		var yxString = mutableAttributedStringFromString("yx", color: .shiftColor)
+        if let range = yxString.range(of: "x") {
+            yxString[range].font = getTimesNewRoman(12.0)
+            yxString[range].baselineOffset = 4.0
+        }
+//		let yxAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
+//		] as [String : Any]
+//		yxString.addAttributes(convertToNSAttributedStringKeyDictionary(yxAttributes), range: NSMakeRange(1, 1))
 		
 		return yxString
 	}
 	
-	static var oneX: NSAttributedString  {
-		let oneXString = mutableAttributedStringFromString("1/x", color: .white)
-		let oneXAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
-		]
-		oneXString.addAttributes(convertToNSAttributedStringKeyDictionary(oneXAttributes), range: NSMakeRange(2, 1))
+	static var oneX: AttributedString  {
+		var oneXString = mutableAttributedStringFromString("1/x", color: .white)
+        if let range = oneXString.range(of: "x") {
+            oneXString[range].font = getTimesNewRoman(12.0)
+        }
+//		let oneXAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
+//		]
+//		oneXString.addAttributes(convertToNSAttributedStringKeyDictionary(oneXAttributes), range: NSMakeRange(2, 1))
 
 		return oneXString
 	}
 	
-	static var xSquare: NSAttributedString {
-		let xSquareString = mutableAttributedStringFromString("x\u{00B2}", color: UIColor(Color.shiftColor))
-		let xSquareAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(14.0),
-		]
-		xSquareString.addAttributes(convertToNSAttributedStringKeyDictionary(xSquareAttributes), range: NSMakeRange(0, 2))
+	static var xSquare: AttributedString {
+		var xSquareString = mutableAttributedStringFromString("x\u{00B2}", color: .shiftColor)
+        let range = xSquareString.range(of: "x\u{00B2}")!
+        xSquareString[range].font = getTimesNewRoman(14.0)
+//		let xSquareAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(14.0),
+//		]
+//		xSquareString.addAttributes(convertToNSAttributedStringKeyDictionary(xSquareAttributes), range: NSMakeRange(0, 2))
 		
 		return xSquareString
 	}
 
-	static var rootX: NSAttributedString {
-		let rootXString = mutableAttributedStringFromString("√x", color: .white)
-		let rootXAttributes2 = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
-		]
-		rootXString.addAttributes(convertToNSAttributedStringKeyDictionary(rootXAttributes2), range: NSMakeRange(1, 1))
+	static var rootX: AttributedString {
+		var rootXString = mutableAttributedStringFromString("√x", color: .white)
+        let range = rootXString.range(of: "x")!
+        rootXString[range].font = getTimesNewRoman(14.0)
+
+//		let rootXAttributes2 = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
+//		]
+//		rootXString.addAttributes(convertToNSAttributedStringKeyDictionary(rootXAttributes2), range: NSMakeRange(1, 1))
 		
 		return rootXString
 	}
 	
-	static var tenX: NSAttributedString {
-		let tenXString = mutableAttributedStringFromString("10x", color: UIColor(Color.shiftColor))
-		let tenXAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
-		] as [String : Any]
-		tenXString.addAttributes(convertToNSAttributedStringKeyDictionary(tenXAttributes), range: NSMakeRange(2, 1))
+	static var tenX: AttributedString {
+		var tenXString = mutableAttributedStringFromString("10x", color: .shiftColor)
+        let range = tenXString.range(of: "x")!
+        tenXString[range].font = getTimesNewRoman(12.0)
+        tenXString[range].baselineOffset = 4.0
+//		let tenXAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
+//		] as [String : Any]
+//		tenXString.addAttributes(convertToNSAttributedStringKeyDictionary(tenXAttributes), range: NSMakeRange(2, 1))
 		
 		return tenXString
 	}
 	
-	static var log: NSAttributedString { mutableAttributedStringFromString("LOG", color: .white) }
+	static var log: AttributedString { mutableAttributedStringFromString("LOG", color: .white) }
 	
-	static var eX: NSAttributedString {
-		let eXString = mutableAttributedStringFromString("ex", color: UIColor(Color.shiftColor))
-		let eXAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
-		] as [String : Any]
-		
-		eXString.addAttributes(convertToNSAttributedStringKeyDictionary(eXAttributes), range: NSMakeRange(1, 1))
-		let eXAttributes2 = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getHelvetica(14.0)
-		]
-		eXString.addAttributes(convertToNSAttributedStringKeyDictionary(eXAttributes2), range: NSMakeRange(0, 1))
+	static var eX: AttributedString {
+		var eXString = mutableAttributedStringFromString("ex", color: .shiftColor)
+        let rangeX = eXString.range(of: "x")!
+        eXString[rangeX].font = getTimesNewRoman(12.0)
+        eXString[rangeX].baselineOffset = 4.0
+
+        if let rangeE = eXString.range(of: "e") {
+            eXString[rangeE].font = getHelvetica(14.0)
+        }
+//		let eXAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(12.0),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
+//		] as [String : Any]
+//		
+//		eXString.addAttributes(convertToNSAttributedStringKeyDictionary(eXAttributes), range: NSMakeRange(1, 1))
+//		let eXAttributes2 = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getHelvetica(14.0)
+//		]
+//		eXString.addAttributes(convertToNSAttributedStringKeyDictionary(eXAttributes2), range: NSMakeRange(0, 1))
 
 		return eXString
 	}
 	
-	static var ln: NSAttributedString { mutableAttributedStringFromString("LN", color: .white) }
+	static var ln: AttributedString { mutableAttributedStringFromString("LN", color: .white) }
 	
-	static var clSigma: NSAttributedString { mutableAttributedStringFromString("CLΣ", color: UIColor(.shiftColor)) }
+	static var clSigma: AttributedString { mutableAttributedStringFromString("CLΣ", color: .shiftColor) }
 	
-	static var xexy: NSAttributedString {
-		let xexYString = mutableAttributedStringFromString("x≷y", color: .white)
-		let xexYAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(16.0),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 1
-		] as [String : Any]
-		xexYString.addAttributes(convertToNSAttributedStringKeyDictionary(xexYAttributes), range: NSMakeRange(0, 3))
+	static var xexy: AttributedString {
+		var xexYString = mutableAttributedStringFromString("x≷y", color: .white)
+        if let range = xexYString.range(of: "x≷y") {
+            xexYString[range].font = getTimesNewRoman(16.0)
+            xexYString[range].baselineOffset = 1.0
+        }
+//		let xexYAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(16.0),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 1
+//		] as [String : Any]
+//		xexYString.addAttributes(convertToNSAttributedStringKeyDictionary(xexYAttributes), range: NSMakeRange(0, 3))
 
 		return xexYString
 	}
 	
-	static var percent: NSAttributedString { mutableAttributedStringFromString("%", color: UIColor(.shiftColor)) }
+	static var percent: AttributedString { mutableAttributedStringFromString("%", color: .shiftColor) }
 	
-	static var rArrow: NSAttributedString { mutableAttributedStringFromString("R↓", color: .white) }
+	static var rArrow: AttributedString { mutableAttributedStringFromString("R↓", color: .white) }
 	
-	static var sin1: NSAttributedString {
-		let sin1String = mutableAttributedStringFromString("SIN-1", color: UIColor(.shiftColor))
-		let sinAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(11.0),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
-		] as [String : Any]
-		sin1String.addAttributes(convertToNSAttributedStringKeyDictionary(sinAttributes), range: NSMakeRange(3, 2))
+	static var sin1: AttributedString {
+		var sin1String = mutableAttributedStringFromString("SIN-1", color: .shiftColor)
+        if let range = sin1String.range(of: "-1") {
+            sin1String[range].font = getTimesNewRoman(11.0)
+            sin1String[range].baselineOffset = 4.0
+        }
+//		let sinAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(11.0),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
+//		] as [String : Any]
+//		sin1String.addAttributes(convertToNSAttributedStringKeyDictionary(sinAttributes), range: NSMakeRange(3, 2))
 
 		return sin1String
 	}
 	
-	static var sin: NSAttributedString { mutableAttributedStringFromString("SIN", color: .white) }
+	static var sin: AttributedString { mutableAttributedStringFromString("SIN", color: .white) }
 	
-	static var cos1: NSAttributedString {
-		let cos1String = mutableAttributedStringFromString("COS-1", color: UIColor(.shiftColor))
-		let cosAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(11.0),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
-		] as [String : Any]
-		cos1String.addAttributes(convertToNSAttributedStringKeyDictionary(cosAttributes), range: NSMakeRange(3, 2))
+	static var cos1: AttributedString {
+		var cos1String = mutableAttributedStringFromString("COS-1", color: .shiftColor)
+        if let range = cos1String.range(of: "-1") {
+            cos1String[range].font = getTimesNewRoman(11.0)
+            cos1String[range].baselineOffset = 4.0
+        }
+//		let cosAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(11.0),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
+//		] as [String : Any]
+//		cos1String.addAttributes(convertToNSAttributedStringKeyDictionary(cosAttributes), range: NSMakeRange(3, 2))
 
 		return cos1String
 	}
 	
-	static var cos: NSAttributedString { mutableAttributedStringFromString("COS", color: .white) }
+	static var cos: AttributedString { mutableAttributedStringFromString("COS", color: .white) }
 	
-	static var tan1: NSAttributedString {
-		let tan1String = mutableAttributedStringFromString("TAN-1", color: UIColor(.shiftColor))
-		let tanAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(11.0),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
-		] as [String : Any]
-		tan1String.addAttributes(convertToNSAttributedStringKeyDictionary(tanAttributes), range: NSMakeRange(3, 2))
+	static var tan1: AttributedString {
+		var tan1String = mutableAttributedStringFromString("TAN-1", color: .shiftColor)
+        if let range = tan1String.range(of: "-1") {
+            tan1String[range].font = getTimesNewRoman(11.0)
+            tan1String[range].baselineOffset = 4.0
+        }
+//		let tanAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(11.0),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): 4
+//		] as [String : Any]
+//		tan1String.addAttributes(convertToNSAttributedStringKeyDictionary(tanAttributes), range: NSMakeRange(3, 2))
 		
 		return tan1String
 	}
 	
-	static var tan: NSAttributedString { mutableAttributedStringFromString("TAN", color: .white) }
+	static var tan: AttributedString { mutableAttributedStringFromString("TAN", color: .white) }
 	
-	static var asn: NSAttributedString { mutableAttributedStringFromString("ASN", color: UIColor(.shiftColor)) }
+	static var asn: AttributedString { mutableAttributedStringFromString("ASN", color: .shiftColor) }
 	
-	static var xeq: NSAttributedString { mutableAttributedStringFromString("XEQ", color: .white) }
+	static var xeq: AttributedString { mutableAttributedStringFromString("XEQ", color: .white) }
 	
-	static var lbl: NSAttributedString { mutableAttributedStringFromString("LBL", color: UIColor(.shiftColor)) }
+	static var lbl: AttributedString { mutableAttributedStringFromString("LBL", color: .shiftColor) }
 	
-	static var sto: NSAttributedString { mutableAttributedStringFromString("STO", color: .white) }
+	static var sto: AttributedString { mutableAttributedStringFromString("STO", color: .white) }
 	
-	static var gto: NSAttributedString { mutableAttributedStringFromString("GTO", color: UIColor(.shiftColor)) }
+	static var gto: AttributedString { mutableAttributedStringFromString("GTO", color: .shiftColor) }
 	
-	static var rcl: NSAttributedString { mutableAttributedStringFromString("RCL", color: .white) }
+	static var rcl: AttributedString { mutableAttributedStringFromString("RCL", color: .white) }
 	
-	static var bst: NSAttributedString { mutableAttributedStringFromString("BST", color: UIColor(.shiftColor)) }
+	static var bst: AttributedString { mutableAttributedStringFromString("BST", color: .shiftColor) }
 	
-	static var sst: NSAttributedString { mutableAttributedStringFromString("SST", color: .white) }
+	static var sst: AttributedString { mutableAttributedStringFromString("SST", color: .white) }
 	
-	static var catalog: NSAttributedString { mutableAttributedStringFromString("CATALOG", color: UIColor(.shiftColor)) }
+	static var catalog: AttributedString { mutableAttributedStringFromString("CATALOG", color: .shiftColor) }
 	
-	static var enter: NSAttributedString { mutableAttributedStringFromString("ENTER ↑", color: .white) }
+	static var enter: AttributedString { mutableAttributedStringFromString("ENTER ↑", color: .white) }
 	
-	static var isg: NSAttributedString { mutableAttributedStringFromString("ISG", color: UIColor(.shiftColor)) }
+	static var isg: AttributedString { mutableAttributedStringFromString("ISG", color: .shiftColor) }
 	
-	static var chs: NSAttributedString { mutableAttributedStringFromString("CHS", color: .white) }
+	static var chs: AttributedString { mutableAttributedStringFromString("CHS", color: .white) }
 	
-	static var rtn: NSAttributedString { mutableAttributedStringFromString("RTN", color: UIColor(.shiftColor)) }
+	static var rtn: AttributedString { mutableAttributedStringFromString("RTN", color: .shiftColor) }
 	
-	static var eex: NSAttributedString { mutableAttributedStringFromString("EEX", color: .white) }
+	static var eex: AttributedString { mutableAttributedStringFromString("EEX", color: .white) }
 	
-	static var clxa: NSAttributedString {
-		let clxaString = mutableAttributedStringFromString("CL X/A", color: UIColor(.shiftColor))
-		let clxaAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(13.0)
-		]
-		clxaString.addAttributes(convertToNSAttributedStringKeyDictionary(clxaAttributes), range: NSMakeRange(3, 1))
+	static var clxa: AttributedString {
+		var clxaString = mutableAttributedStringFromString("CL X/A", color: .shiftColor)
+        if let range = clxaString.range(of: "X") {
+            clxaString[range].font = getTimesNewRoman(13.0)
+        }
+//		let clxaAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(13.0)
+//		]
+//		clxaString.addAttributes(convertToNSAttributedStringKeyDictionary(clxaAttributes), range: NSMakeRange(3, 1))
 
 		return clxaString
 	}
 	
-	static var back: NSAttributedString { mutableAttributedStringFromString("←", color: .white) }
+	static var back: AttributedString { mutableAttributedStringFromString("←", color: .white) }
 	
-	static var xeqy: NSAttributedString {
-		let xeqyString = mutableAttributedStringFromString("x=y ?", color: UIColor(.shiftColor))
-		let xeqyAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(16.0)
-		]
-		xeqyString.addAttributes(convertToNSAttributedStringKeyDictionary(xeqyAttributes), range: NSMakeRange(0, 3))
+	static var xeqy: AttributedString {
+		var xeqyString = mutableAttributedStringFromString("x=y ?", color: .shiftColor)
+        if let range = xeqyString.range(of: "x=y") {
+            xeqyString[range].font = getTimesNewRoman(16.0)
+        }
+//		let xeqyAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(16.0)
+//		]
+//		xeqyString.addAttributes(convertToNSAttributedStringKeyDictionary(xeqyAttributes), range: NSMakeRange(0, 3))
 
 		return xeqyString
 	}
 	
-	static var minus: NSAttributedString  { mutableAttributedStringFromString("━", color: .white, font: getHelvetica(11.0)) }
+	static var minus: AttributedString  { mutableAttributedStringFromString("━", color: .white, font: getHelvetica(11.0)) }
 
-	static var sf: NSAttributedString { mutableAttributedStringFromString("SF", color: UIColor(.shiftColor)) }
+	static var sf: AttributedString { mutableAttributedStringFromString("SF", color: .shiftColor) }
 	
-	static var seven: NSAttributedString { mutableAttributedStringFromString("7", color: .white) }
+	static var seven: AttributedString { mutableAttributedStringFromString("7", color: .white) }
 
-	static var cf: NSAttributedString { mutableAttributedStringFromString("CF", color: UIColor(.shiftColor)) }
+	static var cf: AttributedString { mutableAttributedStringFromString("CF", color: .shiftColor) }
 	
-	static var eight: NSAttributedString { mutableAttributedStringFromString("8", color: .white) }
+	static var eight: AttributedString { mutableAttributedStringFromString("8", color: .white) }
 
-	static var fsQuestionMark: NSAttributedString { mutableAttributedStringFromString("FS?", color: UIColor(.shiftColor)) }
+	static var fsQuestionMark: AttributedString { mutableAttributedStringFromString("FS?", color: .shiftColor) }
 	
-	static var nine: NSAttributedString { mutableAttributedStringFromString("9", color: .white) }
+	static var nine: AttributedString { mutableAttributedStringFromString("9", color: .white) }
 
-	static var xlessthany: NSAttributedString {
-		let xlessthanyString = mutableAttributedStringFromString("x≤y ?", color: UIColor(.shiftColor))
-		let xlessthanyAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(15)
-		]
-		xlessthanyString.addAttributes(convertToNSAttributedStringKeyDictionary(xlessthanyAttributes), range: NSMakeRange(0, 3))
+	static var xlessthany: AttributedString {
+		var xlessthanyString = mutableAttributedStringFromString("x≤y ?", color: .shiftColor)
+        if let range = xlessthanyString.range(of: "x≤y") {
+            xlessthanyString[range].font = getTimesNewRoman(15.0)
+        }
+//		let xlessthanyAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(15)
+//		]
+//		xlessthanyString.addAttributes(convertToNSAttributedStringKeyDictionary(xlessthanyAttributes), range: NSMakeRange(0, 3))
 		
 		return xlessthanyString
 	}
 	
-	static var plus: NSAttributedString  { mutableAttributedStringFromString("╋", color: .white, font: getHelvetica(9)) }
+	static var plus: AttributedString  { mutableAttributedStringFromString("╋", color: .white, font: getHelvetica(9)) }
 
-	static var beep: NSAttributedString { mutableAttributedStringFromString("BEEP", color: UIColor(.shiftColor)) }
+	static var beep: AttributedString { mutableAttributedStringFromString("BEEP", color: .shiftColor) }
 	
-	static var four: NSAttributedString { mutableAttributedStringFromString("4", color: .white) }
+	static var four: AttributedString { mutableAttributedStringFromString("4", color: .white) }
 
-	static var ptor: NSAttributedString { mutableAttributedStringFromString("P→R", color: UIColor(.shiftColor)) }
+	static var ptor: AttributedString { mutableAttributedStringFromString("P→R", color: .shiftColor) }
 	
-	static var five: NSAttributedString { mutableAttributedStringFromString("5", color: .white) }
+	static var five: AttributedString { mutableAttributedStringFromString("5", color: .white) }
 
-	static var rtop: NSAttributedString { mutableAttributedStringFromString("R→P", color: UIColor(.shiftColor)) }
+	static var rtop: AttributedString { mutableAttributedStringFromString("R→P", color: .shiftColor) }
 	
-	static var six: NSAttributedString { mutableAttributedStringFromString("6", color: .white) }
+	static var six: AttributedString { mutableAttributedStringFromString("6", color: .white) }
 
-	static var xgreaterthany: NSAttributedString {
-		let xgreaterthanyString = mutableAttributedStringFromString("x>y ?", color: UIColor(.shiftColor))
-		let xgreaterthanyAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(15),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): -1
-		] as [String : Any]
-		xgreaterthanyString.addAttributes(convertToNSAttributedStringKeyDictionary(xgreaterthanyAttributes), range: NSMakeRange(0, 3))
+	static var xgreaterthany: AttributedString {
+		var xgreaterthanyString = mutableAttributedStringFromString("x>y ?", color: .shiftColor)
+        if let range = xgreaterthanyString.range(of: "x>y") {
+            xgreaterthanyString[range].font = getTimesNewRoman(15.0)
+            xgreaterthanyString[range].baselineOffset = -1.0
+        }
+//		let xgreaterthanyAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(15),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): -1
+//		] as [String : Any]
+//		xgreaterthanyString.addAttributes(convertToNSAttributedStringKeyDictionary(xgreaterthanyAttributes), range: NSMakeRange(0, 3))
 		
 		return xgreaterthanyString
 	}
 
-	static var multiply: NSAttributedString  { mutableAttributedStringFromString("×", color: .white, font: getHelvetica(17)) }
+	static var multiply: AttributedString  { mutableAttributedStringFromString("×", color: .white, font: getHelvetica(17)) }
 
-	static var fix: NSAttributedString { mutableAttributedStringFromString("FIX", color: UIColor(.shiftColor)) }
+	static var fix: AttributedString { mutableAttributedStringFromString("FIX", color: .shiftColor) }
 
-	static var one: NSAttributedString { mutableAttributedStringFromString("1", color: .white) }
+	static var one: AttributedString { mutableAttributedStringFromString("1", color: .white) }
 
-	static var sci: NSAttributedString { mutableAttributedStringFromString("SCI", color: UIColor(.shiftColor)) }
+	static var sci: AttributedString { mutableAttributedStringFromString("SCI", color: .shiftColor) }
 
-	static var two: NSAttributedString { mutableAttributedStringFromString("2", color: .white) }
+	static var two: AttributedString { mutableAttributedStringFromString("2", color: .white) }
 
-	static var eng: NSAttributedString { mutableAttributedStringFromString("ENG", color: UIColor(.shiftColor)) }
+	static var eng: AttributedString { mutableAttributedStringFromString("ENG", color: .shiftColor) }
 
-	static var three: NSAttributedString { mutableAttributedStringFromString("3", color: .white) }
+	static var three: AttributedString { mutableAttributedStringFromString("3", color: .white) }
 
-	static var xeqzero: NSAttributedString {
-		let xeq0String = mutableAttributedStringFromString("x=0 ?", color: UIColor(.shiftColor))
-		let xeq0Attributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(15),
-			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): -1
-		] as [String : Any]
-		xeq0String.addAttributes(convertToNSAttributedStringKeyDictionary(xeq0Attributes), range: NSMakeRange(0, 5))
+	static var xeqzero: AttributedString {
+		var xeq0String = mutableAttributedStringFromString("x=0 ?", color: .shiftColor)
+        if let range = xeq0String.range(of: "x=0 ?") {
+            xeq0String[range].font = getTimesNewRoman(15.0)
+            xeq0String[range].baselineOffset = -1.0
+        }
+//		let xeq0Attributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(15),
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.baselineOffset): -1
+//		] as [String : Any]
+//		xeq0String.addAttributes(convertToNSAttributedStringKeyDictionary(xeq0Attributes), range: NSMakeRange(0, 5))
 		
 		return xeq0String
 	}
 	
-	static var divide: NSAttributedString  { mutableAttributedStringFromString("÷", color: .white, font: getHelvetica(17)) }
+	static var divide: AttributedString  { mutableAttributedStringFromString("÷", color: .white, font: getHelvetica(17)) }
 
-	static var pi: NSAttributedString { mutableAttributedStringFromString("π", color: UIColor(.shiftColor), font: getTimesNewRoman(17 * yRatio)) }
+	static var pi: AttributedString { mutableAttributedStringFromString("π", color: .shiftColor, font: getTimesNewRoman(17 * yRatio)) }
 	
-	static var zero: NSAttributedString { mutableAttributedStringFromString("0", color: .white) }
+	static var zero: AttributedString { mutableAttributedStringFromString("0", color: .white) }
 
-	static var lastX: NSAttributedString {
-		let lastxString = mutableAttributedStringFromString("LAST X", color: UIColor(.shiftColor))
-		let lastxAttributes = [
-			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(15)
-		]
-		lastxString.addAttributes(convertToNSAttributedStringKeyDictionary(lastxAttributes), range: NSMakeRange(5, 1))
+	static var lastX: AttributedString {
+		var lastxString = mutableAttributedStringFromString("LAST X", color: .shiftColor)
+        if let range = lastxString.range(of: "X") {
+            lastxString[range].font = getTimesNewRoman(15.0)
+        }
+//		let lastxAttributes = [
+//			convertFromNSAttributedStringKey(NSAttributedString.Key.font) : getTimesNewRoman(15)
+//		]
+//		lastxString.addAttributes(convertToNSAttributedStringKeyDictionary(lastxAttributes), range: NSMakeRange(5, 1))
 		
 		return lastxString
 	}
 
-	static var dot: NSAttributedString { mutableAttributedStringFromString("•", color: .white, font: getHelvetica(17)) }
+	static var dot: AttributedString { mutableAttributedStringFromString("•", color: .white, font: getHelvetica(17)) }
 
-	static var view: NSAttributedString { mutableAttributedStringFromString("VIEW", color: UIColor(.shiftColor)) }
+	static var view: AttributedString { mutableAttributedStringFromString("VIEW", color: .shiftColor) }
 	
-	static var rs: NSAttributedString { mutableAttributedStringFromString("R/S", color: .white, font: getHelvetica(14)) }
+	static var rs: AttributedString { mutableAttributedStringFromString("R/S", color: .white, font: getHelvetica(14)) }
 
-
-
-	static func mutableAttributedStringFromString(_ aString: String, color: UIColor?, font: UIFont = getHelvetica(13)) -> NSMutableAttributedString {
+	static func mutableAttributedStringFromString(_ attrString: String, color: Color?, font: Font = getHelvetica(13)) -> AttributedString {
 		let textStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
 		textStyle.alignment = NSTextAlignment.center
 
 		if let aColor = color {
-			return NSMutableAttributedString(
-				string: aString,
-				attributes: convertToOptionalNSAttributedStringKeyDictionary([
-					convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font,
-					convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): aColor,
-					convertFromNSAttributedStringKey(NSAttributedString.Key.paragraphStyle): textStyle
-				])
-			)
+            var aString = AttributedString(attrString)
+            aString.font = font
+            aString.foregroundColor = aColor
+            aString.mergeAttributes(.init([.paragraphStyle: textStyle]))
+            
+            return aString
+//			return NSMutableAttributedString(
+//				string: attrString,
+//				attributes: convertToOptionalNSAttributedStringKeyDictionary([
+//					convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font,
+//					convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): aColor,
+//					convertFromNSAttributedStringKey(NSAttributedString.Key.paragraphStyle): textStyle
+//				])
+//			)
 		} else {
-			return NSMutableAttributedString(
-				string: aString,
-				attributes: convertToOptionalNSAttributedStringKeyDictionary([
-					convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font,
-					convertFromNSAttributedStringKey(NSAttributedString.Key.paragraphStyle): textStyle
-				])
-			)
+            var aString = AttributedString(attrString)
+            aString.font = font
+            aString.mergeAttributes(.init([.paragraphStyle: textStyle]))
+
+            return aString
+//			return NSMutableAttributedString(
+//				string: attrString,
+//				attributes: convertToOptionalNSAttributedStringKeyDictionary([
+//					convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font,
+//					convertFromNSAttributedStringKey(NSAttributedString.Key.paragraphStyle): textStyle
+//				])
+//			)
 		}
 	}
 }

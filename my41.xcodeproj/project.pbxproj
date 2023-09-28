@@ -12,6 +12,8 @@
 		DC1C67E61ABECFB800993AEC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE75C0E1A61B4FE002B2D7C /* LaunchScreen.xib */; };
 		DC1C67ED1ABED63000993AEC /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC1C67EC1ABED63000993AEC /* Images-2.xcassets */; };
 		DC34A71F1A949CC900C90AB5 /* hpfont.hpfont in Resources */ = {isa = PBXBuildFile; fileRef = DC75043819B2652200180161 /* hpfont.hpfont */; };
+		DC3F166329467F2E00B55B6A /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD0549025A470600040EF17 /* KeyView.swift */; };
+		DC3F16662946823500B55B6A /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054E425A5C4C50040EF17 /* Keys.swift */; };
 		DC447DE61A34AD8B008FAB28 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC447DE51A34AD8B008FAB28 /* Application.swift */; };
 		DC45285319897DA600C40B6C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285219897DA600C40B6C /* main.swift */; };
 		DC45285519897DA600C40B6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC45285419897DA600C40B6C /* ViewController.swift */; };
@@ -342,16 +344,6 @@
 		DCBE4F6B25B8C69700E69886 /* My41cx_ios_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE4F6A25B8C69700E69886 /* My41cx_ios_App.swift */; };
 		DCC76BDB25DDD8A500F38F43 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BDA25DDD8A500F38F43 /* Dictionary+Extensions.swift */; };
 		DCC76BDC25DDD8A500F38F43 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BDA25DDD8A500F38F43 /* Dictionary+Extensions.swift */; };
-		DCC76BE725DFF2C800F38F43 /* AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE225DFF2C800F38F43 /* AttributedText.swift */; };
-		DCC76BE825DFF2C800F38F43 /* AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE225DFF2C800F38F43 /* AttributedText.swift */; };
-		DCC76BE925DFF2C800F38F43 /* TextViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE325DFF2C800F38F43 /* TextViewStore.swift */; };
-		DCC76BEA25DFF2C800F38F43 /* TextViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE325DFF2C800F38F43 /* TextViewStore.swift */; };
-		DCC76BEB25DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE425DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift */; };
-		DCC76BEC25DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE425DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift */; };
-		DCC76BED25DFF2C800F38F43 /* TextViewWrapper+UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE525DFF2C800F38F43 /* TextViewWrapper+UITextView.swift */; };
-		DCC76BEE25DFF2C800F38F43 /* TextViewWrapper+UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE525DFF2C800F38F43 /* TextViewWrapper+UITextView.swift */; };
-		DCC76BEF25DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE625DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift */; };
-		DCC76BF025DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC76BE625DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift */; };
 		DCC7F32525C5F4B500E68C85 /* MODsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC7F32425C5F4B500E68C85 /* MODsView.swift */; };
 		DCC7F32625C5F4B500E68C85 /* MODsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC7F32425C5F4B500E68C85 /* MODsView.swift */; };
 		DCC9F3B525C3067F001F06B3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC9F3B425C3067F001F06B3 /* SettingsView.swift */; };
@@ -449,7 +441,6 @@
 		DC5626B0198B89FC0040453F /* RamChip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RamChip.swift; path = my41/Classes/RamChip.swift; sourceTree = "<group>"; };
 		DC5E4BDC19F17E7B00BF831B /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Classes/Preferences.swift; sourceTree = "<group>"; };
 		DC6728111A2769E800B4274F /* AlphaKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlphaKeyboard.swift; path = Classes/AlphaKeyboard.swift; sourceTree = "<group>"; };
-		DC676D651A8F6C0A00D0C296 /* CalculatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorController.swift; sourceTree = "<group>"; };
 		DC676D671A8F6D7A00D0C296 /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		DC676D6A1A8F76F800D0C296 /* DisplayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayExtensions.swift; sourceTree = "<group>"; };
 		DC6DB98A19BA5C1800E26ADD /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keyboard.swift; path = Classes/Keyboard.swift; sourceTree = "<group>"; };
@@ -608,11 +599,6 @@
 		DCAD8865199D38540027C925 /* SoundOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundOutput.swift; path = my41/Classes/SoundOutput.swift; sourceTree = "<group>"; };
 		DCBE4F6A25B8C69700E69886 /* My41cx_ios_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My41cx_ios_App.swift; sourceTree = "<group>"; };
 		DCC76BDA25DDD8A500F38F43 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
-		DCC76BE225DFF2C800F38F43 /* AttributedText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedText.swift; sourceTree = "<group>"; };
-		DCC76BE325DFF2C800F38F43 /* TextViewStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewStore.swift; sourceTree = "<group>"; };
-		DCC76BE425DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLineBreakMode+TruncationMode.swift"; sourceTree = "<group>"; };
-		DCC76BE525DFF2C800F38F43 /* TextViewWrapper+UITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextViewWrapper+UITextView.swift"; sourceTree = "<group>"; };
-		DCC76BE625DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextViewWrapper+NSTextView.swift"; sourceTree = "<group>"; };
 		DCC7F32425C5F4B500E68C85 /* MODsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MODsView.swift; sourceTree = "<group>"; };
 		DCC9F3B425C3067F001F06B3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DCC9F3C325C313B5001F06B3 /* MODDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MODDetailsView.swift; sourceTree = "<group>"; };
@@ -634,7 +620,6 @@
 		DCE75C011A61B4FE002B2D7C /* my41cx-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "my41cx-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE75C041A61B4FE002B2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCE75C051A61B4FE002B2D7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DCE75C071A61B4FE002B2D7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DCE75C0A1A61B4FE002B2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DCE75C0F1A61B4FE002B2D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		DCE75C151A61B4FE002B2D7C /* my41cx-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "my41cx-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -833,7 +818,6 @@
 		DC45284419897DA500C40B6C = {
 			isa = PBXGroup;
 			children = (
-				DCC76BE125DFF2C800F38F43 /* AttributedText */,
 				DC56268E198B75770040453F /* ROMs */,
 				DC2E476D19957F4C00BCACAF /* MODs */,
 				DCC3974F1A77DE0B000867BD /* Common code */,
@@ -1024,18 +1008,6 @@
 			name = "Common code";
 			sourceTree = "<group>";
 		};
-		DCC76BE125DFF2C800F38F43 /* AttributedText */ = {
-			isa = PBXGroup;
-			children = (
-				DCC76BE225DFF2C800F38F43 /* AttributedText.swift */,
-				DCC76BE325DFF2C800F38F43 /* TextViewStore.swift */,
-				DCC76BE425DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift */,
-				DCC76BE525DFF2C800F38F43 /* TextViewWrapper+UITextView.swift */,
-				DCC76BE625DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift */,
-			);
-			path = AttributedText;
-			sourceTree = "<group>";
-		};
 		DCC9F3AE25C3065E001F06B3 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1149,12 +1121,10 @@
 				DCD09B111A86318000F8D785 /* Debuger */,
 				DCE75C251A61BC9C002B2D7C /* Peripherals */,
 				DCE75C051A61B4FE002B2D7C /* AppDelegate.swift */,
-				DCE75C071A61B4FE002B2D7C /* ViewController.swift */,
 				DCE75C091A61B4FE002B2D7C /* Main.storyboard */,
 				DCE75C0E1A61B4FE002B2D7C /* LaunchScreen.xib */,
 				DCE75C031A61B4FE002B2D7C /* Supporting Files */,
 				DCD09B0C1A8628E000F8D785 /* CocoaTouchSpecific.swift */,
-				DC676D651A8F6C0A00D0C296 /* CalculatorController.swift */,
 				DC8F31441ABCB54F0053A514 /* Settings.swift */,
 				DC1C67EC1ABED63000993AEC /* Images-2.xcassets */,
 				DCBE4F6A25B8C69700E69886 /* My41cx_ios_App.swift */,
@@ -1300,9 +1270,7 @@
 					};
 					DCE75C001A61B4FE002B2D7C = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = LS2ZZ4TR54;
 						LastSwiftMigration = 1000;
-						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1672,20 +1640,19 @@
 				DCAD8860199D37CB0027C925 /* MOD.swift in Sources */,
 				DCD054CF25A4F0F40040EF17 /* Text+Extensions.swift in Sources */,
 				DCC9F3B525C3067F001F06B3 /* SettingsView.swift in Sources */,
+				DC3F16662946823500B55B6A /* Keys.swift in Sources */,
 				DC4AEB2A1A25E31A00ABF0D8 /* KeyboardShortcuts.swift in Sources */,
 				DCEEC9681A18A270000ECA76 /* PreferencesMenu.swift in Sources */,
 				DC45285719897DA600C40B6C /* AppDelegate.swift in Sources */,
 				DC4E040F1A17783E008D6DD5 /* DebugCPU.swift in Sources */,
 				DCC76BDB25DDD8A500F38F43 /* Dictionary+Extensions.swift in Sources */,
-				DCC76BE725DFF2C800F38F43 /* AttributedText.swift in Sources */,
 				DCEEC96A1A18BE39000ECA76 /* PreferencesCalculator.swift in Sources */,
 				DCD054DE25A53C440040EF17 /* View+Extensions.swift in Sources */,
 				DC5E4BDD19F17E7B00BF831B /* Preferences.swift in Sources */,
-				DCC76BE925DFF2C800F38F43 /* TextViewStore.swift in Sources */,
 				DCEA7DF219D6FA8B00E69234 /* Disassembly.swift in Sources */,
 				DC447DE61A34AD8B008FAB28 /* Application.swift in Sources */,
 				DC0B3FB325D8784000D4DD3B /* SettingsState.swift in Sources */,
-				DCC76BEF25DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift in Sources */,
+				DC3F166329467F2E00B55B6A /* KeyView.swift in Sources */,
 				DC86790A25C9ED9B00E9DCFB /* MODs.swift in Sources */,
 				DCD09B0B1A8628A700F8D785 /* CocoaSpecific.swift in Sources */,
 				DCAD8862199D37E70027C925 /* RomChip.swift in Sources */,
@@ -1693,11 +1660,9 @@
 				DC7B7E1119AFA4EE00C70269 /* Timer.swift in Sources */,
 				DCD054A825A483240040EF17 /* Color+Extensions.swift in Sources */,
 				DC74922719CF1E600012B5C0 /* Debuger.swift in Sources */,
-				DCC76BEB25DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift in Sources */,
 				DCD48909198AF42B00F3B898 /* CalculatorController.swift in Sources */,
 				DC6DB98E19BB6A5200E26ADD /* Button.swift in Sources */,
 				DCD054AF25A490CB0040EF17 /* KeyGroupView.swift in Sources */,
-				DCC76BED25DFF2C800F38F43 /* TextViewWrapper+UITextView.swift in Sources */,
 				DCAD885E199D36150027C925 /* DataOperations.swift in Sources */,
 				DCA23A641A46373300BC2BD2 /* CPU_Class1.swift in Sources */,
 				DCAD8864199D380C0027C925 /* Bus.swift in Sources */,
@@ -1740,7 +1705,6 @@
 				DCD09B231A8660E300F8D785 /* Keyboard.swift in Sources */,
 				DCD054DF25A53C440040EF17 /* View+Extensions.swift in Sources */,
 				DCD054B025A490CB0040EF17 /* KeyGroupView.swift in Sources */,
-				DCC76BF025DFF2C800F38F43 /* TextViewWrapper+NSTextView.swift in Sources */,
 				DCD09B0F1A862A9100F8D785 /* DataOperations.swift in Sources */,
 				DCD09B0E1A862A5600F8D785 /* Timer.swift in Sources */,
 				DCD09B091A86281900F8D785 /* MOD.swift in Sources */,
@@ -1752,7 +1716,6 @@
 				DCD09B071A86260000F8D785 /* Disassembly.swift in Sources */,
 				DC86791A25CB4A1900E9DCFB /* MODList.swift in Sources */,
 				DC7B24A31A79144C0080F85A /* CPU.swift in Sources */,
-				DCC76BEA25DFF2C800F38F43 /* TextViewStore.swift in Sources */,
 				DCC9F3C525C313B5001F06B3 /* MODDetailsView.swift in Sources */,
 				DC7B1EEC25C0BEB6002389E5 /* DisplayView.swift in Sources */,
 				DC7B24A41A79144C0080F85A /* CPU_Class0.swift in Sources */,
@@ -1765,15 +1728,12 @@
 				DCD09B261A8663D500F8D785 /* CalculatorKey.swift in Sources */,
 				DC86790B25C9ED9B00E9DCFB /* MODs.swift in Sources */,
 				DC676D6B1A8F76F800D0C296 /* DisplayExtensions.swift in Sources */,
-				DCC76BEC25DFF2C800F38F43 /* NSLineBreakMode+TruncationMode.swift in Sources */,
 				DCD0549225A470600040EF17 /* KeyView.swift in Sources */,
 				DC676D681A8F6D7A00D0C296 /* Calculator.swift in Sources */,
 				DCD09B131A86319E00F8D785 /* DebugCPU.swift in Sources */,
 				DC86791225C9F50E00E9DCFB /* Array+Extensions.swift in Sources */,
 				DCD09B0D1A8628E000F8D785 /* CocoaTouchSpecific.swift in Sources */,
-				DCC76BE825DFF2C800F38F43 /* AttributedText.swift in Sources */,
 				DC7B24A21A79141E0080F85A /* Bus.swift in Sources */,
-				DCC76BEE25DFF2C800F38F43 /* TextViewWrapper+UITextView.swift in Sources */,
 				DCE75C271A61BCBD002B2D7C /* Display.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1954,7 +1914,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier).osx";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1985,7 +1945,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier).osx";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2048,17 +2008,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2005;
-				DEVELOPMENT_TEAM = LS2ZZ4TR54;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = LS2ZZ4TR54;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "my41cx-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2068,7 +2030,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.my41cx.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = my41CX_iOS_Development;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = my41CX_iOS_Development;
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -2086,8 +2049,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2005;
 				DEVELOPMENT_TEAM = LS2ZZ4TR54;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = LS2ZZ4TR54;
 				INFOPLIST_FILE = "my41cx-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2098,6 +2063,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "my41CX for iOS AppStore";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "my41CX for iOS AppStore";
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;

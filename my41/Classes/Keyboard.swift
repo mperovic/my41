@@ -36,7 +36,8 @@ class KeyGroup : NSView {
 	
 	override func draw(_ dirtyRect: NSRect) {
 		NSColor.clear.setFill()
-		NSRectFill(dirtyRect)
+        dirtyRect.fill()
+//		NSRectFill(dirtyRect)
 		
 		super.draw(dirtyRect)
 	}

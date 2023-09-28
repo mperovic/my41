@@ -39,12 +39,9 @@ final class RomChip {
 	}
 	
 	func binToWords(_ bin: [byte]) {
-		if bin.count == 0 {
-			return
-		}
+		guard bin.count != 0 else { return }
 		
 		var ptr: Int = 0
-//		for var idx = 0; idx < 5120; idx += 5 {
 		for idx in stride(from: 0, to: 5120, by: 5) {
 			self.words[ptr] = word(((word(bin[idx+1]) & 0x03) << 8) | word(bin[idx]))
 			ptr += 1
@@ -62,14 +59,19 @@ final class RomChip {
 		do {
 			data = try Data(contentsOf: URL(fileURLWithPath: path), options: [.mappedIfSafe])
 			
-//			var range = NSRange(location: 0, length: 2)
 			var location = 0
 			for idx in 0..<0x1000 {
-				var i16be: UInt16 = 0
+                let i16be: UInt16 = 0
 				var i16: UInt16 = 0
-				let buffer = UnsafeMutableBufferPointer(start: &i16be, count: 2)
-				let _ = data?.copyBytes(to: buffer, from: location..<location+2)
-//				data?.getBytes(&i16be, range: range)
+                let pointer = UnsafeMutablePointer<UInt16>.allocate(capacity: 2)
+                pointer.initialize(to: i16be)
+                defer {
+                    pointer.deinitialize(count: 2)
+                    pointer.deallocate()
+                }
+
+				let bufferPointer = UnsafeMutableBufferPointer(start: pointer, count: 2)
+				let _ = data?.copyBytes(to: bufferPointer, from: location..<location+2)
 				location += 2
 				i16 = UInt16(bigEndian: i16be)
 				

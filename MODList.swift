@@ -52,7 +52,7 @@ struct MODList: View {
 						.onTapGesture {
 							selectedModule = mod
 						}
-						.listRowBackground(selectedModule == mod ? Color(UIColor.lightGray) : Color.clear)
+						.listRowBackground(selectedModule == mod ? Color.gray.brightness(0.4) as! Color : Color.clear)
 				}
 			}
 		}

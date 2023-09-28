@@ -89,7 +89,9 @@ class CalculatorWindow : NSWindow {
 	}
 }
 
-class Display : NSView, Peripheral {
+final class Display : NSView, Peripheral {
+	var calculator: Calculator?
+	
 	let numDisplayCells = 12
 	let numAnnunciators = 12
 	let numDisplaySegments = 17
@@ -133,7 +135,7 @@ class Display : NSView, Peripheral {
 	}
 	
 	override func awakeFromNib() {
-		calculatorController.display = self
+		calculator?.display = self
 		self.foregroundColor = NSColorList(name: "HP41").color(withKey: "displayForegroundColor")
 		self.displayFont = self.loadFont("hpfont")
 //		self.segmentPaths = self.loadSegmentPaths("hpchar")
@@ -164,7 +166,7 @@ class Display : NSView, Peripheral {
 		let filename: String = Bundle.main.path(forResource: CTULookupRsrcName, ofType: CTULookupRsrcType)!
 		let mString: NSMutableString = try! NSMutableString(contentsOfFile: filename, encoding: String.Encoding.unicode.rawValue)
 		CTULookup = String(mString)
-		CTULookupLength = (CTULookup!).characters.count
+		CTULookupLength = (CTULookup!).count
 	}
 
 	override var isFlipped:Bool{
@@ -194,15 +196,15 @@ class Display : NSView, Peripheral {
 			let attrs = [
 				NSAttributedString.Key.font: annunciatorFont!
 			]
-			calculatorController.prgmMode = false
-			calculatorController.alphaMode = false
+			calculator?.prgmMode = false
+			calculator?.alphaMode = false
 			for idx in 0..<numAnnunciators {
 				if annunciatorOn(idx) {
 					if idx == 10 {
-						calculatorController.prgmMode = true
+						calculator?.prgmMode = true
 					}
 					if idx == 11 {
-						calculatorController.alphaMode = true
+						calculator?.alphaMode = true
 					}
 					
 					let transformation = NSAffineTransform()

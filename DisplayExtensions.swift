@@ -575,31 +575,27 @@ extension Display {
 	
 	
 	//MARK: - Font support
-	
 	func loadFont(_ resourceName: String) -> DisplayFont {
 		var font: DisplayFont = DisplayFont(repeating: 0, count: 128)
 		let filename = Bundle.main.path(forResource: resourceName, ofType: "hpfont")
-		var data: Data?
 		do {
-			data = try Data(contentsOf: URL(fileURLWithPath: filename!), options: [.mappedIfSafe])
+            // Read the data from the file
+			let data = try Data(contentsOf: URL(fileURLWithPath: filename!), options: [.mappedIfSafe])
+            
+            // Calculate the number of UInt32 values in the data
+            let count = data.count / MemoryLayout<UInt32>.size
+            
+             // Extract UInt32 values from the data with big-endian byte order
+             for i in 0..<count {
+                 let offset = i * MemoryLayout<DisplaySegmentMap>.size
+                 let value = data[offset..<offset+MemoryLayout<UInt32>.size].withUnsafeBytes { $0.load(as: UInt32.self) }
+                 font[i] = value.bigEndian
+             }
+
+            return font
 		} catch _ {
-			data = nil
+			fatalError()
 		}
-//		var range = NSRange(location: 0, length: 4)
-		var location = 0
-		for idx in 0..<127 {
-			var tmp: UInt32 = 0
-			var tmp2: UInt32 = 0
-			let buffer = UnsafeMutableBufferPointer(start: &tmp, count: 4)
-			let _ = data?.copyBytes(to: buffer, from: location..<location+4)
-//			data?.getBytes(&tmp, range: range)
-			location += 4
-			tmp2 = UInt32(bigEndian: tmp)
-			
-			font[idx] = tmp2
-		}
-		
-		return font
 	}
 	
 	//MARK: - Peripheral Protocol Method

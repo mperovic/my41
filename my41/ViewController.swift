@@ -658,11 +658,11 @@ final class ViewController: NSViewController {
 	override func viewDidAppear() {
 		if let cType = CalculatorController.sharedInstance.calculatorType {
 			switch cType {
-			case CalculatorType.hp41C:
+			case .hp41c:
 				calculatorLabel.stringValue = "my41C"
-			case CalculatorType.hp41CV:
+			case .hp41cv:
 				calculatorLabel.stringValue = "my41CV"
-			case CalculatorType.hp41CX:
+			case .hp41cx:
 				calculatorLabel.stringValue = "my41CX"
 			}
 		}

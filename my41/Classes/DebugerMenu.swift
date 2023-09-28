@@ -101,7 +101,7 @@ class SelectedDebugView: NSView {
 					NSAttributedString.Key.paragraphStyle: textStyle
 				]
 
-				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [String : AnyObject])
+                text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [NSAttributedString.Key : Any])
 			}
 		} else {
 			if let actualFont = font {
@@ -111,7 +111,7 @@ class SelectedDebugView: NSView {
 					NSAttributedString.Key.paragraphStyle: textStyle
 				]
 				
-				text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [String : AnyObject])
+                text?.draw(in: NSOffsetRect(textRect, 0, 1), withAttributes: textFontAttributes as? [NSAttributedString.Key : Any])
 			}
 		}
 	}
