@@ -17,7 +17,6 @@ class DebugWindowController: NSWindowController {
 // MARK: - SpitView
 
 class DebugSplitViewController: NSSplitViewController {
-	
 	override func viewWillAppear() {
 		let menuVC = self.splitViewItems[0].viewController as! DebugMenuViewController
 		let containerVC = self.splitViewItems[1].viewController as! DebugContainerViewController

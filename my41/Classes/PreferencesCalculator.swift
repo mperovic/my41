@@ -15,25 +15,25 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 	@IBOutlet weak var cardReaderButton: NSButton!
 	@IBOutlet weak var synchronyzeButton: NSButton!
 
-	var calculatorType: CalculatorType?
+	var calculatorType: HPCalculator?
 	var preferencesContainerViewController: PreferencesContainerViewController?
 
 	override func viewDidLoad() {
 		let defaults = UserDefaults.standard
 		
-		let cType = defaults.string(forKey: hpCalculatorType)
+		let cType = defaults.integer(forKey: hpCalculatorType)
 		
 		switch cType {
 		case 1:
-			calculatorType = .hp41C
+			calculatorType = .hp41c
 		case 2:
-			calculatorType = .hp41CV
+			calculatorType = .hp41cv
 		case 3:
-			calculatorType = .hp41CX
+			calculatorType = .hp41cx
 		default:
 			// Make sure I have a default for next time
-			calculatorType = .hp41CX
-			defaults.set(CalculatorType.hp41CX.rawValue, forKey: hpCalculatorType)
+			calculatorType = .hp41cx
+			defaults.set(HPCalculator.hp41cx.rawValue, forKey: hpCalculatorType)
 		}
 		calculatorSelector.selectItem(at: cType - 1)
 	}
@@ -62,25 +62,23 @@ class PreferencesCalculatorViewController: NSViewController, NSComboBoxDelegate 
 
 	
 	// MARK: - NSComboBoxDelegate Methods
-	func comboBoxSelectionDidChange(_ notification: Notification)
-	{
+	func comboBoxSelectionDidChange(_ notification: Notification) {
 		if notification.object as? NSObject == calculatorSelector {
 			let selected = calculatorSelector.indexOfSelectedItem + 1
-			let defaults = UserDefaults.standard
-			let cType = defaults.string(forKey: hpCalculatorType)
+			let cType = UserDefaults.standard.integer(forKey: hpCalculatorType)
 			
 			if selected != cType {
 //				comments.stringValue = "Please be aware that changing the calculator type may result in some memory loss"
 				switch selected {
 				case 1:
-					calculatorType = .hp41C
+					calculatorType = .hp41c
 				case 2:
-					calculatorType = .hp41CV
+					calculatorType = .hp41cv
 				case 3:
-					calculatorType = .hp41CX
+					calculatorType = .hp41cx
 				default:
 					// Make sure I have a default for next time
-					calculatorType = .hp41CX
+					calculatorType = .hp41cx
 				}
 			}
 		}

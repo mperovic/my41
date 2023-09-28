@@ -12,7 +12,7 @@ let MOD_FORMAT = "MOD1"
 
 /* Module type codes */
 enum Category: byte {
-	case `undef`					= 0		// not categorized
+	case `undef`				= 0		// not categorized
 	case os						= 1		// base Operating System for C,CV,CX
 	case hpApplicationPAC		= 2		// HP Application PACs
 	case hpilPeripheral			= 3		// any HP-IL related modules and devices

@@ -127,14 +127,14 @@ class DebugCPUViewController: NSViewController {
 	
 	func pad(string : String, toSize: Int) -> String {
 		var padded = string
-		for _ in 0..<toSize - string.characters.count {
+		for _ in 0..<toSize - string.count {
 			padded = "0" + padded
 		}
 		return padded
 	}
 	
 	func populateDisplayRegisters() {
-		if let display = calculatorController.display {
+		if let display = calculator.display {
 			displayRegisterA.stringValue = display.digits12ToString(display.registers.A)
 			displayRegisterB.stringValue = display.digits12ToString(display.registers.B)
 			displayRegisterC.stringValue = display.digits12ToString(display.registers.C)
@@ -150,7 +150,7 @@ class DebugCPUViewController: NSViewController {
 	}
 	
 	@IBAction func traceAction(sender: AnyObject) {
-		if sender as! NSObject == traceSwitch {
+		if sender as? NSObject == traceSwitch {
 			if traceSwitch.state == NSControl.StateValue.on {
 				TRACE = 1
 			} else {

@@ -121,10 +121,10 @@ class PreferencesModsViewController: NSViewController, NSTableViewDataSource, NS
 		if let modDetails = modFileHeaders?[(filePath as NSString).lastPathComponent] {
 			modDetailsView.modDetails = modDetails
 		} else {
-			let mod = MOD()
+			var mod = MOD(memoryCheck: true)
 
 			do {
-				try mod.readModFromFile(filePath)
+				try mod.readModFromFile(filePath, withMemoryCheck: true)
 				
 				modDetailsView.modDetails = mod.moduleHeader
 				modDetailsView.category = mod.categoryDescription()
@@ -297,11 +297,9 @@ class ExpansionView: NSView {
 	}
 	
 	override func awakeFromNib() {
-		let theArray = [
-			"NSStringPboardType"
-		]
-		
-		register(forDraggedTypes: theArray)
+        let supportedTypes: [NSPasteboard.PasteboardType] = [.string]
+        
+        registerForDraggedTypes(supportedTypes)
 	}
 	
 	override func draw(_ dirtyRect: NSRect) {
@@ -328,9 +326,9 @@ class ExpansionView: NSView {
 				NSAttributedString.Key.paragraphStyle: textStyle
 			]
 			
-			let mod = MOD()
+			var mod = MOD(memoryCheck: true)
 			do {
-				try mod.readModFromFile(fPath as String)
+				try mod.readModFromFile(fPath as String, withMemoryCheck: true)
 				mod.moduleHeader.title.draw(in: NSMakeRect(20.0, 40.0, 100.0, 58.0), withAttributes: attributes)
 			} catch _ {
 				
@@ -366,10 +364,8 @@ class ExpansionView: NSView {
 		}
 
 		let paste = sender.draggingPasteboard
-		let theArray = [
-			"NSStringPboardType"
-		]
-		let desiredType = paste.availableType(from: theArray)
+        let supportedTypes: [NSPasteboard.PasteboardType] = [.string]
+        let desiredType = paste.availableType(from: supportedTypes)
 		if let data = paste.data(forType: desiredType!) {
 			if let fPath = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
 				filePath = fPath as String

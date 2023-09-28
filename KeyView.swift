@@ -7,12 +7,12 @@
 //
 
 import SwiftUI
-import UIKit
+//import AttributedText
 
 struct CalcKey: Hashable {
-	var shiftText: NSAttributedString
-	var upperText: NSAttributedString
-	var lowerText: NSAttributedString?
+	var shiftText: AttributedString
+	var upperText: AttributedString
+	var lowerText: AttributedString?
 	var shiftButton: Bool = false
 	var enter: Bool = false
 	var keyCode: Int
@@ -46,30 +46,36 @@ struct KeyView: View {
 		.init(color: Color(white: 0.20), location: 0.98),
 		.init(color: Color(white: 0.17), location: 1.00)
 	])
+#if os(iOS)
 	let generator = UINotificationFeedbackGenerator()
+#endif
 	
 	var body: some View {
 		GeometryReader { geometry in
 			VStack (spacing: 0) {
-				AttributedText(key.shiftText)
+                Text(key.shiftText)
 					.frame(width: geometry.size.width, height: geometry.size.height / 3)
 					.padding(.bottom, 5)
 				
 				Button(action: {
+#if os(iOS)
 					generator.notificationOccurred(.success)
+#endif
 				}, label: {
 					VStack (alignment: .center, spacing: 0) {
-						AttributedText(key.upperText)
+                        Text(key.upperText)
 						if let text = key.lowerText {
-							AttributedText(text)
+                            Text(text)
 								.padding(.top, 5)
 						}
 					}
-					.frame(width: width, height: height)
-					.background(LinearGradient(
-									gradient: key.shiftButton ? shiftButtonBackground : buttonBackground,
-									startPoint: .top,
-									endPoint: .bottom)
+                    .frame(width: width, height: height)
+                    .background(
+                        LinearGradient(
+                            gradient: key.shiftButton ? shiftButtonBackground : buttonBackground,
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
 					)
 					.overlay(
 						RoundedRectangle(cornerRadius: 3.0)
@@ -88,7 +94,13 @@ struct KeyView: View {
 }
 
 struct KeyView_Previews: PreviewProvider {
-	static var keys = Keys()
+//#if os(iOS)
+//	static var keys = Keys()
+//#elseif os(macOS)
+//	static var keys = ModeKeys()
+//#endif
+    static var keys = Keys()
+
 	static let width: CGFloat = 375 / 5
 	
     static var previews: some View {

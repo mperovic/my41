@@ -27,8 +27,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
 	var yRatio: CGFloat = 1.0
 
 	override func viewWillAppear(_ animated: Bool) {
-		let defaults = UserDefaults.standard
-		calculatorSelector.selectedSegmentIndex = defaults.integer(forKey: HPCalculatorType) - 1
+		calculatorSelector.selectedSegmentIndex = UserDefaults.standard.integer(forKey: HPCalculatorType) - 1
 
 		sound.isOn = SOUND
 		self.yRatio = self.view.bounds.size.height / 800.0
